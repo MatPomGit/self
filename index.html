@@ -339,6 +339,11 @@
       margin-bottom: 0;
     }
 
+    .hero-name-word {
+      display: inline-block;
+      white-space: nowrap;
+    }
+
     .hero-title {
       font-family: var(--font-head);
       font-size: clamp(1rem, 2.5vw, 1.4rem);
@@ -996,7 +1001,7 @@
       <div class="hero-name-wrap fade-in" style="transition-delay:.1s">
         <img class="hero-face" src="docs/img3.png" alt="Portret dr inż. Mateusza Pomianka" loading="eager" decoding="async">
         <h1 class="hero-name">
-          <span class="gradient-text" data-i18n="hero.degree">dr inż.</span><br>Mateusz Pomianek
+          <span class="gradient-text" data-i18n="hero.degree">dr inż.</span><br><span class="hero-name-word">Mateusz</span> <span class="hero-name-word">Pomianek</span>
         </h1>
       </div>
 
