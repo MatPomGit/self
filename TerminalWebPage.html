@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>dr inż. Mateusz Pomianek // research terminal</title>
+  <meta name="description" content="Terminalowa strona główna dr inż. Mateusza Pomianka: dydaktyka, badania, publikacje i projekty." />
+  <style>
+    :root{
+      --bg:#050607;
+      --panel:#0b0f12;
+      --panel-2:#0e1418;
+      --line:#243038;
+      --line-soft:#172026;
+      --text:#d7e1e8;
+      --muted:#7f8d96;
+      --dim:#58646b;
+      --green:#8cffb7;
+      --cyan:#7ee7ff;
+      --amber:#ffd27e;
+      --red:#ff7e8b;
+      --violet:#c59cff;
+      --shadow:0 24px 80px rgba(0,0,0,.48);
+      --radius:16px;
+      --mono:"JetBrains Mono","SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+      --sans:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 12% -8%, rgba(126,231,255,.14), transparent 34rem),
+        radial-gradient(circle at 90% 0%, rgba(197,156,255,.10), transparent 30rem),
+        linear-gradient(180deg,#050607 0%,#080b0d 52%,#050607 100%);
+      font-family:var(--sans);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(126,231,255,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(126,231,255,.045) 1px, transparent 1px);
+      background-size:46px 46px;
+      mask-image:linear-gradient(to bottom, rgba(0,0,0,.8), transparent 88%);
+      z-index:-2;
+    }
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:repeating-linear-gradient(to bottom, rgba(255,255,255,.025), rgba(255,255,255,.025) 1px, transparent 1px, transparent 4px);
+      mix-blend-mode:screen;
+      opacity:.18;
+      z-index:-1;
+    }
+    a{color:inherit;text-decoration:none}
+    .shell{width:min(1480px,calc(100vw - 28px));margin:14px auto 56px;border:1px solid var(--line);border-radius:22px;background:rgba(5,7,8,.78);box-shadow:var(--shadow);overflow:hidden;backdrop-filter:blur(12px)}
+    .topbar{height:54px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:rgba(9,12,14,.86);padding:0 18px;font-family:var(--mono);font-size:13px;letter-spacing:.01em;position:sticky;top:0;z-index:20}
+    .brand{display:flex;align-items:center;gap:10px;white-space:nowrap}.brand strong{color:#fff}.dot{width:8px;height:8px;border-radius:999px;background:var(--green);box-shadow:0 0 18px var(--green)}
+    .nav{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.nav a,.chip,.cmd-pill{border:1px solid var(--line);background:#0b1013;border-radius:8px;padding:7px 10px;color:var(--muted)}.nav a:hover{color:var(--cyan);border-color:rgba(126,231,255,.55)}
+    .layout{display:grid;grid-template-columns:300px 1fr;min-height:calc(100vh - 110px)}
+    aside{border-right:1px solid var(--line);padding:18px;background:linear-gradient(180deg,rgba(12,16,19,.78),rgba(8,11,13,.72))}
+    .profile-card,.panel{border:1px solid var(--line);background:linear-gradient(180deg,rgba(15,20,24,.94),rgba(9,13,16,.92));border-radius:var(--radius);overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.22)}
+    .profile-card{padding:16px}.avatar{width:64px;height:64px;border:1px solid var(--line);border-radius:14px;display:grid;place-items:center;background:radial-gradient(circle at 30% 20%,rgba(126,231,255,.2),rgba(140,255,183,.05) 40%,#080b0d 100%);font-family:var(--mono);font-weight:800;color:var(--cyan);margin-bottom:14px}.kicker{font-family:var(--mono);font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em}.profile-card h1{font-size:22px;line-height:1.08;margin:8px 0 8px}.role{font-size:13px;line-height:1.5;color:var(--muted)}
+    .status{margin-top:14px;border-top:1px solid var(--line-soft);padding-top:12px;display:grid;gap:8px}.status-row{display:flex;align-items:center;justify-content:space-between;gap:10px;font-family:var(--mono);font-size:12px;color:var(--muted)}.status-row b{font-weight:500;color:var(--text)}
+    .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}.tag{font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--line-soft);background:#080c0e;border-radius:7px;padding:5px 7px}.tag.cyan{color:var(--cyan)}.tag.green{color:var(--green)}.tag.violet{color:var(--violet)}
+    .side-block{margin-top:16px;border:1px solid var(--line);border-radius:14px;background:#080c0e;padding:14px}.side-block h3{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin:0 0 12px}.side-link{display:flex;justify-content:space-between;border-top:1px solid var(--line-soft);padding:10px 0;color:var(--muted);font-family:var(--mono);font-size:12px}.side-link:first-of-type{border-top:0}.side-link:hover{color:var(--cyan)}
+    main{padding:18px;display:grid;gap:18px}.hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr);gap:18px}.terminal{border:1px solid var(--line);border-radius:var(--radius);background:rgba(7,10,12,.94);overflow:hidden;position:relative}.terminal::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 18% 10%,rgba(126,231,255,.10),transparent 30%),radial-gradient(circle at 70% 12%,rgba(140,255,183,.07),transparent 30%);pointer-events:none}.term-head{height:42px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:#0a0e11;font-family:var(--mono);font-size:12px;color:var(--muted);position:relative}.lights{display:flex;gap:7px}.light{width:10px;height:10px;border-radius:50%;background:#2b3338}.light:nth-child(1){background:#ff6b6b}.light:nth-child(2){background:#ffd166}.light:nth-child(3){background:#8cffb7}.term-body{padding:24px;position:relative}.prompt{font-family:var(--mono);font-size:13px;color:var(--green);margin-bottom:12px}.prompt span{color:var(--muted)}.title{font-family:var(--mono);font-size:clamp(34px,5.2vw,72px);line-height:.95;letter-spacing:-.06em;margin:0 0 18px;color:#f7fbff;text-shadow:0 0 26px rgba(126,231,255,.12)}.subtitle{max-width:850px;color:#aab7bf;font-size:17px;line-height:1.65;margin:0 0 24px}.cmdline{border:1px solid var(--line);border-radius:12px;background:#050708;padding:13px 14px;font-family:var(--mono);color:var(--muted);display:flex;gap:10px;align-items:center}.cursor{display:inline-block;width:8px;height:17px;background:var(--cyan);animation:blink 1s steps(1) infinite}@keyframes blink{50%{opacity:0}}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.cmd-pill:hover{border-color:rgba(126,231,255,.55);color:var(--cyan)}
+    .metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.metric{border:1px solid var(--line);background:#0b1013;border-radius:14px;padding:16px}.metric .num{font-family:var(--mono);font-size:32px;color:#fff}.metric .lbl{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:5px}.protocol{margin-top:12px;border:1px solid var(--line);border-radius:14px;background:#080c0e;padding:14px;font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.65}.protocol b{color:var(--text);font-weight:600}.ascii{white-space:pre;overflow:auto;color:#82919a;font-size:11px;line-height:1.25;padding-top:8px}
+    .section{scroll-margin-top:72px}.section-title{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:10px 0 12px}.section-title h2{font-family:var(--mono);font-size:20px;letter-spacing:-.04em;margin:0}.section-title p{margin:0;color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.panel{padding:16px}.span-3{grid-column:span 3}.span-4{grid-column:span 4}.span-6{grid-column:span 6}.span-8{grid-column:span 8}.span-12{grid-column:span 12}.panel-label{font-family:var(--mono);font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px}.panel h3{font-size:18px;margin:0 0 10px}.panel p{color:#9ba8b0;line-height:1.55;margin:0;font-size:14px}.list{display:grid;gap:8px;margin-top:12px}.item{border:1px solid var(--line-soft);background:#080c0e;border-radius:10px;padding:10px 12px}.item b{font-family:var(--mono);font-size:12px;color:var(--text);display:block;margin-bottom:4px}.item span{font-size:13px;color:var(--muted);line-height:1.45}.course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}.course{border:1px solid var(--line);background:linear-gradient(180deg,#0d1215,#080b0d);border-radius:14px;padding:14px;min-height:148px;display:flex;flex-direction:column;justify-content:space-between}.course code{font-family:var(--mono);font-size:11px;color:var(--dim)}.course h3{font-size:16px;margin:10px 0;color:#f3f7f9}.course p{font-size:13px;color:var(--muted);line-height:1.5}.course:hover{border-color:rgba(126,231,255,.45);transform:translateY(-2px);transition:.16s}.project-row{display:grid;grid-template-columns:120px 1fr auto;gap:12px;align-items:center;border-top:1px solid var(--line-soft);padding:13px 0}.project-row:first-child{border-top:0}.project-row .code{font-family:var(--mono);color:var(--cyan);font-size:13px}.project-row p{margin:0}.badge{font-family:var(--mono);font-size:11px;color:var(--amber);border:1px solid rgba(255,210,126,.28);border-radius:999px;padding:5px 8px;white-space:nowrap}.pub{border-top:1px solid var(--line-soft);padding:12px 0}.pub:first-child{border-top:0}.pub .year{font-family:var(--mono);font-size:11px;color:var(--dim)}.pub h3{font-size:15px;margin:4px 0;color:#eef5f8}.pub p{font-size:13px;color:var(--muted)}.footer{font-family:var(--mono);font-size:12px;color:var(--dim);border-top:1px solid var(--line);padding:18px;text-align:center;background:#070a0c}
+    @media(max-width:1080px){.layout{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid var(--line)}.hero{grid-template-columns:1fr}.span-3,.span-4,.span-6,.span-8{grid-column:span 12}.nav{display:none}.project-row{grid-template-columns:1fr}.badge{width:max-content}.title{font-size:44px}}
+    @media(max-width:640px){.shell{width:100vw;margin:0;border-radius:0;border-left:0;border-right:0}.container,main{padding:12px}.topbar{padding:0 12px}.term-body{padding:18px}.metrics{grid-template-columns:1fr}.title{font-size:36px}.subtitle{font-size:15px}.grid{grid-template-columns:1fr}.span-12{grid-column:1}.section-title{display:block}.layout{min-height:auto}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="topbar">
+      <div class="brand"><span class="dot"></span><strong>mpomianek@research-os</strong><span class="muted">/ network of teaching · research · affective AI</span></div>
+      <nav class="nav" aria-label="Główna nawigacja">
+        <a href="#students">students</a><a href="#courses">courses</a><a href="#research">research</a><a href="#projects">projects</a><a href="#publications">publications</a><a href="#contact">contact</a>
+      </nav>
+    </div>
+
+    <div class="layout">
+      <aside>
+        <div class="profile-card">
+          <div class="avatar">MP</div>
+          <div class="kicker">local user</div>
+          <h1>dr inż.<br>Mateusz Pomianek</h1>
+          <div class="role">Adiunkt · Katedra Informatyki i Automatyki · Politechnika Rzeszowska</div>
+          <div class="status">
+            <div class="status-row"><span>status</span><b>online</b></div>
+            <div class="status-row"><span>mode</span><b>research / teaching</b></div>
+            <div class="status-row"><span>room</span><b>D.103</b></div>
+            <div class="status-row"><span>discipline</span><b>AEiE i TK · informatyka</b></div>
+          </div>
+          <div class="tags">
+            <span class="tag cyan">affective computing</span><span class="tag green">neuroinformatics</span><span class="tag">computer vision</span><span class="tag violet">XR/AI</span><span class="tag">eye-tracking</span><span class="tag">HRI</span><span class="tag">digital twins</span>
+          </div>
+        </div>
+
+        <div class="side-block">
+          <h3>quick routes</h3>
+          <a class="side-link" href="#students"><span>student panel</span><span>↵</span></a>
+          <a class="side-link" href="#courses"><span>course nodes</span><span>↵</span></a>
+          <a class="side-link" href="#research"><span>research map</span><span>↵</span></a>
+          <a class="side-link" href="#projects"><span>project registry</span><span>↵</span></a>
+          <a class="side-link" href="#publications"><span>publication log</span><span>↵</span></a>
+        </div>
+
+        <div class="side-block">
+          <h3>external nodes</h3>
+          <a class="side-link" href="https://matpomgit.github.io/self/" target="_blank" rel="noreferrer"><span>self.page</span><span>open</span></a>
+          <a class="side-link" href="https://mpomianek.v.prz.edu.pl/" target="_blank" rel="noreferrer"><span>prz.profile</span><span>open</span></a>
+          <a class="side-link" href="https://matpomgit.github.io/self/publications.html" target="_blank" rel="noreferrer"><span>publications</span><span>open</span></a>
+        </div>
+      </aside>
+
+      <main>
+        <section class="hero" id="home">
+          <div class="terminal">
+            <div class="term-head"><div class="lights"><span class="light"></span><span class="light"></span><span class="light"></span></div><span>research_node.sh</span></div>
+            <div class="term-body">
+              <div class="prompt">mateusz@prz:~$ <span>run ./affective_interaction_lab --public-dashboard</span></div>
+              <h2 class="title">Research<br>Operating<br>System</h2>
+              <p class="subtitle">Terminalowa strona główna porządkująca dydaktykę, badania, projekty i publikacje. Rdzeniem profilu są multisensoryczne systemy interakcji człowiek–maszyna, informatyka afektywna, eye-tracking, XR, wizja komputerowa oraz kognitywna robotyka humanoidalna.</p>
+              <div class="cmdline"><span style="color:var(--green)">$</span><span>select module --students --courses --research --projects --publications</span><span class="cursor"></span></div>
+              <div class="actions"><a class="cmd-pill" href="#students">./students</a><a class="cmd-pill" href="#courses">./courses</a><a class="cmd-pill" href="#research">./research</a><a class="cmd-pill" href="#projects">./projects</a></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="metrics">
+              <div class="metric"><div class="num">23</div><div class="lbl">publications</div></div>
+              <div class="metric"><div class="num">2</div><div class="lbl">US patents</div></div>
+              <div class="metric"><div class="num">11</div><div class="lbl">R&amp;D projects</div></div>
+              <div class="metric"><div class="num">8</div><div class="lbl">teaching nodes</div></div>
+            </div>
+            <div class="protocol">
+              <b>active protocol:</b> affective recognition · neural analysis · human-machine interaction
+              <div class="ascii">┌────────────┐   ┌────────────┐   ┌────────────┐
+│  sensors   │ → │  fusion AI  │ → │ feedback   │
+│ VIS IR ToF │   │ gaze affect │   │ text voice │
+└────────────┘   └────────────┘   └────────────┘</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="students">
+          <div class="section-title"><h2>// students hub</h2><p>Panel operacyjny dla studentów i dyplomantów</p></div>
+          <div class="grid">
+            <div class="panel span-4"><div class="panel-label">node: materials</div><h3>Materiały dydaktyczne</h3><p>Zbiorcze wejście do materiałów kursowych, ćwiczeń, prezentacji, repozytoriów oraz zasobów uzupełniających.</p></div>
+            <div class="panel span-4"><div class="panel-label">node: consultations</div><h3>Konsultacje</h3><p>Informacje organizacyjne, kontakt oraz ścieżka do ustalania tematów projektowych, zaliczeń i prac dyplomowych.</p></div>
+            <div class="panel span-4"><div class="panel-label">node: thesis</div><h3>Prace dyplomowe</h3><p>Propozycje tematów, wytyczne dla dyplomantów, zasady przeglądu literatury i ścieżka przygotowania pracy.</p></div>
+            <div class="panel span-12"><div class="panel-label">student command palette</div><div class="list"><div class="item"><b>$ open course/materials</b><span>Materiały do zajęć: narzędzia programistyczne, algorytmy, aplikacje mobilne, technologie internetowe, obrazowanie, gry, psychoinformatyka i robotyka afektywna.</span></div><div class="item"><b>$ request thesis/topic</b><span>Tematy łączące informatykę, wizję komputerową, AI, HCI/HRI, neuroinformatykę, XR i robotykę humanoidalną.</span></div><div class="item"><b>$ submit project/repository</b><span>Preferowana praca projektowa z dokumentacją, repozytorium, czytelną strukturą kodu i mierzalnym efektem.</span></div></div></div>
+          </div>
+        </section>
+
+        <section class="section" id="courses">
+          <div class="section-title"><h2>// course nodes</h2><p>Osobne panele dla przedmiotów</p></div>
+          <div class="course-grid">
+            <a class="course" href="https://mpomianek.v.prz.edu.pl/materialy-dydaktyczne/1-narzedzia-dla-programistow" target="_blank" rel="noreferrer"><code>course_01</code><h3>Narzędzia dla programistów</h3><p>Środowisko pracy, Git, terminal, podstawowe praktyki projektowe.</p></a>
+            <a class="course" href="https://mpomianek.v.prz.edu.pl/materialy-dydaktyczne/2-algorytmy-i-struktury-danych" target="_blank" rel="noreferrer"><code>course_02</code><h3>Algorytmy i struktury danych</h3><p>Złożoność, struktury danych, analiza rozwiązań i implementacje.</p></a>
+            <a class="course" href="https://mpomianek.v.prz.edu.pl/materialy-dydaktyczne/3-programowanie-aplikacji-mobilnych" target="_blank" rel="noreferrer"><code>course_03</code><h3>Programowanie aplikacji mobilnych</h3><p>Projektowanie aplikacji, repozytoria, architektura, frontend i backend.</p></a>
+            <a class="course" href="https://mpomianek.v.prz.edu.pl/materialy-dydaktyczne/4-podstawowe-technologie-internetowe" target="_blank" rel="noreferrer"><code>course_04</code><h3>Podstawowe technologie internetowe</h3><p>HTML, CSS, JavaScript, publikacja i organizacja zasobów WWW.</p></a>
+            <a class="course" href="https://mpomianek.v.prz.edu.pl/materialy-dydaktyczne/5-analiza-i-przetwarzanie-obrazow" target="_blank" rel="noreferrer"><code>course_05</code><h3>Analiza i przetwarzanie obrazów</h3><p>Filtracja, segmentacja, morfologia, detekcja i analiza scen.</p></a>
+            <a class="course" href="https://mpomianek.v.prz.edu.pl/materialy-dydaktyczne/6-programowanie-gier-komputerowych" target="_blank" rel="noreferrer"><code>course_06</code><h3>Programowanie gier komputerowych</h3><p>Interakcja, silniki gier, prototypowanie i symulacje interaktywne.</p></a>
+            <a class="course" href="https://mpomianek.v.prz.edu.pl/materialy-dydaktyczne/7-psychoinformatyka-poznawczo-afektywna/informatyka-afektywna" target="_blank" rel="noreferrer"><code>course_07</code><h3>Psychoinformatyka poznawczo-afektywna</h3><p>Afekt, poznanie, analiza zachowania i systemy wspomagane AI.</p></a>
+            <a class="course" href="https://mpomianek.v.prz.edu.pl/materialy-dydaktyczne/8-robotyka-afektywna/zajecia-dla-studentow" target="_blank" rel="noreferrer"><code>course_08</code><h3>Robotyka afektywna</h3><p>HRI, percepcja, architektury kognitywne i roboty humanoidalne.</p></a>
+          </div>
+        </section>
+
+        <section class="section" id="research">
+          <div class="section-title"><h2>// research map</h2><p>Hardware, software, AI i systemy interakcyjne</p></div>
+          <div class="grid">
+            <div class="panel span-3"><div class="panel-label">affect</div><h3>Informatyka afektywna</h3><p>Rozpoznawanie emocji i stanów psychofizycznych człowieka przez systemy komputerowe.</p></div>
+            <div class="panel span-3"><div class="panel-label">vision</div><h3>Wizja komputerowa</h3><p>Analiza obrazu, wykrywanie obiektów, segmentacja scen i fuzja danych.</p></div>
+            <div class="panel span-3"><div class="panel-label">gaze</div><h3>Eye-tracking / MEMS</h3><p>Estymacja kierunku spojrzenia, biomarkery okulistyczne i interfejsy gaze-based.</p></div>
+            <div class="panel span-3"><div class="panel-label">xr</div><h3>VR / AR / MR</h3><p>Środowiska immersyjne, kalibracja, tracking i symulacje medyczne oraz szkoleniowe.</p></div>
+            <div class="panel span-4"><div class="panel-label">hri</div><h3>Kognitywna robotyka humanoidalna</h3><p>Percepcyjne i kognitywne architektury robotów humanoidalnych do zastosowań terapeutycznych, badawczych i dydaktycznych.</p></div>
+            <div class="panel span-4"><div class="panel-label">digital twin</div><h3>Cyfrowe bliźniaki</h3><p>Walidacja systemów w środowiskach przemysłowych, medycznych i in-silico.</p></div>
+            <div class="panel span-4"><div class="panel-label">defence / optics</div><h3>Optoelektronika i biometria</h3><p>Multispektralna analiza obrazu, systemy biometryczne, symulatory oraz systemy optoelektroniczne.</p></div>
+          </div>
+        </section>
+
+        <section class="section" id="projects">
+          <div class="section-title"><h2>// project registry</h2><p>Wybrane projekty i osiągnięcia R&amp;D</p></div>
+          <div class="panel span-12">
+            <div class="project-row"><div class="code">ARIANA</div><p>Analiza Reakcji, Intensywności Afektu i Neurologicznych Aktywności; system AEI do pomiarów psychometrycznych z wizyjnym rozpoznaniem afektu.</p><span class="badge">affective AI</span></div>
+            <div class="project-row"><div class="code">PIAST</div><p>Konstelacja nanosatelitów obserwacyjnych do optoelektronicznego rozpoznania obrazowego.</p><span class="badge">space / imaging</span></div>
+            <div class="project-row"><div class="code">SEEKER</div><p>Rodzina optoelektronicznych głowic naprowadzających dla rakiet sterowanych.</p><span class="badge">optoelectronics</span></div>
+            <div class="project-row"><div class="code">PolFEL</div><p>Projekt polskiego lasera na swobodnych elektronach realizowany przez konsorcjum jednostek naukowych.</p><span class="badge">research infra</span></div>
+            <div class="project-row"><div class="code">OPTOKRYPT</div><p>Technologie optyczne kryptologii kwantowej do ochrony danych w sieciach teleinformatycznych.</p><span class="badge">quantum optics</span></div>
+            <div class="project-row"><div class="code">RiverGUARD</div><p>Optoelektroniczny system do ochrony perymetrycznej granicy rzecznej.</p><span class="badge">security</span></div>
+            <div class="project-row"><div class="code">PROTECT</div><p>Common and user-oriented biometric border design.</p><span class="badge">biometrics</span></div>
+          </div>
+        </section>
+
+        <section class="section" id="publications">
+          <div class="section-title"><h2>// publication log</h2><p>Wybrane publikacje i patenty</p></div>
+          <div class="grid">
+            <div class="panel span-6"><div class="panel-label">latest</div><div class="pub"><span class="year">2025 · Sensors</span><h3>From Mechanical Instability to Virtual Precision: Digital Twin Validation for Next-Generation MEMS-Based Eye-Tracking Systems</h3><p>Digital twin validation, MEMS eye-tracking, precision modelling.</p></div><div class="pub"><span class="year">2025 · conference</span><h3>Comparative Analysis of Selected Facial Emotion Recognition Methods</h3><p>Facial emotion recognition as a potential tool for automated assessment.</p></div></div>
+            <div class="panel span-6"><div class="panel-label">patents / key works</div><div class="pub"><span class="year">2024 / 2025 · US patent</span><h3>System and methods for use in vision assessment to determine refractive errors and neurodegenerative disorders by ocular biomarking features</h3><p>Ocular biomarkers, refractive errors, neurodegenerative disorders.</p></div><div class="pub"><span class="year">2021 · Metrology and Measurement Systems</span><h3>MEMS mirror based eye tracking</h3><p>Simulation of system parameter effect on pupil position estimation accuracy.</p></div></div>
+          </div>
+        </section>
+
+        <section class="section" id="contact">
+          <div class="section-title"><h2>// contact</h2><p>Adres roboczy i afiliacja</p></div>
+          <div class="grid">
+            <div class="panel span-8"><div class="panel-label">address</div><h3>Katedra Informatyki i Automatyki · Politechnika Rzeszowska</h3><p>al. Powstańców Warszawy 12, 35-959 Rzeszów, Polska<br>pokój D.103 · tel. +48 17 865 14 81</p></div>
+            <div class="panel span-4"><div class="panel-label">mail</div><h3><a href="mailto:m.pomianek@prz.edu.pl">m.pomianek@prz.edu.pl</a></h3><p>Kontakt służbowy oraz sprawy dydaktyczne.</p></div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <div class="footer">mpomianek@research-os:~$ shutdown --keep-node-online</div>
+  </div>
+</body>
+</html>
