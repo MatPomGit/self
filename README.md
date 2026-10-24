@@ -1,20 +1,20 @@
-https://github.com/matpomgit/mobile-hub
-https://matpomgit.github.io/MobileHub/
-https://github.com/matpomgit/psy-hub
-https://matpomgit.github.io/PsyHub/#__home__
-https://github.com/matpomgit/win-xp-web
-https://matpomgit.github.io/win-xp-web
+# self
 
-https://matpomgit.github.io/RoboHub/
+Statyczna strona naukowa i dydaktyczna publikowana przez GitHub Pages.
 
-https://github.com/AI-robot-lab/_LAB-AI-persona
+- [Strona główna](https://matpomgit.github.io/self/)
+- [Biblioteka materiałów](https://matpomgit.github.io/self/library/)
+- [Materiały WiRR](https://matpomgit.github.io/self/wirr/)
 
----
-https://github.com/matpomgit/mobile-vis
-https://github.com/matpomgit/mobile-ros
+## Dokumentacja
 
-## Biblioteka zasobów
+- [Struktura repozytorium](STRUCTURE.md)
+- [Biblioteka i krótkie adresy](LIBRARY.md)
+- [Publikacja wykładów WiRR](WIRR.md)
+- [Zadania przeglądu](REVIEW_TASKS.md)
 
-- Strona: https://matpomgit.github.io/self/library/
-- Skróty: `/self/f/NN` (pliki), `/self/p/NN` (PDF), `/self/h/NN` (HTML)
-- Dodawanie pozycji, generator, ograniczenia i testy: [LIBRARY.md](LIBRARY.md)
+## Organizacja
+
+Zasoby CSS, JS i zależności znajdują się w `assets/css/`, `assets/js/` i `assets/vendor/`. Publiczne strony HTML pozostają pod dotychczasowymi adresami, aliasy `/f/`, `/p/`, `/h/` są generowane i nie należy przenosić ich ręcznie.
+
+Walidacja: `python3 tools/build_library.py --check` oraz `python3 -m unittest discover -s tests`.

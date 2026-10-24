@@ -4,7 +4,7 @@
    https://animejs.com/documentation/getting-started/module-imports
    ============================================================ */
 
-import { animate, stagger, spring } from './anime.esm.min.js';
+import { animate, stagger, spring } from '../vendor/anime.esm.min.js';
 
 (function () {
   'use strict';
