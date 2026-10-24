@@ -27,7 +27,7 @@ for ((i=0; i<${#questions[@]}; i++)); do
     printf 'Poprawnie! +10 punktów.\n'
     ((score+=10))
   else
-    ((hp-=1))
+    hp=$((hp-1))
     printf 'Odpowiedź wzorcowa: %s. Pozostała energia: %d\n' "${solutions[i]}" "$hp"
     if ((hp == 0)); then break; fi
   fi
