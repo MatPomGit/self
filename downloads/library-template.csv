@@ -1,0 +1,4 @@
+type,id,title,description,category,source,updated
+f,02,Przykładowy zestaw danych,Opis pliku,Dydaktyka,downloads/przyklad.csv,2026-10-24
+p,02,Prezentacja PDF,Podgląd i pobieranie,Dydaktyka,downloads/prezentacja.pdf,2026-10-24
+h,09,Instrukcja HTML,Interaktywny dokument,Dydaktyka,nowa-instrukcja.html,2026-10-24
