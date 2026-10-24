@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "type": "f",
+      "id": "01",
+      "title": "Szablon katalogu plików (CSV)",
+      "description": "Edytowalny szablon metadanych do dodawania kolejnych zasobów.",
+      "category": "Narzędzia",
+      "source": "downloads/library-template.csv",
+      "updated": "2026-10-24"
+    },
+    {
+      "type": "p",
+      "id": "01",
+      "title": "Neurodiversity-Aware Multimodal Affective Computing",
+      "description": "Preprint naukowy (arXiv:2610.04705). Dokument PDF hostowany przez arXiv.",
+      "category": "Publikacje",
+      "source": "https://arxiv.org/pdf/2610.04705",
+      "updated": "2026-10-05"
+    },
+    {
+      "type": "h",
+      "id": "01",
+      "title": "Materiały dydaktyczne",
+      "description": "Zbiorczy wykaz materiałów dydaktycznych.",
+      "category": "Dydaktyka",
+      "source": "materials.html",
+      "updated": "2026-10-24"
+    },
+    {
+      "type": "h",
+      "id": "02",
+      "title": "Publikacje i patenty",
+      "description": "Strona dorobku naukowego i odnośników bibliograficznych.",
+      "category": "Publikacje",
+      "source": "publications.html",
+      "updated": "2026-10-24"
+    },
+    {
+      "type": "h",
+      "id": "03",
+      "title": "Git",
+      "description": "Materiały o kontroli wersji Git.",
+      "category": "Dydaktyka",
+      "source": "git.html",
+      "updated": "2026-10-24"
+    },
+    {
+      "type": "h",
+      "id": "04",
+      "title": "Bash",
+      "description": "Materiały dotyczące powłoki Bash.",
+      "category": "Dydaktyka",
+      "source": "bash.html",
+      "updated": "2026-10-24"
+    },
+    {
+      "type": "h",
+      "id": "05",
+      "title": "Vim",
+      "description": "Materiały dotyczące edytora Vim.",
+      "category": "Dydaktyka",
+      "source": "vim.html",
+      "updated": "2026-10-24"
+    },
+    {
+      "type": "h",
+      "id": "06",
+      "title": "LaTeX",
+      "description": "Materiały do przygotowywania dokumentów w LaTeX.",
+      "category": "Dydaktyka",
+      "source": "latex.html",
+      "updated": "2026-10-24"
+    },
+    {
+      "type": "h",
+      "id": "07",
+      "title": "Algorytmy",
+      "description": "Materiały z algorytmów i struktur danych.",
+      "category": "Dydaktyka",
+      "source": "algorytmy.html",
+      "updated": "2026-10-24"
+    },
+    {
+      "type": "h",
+      "id": "08",
+      "title": "Psychoinformatyka",
+      "description": "Materiały z psychoinformatyki poznawczo-afektywnej.",
+      "category": "Dydaktyka",
+      "source": "psychoinformatyka.html",
+      "updated": "2026-10-24"
+    }
+  ]
+}
