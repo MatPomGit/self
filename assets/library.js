@@ -14,7 +14,8 @@
     return entry && ['f','p','h'].includes(entry.type) &&
       typeof entry.id === 'string' && idPattern.test(entry.id) &&
       typeof entry.title === 'string' && entry.title.trim() &&
-      typeof entry.source === 'string' && !!resolveSource(entry.source);
+      typeof entry.source === 'string' && !!resolveSource(entry.source) &&
+      (entry.status === undefined || ['ready','draft','planned'].includes(entry.status));
   }
   function resolveSource(source) {
     if (typeof source !== 'string' || !source) return null;
@@ -53,6 +54,8 @@
   function metadata(entry) {
     const line = element('div', 'kicker');
     line.append(element('span','tag',kindLabel[entry.type]), element('span','muted',entry.category || 'Inne'), element('span','muted',entry.type+'/'+entry.id));
+    if (entry.status === 'planned') line.append(element('span','tag','Oczekuje na PDF'));
+    if (entry.status === 'draft') line.append(element('span','tag','Szkic HTML'));
     return line;
   }
   function card(entry) {
@@ -61,7 +64,7 @@
     const actions = element('div','actions');
     actions.append(link('Zobacz',route(entry)));
     const src = resolveSource(entry.source);
-    if (src) actions.append(link(src.href.startsWith(root.href) ? 'Pobierz plik' : 'Otwórz źródło', src.href, src.href.startsWith(root.href) ? entry.source.split('/').pop() : undefined));
+    if (src && entry.status !== 'planned') actions.append(link(src.href.startsWith(root.href) ? (entry.type === 'f' ? 'Pobierz plik' : 'Otwórz dokument') : 'Otwórz źródło', src.href, entry.type === 'f' && src.href.startsWith(root.href) ? entry.source.split('/').pop() : undefined));
     article.append(actions);
     return article;
   }
@@ -119,6 +122,11 @@
     title.textContent=entry.title;
     desc.textContent=entry.description || '';
     meta.append(metadata(entry));
+    if (entry.status === 'planned') {
+      preview.append(element('p','status','Materiał został zarezerwowany, ale plik PDF nie jest jeszcze dostępny. Link pozostaje aktywny; pobieranie pojawi się po opublikowaniu dokumentu.'));
+      return;
+    }
+    if (entry.status === 'draft') preview.append(element('p','status','To jest szablon strony HTML, nie gotowy wykład.'));
     const src=resolveSource(entry.source);
     if (!src) return;
     const sameSite=src.href.startsWith(root.href);
