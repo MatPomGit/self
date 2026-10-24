@@ -1,0 +1,645 @@
+#!/usr/bin/env bash
+
+# Bash TUI prezentujący najważniejsze informacje systemowe.
+# Interfejs i komentarze są w języku polskim, zgodnie z wymaganiami projektu.
+#
+# Optymalizacja: dane statyczne czytane raz, dane szybkie (CPU, RAM, load, sieć,
+# temperatura) bez forków prosto z /proc i /sys, dane wolne (ps, who, df, tcp,
+# IP) odświeżane co SLOW_INTERVAL s. CPU liczone z różnicy próbek między
+# klatkami (bez sleep). Cała klatka wysyłana jednym printf.
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+readonly APP_NAME="bash-tui"
+readonly VERSION_PREFIX="1.1"
+readonly AUTHORS="KIA, Katedra Informatyki i Automatyki, Politechnika Rzeszowska"
+readonly BAR_WIDTH=28
+readonly SLOW_INTERVAL=2
+readonly REFRESH_HZ_LEVELS=("0.2" "0.5" "1" "2" "3" "4" "5" "10")
+readonly REFRESH_TIMEOUT_LEVELS=("5" "2" "1" "0.5" "0.333" "0.25" "0.2" "0.1")
+readonly ACTION_LABELS=("Instrukcje" "Wolniej" "Szybciej" "Odśwież" "Wyjście")
+readonly LAB_MODULES=("1" "2" "3" "4" "5" "6")
+
+# Definicja kolorów ANSI dla czytelniejszego interfejsu.
+readonly COLOR_RESET=$'\033[0m'
+readonly COLOR_BORDER=$'\033[38;5;39m'
+readonly COLOR_TITLE=$'\033[1;38;5;45m'
+readonly COLOR_LABEL=$'\033[1;38;5;81m'
+readonly COLOR_VALUE=$'\033[38;5;230m'
+readonly COLOR_INFO=$'\033[38;5;159m'
+readonly COLOR_OK=$'\033[1;38;5;82m'
+readonly COLOR_WARN=$'\033[1;38;5;220m'
+readonly COLOR_CRIT=$'\033[1;38;5;196m'
+
+# Katalog skryptu liczony raz.
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
+# Stan: dane statyczne.
+VERSION_STR=""; HOST_NAME=""; KERNEL_STR=""; CPU_MODEL="nieznany"; CPU_CORES="?"
+TEMP_FILE=""; CPU_MIN_DELTA=20
+BAR_FILL=(); BAR_EMPTY=()
+
+# Stan: dane szybkie (każda klatka).
+CPU_PERCENT=0; PREV_TOTAL=0; PREV_BUSY=0
+MEM_PERCENT=0; MEM_USED_MB=0; MEM_TOTAL_MB=0; SWAP_PERCENT=0; SWAP_USED_MB=0; SWAP_TOTAL_MB=0
+LOAD_AVG=""; TEMP_STR="brak"; NET_RX=0; NET_TX=0
+
+# Stan: dane wolne (co SLOW_INTERVAL s).
+UPTIME_STR=""; IP_ADDR=""; PROC_COUNT=0; USER_COUNT=0; NET_IF="brak"
+TOP_PROC=""; TCP_CONN=0
+DISK_ROOT_PCT=0; DISK_ROOT_FREE=0; DISK_ROOT_TOTAL=0
+DISK_HOME_PCT=0; DISK_HOME_FREE=0; DISK_HOME_TOTAL=0
+SLOW_LAST=-100
+MATERIAL_FILES=()
+
+# Stan: interfejs.
+KEY=""; NEED_CLEAR=0; ACTION_BAR=""; MAT_OUT=""
+
+# Zwraca katalog, w którym znajduje się skrypt.
+get_script_dir() {
+    printf '%s\n' "$SCRIPT_DIR"
+}
+
+# Zwraca automatycznie zwiększaną wersję opartą o liczbę commitów w repozytorium.
+get_version() {
+    local commit_count=0
+    if git -C "$SCRIPT_DIR" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+        commit_count="$(git -C "$SCRIPT_DIR" rev-list --count HEAD 2>/dev/null || echo 0)"
+    fi
+    printf "%s.%s" "$VERSION_PREFIX" "$commit_count"
+}
+
+# Uwalnia terminal po wyjściu z programu.
+cleanup_terminal() {
+    tput cnorm || true
+    tput rmcup || true
+    stty sane || true
+}
+
+# Przełącza terminal w tryb „pełnoekranowy” (alt-screen + próba maksymalizacji okna).
+setup_terminal() {
+    printf '\e[9;1t' || true
+    tput smcup || true
+    tput civis || true
+    printf '\e[H\e[2J'
+}
+
+# ---------- dane statyczne (raz) ----------
+
+init_static() {
+    local os rel line f i fill empty
+
+    read -r HOST_NAME < /proc/sys/kernel/hostname || HOST_NAME="$(hostname)"
+    read -r os < /proc/sys/kernel/ostype || os="Linux"
+    read -r rel < /proc/sys/kernel/osrelease || rel=""
+    KERNEL_STR="$os $rel"
+
+    while IFS= read -r line; do
+        if [[ $line == "model name"*": "* ]]; then
+            CPU_MODEL="${line#*: }"
+            break
+        fi
+    done < /proc/cpuinfo
+    CPU_CORES="$(nproc --all 2>/dev/null || echo "?")"
+    if [[ $CPU_CORES =~ ^[0-9]+$ ]]; then
+        CPU_MIN_DELTA=$(( CPU_CORES * 20 ))   # ok. 0,2 s próbkowania (USER_HZ=100)
+    fi
+
+    for f in /sys/class/thermal/thermal_zone*/temp; do
+        if [[ -r $f ]]; then TEMP_FILE=$f; break; fi
+    done
+
+    VERSION_STR="$(get_version)"
+
+    # Gotowe fragmenty pasków postępu (bez forków `tr` w każdej klatce).
+    fill=""
+    for (( i = 0; i <= BAR_WIDTH; i++ )); do
+        BAR_FILL[i]=$fill
+        fill+="█"
+    done
+    empty=""
+    for (( i = BAR_WIDTH; i >= 0; i-- )); do
+        BAR_EMPTY[i]=$empty
+        empty+="░"
+    done
+}
+
+# ---------- dane szybkie (bez forków) ----------
+
+# Pierwsza próbka CPU.
+prime_cpu() {
+    local u n s i w q sq st _x
+    read -r _x u n s i w q sq st _x < /proc/stat
+    PREV_TOTAL=$(( u + n + s + i + w + q + sq + st ))
+    PREV_BUSY=$(( PREV_TOTAL - i - w ))
+}
+
+# Obciążenie CPU z różnicy względem poprzedniej próbki (aktualizacja co ~0,2 s).
+sample_cpu() {
+    local u n s i w q sq st _x total busy td bd
+    read -r _x u n s i w q sq st _x < /proc/stat
+    total=$(( u + n + s + i + w + q + sq + st ))
+    busy=$(( total - i - w ))
+    td=$(( total - PREV_TOTAL ))
+    if (( td >= CPU_MIN_DELTA )); then
+        bd=$(( busy - PREV_BUSY ))
+        CPU_PERCENT=$(( 100 * bd / td ))
+        PREV_TOTAL=$total
+        PREV_BUSY=$busy
+    fi
+}
+
+# RAM i SWAP z /proc/meminfo.
+read_memory() {
+    local k v rest mt=0 ma=0 st=0 sf=0 used
+    while IFS=': ' read -r k v rest; do
+        case $k in
+            MemTotal)     mt=$v ;;
+            MemAvailable) ma=$v ;;
+            SwapTotal)    st=$v ;;
+            SwapFree)     sf=$v; break ;;
+        esac
+    done < /proc/meminfo
+
+    used=$(( mt - ma ))
+    if (( mt > 0 )); then MEM_PERCENT=$(( 100 * used / mt )); else MEM_PERCENT=0; fi
+    MEM_USED_MB=$(( used / 1024 )); MEM_TOTAL_MB=$(( mt / 1024 ))
+    if (( st > 0 )); then
+        SWAP_PERCENT=$(( 100 * (st - sf) / st ))
+    else
+        SWAP_PERCENT=0
+    fi
+    SWAP_USED_MB=$(( (st - sf) / 1024 )); SWAP_TOTAL_MB=$(( st / 1024 ))
+}
+
+# Transfer RX/TX (MB) na domyślnym interfejsie.
+read_network() {
+    local iface rx tx
+    NET_RX=0; NET_TX=0
+    [[ $NET_IF == "brak" ]] && return 0
+    while IFS=' :' read -r iface rx _ _ _ _ _ _ _ tx _; do
+        if [[ $iface == "$NET_IF" ]]; then
+            NET_RX=$(( rx / 1048576 )); NET_TX=$(( tx / 1048576 ))
+            break
+        fi
+    done < /proc/net/dev
+    return 0
+}
+
+# Temperatura CPU z pierwszej strefy thermal_zone.
+read_temperature() {
+    local raw t
+    TEMP_STR="brak"
+    [[ -n $TEMP_FILE ]] || return 0
+    if read -r raw 2>/dev/null < "$TEMP_FILE" && [[ $raw =~ ^[0-9]+$ ]]; then
+        t=$(( (raw + 50) / 100 ))
+        printf -v TEMP_STR '%d.%d°C' $(( t / 10 )) $(( t % 10 ))
+    fi
+    return 0
+}
+
+read_fast() {
+    local l1 l2 l3 _x
+    sample_cpu
+    read_memory
+    read_network
+    read_temperature
+    read -r l1 l2 l3 _x < /proc/loadavg
+    LOAD_AVG="$l1 $l2 $l3"
+}
+
+# ---------- dane wolne (co SLOW_INTERVAL s) ----------
+
+_up_part() {
+    local n=$1 one=$2 many=$3
+    (( n == 0 )) && return 0
+    if (( n == 1 )); then UPTIME_STR="${UPTIME_STR:+$UPTIME_STR, }1 $one"
+    else UPTIME_STR="${UPTIME_STR:+$UPTIME_STR, }$n $many"; fi
+    return 0
+}
+
+# Czas działania w formacie `uptime -p`.
+format_uptime() {
+    local up _x s
+    UPTIME_STR=""
+    read -r up _x < /proc/uptime || return 0
+    s=${up%.*}
+    _up_part $(( s / 604800 )) week weeks
+    _up_part $(( s % 604800 / 86400 )) day days
+    _up_part $(( s % 86400 / 3600 )) hour hours
+    _up_part $(( s % 3600 / 60 )) minute minutes
+    if [[ -z $UPTIME_STR ]]; then UPTIME_STR="0 minutes"; fi
+    UPTIME_STR="up $UPTIME_STR"
+}
+
+# Przeszukuje katalog materials/ (bez find/sort/awk).
+scan_materials() {
+    local d="$SCRIPT_DIR/materials" n f
+    MATERIAL_FILES=()
+    [[ -d $d ]] || return 0
+    for n in "${LAB_MODULES[@]}"; do
+        printf -v f '%s/lab_%02d.md' "$d" "$n"
+        if [[ -f $f ]]; then MATERIAL_FILES+=("$f"); fi
+    done
+    shopt -s nocaseglob
+    for f in "$d"/*.txt; do
+        if [[ -f $f ]]; then MATERIAL_FILES+=("$f"); fi
+    done
+    shopt -u nocaseglob
+    return 0
+}
+
+# Wypisuje listę plików materiałów (opcja --list-instructions).
+discover_material_files() {
+    scan_materials
+    if (( ${#MATERIAL_FILES[@]} > 0 )); then printf '%s\n' "${MATERIAL_FILES[@]}"; fi
+    return 0
+}
+
+refresh_slow() {
+    local df_out fs total used avail pct mp n=0 dest d_if d_rest
+
+    format_uptime
+    IP_ADDR="$(hostname -I 2>/dev/null | awk '{print $1}' || true)"
+
+    local procs=(/proc/[0-9]*)
+    PROC_COUNT=${#procs[@]}
+    USER_COUNT="$(who 2>/dev/null | wc -l || true)"
+    USER_COUNT=${USER_COUNT// /}
+
+    # Domyślny interfejs z tablicy tras (bez `ip`).
+    NET_IF="brak"
+    while read -r d_if dest d_rest; do
+        if [[ $dest == "00000000" ]]; then NET_IF=$d_if; break; fi
+    done < /proc/net/route
+
+    TOP_PROC="$(ps -eo comm,%cpu --sort=-%cpu --no-headers 2>/dev/null \
+        | awk '$1 != "ps" && $1 != "awk" {print $1 " (" $2 "%)"; exit}' || true)"
+    local tcp_files=()
+    [[ -r /proc/net/tcp ]]  && tcp_files+=(/proc/net/tcp)
+    [[ -r /proc/net/tcp6 ]] && tcp_files+=(/proc/net/tcp6)
+    TCP_CONN=0
+    if (( ${#tcp_files[@]} > 0 )); then
+        TCP_CONN="$(awk 'FNR > 1 && $4 == "01" {c++} END {print c + 0}' "${tcp_files[@]}" || true)"
+    fi
+
+    # Jedno wywołanie df dla obu punktów montowania.
+    DISK_ROOT_PCT=0; DISK_ROOT_FREE=0; DISK_ROOT_TOTAL=0
+    DISK_HOME_PCT=0; DISK_HOME_FREE=0; DISK_HOME_TOTAL=0
+    if [[ -d /home ]]; then
+        df_out="$(df -P / /home 2>/dev/null || true)"
+    else
+        df_out="$(df -P / 2>/dev/null || true)"
+    fi
+    while read -r fs total used avail pct mp; do
+        [[ $fs == "Filesystem" || -z ${pct:-} ]] && continue
+        pct=${pct%\%}
+        if (( n == 0 )); then
+            DISK_ROOT_PCT=$pct; DISK_ROOT_FREE=$avail; DISK_ROOT_TOTAL=$total
+        else
+            DISK_HOME_PCT=$pct; DISK_HOME_FREE=$avail; DISK_HOME_TOTAL=$total
+        fi
+        n=$(( n + 1 ))
+    done <<<"$df_out"
+}
+
+# ---------- rysowanie ----------
+
+# Buduje kolorowy pasek postępu do zmiennej: make_bar nazwa_zmiennej procent
+make_bar() {
+    local pct=$2 filled color
+    [[ $pct =~ ^[0-9]+$ ]] || pct=0
+    if (( pct > 100 )); then pct=100; fi
+    filled=$(( pct * BAR_WIDTH / 100 ))
+    if (( pct < 60 )); then color=$COLOR_OK
+    elif (( pct < 85 )); then color=$COLOR_WARN
+    else color=$COLOR_CRIT; fi
+    printf -v "$1" '%s[%s%s%s%s] %3s%%%s' \
+        "$color" "${BAR_FILL[filled]}" "$COLOR_BORDER" "${BAR_EMPTY[filled]}" "$color" "$pct" "$COLOR_RESET"
+}
+
+# Buduje poziomy pasek akcji z podświetleniem aktualnie wybranego pola.
+build_action_bar() {
+    local focused_index=$1 idx s
+    s="${COLOR_INFO}Pola (strzałki):${COLOR_RESET} "
+    for idx in "${!ACTION_LABELS[@]}"; do
+        if (( idx == focused_index )); then
+            s+="${COLOR_TITLE}> ${ACTION_LABELS[$idx]} <${COLOR_RESET} "
+        else
+            s+="${COLOR_LABEL}[ ${ACTION_LABELS[$idx]} ]${COLOR_RESET} "
+        fi
+    done
+    ACTION_BAR=$s
+}
+
+# Buduje sekcję plików materiałów pod główną ramką.
+build_materials_section() {
+    local selected_index=${1:-0} focus_zone=${2:-actions} idx name
+    MAT_OUT=$'\n'"${COLOR_INFO}Materiały (↓ aby przejść, Enter aby otworzyć):${COLOR_RESET}"$'\n'
+    if (( ${#MATERIAL_FILES[@]} == 0 )); then
+        MAT_OUT+="  ${COLOR_WARN}Brak plików w katalogu materials/.${COLOR_RESET}"$'\n'
+        return 0
+    fi
+    for idx in "${!MATERIAL_FILES[@]}"; do
+        name=${MATERIAL_FILES[$idx]#"$SCRIPT_DIR"/}
+        if (( idx == selected_index )) && [[ $focus_zone == "files" ]]; then
+            MAT_OUT+="  ${COLOR_LABEL}> ${name}${COLOR_RESET}"$'\n'
+        else
+            MAT_OUT+="    ${name}"$'\n'
+        fi
+    done
+}
+
+# Rysuje pojedynczy ekran TUI (jeden zapis do terminala).
+render_screen() {
+    local refresh_hz="$1"
+    local focused_index="${2:-0}"
+    local focus_zone="${3:-actions}"
+    local selected_material_index="${4:-0}"
+    local bar_cpu bar_mem bar_swap bar_root bar_home frame
+
+    if (( SECONDS - SLOW_LAST >= SLOW_INTERVAL )); then
+        refresh_slow
+        scan_materials
+        SLOW_LAST=$SECONDS
+    fi
+    read_fast
+
+    make_bar bar_cpu "$CPU_PERCENT"
+    make_bar bar_mem "$MEM_PERCENT"
+    make_bar bar_swap "$SWAP_PERCENT"
+    make_bar bar_root "$DISK_ROOT_PCT"
+    make_bar bar_home "$DISK_HOME_PCT"
+    build_action_bar "$focused_index"
+    build_materials_section "$selected_material_index" "$focus_zone"
+
+    IFS= read -r -d '' frame <<EOT || true
+${COLOR_BORDER}╔════════════════════════════════════════════════════════════════════════════════════════╗${COLOR_RESET}
+${COLOR_BORDER}║${COLOR_RESET}${COLOR_TITLE}                                  MONITOR SYSTEMU                                  ${COLOR_RESET}${COLOR_BORDER}║${COLOR_RESET}
+${COLOR_BORDER}╠════════════════════════════════════════════════════════════════════════════════════════╣${COLOR_RESET}
+${COLOR_BORDER}║${COLOR_RESET} ${COLOR_LABEL}Aplikacja:${COLOR_RESET} ${COLOR_VALUE}${APP_NAME}${COLOR_RESET}    ${COLOR_LABEL}Wersja (auto):${COLOR_RESET} ${COLOR_VALUE}${VERSION_STR}${COLOR_RESET}
+${COLOR_BORDER}║${COLOR_RESET} ${COLOR_LABEL}Autorzy:${COLOR_RESET} ${COLOR_VALUE}${AUTHORS}${COLOR_RESET}
+${COLOR_BORDER}╠════════════════════════════════════════════════════════════════════════════════════════╣${COLOR_RESET}
+${COLOR_BORDER}║${COLOR_RESET} ${COLOR_LABEL}Host:${COLOR_RESET} ${COLOR_VALUE}${HOST_NAME}${COLOR_RESET}    ${COLOR_LABEL}Jądro:${COLOR_RESET} ${COLOR_VALUE}${KERNEL_STR}${COLOR_RESET}
+${COLOR_BORDER}║${COLOR_RESET} ${COLOR_LABEL}IP:${COLOR_RESET} ${COLOR_VALUE}${IP_ADDR:-brak}${COLOR_RESET}    ${COLOR_LABEL}Czas działania:${COLOR_RESET} ${COLOR_VALUE}${UPTIME_STR}${COLOR_RESET}
+${COLOR_BORDER}║${COLOR_RESET} ${COLOR_LABEL}Load avg:${COLOR_RESET} ${COLOR_VALUE}${LOAD_AVG}${COLOR_RESET}    ${COLOR_LABEL}Procesy/Użytkownicy:${COLOR_RESET} ${COLOR_VALUE}${PROC_COUNT}/${USER_COUNT}${COLOR_RESET}
+${COLOR_BORDER}║${COLOR_RESET} ${COLOR_LABEL}Temp. CPU:${COLOR_RESET} ${COLOR_VALUE}${TEMP_STR}${COLOR_RESET}    ${COLOR_LABEL}Połączenia TCP:${COLOR_RESET} ${COLOR_VALUE}${TCP_CONN}${COLOR_RESET}
+${COLOR_BORDER}║${COLOR_RESET} ${COLOR_LABEL}CPU model:${COLOR_RESET} ${COLOR_VALUE}${CPU_MODEL}${COLOR_RESET}
+${COLOR_BORDER}║${COLOR_RESET} ${COLOR_LABEL}Rdzenie logiczne:${COLOR_RESET} ${COLOR_VALUE}${CPU_CORES}${COLOR_RESET}    ${COLOR_LABEL}Top CPU process:${COLOR_RESET} ${COLOR_VALUE}${TOP_PROC:-brak}${COLOR_RESET}
+${COLOR_BORDER}╠════════════════════════════════════════════════════════════════════════════════════════╣${COLOR_RESET}
+${COLOR_BORDER}║${COLOR_RESET} ${COLOR_LABEL}CPU:${COLOR_RESET}     ${bar_cpu}
+${COLOR_BORDER}║${COLOR_RESET} ${COLOR_LABEL}RAM:${COLOR_RESET}     ${bar_mem}  ${COLOR_INFO}(${MEM_USED_MB}MB / ${MEM_TOTAL_MB}MB)${COLOR_RESET}
+${COLOR_BORDER}║${COLOR_RESET} ${COLOR_LABEL}SWAP:${COLOR_RESET}    ${bar_swap}  ${COLOR_INFO}(${SWAP_USED_MB}MB / ${SWAP_TOTAL_MB}MB)${COLOR_RESET}
+${COLOR_BORDER}║${COLOR_RESET} ${COLOR_LABEL}Dysk /:${COLOR_RESET}  ${bar_root}  ${COLOR_INFO}(wolne: ${DISK_ROOT_FREE}K / ${DISK_ROOT_TOTAL}K)${COLOR_RESET}
+${COLOR_BORDER}║${COLOR_RESET} ${COLOR_LABEL}Dysk /home:${COLOR_RESET} ${bar_home}  ${COLOR_INFO}(wolne: ${DISK_HOME_FREE}K / ${DISK_HOME_TOTAL}K)${COLOR_RESET}
+${COLOR_BORDER}║${COLOR_RESET} ${COLOR_LABEL}Sieć:${COLOR_RESET} ${COLOR_VALUE}${NET_IF}${COLOR_RESET}  ${COLOR_INFO}RX: ${NET_RX}MB | TX: ${NET_TX}MB${COLOR_RESET}
+${COLOR_BORDER}╠════════════════════════════════════════════════════════════════════════════════════════╣${COLOR_RESET}
+${COLOR_BORDER}║${COLOR_RESET} ${ACTION_BAR}
+${COLOR_BORDER}║${COLOR_RESET} ${COLOR_INFO}Odświeżanie: ${refresh_hz}Hz  ([+] szybciej, [-] wolniej)${COLOR_RESET}
+${COLOR_BORDER}║${COLOR_RESET} ${COLOR_INFO}Enter: aktywuj pole | q: powrót/wyjście | h: szybkie instrukcje${COLOR_RESET}
+${COLOR_BORDER}╚════════════════════════════════════════════════════════════════════════════════════════╝${COLOR_RESET}
+EOT
+
+    frame+=$MAT_OUT
+    frame=${frame//$'\n'/$'\e[K\n'}          # czyść resztki starej klatki w każdym wierszu
+    if (( NEED_CLEAR )); then printf '\e[2J'; NEED_CLEAR=0; fi
+    printf '\e[H%s\e[J' "$frame"
+}
+
+# ---------- wejście ----------
+
+# Odczytuje klawisz do zmiennej KEY (bez subshella). Bez argumentu czeka bez limitu.
+# Zwraca 1 przy timeoucie/EOF.
+read_input_key() {
+    local key sequence
+    KEY=""
+    if (( $# > 0 )); then
+        read -r -s -n 1 -t "$1" key || return 1
+    else
+        read -r -s -n 1 key || return 1
+    fi
+
+    if [[ $key == $'\e' ]]; then
+        if read -r -s -n 2 -t 0.01 sequence; then
+            key+=$sequence
+        fi
+    fi
+
+    case $key in
+        $'\e[A') KEY="UP" ;;
+        $'\e[B') KEY="DOWN" ;;
+        $'\e[C') KEY="RIGHT" ;;
+        $'\e[D') KEY="LEFT" ;;
+        ""|$'\n'|$'\r') KEY="ENTER" ;;
+        *) KEY=$key ;;
+    esac
+    return 0
+}
+
+wait_for_q() {
+    while read_input_key; do
+        if [[ $KEY == "q" || $KEY == "Q" ]]; then return 0; fi
+    done
+    return 0
+}
+
+# Buduje ścieżkę do pliku instrukcji laboratoryjnej dla wskazanego modułu.
+get_lab_module_file() {
+    printf "%s/materials/lab_%02d.md\n" "$SCRIPT_DIR" "$1"
+}
+
+# Otwiera wybrany plik materiału przez less lub prosty podgląd tekstowy.
+open_material_file() {
+    local file_path="$1"
+    if command -v less >/dev/null 2>&1; then
+        less -R "$file_path" || true
+    else
+        printf '\e[H\e[2J'
+        cat "$file_path"
+        printf "\n--- Koniec pliku. Naciśnij [q], aby wrócić..."
+        wait_for_q
+    fi
+    NEED_CLEAR=1
+}
+
+# Wyświetla pojedynczą stronę modułu laboratoryjnego bez zależności od less.
+render_lab_module_page() {
+    local module_number="$1" module_file="$2"
+    printf '\e[H\e[2J'
+    printf "%s=== Instrukcja laboratoryjna %s ===%s\n\n" "$COLOR_TITLE" "$module_number" "$COLOR_RESET"
+    cat "$module_file"
+    printf "\n\n%sNaciśnij [q], aby wrócić do listy modułów.%s\n" "$COLOR_INFO" "$COLOR_RESET"
+    wait_for_q
+}
+
+# Otwiera wskazany moduł laboratoryjny z bezpiecznym fallbackiem bez less.
+open_lab_module() {
+    local module_number="$1" module_file="$2"
+    if command -v less >/dev/null 2>&1; then
+        less -R "$module_file" || true
+    else
+        render_lab_module_page "$module_number" "$module_file"
+    fi
+}
+
+# Wyświetla interaktywny wybór modułów laboratoryjnych i ich osobne strony.
+show_instructions() {
+    local selected_index=0 idx module_number module_file screen
+
+    while true; do
+        screen="${COLOR_TITLE}=== Instrukcje laboratoryjne (moduły 1-6) ===${COLOR_RESET}"$'\n\n'
+        screen+=$'Wybierz moduł strzałkami góra/dół. Enter = otwórz, q = powrót.\n\n'
+        for idx in "${!LAB_MODULES[@]}"; do
+            module_number="${LAB_MODULES[$idx]}"
+            module_file="$(get_lab_module_file "$module_number")"
+            if (( idx == selected_index )); then
+                if [[ -f $module_file ]]; then
+                    screen+="  ${COLOR_LABEL}> Moduł ${module_number}${COLOR_RESET}"$'\n'
+                else
+                    screen+="  ${COLOR_WARN}> Moduł ${module_number} (brak pliku)${COLOR_RESET}"$'\n'
+                fi
+            else
+                if [[ -f $module_file ]]; then
+                    screen+="    Moduł ${module_number}"$'\n'
+                else
+                    screen+="    ${COLOR_WARN}Moduł ${module_number} (brak pliku)${COLOR_RESET}"$'\n'
+                fi
+            fi
+        done
+        printf '\e[H\e[2J%s' "$screen"
+
+        read_input_key || return 0     # blokujące czekanie na klawisz (bez pętli aktywnej)
+
+        case $KEY in
+            q|Q) NEED_CLEAR=1; return 0 ;;
+            UP)   if (( selected_index > 0 )); then selected_index=$(( selected_index - 1 )); fi ;;
+            DOWN) if (( selected_index < ${#LAB_MODULES[@]} - 1 )); then selected_index=$(( selected_index + 1 )); fi ;;
+            ENTER)
+                module_number="${LAB_MODULES[$selected_index]}"
+                module_file="$(get_lab_module_file "$module_number")"
+                if [[ -f $module_file ]]; then
+                    open_lab_module "$module_number" "$module_file"
+                else
+                    printf "\nBrak pliku dla modułu %s (%s). Naciśnij [q], aby wrócić..." \
+                        "$module_number" "${module_file#"$SCRIPT_DIR"/}"
+                    wait_for_q
+                fi
+                ;;
+        esac
+    done
+}
+
+main() {
+    local mode="interactive"
+    local refresh_index=2
+    local refresh_hz refresh_timeout
+    local focused_control=0
+    local focus_zone="actions"
+    local selected_material_index=0
+
+    case "${1:-}" in
+        --snapshot)
+            mode="snapshot"
+            ;;
+        --list-instructions)
+            discover_material_files
+            return 0
+            ;;
+    esac
+
+    init_static
+    prime_cpu
+    sleep 0.25          # jednorazowa próbka startowa dla pierwszego odczytu CPU
+
+    if [[ $mode == "snapshot" ]]; then
+        render_screen "${REFRESH_HZ_LEVELS[$refresh_index]}"
+        return 0
+    fi
+
+    trap cleanup_terminal EXIT
+    trap 'exit 130' INT TERM
+    trap 'NEED_CLEAR=1' WINCH
+    setup_terminal
+
+    while true; do
+        refresh_hz="${REFRESH_HZ_LEVELS[$refresh_index]}"
+        refresh_timeout="${REFRESH_TIMEOUT_LEVELS[$refresh_index]}"
+        render_screen "$refresh_hz" "$focused_control" "$focus_zone" "$selected_material_index"
+
+        # Lista materiałów odświeżana w render_screen; pilnujemy zakresu zaznaczenia.
+        if (( ${#MATERIAL_FILES[@]} == 0 )); then
+            selected_material_index=0
+            focus_zone="actions"
+        elif (( selected_material_index > ${#MATERIAL_FILES[@]} - 1 )); then
+            selected_material_index=$(( ${#MATERIAL_FILES[@]} - 1 ))
+        fi
+
+        if read_input_key "$refresh_timeout"; then
+            case "$KEY" in
+                q|Q)
+                    break
+                    ;;
+                r|R)
+                    SLOW_LAST=-100
+                    ;;
+                h|H)
+                    show_instructions
+                    ;;
+                LEFT)
+                    if [[ $focus_zone == "actions" ]] && (( focused_control > 0 )); then
+                        focused_control=$(( focused_control - 1 ))
+                    fi
+                    ;;
+                RIGHT)
+                    if [[ $focus_zone == "actions" ]] && (( focused_control < ${#ACTION_LABELS[@]} - 1 )); then
+                        focused_control=$(( focused_control + 1 ))
+                    fi
+                    ;;
+                UP)
+                    if [[ $focus_zone == "files" ]]; then
+                        if (( selected_material_index > 0 )); then
+                            selected_material_index=$(( selected_material_index - 1 ))
+                        else
+                            focus_zone="actions"
+                        fi
+                    fi
+                    ;;
+                DOWN)
+                    if [[ $focus_zone == "actions" ]] && (( ${#MATERIAL_FILES[@]} > 0 )); then
+                        focus_zone="files"
+                    elif [[ $focus_zone == "files" ]] && (( selected_material_index < ${#MATERIAL_FILES[@]} - 1 )); then
+                        selected_material_index=$(( selected_material_index + 1 ))
+                    fi
+                    ;;
+                ENTER)
+                    if [[ $focus_zone == "files" ]]; then
+                        if (( ${#MATERIAL_FILES[@]} > 0 )); then
+                            open_material_file "${MATERIAL_FILES[$selected_material_index]}"
+                        fi
+                    else
+                        case "$focused_control" in
+                            0) show_instructions ;;
+                            1) if (( refresh_index > 0 )); then refresh_index=$(( refresh_index - 1 )); fi ;;
+                            2) if (( refresh_index < ${#REFRESH_HZ_LEVELS[@]} - 1 )); then refresh_index=$(( refresh_index + 1 )); fi ;;
+                            3) SLOW_LAST=-100 ;;
+                            4) break ;;
+                        esac
+                    fi
+                    ;;
+                +)
+                    if (( refresh_index < ${#REFRESH_HZ_LEVELS[@]} - 1 )); then refresh_index=$(( refresh_index + 1 )); fi
+                    ;;
+                -)
+                    if (( refresh_index > 0 )); then refresh_index=$(( refresh_index - 1 )); fi
+                    ;;
+            esac
+        fi
+    done
+}
+
+# Uruchom tylko przy bezpośrednim wykonaniu (pozwala na `source` w testach).
+if [[ ${BASH_SOURCE[0]} == "$0" ]]; then
+    main "$@"
+fi
