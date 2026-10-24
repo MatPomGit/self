@@ -24,12 +24,13 @@ class WiRRAssetsTests(unittest.TestCase):
             with self.subTest(lecture=n):
                 pdf = self.by_id[("p", ident)]
                 html = self.by_id[("h", ident)]
-                self.assertEqual(pdf["status"], "planned")
-                self.assertEqual(html["status"], "draft")
+                self.assertIn(pdf["status"], ("planned", "ready"))
+                self.assertIn(html["status"], ("draft", "ready"))
                 self.assertEqual(pdf["category"], "WiRR")
                 self.assertEqual(html["category"], "WiRR")
                 self.assertEqual(pdf["source"], f"downloads/wirr/w{n:02}.pdf")
-                self.assertFalse((ROOT / pdf["source"]).is_file())
+                if pdf["status"] == "ready":
+                    self.assertTrue((ROOT / pdf["source"]).is_file())
                 self.assertEqual(html["source"], f"lectures/wirr/w{n:02}.html")
                 self.assertTrue((ROOT / html["source"]).is_file())
                 self.assertTrue((ROOT / "p" / ident / "index.html").is_file())
