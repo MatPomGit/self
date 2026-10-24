@@ -1,2 +1,2348 @@
-<!doctype html>
-<html lang="pl"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=archive/index_legacy_2026.html"><meta name="robots" content="noindex"><title>Archiwalna wersja strony</title></head><body><p>Archiwalna wersja strony jest dostępna pod adresem <a href="archive/index_legacy_2026.html">archive/index_legacy_2026.html</a>.</p></body></html>
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dr inż. Mateusz Pomianek – Wizytówka naukowa</title>
+  <meta name="description"
+    content="Strona naukowa dr inż. Mateusza Pomianka – adiunkta PRz. Specjalizacje: informatyka afektywna, VR/AR/MR, AI, optoelektronika, systemy obronne, naprowadzanie rakiet." />
+  <meta name="author" content="dr inż. Mateusz Pomianek" />
+  <meta name="keywords"
+    content="Mateusz Pomianek, informatyka afektywna, wizja komputerowa, eye-tracking, VR AR MR, AI, Politechnika Rzeszowska, adiunkt, naprowadzanie rakiet, pociski przeciwpancerne, systemy obronne, symulatory pola walki, optoelektronika" />
+  <meta property="og:title" content="dr inż. Mateusz Pomianek – Wizytówka naukowa" />
+  <meta property="og:description"
+    content="Strona naukowa dr inż. Mateusza Pomianka – adiunkta Politechniki Rzeszowskiej. Specjalizacje: informatyka afektywna, wizja komputerowa, VR/AR/MR, AI, śledzenie wzroku." />
+  <meta property="og:type" content="profile" />
+  <meta property="og:locale" content="pl_PL" />
+  <meta name="google-site-verification" content="6rxzGHXJtmpyj20hBi0v7yX1h8KpN2fEgueFU1M8Flc" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="dr inż. Mateusz Pomianek – Wizytówka naukowa" />
+  <meta name="twitter:description"
+    content="Adiunkt Politechniki Rzeszowskiej – informatyka afektywna, wizja komputerowa, VR/AR/MR, AI." />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔬</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="shattering-text.css" />
+  <link rel="stylesheet" href="scroll-animations.css" />
+  <link rel="stylesheet" href="anime-animations.css" />
+  <link rel="stylesheet" href="grid-nav.css" />
+  <link rel="stylesheet" href="theme-switcher.css" />
+  <script src="theme-switcher.js"></script>
+
+  <style>
+    /* ==========================================
+       RESET & BASE
+    ========================================== */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      /* Colour palette */
+      --clr-bg: #0a0e1a;
+      --clr-surface: #111827;
+      --clr-surface2: #1a2236;
+      --clr-navy: #0d1b2a;
+      --clr-blue: #1e40af;
+      --clr-cyan: #06b6d4;
+      --clr-teal: #14b8a6;
+      --clr-neon: #00f5ff;
+      --clr-neon2: #7c3aed;
+      --clr-text: #e2e8f0;
+      --clr-muted: #94a3b8;
+      --clr-border: rgba(6, 182, 212, 0.18);
+
+      /* Typography */
+      --font-head: 'Poppins', sans-serif;
+      --font-body: 'Inter', sans-serif;
+
+      /* Spacing */
+      --section-pad: 6rem 2rem;
+    }
+
+    html {
+      scroll-behavior: auto;
+    }
+
+    body {
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      font-family: var(--font-body);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--clr-bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--clr-cyan);
+      border-radius: 3px;
+    }
+
+    /* ==========================================
+       UTILITY CLASSES
+    ========================================== */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-label {
+      font-family: var(--font-head);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--clr-cyan);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--clr-cyan), var(--clr-teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Fade-in animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.56s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.56s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Divider line */
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--clr-cyan), var(--clr-teal));
+      border-radius: 2px;
+      margin-bottom: 2rem;
+    }
+
+    /* ==========================================
+       NAV
+    ========================================== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--nav-bg, rgba(10, 14, 26, 0.75));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--clr-border);
+      transition: background 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .nav-logo {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--clr-cyan);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--clr-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .nav-links a:hover {
+      color: var(--clr-cyan);
+    }
+
+    /* Hamburger for mobile */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--clr-cyan);
+      border-radius: 2px;
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    @media (max-width: 700px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 1rem;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        background: var(--nav-mobile-bg, rgba(10, 14, 26, 0.97));
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid var(--clr-border);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+    }
+
+    /* ==========================================
+       HERO
+    ========================================== */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Canvas fills the hero */
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* Vignette overlay */
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 40%, var(--hero-vignette, rgba(10, 14, 26, 0.8)) 100%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 8rem 2rem 4rem;
+      max-width: 820px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid var(--clr-border);
+      border-radius: 100px;
+      padding: 0.35rem 1rem;
+      font-size: 0.8rem;
+      color: var(--clr-cyan);
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: var(--clr-cyan);
+      border-radius: 50%;
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(1.4);
+      }
+    }
+
+    .hero-name-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-face {
+      width: clamp(58px, 8vw, 82px);
+      height: clamp(58px, 8vw, 82px);
+      border-radius: 50%;
+      border: 2px solid var(--clr-cyan);
+      object-fit: cover;
+      box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
+      flex-shrink: 0;
+    }
+
+    .hero-name {
+      font-family: var(--font-head);
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 0;
+    }
+
+    .hero-name-word {
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    .hero-title {
+      font-family: var(--font-head);
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-weight: 300;
+      color: var(--clr-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .tag {
+      background: rgba(20, 184, 166, 0.08);
+      border: 1px solid rgba(20, 184, 166, 0.25);
+      color: var(--clr-teal);
+      border-radius: 6px;
+      padding: 0.3rem 0.85rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: background 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .tag:hover {
+      background: rgba(20, 184, 166, 0.18);
+      border-color: var(--clr-teal);
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--clr-cyan), var(--clr-teal));
+      color: #0a0e1a;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0.75rem 1.8rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .hero-cta:hover {
+      opacity: 0.88;
+      transform: translateY(-2px);
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--clr-muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-hint::after {
+      content: '';
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, var(--clr-cyan), transparent);
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+        animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(8px);
+      }
+    }
+
+    /* ==========================================
+       ABOUT
+    ========================================== */
+    #about {
+      padding: var(--section-pad);
+      background: var(--clr-surface);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: var(--clr-muted);
+      font-size: 0.95rem;
+      line-height: 1.85;
+    }
+
+    /* Abstract geometric SVG element */
+    .geo-figure {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .geo-figure svg {
+      width: 100%;
+      max-width: 340px;
+      height: auto;
+      filter: drop-shadow(0 0 18px rgba(6, 182, 212, 0.25));
+      animation: geo-spin 20s linear infinite;
+      transform-origin: center;
+    }
+
+    @keyframes geo-spin {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .geo-inner {
+      animation: geo-spin 12s linear infinite reverse;
+    }
+
+    @media (max-width: 768px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+    }
+
+    /* ==========================================
+       RESEARCH INTERESTS
+    ========================================== */
+    #interests {
+      padding: var(--section-pad);
+      background: var(--clr-bg);
+    }
+
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .interest-card {
+      background: var(--clr-surface2);
+      border: 1px solid var(--clr-border);
+      border-radius: 12px;
+      padding: 1.6rem 1.4rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: border-color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .interest-card:hover {
+      border-color: var(--clr-cyan);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(6, 182, 212, 0.12);
+    }
+
+    /* Geometric icon */
+    .int-icon {
+      flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+    }
+
+    .interest-card h3 {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .interest-card p {
+      font-size: 0.9rem;
+      color: var(--clr-muted);
+      line-height: 1.65;
+      max-width: 42ch;
+    }
+
+    .interest-card > div {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    /* ==========================================
+       RESEARCH: HARDWARE / SOFTWARE
+    ========================================== */
+    #research {
+      padding: var(--section-pad);
+      background: var(--clr-surface);
+    }
+
+    .research-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .research-col {
+      background: var(--clr-surface2);
+      border: 1px solid var(--clr-border);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: border-color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .research-col:hover {
+      border-color: var(--clr-cyan);
+      box-shadow: 0 0 30px rgba(6, 182, 212, 0.08);
+    }
+
+    .research-col-head {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .research-col-head svg {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+
+    .research-col-head h3 {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .research-list {
+      list-style: none;
+    }
+
+    .research-list li {
+      padding: 0.55rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.88rem;
+      color: var(--clr-muted);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+    }
+
+    .research-list li:last-child {
+      border-bottom: none;
+    }
+
+    .research-list li::before {
+      content: '';
+      flex-shrink: 0;
+      margin-top: 0.45rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 1px;
+      background: linear-gradient(135deg, var(--clr-cyan), var(--clr-teal));
+      transform: rotate(45deg);
+    }
+
+    @media (max-width: 650px) {
+      .research-cols {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ==========================================
+       PROJECTS & ACHIEVEMENTS
+    ========================================== */
+    #projects {
+      padding: var(--section-pad);
+      background: var(--clr-bg);
+    }
+
+    /* Project cards grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .project-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: border-color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--clr-cyan), var(--clr-teal));
+      opacity: 0;
+      transition: opacity 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .project-card:hover {
+      border-color: var(--clr-cyan);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 35px rgba(6, 182, 212, 0.1);
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
+    }
+
+    .project-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--clr-cyan);
+      margin-bottom: 0.6rem;
+    }
+
+    .project-card h3 {
+      font-family: var(--font-head);
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+
+    .project-card p {
+      font-size: 0.82rem;
+      color: var(--clr-muted);
+      line-height: 1.6;
+    }
+
+    /* ==========================================
+       CLINICAL APPLICATIONS
+    ========================================== */
+    #clinical {
+      padding: var(--section-pad);
+      background: linear-gradient(135deg, #0d1b2a 0%, #0a1628 50%, #0d2035 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Background glow blobs */
+    #clinical::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      left: -80px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    #clinical::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      right: -60px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(124, 58, 237, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .clinical-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .clinical-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .clinical-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(6, 182, 212, 0.15);
+      border-radius: 14px;
+      padding: 1.75rem 1.5rem;
+      transition: background 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .clinical-card:hover {
+      background: rgba(6, 182, 212, 0.06);
+      border-color: var(--clr-cyan);
+      transform: translateY(-4px);
+    }
+
+    .clinical-icon {
+      width: 42px;
+      height: 42px;
+      margin-bottom: 1rem;
+    }
+
+    .clinical-card h3 {
+      font-family: var(--font-head);
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .clinical-card p {
+      font-size: 0.82rem;
+      color: var(--clr-muted);
+      line-height: 1.6;
+    }
+
+    /* ==========================================
+       FOOTER
+    ========================================== */
+    footer {
+      background: var(--clr-navy);
+      border-top: 1px solid var(--clr-border);
+      padding: 2.5rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-brand {
+      font-family: var(--font-head);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .footer-brand span {
+      color: var(--clr-cyan);
+    }
+
+    .footer-info {
+      font-size: 0.82rem;
+      color: var(--clr-muted);
+      line-height: 1.7;
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(148, 163, 184, 0.45);
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    /* ==========================================
+       LANGUAGE TOGGLE
+    ========================================== */
+    .lang-toggle {
+      background: none;
+      border: 1px solid var(--clr-border);
+      color: var(--clr-muted);
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      padding: 0.28rem 0.65rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: color 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.22s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      flex-shrink: 0;
+    }
+
+    .lang-toggle:hover {
+      color: var(--clr-cyan);
+      border-color: var(--clr-cyan);
+      background: rgba(6, 182, 212, 0.06);
+    }
+
+    /* ==========================================
+       MATERIALS
+    ========================================== */
+    #materials {
+      padding: var(--section-pad);
+      background: var(--clr-surface);
+    }
+
+    .materials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.4rem;
+      margin-top: 2rem;
+    }
+
+    .material-card {
+      background: var(--clr-surface2);
+      border: 1px solid var(--clr-border);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .material-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.05) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .material-card:hover {
+      border-color: var(--clr-cyan);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 35px rgba(6, 182, 212, 0.1);
+    }
+
+    .material-card:hover::before {
+      opacity: 1;
+    }
+
+    .material-icon {
+      width: 42px;
+      height: 42px;
+      margin-bottom: 1rem;
+    }
+
+    .material-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--clr-teal);
+      margin-bottom: 0.5rem;
+    }
+
+    .material-card h3 {
+      font-family: var(--font-head);
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      line-height: 1.4;
+    }
+
+    .material-card p {
+      font-size: 0.82rem;
+      color: var(--clr-muted);
+      line-height: 1.6;
+    }
+
+    .material-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 0.9rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--clr-cyan);
+      text-decoration: none;
+      transition: gap 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .material-link:hover {
+      gap: 0.55rem;
+    }
+
+    /* Materials CTA */
+    .materials-cta {
+      max-width: 640px;
+      background: var(--clr-surface2);
+      border: 1px solid var(--clr-border);
+      border-radius: 16px;
+      padding: 2rem 2.5rem;
+    }
+
+    .materials-cta p {
+      font-size: 1rem;
+      color: var(--clr-muted);
+      line-height: 1.8;
+    }
+  </style>
+</head>
+
+<body data-grid-pos="center">
+
+  <!-- Scroll Progress Bar -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- ==========================================
+       NAVIGATION
+  ========================================== -->
+  <nav id="navbar" role="navigation" aria-label="Nawigacja główna">
+    <a href="#hero" class="nav-logo">MP.</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Otwórz menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks" role="list">
+      <li><a href="#about" data-i18n="nav.about">O mnie</a></li>
+      <li><a href="#interests" data-i18n="nav.interests">Zainteresowania</a></li>
+      <li><a href="#research" data-i18n="nav.research">Badania</a></li>
+      <li><a href="#projects" data-i18n="nav.projects">Projekty</a></li>
+      <li><a href="publications.html" data-i18n="nav.publications">Publikacje</a></li>
+      <li><a href="#clinical" data-i18n="nav.clinical">Aplikacje kliniczne</a></li>
+      <li><a href="materials.html" data-i18n="nav.materials">Materiały</a></li>
+    </ul>
+    <button class="lang-toggle" id="langToggle" aria-label="Switch language / Zmień język">EN</button>
+    <div class="theme-picker">
+      <button class="theme-toggle" id="themeToggle" aria-haspopup="listbox" aria-expanded="false"
+        aria-label="Motyw – kliknij aby zmienić">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 2a10 10 0 0 1 0 20C6.5 22 2 17 2 12" />
+          <path d="M12 8v4l3 3" />
+        </svg>
+        Motyw
+      </button>
+    </div>
+  </nav>
+
+  <!-- ==========================================
+       HERO – interactive canvas background
+  ========================================== -->
+  <section id="hero" aria-label="Powitanie">
+    <canvas id="hero-canvas" aria-hidden="true"></canvas>
+
+    <div class="hero-content container">
+      <div class="hero-badge fade-in" data-i18n="hero.badge">Politechnika Rzeszowska · Adiunkt</div>
+
+      <div class="hero-name-wrap fade-in" style="transition-delay:.1s">
+        <img class="hero-face" src="docs/img3.png" alt="Portret dr inż. Mateusza Pomianka" loading="eager" decoding="async">
+        <h1 class="hero-name">
+          <span class="gradient-text" data-i18n="hero.degree">dr inż.</span><br><span class="hero-name-word">Mateusz</span> <span class="hero-name-word">Pomianek</span>
+        </h1>
+      </div>
+
+      <p class="hero-title fade-in" style="transition-delay:.2s" data-i18n="hero.subtitle">
+        Informatyka afektywna &nbsp;·&nbsp; XR/AI &nbsp;·&nbsp; Wizja komputerowa
+      </p>
+
+      <div class="hero-tags fade-in" style="transition-delay:.3s">
+        <span class="tag" data-i18n="hero.tag1">Informatyka afektywna</span>
+        <span class="tag" data-i18n="hero.tag1">Psycho/Neuroinformatyka</span>
+        <span class="tag" data-i18n="hero.tag2">Wizja komputerowa</span>
+        <span class="tag" data-i18n="hero.tag3">Interakcja człowiek–komputer</span>
+        <span class="tag" data-i18n="hero.tag4">Śledzenie ruchów oczu</span>
+        <span class="tag" data-i18n="hero.tag4">Symulacje komputerowe</span>
+        <span class="tag">VR / AR / MR</span>
+        <span class="tag">AI &amp; EAI &amp; NUI</span>
+        <span class="tag">CAD/CAM/CAE</span>
+        <span class="tag" data-i18n="hero.tag5">Technologie obronne</span>
+      </div>
+
+      <a href="#about" class="hero-cta fade-in" style="transition-delay:.4s">
+        <span data-i18n="hero.cta">Poznaj mój profil</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12" />
+          <polyline points="12 5 19 12 12 19" />
+        </svg>
+      </a>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">scroll</div>
+  </section>
+
+  <!-- ==========================================
+       ABOUT
+  ========================================== -->
+  <section id="about" aria-labelledby="about-title">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text fade-in">
+          <p class="section-label" data-i18n="about.label">O mnie</p>
+          <h2 class="section-title" id="about-title" data-i18n="about.title">Naukowiec<br><span class="gradient-text">i
+              inżynier</span></h2>
+          <div class="divider"></div>
+          <p data-i18n="about.p1">
+            Jestem naukowcem i inżynierem specjalizującym się w przetwarzaniu multispektralnej informacji obrazowej oraz
+            projektowaniu systemów opartych na naturalnej interakcji człowieka z maszynami. Moja działalność badawcza
+            sytuuje się na
+            styku optoelektroniki, technologii cyfrowych oraz psychologii poznawczej. Koncentruję się na modelowaniu
+            i integracji
+            ludzkich sygnałów percepcyjnych oraz afektywnych w zaawansowanych rozwiązaniach technicznych, które
+            umożliwiają maszynom
+            lepsze zrozumienie stanu użytkownika. Pracuję jako adiunkt w Katedrze Informatyki i Automatyki Politechniki
+            Rzeszowskiej. Badania prowadzę w dyscyplinie automatyki, elektroniki, elektrotechniki i technologii
+            kosmicznych oraz
+            informatyki. Stopień doktora w dziedzinie nauk inżynieryjno-technicznych uzyskałem w Instytucie
+            Optoelektroniki
+            Wojskowej Akademii Technicznej. W swojej codziennej pracy kieruję się zasadami Europejskiej Karty Naukowca,
+            dbając
+            o etykę, rzetelność oraz przejrzystość badań.
+          </p>
+          <br>
+          <p data-i18n="about.p2">
+            W obszarze moich kompetencji inżynierskich kluczową rolę odgrywa budowa systemów multisensorycznych,
+            wykorzystujących
+            wizję komputerową, uczenie maszynowe oraz fuzję danych do wnioskowania o stanie człowieka i otaczającej go
+            rzeczywistości. Projektuję i integruję autorskie układy do akwizycji parametrów fizjologicznych, takich jak
+            ruch,
+            kierunek spojrzenia czy mimika, wykorzystując przy tym zaawansowane techniki skanowania 3D, fotogrametrii
+            oraz
+            modelowania przestrzennego. Rozwijam również środowiska immersyjne oparte na rozszerzonej i wirtualnej
+            rzeczywistości,
+            które służą jako platformy dla naturalnych, multimodalnych interfejsów człowiek–maszyna. Posiadam bogate
+            doświadczenie w
+            zakresie technologii bezpieczeństwa, obejmujące projektowanie optoelektronicznych systemów naprowadzania,
+            symulatorów i
+            trenażerów pola walki oraz systemów AR czasu rzeczywistego, wspomagających świadomość sytuacyjną żołnierzy.
+            W ramach
+            prac nad systemami autonomicznymi łączę nowoczesną percepcję z algorytmami sterowania w czasie rzeczywistym,
+            co pozwala
+            na tworzenie responsywnych architektur robotycznych zdolnych do precyzyjnej i bezpiecznej współpracy
+            z człowiekiem.
+          </p>
+          <br>
+          <p data-i18n="about.p3">
+            Istotnym filarem mojej aktywności jest robotyka afektywna oraz analiza sygnałów w interfejsach
+            mózg–komputer, które
+            m.in. znajdują zastosowanie w budowie inteligentnych interfejsów człowieka z robotem. Badam i integruje dane
+            okulograficzne, ekspresję emocjonalną, czy elektroencefalograficzną aktywność ludzkiego mózgu, co pozwala na
+            opracowywanie systemów adaptacyjnych w ramach percepcyjnych i kognitywnych architektur humanoidalnych
+            robotów,
+            fizycznej/ucieleśnionej sztucznej inteligencji. Uzyskane w ten sposób reprezentacje danych wykorzystuję nie
+            tylko do
+            personalizacji interakcji z robotami, ale również do tworzenia specjalistycznych aplikacji o charakterze
+            diagnostyczno-klinicznym, wspomagających procesy medyczne i rehabilitacyjne. W ujęciu wdrożeniowym tworzę
+            cyfrowe
+            bliźniaki autonomicznych systemów oraz wykorzystuję metody uczenia ze wzmocnieniem, aby optymalizować
+            funkcjonowanie
+            systemów w złożonych warunkach rzeczywistych, zapewniając ich skuteczną adaptację do dynamicznie
+            zmieniającego się
+            otoczenia i potrzeb użytkownika. Moim celem jest budowa systemów, które nie tylko odbierają sygnały, ale też
+            inteligentnie je interpretują i odpowiadają w sposób dostosowany do kontekstu.
+          </p>
+        </div>
+
+        <!-- Abstract geometric figure -->
+        <div class="geo-figure fade-in" style="transition-delay:.2s" aria-hidden="true">
+          <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <!-- Outer ring -->
+            <circle cx="150" cy="150" r="130" fill="none" stroke="rgba(6,182,212,0.15)" stroke-width="1" />
+            <circle cx="150" cy="150" r="130" fill="none" stroke="rgba(6,182,212,0.35)" stroke-width="1"
+              stroke-dasharray="30 12" />
+            <!-- Mid ring -->
+            <circle cx="150" cy="150" r="96" fill="none" stroke="rgba(20,184,166,0.2)" stroke-width="1" />
+            <!-- Inner rotating group -->
+            <g class="geo-inner">
+              <!-- Hexagon -->
+              <polygon points="150,86 199,114 199,170 150,198 101,170 101,114" fill="none" stroke="rgba(6,182,212,0.5)"
+                stroke-width="1.5" />
+              <!-- Triangle -->
+              <polygon points="150,100 190,170 110,170" fill="rgba(6,182,212,0.04)" stroke="rgba(20,184,166,0.4)"
+                stroke-width="1" />
+            </g>
+            <!-- Centre dot -->
+            <circle cx="150" cy="150" r="5" fill="#06b6d4" opacity="0.8" />
+            <circle cx="150" cy="150" r="10" fill="none" stroke="#06b6d4" stroke-width="1" opacity="0.3" />
+            <!-- Axis lines -->
+            <line x1="150" y1="20" x2="150" y2="60" stroke="rgba(6,182,212,0.2)" stroke-width="1" />
+            <line x1="150" y1="240" x2="150" y2="280" stroke="rgba(6,182,212,0.2)" stroke-width="1" />
+            <line x1="20" y1="150" x2="60" y2="150" stroke="rgba(6,182,212,0.2)" stroke-width="1" />
+            <line x1="240" y1="150" x2="280" y2="150" stroke="rgba(6,182,212,0.2)" stroke-width="1" />
+            <!-- Corner nodes -->
+            <circle cx="150" cy="20" r="3" fill="rgba(6,182,212,0.6)" />
+            <circle cx="150" cy="280" r="3" fill="rgba(6,182,212,0.6)" />
+            <circle cx="20" cy="150" r="3" fill="rgba(6,182,212,0.6)" />
+            <circle cx="280" cy="150" r="3" fill="rgba(6,182,212,0.6)" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       RESEARCH INTERESTS
+  ========================================== -->
+  <section id="interests" aria-labelledby="interests-title">
+    <div class="container">
+      <p class="section-label fade-in" data-i18n="interests.label">Specjalizacje</p>
+      <h2 class="section-title fade-in" style="transition-delay:.05s" id="interests-title" data-i18n="interests.title">
+        Zainteresowania<br><span class="gradient-text">naukowe</span>
+      </h2>
+      <div class="divider fade-in" style="transition-delay:.1s"></div>
+
+      <div class="interests-grid">
+
+        <!-- Card 1 -->
+        <article class="interest-card fade-in" style="transition-delay:.1s">
+          <svg class="int-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" stroke="rgba(6,182,212,0.4)" stroke-width="1.5" />
+            <circle cx="20" cy="20" r="8" fill="rgba(6,182,212,0.15)" stroke="rgba(6,182,212,0.7)" stroke-width="1.5" />
+            <line x1="20" y1="2" x2="20" y2="10" stroke="rgba(6,182,212,0.5)" stroke-width="1.5"
+              stroke-linecap="round" />
+            <line x1="20" y1="30" x2="20" y2="38" stroke="rgba(6,182,212,0.5)" stroke-width="1.5"
+              stroke-linecap="round" />
+            <line x1="2" y1="20" x2="10" y2="20" stroke="rgba(6,182,212,0.5)" stroke-width="1.5"
+              stroke-linecap="round" />
+            <line x1="30" y1="20" x2="38" y2="20" stroke="rgba(6,182,212,0.5)" stroke-width="1.5"
+              stroke-linecap="round" />
+          </svg>
+          <div>
+            <h3 data-i18n="interests.card1.title">Informatyka afektywna</h3>
+            <p data-i18n="interests.card1.desc">Rozpoznawanie emocji i stanów psychofizycznych człowieka przez systemy
+              komputerowe.</p>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="interest-card fade-in" style="transition-delay:.15s">
+          <svg class="int-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="4" y="10" width="32" height="20" rx="3" stroke="rgba(20,184,166,0.6)" stroke-width="1.5" />
+            <circle cx="20" cy="20" r="5" fill="rgba(20,184,166,0.15)" stroke="rgba(20,184,166,0.7)"
+              stroke-width="1.5" />
+            <line x1="4" y1="10" x2="14" y2="20" stroke="rgba(20,184,166,0.4)" stroke-width="1" />
+            <line x1="36" y1="10" x2="26" y2="20" stroke="rgba(20,184,166,0.4)" stroke-width="1" />
+          </svg>
+          <div>
+            <h3 data-i18n="interests.card2.title">Wizja komputerowa</h3>
+            <p data-i18n="interests.card2.desc">Analiza i przetwarzanie obrazów, wykrywanie obiektów, segmentacja scen.
+            </p>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="interest-card fade-in" style="transition-delay:.2s">
+          <svg class="int-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polygon points="20,4 36,32 4,32" fill="rgba(6,182,212,0.08)" stroke="rgba(6,182,212,0.6)"
+              stroke-width="1.5" stroke-linejoin="round" />
+            <circle cx="20" cy="22" r="4" fill="rgba(6,182,212,0.2)" stroke="rgba(6,182,212,0.8)" stroke-width="1.5" />
+          </svg>
+          <div>
+            <h3 data-i18n="interests.card3.title">Interakcja człowiek–komputer</h3>
+            <p data-i18n="interests.card3.desc">Projektowanie i ewaluacja interfejsów HCI (HRI, NUI, multimodalność, UX),
+              analiza sygnałów behawioralnych (mimika, gesty, gaze) oraz tworzenie adaptacyjnych systemów
+              interakcyjnych opartych na AI.</p>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="interest-card fade-in" style="transition-delay:.25s">
+          <svg class="int-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <ellipse cx="20" cy="20" rx="16" ry="8" stroke="rgba(20,184,166,0.5)" stroke-width="1.5" />
+            <line x1="4" y1="20" x2="36" y2="20" stroke="rgba(20,184,166,0.4)" stroke-width="1" />
+            <circle cx="20" cy="20" r="3" fill="rgba(20,184,166,0.3)" stroke="rgba(20,184,166,0.9)"
+              stroke-width="1.5" />
+            <!-- Eye rays -->
+            <line x1="20" y1="20" x2="32" y2="14" stroke="rgba(20,184,166,0.35)" stroke-width="1" />
+            <line x1="20" y1="20" x2="8" y2="14" stroke="rgba(20,184,166,0.35)" stroke-width="1" />
+          </svg>
+          <div>
+            <h3 data-i18n="interests.card4.title">Śledzenie wzroku</h3>
+            <p data-i18n="interests.card4.desc">Śledzenie wzroku: metody eye-tracking, estymacja kierunku spojrzenia (w
+              tym MEMS), modelowanie ruchów oka (fiksacje, sakkady, mikrosakkady)
+              oraz analiza dynamiki uwagi wzrokowej. Zastosowania obejmują biomarkery kliniczne i neurokognitywne,
+              interfejsy gaze-based, diagnostykę oraz integrację z systemami percepcji w HRI i AI.</p>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="interest-card fade-in" style="transition-delay:.3s">
+          <svg class="int-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="8" y="6" width="24" height="18" rx="2" stroke="rgba(6,182,212,0.5)" stroke-width="1.5" />
+            <rect x="12" y="10" width="16" height="10" rx="1" fill="rgba(6,182,212,0.08)" stroke="rgba(6,182,212,0.4)"
+              stroke-width="1" />
+            <line x1="12" y1="28" x2="8" y2="34" stroke="rgba(6,182,212,0.5)" stroke-width="1.5"
+              stroke-linecap="round" />
+            <line x1="28" y1="28" x2="32" y2="34" stroke="rgba(6,182,212,0.5)" stroke-width="1.5"
+              stroke-linecap="round" />
+            <line x1="8" y1="34" x2="32" y2="34" stroke="rgba(6,182,212,0.5)" stroke-width="1.5"
+              stroke-linecap="round" />
+          </svg>
+          <div>
+            <h3 data-i18n="interests.card5.title">Systemy VR / AR / MR</h3>
+            <p data-i18n="interests.card5.desc">architektury immersyjnych środowisk (VR), rozszerzonej i mieszanej
+              rzeczywistości (AR/MR), w tym varifocal HMD,
+              rejestracja i śledzenie (tracking), kalibracja przestrzenna oraz rendering w czasie rzeczywistym.
+              Zastosowania obejmują symulacje medyczne i szkoleniowe,
+              interakcje multimodalne, percepcję głębi i obecności (presence) oraz integrację z systemami AI i
+              sensoryką..</p>
+          </div>
+        </article>
+
+        <!-- Card 6 -->
+        <article class="interest-card fade-in" style="transition-delay:.35s">
+          <svg class="int-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="20" cy="12" r="6" stroke="rgba(20,184,166,0.6)" stroke-width="1.5" />
+            <circle cx="8" cy="30" r="4" stroke="rgba(20,184,166,0.4)" stroke-width="1.5" />
+            <circle cx="32" cy="30" r="4" stroke="rgba(20,184,166,0.4)" stroke-width="1.5" />
+            <line x1="20" y1="18" x2="8" y2="26" stroke="rgba(20,184,166,0.4)" stroke-width="1.2" />
+            <line x1="20" y1="18" x2="32" y2="26" stroke="rgba(20,184,166,0.4)" stroke-width="1.2" />
+            <line x1="8" y1="30" x2="32" y2="30" stroke="rgba(20,184,166,0.25)" stroke-width="1"
+              stroke-dasharray="3 2" />
+          </svg>
+          <div>
+            <h3 data-i18n="interests.card6.title">AI w NUI</h3>
+            <p data-i18n="interests.card6.desc">zastosowanie uczenia maszynowego i głębokiego do interpretacji sygnałów
+              multimodalnych (mowa, gesty, wzrok)
+              oraz budowy adaptacyjnych, kontekstowo świadomych interfejsów. Obejmuje modele vision-language-action
+              (VLA), world models, fuzję sensoryczną,
+              inferencję intencji użytkownika oraz sprzężenie percepcja–działanie w systemach interaktywnych.</p>
+          </div>
+        </article>
+
+        <!-- Card 7 removed – defence interests consolidated -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       RESEARCH: HARDWARE / SOFTWARE
+  ========================================== -->
+  <section id="research" aria-labelledby="research-title">
+    <div class="container">
+      <p class="section-label fade-in" data-i18n="research.label">Obszary badań</p>
+      <h2 class="section-title fade-in" style="transition-delay:.05s" id="research-title" data-i18n="research.title">
+        Badania &amp;<br><span class="gradient-text">technologie</span>
+      </h2>
+      <div class="divider fade-in" style="transition-delay:.1s"></div>
+
+      <div class="research-cols">
+        <!-- Hardware column -->
+        <div class="research-col fade-in" style="transition-delay:.15s">
+          <div class="research-col-head">
+            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="3" y="8" width="22" height="14" rx="2" stroke="rgba(6,182,212,0.7)" stroke-width="1.5" />
+              <rect x="7" y="11" width="6" height="5" rx="1" fill="rgba(6,182,212,0.2)" stroke="rgba(6,182,212,0.6)"
+                stroke-width="1" />
+              <circle cx="19" cy="13.5" r="2" fill="rgba(6,182,212,0.15)" stroke="rgba(6,182,212,0.7)"
+                stroke-width="1" />
+              <line x1="10" y1="3" x2="10" y2="8" stroke="rgba(6,182,212,0.4)" stroke-width="1.2"
+                stroke-linecap="round" />
+              <line x1="18" y1="3" x2="18" y2="8" stroke="rgba(6,182,212,0.4)" stroke-width="1.2"
+                stroke-linecap="round" />
+              <line x1="10" y1="22" x2="10" y2="27" stroke="rgba(6,182,212,0.4)" stroke-width="1.2"
+                stroke-linecap="round" />
+              <line x1="18" y1="22" x2="18" y2="27" stroke="rgba(6,182,212,0.4)" stroke-width="1.2"
+                stroke-linecap="round" />
+            </svg>
+            <h3 class="gradient-text">Hardware</h3>
+          </div>
+          <ul class="research-list">
+            <li data-i18n="research.hw1">Optoelektroniczne systemy wizualizacji, symulacji i pomiaru</li>
+            <li data-i18n="research.hw2">Śledzenie ruchu, wzroku i gestów</li>
+            <li data-i18n="research.hw3">Rozpoznawanie emocji i stanów afektywnych</li>
+            <li data-i18n="research.hw4">Prototypowanie: CAD, modelowanie 3D, fotogrametria, skanowanie 3D</li>
+            <li data-i18n="research.hw5">Pomiary techniczne, cyfrowe bliźniaki, in-silico</li>
+          </ul>
+        </div>
+
+        <!-- Software column -->
+        <div class="research-col fade-in" style="transition-delay:.25s">
+          <div class="research-col-head">
+            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="3" y="4" width="22" height="20" rx="2" stroke="rgba(20,184,166,0.7)" stroke-width="1.5" />
+              <line x1="3" y1="9" x2="25" y2="9" stroke="rgba(20,184,166,0.4)" stroke-width="1" />
+              <line x1="8" y1="14" x2="14" y2="14" stroke="rgba(20,184,166,0.5)" stroke-width="1.2"
+                stroke-linecap="round" />
+              <line x1="8" y1="17" x2="20" y2="17" stroke="rgba(20,184,166,0.4)" stroke-width="1.2"
+                stroke-linecap="round" />
+              <line x1="8" y1="20" x2="16" y2="20" stroke="rgba(20,184,166,0.3)" stroke-width="1.2"
+                stroke-linecap="round" />
+              <circle cx="6.5" cy="6.5" r="1" fill="rgba(20,184,166,0.5)" />
+              <circle cx="9.5" cy="6.5" r="1" fill="rgba(20,184,166,0.4)" />
+              <circle cx="12.5" cy="6.5" r="1" fill="rgba(20,184,166,0.3)" />
+            </svg>
+            <h3 class="gradient-text">Software</h3>
+          </div>
+          <ul class="research-list">
+            <li data-i18n="research.sw1">Analiza obrazu i widzenie komputerowe</li>
+            <li data-i18n="research.sw3">Mixed Reality – MR / AR / VR</li>
+            <li data-i18n="research.sw4">Interaktywne aplikacje, symulacje i gry</li>
+            <li data-i18n="research.sw5">Inteligentne systemy interpretujące sygnały użytkownika</li>
+            <li data-i18n="research.sw2">Uczenie maszynowe i sieci neuronowe</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       PROJECTS & ACHIEVEMENTS
+  ========================================== -->
+  <section id="projects" aria-labelledby="projects-title">
+    <div class="container">
+      <p class="section-label fade-in" data-i18n="projects.label">Dorobek naukowy</p>
+      <h2 class="section-title fade-in" style="transition-delay:.05s" id="projects-title" data-i18n="projects.title">
+        Projekty &amp;<br><span class="gradient-text">osiągnięcia</span>
+      </h2>
+      <div class="divider fade-in" style="transition-delay:.1s"></div>
+
+      <!-- Project cards -->
+      <div class="projects-grid">
+
+        <article class="project-card fade-in" style="transition-delay:.1s">
+          <p class="project-tag">Eye-tracking</p>
+          <h3>MEMS Eye-Tracking</h3>
+          <p data-i18n="projects.card1.desc">Opracowanie miniaturowych systemów śledzenia wzroku opartych na
+            mikroelektrycznych układach mechanicznych (MEMS).</p>
+        </article>
+
+        <article class="project-card fade-in" style="transition-delay:.15s">
+          <p class="project-tag">XR Hardware</p>
+          <h3>Varifocal HMD Calibration</h3>
+          <p data-i18n="projects.card2.desc">Metody kalibracji wyświetlaczy nagłownych o zmiennej ogniskowej dla
+            aplikacji rozszerzonej i wirtualnej rzeczywistości.</p>
+        </article>
+
+        <article class="project-card fade-in" style="transition-delay:.2s">
+          <p class="project-tag">Digital Twin</p>
+          <h3>Digital Twin Validation</h3>
+          <p data-i18n="projects.card3.desc">Walidacja cyfrowych bliźniaków w środowiskach przemysłowych i medycznych,
+            pomiary in-silico.</p>
+        </article>
+
+        <article class="project-card fade-in" style="transition-delay:.25s">
+          <p class="project-tag" data-i18n="projects.card4.tag">Medycyna</p>
+          <h3>VR Pipelines for Medical Data</h3>
+          <p data-i18n="projects.card4.desc">Pipeliny VR do wizualizacji i analizy danych medycznych w diagnostyce i
+            edukacji.</p>
+        </article>
+
+        <article class="project-card fade-in" style="transition-delay:.3s">
+          <p class="project-tag" data-i18n="projects.card5.tag">Robotyka</p>
+          <h3 data-i18n="projects.card5.title">Kognitywna Robotyka Humanoidalna</h3>
+          <p data-i18n="projects.card5.desc">Percepcyjne i kognitywne architektury robotów humanoidalnych do zastosowań
+            terapeutycznych i badawczych.</p>
+        </article>
+
+        <article class="project-card fade-in" style="transition-delay:.35s">
+          <p class="project-tag" data-i18n="projects.card6.tag">AI / Biometria</p>
+          <h3 data-i18n="projects.card6.title">Optoelektronika &amp; Biometria</h3>
+          <p data-i18n="projects.card6.desc">Multispektralna analiza obrazu, systemy biometryczne, przetwarzanie
+            sygnałów afektywnych.</p>
+        </article>
+
+        <article class="project-card fade-in" style="transition-delay:.4s">
+          <p class="project-tag" data-i18n="projects.card7.tag">Obronność</p>
+          <h3 data-i18n="projects.card7.title">Technologie obronne</h3>
+          <p data-i18n="projects.card7.desc">Historyczne doświadczenie w projektowaniu optoelektronicznych systemów
+            naprowadzania broni, symulatorach pola walki oraz systemach VR/AR dla wojska.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       CLINICAL APPLICATIONS
+  ========================================== -->
+  <section id="clinical" aria-labelledby="clinical-title">
+    <div class="clinical-inner container">
+      <p class="section-label fade-in" data-i18n="clinical.label">Medycyna &amp; Neuronauka</p>
+      <h2 class="section-title fade-in" style="transition-delay:.05s" id="clinical-title" data-i18n="clinical.title">
+        Aplikacje kliniczne<br><span class="gradient-text">i neuropsychologiczne</span>
+      </h2>
+      <div class="divider fade-in" style="transition-delay:.1s"></div>
+
+      <div class="clinical-grid">
+
+        <article class="clinical-card fade-in" style="transition-delay:.1s">
+          <svg class="clinical-icon" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true">
+            <circle cx="21" cy="21" r="18" stroke="rgba(6,182,212,0.4)" stroke-width="1.5" />
+            <path d="M12 21 Q16 13 21 21 Q26 29 30 21" stroke="rgba(6,182,212,0.7)" stroke-width="1.8" fill="none"
+              stroke-linecap="round" />
+            <circle cx="21" cy="21" r="3" fill="rgba(6,182,212,0.3)" stroke="rgba(6,182,212,0.8)" stroke-width="1.5" />
+          </svg>
+          <h3 data-i18n="clinical.card1.title">Biomarkery okulistyczne</h3>
+          <p data-i18n="clinical.card1.desc">Modelowanie biomarkerów okulistycznych i behawioralnych z wykorzystaniem AI
+            do wczesnej diagnostyki.</p>
+        </article>
+
+        <article class="clinical-card fade-in" style="transition-delay:.15s">
+          <svg class="clinical-icon" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true">
+            <rect x="8" y="8" width="26" height="26" rx="4" stroke="rgba(20,184,166,0.5)" stroke-width="1.5" />
+            <path d="M14 21 L18 17 L22 25 L26 19 L28 21" stroke="rgba(20,184,166,0.8)" stroke-width="1.8" fill="none"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <h3 data-i18n="clinical.card2.title">Diagnostyka wspomagana AI</h3>
+          <p data-i18n="clinical.card2.desc">Systemy decyzji klinicznych wykorzystujące uczenie maszynowe do analizy
+            danych pacjentów.</p>
+        </article>
+
+        <article class="clinical-card fade-in" style="transition-delay:.2s">
+          <svg class="clinical-icon" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true">
+            <rect x="6" y="12" width="30" height="20" rx="3" stroke="rgba(6,182,212,0.5)" stroke-width="1.5" />
+            <rect x="12" y="16" width="18" height="12" rx="2" fill="rgba(6,182,212,0.07)" stroke="rgba(6,182,212,0.4)"
+              stroke-width="1" />
+            <line x1="10" y1="6" x2="6" y2="12" stroke="rgba(6,182,212,0.4)" stroke-width="1.3"
+              stroke-linecap="round" />
+            <line x1="32" y1="6" x2="36" y2="12" stroke="rgba(6,182,212,0.4)" stroke-width="1.3"
+              stroke-linecap="round" />
+            <circle cx="21" cy="22" r="3" fill="rgba(6,182,212,0.2)" stroke="rgba(6,182,212,0.6)" stroke-width="1.2" />
+          </svg>
+          <h3 data-i18n="clinical.card3.title">Rehabilitacja XR</h3>
+          <p data-i18n="clinical.card3.desc">Terapia z wykorzystaniem rozszerzonej i wirtualnej rzeczywistości w
+            neurorehabilitacji.</p>
+        </article>
+
+        <article class="clinical-card fade-in" style="transition-delay:.25s">
+          <svg class="clinical-icon" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true">
+            <circle cx="21" cy="15" r="7" stroke="rgba(20,184,166,0.6)" stroke-width="1.5" />
+            <path d="M8 36 Q10 26 21 26 Q32 26 34 36" stroke="rgba(20,184,166,0.5)" stroke-width="1.5" fill="none"
+              stroke-linecap="round" />
+            <line x1="21" y1="26" x2="21" y2="32" stroke="rgba(20,184,166,0.4)" stroke-width="1.5"
+              stroke-linecap="round" />
+            <line x1="16" y1="30" x2="26" y2="30" stroke="rgba(20,184,166,0.4)" stroke-width="1.5"
+              stroke-linecap="round" />
+          </svg>
+          <h3 data-i18n="clinical.card4.title">Robotyka kognitywna</h3>
+          <p data-i18n="clinical.card4.desc">Humanoidalne roboty z percepcyjnymi architekturami kognitywnymi do terapii
+            i badań neuropsychologicznych.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       MATERIALS
+  ========================================== -->
+  <section id="materials" aria-labelledby="materials-title">
+    <div class="container">
+      <p class="section-label fade-in" data-i18n="materials.label">Dydaktyka</p>
+      <h2 class="section-title fade-in" style="transition-delay:.05s" id="materials-title" data-i18n="materials.title">
+        Materiały<br><span class="gradient-text">dydaktyczne</span>
+      </h2>
+      <div class="divider fade-in" style="transition-delay:.1s"></div>
+
+      <div class="materials-cta fade-in" style="transition-delay:.15s">
+        <p data-i18n="materials.desc">Udostępniam materiały dydaktyczne do prowadzonych przeze mnie przedmiotów: Bash,
+          LaTeX, GIT, Algorytmy, Aplikacje mobilne, Psychoinformatyka, Robotyka afektywna oraz Seminaria dyplomowe.
+          Dostępny jest również interaktywny <a href="https://matpomgit.github.io/win-xp-web" target="_blank"
+            rel="noopener noreferrer" style="color:var(--clr-cyan);text-decoration:none;">Interfejs PC</a> w
+          przeglądarce.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.9rem;margin-top:1.5rem;">
+          <a href="materials.html" class="hero-cta" style="display:inline-flex;">
+            <span data-i18n="materials.cta">Przejdź do materiałów</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </a>
+          <a href="https://matpomgit.github.io/win-xp-web" target="_blank" rel="noopener noreferrer" class="hero-cta"
+            style="display:inline-flex;background:transparent;border:1px solid rgba(6,182,212,0.45);color:var(--clr-cyan);"
+            data-i18n="materials.pcCta">
+            Interfejs PC
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FOOTER
+  ========================================== -->
+  <footer role="contentinfo">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand" data-i18n="footer.brand">dr inż. <span>Mateusz Pomianek</span></p>
+        <p class="footer-info" data-i18n="footer.dept">
+          Katedra Informatyki i Automatyki<br>
+          Politechnika Rzeszowska im. I. Łukasiewicza
+        </p>
+      </div>
+
+      <div class="footer-info" style="text-align:right">
+        <p>al. Powstańców Warszawy 12</p>
+        <p data-i18n="footer.city">35-959 Rzeszów, Polska</p>
+        <p style="margin-top:.4rem; color: var(--clr-cyan);"><a href="https://prz.edu.pl" target="_blank"
+            rel="noopener noreferrer" style="color: inherit; text-decoration: none;">prz.edu.pl</a></p>
+        <p style="margin-top:.75rem;"><a href="publications.html" data-i18n="footer.publications" style="color: var(--clr-cyan); text-decoration: none;">Przejdź do zakładki Publikacje</a></p>
+      </div>
+    </div>
+    <p class="footer-copy" data-i18n="footer.copy">© 2026 · dr inż. Mateusz Pomianek · Politechnika Rzeszowska</p>
+  </footer>
+
+  <!-- ==========================================
+       JAVASCRIPT
+  ========================================== -->
+  <script>
+    /* ------------------------------------------
+       1. HERO CANVAS – particle + geometry system
+    ------------------------------------------ */
+    (function () {
+      const canvas = document.getElementById('hero-canvas');
+      const ctx = canvas.getContext('2d');
+      let W, H, mouse = { x: -9999, y: -9999 };
+      let particles = [];
+      let animId;
+      let wheelImpulse = 0;
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* Resize handler */
+      function resize() {
+        W = canvas.width = canvas.offsetWidth;
+        H = canvas.height = canvas.offsetHeight;
+      }
+
+      /* Helper: read a CSS hex variable → {r,g,b} */
+      function hexToRgb(hex) {
+        hex = hex.replace(/\s/g, '');
+        var m = hex.match(/^#([0-9a-f]{3,6})$/i);
+        if (!m) return { r: 6, g: 182, b: 212 };
+        var h = m[1];
+        if (h.length === 3) h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2];
+        return { r: parseInt(h.slice(0, 2), 16), g: parseInt(h.slice(2, 4), 16), b: parseInt(h.slice(4, 6), 16) };
+      }
+      function getAccent() { return hexToRgb(getComputedStyle(document.documentElement).getPropertyValue('--clr-cyan').trim() || '#06b6d4'); }
+      function getAccent2() { return hexToRgb(getComputedStyle(document.documentElement).getPropertyValue('--clr-teal').trim() || '#14b8a6'); }
+      function getNeon() { return hexToRgb(getComputedStyle(document.documentElement).getPropertyValue('--clr-neon').trim() || '#00f5ff'); }
+      function rgbStr(c) { return c.r + ',' + c.g + ',' + c.b; }
+
+      window.addEventListener('resize', () => { resize(); initParticles(); initGalaxies(); });
+      resize();
+
+      /* Mouse tracking */
+      document.getElementById('hero').addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+      });
+
+      document.getElementById('hero').addEventListener('mouseleave', () => {
+        mouse.x = -9999;
+        mouse.y = -9999;
+      });
+
+      /* Touch support */
+      document.getElementById('hero').addEventListener('touchmove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const t = e.touches[0];
+        mouse.x = t.clientX - rect.left;
+        mouse.y = t.clientY - rect.top;
+      }, { passive: true });
+
+      /* Reakcja na kółko myszy: wzmacnia ruch cząstek i galaktyk podczas przewijania. */
+      if (!prefersReducedMotion) {
+        window.addEventListener('wheel', (e) => {
+          wheelImpulse += Math.max(-12, Math.min(12, e.deltaY * 0.03));
+        }, { passive: true });
+      }
+
+      /* ── Galaxy constructor ──────────────────────────────── */
+      function Galaxy() {
+        this.init(true);
+      }
+
+      Galaxy.prototype.init = function (scatter) {
+        this.x = scatter ? Math.random() * W : (Math.random() < 0.5 ? -80 : W + 80);
+        this.y = scatter ? Math.random() * H : Math.random() * H;
+        this.angle = Math.random() * Math.PI * 2;
+        var spd = (Math.random() * 0.0004 + 0.00015) * (Math.random() < 0.5 ? 1 : -1);
+        this.rotSpeed = spd;
+        this.baseRotSpeed = spd;
+        this.size = Math.random() * 55 + 38;
+        this.numArms = Math.floor(Math.random() * 3) + 2;
+        this.armTurns = Math.random() * 1.2 + 0.9;
+        this.vx = (Math.random() - 0.5) * 0.12;
+        this.vy = (Math.random() - 0.5) * 0.12;
+        var a1 = getAccent(), a2 = getAccent2(), n2 = getNeon();
+        var palette = [
+          [a1.r, a1.g, a1.b],
+          [a2.r, a2.g, a2.b],
+          [n2.r, n2.g, n2.b],
+        ];
+        this.rgb = palette[Math.floor(Math.random() * palette.length)];
+        this.stars = [];
+        this.buildStars();
+      };
+
+      Galaxy.prototype.buildStars = function () {
+        this.stars = [];
+        var perArm = 55;
+        for (var a = 0; a < this.numArms; a++) {
+          var armOff = (Math.PI * 2 / this.numArms) * a;
+          for (var i = 0; i < perArm; i++) {
+            var t = i / perArm;
+            var spA = armOff + t * this.armTurns * Math.PI * 2;
+            var rad = t * this.size;
+            var jitter = (Math.random() - 0.5) * this.size * 0.18;
+            var jA = Math.random() * Math.PI * 2;
+            this.stars.push({
+              x: rad * Math.cos(spA) + jitter * Math.cos(jA),
+              y: rad * Math.sin(spA) + jitter * Math.sin(jA),
+              r: Math.random() * 1.4 + 0.3,
+              a: (1 - t * 0.65) * (Math.random() * 0.45 + 0.15),
+            });
+          }
+        }
+      };
+
+      Galaxy.prototype.update = function () {
+        var dx = this.x - mouse.x;
+        var dy = this.y - mouse.y;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        var influenceR = this.size * 2.8;
+
+        if (dist < influenceR && dist > 0) {
+          var f = (influenceR - dist) / influenceR;
+          this.rotSpeed = this.baseRotSpeed + Math.sign(this.baseRotSpeed) * f * 0.012;
+          this.vx += (dx / dist) * f * 0.045;
+          this.vy += (dy / dist) * f * 0.045;
+        } else {
+          this.rotSpeed += (this.baseRotSpeed - this.rotSpeed) * 0.05;
+        }
+
+        this.angle += this.rotSpeed;
+        this.vx *= 0.97;
+        this.vy *= 0.97;
+        this.x += this.vx;
+        this.y += this.vy;
+
+        var pad = this.size + 20;
+        if (this.x < -pad) this.x = W + pad;
+        if (this.x > W + pad) this.x = -pad;
+        if (this.y < -pad) this.y = H + pad;
+        if (this.y > H + pad) this.y = -pad;
+      };
+
+      Galaxy.prototype.draw = function () {
+        var r = this.rgb[0], g = this.rgb[1], b = this.rgb[2];
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.angle);
+
+        var grad = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size * 0.38);
+        grad.addColorStop(0, 'rgba(' + r + ',' + g + ',' + b + ',0.38)');
+        grad.addColorStop(0.5, 'rgba(' + r + ',' + g + ',' + b + ',0.07)');
+        grad.addColorStop(1, 'rgba(' + r + ',' + g + ',' + b + ',0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(0, 0, this.size * 0.38, 0, Math.PI * 2);
+        ctx.fill();
+
+        for (var i = 0; i < this.stars.length; i++) {
+          var s = this.stars[i];
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + s.a + ')';
+          ctx.fill();
+        }
+
+        ctx.restore();
+      };
+
+      var galaxies = [];
+      var PIXELS_PER_GALAXY = 130000; /* viewport pixels per galaxy; controls density */
+
+      function initGalaxies() {
+        var count = Math.min(Math.max(Math.floor(W * H / PIXELS_PER_GALAXY), 3), 6);
+        galaxies = [];
+        for (var i = 0; i < count; i++) {
+          galaxies.push(new Galaxy());
+        }
+      }
+
+      /* Particle constructor */
+      function Particle() {
+        this.reset();
+      }
+
+      Particle.prototype.reset = function () {
+        this.depth = Math.random() * 0.8 + 0.2;          /* 0.2 = far, 1.0 = near */
+        this.x = Math.random() * W;
+        this.y = Math.random() * H;
+        this.r = (Math.random() * 1.8 + 0.4) * this.depth;
+        this.vx = (Math.random() - 0.5) * 0.35 * this.depth;
+        this.vy = (Math.random() - 0.5) * 0.35 * this.depth;
+        this.alpha = (Math.random() * 0.5 + 0.15) * (0.35 + this.depth * 0.65);
+        /* colour: mix of accent colours read from current theme */
+        var a1 = getAccent(), a2 = getAccent2(), n = getNeon();
+        const palette = [
+          'rgba(' + rgbStr(a1) + ',',
+          'rgba(' + rgbStr(a2) + ',',
+          'rgba(' + rgbStr(n) + ',',
+          'rgba(' + rgbStr(a1) + ',',
+        ];
+        this.color = palette[Math.floor(Math.random() * palette.length)];
+      };
+
+      Particle.prototype.update = function () {
+        /* Repulsion from mouse */
+        const dx = this.x - mouse.x;
+        const dy = this.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const repR = 100;
+
+        if (dist < repR && dist > 0) {
+          const force = (repR - dist) / repR;
+          this.vx += (dx / dist) * force * 0.6;
+          this.vy += (dy / dist) * force * 0.6;
+        }
+
+        /* Friction */
+        this.vx *= 0.97;
+        this.vy *= 0.97;
+
+        this.x += this.vx;
+        this.y += this.vy;
+
+        /* Wrap around edges */
+        if (this.x < 0) this.x = W;
+        if (this.x > W) this.x = 0;
+        if (this.y < 0) this.y = H;
+        if (this.y > H) this.y = 0;
+      };
+
+      Particle.prototype.draw = function () {
+        /* Near particles shift less with mouse (they're close so parallax is subtle);
+           far particles shift more in the opposite direction for depth effect. */
+        const parallaxX = (mouse.x !== -9999) ? (mouse.x / W - 0.5) * 24 * (1 - this.depth) : 0;
+        const parallaxY = (mouse.y !== -9999) ? (mouse.y / H - 0.5) * 18 * (1 - this.depth) : 0;
+        ctx.beginPath();
+        ctx.arc(this.x + parallaxX, this.y + parallaxY, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = this.color + this.alpha + ')';
+        ctx.fill();
+      };
+
+      function initParticles() {
+        const baseCount = Math.min(Math.floor(W * H / 8000), 180);
+        const count = baseCount * 2;
+        particles = [];
+        for (let i = 0; i < count; i++) {
+          particles.push(new Particle());
+        }
+      }
+
+      /* Draw connections between nearby particles */
+      function drawConnections() {
+        const maxDist = 110;
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (((i + j) % 2 === 0) && dist < maxDist) {
+              const alpha = (1 - dist / maxDist) * 0.22;
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = `rgba(${rgbStr(getAccent())},${alpha})`;
+              ctx.lineWidth = 0.7;
+              ctx.stroke();
+            }
+          }
+        }
+      }
+
+      /* Draw floating geometric shapes */
+      let geoAngle = 0;
+
+      function drawGeoShapes() {
+        geoAngle += 0.003;
+
+        /* Mouse offset for parallax */
+        const offX = (mouse.x !== -9999) ? (mouse.x / W - 0.5) * 30 : 0;
+        const offY = (mouse.y !== -9999) ? (mouse.y / H - 0.5) * 20 : 0;
+
+        ctx.save();
+
+        /* Large outer hexagon */
+        ctx.translate(W * 0.78 + offX * 0.4, H * 0.45 + offY * 0.4);
+        ctx.rotate(geoAngle * 0.4);
+        drawHexagon(ctx, 0, 0, 160, `rgba(${rgbStr(getAccent())},0.06)`, `rgba(${rgbStr(getAccent())},0.12)`, 1);
+        ctx.restore();
+
+        ctx.save();
+        /* Inner hexagon */
+        ctx.translate(W * 0.78 + offX * 0.6, H * 0.45 + offY * 0.6);
+        ctx.rotate(-geoAngle * 0.7);
+        drawHexagon(ctx, 0, 0, 90, null, `rgba(${rgbStr(getAccent2())},0.18)`, 1);
+        ctx.restore();
+
+        ctx.save();
+        /* Triangle */
+        ctx.translate(W * 0.12 + offX * 0.3, H * 0.25 + offY * 0.3);
+        ctx.rotate(geoAngle);
+        drawPolygon(ctx, 0, 0, 3, 60, null, `rgba(${rgbStr(getNeon())},0.12)`, 1);
+        ctx.restore();
+
+        ctx.save();
+        /* Small circle ring */
+        ctx.translate(W * 0.88 + offX * 0.5, H * 0.75 + offY * 0.5);
+        ctx.beginPath();
+        ctx.arc(0, 0, 50, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(${rgbStr(getAccent())},0.1)`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(0, 0, 30, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(${rgbStr(getAccent2())},0.1)`;
+        ctx.stroke();
+        ctx.restore();
+
+        ctx.save();
+        /* Cross/grid lines */
+        ctx.translate(W * 0.5 + offX * 0.1, H * 0.85 + offY * 0.1);
+        ctx.rotate(geoAngle * 0.2);
+        for (let i = -2; i <= 2; i++) {
+          ctx.beginPath();
+          ctx.moveTo(i * 30, -60);
+          ctx.lineTo(i * 30, 60);
+          ctx.strokeStyle = `rgba(${rgbStr(getAccent())},0.04)`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(-60, i * 30);
+          ctx.lineTo(60, i * 30);
+          ctx.stroke();
+        }
+        ctx.restore();
+      }
+
+      function drawHexagon(ctx, x, y, r, fill, stroke, lw) {
+        ctx.beginPath();
+        for (let i = 0; i < 6; i++) {
+          const a = (Math.PI / 3) * i - Math.PI / 6;
+          const px = x + r * Math.cos(a);
+          const py = y + r * Math.sin(a);
+          i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+        if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+        if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lw; ctx.stroke(); }
+      }
+
+      function drawPolygon(ctx, x, y, sides, r, fill, stroke, lw) {
+        ctx.beginPath();
+        for (let i = 0; i < sides; i++) {
+          const a = (Math.PI * 2 / sides) * i - Math.PI / 2;
+          const px = x + r * Math.cos(a);
+          const py = y + r * Math.sin(a);
+          i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+        if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+        if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lw; ctx.stroke(); }
+      }
+
+      /* Spadające gwiazdy: szybkie punkty z krótkim, zanikającym śladem. */
+      var fallingStars = [];
+      var nextFallingStarAt = 0;
+
+      function createFallingStar(now) {
+        var angle = Math.random() * Math.PI * 2;
+        var speed = Math.random() * 9 + 7;
+        var life = Math.random() * 0.7 + 0.6;
+        var startX = Math.random() * W;
+        var startY = Math.random() * H;
+        var trail = Math.random() * 28 + 16;
+        var accent = getAccent();
+        fallingStars.push({
+          x: startX,
+          y: startY,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          life: life,
+          maxLife: life,
+          trail: trail,
+          color: accent
+        });
+        nextFallingStarAt = now + 1800 + Math.random() * 2600;
+      }
+
+      function updateAndDrawFallingStars(dt, now) {
+        if (now >= nextFallingStarAt) createFallingStar(now);
+        for (var i = fallingStars.length - 1; i >= 0; i--) {
+          var s = fallingStars[i];
+          s.x += s.vx * dt * 60;
+          s.y += s.vy * dt * 60;
+          s.life -= dt;
+          if (s.life <= 0 || s.x < -60 || s.x > W + 60 || s.y < -60 || s.y > H + 60) {
+            fallingStars.splice(i, 1);
+            continue;
+          }
+          var t = s.life / s.maxLife;
+          var tailX = s.x - (s.vx / (Math.sqrt(s.vx * s.vx + s.vy * s.vy) || 1)) * s.trail;
+          var tailY = s.y - (s.vy / (Math.sqrt(s.vx * s.vx + s.vy * s.vy) || 1)) * s.trail;
+          var grad = ctx.createLinearGradient(s.x, s.y, tailX, tailY);
+          grad.addColorStop(0, 'rgba(' + s.color.r + ',' + s.color.g + ',' + s.color.b + ',' + (0.9 * t).toFixed(3) + ')');
+          grad.addColorStop(1, 'rgba(' + s.color.r + ',' + s.color.g + ',' + s.color.b + ',0)');
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = 1.25;
+          ctx.beginPath();
+          ctx.moveTo(s.x, s.y);
+          ctx.lineTo(tailX, tailY);
+          ctx.stroke();
+
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, 1.8, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255,255,255,' + (0.9 * t).toFixed(3) + ')';
+          ctx.fill();
+        }
+      }
+
+      /* Main render loop */
+      var lastTs = null;
+      function render(ts) {
+        var dt = lastTs ? Math.min((ts - lastTs) / 1000, 0.05) : 0.016;
+        lastTs = ts;
+        ctx.clearRect(0, 0, W, H);
+
+        /* Subtle gradient background – reads current theme colour */
+        const bgClr = getComputedStyle(document.documentElement)
+          .getPropertyValue('--clr-bg').trim() || '#0a0e1a';
+        const grad = ctx.createLinearGradient(0, 0, W, H);
+        grad.addColorStop(0, bgClr);
+        grad.addColorStop(0.5, bgClr);
+        grad.addColorStop(1, bgClr);
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, W, H);
+
+        drawGeoShapes();
+        galaxies.forEach(g => { g.vy += wheelImpulse * 0.02; g.update(); g.draw(); });
+        drawConnections();
+        particles.forEach(p => { p.vy += wheelImpulse * 0.01; p.update(); p.draw(); });
+        wheelImpulse *= 0.86;
+        updateAndDrawFallingStars(dt, ts || performance.now());
+
+        animId = requestAnimationFrame(render);
+      }
+
+      initParticles();
+      initGalaxies();
+
+      if (prefersReducedMotion) {
+        /* Single static frame – no animation loop */
+        ctx.clearRect(0, 0, W, H);
+        drawGeoShapes();
+        galaxies.forEach(g => g.draw());
+        drawConnections();
+        particles.forEach(p => p.draw());
+        updateAndDrawFallingStars(0.016, performance.now() + 999999);
+      } else {
+        render();
+      }
+
+      /* Re-initialise particles/galaxies when theme changes */
+      document.addEventListener('themechange', function () {
+        initParticles();
+        initGalaxies();
+        if (prefersReducedMotion) {
+          ctx.clearRect(0, 0, W, H);
+          drawGeoShapes();
+          galaxies.forEach(g => g.draw());
+          drawConnections();
+          particles.forEach(p => p.draw());
+          fallingStars = [];
+        }
+      });
+    })();
+
+    /* ------------------------------------------
+       2. FADE-IN on scroll (Intersection Observer)
+    ------------------------------------------ */
+    (function () {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      /* Trigger hero fade-ins immediately */
+      document.querySelectorAll('#hero .fade-in').forEach(el => {
+        setTimeout(() => el.classList.add('visible'), 100);
+      });
+
+      /* Observe all other fade-in elements */
+      document.querySelectorAll('.fade-in:not(#hero .fade-in)').forEach(el => {
+        observer.observe(el);
+      });
+    })();
+
+    /* ------------------------------------------
+       3. MOBILE NAV TOGGLE
+    ------------------------------------------ */
+    (function () {
+      const toggle = document.getElementById('navToggle');
+      const links = document.getElementById('navLinks');
+
+      toggle.addEventListener('click', () => {
+        const isOpen = links.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', isOpen);
+      });
+
+      /* Close on link click */
+      links.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          links.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+
+    /* ------------------------------------------
+       4. NAV background on scroll
+    ------------------------------------------ */
+    (function () {
+      const nav = document.getElementById('navbar');
+      function updateNavBg() {
+        const style = getComputedStyle(document.documentElement);
+        const scrolled = style.getPropertyValue('--nav-bg-scrolled').trim() || 'rgba(10,14,26,0.95)';
+        const idle = style.getPropertyValue('--nav-bg').trim() || 'rgba(10,14,26,0.75)';
+        nav.style.background = window.scrollY > 40 ? scrolled : idle;
+      }
+      window.addEventListener('scroll', updateNavBg, { passive: true });
+      document.addEventListener('themechange', updateNavBg);
+    })();
+  </script>
+  <script src="shattering-text.js"></script>
+  <script src="scroll-animations.js"></script>
+  <script type="module" src="anime-animations.js"></script>
+  <script src="grid-nav.js" type="module"></script>
+
+  <!-- ==========================================
+       LANGUAGE SWITCHING (PL / EN)
+  ========================================== -->
+  <script>
+    (function () {
+      /* ── Translations dictionary ─────────────── */
+      const T = {
+        pl: {
+          'page.title': 'dr inż. Mateusz Pomianek – Wizytówka naukowa',
+          /* NAV */
+          'nav.about': 'O mnie',
+          'nav.interests': 'Zainteresowania',
+          'nav.research': 'Badania',
+          'nav.projects': 'Projekty',
+          'nav.publications': 'Publikacje',
+          'nav.clinical': 'Aplikacje kliniczne',
+          'nav.materials': 'Materiały',
+          /* HERO */
+          'hero.degree': 'dr inż.',
+          'hero.badge': 'Politechnika Rzeszowska · Adiunkt',
+          'hero.subtitle': 'Informatyka afektywna &nbsp;·&nbsp; XR/AI &nbsp;·&nbsp; Wizja komputerowa',
+          'hero.tag1': 'Informatyka afektywna',
+          'hero.tag2': 'Wizja komputerowa',
+          'hero.tag3': 'Interakcja człowiek–komputer',
+          'hero.tag4': 'Śledzenie wzroku',
+          'hero.tag5': 'Technologie obronne',
+          'hero.cta': 'Poznaj mój profil',
+          /* ABOUT */
+          'about.label': 'O mnie',
+          'about.title': 'Naukowiec<br><span class="gradient-text">i inżynier</span>',
+          'about.p1': 'Jestem naukowcem i inżynierem specjalizującym się w przetwarzaniu multispektralnej informacji obrazowej oraz projektowaniu systemów opartych na naturalnej interakcji człowieka z maszynami. Moja działalność badawcza sytuuje się na styku optoelektroniki, technologii cyfrowych oraz psychologii poznawczej. Koncentruję się na modelowaniu i integracji ludzkich sygnałów percepcyjnych oraz afektywnych w zaawansowanych rozwiązaniach technicznych, które umożliwiają maszynom lepsze zrozumienie stanu użytkownika. Pracuję jako adiunkt w Katedrze Informatyki i Automatyki Politechniki Rzeszowskiej. Badania prowadzę w dyscyplinie automatyki, elektroniki, elektrotechniki i technologii kosmicznych oraz informatyki. Stopień doktora w dziedzinie nauk inżynieryjno-technicznych uzyskałem w Instytucie Optoelektroniki Wojskowej Akademii Technicznej. W swojej codziennej pracy kieruję się zasadami Europejskiej Karty Naukowca, dbając o etykę, rzetelność oraz przejrzystość badań.',
+          'about.p2': 'W obszarze moich kompetencji inżynierskich kluczową rolę odgrywa budowa systemów multisensorycznych, wykorzystujących wizję komputerową, uczenie maszynowe oraz fuzję danych do wnioskowania o stanie człowieka i otaczającej go rzeczywistości. Projektuję i integruję autorskie układy do akwizycji parametrów fizjologicznych, takich jak ruch, kierunek spojrzenia czy mimika, wykorzystując przy tym zaawansowane techniki skanowania 3D, fotogrametrii oraz modelowania przestrzennego. Rozwijam również środowiska immersyjne oparte na rozszerzonej i wirtualnej rzeczywistości, które służą jako platformy dla naturalnych, multimodalnych interfejsów człowiek–maszyna. Posiadam bogate doświadczenie w zakresie technologii bezpieczeństwa, obejmujące projektowanie optoelektronicznych systemów naprowadzania, symulatorów i trenażerów pola walki oraz systemów AR czasu rzeczywistego, wspomagających świadomość sytuacyjną żołnierzy. W ramach prac nad systemami autonomicznymi łączę nowoczesną percepcję z algorytmami sterowania w czasie rzeczywistym, co pozwala na tworzenie responsywnych architektur robotycznych zdolnych do precyzyjnej i bezpiecznej współpracy z człowiekiem.',
+          'about.p3': 'Istotnym filarem mojej aktywności jest robotyka afektywna oraz analiza sygnałów w interfejsach mózg–komputer, które m.in. znajdują zastosowanie w budowie inteligentnych interfejsów człowieka z robotem. Badam i integruje dane okulograficzne, ekspresję emocjonalną, czy elektroencefalograficzną aktywność ludzkiego mózgu, co pozwala na opracowywanie systemów adaptacyjnych w ramach percepcyjnych i kognitywnych architektur humanoidalnych robotów, fizycznej/ucieleśnionej sztucznej inteligencji. Uzyskane w ten sposób reprezentacje danych wykorzystuję nie tylko do personalizacji interakcji z robotami, ale również do tworzenia specjalistycznych aplikacji o charakterze diagnostyczno-klinicznym, wspomagających procesy medyczne i rehabilitacyjne. W ujęciu wdrożeniowym tworzę cyfrowe bliźniaki autonomicznych systemów oraz wykorzystuję metody uczenia ze wzmocnieniem, aby optymalizować funkcjonowanie systemów w złożonych warunkach rzeczywistych, zapewniając ich skuteczną adaptację do dynamicznie zmieniającego się otoczenia i potrzeb użytkownika. Moim celem jest budowa systemów, które nie tylko odbierają sygnały, ale też inteligentnie je interpretują i odpowiadają w sposób dostosowany do kontekstu.',
+          /* INTERESTS */
+          'interests.label': 'Specjalizacje',
+          'interests.title': 'Zainteresowania<br><span class="gradient-text">naukowe</span>',
+          'interests.card1.title': 'Informatyka afektywna',
+          'interests.card1.desc': 'Rozpoznawanie emocji i stanów psychofizycznych człowieka przez systemy komputerowe.',
+          'interests.card2.title': 'Wizja komputerowa',
+          'interests.card2.desc': 'Analiza i przetwarzanie obrazów, wykrywanie obiektów, segmentacja scen.',
+          'interests.card3.title': 'Interakcja człowiek–komputer',
+          'interests.card3.desc': 'Projektowanie i ewaluacja interfejsów HCI (HRI, NUI, multimodalność, UX), analiza sygnałów behawioralnych (mimika, gesty, gaze) oraz tworzenie adaptacyjnych systemów interakcyjnych opartych na AI.',
+          'interests.card4.title': 'Śledzenie wzroku',
+          'interests.card4.desc': 'Eye-tracking, MEMS gaze estimation, analiza fiksacji i sakkad.',
+          'interests.card5.title': 'Systemy VR / AR / MR',
+          'interests.card5.desc': 'Mixed reality, varifocal HMD, kalibracja, aplikacje medyczne i szkoleniowe.',
+          'interests.card6.title': 'AI w NUI',
+          'interests.card6.desc': 'Uczenie maszynowe w naturalnych interfejsach użytkownika, inteligentne systemy interpretujące sygnały.',
+          /* RESEARCH */
+          'research.label': 'Obszary badań',
+          'research.title': 'Badania &amp;<br><span class="gradient-text">technologie</span>',
+          'research.hw1': 'Optoelektroniczne systemy wizualizacji, symulacji i pomiaru',
+          'research.hw2': 'Śledzenie ruchu, wzroku i gestów',
+          'research.hw3': 'Rozpoznawanie emocji i stanów afektywnych',
+          'research.hw4': 'Prototypowanie: CAD, modelowanie 3D, fotogrametria, skanowanie 3D',
+          'research.hw5': 'Pomiary techniczne, cyfrowe bliźniaki, in-silico',
+          'research.sw1': 'Analiza obrazu i widzenie komputerowe',
+          'research.sw2': 'Uczenie maszynowe i sieci neuronowe',
+          'research.sw3': 'Mixed Reality – MR / AR / VR',
+          'research.sw4': 'Interaktywne aplikacje, symulacje i gry',
+          'research.sw5': 'Inteligentne systemy interpretujące sygnały użytkownika',
+          /* PROJECTS */
+          'projects.label': 'Dorobek naukowy',
+          'projects.title': 'Projekty &amp;<br><span class="gradient-text">osiągnięcia</span>',
+          'projects.card1.desc': 'Opracowanie miniaturowych systemów śledzenia wzroku opartych na mikroelektrycznych układach mechanicznych (MEMS).',
+          'projects.card2.desc': 'Metody kalibracji wyświetlaczy nagłownych o zmiennej ogniskowej dla aplikacji rozszerzonej i wirtualnej rzeczywistości.',
+          'projects.card3.desc': 'Walidacja cyfrowych bliźniaków w środowiskach przemysłowych i medycznych, pomiary in-silico.',
+          'projects.card4.tag': 'Medycyna',
+          'projects.card4.desc': 'Pipeliny VR do wizualizacji i analizy danych medycznych w diagnostyce i edukacji.',
+          'projects.card5.tag': 'Robotyka',
+          'projects.card5.title': 'Kognitywna Robotyka Humanoidalna',
+          'projects.card5.desc': 'Percepcyjne i kognitywne architektury robotów humanoidalnych do zastosowań terapeutycznych i badawczych.',
+          'projects.card6.tag': 'AI / Biometria',
+          'projects.card6.title': 'Optoelektronika &amp; Biometria',
+          'projects.card6.desc': 'Multispektralna analiza obrazu, systemy biometryczne, przetwarzanie sygnałów afektywnych.',
+          'projects.card7.tag': 'Obronność',
+          'projects.card7.title': 'Technologie obronne',
+          'projects.card7.desc': 'Historyczne doświadczenie w projektowaniu optoelektronicznych systemów naprowadzania broni, symulatorach pola walki oraz systemach VR/AR dla wojska. Nie jest to aktualny obszar badawczy.',
+          /* CLINICAL */
+          'clinical.label': 'Medycyna &amp; Neuronauka',
+          'clinical.title': 'Aplikacje kliniczne<br><span class="gradient-text">i neuropsychologiczne</span>',
+          'clinical.card1.title': 'Biomarkery okulistyczne',
+          'clinical.card1.desc': 'Modelowanie biomarkerów okulistycznych i behawioralnych z wykorzystaniem AI do wczesnej diagnostyki.',
+          'clinical.card2.title': 'Diagnostyka wspomagana AI',
+          'clinical.card2.desc': 'Systemy decyzji klinicznych wykorzystujące uczenie maszynowe do analizy danych pacjentów.',
+          'clinical.card3.title': 'Rehabilitacja XR',
+          'clinical.card3.desc': 'Terapia z wykorzystaniem rozszerzonej i wirtualnej rzeczywistości w neurorehabilitacji.',
+          'clinical.card4.title': 'Robotyka kognitywna',
+          'clinical.card4.desc': 'Humanoidalne roboty z percepcyjnymi architekturami kognitywnymi do terapii i badań neuropsychologicznych.',
+          /* MATERIALS */
+          'materials.label': 'Dydaktyka',
+          'materials.title': 'Materiały<br><span class="gradient-text">dydaktyczne</span>',
+          'materials.desc': 'Udostępniam materiały dydaktyczne do prowadzonych przeze mnie przedmiotów: Bash, LaTeX, GIT, Algorytmy, Aplikacje mobilne, Psychoinformatyka, Robotyka afektywna oraz Seminaria dyplomowe. Dostępny jest również interaktywny <a href="https://matpomgit.github.io/win-xp-web" target="_blank" rel="noopener noreferrer" style="color:var(--clr-cyan);text-decoration:none;">Interfejs PC</a> w przeglądarce.',
+          'materials.cta': 'Przejdź do materiałów',
+          'materials.pcCta': 'Interfejs PC',
+          /* FOOTER */
+          'footer.brand': 'dr inż. <span>Mateusz Pomianek</span>',
+          'footer.dept': 'Katedra Informatyki i Automatyki<br>Politechnika Rzeszowska im. I. Łukasiewicza',
+          'footer.city': '35-959 Rzeszów, Polska',
+          'footer.publications': 'Przejdź do zakładki Publikacje',
+          'footer.copy': '© 2025 dr inż. Mateusz Pomianek · Politechnika Rzeszowska',
+        },
+        en: {
+          'page.title': 'Ph.D., Eng. Mateusz Pomianek – Academic Profile',
+          /* NAV */
+          'nav.about': 'About',
+          'nav.interests': 'Interests',
+          'nav.research': 'Research',
+          'nav.projects': 'Projects',
+          'nav.publications': 'Publications',
+          'nav.clinical': 'Clinical Apps',
+          'nav.materials': 'Materials',
+          /* HERO */
+          'hero.degree': 'Ph.D., Eng.',
+          'hero.badge': 'Rzeszów University of Technology · Associate Professor',
+          'hero.subtitle': 'Affective Computing &nbsp;·&nbsp; XR/AI &nbsp;·&nbsp; Computer Vision',
+          'hero.tag1': 'Affective Computing',
+          'hero.tag2': 'Computer Vision',
+          'hero.tag3': 'Human–Computer Interaction',
+          'hero.tag4': 'Eye Tracking',
+          'hero.tag5': 'Defence Technologies',
+          'hero.cta': 'Explore my profile',
+          /* ABOUT */
+          'about.label': 'About Me',
+          'about.title': 'Scientist<br><span class="gradient-text">&amp; Engineer</span>',
+          'about.p1': 'I am an Assistant Professor in the Department of Computer and Control Engineering at the Rzeszów University of Technology, where I specialize in multispectral image processing and the design of systems based on natural human-machine interaction. My research lies at the intersection of optoelectronics, digital technologies, and cognitive psychology, spanning the fields of automation, electronics, space technology, and computer science. Having earned my Ph.D. in engineering and technical sciences at the Military University of Technology in Warsaw. I focus on modeling and integrating human perceptual and affective signals into advanced technical solutions that enable machines to better understand the user’s state. In all my scientific endeavors, I adhere to the principles of the European Charter for Researchers, ensuring the highest standards of ethics, integrity, and transparency.',
+          'about.p2': 'My engineering expertise involves the development of multisensory systems that leverage computer vision, machine learning, and data fusion to infer the state of an individual and their surrounding environment. I design and integrate proprietary systems for acquiring physiological parameters, such as movement, gaze direction, and facial expressions, utilizing advanced 3D scanning, photogrammetry, and spatial modeling techniques. Furthermore, I develop immersive environments based on augmented and virtual reality, which serve as platforms for natural, multimodal human-machine interfaces. By combining modern perception with real-time control algorithms, I create responsive robotic architectures capable of precise and safe collaboration with humans.',
+          'about.p3': 'A significant component of my research is dedicated to affective robotics and the analysis of signals in brain-computer interfaces, which facilitate the development of intelligent human-robot interaction. I synthesize eye-tracking data, emotional expressions, and electroencephalographic activity to develop adaptive systems that respond dynamically to an operator’s cognitive and affective state. These data representations are utilized not only to personalize interactions with robots but also to create specialized diagnostic and clinical applications for medical and rehabilitation processes. In terms of implementation, I work with digital twins and employ reinforcement learning to optimize system performance in complex real-world conditions, ensuring effective adaptation to both the environment and evolving user needs.',
+          /* INTERESTS */
+          'interests.label': 'Specialisations',
+          'interests.title': 'Research<br><span class="gradient-text">interests</span>',
+          'interests.card1.title': 'Affective Computing',
+          'interests.card1.desc': 'Recognition of human emotions and psychophysical states by computer systems.',
+          'interests.card2.title': 'Computer Vision',
+          'interests.card2.desc': 'Image analysis and processing, object detection, scene segmentation.',
+          'interests.card3.title': 'Human–Computer Interaction',
+          'interests.card3.desc': 'Design and evaluation of HCI interfaces (HRI, NUI, multimodality, UX), analysis of behavioral signals (facial expressions, gestures, gaze), and creation of adaptive interaction systems based on AI.',
+          'interests.card4.title': 'Eye Tracking',
+          'interests.card4.desc': 'Eye-tracking, MEMS gaze estimation, fixation and saccade analysis.',
+          'interests.card5.title': 'VR / AR / MR Systems',
+          'interests.card5.desc': 'Mixed reality, varifocal HMD, calibration, medical and training applications.',
+          'interests.card6.title': 'AI in NUI',
+          'interests.card6.desc': 'Machine learning in natural user interfaces, intelligent systems interpreting user signals.',
+          /* RESEARCH */
+          'research.label': 'Research areas',
+          'research.title': 'Research &amp;<br><span class="gradient-text">technologies</span>',
+          'research.hw1': 'Optoelectronic visualisation, simulation and measurement systems',
+          'research.hw2': 'Motion, gaze and gesture tracking',
+          'research.hw3': 'Emotion and affective state recognition',
+          'research.hw4': 'Prototyping: CAD, 3D modelling, photogrammetry, 3D scanning',
+          'research.hw5': 'Technical measurements, digital twins, in-silico',
+          'research.sw1': 'Image analysis and computer vision',
+          'research.sw2': 'Machine learning and neural networks',
+          'research.sw3': 'Mixed Reality – MR / AR / VR',
+          'research.sw4': 'Interactive applications, simulations and games',
+          'research.sw5': 'Intelligent systems interpreting user signals',
+          /* PROJECTS */
+          'projects.label': 'Academic output',
+          'projects.title': 'Projects &amp;<br><span class="gradient-text">achievements</span>',
+          'projects.card1.desc': 'Development of miniature eye-tracking systems based on micro-electro-mechanical systems (MEMS).',
+          'projects.card2.desc': 'Calibration methods for varifocal head-mounted displays for augmented and virtual reality applications.',
+          'projects.card3.desc': 'Validation of digital twins in industrial and medical environments, in-silico measurements.',
+          'projects.card4.tag': 'Medicine',
+          'projects.card4.desc': 'VR pipelines for visualisation and analysis of medical data in diagnostics and education.',
+          'projects.card5.tag': 'Robotics',
+          'projects.card5.title': 'Cognitive Humanoid Robotics',
+          'projects.card5.desc': 'Perceptual and cognitive architectures for humanoid robots for therapeutic and research applications.',
+          'projects.card6.tag': 'AI / Biometrics',
+          'projects.card6.title': 'Optoelectronics &amp; Biometrics',
+          'projects.card6.desc': 'Multispectral image analysis, biometric systems, affective signal processing.',
+          'projects.card7.tag': 'Defence',
+          'projects.card7.title': 'Defence Technologies',
+          'projects.card7.desc': 'Past experience in designing optoelectronic weapon guidance systems, combat field simulators, and military VR/AR systems. This is not a current research focus.',
+          /* CLINICAL */
+          'clinical.label': 'Medicine &amp; Neuroscience',
+          'clinical.title': 'Clinical<br><span class="gradient-text">applications</span>',
+          'clinical.card1.title': 'Ophthalmic biomarkers',
+          'clinical.card1.desc': 'Modelling ophthalmic and behavioural biomarkers using AI for early diagnostics.',
+          'clinical.card2.title': 'AI-assisted diagnostics',
+          'clinical.card2.desc': 'Clinical decision systems using machine learning to analyse patient data.',
+          'clinical.card3.title': 'XR Rehabilitation',
+          'clinical.card3.desc': 'Therapy using augmented and virtual reality in neurorehabilitation.',
+          'clinical.card4.title': 'Cognitive robotics',
+          'clinical.card4.desc': 'Humanoid robots with perceptual cognitive architectures for therapy and neuropsychological research.',
+          /* MATERIALS */
+          'materials.label': 'Teaching',
+          'materials.title': 'Teaching<br><span class="gradient-text">materials</span>',
+          'materials.desc': 'Teaching materials are available for courses I lead: Bash, LaTeX, GIT, Algorithms, Mobile Applications, Psychoinformatics, Affective Robotics, and Diploma Seminars. An interactive <a href="https://matpomgit.github.io/win-xp-web" target="_blank" rel="noopener noreferrer" style="color:var(--clr-cyan);text-decoration:none;">PC Interface</a> in the browser is also available.',
+          'materials.cta': 'Go to materials',
+          'materials.pcCta': 'PC Interface',
+          /* FOOTER */
+          'footer.brand': 'Ph.D., Eng. <span>Mateusz Pomianek</span>',
+          'footer.dept': 'Department of Computer Science and Automation<br>Rzeszów University of Technology',
+          'footer.city': '35-959 Rzeszów, Poland',
+          'footer.publications': 'Go to Publications tab',
+          'footer.copy': '© 2025 Ph.D., Eng. Mateusz Pomianek · Rzeszów University of Technology',
+        }
+      };
+
+      /* ── Apply translations ──────────────────── */
+      function applyLang(lang) {
+        const dict = T[lang];
+        if (!dict) return;
+
+        /* Update page title */
+        if (dict['page.title']) document.title = dict['page.title'];
+
+        /* Update html lang attribute */
+        document.documentElement.lang = lang;
+
+        /* Update all data-i18n elements */
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (!dict[key]) return;
+          /* Use innerHTML for entries that contain HTML tags */
+          el.innerHTML = dict[key];
+        });
+
+        /* Update toggle button label */
+        const btn = document.getElementById('langToggle');
+        if (btn) btn.textContent = lang === 'pl' ? 'EN' : 'PL';
+
+        /* Persist choice */
+        try { localStorage.setItem('lang', lang); } catch (e) { /* ignore */ }
+      }
+
+      /* ── Toggle handler ──────────────────────── */
+      const btn = document.getElementById('langToggle');
+      if (btn) {
+        btn.addEventListener('click', () => {
+          const current = document.documentElement.lang || 'pl';
+          applyLang(current === 'pl' ? 'en' : 'pl');
+        });
+      }
+
+      /* ── Restore saved language on load ─────── */
+      (function () {
+        let saved = 'pl';
+        try { saved = localStorage.getItem('lang') || 'pl'; } catch (e) { /* ignore */ }
+        if (saved !== 'pl') applyLang(saved);
+      })();
+    })();
+  </script>
+</body>
+
+</html>
