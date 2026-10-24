@@ -26,6 +26,11 @@ def validate(entries: list[dict], root: Path = ROOT) -> None:
         for name in ("title", "description", "category", "source"):
             if not isinstance(entry.get(name), str) or not entry[name].strip():
                 raise ValueError(f"Missing {name} in {kind}/{ident}")
+        status = entry.get("status", "ready")
+        if status not in {"ready", "draft", "planned"}:
+            raise ValueError(f"Invalid status in {kind}/{ident}: {status!r}")
+        if status == "planned" and kind != "p":
+            raise ValueError(f"Only PDF reservations are supported: {kind}/{ident}")
         src = entry["source"]
         if src.startswith("https://"):
             parsed = urlsplit(src)
@@ -38,7 +43,7 @@ def validate(entries: list[dict], root: Path = ROOT) -> None:
                 or src.startswith("/")
                 or any(part in ("..", ".") for part in parts)
                 or "//" in src
-                or not (root / src).is_file()
+                or (status != "planned" and not (root / src).is_file())
             ):
                 raise ValueError(f"Missing or unsafe local source: {src}")
 
