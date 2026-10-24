@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Materiały studenckie WiRR: 7 wykładów PDF i HTML oraz samodzielne skrypty Bash.">
+<title>WiRR | Wykłady i pliki dla studentów</title>
+<link rel="stylesheet" href="../assets/library.css">
+<style>
+table{width:100%;border-collapse:collapse;background:white}th,td{text-align:left;padding:15px;border-bottom:1px solid var(--edge)}
+thead th{background:#eaf2f8}td a{font-weight:700}.pending,.draft{display:block;color:var(--muted);font-size:.82rem}
+.box{background:white;border:1px solid var(--edge);border-radius:16px;padding:24px;margin-bottom:18px;overflow-x:auto}
+.downloads{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.downloads article{border:1px solid var(--edge);border-radius:12px;padding:18px}
+code{overflow-wrap:anywhere}
+@media(max-width:500px){th,td{padding:10px 6px;font-size:.9rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><a href="../">MP. / strona główna</a><nav class="toplinks" aria-label="Nawigacja"><a href="../library/">Biblioteka</a><a href="../materials.html">Materiały</a></nav></header>
+<main>
+<section class="hero">
+<h1>WiRR: materiały dla studentów</h1>
+<p>Wirtualna i Rozszerzona Rzeczywistość. Siedem wykładów w wersjach PDF i HTML oraz materiały Bash do pobrania.</p>
+<p class="muted">Szablony HTML i adresy PDF są przygotowane. Właściwe wykłady nie zostały jeszcze opublikowane.</p>
+</section>
+<section class="box" aria-labelledby="lectures"><h2 id="lectures">Wykłady 1–7</h2>
+<table><thead><tr><th scope="col">Numer</th><th scope="col">Prezentacja PDF</th><th scope="col">Materiał HTML</th></tr></thead>
+<tbody>
+<tr><th scope="row">Wykład 1</th><td><a href="../p/10/">PDF 1</a><span class="pending">Oczekuje na plik</span></td><td><a href="../h/10/">HTML 1</a><span class="draft">Szkic</span></td></tr>
+<tr><th scope="row">Wykład 2</th><td><a href="../p/11/">PDF 2</a><span class="pending">Oczekuje na plik</span></td><td><a href="../h/11/">HTML 2</a><span class="draft">Szkic</span></td></tr>
+<tr><th scope="row">Wykład 3</th><td><a href="../p/12/">PDF 3</a><span class="pending">Oczekuje na plik</span></td><td><a href="../h/12/">HTML 3</a><span class="draft">Szkic</span></td></tr>
+<tr><th scope="row">Wykład 4</th><td><a href="../p/13/">PDF 4</a><span class="pending">Oczekuje na plik</span></td><td><a href="../h/13/">HTML 4</a><span class="draft">Szkic</span></td></tr>
+<tr><th scope="row">Wykład 5</th><td><a href="../p/14/">PDF 5</a><span class="pending">Oczekuje na plik</span></td><td><a href="../h/14/">HTML 5</a><span class="draft">Szkic</span></td></tr>
+<tr><th scope="row">Wykład 6</th><td><a href="../p/15/">PDF 6</a><span class="pending">Oczekuje na plik</span></td><td><a href="../h/15/">HTML 6</a><span class="draft">Szkic</span></td></tr>
+<tr><th scope="row">Wykład 7</th><td><a href="../p/16/">PDF 7</a><span class="pending">Oczekuje na plik</span></td><td><a href="../h/16/">HTML 7</a><span class="draft">Szkic</span></td></tr>
+</tbody></table></section>
+<section class="box" aria-labelledby="scripts"><h2 id="scripts">Skrypty Bash do pobrania</h2>
+<p>Trzy samodzielne demonstracje dydaktyczne. Nie pobierają dodatkowego kodu, nie instalują oprogramowania i nie wymagają połączenia z Internetem.</p>
+<div class="downloads">
+<article><h2>bash-vid.sh</h2><p class="muted">Tekstowy pokaz podstaw Bash.</p><a class="action" href="../downloads/bash/bash-vid.sh" download="bash-vid.sh">Pobierz bash-vid.sh</a><p><small>Uruchom: <code>bash bash-vid.sh</code></small></p></article>
+<article><h2>bash-game.sh</h2><p class="muted">Gra w zgadywanie liczb.</p><a class="action" href="../downloads/bash/bash-game.sh" download="bash-game.sh">Pobierz bash-game.sh</a><p><small>Uruchom: <code>bash bash-game.sh</code></small></p></article>
+<article><h2>bash-rpg</h2><p class="muted">Krótka gra edukacyjna z pytaniami o komendy Bash.</p><a class="action" href="../downloads/bash/bash-rpg" download="bash-rpg">Pobierz bash-rpg</a><p><small>Uruchom: <code>bash bash-rpg</code></small></p></article>
+</div>
+</section>
+</main>
+<footer>Pliki są publikowane bezpośrednio w tym serwisie. Brak zależności od innych repozytoriów.</footer>
+</div>
+</body>
+</html>
