@@ -6,9 +6,10 @@
 <meta name="description" content="Materiały studenckie WiRR: 7 wykładów PDF i HTML oraz samodzielne skrypty Bash.">
 <title>WiRR | Wykłady i pliki dla studentów</title>
 <link rel="stylesheet" href="../assets/library.css">
+<script defer src="../assets/wirr.js"></script>
 <style>
 table{width:100%;border-collapse:collapse;background:white}th,td{text-align:left;padding:15px;border-bottom:1px solid var(--edge)}
-thead th{background:#eaf2f8}td a{font-weight:700}.pending,.draft{display:block;color:var(--muted);font-size:.82rem}
+thead th{background:#eaf2f8}td a{font-weight:700}.pending,.draft,.ready{display:block;color:var(--muted);font-size:.82rem}.ready{color:#256044;font-weight:700}
 .box{background:white;border:1px solid var(--edge);border-radius:16px;padding:24px;margin-bottom:18px;overflow-x:auto}
 .downloads{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
 .downloads article{border:1px solid var(--edge);border-radius:12px;padding:18px}
@@ -28,13 +29,13 @@ code{overflow-wrap:anywhere}
 <section class="box" aria-labelledby="lectures"><h2 id="lectures">Wykłady 1–7</h2>
 <table><thead><tr><th scope="col">Numer</th><th scope="col">Prezentacja PDF</th><th scope="col">Materiał HTML</th></tr></thead>
 <tbody>
-<tr><th scope="row">Wykład 1</th><td><a href="../p/10/">PDF 1</a><span class="pending">Oczekuje na plik</span></td><td><a href="../h/10/">HTML 1</a><span class="draft">Szkic</span></td></tr>
-<tr><th scope="row">Wykład 2</th><td><a href="../p/11/">PDF 2</a><span class="pending">Oczekuje na plik</span></td><td><a href="../h/11/">HTML 2</a><span class="draft">Szkic</span></td></tr>
-<tr><th scope="row">Wykład 3</th><td><a href="../p/12/">PDF 3</a><span class="pending">Oczekuje na plik</span></td><td><a href="../h/12/">HTML 3</a><span class="draft">Szkic</span></td></tr>
-<tr><th scope="row">Wykład 4</th><td><a href="../p/13/">PDF 4</a><span class="pending">Oczekuje na plik</span></td><td><a href="../h/13/">HTML 4</a><span class="draft">Szkic</span></td></tr>
-<tr><th scope="row">Wykład 5</th><td><a href="../p/14/">PDF 5</a><span class="pending">Oczekuje na plik</span></td><td><a href="../h/14/">HTML 5</a><span class="draft">Szkic</span></td></tr>
-<tr><th scope="row">Wykład 6</th><td><a href="../p/15/">PDF 6</a><span class="pending">Oczekuje na plik</span></td><td><a href="../h/15/">HTML 6</a><span class="draft">Szkic</span></td></tr>
-<tr><th scope="row">Wykład 7</th><td><a href="../p/16/">PDF 7</a><span class="pending">Oczekuje na plik</span></td><td><a href="../h/16/">HTML 7</a><span class="draft">Szkic</span></td></tr>
+<tr><th scope="row">Wykład 1</th><td><a href="../p/10/">PDF 1</a><span class="pending" data-resource-status="p/10">Oczekuje na plik</span></td><td><a href="../h/10/">HTML 1</a><span class="draft" data-resource-status="h/10">Szkic</span></td></tr>
+<tr><th scope="row">Wykład 2</th><td><a href="../p/11/">PDF 2</a><span class="pending" data-resource-status="p/11">Oczekuje na plik</span></td><td><a href="../h/11/">HTML 2</a><span class="draft" data-resource-status="h/11">Szkic</span></td></tr>
+<tr><th scope="row">Wykład 3</th><td><a href="../p/12/">PDF 3</a><span class="pending" data-resource-status="p/12">Oczekuje na plik</span></td><td><a href="../h/12/">HTML 3</a><span class="draft" data-resource-status="h/12">Szkic</span></td></tr>
+<tr><th scope="row">Wykład 4</th><td><a href="../p/13/">PDF 4</a><span class="pending" data-resource-status="p/13">Oczekuje na plik</span></td><td><a href="../h/13/">HTML 4</a><span class="draft" data-resource-status="h/13">Szkic</span></td></tr>
+<tr><th scope="row">Wykład 5</th><td><a href="../p/14/">PDF 5</a><span class="pending" data-resource-status="p/14">Oczekuje na plik</span></td><td><a href="../h/14/">HTML 5</a><span class="draft" data-resource-status="h/14">Szkic</span></td></tr>
+<tr><th scope="row">Wykład 6</th><td><a href="../p/15/">PDF 6</a><span class="pending" data-resource-status="p/15">Oczekuje na plik</span></td><td><a href="../h/15/">HTML 6</a><span class="draft" data-resource-status="h/15">Szkic</span></td></tr>
+<tr><th scope="row">Wykład 7</th><td><a href="../p/16/">PDF 7</a><span class="pending" data-resource-status="p/16">Oczekuje na plik</span></td><td><a href="../h/16/">HTML 7</a><span class="draft" data-resource-status="h/16">Szkic</span></td></tr>
 </tbody></table></section>
 <section class="box" aria-labelledby="scripts"><h2 id="scripts">Skrypty Bash do pobrania</h2>
 <p>Trzy samodzielne demonstracje dydaktyczne. Nie pobierają dodatkowego kodu, nie instalują oprogramowania i nie wymagają połączenia z Internetem.</p>
