@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Biblioteka plików, publikacji PDF i materiałów HTML dr. inż. Mateusza Pomianka.">
+<title>Biblioteka zasobów | Mateusz Pomianek</title>
+<link rel="stylesheet" href="../assets/library.css">
+<script defer src="../assets/library.js"></script>
+</head>
+<body>
+<div class="wrap">
+<header><a href="../">MP. / strona główna</a><nav class="toplinks" aria-label="Nawigacja"><a href="../">Start</a><a href="../materials.html">Materiały</a><a href="../publications.html">Publikacje</a></nav></header>
+<main data-library="catalog">
+<section class="hero"><h1>Biblioteka zasobów</h1><p>Dokumenty PDF, strony HTML i pliki do pobrania. Każdy materiał ma trwały, krótki adres.</p><p class="muted">Adresy: <code>/self/f/01</code> (plik), <code>/self/p/01</code> (PDF), <code>/self/h/01</code> (HTML).</p></section>
+<div class="searchbar">
+<label for="library-search">Szukaj materiałów<input id="library-search" type="search" placeholder="Tytuł, temat, numer..." autocomplete="off"></label>
+<label for="library-type">Format<select id="library-type"><option value="">Wszystkie formaty</option><option value="f">Pliki</option><option value="p">PDF</option><option value="h">HTML</option></select></label>
+<label for="library-category">Kategoria<select id="library-category"><option value="">Wszystkie kategorie</option></select></label>
+</div>
+<div class="toolbar"><p class="count" id="library-count" role="status">Wczytywanie katalogu...</p><span class="muted">24 pozycje na stronę</span></div>
+<div class="grid" id="library-results" aria-live="polite"></div>
+<div class="pager"><button class="action" id="library-prev" type="button" disabled>Poprzednia</button><span id="library-page" aria-live="polite">Strona 1</span><button class="action" id="library-next" type="button" disabled>Następna</button></div>
+</main>
+<footer>Biblioteka publiczna, GitHub Pages. Materiały zewnętrzne mogą wymagać otwarcia w osobnej karcie.</footer>
+</div>
+</body>
+</html>
