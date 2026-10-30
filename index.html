@@ -85,7 +85,7 @@
     .contact strong{display:block;margin-bottom:4px}
     .contact span,.contact a{color:var(--muted)}
     .contact a:hover{color:var(--accent)}
-    footer{padding:24px 0 36px;border-top:1px solid var(--line);color:var(--muted);font-size:.43rem}
+    footer{padding:24px 0 36px;border-top:1px solid var(--line);color:var(--muted);font-size:.6rem}
 
     @media(max-width:860px){
       .intro{grid-template-columns:1fr;gap:28px}
@@ -105,7 +105,8 @@
     header{padding:clamp(10px,1.8vh,20px) 0}
     main{display:flex;flex-direction:column;justify-content:center;min-height:0;padding:clamp(8px,2vh,24px) 0}
     .intro{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(12px,2vw,24px)}
-    .wheel{width:min(100%,760px,calc((100dvh - 148px)*1.5));max-width:none}
+    .intro>div:first-child{transform:translateY(-18px)}
+    .wheel{width:min(110%,836px,calc((100dvh - 148px)*1.65));max-width:none}
     footer{padding:clamp(9px,1.5vh,18px) 0}
     /* Nie zamykaj wysuniętych odnośników natychmiast po opuszczeniu segmentu. */
     .subs{visibility:hidden;opacity:0;pointer-events:none;transition:opacity .2s ease,visibility 0s linear .2s}
@@ -119,12 +120,13 @@
     .workspace.visible{width:100%}
     @media(max-width:860px){
       .intro{grid-template-columns:1fr;gap:12px}
-      .wheel{width:min(100%,400px,calc(100dvh - 300px));max-width:400px}
+      .intro>div:first-child{transform:translateY(-8px)}
+      .wheel{width:min(100%,440px,calc((100dvh - 300px)*1.1));max-width:440px}
       .subs{display:none!important}
       .seg-sub{font-size:11px}
     }
     @media(max-height:600px) and (min-width:861px){
-      .wheel{width:min(100%,660px,calc((100dvh - 106px)*1.5))}
+      .wheel{width:min(110%,726px,calc((100dvh - 106px)*1.65))}
       .lead{margin-top:10px}
       .role{margin-top:8px}
     }
@@ -142,7 +144,7 @@
       <section class="intro" id="start" aria-labelledby="page-title">
         <div>
           <img class="portrait" src="docs/images/self.png" alt="Portret dr. inż. Mateusza Pomianka" width="126" height="126" decoding="async" fetchpriority="high">
-          <h1 id="page-title">Informatyka afektywna i robotyka humanoidalna</h1>
+          <h1 id="page-title">Informatyka afektywna i&nbsp;robotyka humanoidalna</h1>
           <p class="role">Adiunkt, Katedra Informatyki i Automatyki</p>
           <p class="lead">Dydaktyka, badania i projekty: wizja komputerowa, neuroinformatyka, śledzenie wzroku oraz XR.</p>
         </div>

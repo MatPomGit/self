@@ -46,3 +46,12 @@ Podstrony stosują `<base href="../">`, aby odwołania do `docs/assets/`,
 strony głównej i materiałów były poprawne również z głębszej ścieżki.
 Na stronie startowej stopka ma czcionkę 0,43 rem (50% pierwotnych 0,86 rem).
 Kolumna tytułu na ekranach szerokich otrzymała udział 0,85 fr zamiast 0,55 fr.
+
+## Korekty układu (30.10.2026)
+
+Stopka strony głównej używa czcionki `0.6rem`. W tytule zastosowano twardą
+spację po spójniku „i”, aby zachować go w jednym wierszu z „robotyka”.
+Kolumna tytułowa jest przesunięta o 18 px w górę (8 px na węższych ekranach).
+Maksymalne wymiary koła kategorii zwiększono o 10% i zachowano ograniczenia
+zależne od wysokości okna; na bardzo małych ekranach wielkość koła może być
+mniejsza ze względu na przestrzeń dostępną w widoku.
