@@ -28,6 +28,7 @@
     .intro{display:grid;grid-template-columns:minmax(0,.45fr) minmax(0,1.55fr);gap:24px;align-items:center}
     .intro.hidden{display:none}
     h1{margin:0;font-family:var(--serif);font-weight:700;font-size:clamp(1.9rem,3.2vw,2.6rem);line-height:1.1;letter-spacing:-.02em}
+    .portrait{display:block;width:clamp(86px,11vh,126px);height:clamp(86px,11vh,126px);border-radius:50%;object-fit:cover;object-position:center;border:2px solid var(--accent);padding:3px;background:#fff;margin:0 0 clamp(10px,2vh,18px)}
     .role{margin:14px 0 0;color:var(--accent);font-weight:600}
     .lead{margin:20px 0 0;color:var(--muted);max-width:46ch}
 
@@ -140,6 +141,7 @@
     <main>
       <section class="intro" id="start" aria-labelledby="page-title">
         <div>
+          <img class="portrait" src="docs/self.png" alt="Portret dr. inż. Mateusza Pomianka" width="126" height="126" decoding="async" fetchpriority="high">
           <h1 id="page-title">Informatyka afektywna i robotyka humanoidalna</h1>
           <p class="role">Adiunkt, Katedra Informatyki i Automatyki</p>
           <p class="lead">Dydaktyka, badania i projekty: wizja komputerowa, neuroinformatyka, śledzenie wzroku oraz XR.</p>
