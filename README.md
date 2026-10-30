@@ -4,20 +4,17 @@ Statyczna strona naukowa i dydaktyczna publikowana przez GitHub Pages.
 
 - [Strona główna](https://matpomgit.github.io/self/)
 - [Materiały dla studentów](https://matpomgit.github.io/self/materials/)
-- [Biblioteka zasobów](https://matpomgit.github.io/self/library/)
-- [Materiały WiRR](https://matpomgit.github.io/self/materials/wirr/)
-
-## Dokumentacja
-
 - [Struktura repozytorium](STRUCTURE.md)
-- [Biblioteka i krótkie adresy](LIBRARY.md)
-- [Publikacja wykładów WiRR](WIRR.md)
-- [Zadania przeglądu](REVIEW_TASKS.md)
 
 ## Organizacja
 
-Wszystkie lokalne materiały dla studentów umieszcza się w `materials/` z podziałem na przedmioty. `materials/index.html` jest prostą, statyczną listą plików. Dawne adresy stron HTML przekierowują do `materials/`. Krótkie adresy `f/NN/`, `p/NN/` i `h/NN/` pozostają bez zmian.
+Aktualne strony HTML przedmiotów i laboratoriów znajdują się wyłącznie w `materials/`.
+`materials/index.html` to prosty wykaz istniejących zasobów. Cztery strony laboratoriów
+WiRR to `materials/wirr_blok_01.html` do `materials/wirr_blok_04.html`.
+Niepublikowane szkice wykładów, aliasy `f/`, `h/`, `p/`, katalog
+`library/` i generator aliasów zostały usunięte.
 
-Wspólne zasoby serwisu znajdują się w `assets/`. Manifest `assets/library.json` wskazuje pliki w `materials/`.
+Pliki pomocnicze pozostają w `materials/bash/` i `materials/templates/`.
+Zasoby techniczne strony pozostają w `assets/`.
 
-Walidacja: `python3 tools/build_library.py --check` oraz `python3 -m unittest discover -s tests`.
+Walidacja: `python3 -m unittest discover -s tests`.
