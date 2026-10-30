@@ -169,3 +169,12 @@ Naprawiono brakujący plik `docs/data/in-progress.json` (powodował błąd
 HTTP 404), uzupełniono każdy z 26 wpisów o krótki opis celu, badania i
 rezultatu. Czasopisma pozostają widoczne także jako propozycje. Panel
 szczegółów jest wyrównany do góry zamiast do środka wysokości okna.
+
+## Wersja v1.2.2
+
+Listę manuskryptów zagęszczono; pełny tytuł jest pierwszy, nazwa projektu
+w osobnym wierszu. Każda pozycja pokazuje kolejny krok, planowane czasopismo
+z linkiem i punktacją (nieweryfikowane wartości jako „do weryfikacji”).
+W nagłówku sekcji Publikacje obok nazwiska pojawia się jej tytuł.
+Ocena następnego kroku ma charakter redakcyjny; nie oznacza stanu potwierdzonego
+przez ukończone eksperymenty. Punktację podaje się wg wykazu 2024, nie nowego 2027.

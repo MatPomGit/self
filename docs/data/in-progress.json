@@ -8,7 +8,11 @@
     "description": "Porównanie autonomicznej nawigacji z metodami SLAM na zbiorach UAV, ablacje i walidacja w warunkach zbliżonych do terenowych. Rezultatem będzie model nawigacji i powtarzalny benchmark.",
     "journal": "Journal of Field Robotics",
     "journalConfirmed": true,
-    "status": "Manuskrypt i protokół; brak pełnej walidacji"
+    "status": "Manuskrypt i protokół; brak pełnej walidacji",
+    "nextStep": "Zamrozić protokół benchmarku i wykonać pełne porównania z bazowymi metodami nawigacji.",
+    "journalUrl": "https://onlinelibrary.wiley.com/journal/15564967",
+    "ministerialPoints": 140,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-rgbt-P01",
@@ -19,7 +23,11 @@
     "description": "Badanie wpływu rozdzielczości i geometrii optycznej na detekcję obiektów. Powstaną charakterystyki ograniczeń obserwowalności i zestaw eksperymentów.",
     "journal": "Sensors",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Potwierdzić źródła danych z referencyjnymi oznaczeniami i przeprowadzić pierwszy eksperyment rozdzielczości.",
+    "journalUrl": "https://www.mdpi.com/journal/sensors",
+    "ministerialPoints": 100,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-rgbt-P02",
@@ -30,7 +38,11 @@
     "description": "Porównanie fuzji RGB i obrazu termicznego z uwzględnieniem synchronizacji oraz zmian sceny. Wynikiem będzie oceniona metoda integracji modalności.",
     "journal": "Information Fusion",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Zamknąć protokół parowania RGB–LWIR i przygotować zbiór z wiarygodną synchronizacją.",
+    "journalUrl": "https://www.sciencedirect.com/journal/information-fusion",
+    "ministerialPoints": 200,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-dera-hri-P01",
@@ -41,7 +53,11 @@
     "description": "Planowana ocena struktury czynnikowej, rzetelności i trafności kwestionariusza po interakcji z robotem. Rezultatem byłoby zwalidowane narzędzie pomiarowe.",
     "journal": "International Journal of Social Robotics",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Przygotować protokół badania pilotażowego i plan analizy psychometrycznej przed rekrutacją.",
+    "journalUrl": "https://link.springer.com/journal/12369",
+    "ministerialPoints": null,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-rvi-P01",
@@ -52,7 +68,11 @@
     "description": "Porównanie metod inspekcji robotycznej w kontrolowanych scenariuszach symulacyjnych. Powstanie odtwarzalny benchmark i metryki jakości.",
     "journal": "Robotics and Autonomous Systems",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Uruchomić powtarzalny benchmark na zamrożonej konfiguracji scen i zebrać pierwsze wyniki.",
+    "journalUrl": "https://www.sciencedirect.com/journal/robotics-and-autonomous-systems",
+    "ministerialPoints": 140,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-rgbt-P03",
@@ -63,7 +83,11 @@
     "description": "Pomiary opóźnień, pamięci i poboru energii na urządzeniu brzegowym. Rezultatem będzie profil wydajności i analiza kompromisów.",
     "journal": "IEEE Access",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Wybrać fizyczną platformę obliczeniową i rozpocząć pomiar latencji oraz pamięci.",
+    "journalUrl": "https://ieeeaccess.ieee.org/",
+    "ministerialPoints": 100,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-rvi-P02",
@@ -74,7 +98,11 @@
     "description": "Testowanie lokalizacji wskazanego obiektu pośród wielu podobnych elementów. Rezultatem będzie algorytm lokalizacji i zbiór scen testowych.",
     "journal": "Journal of Intelligent & Robotic Systems",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Ustalić zestaw obiektów i scen testowych wraz z metrykami lokalizacji.",
+    "journalUrl": "https://link.springer.com/journal/10846",
+    "ministerialPoints": 140,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-rvi-P03",
@@ -85,7 +113,11 @@
     "description": "Planowanie pozycji kamery i trasy z uwzględnieniem całego ciała humanoida. Powstanie planista bezpiecznych punktów obserwacji.",
     "journal": "Autonomous Robots",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Zamrozić model kinematyczny i ograniczenia planisty pozycji kamery.",
+    "journalUrl": "https://link.springer.com/journal/10514",
+    "ministerialPoints": 100,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-affective-P01",
@@ -96,7 +128,11 @@
     "description": "Ocena rozpoznawania stanów afektywnych z ograniczonej liczby kanałów EEG między zbiorami danych. Powstaną reprezentacje i benchmark odporności.",
     "journal": "Biomedical Signal Processing and Control",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Wybrać dwa kompatybilne publiczne zbiory EEG i ustalić protokół transferu między montażami.",
+    "journalUrl": "https://www.sciencedirect.com/journal/biomedical-signal-processing-and-control",
+    "ministerialPoints": 140,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-rvi-P04",
@@ -107,7 +143,11 @@
     "description": "Aktywny dobór kolejnych ujęć przy niepełnej znajomości geometrii obiektu. Powstanie procedura oceny pokrycia i niepewności.",
     "journal": "Robotics and Autonomous Systems",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Sformalizować metrykę pokrycia i niepewności obserwacji obiektu.",
+    "journalUrl": "https://www.sciencedirect.com/journal/robotics-and-autonomous-systems",
+    "ministerialPoints": 140,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-affective-P02",
@@ -118,7 +158,11 @@
     "description": "Badanie fuzji sygnałów przy brakujących modalnościach i niepewnych pomiarach. Rezultatem będzie algorytm fuzji z oceną kalibracji.",
     "journal": "Information Fusion",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Wybrać licencjonowany zbiór multimodalny i zaplanować scenariusze brakujących modalności.",
+    "journalUrl": "https://www.sciencedirect.com/journal/information-fusion",
+    "ministerialPoints": 200,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-rgbt-P04",
@@ -129,7 +173,11 @@
     "description": "Testy degradacji i awarii jednego z sensorów przy kontrolowanym ryzyku błędnej detekcji. Powstanie mechanizm wykrywania awarii i selektywnej predykcji.",
     "journal": "Pattern Recognition Letters",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Zdefiniować realistyczne scenariusze awarii RGB/LWIR oraz budżet fałszywych alarmów.",
+    "journalUrl": "https://www.sciencedirect.com/journal/pattern-recognition-letters",
+    "ministerialPoints": 100,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-rvi-P05",
@@ -140,7 +188,11 @@
     "description": "Pomiar wpływu chodu i ustawienia kamery na powtarzalność zdjęć. Wynikiem będą zalecenia akwizycji i metryki błędów.",
     "journal": "Sensors",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Przygotować protokół powtarzanych pomiarów położenia kamery podczas lokomocji.",
+    "journalUrl": "https://www.mdpi.com/journal/sensors",
+    "ministerialPoints": 100,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-rgbt-P05",
@@ -151,7 +203,11 @@
     "description": "Ocena przenoszenia modelu pomiędzy różnymi kamerami RGB i termicznymi. Rezultatem będzie protokół walidacji międzyurządzeniowej.",
     "journal": "Machine Vision and Applications",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Pozyskać dane z niezależnego fizycznego sensora do walidacji międzyurządzeniowej.",
+    "journalUrl": "https://link.springer.com/journal/138",
+    "ministerialPoints": 100,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-rvi-P06",
@@ -162,7 +218,11 @@
     "description": "Dobór i ponawianie ujęć na podstawie ostrości, ekspozycji oraz kompletności. Powstanie zamknięta pętla kontroli jakości obrazu.",
     "journal": "Robotics and Autonomous Systems",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Zdefiniować mierzalne progi ostrości, ekspozycji i kompletności obrazów.",
+    "journalUrl": "https://www.sciencedirect.com/journal/robotics-and-autonomous-systems",
+    "ministerialPoints": 140,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-affective-P03",
@@ -173,7 +233,11 @@
     "description": "Analiza zmian sygnałów i obciążenia poznawczego między sesjami. Powstanie adaptacyjny model indywidualny i protokół walidacji.",
     "journal": "IEEE Transactions on Affective Computing",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Przygotować harmonogram powtarzanych sesji i procedurę oceny dryfu sygnału.",
+    "journalUrl": "https://www.computer.org/csdl/journal/ta",
+    "ministerialPoints": 140,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-affective-P04",
@@ -184,7 +248,11 @@
     "description": "Testy analizy mimiki lokalnie na urządzeniu bez utrwalania surowych nagrań. Rezultatem będzie model z oceną prywatności i jakości.",
     "journal": "Pattern Recognition Letters",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Zamrozić scenariusz testowy przetwarzania na urządzeniu bez retencji nagrań.",
+    "journalUrl": "https://www.sciencedirect.com/journal/pattern-recognition-letters",
+    "ministerialPoints": 100,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-rgbt-P06",
@@ -195,7 +263,11 @@
     "description": "Badanie stabilności śledzenia obiektów podczas zasłonięć i chwilowej utraty modalności. Powstanie metoda asocjacji tożsamości między klatkami.",
     "journal": "Computer Vision and Image Understanding",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Pozyskać sekwencje RGB–LWIR z etykietami tożsamości obiektów w czasie.",
+    "journalUrl": "https://www.sciencedirect.com/journal/computer-vision-and-image-understanding",
+    "ministerialPoints": 100,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-affective-P05",
@@ -206,7 +278,11 @@
     "description": "Wykorzystanie kinematyki dłoni do oceny jakości ruchu oraz obciążenia zadaniem. Powstanie model i zbiór cech ruchowych.",
     "journal": "Sensors",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Zdefiniować zadania ruchowe i zestaw mierzalnych cech kinematycznych dłoni.",
+    "journalUrl": "https://www.mdpi.com/journal/sensors",
+    "ministerialPoints": 100,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-rvi-P07",
@@ -217,7 +293,11 @@
     "description": "Porównanie scenariuszy symulacyjnych z rzeczywistymi oraz analiza różnic domenowych. Rezultatem będzie procedura transferu i raport ograniczeń.",
     "journal": "Journal of Field Robotics",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Ustalić legalny, porównywalny zbiór rzeczywistych ujęć do analizy sim-to-real.",
+    "journalUrl": "https://onlinelibrary.wiley.com/journal/15564967",
+    "ministerialPoints": 140,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-affective-P06",
@@ -228,7 +308,11 @@
     "description": "Porównanie adaptacji poziomu trudności sterowanej niepewnością modelu. Wynikiem będzie strategia personalizacji i walidacja eksperymentalna.",
     "journal": "Entertainment Computing",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Przygotować eksperyment N-of-1 z porównaniem zasad adaptacji trudności.",
+    "journalUrl": "https://www.sciencedirect.com/journal/entertainment-computing",
+    "ministerialPoints": null,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-rvi-P08",
@@ -239,7 +323,11 @@
     "description": "Walidacja dokumentowania obiektów przez humanoida w powtarzalnych zadaniach terenowych. Powstanie protokół eksperymentu i metryki użyteczności.",
     "journal": "Journal of Field Robotics",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Określić kryteria walidacji terenowej i zakres dostępnego sprzętu.",
+    "journalUrl": "https://onlinelibrary.wiley.com/journal/15564967",
+    "ministerialPoints": 140,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-affective-P07",
@@ -250,7 +338,11 @@
     "description": "Łączenie kierunku spojrzenia i ruchu dłoni dla bezpiecznego sterowania robotem. Powstanie demonstrator i testy mechanizmów awaryjnych.",
     "journal": "Robotics and Autonomous Systems",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Zbudować bezpieczny scenariusz ROS 2/Gazebo z testami zatrzymania awaryjnego.",
+    "journalUrl": "https://www.sciencedirect.com/journal/robotics-and-autonomous-systems",
+    "ministerialPoints": 140,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-affective-P08",
@@ -261,7 +353,11 @@
     "description": "Benchmarki odpornego przetwarzania sygnałów na CPU/GPU przy ograniczeniach czasu rzeczywistego. Powstanie architektura inferencji i pomiary.",
     "journal": "IEEE Access",
     "journalConfirmed": false,
-    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia"
+    "status": "Plan badań; walidacja i wyniki wymagają uzupełnienia",
+    "nextStep": "Ustalić identyczne obciążenia testowe CPU/GPU i metryki awarii.",
+    "journalUrl": "https://ieeeaccess.ieee.org/",
+    "ministerialPoints": 100,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-rgbt-P07",
@@ -272,7 +368,11 @@
     "description": "Opcjonalne badanie sterowania wyborem sensora i rozdzielczości zależnie od budżetu energii. Rezultatem byłaby polityka oszczędzania energii; praca wstrzymana.",
     "journal": "IEEE Access",
     "journalConfirmed": false,
-    "status": "HOLD: etap opcjonalny"
+    "status": "HOLD: etap opcjonalny",
+    "nextStep": "HOLD: zdecydować o aktywacji po zakończeniu pomiarów wydajności P03.",
+    "journalUrl": "https://ieeeaccess.ieee.org/",
+    "ministerialPoints": 100,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   },
   {
     "id": "arc-rgbt-P08",
@@ -283,6 +383,10 @@
     "description": "Opcjonalna analiza niepewności kalibracji przestrzenno-czasowej i wpływu na ryzyko detekcji. Rezultatem byłyby granice niepewności; praca wstrzymana.",
     "journal": "Information Fusion",
     "journalConfirmed": false,
-    "status": "HOLD: etap opcjonalny"
+    "status": "HOLD: etap opcjonalny",
+    "nextStep": "HOLD: zdecydować o aktywacji po wynikach kalibracji i rejestracji P02.",
+    "journalUrl": "https://www.sciencedirect.com/journal/information-fusion",
+    "ministerialPoints": 200,
+    "pointsBasis": "wykaz 2024 (weryfikacja robocza; zmiana wykazu planowana na 2027)"
   }
 ]
