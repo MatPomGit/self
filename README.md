@@ -4,7 +4,7 @@ Witryna naukowa i dydaktyczna publikowana przez GitHub Pages.
 
 - [Strona główna](https://matpomgit.github.io/self/)
 - [Materiały dla studentów](https://matpomgit.github.io/self/materials/)
-- [Struktura repozytorium](STRUCTURE.md)
+- [Struktura repozytorium](docs/STRUCTURE.md)
 
 ## Zasady publikacji
 
@@ -26,7 +26,15 @@ fokusu klawiatury; zamknięcie po opuszczeniu grupy ma 650 ms opóźnienia.
 Podtytuły w obrębie segmentów pojawiają się tylko po najechaniu na sam
 segment lub ustawieniu na nim fokusu.
 
-Poprzedni `index.html` zachowano w `archive/index_previous_20261030.html`.
+Poprzedni `index.html` zachowano w `docs/archive/index_previous_20261030.html`.
 
-Portret na stronie głównej korzysta z `docs/self.png` i ma okrągłą ramę CSS.
+Portret na stronie głównej korzysta z `docs/images/self.png` i ma okrągłą ramę CSS.
 Plik jest zasobem strony osobistej, nie należy go przenosić do `materials/`.
+
+## Zasoby witryny
+
+Zasoby CSS, JS i vendor znajdują się w `docs/assets/`, zdjęcia i grafiki
+w `docs/images/`, a archiwalne strony w `docs/archive/`. Dokumentacja
+struktury znajduje się w `docs/STRUCTURE.md`. Główne pliki HTML pozostają
+w katalogu głównym, ponieważ obsługują publiczne adresy GitHub Pages.
+Materiały dydaktyczne są odrębnie w `materials/`.

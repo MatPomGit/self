@@ -13,9 +13,9 @@ są od nich rozdzielone.
 | `materials/wirr_blok_01.html` do `materials/wirr_blok_04.html` | Cztery bloki WiRR |
 | `materials/bash/` | Pomocnicze programy terminalowe; bez osobnej strony HTML |
 | `materials/templates/` | Szablony do pobrania |
-| `assets/css/`, `assets/js/`, `assets/vendor/` | Wspólne zasoby techniczne witryny |
-| `docs/` | Grafiki i teksty dokumentacyjne |
-| `archive/` | Historyczne strony, przekierowanie `index_old.html`, poprzedni `index.html` |
+| `docs/assets/css/`, `docs/assets/js/`, `docs/assets/vendor/` | Wspólne zasoby techniczne witryny |
+| `docs/images/`, `docs/papers.md` | Zdjęcia i dokumentacja |
+| `docs/archive/` | Historyczne strony, przekierowanie i poprzednia strona główna |
 | `tests/` | Testy regresyjne i statyczne |
 
 Usunięto osobne strony HTML przedmiotów: Bash, LaTeX, Git, Vim,
@@ -45,6 +45,12 @@ Nie dodawaj kart, animacji ani skryptów do indeksu.
 ## Uwagi historyczne
 
 `REVIEW_TASKS.md` usunięto po sprawdzeniu jego uwag. Historyczne skrypty
-w `assets/js/` są powiązane z archiwalną stroną, nie z obecną stroną główną.
+w `docs/assets/js/` są powiązane z archiwalną stroną, nie z obecną stroną główną.
 Test statyczny pilnuje `aria-selected` i czasu przewijania 416 ms;
 nie zastępuje on testów E2E.
+
+## Lokalizacja plików
+
+`docs/assets/` zawiera techniczne pliki CSS, JS i vendor, `docs/images/`
+zdjęcia, `docs/archive/` dawne wersje strony. Publiczne adresy stron HTML
+w katalogu głównym i materiały w `materials/` nie zmieniają się.
