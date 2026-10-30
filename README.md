@@ -138,3 +138,9 @@ Na widokach szczegółowych usunięto powieloną nawigację: przycisk
 „Strona główna” i poziome zakładki. Powrót zapewnia nazwisko w nagłówku.
 Nagłówek przesunięto o 14 px w prawo; zmniejszono odstęp nad zawartością
 paneli i poprawiono etykiety dostępności sekcji.
+
+## Wersja v1.1.4
+
+Opis zakładki Badania zastąpiono rozbudowaną autobiograficzną prezentacją
+profilu naukowego, kompetencji inżynierskich i robotyki afektywnej na podstawie
+tekstu właściciela. Zrezygnowano z listy określanej jako „specjalizacje”.
