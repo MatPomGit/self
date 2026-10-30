@@ -150,7 +150,7 @@
     });
   }
 
-  /* ── 6. Fast anchor smooth scroll (520 ms) ──────────────── */
+  /* ── 6. Fast anchor smooth scroll (416 ms) ──────────────── */
   document.addEventListener('click', function (e) {
     var a = e.target.closest('a[href^="#"]');
     if (!a) { return; }

@@ -15,7 +15,7 @@ są od nich rozdzielone.
 | `materials/templates/` | Szablony do pobrania |
 | `assets/css/`, `assets/js/`, `assets/vendor/` | Wspólne zasoby techniczne witryny |
 | `docs/` | Grafiki i teksty dokumentacyjne |
-| `archive/` | Historyczna wersja strony |
+| `archive/` | Historyczna strona i przekierowanie `index_old.html` |
 | `tests/` | Testy regresyjne i statyczne |
 
 Usunięto osobne strony HTML przedmiotów: Bash, LaTeX, Git, Vim,
@@ -41,3 +41,10 @@ Nie dodawaj kart, animacji ani skryptów do indeksu.
   `library/`, `f/`, `h/`, `p/` ani usuniętego generatora aliasów.
 - Po każdej zmianie uruchom `python3 -m unittest discover -s tests`;
   przy zmianach interfejsu także `bash tests/theme_switcher_static_check.sh`.
+
+## Uwagi historyczne
+
+`REVIEW_TASKS.md` usunięto po sprawdzeniu jego uwag. Historyczne skrypty
+w `assets/js/` są powiązane z archiwalną stroną, nie z obecną stroną główną.
+Test statyczny pilnuje `aria-selected` i czasu przewijania 416 ms;
+nie zastępuje on testów E2E.

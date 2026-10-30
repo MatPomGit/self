@@ -10,8 +10,8 @@ if rg -n "Update aria-selected" assets/js/theme-switcher.js >/dev/null; then
   exit 1
 fi
 
-# Test 3: komentarz czasu scrolla powinien zgadzać się z DURATION=520.
-rg -n "Fast anchor smooth scroll \(520 ms\)" assets/js/scroll-animations.js >/dev/null
-rg -n "var DURATION  = 520;" assets/js/scroll-animations.js >/dev/null
+# Test 3: komentarz czasu scrolla powinien zgadzać się z DURATION=416.
+rg -n "Fast anchor smooth scroll \(416 ms\)" assets/js/scroll-animations.js >/dev/null
+rg -n "var DURATION  = 416;" assets/js/scroll-animations.js >/dev/null
 
 echo "Static checks passed"
