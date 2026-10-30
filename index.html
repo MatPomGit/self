@@ -146,6 +146,14 @@
     .data-filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
     .data-filters button{border:1px solid var(--line);background:#fff;border-radius:5px;padding:5px 10px;cursor:pointer}
     .data-filters button[aria-pressed="true"]{background:var(--accent);color:#fff}
+    .publication-list{list-style:decimal;padding-left:22px;margin:16px 0}
+    .publication-item{padding:10px 0;border-bottom:1px solid var(--line);display:list-item}
+    .publication-title{font-size:.94rem;font-weight:650;line-height:1.35}
+    .publication-meta{font-size:.79rem;color:var(--muted);margin-top:2px;line-height:1.4}
+    .publication-actions{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-top:6px}
+    .publication-actions button,.publication-actions a{font:inherit;font-size:.75rem;padding:3px 8px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--accent);text-decoration:none;cursor:pointer}
+    .publication-actions button:hover,.publication-actions a:hover{border-color:var(--accent)}
+    .citation-status{font-size:.75rem;color:var(--muted)}
     .workspace.visible{width:100%}
     @media(max-width:860px){
       .intro{grid-template-columns:1fr;gap:12px}
@@ -175,7 +183,7 @@
           <img class="portrait" src="docs/images/self.png" alt="Portret dr. inż. Mateusza Pomianka" width="164" height="164" decoding="async" fetchpriority="high">
           <h1 id="page-title">Informatyka afektywna i&nbsp;robotyka humanoidalna</h1>
           <p class="role">Adiunkt, Katedra Informatyki i Automatyki</p>
-          <p class="lead">Dydaktyka, badania i projekty: wizja komputerowa, neuroinformatyka, śledzenie wzroku oraz XR.</p>
+          <p class="lead">Badam i rozwijam inteligentne systemy percepcji, interakcji człowiek–maszyna oraz robotyki, łącząc informatykę z neuronauką.</p>
         </div>
         <svg class="wheel" id="wheel" viewBox="0 0 460 460" role="group" aria-label="Kategorie strony">
           <g class="grp">
@@ -191,22 +199,22 @@
             <g class="subs"><line class="conn" x1="428.8" y1="165.4" x2="452.0" y2="165.4"/><rect class="bridge" x="428.8" y="151.4" width="23.2" height="28"/><a class="pill" href="materials/"><rect x="452.0" y="89.4" width="190" height="28"/><text x="462.0" y="103.4">Materiały</text></a><a class="pill" href="#studenci" data-tab="studenci"><rect x="452.0" y="120.4" width="190" height="28"/><text x="462.0" y="134.4">Zajęcia</text></a><a class="pill" href="#studenci" data-tab="studenci"><rect x="452.0" y="151.4" width="190" height="28"/><text x="462.0" y="165.4">Konsultacje</text></a><a class="pill" href="#studenci" data-tab="studenci"><rect x="452.0" y="182.4" width="190" height="28"/><text x="462.0" y="196.4">Prace dyplomowe</text></a><a class="pill" href="#studenci" data-tab="studenci"><rect x="452.0" y="213.4" width="190" height="28"/><text x="462.0" y="227.4">Projekty studenckie</text></a></g>
           </g>
           <g class="grp">
-            <a class="seg" href="#badania" data-tab="badania" aria-label="Badania">
-              <g class="seg-body" style="--dx:5.3px;--dy:7.3px"><path d="M 420.21 291.80 A 200 200 0 0 1 230.00 430.00 L 230.00 310.00 A 80 80 0 0 0 306.08 254.72 Z"/><text class="seg-label" x="312.3" y="343.3">Badania</text><text class="seg-sub" x="312.3" y="366.3">Obszary naukowe</text></g>
-            </a>
-            <g class="subs"><line class="conn" x1="352.8" y1="399.1" x2="452.0" y2="399.1"/><rect class="bridge" x="352.8" y="385.1" width="99.2" height="28"/><a class="pill" href="#badania" data-tab="badania"><rect x="452.0" y="307.6" width="190" height="28"/><text x="462.0" y="321.6">Informatyka afektywna</text></a><a class="pill" href="#badania" data-tab="badania"><rect x="452.0" y="338.6" width="190" height="28"/><text x="462.0" y="352.6">Wizja komputerowa</text></a><a class="pill" href="#badania" data-tab="badania"><rect x="452.0" y="369.6" width="190" height="28"/><text x="462.0" y="383.6">Śledzenie wzroku</text></a><a class="pill" href="#badania" data-tab="badania"><rect x="452.0" y="400.6" width="190" height="28"/><text x="462.0" y="414.6">XR, HCI i HRI</text></a><a class="pill" href="#badania" data-tab="badania"><rect x="452.0" y="431.6" width="190" height="28"/><text x="462.0" y="445.6">Robotyka humanoidalna</text></a><a class="pill" href="#badania" data-tab="badania"><rect x="452.0" y="462.6" width="190" height="28"/><text x="462.0" y="476.6">Optoelektronika</text></a></g>
-          </g>
-          <g class="grp">
             <a class="seg" href="#projekty" data-tab="projekty" aria-label="Projekty">
-              <g class="seg-body" style="--dx:-5.3px;--dy:7.3px"><path d="M 230.00 430.00 A 200 200 0 0 1 39.79 291.80 L 153.92 254.72 A 80 80 0 0 0 230.00 310.00 Z"/><text class="seg-label" x="147.7" y="343.3">Projekty</text><text class="seg-sub" x="147.7" y="366.3">Badania i rozwój</text></g>
+              <g class="seg-body" style="--dx:5.3px;--dy:7.3px"><path d="M 420.21 291.80 A 200 200 0 0 1 230.00 430.00 L 230.00 310.00 A 80 80 0 0 0 306.08 254.72 Z"/><text class="seg-label" x="312.3" y="343.3">Projekty</text><text class="seg-sub" x="312.3" y="366.3">Badania i rozwój</text></g>
             </a>
-            <g class="subs"><line class="conn" x1="107.2" y1="399.1" x2="8.0" y2="399.1"/><rect class="bridge" x="8.0" y="385.1" width="99.2" height="28"/><a class="pill" href="#projekty" data-tab="projekty"><rect x="-182.0" y="307.6" width="190" height="28"/><text x="-172.0" y="321.6">ARIANA</text></a><a class="pill" href="#projekty" data-tab="projekty"><rect x="-182.0" y="338.6" width="190" height="28"/><text x="-172.0" y="352.6">PIAST</text></a><a class="pill" href="#projekty" data-tab="projekty"><rect x="-182.0" y="369.6" width="190" height="28"/><text x="-172.0" y="383.6">SEEKER</text></a><a class="pill" href="#projekty" data-tab="projekty"><rect x="-182.0" y="400.6" width="190" height="28"/><text x="-172.0" y="414.6">PolFEL</text></a><a class="pill" href="#projekty" data-tab="projekty"><rect x="-182.0" y="431.6" width="190" height="28"/><text x="-172.0" y="445.6">OPTOKRYPT</text></a><a class="pill" href="#projekty" data-tab="projekty"><rect x="-182.0" y="462.6" width="190" height="28"/><text x="-172.0" y="476.6">PROTECT</text></a></g>
+            <g class="subs"><line class="conn" x1="352.8" y1="399.1" x2="452.0" y2="399.1"/><rect class="bridge" x="352.8" y="385.1" width="99.2" height="28"/><a class="pill" href="#projekty" data-tab="projekty"><rect x="452.0" y="307.6" width="190" height="28"/><text x="462.0" y="321.6">ARIANA</text></a><a class="pill" href="#projekty" data-tab="projekty"><rect x="452.0" y="338.6" width="190" height="28"/><text x="462.0" y="352.6">PIAST</text></a><a class="pill" href="#projekty" data-tab="projekty"><rect x="452.0" y="369.6" width="190" height="28"/><text x="462.0" y="383.6">SEEKER</text></a><a class="pill" href="#projekty" data-tab="projekty"><rect x="452.0" y="400.6" width="190" height="28"/><text x="462.0" y="414.6">PolFEL</text></a><a class="pill" href="#projekty" data-tab="projekty"><rect x="452.0" y="431.6" width="190" height="28"/><text x="462.0" y="445.6">OPTOKRYPT</text></a><a class="pill" href="#projekty" data-tab="projekty"><rect x="452.0" y="462.6" width="190" height="28"/><text x="462.0" y="476.6">PROTECT</text></a></g>
           </g>
           <g class="grp">
             <a class="seg" href="#publikacje" data-tab="publikacje" aria-label="Publikacje">
-              <g class="seg-body" style="--dx:-8.6px;--dy:-2.8px"><path d="M 39.79 291.80 A 200 200 0 0 1 112.44 68.20 L 182.98 165.28 A 80 80 0 0 0 153.92 254.72 Z"/><text class="seg-label" x="96.9" y="186.7">Publikacje</text><text class="seg-sub" x="96.9" y="209.7">Dorobek naukowy</text></g>
+              <g class="seg-body" style="--dx:-5.3px;--dy:7.3px"><path d="M 230.00 430.00 A 200 200 0 0 1 39.79 291.80 L 153.92 254.72 A 80 80 0 0 0 230.00 310.00 Z"/><text class="seg-label" x="147.7" y="343.3">Publikacje</text><text class="seg-sub" x="147.7" y="366.3">Dorobek naukowy</text></g>
             </a>
-            <g class="subs"><line class="conn" x1="31.2" y1="165.4" x2="8.0" y2="165.4"/><rect class="bridge" x="8.0" y="151.4" width="23.2" height="28"/><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="89.4" width="190" height="28"/><text x="-172.0" y="103.4">Digital twin, 2025</text></a><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="120.4" width="190" height="28"/><text x="-172.0" y="134.4">Emocje z twarzy, 2025</text></a><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="151.4" width="190" height="28"/><text x="-172.0" y="165.4">Patent USA</text></a><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="182.4" width="190" height="28"/><text x="-172.0" y="196.4">Eye tracking, 2021</text></a><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="213.4" width="190" height="28"/><text x="-172.0" y="227.4">Pełna lista</text></a></g>
+            <g class="subs"><line class="conn" x1="107.2" y1="399.1" x2="8.0" y2="399.1"/><rect class="bridge" x="8.0" y="385.1" width="99.2" height="28"/><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="307.6" width="190" height="28"/><text x="-172.0" y="321.6">Wszystkie publikacje</text></a><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="338.6" width="190" height="28"/><text x="-172.0" y="352.6">Czasopisma</text></a><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="369.6" width="190" height="28"/><text x="-172.0" y="383.6">Konferencje</text></a><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="400.6" width="190" height="28"/><text x="-172.0" y="414.6">Patenty</text></a><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="431.6" width="190" height="28"/><text x="-172.0" y="445.6">Cytowania</text></a></g>
+          </g>
+          <g class="grp">
+            <a class="seg" href="#badania" data-tab="badania" aria-label="Badania">
+              <g class="seg-body" style="--dx:-8.6px;--dy:-2.8px"><path d="M 39.79 291.80 A 200 200 0 0 1 112.44 68.20 L 182.98 165.28 A 80 80 0 0 0 153.92 254.72 Z"/><text class="seg-label" x="96.9" y="186.7">Badania</text><text class="seg-sub" x="96.9" y="209.7">Obszary naukowe</text></g>
+            </a>
+            <g class="subs"><line class="conn" x1="31.2" y1="165.4" x2="8.0" y2="165.4"/><rect class="bridge" x="8.0" y="151.4" width="23.2" height="28"/><a class="pill" href="#badania" data-tab="badania"><rect x="-182.0" y="89.4" width="190" height="28"/><text x="-172.0" y="103.4">Informatyka afektywna</text></a><a class="pill" href="#badania" data-tab="badania"><rect x="-182.0" y="120.4" width="190" height="28"/><text x="-172.0" y="134.4">Wizja komputerowa</text></a><a class="pill" href="#badania" data-tab="badania"><rect x="-182.0" y="151.4" width="190" height="28"/><text x="-172.0" y="165.4">Śledzenie wzroku</text></a><a class="pill" href="#badania" data-tab="badania"><rect x="-182.0" y="182.4" width="190" height="28"/><text x="-172.0" y="196.4">XR, HCI i HRI</text></a><a class="pill" href="#badania" data-tab="badania"><rect x="-182.0" y="213.4" width="190" height="28"/><text x="-172.0" y="227.4">Robotyka humanoidalna</text></a><a class="pill" href="#badania" data-tab="badania"><rect x="-182.0" y="244.4" width="190" height="28"/><text x="-172.0" y="258.4">Optoelektronika</text></a></g>
           </g>
           <circle class="idle-orbit" cx="230" cy="230" r="200" aria-hidden="true"/>
           <circle class="idle-orbit" cx="230" cy="230" r="200" aria-hidden="true"/>
@@ -274,7 +282,8 @@
             <button type="button" data-filter="conference" aria-pressed="false">Konferencje</button>
             <button type="button" data-filter="patent" aria-pressed="false">Patenty</button>
           </div>
-          <div class="data-grid" id="publications-list"></div>
+          <p id="citation-status" role="status" class="citation-status" aria-live="polite"></p>
+          <ol class="publication-list" id="publications-list"></ol>
         </article>
 
         <article class="panel" id="kontakt" role="tabpanel" aria-labelledby="t-kontakt">
@@ -288,7 +297,7 @@
       </section>
     </main>
 
-    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.1.0">v1.1.0</span></footer>
+    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.1.1">v1.1.1</span></footer>
   </div>
 
   <script>
@@ -401,20 +410,52 @@
       list.replaceChildren(fragment);
     }
     let publicationRecords=[];
+    function citationText(entry){
+      return [entry.authors||'',entry.year?'('+entry.year+').':'',entry.title+'.',entry.metadata||''].filter(Boolean).join(' ').replace(/\\s+/g,' ').trim();
+    }
+    function bibtexKey(entry,index){
+      const last=(entry.authors||'author').split(',')[0].trim().split(' ')[0].normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-zA-Z0-9]/g,'').toLowerCase();
+      return (last||'author')+(entry.year||'nd')+'_'+(index+1);
+    }
+    function bibtexEscape(text){
+      return String(text||'').replace(/\\\\/g,'\\\\textbackslash{}').replace(/[{}]/g,char=>'\\\\'+char);
+    }
+    function bibtexText(entry,index){
+      const type={journal:'article',conference:'inproceedings',patent:'misc'}[entry.type]||'misc';
+      const props=[['title',entry.title],['year',entry.year],['author',entry.authors],['note',entry.metadata],['url',entry.link]].filter(([key,value])=>value!=null&&String(value).trim());
+      return '@'+type+'{'+bibtexKey(entry,index)+',\\n'+props.map(([key,value])=>'  '+key+' = {'+bibtexEscape(value)+'}').join(',\\n')+'\\n}';
+    }
+    async function copyCitation(content,button){
+      try{
+        await navigator.clipboard.writeText(content);
+        const old=button.textContent;button.textContent='Skopiowano';
+        setTimeout(()=>{button.textContent=old},1600);
+      }catch(error){
+        const status=document.getElementById('citation-status');
+        status.textContent='Nie można skopiować automatycznie. Sprawdź uprawnienia przeglądarki.';
+      }
+    }
     function renderPublications(filter='all'){
       const list=document.getElementById('publications-list');
       const fragment=document.createDocumentFragment();
-      publicationRecords.filter(entry=>filter==='all'||entry.type===filter).forEach(entry=>{
-        const card=makeElement('article','data-card');
-        card.append(makeElement('div','data-category',String(entry.year||'')+' · '+({journal:'Czasopismo',conference:'Konferencja',patent:'Patent'}[entry.type]||entry.type)),makeElement('h3','',entry.title));
-        if(entry.authors)card.append(makeElement('p','',entry.authors));
-        if(entry.metadata)card.append(makeElement('p','',entry.metadata));
-        if(entry.link&&/^https:\/\//.test(entry.link)){
-          const link=makeElement('a','',entry.linkText||'Otwórz publikację');
+      publicationRecords.forEach((entry,index)=>{
+        if(filter!=='all'&&entry.type!==filter)return;
+        const item=makeElement('li','publication-item');
+        const body=makeElement('div','publication-body');
+        const name=makeElement('div','publication-title',entry.title);
+        const meta=makeElement('div','publication-meta',[entry.authors,entry.year,entry.metadata].filter(Boolean).join(' · '));
+        body.append(name,meta);
+        const actions=makeElement('div','publication-actions');
+        if(entry.link&&/^https:\\/\\//.test(entry.link)){
+          const link=makeElement('a','',entry.linkText||'Źródło');
           link.href=entry.link;link.target='_blank';link.rel='noopener noreferrer';
-          card.append(link);
-        }else if(entry.linkText)card.append(makeElement('p','',entry.linkText));
-        fragment.append(card);
+          actions.append(link);
+        }
+        const cite=makeElement('button','', 'Cite');cite.type='button';
+        cite.addEventListener('click',()=>copyCitation(citationText(entry),cite));
+        const bib=makeElement('button','','copy BibTeX');bib.type='button';
+        bib.addEventListener('click',()=>copyCitation(bibtexText(entry,index),bib));
+        actions.append(cite,bib);item.append(body,actions);fragment.append(item);
       });
       list.replaceChildren(fragment);
     }
