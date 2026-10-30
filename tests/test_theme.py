@@ -99,8 +99,41 @@ class ThemeTests(unittest.TestCase):
         self.assertIn('--accent:#93c2e6', MATERIALS_HTML)
         self.assertIn('--surface:#202a35', MATERIALS_HTML)
 
+    def test_home_title_and_position(self):
+        self.assertIn('transform:translateY(-98px)', HTML)
+        self.assertIn('class="title-robotics">robotyka humanoidalna</span>', HTML)
+        self.assertIn('white-space:nowrap', HTML)
+        self.assertIn('max-height:690px', HTML)
+
+    def test_research_typography(self):
+        self.assertIn('#badania .research-intro{font-size:.94rem', HTML)
+        self.assertIn('#badania .research-heading{font-size:1.14rem', HTML)
+
+    def test_contact_links_have_icons(self):
+        import re
+        section = re.search(r'<article class="panel" id="kontakt"[\s\S]*?</article>', HTML)
+        self.assertIsNotNone(section)
+        self.assertEqual(section.group(0).count('class="link-icon'), 3)
+        self.assertEqual(section.group(0).count('aria-hidden="true"'), 3)
+        for text, url in (
+            ("GitHub", "https://github.com/MatPomGit"),
+            ("ORCID", "https://orcid.org/0000-0001-7769-8919"),
+            ("Profil uczelniany", "https://mpomianek.v.prz.edu.pl/"),
+        ):
+            self.assertIn(url, section.group(0))
+            self.assertIn("<span>" + text + "</span>", section.group(0))
+
+    def test_work_in_progress_filter_matches_wheel(self):
+        self.assertNotIn(">Cytowania</text>", HTML)
+        self.assertIn('data-filter="progress">', HTML)
+        self.assertIn('>Robocze</text>', HTML)
+        self.assertIn('data-filter="progress" aria-pressed="false">Robocze</button>', HTML)
+        self.assertIn("if(el.dataset.filter)", HTML)
+        for name in ("all", "journal", "conference", "patent", "progress"):
+            self.assertIn('data-filter="' + name + '">', HTML)
+
     def test_version(self):
-        self.assertIn("v1.2.7", HTML)
+        self.assertIn("v1.2.8", HTML)
 
 
 if __name__ == "__main__":
