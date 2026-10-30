@@ -85,3 +85,11 @@ Gdy żaden segment nie jest aktywny, cienki fragment obrysu koła wykonuje
 pełny obrót zgodnie z ruchem wskazówek zegara w 12 sekund.
 Po najechaniu lub przejściu fokusu na kategorię efekt znika; uwzględniono
 `prefers-reduced-motion`, bez bibliotek zewnętrznych.
+
+## Wersja v1.0.1
+
+Animowany obrys biegnie poza kołem (promień 203 względem promienia
+segmentów 200), z pięcioma odcinkami malejącej przezroczystości tworzącymi
+ogon. W sekcji Kontakt dodano odnośnik do profilu ORCID.
+Każda następna zmiana publikowanej strony wymaga zwiększenia numeru wersji
+w stopce i aktualizacji etykiety dostępności.
