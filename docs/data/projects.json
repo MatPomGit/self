@@ -1,0 +1,87 @@
+[
+  {
+    "category": "Wybrane projekty",
+    "title": "ARIANA",
+    "description": "System do wielomodalnej analizy reakcji, afektu i aktywności neurologicznej."
+  },
+  {
+    "category": "Wybrane projekty",
+    "title": "PIAST",
+    "description": "Konstelacja nanosatelitów do optoelektronicznego rozpoznania obrazowego."
+  },
+  {
+    "category": "Wybrane projekty",
+    "title": "SEEKER",
+    "description": "Rozwój optoelektronicznych głowic naprowadzających."
+  },
+  {
+    "category": "Wybrane projekty",
+    "title": "PolFEL",
+    "description": "Projekt polskiego lasera na swobodnych elektronach."
+  },
+  {
+    "category": "Wybrane projekty",
+    "title": "OPTOKRYPT",
+    "description": "Technologie optyczne kryptologii kwantowej."
+  },
+  {
+    "category": "Wybrane projekty",
+    "title": "PROTECT",
+    "description": "Badania nad biometrycznymi systemami kontroli granicznej."
+  },
+  {
+    "category": "Eye-tracking",
+    "title": "MEMS Eye-Tracking",
+    "description": "Opracowanie miniaturowych systemów śledzenia wzroku opartych na mikroelektrycznych układach mechanicznych (MEMS)."
+  },
+  {
+    "category": "XR Hardware",
+    "title": "Varifocal HMD Calibration",
+    "description": "Metody kalibracji wyświetlaczy nagłownych o zmiennej ogniskowej dla aplikacji rozszerzonej i wirtualnej rzeczywistości."
+  },
+  {
+    "category": "Digital Twin",
+    "title": "Digital Twin Validation",
+    "description": "Walidacja cyfrowych bliźniaków w środowiskach przemysłowych i medycznych, pomiary in-silico."
+  },
+  {
+    "category": "Medycyna",
+    "title": "VR Pipelines for Medical Data",
+    "description": "Pipeliny VR do wizualizacji i analizy danych medycznych w diagnostyce i edukacji."
+  },
+  {
+    "category": "Robotyka",
+    "title": "Kognitywna Robotyka Humanoidalna",
+    "description": "Percepcyjne i kognitywne architektury robotów humanoidalnych do zastosowań terapeutycznych i badawczych."
+  },
+  {
+    "category": "AI / Biometria",
+    "title": "Optoelektronika & Biometria",
+    "description": "Multispektralna analiza obrazu, systemy biometryczne, przetwarzanie sygnałów afektywnych."
+  },
+  {
+    "category": "Obronność",
+    "title": "Technologie obronne",
+    "description": "Historyczne doświadczenie w projektowaniu optoelektronicznych systemów naprowadzania broni, symulatorach pola walki oraz systemach VR/AR dla wojska. Nie jest to aktualny obszar badawczy."
+  },
+  {
+    "category": "Zastosowania kliniczne",
+    "title": "Biomarkery okulistyczne",
+    "description": "Modelowanie biomarkerów okulistycznych i behawioralnych z wykorzystaniem AI do wczesnej diagnostyki."
+  },
+  {
+    "category": "Zastosowania kliniczne",
+    "title": "Diagnostyka wspomagana AI",
+    "description": "Systemy decyzji klinicznych wykorzystujące uczenie maszynowe do analizy danych pacjentów."
+  },
+  {
+    "category": "Zastosowania kliniczne",
+    "title": "Rehabilitacja XR",
+    "description": "Terapia z wykorzystaniem rozszerzonej i wirtualnej rzeczywistości w neurorehabilitacji."
+  },
+  {
+    "category": "Zastosowania kliniczne",
+    "title": "Robotyka kognitywna",
+    "description": "Humanoidalne roboty z percepcyjnymi architekturami kognitywnymi do terapii i badań neuropsychologicznych."
+  }
+]
