@@ -15,7 +15,7 @@ są od nich rozdzielone.
 | `materials/templates/` | Szablony do pobrania |
 | `assets/css/`, `assets/js/`, `assets/vendor/` | Wspólne zasoby techniczne witryny |
 | `docs/` | Grafiki i teksty dokumentacyjne |
-| `archive/` | Historyczna strona i przekierowanie `index_old.html` |
+| `archive/` | Historyczne strony, przekierowanie `index_old.html`, poprzedni `index.html` |
 | `tests/` | Testy regresyjne i statyczne |
 
 Usunięto osobne strony HTML przedmiotów: Bash, LaTeX, Git, Vim,
