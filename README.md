@@ -78,3 +78,10 @@ Koło startowe pomniejszono o około 12%, przesunięto 20 px w górę
 (8 px na ekranach wąskich) i ograniczono jego wymiar w zależności od
 wysokości okna. Układ na bardzo małych ekranach może nadal wymagać
 przewijania w celu zachowania czytelności.
+
+## Dyskretna animacja koła
+
+Gdy żaden segment nie jest aktywny, cienki fragment obrysu koła wykonuje
+pełny obrót zgodnie z ruchem wskazówek zegara w 12 sekund.
+Po najechaniu lub przejściu fokusu na kategorię efekt znika; uwzględniono
+`prefers-reduced-motion`, bez bibliotek zewnętrznych.
