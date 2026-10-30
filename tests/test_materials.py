@@ -9,7 +9,6 @@ from urllib.parse import unquote, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 MATERIALS = ROOT / "materials"
 SUBJECTS = (
-    "bash", "latex", "git", "vim", "algorytmy", "aplikacje-mobilne",
     "psychoinformatyka", "robotyka-afektywna", "informatyka-poznawcza",
     "seminaria-dyplomowe",
 )
@@ -53,6 +52,14 @@ class MaterialsTests(unittest.TestCase):
             self.assertTrue((MATERIALS / f"ndp_lab_{number:02}.html").is_file())
         for number in range(1, 5):
             self.assertTrue((MATERIALS / f"wirr_blok_{number:02}.html").is_file())
+
+    def test_removed_subject_pages_absent(self):
+        for subject in ("bash", "latex", "git", "vim",
+                        "algorytmy", "aplikacje-mobilne"):
+            with self.subTest(subject=subject):
+                self.assertFalse((MATERIALS / subject / "index.html").exists())
+        for file in ("ascii_player", "student", "system_tui"):
+            self.assertTrue((MATERIALS / "bash" / file).is_file())
 
     def test_legacy_scaffolding_absent(self):
         for path in ("wirr", "lectures", "library", "f", "h", "p",
