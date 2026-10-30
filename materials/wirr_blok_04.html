@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WiRR • Blok 04 • Laboratoria 07–08</title><style>
+:root{font-family:system-ui,-apple-system,'Segoe UI',Arial,sans-serif;color:#163047;background:#edf3f7;line-height:1.48}
+*{box-sizing:border-box}body{margin:0}header{background:#003c82;color:white;padding:13px max(18px,calc((100vw - 1120px)/2))}
+header h1{font-size:1.25rem;margin:0}header p{margin:3px 0;color:#e0efff;font-size:.86rem}
+.layout{max-width:1120px;margin:16px auto;padding:0 14px;display:grid;grid-template-columns:210px minmax(0,1fr);gap:16px}
+aside,main{background:white;border:1px solid #d7e3ed;border-radius:13px}aside{padding:13px;height:max-content;position:sticky;top:12px}
+aside h2{font-size:1rem;margin:0 0 12px}nav button{display:block;width:100%;text-align:left;border:0;background:white;padding:9px 12px;color:#254866;border-radius:8px;cursor:pointer;font-size:.94rem}
+nav button[aria-current=page]{background:#e4effa;color:#003c82;font-weight:700}
+main{padding:20px 24px;min-height:420px}h2{font-size:1.23rem;margin:0 0 8px}h3{font-size:1.05rem;margin:12px 0 8px}
+.lead{color:#486176;font-size:.95rem;margin:6px 0 13px}.task{padding:10px 0;border-bottom:1px solid #e4edf3;display:grid;grid-template-columns:28px minmax(0,1fr);gap:7px}
+.task:last-child{border-bottom:0}.num{color:#087e8b;font-weight:750}.task p{margin:0}
+.task .body{font-size:.96rem}.controls{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:18px}
+button.primary{background:#003c82;color:white;border:0;border-radius:8px;padding:9px 14px;cursor:pointer}
+button.secondary{background:white;color:#003c82;border:1px solid #adc4d9;border-radius:8px;padding:8px 12px;cursor:pointer}
+button:disabled{opacity:.45;cursor:not-allowed}.chip{display:inline-block;border:1px solid #c4d9e7;border-radius:12px;padding:1px 8px;font-size:.76rem;color:#35536a}
+fieldset{margin:0 0 10px;padding:12px;border:1px solid #d8e5ed;border-radius:9px}legend{font-weight:650;padding:0 5px}
+.option{display:block;border:1px solid #e0e8ef;padding:7px 9px;margin:5px 0;border-radius:6px;cursor:pointer}.option:has(input:checked){border-color:#087e8b;background:#ecfaf8}
+input{accent-color:#087e8b}input[type=text]{padding:8px;border:1px solid #b8cbd9;border-radius:7px;max-width:270px;width:100%}
+.result{padding:9px 12px;margin:9px 0;border-left:4px solid #b9c8d4;background:#f5f8fb}
+.result.bad{border-color:#b94a49}.result.good{border-color:#087e8b}
+code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:#133d5a}
+footer{padding:9px 0;color:#61788a;font-size:.8rem}
+@media(max-width:690px){.layout{display:block}aside{position:static;margin-bottom:12px}nav{display:flex;flex-wrap:wrap;gap:3px}nav button{width:auto;padding:7px 9px}main{padding:16px}header{padding:12px 16px}}
+@media print{aside,.controls,button{display:none!important}.layout{display:block}main{border:0}}
+</style></head>
+<body><header><h1>WiRR · Blok 04 · Laboratoria 07 i 08</h1>
+<p>Politechnika Rzeszowska · Wirtualna i rozszerzona rzeczywistość</p></header>
+<div class="layout"><aside><h2>Przebieg bloku</h2><nav id="navigation" aria-label="Nawigacja"></nav>
+<footer>Każde laboratorium ma osobny wynik. Zapis raportu jest dobrowolny.</footer></aside>
+<main id="content"></main></div>
+<script>const DATA={"block":"04","labs":[{"n":"07","title":"Projektant kontra percepcja","mode":"DESKTOP_SIM","steps":[["Otwórz Ekspedycję XR","Uruchom Lab 07 i wybierz zadanie manipulacyjne."],["Zapisz wynik A","Przenieś obiekt do celu bez dodatkowego podświetlenia. Zanotuj sukces, błędy i czas."],["Zapisz wynik B","Włącz podświetlenie, nie zmieniając obiektu, celu, dystansu ani sterowania."],["Oceń poprawę","Porównaj czas, błędy i ukończenie. Uwzględnij efekt uczenia się."],["Dobierz podświetlenie","Zaproponuj nowy wariant wyróżnienia celu i powtórz zadanie."],["Sprawdź inne tło","Przełącz przygotowane tło i zachowaj te same warunki interakcji."]],"questions":[{"q":"Użyteczność: które stwierdzenie jest poprawne?","opts":["To liczba trójkątów","Jest wyłącznie liczbą klatek","Zależy od zadania i kontekstu użytkownika","Wynika tylko z koloru"],"ans":2,"why":"Zależy od zadania i kontekstu użytkownika"},{"q":"Efekt uczenia się: które stwierdzenie jest poprawne?","opts":["Może poprawić wynik kolejnej próby niezależnie od UI","Zawsze pogarsza wynik","Znika po zmianie tła","Występuje tylko w VR"],"ans":0,"why":"Może poprawić wynik kolejnej próby niezależnie od UI"},{"q":"Test A/B: które stwierdzenie jest poprawne?","opts":["Powinien zmieniać jeden istotny czynnik","Wymaga innych celów w A i B","Nie mierzy ukończenia","Nie uwzględnia błędów"],"ans":0,"why":"Powinien zmieniać jeden istotny czynnik"},{"q":"Wynik zadania: które stwierdzenie jest poprawne?","opts":["Obejmuje tylko czas","Obejmuje poprawność, błędy i czas","Nie wymaga celu","Jest zawsze subiektywny"],"ans":1,"why":"Obejmuje poprawność, błędy i czas"},{"q":"Inne tło: które stwierdzenie jest poprawne?","opts":["Zawsze zwiększa kontrast","Zastępuje ocenę błędów","Zwiększa liczbę uczestników","Pozwala sprawdzić czytelność w zmienionym kontekście"],"ans":3,"why":"Pozwala sprawdzić czytelność w zmienionym kontekście"},{"q":"Jak traktować nieudaną próbę?","opts":["Zastąpić średnią","Wpisać wynik 0 s","Zachować jako nieudaną","Usunąć z raportu"],"ans":2,"why":"Zachować jako nieudaną"},{"q":"Co oznacza brak odczytu?","opts":["Zawsze błąd studenta","Brak danych, nie wartość zero","Wynik zerowy","Dowód poprawnego działania"],"ans":1,"why":"Brak danych, nie wartość zero"},{"q":"Co należy porównać przy modyfikacji ustawienia?","opts":["Dwie różne sceny","Wynik przed i po zmianie","Tylko najlepszy pomiar","Tylko poprawiony wariant"],"ans":1,"why":"Wynik przed i po zmianie"},{"q":"Jak ograniczyć wpływ czynników zakłócających?","opts":["Zmieniać trasę kamery w każdej próbie","Zmienić jednocześnie wszystkie parametry","Utrzymywać pozostałe parametry stałe","Pominąć warunki testu"],"ans":2,"why":"Utrzymywać pozostałe parametry stałe"},{"q":"Co stanowi podstawę interpretacji?","opts":["Przewidywane wyniki","Własne, zapisane obserwacje","Przykładowe dane zastępcze","Wyłącznie liczba klatek"],"ans":1,"why":"Własne, zapisane obserwacje"}]},{"n":"07","title":"Wymyśl użyteczne 90 sekund XR","mode":"DESKTOP_SIM","steps":[["Otwórz Experience Studio","Uruchom Lab 08 i gotowy szablon inspekcji części."],["Wykonaj bazową inspekcję","Sprawdź części i zachowaj wynik z widocznym kryterium zakończenia."],["Włącz pierwszy moduł","Dodaj wyróżnienie aktualnie sprawdzanej części i porównaj z bazą."],["Dodaj informację zwrotną","Dołącz potwierdzenie zakończenia i zachowaj konfigurację."],["Uruchom GUEST_SIM","Wykonaj przygotowany scenariusz, sprawdź błędy, zmień jedno ustawienie i ponów test."],["Wykonaj kontrpróbę","Pokaż działanie przez 60–90 sekund; sprawdź drugą widoczność części i opisz ograniczenia."]],"questions":[{"q":"GUEST_SIM: które stwierdzenie jest poprawne?","opts":["Alternatywa dla zapisu wyniku","Test ustalonego scenariusza symulowanego użytkownika","Badanie rzeczywistego człowieka","Pomiar śledzenia wzroku"],"ans":1,"why":"Test ustalonego scenariusza symulowanego użytkownika"},{"q":"Demonstrator: które stwierdzenie jest poprawne?","opts":["Jest wyłącznie prezentacją graficzną","Nie wymaga sprawdzenia","Powinien mieć odbiorcę, cel i kryterium zakończenia","Musi być zbudowany od zera"],"ans":2,"why":"Powinien mieć odbiorcę, cel i kryterium zakończenia"},{"q":"Pierwszy moduł: które stwierdzenie jest poprawne?","opts":["Wyłącza raportowanie","Zmienia cały projekt","Wyróżnia aktualnie sprawdzaną część","Włącza ROS_LIVE"],"ans":2,"why":"Wyróżnia aktualnie sprawdzaną część"},{"q":"Informacja zwrotna: które stwierdzenie jest poprawne?","opts":["Musi używać HMD","Jest zawsze bez znaczenia","Zastępuje testy","Potwierdza zakończenie zadania"],"ans":3,"why":"Potwierdza zakończenie zadania"},{"q":"60–90 sekund: które stwierdzenie jest poprawne?","opts":["To czas pokazu, nie całego laboratorium","To czas kompilacji","To stały pomiar RTT","To czas trzech prób"],"ans":0,"why":"To czas pokazu, nie całego laboratorium"},{"q":"Jak traktować nieudaną próbę?","opts":["Wpisać wynik 0 s","Zastąpić średnią","Usunąć z raportu","Zachować jako nieudaną"],"ans":3,"why":"Zachować jako nieudaną"},{"q":"Co oznacza brak odczytu?","opts":["Wynik zerowy","Brak danych, nie wartość zero","Zawsze błąd studenta","Dowód poprawnego działania"],"ans":1,"why":"Brak danych, nie wartość zero"},{"q":"Co należy porównać przy modyfikacji ustawienia?","opts":["Dwie różne sceny","Tylko najlepszy pomiar","Wynik przed i po zmianie","Tylko poprawiony wariant"],"ans":2,"why":"Wynik przed i po zmianie"},{"q":"Jak ograniczyć wpływ czynników zakłócających?","opts":["Utrzymywać pozostałe parametry stałe","Pominąć warunki testu","Zmieniać trasę kamery w każdej próbie","Zmienić jednocześnie wszystkie parametry"],"ans":0,"why":"Utrzymywać pozostałe parametry stałe"},{"q":"Co stanowi podstawę interpretacji?","opts":["Własne, zapisane obserwacje","Wyłącznie liczba klatek","Przewidywane wyniki","Przykładowe dane zastępcze"],"ans":0,"why":"Własne, zapisane obserwacje"}]}]};
+const labs=DATA.labs;
+const pages=labs.flatMap((l,i)=>[{kind:"lab",i},{kind:"quiz",i}]).concat([{kind:"results"}]);
+const entries=[labs[0].n+" • Instrukcja",labs[0].n+" • Test",labs[1].n+" • Instrukcja",labs[1].n+" • Test","Wyniki"];
+const answers=labs.map(l=>Array(l.questions.length).fill(null));
+const done=[false,false],results=[null,null];
+let current=0;
+const main=document.getElementById("content");
+const nav=document.getElementById("navigation");
+const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function draw(){
+ nav.replaceChildren();
+ entries.forEach((s,i)=>{const b=document.createElement("button");b.textContent=s;b.type="button";if(i===current)b.setAttribute("aria-current","page");b.disabled=i===4&&!done.every(Boolean);
+ b.onclick=()=>{current=i;draw()};nav.append(b)});
+ const page=pages[current];
+ if(page.kind==="lab"){
+  const l=labs[page.i];
+  main.innerHTML=`<h2>Laboratorium ${l.n}: ${escapeHtml(l.title)}</h2><p class="lead"><span class="chip">${escapeHtml(l.mode)}</span> Wykonaj etapy w przygotowanej scenie Unity. Ocena merytoryczna doświadczenia należy do prowadzącego.</p><div id="steps"></div><div class="controls"><button class="secondary" id="prev">Poprzednia sekcja</button><button class="primary" id="next">Przejdź do testu</button></div>`;
+  const holder=document.getElementById("steps");
+  l.steps.forEach((s,i)=>{const d=document.createElement("div");d.className="task";const a=document.createElement("div");a.className="num";a.textContent=i+1+".";const b=document.createElement("div");b.className="body";const title=document.createElement("strong");title.textContent=s[0];const p=document.createElement("p");p.textContent=s[1];b.append(title,p);d.append(a,b);holder.append(d)});
+  document.getElementById("prev").disabled=current===0;
+  document.getElementById("prev").onclick=()=>{current=Math.max(0,current-1);draw()};
+  document.getElementById("next").onclick=()=>{current++;draw()};
+ }else if(page.kind==="quiz"){
+  const l=labs[page.i];
+  main.innerHTML=`<h2>Laboratorium ${l.n}: Test końcowy</h2><p class="lead">10 pytań, 4 odpowiedzi. Jedna poprawna. Wynik pojawia się po oddaniu całego testu.</p><form id="questions"></form><div class="controls"><button class="secondary" type="button" id="prev">Wróć do instrukcji</button><button class="primary" type="button" id="submit">Zakończ test</button></div><p id="notice" role="status"></p>`;
+  const f=document.getElementById("questions");
+  l.questions.forEach((q,qi)=>{const field=document.createElement("fieldset"),leg=document.createElement("legend");leg.textContent=(qi+1)+". "+q.q;field.append(leg);
+    q.opts.forEach((o,oi)=>{const label=document.createElement("label");label.className="option";const input=document.createElement("input");input.type="radio";input.name="q"+qi;input.value=oi;input.checked=answers[page.i][qi]===oi;input.disabled=done[page.i];input.addEventListener("change",()=>{answers[page.i][qi]=oi});label.append(input,document.createTextNode(" "+o));field.append(label)});f.append(field)});
+  document.getElementById("prev").onclick=()=>{current--;draw()};
+  const submit=document.getElementById("submit");submit.disabled=done[page.i];submit.textContent=done[page.i]?"Test zakończony":"Zakończ test";
+  submit.onclick=()=>{
+    if(done[page.i])return;
+    if(answers[page.i].some(x=>x===null)){document.getElementById("notice").textContent="Odpowiedz na wszystkie 10 pytań.";return}
+    const score=l.questions.reduce((s,q,i)=>s+(answers[page.i][i]===q.ans?1:0),0);
+    results[page.i]={lab:l.n,score,max:10,answers:l.questions.map((q,i)=>({question:q.q,chosen:q.opts[answers[page.i][i]],correct:q.opts[q.ans],ok:answers[page.i][i]===q.ans}))};
+    done[page.i]=true;current=done.every(Boolean)?4:(page.i===0?2:4);draw();
+  };
+ }else{
+  main.innerHTML='<h2>Wyniki obu laboratoriów</h2><p class="lead">Wynik testów wiedzy jest niezależny od oceny wykonania eksperymentów w Unity.</p><div id="scores"></div><button class="primary" id="export">Zapisz raport JSON</button>';
+  const el=document.getElementById("scores");
+  results.forEach((r,j)=>{if(!r)return;const h=document.createElement("h3");h.textContent="Laboratorium "+r.lab+": "+r.score+"/10 ("+r.score*10+"%)";el.append(h);
+    r.answers.forEach((a,i)=>{const d=document.createElement("div");d.className="result "+(a.ok?"good":"bad");d.textContent=(i+1)+". "+a.question+" — "+(a.ok?"Poprawnie":"Błędnie")+". Poprawna odpowiedź: "+a.correct;el.append(d)})});
+  document.getElementById("export").onclick=()=>{const report={schema:"wirr-block-assessment/1.0",block:DATA.block,results,created_at:new Date().toISOString(),note:"Lokalny test wiedzy, bez automatycznej oceny działania scen Unity"};const blob=new Blob([JSON.stringify(report,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="wirr_blok_"+DATA.block+"_wyniki.json";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+ }
+}
+draw();
+</script></body></html>
