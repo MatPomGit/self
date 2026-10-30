@@ -7,7 +7,7 @@
       "title": "Szablon katalogu plików (CSV)",
       "description": "Edytowalny szablon metadanych do dodawania kolejnych zasobów.",
       "category": "Narzędzia",
-      "source": "downloads/library-template.csv",
+      "source": "materials/templates/library-template.csv",
       "updated": "2026-10-24"
     },
     {
@@ -25,7 +25,7 @@
       "title": "Materiały dydaktyczne",
       "description": "Zbiorczy wykaz materiałów dydaktycznych.",
       "category": "Dydaktyka",
-      "source": "materials.html",
+      "source": "materials/index.html",
       "updated": "2026-10-24"
     },
     {
@@ -43,7 +43,7 @@
       "title": "Git",
       "description": "Materiały o kontroli wersji Git.",
       "category": "Dydaktyka",
-      "source": "git.html",
+      "source": "materials/git/index.html",
       "updated": "2026-10-24"
     },
     {
@@ -52,7 +52,7 @@
       "title": "Bash",
       "description": "Materiały dotyczące powłoki Bash.",
       "category": "Dydaktyka",
-      "source": "bash.html",
+      "source": "materials/bash/index.html",
       "updated": "2026-10-24"
     },
     {
@@ -61,7 +61,7 @@
       "title": "Vim",
       "description": "Materiały dotyczące edytora Vim.",
       "category": "Dydaktyka",
-      "source": "vim.html",
+      "source": "materials/vim/index.html",
       "updated": "2026-10-24"
     },
     {
@@ -70,7 +70,7 @@
       "title": "LaTeX",
       "description": "Materiały do przygotowywania dokumentów w LaTeX.",
       "category": "Dydaktyka",
-      "source": "latex.html",
+      "source": "materials/latex/index.html",
       "updated": "2026-10-24"
     },
     {
@@ -79,7 +79,7 @@
       "title": "Algorytmy",
       "description": "Materiały z algorytmów i struktur danych.",
       "category": "Dydaktyka",
-      "source": "algorytmy.html",
+      "source": "materials/algorytmy/index.html",
       "updated": "2026-10-24"
     },
     {
@@ -88,7 +88,7 @@
       "title": "Psychoinformatyka",
       "description": "Materiały z psychoinformatyki poznawczo-afektywnej.",
       "category": "Dydaktyka",
-      "source": "psychoinformatyka.html",
+      "source": "materials/psychoinformatyka/index.html",
       "updated": "2026-10-24"
     },
     {
@@ -98,7 +98,7 @@
       "description": "Miejsce na prezentację PDF. Plik nie został jeszcze opublikowany.",
       "category": "WiRR",
       "status": "planned",
-      "source": "downloads/wirr/w01.pdf",
+      "source": "materials/wirr/w01.pdf",
       "updated": "2026-10-24",
       "lecture": 1
     },
@@ -109,7 +109,7 @@
       "description": "Szkielet materiału HTML. Właściwa treść wykładu oczekuje na uzupełnienie.",
       "category": "WiRR",
       "status": "draft",
-      "source": "lectures/wirr/w01.html",
+      "source": "materials/wirr/lectures/w01.html",
       "updated": "2026-10-24",
       "lecture": 1
     },
@@ -120,7 +120,7 @@
       "description": "Miejsce na prezentację PDF. Plik nie został jeszcze opublikowany.",
       "category": "WiRR",
       "status": "planned",
-      "source": "downloads/wirr/w02.pdf",
+      "source": "materials/wirr/w02.pdf",
       "updated": "2026-10-24",
       "lecture": 2
     },
@@ -131,7 +131,7 @@
       "description": "Szkielet materiału HTML. Właściwa treść wykładu oczekuje na uzupełnienie.",
       "category": "WiRR",
       "status": "draft",
-      "source": "lectures/wirr/w02.html",
+      "source": "materials/wirr/lectures/w02.html",
       "updated": "2026-10-24",
       "lecture": 2
     },
@@ -142,7 +142,7 @@
       "description": "Miejsce na prezentację PDF. Plik nie został jeszcze opublikowany.",
       "category": "WiRR",
       "status": "planned",
-      "source": "downloads/wirr/w03.pdf",
+      "source": "materials/wirr/w03.pdf",
       "updated": "2026-10-24",
       "lecture": 3
     },
@@ -153,7 +153,7 @@
       "description": "Szkielet materiału HTML. Właściwa treść wykładu oczekuje na uzupełnienie.",
       "category": "WiRR",
       "status": "draft",
-      "source": "lectures/wirr/w03.html",
+      "source": "materials/wirr/lectures/w03.html",
       "updated": "2026-10-24",
       "lecture": 3
     },
@@ -164,7 +164,7 @@
       "description": "Miejsce na prezentację PDF. Plik nie został jeszcze opublikowany.",
       "category": "WiRR",
       "status": "planned",
-      "source": "downloads/wirr/w04.pdf",
+      "source": "materials/wirr/w04.pdf",
       "updated": "2026-10-24",
       "lecture": 4
     },
@@ -175,7 +175,7 @@
       "description": "Szkielet materiału HTML. Właściwa treść wykładu oczekuje na uzupełnienie.",
       "category": "WiRR",
       "status": "draft",
-      "source": "lectures/wirr/w04.html",
+      "source": "materials/wirr/lectures/w04.html",
       "updated": "2026-10-24",
       "lecture": 4
     },
@@ -186,7 +186,7 @@
       "description": "Miejsce na prezentację PDF. Plik nie został jeszcze opublikowany.",
       "category": "WiRR",
       "status": "planned",
-      "source": "downloads/wirr/w05.pdf",
+      "source": "materials/wirr/w05.pdf",
       "updated": "2026-10-24",
       "lecture": 5
     },
@@ -197,7 +197,7 @@
       "description": "Szkielet materiału HTML. Właściwa treść wykładu oczekuje na uzupełnienie.",
       "category": "WiRR",
       "status": "draft",
-      "source": "lectures/wirr/w05.html",
+      "source": "materials/wirr/lectures/w05.html",
       "updated": "2026-10-24",
       "lecture": 5
     },
@@ -208,7 +208,7 @@
       "description": "Miejsce na prezentację PDF. Plik nie został jeszcze opublikowany.",
       "category": "WiRR",
       "status": "planned",
-      "source": "downloads/wirr/w06.pdf",
+      "source": "materials/wirr/w06.pdf",
       "updated": "2026-10-24",
       "lecture": 6
     },
@@ -219,7 +219,7 @@
       "description": "Szkielet materiału HTML. Właściwa treść wykładu oczekuje na uzupełnienie.",
       "category": "WiRR",
       "status": "draft",
-      "source": "lectures/wirr/w06.html",
+      "source": "materials/wirr/lectures/w06.html",
       "updated": "2026-10-24",
       "lecture": 6
     },
@@ -230,7 +230,7 @@
       "description": "Miejsce na prezentację PDF. Plik nie został jeszcze opublikowany.",
       "category": "WiRR",
       "status": "planned",
-      "source": "downloads/wirr/w07.pdf",
+      "source": "materials/wirr/w07.pdf",
       "updated": "2026-10-24",
       "lecture": 7
     },
@@ -241,7 +241,7 @@
       "description": "Szkielet materiału HTML. Właściwa treść wykładu oczekuje na uzupełnienie.",
       "category": "WiRR",
       "status": "draft",
-      "source": "lectures/wirr/w07.html",
+      "source": "materials/wirr/lectures/w07.html",
       "updated": "2026-10-24",
       "lecture": 7
     },
@@ -252,7 +252,7 @@
       "description": "Samodzielny tekstowy pokaz podstaw poleceń Bash.",
       "category": "Bash",
       "status": "ready",
-      "source": "downloads/bash/bash-vid.sh",
+      "source": "materials/bash/bash-vid.sh",
       "updated": "2026-10-24"
     },
     {
@@ -262,7 +262,7 @@
       "description": "Samodzielna gra terminalowa: zgadywanie liczb.",
       "category": "Bash",
       "status": "ready",
-      "source": "downloads/bash/bash-game.sh",
+      "source": "materials/bash/bash-game.sh",
       "updated": "2026-10-24"
     },
     {
@@ -272,7 +272,7 @@
       "description": "Samodzielna edukacyjna gra tekstowa z zadaniami Bash.",
       "category": "Bash",
       "status": "ready",
-      "source": "downloads/bash/bash-rpg",
+      "source": "materials/bash/bash-rpg",
       "updated": "2026-10-24"
     }
   ]

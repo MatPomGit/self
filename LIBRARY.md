@@ -15,7 +15,7 @@ Strony aliasów są prawdziwymi plikami `index.html`, dzięki czemu bezpośredni
 
 ## Dodawanie zasobów
 
-1. Umieść opublikowany plik w repozytorium (np. `downloads/kurs-w01.pdf`), **albo** użyj pełnego adresu `https://...`. Nie publikuj danych niejawnych lub osobowych.
+1. Umieść opublikowany plik w katalogu `materials/<przedmiot>/` (np. `materials/przedmiot/kurs-w01.pdf`), **albo** użyj pełnego adresu `https://...`. Nie publikuj danych niejawnych lub osobowych.
 2. Dodaj wpis do `assets/library.json`, zachowując unikalną parę `type + id` i pola `title`, `description`, `category`, `source`, `updated`.
 3. Wykonaj lokalnie `python3 tools/build_library.py`. Powstaną statyczne strony `f/NN/index.html`, `p/NN/index.html` lub `h/NN/index.html`.
 4. Zweryfikuj `python3 tools/build_library.py --check` oraz `python3 -m unittest discover -s tests -p 'test_library.py'`.
@@ -30,12 +30,12 @@ Przykładowy rekord:
   "title": "Wykład 1",
   "description": "Prezentacja PDF",
   "category": "Dydaktyka",
-  "source": "downloads/wyklad-01.pdf",
+  "source": "materials/przedmiot/wyklad-01.pdf",
   "updated": "2026-10-24"
 }
 ```
 
-`downloads/library-template.csv` zawiera przykładowe metadane do planowania nowych pozycji.
+`materials/templates/library-template.csv` zawiera przykładowe metadane do planowania nowych pozycji.
 Plik CSV **nie** jest automatycznie importowany do manifestu JSON.
 
 ## Zasady techniczne i bezpieczeństwo

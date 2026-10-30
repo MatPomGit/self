@@ -1,26 +1,27 @@
 # Struktura repozytorium self
 
-Witryna statyczna publikowana przez GitHub Pages. Zachowujemy publiczne adresy, dlatego pliki stron HTML pozostają obecnie w katalogu głównym.
+Witryna jest publikowana przez GitHub Pages. Materiały dla studentów mają wspólny katalog nadrzędny.
 
 | Ścieżka | Rola |
 | --- | --- |
-| `index.html`, `*.html` | Publiczne strony, zachowane adresy URL |
-| `assets/` | Zasoby biblioteki; docelowo także CSS, JavaScript i biblioteki vendor |
-| `archive/` | Historyczne, niepublikowane wersje stron (do referencji) |
-| `docs/` | Dokumentacja i grafiki |
-| `downloads/` | Publiczne pliki do pobrania, w tym `bash/` i `wirr/` |
-| `lectures/wirr/` | Wykłady HTML |
-| `f/NN/`, `p/NN/`, `h/NN/` | Wygenerowane krótkie adresy; nie kasować i nie przenosić |
-| `library/`, `wirr/` | Strony katalogowe |
-| `tools/`, `tests/` | Generator i testy |
+| `index.html`, `publications.html`, `projects.html` | Strony ogólne serwisu |
+| `materials/index.html` | Prosty, statyczny wykaz plików dla studentów |
+| `materials/<przedmiot>/index.html` | Strony poszczególnych przedmiotów |
+| `materials/bash/` | Pliki Bash do pobrania i strona Bash |
+| `materials/wirr/` | Wykaz WiRR, szkice HTML i docelowe PDF |
+| `materials/templates/` | Pliki pomocnicze do pobrania |
+| `assets/` | Zasoby CSS i JavaScript, manifest biblioteki |
+| `docs/`, `archive/` | Grafiki, dokumentacja i archiwum |
+| `library/` | Publiczny katalog i wyszukiwarka zasobów |
+| `f/NN/`, `p/NN/`, `h/NN/` | Wygenerowane, trwałe aliasy |
+| `materials.html`, strony przedmiotów w katalogu głównym, `wirr/`, `lectures/` | Przekierowania do `materials/` |
+| `tools/`, `tests/` | Generator aliasów i testy |
 | `.github/` | Automatyzacja GitHub |
 
 ## Zasady porządkowania
 
-1. Nie usuwać publicznych stron ani aliasów. Najpierw zapewnić zgodne przekierowania i sprawdzić odwołania.
-2. Nowe zasoby CSS i JavaScript dodawać w `assets/css/` i `assets/js/`, biblioteki zewnętrzne w `assets/vendor/`.
-3. Pliki do pobrania publikować w `downloads/`, katalog aktualizować w `assets/library.json`, następnie uruchamiać `python3 tools/build_library.py`.
-4. Nie commitować plików roboczych takich jak `nohup.out`, logów, cache czy plików tymczasowych.
-5. Walidować zmiany poleceniem `python3 tools/build_library.py --check` oraz `python3 -m unittest discover -s tests`.
-
-Historyczne `index_old.html` zachowano jako kopię referencyjną w `archive/` ze względu na istniejący publiczny adres starej strony. Nie jest to nowy punkt wejścia.
+1. Nowe lokalne pliki dla studentów umieszczaj wyłącznie w `materials/<przedmiot>/`.
+2. Główny indeks `materials/index.html` zawiera wyłącznie istniejące, działające linki; zaplanowanych PDF nie udostępnia się jako plików.
+3. Po przeniesieniu materiału aktualizuj `assets/library.json`, zachowując identyfikatory aliasów.
+4. Nie kasuj starych przekierowań HTML. Starsze bezpośrednie adresy skryptów w `downloads/` wymagają aktualizacji na `materials/`.
+5. Uruchamiaj `python3 tools/build_library.py --check` i `python3 -m unittest discover -s tests`.

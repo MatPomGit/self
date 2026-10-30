@@ -3,8 +3,9 @@
 Statyczna strona naukowa i dydaktyczna publikowana przez GitHub Pages.
 
 - [Strona główna](https://matpomgit.github.io/self/)
-- [Biblioteka materiałów](https://matpomgit.github.io/self/library/)
-- [Materiały WiRR](https://matpomgit.github.io/self/wirr/)
+- [Materiały dla studentów](https://matpomgit.github.io/self/materials/)
+- [Biblioteka zasobów](https://matpomgit.github.io/self/library/)
+- [Materiały WiRR](https://matpomgit.github.io/self/materials/wirr/)
 
 ## Dokumentacja
 
@@ -15,6 +16,8 @@ Statyczna strona naukowa i dydaktyczna publikowana przez GitHub Pages.
 
 ## Organizacja
 
-Zasoby CSS, JS i zależności znajdują się w `assets/css/`, `assets/js/` i `assets/vendor/`. Publiczne strony HTML pozostają pod dotychczasowymi adresami, aliasy `/f/`, `/p/`, `/h/` są generowane i nie należy przenosić ich ręcznie.
+Wszystkie lokalne materiały dla studentów umieszcza się w `materials/` z podziałem na przedmioty. `materials/index.html` jest prostą, statyczną listą plików. Dawne adresy stron HTML przekierowują do `materials/`. Krótkie adresy `f/NN/`, `p/NN/` i `h/NN/` pozostają bez zmian.
+
+Wspólne zasoby serwisu znajdują się w `assets/`. Manifest `assets/library.json` wskazuje pliki w `materials/`.
 
 Walidacja: `python3 tools/build_library.py --check` oraz `python3 -m unittest discover -s tests`.
