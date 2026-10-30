@@ -99,3 +99,9 @@ w stopce i aktualizacji etykiety dostępności.
 Promień animowanego obrysu zmniejszono z 203 do 200 jednostek SVG,
 aby pokrywał się z zewnętrzną krawędzią segmentów koła.
 Dostosowano również długość wzorca kreskowania do nowego obwodu.
+
+## Wersja v1.0.3
+
+Zwiększono widoczność animowanego obrysu: krycie czoła 72% (`opacity: .72`),
+a ogon ma dziewięć odcinków zamiast pięciu. Długość odcinka wynosi
+18 jednostek SVG, promień pozostaje 200, czas obrotu 12 sekund.

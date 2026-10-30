@@ -123,12 +123,16 @@
     .grp.open .seg-label,.grp:focus-within .seg-label{fill:#fff}
     .grp.open .seg-body,.grp:focus-within .seg-body{transform:translate(var(--dx),var(--dy))}
     /* Delikatny, nieinteraktywny impuls przesuwający się zgodnie z ruchem zegara. */
-    .idle-orbit{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-dasharray:10 1247;pointer-events:none;transform-origin:230px 230px;animation:orbit-clockwise 12s linear infinite}
-    .idle-orbit:nth-of-type(1){stroke-dashoffset:0;opacity:.32}
-    .idle-orbit:nth-of-type(2){stroke-dashoffset:11;opacity:.23}
-    .idle-orbit:nth-of-type(3){stroke-dashoffset:22;opacity:.15}
-    .idle-orbit:nth-of-type(4){stroke-dashoffset:33;opacity:.09}
-    .idle-orbit:nth-of-type(5){stroke-dashoffset:44;opacity:.04}
+    .idle-orbit{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-dasharray:18 1239;pointer-events:none;transform-origin:230px 230px;animation:orbit-clockwise 12s linear infinite}
+    .idle-orbit:nth-of-type(1){stroke-dashoffset:0;opacity:0.72}
+    .idle-orbit:nth-of-type(2){stroke-dashoffset:18;opacity:0.6}
+    .idle-orbit:nth-of-type(3){stroke-dashoffset:36;opacity:0.48}
+    .idle-orbit:nth-of-type(4){stroke-dashoffset:54;opacity:0.38}
+    .idle-orbit:nth-of-type(5){stroke-dashoffset:72;opacity:0.29}
+    .idle-orbit:nth-of-type(6){stroke-dashoffset:90;opacity:0.21}
+    .idle-orbit:nth-of-type(7){stroke-dashoffset:108;opacity:0.14}
+    .idle-orbit:nth-of-type(8){stroke-dashoffset:126;opacity:0.09}
+    .idle-orbit:nth-of-type(9){stroke-dashoffset:144;opacity:0.05}
     @keyframes orbit-clockwise{to{transform:rotate(360deg)}}
     .wheel.is-engaged .idle-orbit,.intro.hidden .idle-orbit{animation-play-state:paused;opacity:0}
     @media(prefers-reduced-motion:reduce){.idle-orbit{animation:none;opacity:0}}
@@ -194,6 +198,10 @@
             </a>
             <g class="subs"><line class="conn" x1="31.2" y1="165.4" x2="8.0" y2="165.4"/><rect class="bridge" x="8.0" y="151.4" width="23.2" height="28"/><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="89.4" width="190" height="28"/><text x="-172.0" y="103.4">Digital twin, 2025</text></a><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="120.4" width="190" height="28"/><text x="-172.0" y="134.4">Emocje z twarzy, 2025</text></a><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="151.4" width="190" height="28"/><text x="-172.0" y="165.4">Patent USA</text></a><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="182.4" width="190" height="28"/><text x="-172.0" y="196.4">Eye tracking, 2021</text></a><a class="pill" href="subpages/publications.html" target="_blank" rel="noreferrer"><rect x="-182.0" y="213.4" width="190" height="28"/><text x="-172.0" y="227.4">Pełna lista</text></a></g>
           </g>
+          <circle class="idle-orbit" cx="230" cy="230" r="200" aria-hidden="true"/>
+          <circle class="idle-orbit" cx="230" cy="230" r="200" aria-hidden="true"/>
+          <circle class="idle-orbit" cx="230" cy="230" r="200" aria-hidden="true"/>
+          <circle class="idle-orbit" cx="230" cy="230" r="200" aria-hidden="true"/>
           <circle class="idle-orbit" cx="230" cy="230" r="200" aria-hidden="true"/>
           <circle class="idle-orbit" cx="230" cy="230" r="200" aria-hidden="true"/>
           <circle class="idle-orbit" cx="230" cy="230" r="200" aria-hidden="true"/>
@@ -275,7 +283,7 @@
       </section>
     </main>
 
-    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.0.2">v1.0.2</span></footer>
+    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.0.3">v1.0.3</span></footer>
   </div>
 
   <script>
