@@ -1,17 +1,39 @@
 # Struktura repozytorium self
 
-| Ścieżka | Przeznaczenie |
-| --- | --- |
-| `index.html`, `projects.html`, `publications.html` | Główne strony serwisu |
-| `materials/index.html` | Jedyny wykaz aktualnych materiałów dla studentów |
-| `materials/<przedmiot>/index.html` | Strony przedmiotów |
-| `materials/ndp_lab_02.html` do `materials/ndp_lab_06.html` | Laboratoria NDP |
-| `materials/wirr_blok_01.html` do `materials/wirr_blok_04.html` | Laboratoria WiRR |
-| `materials/bash/`, `materials/templates/` | Pliki pomocnicze do pobrania |
-| `assets/` | Zasoby techniczne CSS/JS |
-| `docs/`, `archive/` | Grafiki, dokumenty, archiwum |
-| `tests/` | Testy lokalnych odwołań i zasobów |
+Repozytorium zawiera statyczną witrynę GitHub Pages. Pliki dla studentów
+muszą znajdować się w obrębie `materials/`; pliki infrastruktury witryny
+są od nich rozdzielone.
 
-W repozytorium nie utrzymuje się osobnej biblioteki aliasów ani szkiców wykładów WiRR.
-Nie dodawaj nowych stron dydaktycznych poza `materials/`.
-Po modyfikacjach wykonaj `python3 -m unittest discover -s tests`.
+| Ścieżka | Funkcja |
+| --- | --- |
+| `index.html`, `projects.html`, `publications.html` | Główne strony |
+| `materials/index.html` | Indeks aktualnych materiałów, statyczne listy HTML |
+| `materials/<przedmiot>/index.html` | Strony dziesięciu przedmiotów |
+| `materials/ndp_lab_02.html` do `materials/ndp_lab_06.html` | Pięć laboratoriów NDP |
+| `materials/wirr_blok_01.html` do `materials/wirr_blok_04.html` | Cztery bloki WiRR |
+| `materials/bash/` | Strona Bash i pomocnicze programy terminalowe |
+| `materials/templates/` | Szablony do pobrania |
+| `assets/css/`, `assets/js/`, `assets/vendor/` | Wspólne zasoby techniczne witryny |
+| `docs/` | Grafiki i teksty dokumentacyjne |
+| `archive/` | Historyczna wersja strony |
+| `tests/` | Testy regresyjne i statyczne |
+
+## Typografia indeksu
+
+`materials/index.html` ma niewielki, lokalny arkusz CSS w znaczniku
+`<style>`. Domyślny tekst ma 14 px i interlinię 1,5;
+`h1` ma 1,55 rem, a `h2` 1,1 rem. Maksymalna szerokość treści wynosi
+780 px. Na ekranach do 600 px zmniejszają się marginesy boczne.
+Pozostaw zwykłe odnośniki HTML z podkreśleniem i widocznym fokusem.
+Nie dodawaj kart, animacji ani skryptów do indeksu.
+
+## Reguły utrzymania
+
+- Nowe materiały studenckie umieszczaj wyłącznie w `materials/`.
+- Lista `materials/index.html` powinna wskazywać wyłącznie opublikowane pliki.
+- Zachowaj nazwy i istniejące ścieżki aktualnych laboratoriów, aktualizując
+  linki przy świadomym przeniesieniu.
+- Nie odtwarzaj `wirr/`, `lectures/wirr/`, `materials/wirr/lectures/`,
+  `library/`, `f/`, `h/`, `p/` ani usuniętego generatora aliasów.
+- Po każdej zmianie uruchom `python3 -m unittest discover -s tests`;
+  przy zmianach interfejsu także `bash tests/theme_switcher_static_check.sh`.
