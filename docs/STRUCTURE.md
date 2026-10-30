@@ -6,7 +6,8 @@ są od nich rozdzielone.
 
 | Ścieżka | Funkcja |
 | --- | --- |
-| `index.html`, `projects.html`, `publications.html` | Główne strony |
+| `index.html` | Główna strona witryny |
+| `subpages/projects.html`, `subpages/publications.html` | Podstrony projektów i publikacji |
 | `materials/index.html` | Indeks aktualnych materiałów, statyczne listy HTML |
 | `materials/<przedmiot>/index.html` | Strony czterech pozostałych przedmiotów |
 | `materials/ndp_lab_02.html` do `materials/ndp_lab_06.html` | Pięć laboratoriów NDP |
@@ -52,5 +53,8 @@ nie zastępuje on testów E2E.
 ## Lokalizacja plików
 
 `docs/assets/` zawiera techniczne pliki CSS, JS i vendor, `docs/images/`
-zdjęcia, `docs/archive/` dawne wersje strony. Publiczne adresy stron HTML
+zdjęcia, `docs/archive/` dawne wersje strony. Publiczny adres głównej strony HTML
 w katalogu głównym i materiały w `materials/` nie zmieniają się.
+
+Podstrony projektów i publikacji przechowuje się w `subpages/`, z bazą
+linków wskazującą katalog główny. Nie przenosi się plików studenckich z `materials/`.
