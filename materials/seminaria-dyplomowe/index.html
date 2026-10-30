@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seminaria dyplomowe – dr inż. Mateusz Pomianek</title>
+  <meta name="description" content="Wskazówki i materiały do pisania prac dyplomowych (inżynierskich i magisterskich). Obejmuje metodologię badań, strukturę pracy, zasady formatowania, prezentację i wymogi promotora." />
+  <meta name="author" content="dr inż. Mateusz Pomianek" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔬</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --clr-bg:      #0a0e1a;
+      --clr-surface: #111827;
+      --clr-surface2:#1a2236;
+      --clr-navy:    #0d1b2a;
+      --clr-cyan:    #06b6d4;
+      --clr-teal:    #14b8a6;
+      --clr-neon2:   #7c3aed;
+      --clr-text:    #e2e8f0;
+      --clr-muted:   #94a3b8;
+      --clr-border:  rgba(6,182,212,0.18);
+      --font-head:   'Poppins', sans-serif;
+      --font-body:   'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      font-family: var(--font-body);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--clr-bg); }
+    ::-webkit-scrollbar-thumb { background: var(--clr-cyan); border-radius: 3px; }
+
+    .container { max-width: 1000px; margin: 0 auto; padding: 0 1.5rem; }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--clr-cyan), var(--clr-teal));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-label {
+      font-family: var(--font-head);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--clr-cyan);
+      margin-bottom: 0.75rem;
+    }
+
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--clr-cyan), var(--clr-teal));
+      border-radius: 2px;
+      margin-bottom: 2rem;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10,14,26,0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--clr-border);
+    }
+
+    .nav-logo {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--clr-cyan);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--clr-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--clr-cyan); }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--clr-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.25s;
+    }
+    .nav-back:hover { color: var(--clr-cyan); }
+
+    /* PAGE HERO */
+    .page-hero {
+      padding: 8rem 2rem 4rem;
+      background: var(--clr-surface);
+      border-bottom: 1px solid var(--clr-border);
+    }
+
+    .page-hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .page-hero p {
+      color: var(--clr-muted);
+      font-size: 1.05rem;
+      max-width: 640px;
+      line-height: 1.8;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--clr-muted);
+    }
+
+    .breadcrumb a {
+      color: var(--clr-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .breadcrumb a:hover { color: var(--clr-cyan); }
+
+    .breadcrumb-sep { color: rgba(148,163,184,0.3); }
+
+    /* TABS */
+    .tabs-wrapper {
+      border-bottom: 1px solid var(--clr-border);
+      background: var(--clr-surface);
+      position: sticky;
+      top: 64px;
+      z-index: 50;
+    }
+
+    .tabs-nav {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      gap: 0;
+      list-style: none;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .tabs-nav::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 1.5rem;
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      color: var(--clr-muted);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.2s, border-color 0.2s;
+      margin-bottom: -1px;
+    }
+
+    .tab-btn:hover { color: var(--clr-text); }
+
+    .tab-btn.active {
+      color: var(--clr-cyan);
+      border-bottom-color: var(--clr-cyan);
+    }
+
+    /* MAIN */
+    main { padding: 4rem 0 6rem; }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* TOPICS GRID */
+    .topics-section { margin-bottom: 3rem; }
+
+    .topics-section-title {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .topics-section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--clr-border);
+    }
+
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .topic-card {
+      background: var(--clr-surface2);
+      border: 1px solid var(--clr-border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .topic-card:hover {
+      border-color: var(--clr-cyan);
+      transform: translateY(-2px);
+    }
+
+    .topic-num {
+      font-family: var(--font-head);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--clr-teal);
+      margin-bottom: 0.4rem;
+    }
+
+    .topic-card h4 {
+      font-family: var(--font-head);
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+      line-height: 1.4;
+    }
+
+    .topic-card p {
+      font-size: 0.8rem;
+      color: var(--clr-muted);
+      line-height: 1.55;
+    }
+
+    /* RESOURCES */
+    .resources-section {
+      background: var(--clr-surface2);
+      border: 1px solid var(--clr-border);
+      border-radius: 16px;
+      padding: 2rem 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .resources-title {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      color: var(--clr-text);
+    }
+
+    .resource-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .resource-list li a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--clr-cyan);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: opacity 0.2s;
+    }
+
+    .resource-list li a:hover { opacity: 0.75; text-decoration: underline; }
+
+    /* INFO BOX */
+    .info-box {
+      background: rgba(6,182,212,0.07);
+      border: 1px solid rgba(6,182,212,0.25);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+      font-size: 0.88rem;
+      color: var(--clr-muted);
+      line-height: 1.7;
+    }
+
+    .info-box strong { color: var(--clr-cyan); }
+
+    /* REQUIREMENTS LIST */
+    .req-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 2rem;
+    }
+
+    .req-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      font-size: 0.875rem;
+      color: var(--clr-muted);
+      line-height: 1.6;
+    }
+
+    .req-list li::before {
+      content: '▸';
+      color: var(--clr-teal);
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .req-list li strong { color: var(--clr-text); }
+
+    /* PROPOSED TOPICS */
+    .proposed-topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .proposed-topic-card {
+      background: var(--clr-surface2);
+      border: 1px solid var(--clr-border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .proposed-topic-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--clr-cyan), var(--clr-teal));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .proposed-topic-card:hover {
+      border-color: rgba(6,182,212,0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(6,182,212,0.1);
+    }
+
+    .proposed-topic-card:hover::before { opacity: 1; }
+
+    .pt-category {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: var(--font-head);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--clr-teal);
+      background: rgba(20,184,166,0.1);
+      border: 1px solid rgba(20,184,166,0.2);
+      border-radius: 20px;
+      padding: 0.2rem 0.65rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .proposed-topic-card h4 {
+      font-family: var(--font-head);
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      line-height: 1.45;
+      color: var(--clr-text);
+    }
+
+    .proposed-topic-card p {
+      font-size: 0.8rem;
+      color: var(--clr-muted);
+      line-height: 1.6;
+    }
+
+    .pt-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.85rem;
+    }
+
+    .pt-tag {
+      font-size: 0.7rem;
+      color: rgba(148,163,184,0.7);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 4px;
+      padding: 0.15rem 0.5rem;
+    }
+
+    /* SECTION HEADER */
+    .section-header {
+      margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+      font-family: var(--font-head);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-header p {
+      color: var(--clr-muted);
+      font-size: 0.9rem;
+      max-width: 600px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--clr-navy);
+      border-top: 1px solid var(--clr-border);
+      padding: 2.5rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-brand { font-family: var(--font-head); font-size: 0.95rem; font-weight: 600; }
+    .footer-brand span { color: var(--clr-cyan); }
+    .footer-info { font-size: 0.82rem; color: var(--clr-muted); line-height: 1.7; }
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(148,163,184,0.45);
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .topics-grid { grid-template-columns: 1fr; }
+      .proposed-topics-grid { grid-template-columns: 1fr; }
+      .resources-section { padding: 1.5rem; }
+      .tab-btn { padding: 0.85rem 1rem; font-size: 0.82rem; }
+    }
+  </style>
+  <link rel="stylesheet" href="../../assets/css/theme-switcher.css" />
+  <script src="../../assets/js/theme-switcher.js"></script>
+</head>
+<body>
+
+  <nav id="navbar" role="navigation" aria-label="Nawigacja główna">
+    <a href="../../index.html" class="nav-logo">MP.</a>
+    <ul class="nav-links" role="list">
+      <li><a href="../../index.html#about">O mnie</a></li>
+      <li><a href="../../index.html#research">Badania</a></li>
+      <li><a href="../../publications.html">Publikacje</a></li>
+      <li><a href="../">Materiały</a></li>
+    </ul>
+    <a href="../" class="nav-back" aria-label="Powrót do materiałów">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="19 12 5 12"/><polyline points="12 5 5 12 12 19"/></svg>
+      Materiały
+    </a>
+    <div class="theme-picker">
+      <button class="theme-toggle" id="themeToggle" aria-haspopup="listbox" aria-expanded="false" aria-label="Motyw – kliknij aby zmienić">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20C6.5 22 2 17 2 12"/><path d="M12 8v4l3 3"/></svg>
+        Motyw
+      </button>
+    </div>
+  </nav>
+
+  <div class="page-hero">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="../../index.html">Strona główna</a>
+        <span class="breadcrumb-sep">›</span>
+        <a href="../">Materiały</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Seminarium</span>
+      </div>
+      <p class="section-label">Seminarium</p>
+      <h1>Seminaria<br><span class="gradient-text">dyplomowe</span></h1>
+      <p>Wskazówki i materiały do pisania prac dyplomowych (inżynierskich i magisterskich). Obejmuje metodologię badań, strukturę pracy, zasady formatowania, prezentację i wymogi promotora.</p>
+    </div>
+  </div>
+
+  <!-- TABS NAVIGATION -->
+  <div class="tabs-wrapper" role="tablist" aria-label="Sekcje seminarium">
+    <ul class="tabs-nav">
+      <li>
+        <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-general" id="tab-general">
+          📚 Informacje ogólne
+        </button>
+      </li>
+      <li>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-master" id="tab-master">
+          🎓 Praca magisterska
+        </button>
+      </li>
+      <li>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-topics" id="tab-topics">
+          💡 Proponowane tematy prac
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <main>
+    <div class="container">
+
+      <!-- ===== TAB 1: INFORMACJE OGÓLNE ===== -->
+      <div class="tab-panel active" id="panel-general" role="tabpanel" aria-labelledby="tab-general">
+
+        <div class="topics-section">
+          <div class="topics-section-title">Zakres tematyczny</div>
+          <div class="topics-grid">
+            <div class="topic-card">
+              <p class="topic-num">Temat 01</p>
+              <h4>Wybór tematu</h4>
+              <p>Jak sformułować temat, cel i zakres pracy dyplomowej.</p>
+            </div>
+            <div class="topic-card">
+              <p class="topic-num">Temat 02</p>
+              <h4>Struktura pracy</h4>
+              <p>Rozdziały, wstęp, przegląd literatury, metodologia, wyniki, wnioski.</p>
+            </div>
+            <div class="topic-card">
+              <p class="topic-num">Temat 03</p>
+              <h4>Przegląd literatury</h4>
+              <p>Bazy naukowe (Scopus, WoS), zarządzanie bibliografią, cytowania.</p>
+            </div>
+            <div class="topic-card">
+              <p class="topic-num">Temat 04</p>
+              <h4>Metodologia badań</h4>
+              <p>Hipotezy, metody eksperymentalne, zbieranie i analiza danych.</p>
+            </div>
+            <div class="topic-card">
+              <p class="topic-num">Temat 05</p>
+              <h4>Formatowanie (LaTeX)</h4>
+              <p>Szablon PRz w LaTeX, marginesy, czcionki, podpisy, spisy.</p>
+            </div>
+            <div class="topic-card">
+              <p class="topic-num">Temat 06</p>
+              <h4>Prezentacja dyplomowa</h4>
+              <p>Przygotowanie slajdów, obrona, pytania komisji – wskazówki.</p>
+            </div>
+            <div class="topic-card">
+              <p class="topic-num">Temat 07</p>
+              <h4>Etyka naukowa</h4>
+              <p>Plagiat, rzetelność danych, prawa autorskie, licencje.</p>
+            </div>
+            <div class="topic-card">
+              <p class="topic-num">Temat 08</p>
+              <h4>Harmonogram prac</h4>
+              <p>Planowanie etapów, kamienie milowe, komunikacja z promotorem.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="resources-section">
+          <p class="resources-title">📁 Materiały do pobrania</p>
+          <ul class="resource-list">
+            <li><a href="#">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Szablon pracy dyplomowej (LaTeX)
+            </a></li>
+            <li><a href="#">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Wymogi formalne PRz
+            </a></li>
+            <li><a href="#">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Przykładowe prace
+            </a></li>
+          </ul>
+        </div>
+
+      </div><!-- /panel-general -->
+
+      <!-- ===== TAB 2: PRACA MAGISTERSKA ===== -->
+      <div class="tab-panel" id="panel-master" role="tabpanel" aria-labelledby="tab-master">
+
+        <div class="section-header">
+          <h2>Praca <span class="gradient-text">magisterska</span></h2>
+          <p>Wskazówki i wymagania specyficzne dla prac magisterskich realizowanych pod moją opieką.</p>
+        </div>
+
+        <div class="info-box">
+          <strong>Ważne:</strong> Praca magisterska to badanie naukowe wymagające samodzielnego sformułowania problemu badawczego, przeglądu stanu wiedzy oraz oryginalnego wkładu. Różni się od pracy inżynierskiej przede wszystkim wymaganiem nowości i głębokości analizy.
+        </div>
+
+        <div class="topics-section">
+          <div class="topics-section-title">Wymagania formalne</div>
+          <ul class="req-list">
+            <li><strong>Objętość:</strong> 60–100 stron (bez załączników), czcionka 12pt, interlinia 1,5.</li>
+            <li><strong>Literatura:</strong> minimum 30 pozycji, w tym co najmniej 10 artykułów z recenzowanych czasopism (Scopus/WoS).</li>
+            <li><strong>Język:</strong> praca może być napisana po polsku lub angielsku (po uzgodnieniu z promotorem).</li>
+            <li><strong>Streszczenie:</strong> w języku polskim i angielskim (do 250 słów każde).</li>
+            <li><strong>Szablon:</strong> obowiązujący szablon PRz dostępny w zakładce „Informacje ogólne".</li>
+            <li><strong>Antyplagiat:</strong> praca musi przejść system JSA przed złożeniem w dziekanacie.</li>
+          </ul>
+        </div>
+
+        <div class="topics-section">
+          <div class="topics-section-title">Struktura pracy magisterskiej</div>
+          <div class="topics-grid">
+            <div class="topic-card">
+              <p class="topic-num">Rozdział 1</p>
+              <h4>Wstęp i motywacja</h4>
+              <p>Tło problemu, motywacja badań, cel i zakres pracy, struktura dokumentu.</p>
+            </div>
+            <div class="topic-card">
+              <p class="topic-num">Rozdział 2</p>
+              <h4>Przegląd literatury</h4>
+              <p>Systematyczny przegląd stanu wiedzy, analiza istniejących rozwiązań, identyfikacja luk badawczych.</p>
+            </div>
+            <div class="topic-card">
+              <p class="topic-num">Rozdział 3</p>
+              <h4>Metodologia i projekt</h4>
+              <p>Hipotezy badawcze, metody, narzędzia, architektura proponowanego rozwiązania lub eksperymentu.</p>
+            </div>
+            <div class="topic-card">
+              <p class="topic-num">Rozdział 4</p>
+              <h4>Implementacja / Badania</h4>
+              <p>Opis wdrożenia, przeprowadzone eksperymenty, zbieranie i przetwarzanie danych.</p>
+            </div>
+            <div class="topic-card">
+              <p class="topic-num">Rozdział 5</p>
+              <h4>Wyniki i dyskusja</h4>
+              <p>Prezentacja wyników, analiza statystyczna, porównanie z literaturą, interpretacja.</p>
+            </div>
+            <div class="topic-card">
+              <p class="topic-num">Rozdział 6</p>
+              <h4>Wnioski</h4>
+              <p>Podsumowanie osiągnięć, ograniczenia pracy, kierunki przyszłych badań.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="topics-section">
+          <div class="topics-section-title">Harmonogram prac magisterskich</div>
+          <div class="topics-grid">
+            <div class="topic-card">
+              <p class="topic-num">Semestr 1</p>
+              <h4>Faza przygotowawcza</h4>
+              <p>Wybór tematu, przegląd literatury, sformułowanie hipotez, plan badań – konsultacje co 2 tygodnie.</p>
+            </div>
+            <div class="topic-card">
+              <p class="topic-num">Semestr 2</p>
+              <h4>Faza realizacji</h4>
+              <p>Implementacja / eksperymenty, zbieranie danych, wstępna analiza wyników – konsultacje co tydzień.</p>
+            </div>
+            <div class="topic-card">
+              <p class="topic-num">Semestr 3</p>
+              <h4>Faza finalizacji</h4>
+              <p>Analiza wyników, pisanie pracy, korekty, złożenie do recenzji, przygotowanie do obrony.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="resources-section">
+          <p class="resources-title">📁 Materiały dla dyplomantów magisterskich</p>
+          <ul class="resource-list">
+            <li><a href="#">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Szablon pracy magisterskiej (LaTeX)
+            </a></li>
+            <li><a href="#">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Przewodnik po systematycznym przeglądzie literatury
+            </a></li>
+            <li><a href="#">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Wzór raportu z postępów prac
+            </a></li>
+            <li><a href="#">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Kryteria oceny pracy magisterskiej
+            </a></li>
+          </ul>
+        </div>
+
+      </div><!-- /panel-master -->
+
+      <!-- ===== TAB 3: PROPONOWANE TEMATY PRAC ===== -->
+      <div class="tab-panel" id="panel-topics" role="tabpanel" aria-labelledby="tab-topics">
+
+        <div class="section-header">
+          <h2>Proponowane <span class="gradient-text">tematy prac</span></h2>
+          <p>Lista proponowanych tematów prac magisterskich. Każdy temat można rozszerzyć lub dostosować po konsultacji z promotorem.</p>
+        </div>
+
+        <div class="info-box">
+          <strong>Jak wybrać temat?</strong> Zapoznaj się z poniższą listą, a następnie umów się na konsultacje. Temat można modyfikować i uszczegółowiać – liczy się dopasowanie do Twoich zainteresowań i możliwości realizacji w przewidzianym czasie.
+        </div>
+
+        <div class="topics-section">
+          <div class="topics-section-title">🤖 Sztuczna inteligencja i uczenie maszynowe</div>
+          <div class="proposed-topics-grid">
+            <div class="proposed-topic-card">
+              <span class="pt-category">AI / ML</span>
+              <h4>Wykrywanie emocji w mowie z wykorzystaniem głębokich sieci neuronowych</h4>
+              <p>Budowa i ewaluacja modelu klasyfikacji emocji na podstawie cech akustycznych mowy (MFCC, spektrogram) przy użyciu architektur CNN lub Transformer.</p>
+              <div class="pt-tags">
+                <span class="pt-tag">Python</span><span class="pt-tag">TensorFlow</span><span class="pt-tag">NLP</span>
+              </div>
+            </div>
+            <div class="proposed-topic-card">
+              <span class="pt-category">AI / ML</span>
+              <h4>Generatywne modele językowe w personalizacji interfejsów użytkownika</h4>
+              <p>Badanie możliwości zastosowania LLM (np. GPT, Llama) do dynamicznego dostosowywania treści interfejsów do potrzeb i preferencji użytkownika.</p>
+              <div class="pt-tags">
+                <span class="pt-tag">LLM</span><span class="pt-tag">UX</span><span class="pt-tag">API</span>
+              </div>
+            </div>
+            <div class="proposed-topic-card">
+              <span class="pt-category">AI / ML</span>
+              <h4>Wykrywanie anomalii w danych IoT z użyciem uczenia nienadzorowanego</h4>
+              <p>Implementacja i porównanie metod (Autoencoder, Isolation Forest, One-Class SVM) do detekcji anomalii w strumieniach danych z urządzeń IoT.</p>
+              <div class="pt-tags">
+                <span class="pt-tag">IoT</span><span class="pt-tag">Anomaly Detection</span><span class="pt-tag">Python</span>
+              </div>
+            </div>
+            <div class="proposed-topic-card">
+              <span class="pt-category">AI / ML</span>
+              <h4>Klasyfikacja intencji użytkownika w systemach dialogowych</h4>
+              <p>Projektowanie i trening modelu NLU do rozpoznawania intencji w języku polskim na potrzeby chatbotów i asystentów głosowych.</p>
+              <div class="pt-tags">
+                <span class="pt-tag">NLU</span><span class="pt-tag">Chatbot</span><span class="pt-tag">BERT</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topics-section">
+          <div class="topics-section-title">📱 Aplikacje mobilne i systemy interaktywne</div>
+          <div class="proposed-topics-grid">
+            <div class="proposed-topic-card">
+              <span class="pt-category">Mobile</span>
+              <h4>System monitorowania stresu na podstawie danych biometrycznych w urządzeniach noszonych</h4>
+              <p>Aplikacja mobilna integrująca dane z smartwatchy (HR, HRV, akcelerometr) i klasyfikująca poziom stresu w czasie rzeczywistym.</p>
+              <div class="pt-tags">
+                <span class="pt-tag">Android/iOS</span><span class="pt-tag">Wearables</span><span class="pt-tag">ML</span>
+              </div>
+            </div>
+            <div class="proposed-topic-card">
+              <span class="pt-category">Mobile</span>
+              <h4>Augmented Reality w edukacji – interaktywny podręcznik 3D</h4>
+              <p>Projektowanie i implementacja aplikacji AR wspomagającej naukę wybranego przedmiotu STEM przy użyciu ARKit lub ARCore.</p>
+              <div class="pt-tags">
+                <span class="pt-tag">AR</span><span class="pt-tag">Unity</span><span class="pt-tag">EdTech</span>
+              </div>
+            </div>
+            <div class="proposed-topic-card">
+              <span class="pt-category">Mobile</span>
+              <h4>Gamifikacja jako narzędzie poprawy adherencji w aplikacjach zdrowotnych</h4>
+              <p>Projekt i badanie skuteczności mechanizmów grywalizacji (odznaki, streaki, rankingi) na zaangażowanie użytkowników aplikacji zdrowotnych.</p>
+              <div class="pt-tags">
+                <span class="pt-tag">Gamification</span><span class="pt-tag">mHealth</span><span class="pt-tag">UX</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topics-section">
+          <div class="topics-section-title">🧠 Psychoinformatyka i interakcja człowiek-komputer</div>
+          <div class="proposed-topics-grid">
+            <div class="proposed-topic-card">
+              <span class="pt-category">HCI</span>
+              <h4>Wpływ kroju pisma i kolorystyki interfejsu na obciążenie poznawcze użytkownika</h4>
+              <p>Badanie eksperymentalne wpływu cech typograficznych i paletowych UI na mierzalne wskaźniki obciążenia poznawczego (czas reakcji, NASA-TLX).</p>
+              <div class="pt-tags">
+                <span class="pt-tag">UX Research</span><span class="pt-tag">Cognitive Load</span><span class="pt-tag">A/B Testing</span>
+              </div>
+            </div>
+            <div class="proposed-topic-card">
+              <span class="pt-category">HCI</span>
+              <h4>Adaptacyjny interfejs użytkownika sterowany modelem psychologicznym</h4>
+              <p>System dynamicznie modyfikujący układ UI na podstawie modelu użytkownika zbudowanego z obserwacji zachowania (eye-tracking, kliknięcia).</p>
+              <div class="pt-tags">
+                <span class="pt-tag">Adaptive UI</span><span class="pt-tag">Eye Tracking</span><span class="pt-tag">User Modeling</span>
+              </div>
+            </div>
+            <div class="proposed-topic-card">
+              <span class="pt-category">HCI</span>
+              <h4>Analiza sentymentu opinii o aplikacjach mobilnych w sklepach cyfrowych</h4>
+              <p>Budowa pipeline'u NLP do automatycznej analizy recenzji użytkowników App Store / Google Play w celu identyfikacji wzorców satysfakcji.</p>
+              <div class="pt-tags">
+                <span class="pt-tag">Sentiment Analysis</span><span class="pt-tag">NLP</span><span class="pt-tag">Python</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topics-section">
+          <div class="topics-section-title">🤖 Robotyka i systemy autonomiczne</div>
+          <div class="proposed-topics-grid">
+            <div class="proposed-topic-card">
+              <span class="pt-category">Robotics</span>
+              <h4>Robot społeczny jako narzędzie wsparcia emocjonalnego dla osób starszych</h4>
+              <p>Projektowanie interakcji i badanie akceptowalności robota asystującego (np. NAO, Pepper) w kontekście domu opieki lub rehabilitacji.</p>
+              <div class="pt-tags">
+                <span class="pt-tag">Social Robotics</span><span class="pt-tag">HRI</span><span class="pt-tag">Affective Computing</span>
+              </div>
+            </div>
+            <div class="proposed-topic-card">
+              <span class="pt-category">Robotics</span>
+              <h4>Nawigacja autonomiczna z zastosowaniem reinforcement learning w środowisku symulowanym</h4>
+              <p>Trening agenta RL (PPO/SAC) do nawigacji w środowisku przeszkód (Gazebo/MuJoCo) i transfer polityki do robota rzeczywistego.</p>
+              <div class="pt-tags">
+                <span class="pt-tag">RL</span><span class="pt-tag">ROS2</span><span class="pt-tag">Sim2Real</span>
+              </div>
+            </div>
+            <div class="proposed-topic-card">
+              <span class="pt-category">Robotics</span>
+              <h4>Rozpoznawanie gestów jako interfejs sterowania robotem mobilnym</h4>
+              <p>System wizyjny oparty na MediaPipe lub sieci szkieletowej do intuicyjnego sterowania robotem gestykulacją dłoni w czasie rzeczywistym.</p>
+              <div class="pt-tags">
+                <span class="pt-tag">Computer Vision</span><span class="pt-tag">Gesture Recognition</span><span class="pt-tag">ROS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="topics-section">
+          <div class="topics-section-title">🔒 Bezpieczeństwo i algorytmika</div>
+          <div class="proposed-topics-grid">
+            <div class="proposed-topic-card">
+              <span class="pt-category">Security</span>
+              <h4>Detekcja ataków phishingowych z użyciem uczenia maszynowego</h4>
+              <p>Budowa i ewaluacja klasyfikatora URL / e-mail opartego na cechach leksykalnych i reputacyjnych do wykrywania prób phishingu.</p>
+              <div class="pt-tags">
+                <span class="pt-tag">Cybersecurity</span><span class="pt-tag">ML</span><span class="pt-tag">Python</span>
+              </div>
+            </div>
+            <div class="proposed-topic-card">
+              <span class="pt-category">Algorithms</span>
+              <h4>Optymalizacja harmonogramowania zadań w systemach wielordzeniowych algorytmami ewolucyjnymi</h4>
+              <p>Porównanie metaheurystyk (GA, PSO, DE) w problemie szeregowania zadań na wielu rdzeniach z ograniczeniami czasowymi.</p>
+              <div class="pt-tags">
+                <span class="pt-tag">Scheduling</span><span class="pt-tag">Metaheuristics</span><span class="pt-tag">C++/Python</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top:1rem;">
+          <strong>Nie widzisz interesującego tematu?</strong> Powyższa lista jest otwarta – jeśli masz własny pomysł zbliżony do obszarów moich badań (psychoinformatyka, robotyka afektywna, HCI, AI), zaproponuj go na konsultacjach. Chętnie wspólnie go doprecyzujemy.
+        </div>
+
+      </div><!-- /panel-topics -->
+
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const buttons = document.querySelectorAll('.tab-btn');
+      const panels = document.querySelectorAll('.tab-panel');
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          buttons.forEach(function (b) {
+            b.classList.remove('active');
+            b.setAttribute('aria-selected', 'false');
+          });
+          panels.forEach(function (p) { p.classList.remove('active'); });
+
+          btn.classList.add('active');
+          btn.setAttribute('aria-selected', 'true');
+          const panelId = btn.getAttribute('aria-controls');
+          document.getElementById(panelId).classList.add('active');
+        });
+      });
+    })();
+  </script>
+
+  <footer role="contentinfo">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand">dr inż. <span>Mateusz Pomianek</span></p>
+        <p class="footer-info">
+          Katedra Informatyki i Automatyki<br>
+          Politechnika Rzeszowska im. I. Łukasiewicza
+        </p>
+      </div>
+      <div class="footer-info" style="text-align:right">
+        <p>al. Powstańców Warszawy 12</p>
+        <p>35-959 Rzeszów, Polska</p>
+        <p style="margin-top:.4rem; color: var(--clr-cyan);">
+          <a href="https://prz.edu.pl" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:none;">prz.edu.pl</a>
+        </p>
+      </div>
+    </div>
+    <p class="footer-copy">© 2025 dr inż. Mateusz Pomianek · Politechnika Rzeszowska</p>
+  </footer>
+
+</body>
+</html>
