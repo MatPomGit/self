@@ -117,3 +117,11 @@ na dużych ekranach, dwiema na średnich i jedną na telefonach.
 
 Dawne odnośniki do usuniętych podstron zastąpiono przejściem do panelu
 `#publikacje`; archiwalna strona kieruje do tego samego panelu.
+
+## Wersja v1.1.1
+
+Opis profilu na stronie głównej zmieniono na syntetyczny opis kierunków badań.
+W kole kategorii zmieniono kolejność: Projekty zajmują poprzednie miejsce
+Badań, Publikacje miejsce Projektów, a Badania miejsce Publikacji.
+Publikacje są zwartą listą z kopiowaniem cytowania i BibTeX. Dane bibliograficzne
+pochodzą z `docs/data/publications.json`; nieznane pola nie są dopowiadane.
