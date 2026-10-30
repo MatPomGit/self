@@ -93,3 +93,9 @@ segmentów 200), z pięcioma odcinkami malejącej przezroczystości tworzącymi
 ogon. W sekcji Kontakt dodano odnośnik do profilu ORCID.
 Każda następna zmiana publikowanej strony wymaga zwiększenia numeru wersji
 w stopce i aktualizacji etykiety dostępności.
+
+## Wersja v1.0.2
+
+Promień animowanego obrysu zmniejszono z 203 do 200 jednostek SVG,
+aby pokrywał się z zewnętrzną krawędzią segmentów koła.
+Dostosowano również długość wzorca kreskowania do nowego obwodu.
