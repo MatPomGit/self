@@ -38,3 +38,11 @@ w `docs/images/`, a archiwalne strony w `docs/archive/`. Dokumentacja
 struktury znajduje się w `docs/STRUCTURE.md`. Główne pliki HTML pozostają
 w katalogu głównym, ponieważ obsługują publiczne adresy GitHub Pages.
 Materiały dydaktyczne są odrębnie w `materials/`.
+
+## Podstrony
+
+Strony publikacji i projektów są utrzymywane w `subpages/`.
+Podstrony stosują `<base href="../">`, aby odwołania do `docs/assets/`,
+strony głównej i materiałów były poprawne również z głębszej ścieżki.
+Na stronie startowej stopka ma czcionkę 0,43 rem (50% pierwotnych 0,86 rem).
+Kolumna tytułu na ekranach szerokich otrzymała udział 0,85 fr zamiast 0,55 fr.
