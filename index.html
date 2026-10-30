@@ -161,6 +161,8 @@
     .data-card p{margin:6px 0;color:var(--muted);font-size:.88rem;overflow-wrap:anywhere}
     .data-card .data-category{font-size:.76rem;color:var(--accent);font-weight:650}
     .data-card a{font-size:.85rem;color:var(--accent);overflow-wrap:anywhere}
+    .projects-source{font-size:.77rem;color:var(--muted);margin:18px 0 0}
+    .projects-source a{color:var(--accent)}
     .data-status{color:var(--muted)}
     .data-filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
     .data-filters button{border:1px solid var(--line);background:#fff;border-radius:5px;padding:5px 10px;cursor:pointer}
@@ -295,7 +297,7 @@
             <a class="seg" href="#projekty" data-tab="projekty" aria-label="Projekty">
               <g class="seg-body" style="--dx:5.3px;--dy:7.3px"><path d="M 420.21 291.80 A 200 200 0 0 1 230.00 430.00 L 230.00 310.00 A 80 80 0 0 0 306.08 254.72 Z"/><text class="seg-label" x="312.3" y="343.3">Projekty</text><text class="seg-sub" x="312.3" y="366.3">Badania i rozwój</text></g>
             </a>
-            <g class="subs"><line class="conn" x1="352.8" y1="399.1" x2="452.0" y2="399.1"/><rect class="bridge" x="352.8" y="385.1" width="99.2" height="28"/><a class="pill" href="#projekty" data-tab="projekty"><rect x="452.0" y="307.6" width="190" height="28"/><text x="462.0" y="321.6">ARIANA</text></a><a class="pill" href="#projekty" data-tab="projekty"><rect x="452.0" y="338.6" width="190" height="28"/><text x="462.0" y="352.6">PIAST</text></a><a class="pill" href="#projekty" data-tab="projekty"><rect x="452.0" y="369.6" width="190" height="28"/><text x="462.0" y="383.6">SEEKER</text></a><a class="pill" href="#projekty" data-tab="projekty"><rect x="452.0" y="400.6" width="190" height="28"/><text x="462.0" y="414.6">PolFEL</text></a><a class="pill" href="#projekty" data-tab="projekty"><rect x="452.0" y="431.6" width="190" height="28"/><text x="462.0" y="445.6">OPTOKRYPT</text></a><a class="pill" href="#projekty" data-tab="projekty"><rect x="452.0" y="462.6" width="190" height="28"/><text x="462.0" y="476.6">PROTECT</text></a></g>
+            <g class="subs"><line class="conn" x1="352.8" y1="399.1" x2="452.0" y2="399.1"/><rect class="bridge" x="352.8" y="385.1" width="99.2" height="28"/><a class="pill" href="#projekty" data-tab="projekty"><rect x="452.0" y="385.1" width="190" height="28"/><text x="462.0" y="399.1">Wszystkie projekty</text></a></g>
           </g>
           <g class="grp">
             <a class="seg" href="#publikacje" data-tab="publikacje" aria-label="Publikacje">
@@ -365,6 +367,7 @@
           <!-- Tytuł sekcji wyświetla wspólny nagłówek strony. -->
           <p class="data-status" id="projects-status" role="status">Wczytywanie projektów…</p>
           <div class="data-grid" id="projects-list"></div>
+          <p class="projects-source">Źródło: <a href="https://mpomianek.v.prz.edu.pl/praca-naukowa/uczestnictwo-w-organizacjach-i-projektach" target="_blank" rel="noopener noreferrer">Wykaz projektów na stronie uczelnianej PRz</a>.</p>
         </article>
 
         <article class="panel" id="publikacje" role="region" aria-label="Publikacje">
@@ -405,7 +408,7 @@
       </section>
     </main>
 
-    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.9">v1.2.9</span></footer>
+    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.10">v1.2.10</span></footer>
   </div>
 
   <script>
@@ -552,7 +555,8 @@
       const fragment=document.createDocumentFragment();
       records.forEach(entry=>{
         const card=makeElement('article','data-card');
-        card.append(makeElement('div','data-category',entry.category),makeElement('h3','',entry.title),makeElement('p','',entry.description));
+        if(entry.category)card.append(makeElement('div','data-category',entry.category));
+        card.append(makeElement('h3','',entry.title),makeElement('p','',entry.description));
         fragment.append(card);
       });
       list.replaceChildren(fragment);
