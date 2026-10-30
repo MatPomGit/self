@@ -114,3 +114,6 @@ Zachowano 17 wpisów projektowych (w tym 6 już z głównej strony) oraz 25 wpis
 Usunięto powielone szablony HTML z `subpages/`. Strona `materials/`
 pozostaje samodzielna i wykorzystuje lekki grid CSS z czterema kolumnami
 na dużych ekranach, dwiema na średnich i jedną na telefonach.
+
+Dawne odnośniki do usuniętych podstron zastąpiono przejściem do panelu
+`#publikacje`; archiwalna strona kieruje do tego samego panelu.
