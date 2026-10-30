@@ -192,3 +192,17 @@ Indeks materiałów rozszerzono o pobieranie 13 nowych plików: dokumentów
 PDF/PPTX i siedmiu wykładów robotyki afektywnej. Układ grid ma 3 kolumny
 na ekranach szerokich, 2 na tabletach i 1 na telefonach. Zachowano bezpośrednie
 odnośniki do istniejących zasobów i brak JavaScriptu w indeksie.
+
+## Wersja v1.2.6 (30.10.2026): jasny i ciemny motyw
+
+Przycisk w prawym górnym rogu strony głównej przełącza motyw. Ustawienie
+początkowe wynika z `prefers-color-scheme`. Ręczny wybór zapisuje klucz
+`self-theme` w `localStorage`; zablokowany magazyn nie blokuje sterowania.
+Wczesny skrypt w `<head>` ogranicza błysk niewłaściwego tła. Stan przycisku
+jest udostępniony przez `aria-pressed`.
+
+Ciemny motyw: grafit zamiast czerni, przygaszona biel, mniej nasycony
+akcent i jaśniejsze powierzchnie. Obejmuje też koło kategorii SVG.
+Zalecenia: https://blog.edugrafia.pl/kilka-porad-przy-projektowaniu-ciemnych-interfejsow/
+
+Katalog `materials/` pozostaje odrębną stroną tekstową bez JavaScriptu.
