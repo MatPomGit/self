@@ -42,3 +42,16 @@ w indeksie, obecność stron laboratoriów oraz brak usuniętej infrastruktury a
 Skrypt powłoki weryfikuje osobne zasoby interfejsu witryny.
 
 Szczegółowy opis katalogów: [STRUCTURE.md](STRUCTURE.md).
+
+## Archiwum i kontrola techniczna
+
+Historyczna wersja strony znajduje się w `archive/index_legacy_2026.html`.
+Przekierowanie `index_old.html` przeniesiono do `archive/index_old.html`.
+Dawny adres `/self/index_old.html` nie jest już publikowany.
+
+Po przeglądzie `REVIEW_TASKS.md` stwierdzono: poprawiono wcześniej literówkę
+w tytule publikacji, a `applyTheme()` synchronizuje `aria-selected` i `active`.
+Komentarz animacji przewijania uzgodniono z wartością 416 ms. Test statyczny
+`tests/theme_switcher_static_check.sh` kontroluje te dwie reguły.
+Nie przeprowadzono testów E2E. Archiwalne skrypty nie są używane przez
+obecną stronę główną.
