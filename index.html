@@ -146,14 +146,19 @@
     .data-filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
     .data-filters button{border:1px solid var(--line);background:#fff;border-radius:5px;padding:5px 10px;cursor:pointer}
     .data-filters button[aria-pressed="true"]{background:var(--accent);color:#fff}
-    .publication-list{list-style:decimal;padding-left:22px;margin:16px 0}
-    .publication-item{padding:10px 0;border-bottom:1px solid var(--line);display:list-item}
-    .publication-title{font-size:.94rem;font-weight:650;line-height:1.35}
-    .publication-meta{font-size:.79rem;color:var(--muted);margin-top:2px;line-height:1.4}
-    .publication-actions{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin-top:6px}
-    .publication-actions button,.publication-actions a{font:inherit;font-size:.75rem;padding:3px 8px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--accent);text-decoration:none;cursor:pointer}
+    .publication-list{list-style:decimal;padding-left:20px;margin:8px 0}
+    .publication-item{padding:5px 0;border-bottom:1px solid var(--line);display:list-item}
+    .publication-title{font-size:.87rem;font-weight:600;line-height:1.3}
+    .publication-meta{font-size:.72rem;color:var(--muted);margin-top:1px;line-height:1.3}
+    .publication-actions{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-top:3px}
+    .publication-actions button,.publication-actions a{font:inherit;font-size:.69rem;padding:2px 6px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--accent);text-decoration:none;cursor:pointer}
     .publication-actions button:hover,.publication-actions a:hover{border-color:var(--accent)}
     .citation-status{font-size:.75rem;color:var(--muted)}
+    .progress-list{margin-top:12px}
+    .progress-list p{font-size:.82rem;color:var(--muted)}
+    .progress-list ul{padding-left:20px;margin:8px 0}
+    .progress-list li{padding:6px 0;border-bottom:1px solid var(--line)}
+    .progress-list a{color:var(--accent);font-weight:600}
     .workspace.visible{width:100%}
     @media(max-width:860px){
       .intro{grid-template-columns:1fr;gap:12px}
@@ -282,9 +287,11 @@
             <button type="button" data-filter="journal" aria-pressed="false">Czasopisma</button>
             <button type="button" data-filter="conference" aria-pressed="false">Konferencje</button>
             <button type="button" data-filter="patent" aria-pressed="false">Patenty</button>
+            <button type="button" data-filter="progress" aria-pressed="false">In progress</button>
           </div>
           <p id="citation-status" role="status" class="citation-status" aria-live="polite"></p>
           <ol class="publication-list" id="publications-list"></ol>
+          <div id="progress-list" class="progress-list" hidden></div>
         </article>
 
         <article class="panel" id="kontakt" role="region" aria-label="Kontakt">
@@ -298,7 +305,7 @@
       </section>
     </main>
 
-    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.1.4">v1.1.4</span></footer>
+    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.1.5">v1.1.5</span></footer>
   </div>
 
   <script>
@@ -462,9 +469,26 @@
       });
       list.replaceChildren(fragment);
     }
+    const publicArcPages=[["ARC S4D TAM","https://matpomgit.github.io/arc-s4d-tam/"],["ARC RGBT","https://matpomgit.github.io/arc-rgbt/"],["ARC RVI","https://matpomgit.github.io/arc-rvi/"],["ARC DERA HRI","https://matpomgit.github.io/arc-dera-hri/"],["ARC Affective","https://matpomgit.github.io/arc-affective/"]];
+    function renderProgress(){
+      const target=document.getElementById('progress-list');
+      const intro=makeElement('p','', 'Publiczne strony projektów badawczych ARC. Prace w toku; poniższa lista nie oznacza zaakceptowanych publikacji.');
+      const list=document.createElement('ul');
+      publicArcPages.forEach(([title,url])=>{
+        const li=document.createElement('li');
+        const link=makeElement('a','',title);
+        link.href=url;link.target='_blank';link.rel='noopener noreferrer';
+        li.append(link);list.append(li);
+      });
+      target.replaceChildren(intro,list);
+    }
+    renderProgress();
     document.querySelectorAll('#publication-filters button').forEach(button=>button.addEventListener('click',()=>{
       document.querySelectorAll('#publication-filters button').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
-      renderPublications(button.dataset.filter);
+      const progress=button.dataset.filter==='progress';
+      document.getElementById('publications-list').hidden=progress;
+      document.getElementById('progress-list').hidden=!progress;
+      if(!progress)renderPublications(button.dataset.filter);
     }));
     loadData('docs/data/projects.json','projects-list','projects-status',renderProjects);
     loadData('docs/data/publications.json','publications-list','publications-status',records=>{publicationRecords=records;renderPublications()});

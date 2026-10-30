@@ -144,3 +144,11 @@ paneli i poprawiono etykiety dostępności sekcji.
 Opis zakładki Badania zastąpiono rozbudowaną autobiograficzną prezentacją
 profilu naukowego, kompetencji inżynierskich i robotyki afektywnej na podstawie
 tekstu właściciela. Zrezygnowano z listy określanej jako „specjalizacje”.
+
+## Wersja v1.1.5
+
+Publikacje: ciaśniejsza lista, nowy filtr `In progress` zawierający linki
+wyłącznie do pięciu publicznych stron ARC (strony projektów, bez sugerowania
+statusu recenzowanej publikacji). Przegląd wykazu uczelnianego PRz wykazał
+25 pozycji odpowiadających 25 pozycjom JSON. Ostatnia pozycja uczelnianego
+wykazu podaje w treści rok 2017 przy nagłówku 2016; zachowano dane pierwotne.
