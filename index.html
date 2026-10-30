@@ -411,19 +411,25 @@
     }
     let publicationRecords=[];
     function citationText(entry){
-      return [entry.authors||'',entry.year?'('+entry.year+').':'',entry.title+'.',entry.metadata||''].filter(Boolean).join(' ').replace(/\\s+/g,' ').trim();
+      return [entry.authors||'',entry.year?'('+entry.year+').':'',entry.title+'.',entry.metadata||''].filter(Boolean).join(' ').replace(/\s+/g,' ').trim();
     }
     function bibtexKey(entry,index){
-      const last=(entry.authors||'author').split(',')[0].trim().split(' ')[0].normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-zA-Z0-9]/g,'').toLowerCase();
+      const last=(entry.authors||'author').split(',')[0].trim().split(' ')[0].normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zA-Z0-9]/g,'').toLowerCase();
       return (last||'author')+(entry.year||'nd')+'_'+(index+1);
     }
-    function bibtexEscape(text){
-      return String(text||'').replace(/\\\\/g,'\\\\textbackslash{}').replace(/[{}]/g,char=>'\\\\'+char);
+    function bibtexEscape(value){
+      return String(value||'').replace(/\\/g,'\\textbackslash{}').replace(/[{}]/g,char=>'\\'+char);
+    }
+    function bibtexAuthors(authors){
+      return String(authors||'').split(',').map(name=>name.trim()).filter(Boolean).map(name=>{
+        const parts=name.match(/^(.+?)\s+((?:[A-ZĄĆĘŁŃÓŚŹŻ]\.)+)$/u);
+        return parts?parts[1]+', '+parts[2]:name;
+      }).join(' and ');
     }
     function bibtexText(entry,index){
       const type={journal:'article',conference:'inproceedings',patent:'misc'}[entry.type]||'misc';
-      const props=[['title',entry.title],['year',entry.year],['author',entry.authors],['note',entry.metadata],['url',entry.link]].filter(([key,value])=>value!=null&&String(value).trim());
-      return '@'+type+'{'+bibtexKey(entry,index)+',\\n'+props.map(([key,value])=>'  '+key+' = {'+bibtexEscape(value)+'}').join(',\\n')+'\\n}';
+      const props=[['title',entry.title],['year',entry.year],['author',bibtexAuthors(entry.authors)],['note',entry.metadata],['url',entry.link]].filter(([key,value])=>value!=null&&String(value).trim());
+      return '@'+type+'{'+bibtexKey(entry,index)+',\n'+props.map(([key,value])=>'  '+key+' = {'+bibtexEscape(value)+'}').join(',\n')+'\n}';
     }
     async function copyCitation(content,button){
       try{
@@ -446,7 +452,7 @@
         const meta=makeElement('div','publication-meta',[entry.authors,entry.year,entry.metadata].filter(Boolean).join(' · '));
         body.append(name,meta);
         const actions=makeElement('div','publication-actions');
-        if(entry.link&&/^https:\\/\\//.test(entry.link)){
+        if(entry.link&&/^https:\/\//.test(entry.link)){
           const link=makeElement('a','',entry.linkText||'Źródło');
           link.href=entry.link;link.target='_blank';link.rel='noopener noreferrer';
           actions.append(link);
