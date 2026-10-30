@@ -29,6 +29,8 @@ class MaterialsTests(unittest.TestCase):
     def test_index_links_resolve(self):
         html = (MATERIALS / "index.html").read_text(encoding="utf-8")
         self.assertNotIn("<script", html)
+        self.assertIn("font:14px/1.5", html)
+        self.assertIn("a:focus-visible", html)
         self.assertNotIn("library/", html)
         parser = Anchors()
         parser.feed(html)
