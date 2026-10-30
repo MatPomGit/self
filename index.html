@@ -85,7 +85,7 @@
     .contact strong{display:block;margin-bottom:4px}
     .contact span,.contact a{color:var(--muted)}
     .contact a:hover{color:var(--accent)}
-    footer{padding:24px 0 36px;border-top:1px solid var(--line);color:var(--muted);font-size:.6rem}
+    footer{padding:24px 0 36px;border-top:1px solid var(--line);color:var(--muted);font-size:.6rem;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 
     @media(max-width:860px){
       .intro{grid-template-columns:1fr;gap:28px}
@@ -108,6 +108,7 @@
     .intro>div:first-child{transform:translateY(-42px)}
     .wheel{width:min(132%,1003px,calc((100dvh - 148px)*1.98));max-width:none}
     footer{padding:clamp(9px,1.5vh,18px) 0}
+    .site-version{color:var(--muted);opacity:.55;white-space:nowrap;margin-left:auto;font-variant-numeric:tabular-nums}
     /* Nie zamykaj wysuniętych odnośników natychmiast po opuszczeniu segmentu. */
     .subs{visibility:hidden;opacity:0;pointer-events:none;transition:opacity .2s ease,visibility 0s linear .2s}
     .wide .subs{display:block}
@@ -259,7 +260,7 @@
       </section>
     </main>
 
-    <footer>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</footer>
+    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.0.0">v1.0.0</span></footer>
   </div>
 
   <script>

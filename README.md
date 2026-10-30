@@ -64,3 +64,10 @@ Podświetlenie głównej kategorii jest utrzymywane przez klasę `.grp.open`
 podczas przemieszczania kursora między podkategoriami; zamknięcie pozostaje
 opóźnione o 650 ms. Podtytuły wewnątrz głównych segmentów nadal reagują
 wyłącznie na najechanie lub fokus samego segmentu.
+
+## Wersjonowanie witryny
+
+Stopka `index.html` zawiera numer wersji po prawej stronie, obecnie `v1.0.0`.
+To pierwsza jawnie oznaczona wersja witryny; wcześniejsze wydania nie miały
+numeru wersji. Przy kolejnych publikowanych zmianach należy aktualizować
+numer w widocznym tekście oraz etykiecie dostępności `aria-label`.
