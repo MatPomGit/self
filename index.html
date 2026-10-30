@@ -20,7 +20,7 @@
     :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
     .page{width:min(1200px,calc(100% - 40px));margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
     header{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:28px 0;border-bottom:1px solid var(--line)}
-    .home{text-decoration:none;font-family:var(--serif);font-size:1.2rem;font-weight:700;border-radius:4px}
+    .home{margin-left:14px;text-decoration:none;font-family:var(--serif);font-size:1.2rem;font-weight:700;border-radius:4px}
     .affil{color:var(--muted);font-size:.92rem;text-align:right}
     main{flex:1;padding:48px 0 32px}
 
@@ -64,7 +64,7 @@
     .tab{border:0;background:none;padding:12px 0;color:var(--muted);white-space:nowrap;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px}
     .tab:hover{color:var(--text)}
     .tab[aria-selected="true"]{color:var(--accent);font-weight:650;border-bottom-color:var(--accent)}
-    .panel{display:none;padding-top:32px}
+    .panel{display:none;padding-top:12px}
     .panel.active{display:block}
     h2{margin:0 0 20px;font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.1rem);letter-spacing:-.01em}
     h3{margin:40px 0 4px;font-family:var(--serif);font-size:1.25rem}
@@ -232,10 +232,7 @@
       </section>
 
       <section class="workspace" id="informacje" aria-label="Informacje szczegółowe">
-        <button class="back" id="back" type="button">← Strona główna</button>
-        <div class="tabs" role="tablist" aria-label="Kategorie strony"><button class="tab" role="tab" id="t-studenci" aria-controls="studenci" aria-selected="false" data-tab="studenci">Dla studentów</button><button class="tab" role="tab" id="t-badania" aria-controls="badania" aria-selected="false" data-tab="badania">Badania</button><button class="tab" role="tab" id="t-projekty" aria-controls="projekty" aria-selected="false" data-tab="projekty">Projekty</button><button class="tab" role="tab" id="t-publikacje" aria-controls="publikacje" aria-selected="false" data-tab="publikacje">Publikacje</button><button class="tab" role="tab" id="t-kontakt" aria-controls="kontakt" aria-selected="false" data-tab="kontakt">Kontakt</button></div>
-
-        <article class="panel" id="studenci" role="tabpanel" aria-labelledby="t-studenci">
+<article class="panel" id="studenci" role="region" aria-label="Dla studentów">
           <h2>Dla studentów</h2>
           <div class="facts">
             <div class="fact"><strong>Materiały dydaktyczne</strong><span>Instrukcje, prezentacje, ćwiczenia i materiały dodatkowe są dostępne na stronie uczelnianej oraz w repozytoriach przypisanych do konkretnych zajęć.</span></div>
@@ -255,7 +252,7 @@
           <div class="links"><a class="link" href="materials/">Materiały dydaktyczne</a></div>
         </article>
 
-        <article class="panel" id="badania" role="tabpanel" aria-labelledby="t-badania">
+        <article class="panel" id="badania" role="region" aria-label="Badania">
           <h2>Profil badawczy</h2>
           <div class="research-intro">
             <p class="research-lead">Zajmuję się projektowaniem inteligentnych systemów, które analizują człowieka i jego otoczenie, interpretują sygnały percepcyjne i fizjologiczne oraz dostosowują sposób interakcji do aktualnej sytuacji.</p>
@@ -273,13 +270,13 @@
           <p class="research-summary"><strong>Wspólny cel:</strong> tworzenie i ocena systemów technicznych, które lepiej rozumieją człowieka, efektywniej współpracują z użytkownikiem i mogą być rzetelnie testowane w powtarzalnych warunkach badawczych.</p>
         </article>
 
-        <article class="panel" id="projekty" role="tabpanel" aria-labelledby="t-projekty">
+        <article class="panel" id="projekty" role="region" aria-label="Projekty">
           <h2>Projekty</h2>
           <p class="data-status" id="projects-status" role="status">Wczytywanie projektów…</p>
           <div class="data-grid" id="projects-list"></div>
         </article>
 
-        <article class="panel" id="publikacje" role="tabpanel" aria-labelledby="t-publikacje">
+        <article class="panel" id="publikacje" role="region" aria-label="Publikacje">
           <h2>Publikacje</h2>
           <p class="data-status" id="publications-status" role="status">Wczytywanie publikacji…</p>
           <div class="data-filters" id="publication-filters" aria-label="Filtruj publikacje">
@@ -292,7 +289,7 @@
           <ol class="publication-list" id="publications-list"></ol>
         </article>
 
-        <article class="panel" id="kontakt" role="tabpanel" aria-labelledby="t-kontakt">
+        <article class="panel" id="kontakt" role="region" aria-label="Kontakt">
           <h2>Kontakt</h2>
           <div class="contact">
             <div><strong>Adres</strong><span>Katedra Informatyki i Automatyki<br>Politechnika Rzeszowska<br>al. Powstańców Warszawy 12<br>35 959 Rzeszów<br>pokój D.103</span></div>
@@ -303,12 +300,11 @@
       </section>
     </main>
 
-    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.1.2">v1.1.2</span></footer>
+    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.1.3">v1.1.3</span></footer>
   </div>
 
   <script>
     const workspace=document.querySelector('#informacje');
-    const tabs=[...document.querySelectorAll('.tab')];
     const panels=[...document.querySelectorAll('.panel')];
     const start=document.querySelector('#start');
     const wheel=document.querySelector('#wheel');
@@ -362,7 +358,6 @@
     function showHome(){
       start.classList.remove('hidden');
       workspace.classList.remove('visible');
-      tabs.forEach(t=>t.setAttribute('aria-selected','false'));
       panels.forEach(p=>p.classList.remove('active'));
       history.replaceState(null,'',location.pathname+location.search);
       window.scrollTo({top:0,behavior:'smooth'});
@@ -373,7 +368,6 @@
       if(!panels.some(p=>p.id===id)) return;
       start.classList.add('hidden');
       workspace.classList.add('visible');
-      tabs.forEach(t=>t.setAttribute('aria-selected',String(t.dataset.tab===id)));
       panels.forEach(p=>p.classList.toggle('active',p.id===id));
       history.replaceState(null,'',`#${id}`);
       if(scroll) window.scrollTo({top:0,behavior:'smooth'});
@@ -381,7 +375,6 @@
 
     document.querySelectorAll('[data-tab]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();activateTab(el.dataset.tab)}));
     document.querySelector('#home-link').addEventListener('click',e=>{e.preventDefault();showHome()});
-    document.querySelector('#back').addEventListener('click',showHome);
 
 
     /* Dane publikacji i projektów: oddzielne źródła JSON, wspólny styl strony. */

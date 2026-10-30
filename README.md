@@ -131,3 +131,10 @@ pochodzą z `docs/data/publications.json`; nieznane pola nie są dopowiadane.
 Zakładkę Badania uzupełniono o opis profilu naukowego, metod pracy,
 sześć rozwiniętych specjalizacji i cel integrujący kierunki badawcze.
 Zachowano spójność wizualną ze stroną główną.
+
+## Wersja v1.1.3
+
+Na widokach szczegółowych usunięto powieloną nawigację: przycisk
+„Strona główna” i poziome zakładki. Powrót zapewnia nazwisko w nagłówku.
+Nagłówek przesunięto o 14 px w prawo; zmniejszono odstęp nad zawartością
+paneli i poprawiono etykiety dostępności sekcji.
