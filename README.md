@@ -27,3 +27,6 @@ Podtytuły w obrębie segmentów pojawiają się tylko po najechaniu na sam
 segment lub ustawieniu na nim fokusu.
 
 Poprzedni `index.html` zachowano w `archive/index_previous_20261030.html`.
+
+Portret na stronie głównej korzysta z `docs/self.png` i ma okrągłą ramę CSS.
+Plik jest zasobem strony osobistej, nie należy go przenosić do `materials/`.
