@@ -56,7 +56,7 @@ class WiRRAssetsTests(unittest.TestCase):
     @unittest.skipUnless(BASH, "Bash not installed")
     def test_script_syntax_and_help(self):
         for file in ("bash-vid.sh", "bash-game.sh", "bash-rpg"):
-            path = ROOT / "downloads/bash" / file
+            path = ROOT / "materials/bash" / file
             with self.subTest(file=file):
                 syntax = subprocess.run([BASH, "-n", str(path)], capture_output=True, text=True, timeout=5)
                 self.assertEqual(syntax.returncode, 0, syntax.stderr)
@@ -65,7 +65,7 @@ class WiRRAssetsTests(unittest.TestCase):
 
     @unittest.skipUnless(BASH, "Bash not installed")
     def test_noninteractive_execution(self):
-        work = ROOT / "downloads/bash"
+        work = ROOT / "materials/bash"
         commands = (
             (["bash-vid.sh", "--fast"], "", "Koniec pokazu"),
             (["bash-game.sh"], "", "koniec wejścia"),
