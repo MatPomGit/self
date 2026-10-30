@@ -28,10 +28,10 @@ class WiRRAssetsTests(unittest.TestCase):
                 self.assertIn(html["status"], ("draft", "ready"))
                 self.assertEqual(pdf["category"], "WiRR")
                 self.assertEqual(html["category"], "WiRR")
-                self.assertEqual(pdf["source"], f"downloads/wirr/w{n:02}.pdf")
+                self.assertEqual(pdf["source"], f"materials/wirr/w{n:02}.pdf")
                 if pdf["status"] == "ready":
                     self.assertTrue((ROOT / pdf["source"]).is_file())
-                self.assertEqual(html["source"], f"lectures/wirr/w{n:02}.html")
+                self.assertEqual(html["source"], f"materials/wirr/lectures/w{n:02}.html")
                 self.assertTrue((ROOT / html["source"]).is_file())
                 self.assertTrue((ROOT / "p" / ident / "index.html").is_file())
                 self.assertTrue((ROOT / "h" / ident / "index.html").is_file())
@@ -40,13 +40,13 @@ class WiRRAssetsTests(unittest.TestCase):
         for ident, basename in (("02", "bash-vid.sh"), ("03", "bash-game.sh"), ("04", "bash-rpg")):
             with self.subTest(basename=basename):
                 entry = self.by_id[("f", ident)]
-                self.assertEqual(entry["source"], f"downloads/bash/{basename}")
+                self.assertEqual(entry["source"], f"materials/bash/{basename}")
                 self.assertEqual(entry["status"], "ready")
                 self.assertTrue((ROOT / entry["source"]).is_file())
                 self.assertTrue((ROOT / "f" / ident / "index.html").is_file())
 
     def test_wirr_landing_only_uses_local_resources(self):
-        html = (ROOT / "wirr/index.html").read_text(encoding="utf-8")
+        html = (ROOT / "materials/wirr/index.html").read_text(encoding="utf-8")
         self.assertNotIn("github.com/", html)
         self.assertNotRegex(html, r'href="https?://')
         self.assertEqual(len(re.findall(r'<th scope="row">Wykład ', html)), 7)
