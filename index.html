@@ -106,7 +106,7 @@
     main{display:flex;flex-direction:column;justify-content:center;min-height:0;padding:clamp(8px,2vh,24px) 0}
     .intro{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(12px,2vw,24px)}
     .intro>div:first-child{transform:translateY(-42px)}
-    .wheel{width:min(132%,1003px,calc((100dvh - 148px)*1.98));max-width:none}
+    .wheel{width:min(116%,882px,calc((100dvh - 184px)*1.74));max-width:none;transform:translateY(-20px)}
     footer{padding:clamp(9px,1.5vh,18px) 0}
     .site-version{color:var(--muted);opacity:.55;white-space:nowrap;margin-left:auto;font-variant-numeric:tabular-nums}
     /* Nie zamykaj wysuniętych odnośników natychmiast po opuszczeniu segmentu. */
@@ -126,12 +126,12 @@
     @media(max-width:860px){
       .intro{grid-template-columns:1fr;gap:12px}
       .intro>div:first-child{transform:translateY(-20px)}
-      .wheel{width:min(100%,528px,calc((100dvh - 300px)*1.32));max-width:528px}
+      .wheel{width:min(100%,465px,calc((100dvh - 315px)*1.16));max-width:465px;transform:translateY(-8px)}
       .subs{display:none!important}
       .seg-sub{font-size:11px}
     }
     @media(max-height:600px) and (min-width:861px){
-      .wheel{width:min(132%,871px,calc((100dvh - 106px)*1.98))}
+      .wheel{width:min(116%,766px,calc((100dvh - 146px)*1.74))}
       .lead{margin-top:10px}
       .role{margin-top:8px}
     }
