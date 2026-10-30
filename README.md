@@ -178,3 +178,10 @@ z linkiem i punktacją (nieweryfikowane wartości jako „do weryfikacji”).
 W nagłówku sekcji Publikacje obok nazwiska pojawia się jej tytuł.
 Ocena następnego kroku ma charakter redakcyjny; nie oznacza stanu potwierdzonego
 przez ukończone eksperymenty. Punktację podaje się wg wykazu 2024, nie nowego 2027.
+
+## Wersja v1.2.4
+
+Pasek postępu przeniesiono do wiersza tytułu manuskryptu i wyrównano
+do prawej krawędzi; usunięto podwójny tytuł panelu Publikacje.
+Nagłówek zawiera pogrubione „/ Publikacje”, a etykieta czasopisma brzmi
+„Docelowe czasopismo”.
