@@ -30,6 +30,8 @@ class MaterialsTests(unittest.TestCase):
         self.assertNotIn("<script", html)
         self.assertIn("font:14px/1.5", html)
         self.assertIn("a:focus-visible", html)
+        self.assertIn("class=\"materials-grid\"", html)
+        self.assertEqual(html.count('class="materials-group"'), 4)
         self.assertNotIn("library/", html)
         parser = Anchors()
         parser.feed(html)

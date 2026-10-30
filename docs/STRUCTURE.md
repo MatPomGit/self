@@ -7,8 +7,8 @@ są od nich rozdzielone.
 | Ścieżka | Funkcja |
 | --- | --- |
 | `index.html` | Główna strona witryny |
-| `subpages/projects.html`, `subpages/publications.html` | Podstrony projektów i publikacji |
-| `materials/index.html` | Indeks aktualnych materiałów, statyczne listy HTML |
+| `docs/data/projects.json`, `docs/data/publications.json` | Dane projektów i publikacji dla paneli strony głównej |
+| `materials/index.html` | Indeks aktualnych materiałów, responsywny grid CSS |
 | `materials/<przedmiot>/index.html` | Strony czterech pozostałych przedmiotów |
 | `materials/ndp_lab_02.html` do `materials/ndp_lab_06.html` | Pięć laboratoriów NDP |
 | `materials/wirr_blok_01.html` do `materials/wirr_blok_04.html` | Cztery bloki WiRR |
@@ -56,5 +56,4 @@ nie zastępuje on testów E2E.
 zdjęcia, `docs/archive/` dawne wersje strony. Publiczny adres głównej strony HTML
 w katalogu głównym i materiały w `materials/` nie zmieniają się.
 
-Podstrony projektów i publikacji przechowuje się w `subpages/`, z bazą
-linków wskazującą katalog główny. Nie przenosi się plików studenckich z `materials/`.
+Projekty i publikacje są prezentowane bez osobnych podstron HTML z danych JSON w `docs/data/`. Materiały studenckie pozostają w `materials/`.

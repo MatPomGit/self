@@ -136,6 +136,16 @@
     @keyframes orbit-clockwise{to{transform:rotate(360deg)}}
     .wheel.is-engaged .idle-orbit,.intro.hidden .idle-orbit{animation-play-state:paused;opacity:0}
     @media(prefers-reduced-motion:reduce){.idle-orbit{animation:none;opacity:0}}
+    .data-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:12px;margin-top:18px}
+    .data-card{padding:16px;border:1px solid var(--line);border-radius:8px;min-width:0}
+    .data-card h3{font:650 1rem/1.4 var(--sans);margin:4px 0 8px}
+    .data-card p{margin:6px 0;color:var(--muted);font-size:.88rem;overflow-wrap:anywhere}
+    .data-card .data-category{font-size:.76rem;color:var(--accent);font-weight:650}
+    .data-card a{font-size:.85rem;color:var(--accent);overflow-wrap:anywhere}
+    .data-status{color:var(--muted)}
+    .data-filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .data-filters button{border:1px solid var(--line);background:#fff;border-radius:5px;padding:5px 10px;cursor:pointer}
+    .data-filters button[aria-pressed="true"]{background:var(--accent);color:#fff}
     .workspace.visible{width:100%}
     @media(max-width:860px){
       .intro{grid-template-columns:1fr;gap:12px}
@@ -196,7 +206,7 @@
             <a class="seg" href="#publikacje" data-tab="publikacje" aria-label="Publikacje">
               <g class="seg-body" style="--dx:-8.6px;--dy:-2.8px"><path d="M 39.79 291.80 A 200 200 0 0 1 112.44 68.20 L 182.98 165.28 A 80 80 0 0 0 153.92 254.72 Z"/><text class="seg-label" x="96.9" y="186.7">Publikacje</text><text class="seg-sub" x="96.9" y="209.7">Dorobek naukowy</text></g>
             </a>
-            <g class="subs"><line class="conn" x1="31.2" y1="165.4" x2="8.0" y2="165.4"/><rect class="bridge" x="8.0" y="151.4" width="23.2" height="28"/><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="89.4" width="190" height="28"/><text x="-172.0" y="103.4">Digital twin, 2025</text></a><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="120.4" width="190" height="28"/><text x="-172.0" y="134.4">Emocje z twarzy, 2025</text></a><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="151.4" width="190" height="28"/><text x="-172.0" y="165.4">Patent USA</text></a><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="182.4" width="190" height="28"/><text x="-172.0" y="196.4">Eye tracking, 2021</text></a><a class="pill" href="subpages/publications.html" target="_blank" rel="noreferrer"><rect x="-182.0" y="213.4" width="190" height="28"/><text x="-172.0" y="227.4">Pełna lista</text></a></g>
+            <g class="subs"><line class="conn" x1="31.2" y1="165.4" x2="8.0" y2="165.4"/><rect class="bridge" x="8.0" y="151.4" width="23.2" height="28"/><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="89.4" width="190" height="28"/><text x="-172.0" y="103.4">Digital twin, 2025</text></a><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="120.4" width="190" height="28"/><text x="-172.0" y="134.4">Emocje z twarzy, 2025</text></a><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="151.4" width="190" height="28"/><text x="-172.0" y="165.4">Patent USA</text></a><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="182.4" width="190" height="28"/><text x="-172.0" y="196.4">Eye tracking, 2021</text></a><a class="pill" href="#publikacje" data-tab="publikacje"><rect x="-182.0" y="213.4" width="190" height="28"/><text x="-172.0" y="227.4">Pełna lista</text></a></g>
           </g>
           <circle class="idle-orbit" cx="230" cy="230" r="200" aria-hidden="true"/>
           <circle class="idle-orbit" cx="230" cy="230" r="200" aria-hidden="true"/>
@@ -251,25 +261,20 @@
 
         <article class="panel" id="projekty" role="tabpanel" aria-labelledby="t-projekty">
           <h2>Projekty</h2>
-          <div class="rows">
-            <div class="row"><strong>ARIANA</strong><span>System do wielomodalnej analizy reakcji, afektu i aktywności neurologicznej.</span></div>
-            <div class="row"><strong>PIAST</strong><span>Konstelacja nanosatelitów do optoelektronicznego rozpoznania obrazowego.</span></div>
-            <div class="row"><strong>SEEKER</strong><span>Rozwój optoelektronicznych głowic naprowadzających.</span></div>
-            <div class="row"><strong>PolFEL</strong><span>Projekt polskiego lasera na swobodnych elektronach.</span></div>
-            <div class="row"><strong>OPTOKRYPT</strong><span>Technologie optyczne kryptologii kwantowej.</span></div>
-            <div class="row"><strong>PROTECT</strong><span>Badania nad biometrycznymi systemami kontroli granicznej.</span></div>
-          </div>
+          <p class="data-status" id="projects-status" role="status">Wczytywanie projektów…</p>
+          <div class="data-grid" id="projects-list"></div>
         </article>
 
         <article class="panel" id="publikacje" role="tabpanel" aria-labelledby="t-publikacje">
           <h2>Publikacje</h2>
-          <div class="rows">
-            <div class="row"><strong>Digital twin validation for MEMS based eye tracking systems</strong><span>Sensors, 2025. Modelowanie precyzji i walidacja cyfrowego bliźniaka systemu śledzenia wzroku.</span></div>
-            <div class="row"><strong>Comparative analysis of selected facial emotion recognition methods</strong><span>2025. Porównanie metod automatycznego rozpoznawania emocji z twarzy.</span></div>
-            <div class="row"><strong>System and methods for use in vision assessment</strong><span>Patent amerykański z zakresu oceny wzroku i okulistycznych biomarkerów zaburzeń neurodegeneracyjnych.</span></div>
-            <div class="row"><strong>MEMS mirror based eye tracking</strong><span>Metrology and Measurement Systems, 2021. Analiza wpływu parametrów systemu na dokładność estymacji położenia źrenicy.</span></div>
+          <p class="data-status" id="publications-status" role="status">Wczytywanie publikacji…</p>
+          <div class="data-filters" id="publication-filters" aria-label="Filtruj publikacje">
+            <button type="button" data-filter="all" aria-pressed="true">Wszystkie</button>
+            <button type="button" data-filter="journal" aria-pressed="false">Czasopisma</button>
+            <button type="button" data-filter="conference" aria-pressed="false">Konferencje</button>
+            <button type="button" data-filter="patent" aria-pressed="false">Patenty</button>
           </div>
-          <div class="links"><a class="link" href="https://matpomgit.github.io/self/publications.html" target="_blank" rel="noreferrer">Pełniejsza lista publikacji</a></div>
+          <div class="data-grid" id="publications-list"></div>
         </article>
 
         <article class="panel" id="kontakt" role="tabpanel" aria-labelledby="t-kontakt">
@@ -283,7 +288,7 @@
       </section>
     </main>
 
-    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.0.3">v1.0.3</span></footer>
+    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.1.0">v1.1.0</span></footer>
   </div>
 
   <script>
@@ -362,6 +367,63 @@
     document.querySelectorAll('[data-tab]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();activateTab(el.dataset.tab)}));
     document.querySelector('#home-link').addEventListener('click',e=>{e.preventDefault();showHome()});
     document.querySelector('#back').addEventListener('click',showHome);
+
+
+    /* Dane publikacji i projektów: oddzielne źródła JSON, wspólny styl strony. */
+    const makeElement=(tag,className,value)=>{
+      const element=document.createElement(tag);
+      if(className)element.className=className;
+      if(value!==undefined)element.textContent=value;
+      return element;
+    };
+    async function loadData(path,listId,statusId,render){
+      const status=document.getElementById(statusId);
+      try{
+        const response=await fetch(path);
+        if(!response.ok)throw new Error('HTTP '+response.status);
+        const records=await response.json();
+        if(!Array.isArray(records))throw new Error('Nieprawidłowy format danych');
+        render(records);
+        status.hidden=true;
+      }catch(error){
+        status.textContent='Nie udało się pobrać danych. Odśwież stronę, aby spróbować ponownie.';
+        console.error('Błąd wczytywania '+path,error);
+      }
+    }
+    function renderProjects(records){
+      const list=document.getElementById('projects-list');
+      const fragment=document.createDocumentFragment();
+      records.forEach(entry=>{
+        const card=makeElement('article','data-card');
+        card.append(makeElement('div','data-category',entry.category),makeElement('h3','',entry.title),makeElement('p','',entry.description));
+        fragment.append(card);
+      });
+      list.replaceChildren(fragment);
+    }
+    let publicationRecords=[];
+    function renderPublications(filter='all'){
+      const list=document.getElementById('publications-list');
+      const fragment=document.createDocumentFragment();
+      publicationRecords.filter(entry=>filter==='all'||entry.type===filter).forEach(entry=>{
+        const card=makeElement('article','data-card');
+        card.append(makeElement('div','data-category',String(entry.year||'')+' · '+({journal:'Czasopismo',conference:'Konferencja',patent:'Patent'}[entry.type]||entry.type)),makeElement('h3','',entry.title));
+        if(entry.authors)card.append(makeElement('p','',entry.authors));
+        if(entry.metadata)card.append(makeElement('p','',entry.metadata));
+        if(entry.link&&/^https:\/\//.test(entry.link)){
+          const link=makeElement('a','',entry.linkText||'Otwórz publikację');
+          link.href=entry.link;link.target='_blank';link.rel='noopener noreferrer';
+          card.append(link);
+        }else if(entry.linkText)card.append(makeElement('p','',entry.linkText));
+        fragment.append(card);
+      });
+      list.replaceChildren(fragment);
+    }
+    document.querySelectorAll('#publication-filters button').forEach(button=>button.addEventListener('click',()=>{
+      document.querySelectorAll('#publication-filters button').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
+      renderPublications(button.dataset.filter);
+    }));
+    loadData('docs/data/projects.json','projects-list','projects-status',renderProjects);
+    loadData('docs/data/publications.json','publications-list','publications-status',records=>{publicationRecords=records;renderPublications()});
 
     const requested=location.hash.slice(1);
     if(requested) activateTab(requested,false);

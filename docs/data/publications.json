@@ -1,0 +1,227 @@
+[
+  {
+    "year": 2025,
+    "type": "journal",
+    "title": "From Mechanical Instability to Virtual Precision: Digital Twin Validation for Next-Generation MEMS-Based Eye-Tracking Systems",
+    "authors": "Pomianek M. , Piszczek M., Stawarz P., Kucharczyk-Drab A.",
+    "metadata": "Sensors, t. 25, nr 20, s. 6460 · IF: 3.4 · MEiN: 100 pkt",
+    "link": "https://doi.org/10.3390/s25206460",
+    "linkText": "DOI: 10.3390/s25206460"
+  },
+  {
+    "year": 2025,
+    "type": "conference",
+    "title": "Comparative Analysis of Selected Facial Emotion Recognition Methods as Potential Tool for Emotional Disorders Automated Assessment in Terms of Remote Work Application",
+    "authors": "Zimnoch I., Rokita A., Matuła M., Kuczek W., Rydzik M., Pomianek M.",
+    "metadata": "3rd International Scientific Research Congress Book, Istanbul · MEiN: 20 pkt",
+    "link": null,
+    "linkText": "International Scientific Research Academy, 2025"
+  },
+  {
+    "year": 2025,
+    "type": "patent",
+    "title": "System and methods for use in vision assessment to determine refractive errors and neurodegenerative disorders by ocular biomarking features",
+    "authors": "Krukowski P., Piszczek M., Borowczyk K., Maciaszek D., Maciejewski M., Pomianek M.",
+    "metadata": "US20250090019A1 · 20 marca 2025 · MEiN: 100 pkt",
+    "link": "https://patents.google.com/patent/US20250090019A1",
+    "linkText": "US20250090019A1 · USPTO"
+  },
+  {
+    "year": 2024,
+    "type": "patent",
+    "title": "System and methods for use in vision assessment to determine refractive errors and neurodegenerative disorders by ocular biomarking features",
+    "authors": "Krukowski P., Piszczek M., Borowczyk K., Maciaszek D., Maciejewski M., Pomianek M.",
+    "metadata": "US12102387B2 · 10 stycznia 2024 · MEiN: 100 pkt",
+    "link": "https://patents.google.com/patent/US12102387B2",
+    "linkText": "US12102387B2 · USPTO"
+  },
+  {
+    "year": 2022,
+    "type": "journal",
+    "title": "Compensation of magnification variations in varifocal HMDs by using a virtual camera",
+    "authors": "Piszczek M. et al.",
+    "metadata": "Photonics Letters of Poland, t. 14, nr 2, s. 31–33 · IF: 0.8 · MEiN: 40 pkt",
+    "link": "https://doi.org/10.4302/plp.v14i2.1148",
+    "linkText": "DOI: 10.4302/plp.v14i2.1148"
+  },
+  {
+    "year": 2022,
+    "type": "journal",
+    "title": "Field-of-view correction in a VR HMD display with varifocal optics",
+    "authors": "Piszczek M. et al.",
+    "metadata": "Photonics Letters of Poland, t. 14, nr 2, s. 31–33 · IF: 0.8 · MEiN: 40 pkt",
+    "link": "https://doi.org/10.4302/PLP.V14I2.1148",
+    "linkText": "DOI: 10.4302/PLP.V14I2.1148"
+  },
+  {
+    "year": 2021,
+    "type": "journal",
+    "title": "MEMS mirror based eye tracking: simulation of the system parameter effect on the accuracy of pupil position estimation",
+    "authors": "Pomianek M. , Piszczek M., Maciejewski M.",
+    "metadata": "Metrology and Measurement Systems, t. 28, nr 4, s. 711–724 · IF: 1.610 · MEiN: 100 pkt",
+    "link": "https://doi.org/10.24425/mms.2021.137704",
+    "linkText": "DOI: 10.24425/mms.2021.137704"
+  },
+  {
+    "year": 2020,
+    "type": "journal",
+    "title": "The stability of the MEMS 2D mirror's operating point in terms of eye tracking systems",
+    "authors": "Pomianek M. , Piszczek M., Maciejewski M., Krukowski P.",
+    "metadata": "Photonics Letters of Poland, t. 12, nr 2, s. 43 · IF: 0.6 · MEiN: 40 pkt",
+    "link": "https://doi.org/10.4302/plp.v12i2.1016",
+    "linkText": "DOI: 10.4302/plp.v12i2.1016"
+  },
+  {
+    "year": 2020,
+    "type": "journal",
+    "title": "The importance of monitoring vergence eye movements for solutions using virtual technologies",
+    "authors": "Piszczek M., Pomianek M. , Maciejewski M., Jodłowski L., Krukowski P.",
+    "metadata": "Photonics Letters of Poland, t. 12, nr 2, s. 40 · IF: 0.6 · MEiN: 40 pkt",
+    "link": "https://doi.org/10.4302/plp.v12i2.1015",
+    "linkText": "DOI: 10.4302/plp.v12i2.1015"
+  },
+  {
+    "year": 2020,
+    "type": "journal",
+    "title": "Optoelectronic tracking system for shooting simulator - tests in a virtual reality application",
+    "authors": "Maciejewski M., Piszczek M., Pomianek M. , Pałka N.",
+    "metadata": "Photonics Letters of Poland, t. 12, nr 2, s. 61 · IF: 0.6 · MEiN: 40 pkt",
+    "link": "https://doi.org/10.4302/plp.v12i2.1025",
+    "linkText": "DOI: 10.4302/plp.v12i2.1025"
+  },
+  {
+    "year": 2020,
+    "type": "conference",
+    "title": "Pupil Position Estimation Error in an Eye Tracking System Based on the MEMS Mirror Scanning Method",
+    "authors": "Pomianek M. , Piszczek M., Maciejewski M., Krukowski P.",
+    "metadata": "Microelectronic Devices and Technologies, IFSA · MEiN: 20 pkt",
+    "link": null,
+    "linkText": "Microelectronic Devices and Technologies, s. 28–30, paź. 2020"
+  },
+  {
+    "year": 2020,
+    "type": "journal",
+    "title": "Design and evaluation of a SteamVR tracker for training",
+    "authors": "Maciejewski M., Piszczek M., Pomianek M. , Pałka N.",
+    "metadata": "Metrology and Measurement Systems, t. 27, nr 4, s. 601–614 · IF: 1.635 · MEiN: 100 pkt",
+    "link": "https://doi.org/10.24425/mms.2020.134841",
+    "linkText": "DOI: 10.24425/mms.2020.134841"
+  },
+  {
+    "year": 2020,
+    "type": "conference",
+    "title": "The Efficiency of Medical Volume Data Processing Using Virtual Reality",
+    "authors": "Pomianek M. , Piszczek M., Maciejewski M.",
+    "metadata": "CLEO 2020, Optica Publishing Group · MEiN: 20 pkt",
+    "link": "https://doi.org/10.1364/CLEO_AT.2020.JTU2C.9",
+    "linkText": "DOI: 10.1364/CLEO_AT.2020.JTU2C.9"
+  },
+  {
+    "year": 2019,
+    "type": "conference",
+    "title": "Objects tracking in virtual reality applications using SteamVR tracking system: selected issues",
+    "authors": "Maciejewski M., Piszczek M., Pomianek M. , Palka N.",
+    "metadata": "14th Conference on Integrated Optics, SPIE · MEiN: 20 pkt",
+    "link": "https://doi.org/10.1117/12.2537294",
+    "linkText": "DOI: 10.1117/12.2537294"
+  },
+  {
+    "year": 2018,
+    "type": "conference",
+    "title": "Testing the SteamVR trackers operation correctness with the OptiTrack system",
+    "authors": "Maciejewski M., Piszczek M., Pomianek M.",
+    "metadata": "Proceedings of SPIE, t. 10830 · MEiN: 20 pkt",
+    "link": "https://doi.org/10.1117/12.2502203",
+    "linkText": "DOI: 10.1117/12.2502203"
+  },
+  {
+    "year": 2018,
+    "type": "conference",
+    "title": "Manipulation of virtual 3D objects with the use of graphic tags and AR technologies",
+    "authors": "Piszczek M., Pomianek M. , Maciejewski M.",
+    "metadata": "13th Conference on Integrated Optics, SPIE · MEiN: 20 pkt",
+    "link": "https://doi.org/10.1117/12.2502201",
+    "linkText": "DOI: 10.1117/12.2502201"
+  },
+  {
+    "year": 2018,
+    "type": "conference",
+    "title": "Virtualization of the measurement system for the MIMO THz scanner",
+    "authors": "Piszczek M., Pomianek M. , Maciejewski M., Zagrajek P.",
+    "metadata": "13th Conference on Integrated Optics, SPIE · MEiN: 20 pkt",
+    "link": "https://doi.org/10.1117/12.2502202",
+    "linkText": "DOI: 10.1117/12.2502202"
+  },
+  {
+    "year": 2018,
+    "type": "conference",
+    "title": "Wirtualizacja systemu produkcyjnego dla koncepcji Przemysłu 4.0",
+    "authors": "Pomianek M. , Marek P., Maciejewski M., Szustakowski M.",
+    "metadata": "Wiedza i innowacje młodych naukowców 2017, Warszawa · MEiN: 20 pkt",
+    "link": null,
+    "linkText": "Wiedza i innowacje..., s. 271–280, 2018"
+  },
+  {
+    "year": 2018,
+    "type": "conference",
+    "title": "Photonic input-output devices used in virtual and augmented reality technologies",
+    "authors": "Piszczek M., Maciejewski M., Pomianek M.",
+    "metadata": "2018 Baltic URSI Symposium, IEEE · MEiN: 20 pkt",
+    "link": "https://doi.org/10.23919/URSI.2018.8406754",
+    "linkText": "DOI: 10.23919/URSI.2018.8406754"
+  },
+  {
+    "year": 2018,
+    "type": "conference",
+    "title": "Information potential of the 3D GIS application with the use of virtual technologies",
+    "authors": "Maciejewski M., Pomianek M. , Piszczek M.",
+    "metadata": "Earth Resources and Environmental Remote Sensing/GIS Applications IX, SPIE · MEiN: 20 pkt",
+    "link": "https://doi.org/10.1117/12.2325571",
+    "linkText": "DOI: 10.1117/12.2325571"
+  },
+  {
+    "year": 2017,
+    "type": "conference",
+    "title": "Optoelectronics technologies for Virtual Reality systems",
+    "authors": "Piszczek M., Maciejewski M., Pomianek M. , Szustakowski M.",
+    "metadata": "12th Conference on Integrated Optics, SPIE · MEiN: 20 pkt",
+    "link": "https://doi.org/10.1117/12.2281790",
+    "linkText": "DOI: 10.1117/12.2281790"
+  },
+  {
+    "year": 2017,
+    "type": "journal",
+    "title": "Virtualization of HMI for control and measurement systems",
+    "authors": "Piszczek M., Pomianek M. , Maciejewski M., Zagrajek P.",
+    "metadata": "Elektronika – Konstrukcje, Technologie, Zastosowania, t. 1, nr 8, s. 16–20 · MEiN: 20 pkt",
+    "link": "https://doi.org/10.15199/13.2017.8.3",
+    "linkText": "DOI: 10.15199/13.2017.8.3"
+  },
+  {
+    "year": 2017,
+    "type": "journal",
+    "title": "Designing and testing components of biometric information system using virtual reality",
+    "authors": "Piszczek M., Maciejewski M., Pomianek M. , Szustakowski M.",
+    "metadata": "Przegląd Elektrotechniczny, t. 93, nr 10, s. 95–98 · MEiN: 40 pkt",
+    "link": "https://doi.org/10.15199/48.2017.10.22",
+    "linkText": "DOI: 10.15199/48.2017.10.22"
+  },
+  {
+    "year": 2017,
+    "type": "journal",
+    "title": "Shooting trainning system in Virtual Reality – metrological aspects.",
+    "authors": "Piszczek M., Maciejewski M., Pomianek M.",
+    "metadata": "Przegląd Elektrotechniczny, t. 93, nr 10, s. 45–48 · MEiN: 40 pkt",
+    "link": "https://doi.org/10.15199/48.2017.10.10",
+    "linkText": "DOI: 10.15199/48.2017.10.10"
+  },
+  {
+    "year": 2016,
+    "type": "conference",
+    "title": "Tools virtualization for command and control systems",
+    "authors": "Piszczek M., Maciejewski M., Pomianek M. , Szustakowski M.",
+    "metadata": "Proceedings of SPIE, t. 10433 · MEiN: 20 pkt",
+    "link": "https://doi.org/10.1117/12.2277933",
+    "linkText": "DOI: 10.1117/12.2277933"
+  }
+]

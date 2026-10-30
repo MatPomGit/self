@@ -105,3 +105,15 @@ Dostosowano również długość wzorca kreskowania do nowego obwodu.
 Zwiększono widoczność animowanego obrysu: krycie czoła 72% (`opacity: .72`),
 a ogon ma dziewięć odcinków zamiast pięciu. Długość odcinka wynosi
 18 jednostek SVG, promień pozostaje 200, czas obrotu 12 sekund.
+
+## Wersja v1.1.0: jedna witryna, rozdzielone dane
+
+Osobne podstrony projektów i publikacji zastąpiono panelami strony głównej
+ładowanymi z `docs/data/projects.json` i `docs/data/publications.json`.
+Zachowano 17 wpisów projektowych (w tym 6 już z głównej strony) oraz 25 wpisów publikacji.
+Usunięto powielone szablony HTML z `subpages/`. Strona `materials/`
+pozostaje samodzielna i wykorzystuje lekki grid CSS z czterema kolumnami
+na dużych ekranach, dwiema na średnich i jedną na telefonach.
+
+Dawne odnośniki do usuniętych podstron zastąpiono przejściem do panelu
+`#publikacje`; archiwalna strona kieruje do tego samego panelu.

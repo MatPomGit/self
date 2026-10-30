@@ -8,21 +8,27 @@
 <style>
 :root{color-scheme:light}
 body{margin:0;background:#fff;color:#20242a;font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
-main{max-width:780px;margin:0 auto;padding:20px 22px 48px}
+main{max-width:1240px;margin:0 auto;padding:clamp(12px,2vh,20px) 22px 24px}
 h1{font-size:1.55rem;line-height:1.25;margin:0 0 12px}
-h2{font-size:1.1rem;line-height:1.35;margin:24px 0 8px}
+h2{font-size:1.1rem;line-height:1.35;margin:0 0 8px}
 p{margin:8px 0}
 ul{margin:0;padding-left:23px}
 li{margin:3px 0}
 a{color:#145a8d;text-underline-offset:2px}
 a:focus-visible{outline:2px solid #145a8d;outline-offset:3px}
-@media(max-width:600px){main{padding:18px 16px 36px}}
+.materials-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,2vw,22px);align-items:start;margin-top:14px}
+.materials-group{min-width:0;padding:12px 14px;border:1px solid #e3e8ee;border-radius:6px}
+.materials-group a{overflow-wrap:anywhere}
+@media(max-width:1000px){.materials-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){main{padding:18px 16px 30px}.materials-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <main>
 <h1>Materiały dla studentów</h1>
 <p><a href="../">Strona główna</a></p>
+<div class="materials-grid">
+<section class="materials-group">
 <h2>Strony przedmiotów</h2>
 <ul>
 <li><a href="psychoinformatyka/">Psychoinformatyka</a></li>
@@ -30,6 +36,8 @@ a:focus-visible{outline:2px solid #145a8d;outline-offset:3px}
 <li><a href="informatyka-poznawcza/">Informatyka poznawcza</a></li>
 <li><a href="seminaria-dyplomowe/">Seminaria dyplomowe</a></li>
 </ul>
+</section>
+<section class="materials-group">
 <h2>Laboratoria NDP</h2>
 <ul>
 <li><a href="ndp_lab_02.html">Laboratorium 2</a></li>
@@ -38,6 +46,8 @@ a:focus-visible{outline:2px solid #145a8d;outline-offset:3px}
 <li><a href="ndp_lab_05.html">Laboratorium 5</a></li>
 <li><a href="ndp_lab_06.html">Laboratorium 6</a></li>
 </ul>
+</section>
+<section class="materials-group">
 <h2>Laboratoria WiRR</h2>
 <ul>
 <li><a href="wirr_blok_01.html">Blok 1</a></li>
@@ -45,6 +55,8 @@ a:focus-visible{outline:2px solid #145a8d;outline-offset:3px}
 <li><a href="wirr_blok_03.html">Blok 3</a></li>
 <li><a href="wirr_blok_04.html">Blok 4</a></li>
 </ul>
+</section>
+<section class="materials-group">
 <h2>Pliki pomocnicze</h2>
 <ul>
 <li><a href="bash/ascii_player" download>ascii_player (Bash)</a></li>
@@ -52,6 +64,8 @@ a:focus-visible{outline:2px solid #145a8d;outline-offset:3px}
 <li><a href="bash/system_tui" download>system_tui (Bash)</a></li>
 <li><a href="templates/library-template.csv" download>library-template.csv</a></li>
 </ul>
+</section>
+</div>
 </main>
 </body>
 </html>
