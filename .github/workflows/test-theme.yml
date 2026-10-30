@@ -1,10 +1,10 @@
 name: Sprawdzenie motywu self
 on:
   pull_request:
-    paths: ["index.html", "materials/index.html", "tests/test_theme.py", "tests/test_materials.py", ".github/workflows/test-theme.yml"]
+    paths: ["index.html", "docs/data/projects.json", "materials/index.html", "tests/test_theme.py", "tests/test_materials.py", "tests/test_projects.py", ".github/workflows/test-theme.yml"]
   push:
     branches: [main]
-    paths: ["index.html", "tests/test_theme.py", ".github/workflows/test-theme.yml"]
+    paths: ["index.html", "docs/data/projects.json", "tests/test_theme.py", "tests/test_projects.py", ".github/workflows/test-theme.yml"]
 permissions:
   contents: read
 jobs:

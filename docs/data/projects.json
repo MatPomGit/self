@@ -1,87 +1,46 @@
 [
   {
-    "category": "Wybrane projekty",
-    "title": "ARIANA",
-    "description": "System do wielomodalnej analizy reakcji, afektu i aktywności neurologicznej."
+    "title": "Projekt „ARIANA”",
+    "description": "System do pomiarów psychometrycznych i rozpoznawania afektu na podstawie mimiki, mikroekspresji, temperatury skóry, ruchu, źrenic i spojrzenia, z informacją zwrotną dla użytkownika."
   },
   {
-    "category": "Wybrane projekty",
-    "title": "PIAST",
-    "description": "Konstelacja nanosatelitów do optoelektronicznego rozpoznania obrazowego."
+    "title": "Polish ImAging SaTellites „PIAST”",
+    "description": "Konstelacja trzech nanosatelitów obserwacyjnych do optoelektronicznego obrazowania Ziemi, demonstracji obrazów o rozdzielczości około 5 m oraz manewrów orbitalnych."
   },
   {
-    "category": "Wybrane projekty",
-    "title": "SEEKER",
-    "description": "Rozwój optoelektronicznych głowic naprowadzających."
+    "title": "Rodzina głowic optoelektronicznych dla rakiet sterowanych „SEEKER”",
+    "description": "Opracowanie wielospektralnych i obrazujących głowic naprowadzających do zastosowań przeciwlotniczych oraz przeciwpancernych, z weryfikacją prototypów w warunkach poligonowych."
   },
   {
-    "category": "Wybrane projekty",
-    "title": "PolFEL",
-    "description": "Projekt polskiego lasera na swobodnych elektronach."
+    "title": "„PolFEL” - Projekt polskiego lasera na swobodnych elektronach",
+    "description": "Budowa polskiego lasera na swobodnych elektronach przez konsorcjum ośmiu jednostek, którego liderem jest Narodowe Centrum Badań Jądrowych."
   },
   {
-    "category": "Wybrane projekty",
-    "title": "OPTOKRYPT",
-    "description": "Technologie optyczne kryptologii kwantowej."
+    "title": "Kwantowy generator liczb losowych „OPTOKRYPT”",
+    "description": "Technologie optyczne kryptologii kwantowej do ochrony danych w sieciach teleinformatycznych; projekt DOB-SZAFIR/01/A/013/01/2021."
   },
   {
-    "category": "Wybrane projekty",
-    "title": "PROTECT",
-    "description": "Badania nad biometrycznymi systemami kontroli granicznej."
+    "title": "Analysis of the possibility of using optoelectronic eye tracking systems as interaction interfaces in mixed reality systems",
+    "description": "Analiza zastosowania optoelektronicznych systemów śledzenia wzroku jako interfejsów interakcji w rzeczywistości mieszanej."
   },
   {
-    "category": "Eye-tracking",
-    "title": "MEMS Eye-Tracking",
-    "description": "Opracowanie miniaturowych systemów śledzenia wzroku opartych na mikroelektrycznych układach mechanicznych (MEMS)."
+    "title": "Analysis of the possibilities of using mixed reality vision systems in scientific research and military applications (RMN/948/2018)",
+    "description": "Analiza możliwości wykorzystania systemów wizyjnych rzeczywistości mieszanej w badaniach naukowych i zastosowaniach wojskowych."
   },
   {
-    "category": "XR Hardware",
-    "title": "Varifocal HMD Calibration",
-    "description": "Metody kalibracji wyświetlaczy nagłownych o zmiennej ogniskowej dla aplikacji rozszerzonej i wirtualnej rzeczywistości."
+    "title": "Optoelektroniczny system do ochrony perymetrycznej granicy rzecznej „RiverGUARD”",
+    "description": "System optoelektroniczny przeznaczony do ochrony perymetrycznej granicy rzecznej."
   },
   {
-    "category": "Digital Twin",
-    "title": "Digital Twin Validation",
-    "description": "Walidacja cyfrowych bliźniaków w środowiskach przemysłowych i medycznych, pomiary in-silico."
+    "title": "Active sub-THz 3D scanner for anti-terrorist applications (PBS3/B3/30/2015)",
+    "description": "Aktywny skaner trójwymiarowy w zakresie sub-THz, przeznaczony do zastosowań antyterrorystycznych."
   },
   {
-    "category": "Medycyna",
-    "title": "VR Pipelines for Medical Data",
-    "description": "Pipeliny VR do wizualizacji i analizy danych medycznych w diagnostyce i edukacji."
+    "title": "Development of a sensor for a virtual trainer - anti-aircraft GROM and PIORUN missile sets",
+    "description": "Opracowanie sensora do wirtualnego trenażera przeciwlotniczych zestawów GROM i PIORUN."
   },
   {
-    "category": "Robotyka",
-    "title": "Kognitywna Robotyka Humanoidalna",
-    "description": "Percepcyjne i kognitywne architektury robotów humanoidalnych do zastosowań terapeutycznych i badawczych."
-  },
-  {
-    "category": "AI / Biometria",
-    "title": "Optoelektronika & Biometria",
-    "description": "Multispektralna analiza obrazu, systemy biometryczne, przetwarzanie sygnałów afektywnych."
-  },
-  {
-    "category": "Obronność",
-    "title": "Technologie obronne",
-    "description": "Historyczne doświadczenie w projektowaniu optoelektronicznych systemów naprowadzania broni, symulatorach pola walki oraz systemach VR/AR dla wojska. Nie jest to aktualny obszar badawczy."
-  },
-  {
-    "category": "Zastosowania kliniczne",
-    "title": "Biomarkery okulistyczne",
-    "description": "Modelowanie biomarkerów okulistycznych i behawioralnych z wykorzystaniem AI do wczesnej diagnostyki."
-  },
-  {
-    "category": "Zastosowania kliniczne",
-    "title": "Diagnostyka wspomagana AI",
-    "description": "Systemy decyzji klinicznych wykorzystujące uczenie maszynowe do analizy danych pacjentów."
-  },
-  {
-    "category": "Zastosowania kliniczne",
-    "title": "Rehabilitacja XR",
-    "description": "Terapia z wykorzystaniem rozszerzonej i wirtualnej rzeczywistości w neurorehabilitacji."
-  },
-  {
-    "category": "Zastosowania kliniczne",
-    "title": "Robotyka kognitywna",
-    "description": "Humanoidalne roboty z percepcyjnymi architekturami kognitywnymi do terapii i badań neuropsychologicznych."
+    "title": "Pervasive and User Focused Biometrics Border Project (Common and user-oriented biometric border design) EU–0700259 PROTECT",
+    "description": "Projekt systemów biometrycznych do ochrony granic, zorientowany na użytkownika."
   }
 ]
