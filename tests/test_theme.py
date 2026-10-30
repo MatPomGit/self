@@ -132,8 +132,25 @@ class ThemeTests(unittest.TestCase):
         for name in ("all", "journal", "conference", "patent", "progress"):
             self.assertIn('data-filter="' + name + '">', HTML)
 
+    def test_publication_actions_aligned_with_title(self):
+        self.assertIn('.publication-heading{display:flex;align-items:flex-start;', HTML)
+        self.assertIn('justify-content:flex-end;flex:0 0 auto;', HTML)
+        self.assertIn('margin-left:auto}', HTML)
+        self.assertIn("const heading=makeElement('div','publication-heading');", HTML)
+        self.assertIn("heading.append(name,actions);", HTML)
+        self.assertIn("body.append(heading,meta);", HTML)
+        self.assertIn("item.append(body);fragment.append(item);", HTML)
+        self.assertNotIn("item.append(body,actions)", HTML)
+
+    def test_next_step_is_inline_after_project(self):
+        self.assertIn("const next=makeElement('span','manuscript-next'", HTML)
+        self.assertIn("project.append(projectLink,document.createTextNode(', '),next);", HTML)
+        self.assertIn("item.append(heading,meta,description);list.append(item);", HTML)
+        self.assertNotIn("item.append(heading,meta,description,next)", HTML)
+        self.assertIn('.manuscript-next{font-size:inherit;line-height:inherit;', HTML)
+
     def test_version(self):
-        self.assertIn("v1.2.8", HTML)
+        self.assertIn("v1.2.9", HTML)
 
 
 if __name__ == "__main__":

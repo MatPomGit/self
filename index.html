@@ -167,10 +167,11 @@
     .data-filters button[aria-pressed="true"]{background:var(--accent);color:#fff}
     .publication-list{list-style:decimal;padding-left:20px;margin:8px 0}
     .publication-item{padding:5px 0;border-bottom:1px solid var(--line);display:list-item}
-    .publication-title{font-size:.87rem;font-weight:600;line-height:1.3}
+    .publication-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:8px 12px;min-width:0}
+    .publication-title{font-size:.87rem;font-weight:600;line-height:1.3;flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
     .publication-meta{font-size:.72rem;color:var(--muted);margin-top:1px;line-height:1.3}
-    .publication-actions{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-top:3px}
-    .publication-actions button,.publication-actions a{font:inherit;font-size:.69rem;padding:2px 6px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--accent);text-decoration:none;cursor:pointer}
+    .publication-actions{display:flex;align-items:center;justify-content:flex-end;flex:0 0 auto;flex-wrap:wrap;gap:5px;margin-left:auto}
+    .publication-actions button,.publication-actions a{font:inherit;font-size:.69rem;padding:2px 6px;border:1px solid var(--line);border-radius:4px;background:#fff;color:var(--accent);text-decoration:none;cursor:pointer;white-space:nowrap}
     .publication-actions button:hover,.publication-actions a:hover{border-color:var(--accent)}
     .citation-status{font-size:.75rem;color:var(--muted)}
     .progress-list{margin-top:12px}
@@ -184,13 +185,18 @@
     .manuscript-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;min-width:0}
     .manuscript-title{display:block;font-size:.84rem;font-weight:600;min-width:0;flex:1}
     .manuscript-meta{display:flex;align-items:baseline;justify-content:space-between;gap:6px 20px;flex-wrap:wrap;margin-top:1px}
-    .manuscript-project{font-size:.73rem}
+    .manuscript-project{font-size:.73rem;flex:1 1 360px;min-width:0;overflow-wrap:anywhere}
     .manuscript-description{font-size:.76rem;line-height:1.35;margin:2px 0;max-width:110ch}
-    .manuscript-next{font-size:.74rem;line-height:1.3;margin:2px 0;color:var(--text)}
+    .manuscript-next{font-size:inherit;line-height:inherit;color:var(--text)}
     .manuscript-journal,.manuscript-status{font-size:.75rem;color:var(--muted);margin-top:2px}
     .manuscript-track{display:flex;gap:8px;align-items:center;justify-content:flex-end;flex:0 0 clamp(118px,20vw,260px);margin-left:auto}
     .manuscript-track progress{height:8px;width:100%;min-width:0;accent-color:var(--accent)}
     .manuscript-percent{font-size:.73rem;font-variant-numeric:tabular-nums}
+    @media(max-width:540px){
+      .publication-heading{flex-wrap:wrap}
+      .publication-title{flex:1 1 100%}
+      .publication-actions{margin-left:auto}
+    }
     main:has(.workspace.visible){justify-content:flex-start}
     .workspace.visible{width:100%}
     /* Typografia tytułu: dwa wiersze na szerokim ekranie, bez poziomego overflow. */
@@ -399,7 +405,7 @@
       </section>
     </main>
 
-    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.8">v1.2.8</span></footer>
+    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.9">v1.2.9</span></footer>
   </div>
 
   <script>
@@ -592,7 +598,6 @@
         const body=makeElement('div','publication-body');
         const name=makeElement('div','publication-title',entry.title);
         const meta=makeElement('div','publication-meta',[entry.authors,entry.year,entry.metadata].filter(Boolean).join(' · '));
-        body.append(name,meta);
         const actions=makeElement('div','publication-actions');
         if(entry.link&&/^https:\/\//.test(entry.link)){
           const link=makeElement('a','',entry.linkText||'Źródło');
@@ -603,7 +608,11 @@
         cite.addEventListener('click',()=>copyCitation(citationText(entry),cite));
         const bib=makeElement('button','','copy BibTeX');bib.type='button';
         bib.addEventListener('click',()=>copyCitation(bibtexText(entry,index),bib));
-        actions.append(cite,bib);item.append(body,actions);fragment.append(item);
+        actions.append(cite,bib);
+        const heading=makeElement('div','publication-heading');
+        heading.append(name,actions);
+        body.append(heading,meta);
+        item.append(body);fragment.append(item);
       });
       list.replaceChildren(fragment);
     }
@@ -622,10 +631,10 @@
           const project=makeElement('div','manuscript-project');
           const projectLink=makeElement('a','',entry.project.toUpperCase());
           projectLink.href=entry.projectUrl;projectLink.target='_blank';projectLink.rel='noopener noreferrer';
-          project.append(projectLink);
+          const next=makeElement('span','manuscript-next','Następny krok: '+entry.nextStep);
+          project.append(projectLink,document.createTextNode(', '),next);
           const meta=makeElement('div','manuscript-meta');
           const description=makeElement('p','manuscript-description',entry.description);
-          const next=makeElement('p','manuscript-next','Następny krok: '+entry.nextStep);
           const journal=makeElement('div','manuscript-journal','Docelowe czasopismo: ');
           const journalLink=makeElement('a','',entry.journal);
           journalLink.href=entry.journalUrl;journalLink.target='_blank';journalLink.rel='noopener noreferrer';
@@ -637,7 +646,7 @@
           const heading=makeElement('div','manuscript-heading');
           heading.append(title,track);
           meta.append(project,journal);
-          item.append(heading,meta,description,next);list.append(item);
+          item.append(heading,meta,description);list.append(item);
         });
         target.replaceChildren(intro,list);
       }catch(error){
