@@ -4,7 +4,9 @@ from pathlib import Path
 import re
 import unittest
 
-HTML = (Path(__file__).resolve().parents[1] / "index.html").read_text(encoding="utf-8")
+ROOT = Path(__file__).resolve().parents[1]
+HTML = (ROOT / "index.html").read_text(encoding="utf-8")
+MATERIALS_HTML = (ROOT / "materials" / "index.html").read_text(encoding="utf-8")
 
 
 class Parser(HTMLParser):
@@ -68,8 +70,37 @@ class ThemeTests(unittest.TestCase):
             with self.subTest(fg=fg, bg=bg):
                 self.assertGreaterEqual(contrast(fg, bg), 4.5)
 
+    def test_section_headings_are_in_shared_header(self):
+        self.assertIn('<h1 class="header-section" id="header-section" hidden>', HTML)
+        self.assertIn("headerSection.textContent='/ '+sectionLabels[id]", HTML)
+        for key, label in (("projekty", "Projekty"), ("badania", "Badania"),
+                           ("kontakt", "Kontakt"), ("publikacje", "Publikacje")):
+            self.assertIn(key + ":'" + label + "'", HTML)
+        for redundant in ("<h2>Projekty</h2>", "<h2>Kontakt</h2>",
+                          "<h2>Badania i działalność naukowa</h2>"):
+            self.assertNotIn(redundant, HTML)
+
+    def test_materials_theme_has_same_preference(self):
+        parser = Parser()
+        parser.feed(MATERIALS_HTML)
+        toggles = [b for b in parser.buttons if b.get("id") == "theme-toggle"]
+        self.assertEqual(len(toggles), 1)
+        self.assertEqual(toggles[0].get("aria-pressed"), "false")
+        for script in ("localStorage.getItem('self-theme')",
+                       "localStorage.setItem('self-theme', next)",
+                       "prefers-color-scheme: dark",
+                       "themeToggle.addEventListener('click'",
+                       "systemTheme.addEventListener('change'",
+                       "themeToggle.setAttribute('aria-pressed', String(dark))"):
+            with self.subTest(script=script):
+                self.assertIn(script, MATERIALS_HTML)
+        self.assertLess(MATERIALS_HTML.index("document.documentElement.dataset.theme ="),
+                        MATERIALS_HTML.index("<style>"))
+        self.assertIn('--accent:#93c2e6', MATERIALS_HTML)
+        self.assertIn('--surface:#202a35', MATERIALS_HTML)
+
     def test_version(self):
-        self.assertIn("v1.2.6", HTML)
+        self.assertIn("v1.2.7", HTML)
 
 
 if __name__ == "__main__":

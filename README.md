@@ -206,3 +206,16 @@ akcent i jaśniejsze powierzchnie. Obejmuje też koło kategorii SVG.
 Zalecenia: https://blog.edugrafia.pl/kilka-porad-przy-projektowaniu-ciemnych-interfejsow/
 
 Katalog `materials/` pozostaje odrębną stroną tekstową bez JavaScriptu.
+
+## Wersja v1.2.7 (30.10.2026): spójne nagłówki i motyw materiałów
+
+W sekcjach Badania, Projekty i Kontakt usunięto powtarzane tytuły z obszaru
+głównego. Nazwa aktywnej sekcji pojawia się teraz jako nagłówek po znaku
+`/` obok nazwiska, tak jak w Publikacjach. Tak samo działa awaryjny widok
+`#studenci`. Nagłówek zachowuje semantykę HTML `h1`.
+
+`materials/index.html` otrzymał mały przełącznik trybu jasnego i ciemnego,
+korzystający z tego samego klucza `localStorage` (`self-theme`) i
+`prefers-color-scheme`, co strona główna. Wybór pozostaje zachowany przy
+przejściu między stronami. Lista plików nie została zmieniona; jej dwa
+małe skrypty służą wyłącznie do zapamiętywania i przełączania motywu.

@@ -4,20 +4,40 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Aktualne materiały dydaktyczne.">
+<meta name="color-scheme" content="light dark">
 <title>Materiały dla studentów</title>
+<script>
+(() => {
+  let stored = null;
+  try { stored = localStorage.getItem('self-theme'); } catch (error) { /* Pamięć może być niedostępna. */ }
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  document.documentElement.dataset.theme =
+    stored === 'dark' || (stored !== 'light' && prefersDark) ? 'dark' : 'light';
+})();
+</script>
 <style>
-:root{color-scheme:light}
-body{margin:0;background:#fff;color:#20242a;font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+:root{color-scheme:light;--bg:#fff;--text:#20242a;--line:#e3e8ee;--accent:#145a8d;--surface:#fff;--raised:#f6f9fc}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#171c24;--text:#e5eaf0;--line:#3b4654;--accent:#93c2e6;--surface:#202a35;--raised:#2b3948}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
 main{max-width:1240px;margin:0 auto;padding:clamp(12px,2vh,20px) 22px 24px}
 h1{font-size:1.55rem;line-height:1.25;margin:0 0 12px}
 h2{font-size:1.1rem;line-height:1.35;margin:0 0 8px}
 p{margin:8px 0}
 ul{margin:0;padding-left:23px}
 li{margin:3px 0}
-a{color:#145a8d;text-underline-offset:2px}
-a:focus-visible{outline:2px solid #145a8d;outline-offset:3px}
+a{color:var(--accent);text-underline-offset:2px}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.materials-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.materials-header>div{min-width:0}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;flex:0 0 40px;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--text);cursor:pointer}
+.theme-toggle:hover{border-color:var(--accent);background:var(--raised)}
+.theme-toggle svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.theme-sun{display:none}
+:root[data-theme="dark"] .theme-sun{display:block}
+:root[data-theme="dark"] .theme-moon{display:none}
 .materials-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,2vw,22px);align-items:start;margin-top:14px}
-.materials-group{min-width:0;padding:12px 14px;border:1px solid #e3e8ee;border-radius:6px}
+.materials-group{min-width:0;padding:12px 14px;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
 .materials-group a{overflow-wrap:anywhere}
 @media(max-width:1000px){.materials-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){main{padding:18px 16px 30px}.materials-grid{grid-template-columns:1fr}}
@@ -25,8 +45,16 @@ a:focus-visible{outline:2px solid #145a8d;outline-offset:3px}
 </head>
 <body>
 <main>
-<h1>Materiały dla studentów</h1>
-<p><a href="../">Strona główna</a></p>
+<header class="materials-header">
+  <div>
+    <h1>Materiały dla studentów</h1>
+    <p><a href="../">Strona główna</a></p>
+  </div>
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Tryb ciemny" aria-pressed="false" title="Włącz tryb ciemny">
+    <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 14.1A8.9 8.9 0 0 1 9.9 3.2a9 9 0 1 0 10.9 10.9Z"/></svg>
+    <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+  </button>
+</header>
 <div class="materials-grid">
 <section class="materials-group">
 <h2>Strony przedmiotów</h2>
@@ -88,5 +116,33 @@ a:focus-visible{outline:2px solid #145a8d;outline-offset:3px}
 </section>
 </div>
 </main>
+<script>
+  const themeToggle = document.getElementById('theme-toggle');
+  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+  let sessionChoice = false;
+  function syncThemeToggle(){
+    const dark = document.documentElement.dataset.theme === 'dark';
+    themeToggle.setAttribute('aria-pressed', String(dark));
+    themeToggle.title = dark ? 'Włącz tryb jasny' : 'Włącz tryb ciemny';
+  }
+  themeToggle.addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    sessionChoice = true;
+    try { localStorage.setItem('self-theme', next); } catch (error) { /* Zmiana motywu działa bez pamięci. */ }
+    syncThemeToggle();
+  });
+  if (systemTheme.addEventListener) {
+    systemTheme.addEventListener('change', event => {
+      if (sessionChoice) return;
+      let saved = null;
+      try { saved = localStorage.getItem('self-theme'); } catch (error) { /* Pamięć niedostępna. */ }
+      if (saved === 'light' || saved === 'dark') return;
+      document.documentElement.dataset.theme = event.matches ? 'dark' : 'light';
+      syncThemeToggle();
+    });
+  }
+  syncThemeToggle();
+</script>
 </body>
 </html>

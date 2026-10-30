@@ -31,7 +31,7 @@
     .page{width:min(1200px,calc(100% - 40px));margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
     header{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:28px 0;border-bottom:1px solid var(--line)}
     .header-identity{display:flex;align-items:baseline;gap:14px;min-width:0;flex-wrap:wrap}
-    .header-section{font-family:var(--serif);font-weight:700;font-size:1.05rem;color:var(--muted)}
+    .header-section{margin:0;font-family:var(--serif);font-weight:700;font-size:1.05rem;line-height:1.5;letter-spacing:normal;color:var(--muted)}
     .home{margin-left:14px;text-decoration:none;font-family:var(--serif);font-size:1.2rem;font-weight:700;border-radius:4px}
     .affil{color:var(--muted);font-size:.92rem;text-align:right}
     .header-actions{display:flex;align-items:center;gap:12px;flex-shrink:0}
@@ -240,7 +240,7 @@
 <body>
   <div class="page">
     <header>
-      <div class="header-identity"><a class="home" id="home-link" href="#" aria-label="Strona główna">dr inż. Mateusz Pomianek</a><span class="header-section" id="header-section" hidden>/ Publikacje</span></div>
+      <div class="header-identity"><a class="home" id="home-link" href="#" aria-label="Strona główna">dr inż. Mateusz Pomianek</a><h1 class="header-section" id="header-section" hidden>/ Publikacje</h1></div>
       <div class="header-actions">
         <span class="affil">Politechnika Rzeszowska</span>
         <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Tryb ciemny" aria-pressed="false" title="Włącz tryb ciemny">
@@ -306,7 +306,7 @@
 
       <section class="workspace" id="informacje" aria-label="Informacje szczegółowe">
 <article class="panel" id="studenci" role="region" aria-label="Dla studentów">
-          <h2>Dla studentów</h2>
+          <!-- Tytuł sekcji wyświetla wspólny nagłówek strony. -->
           <div class="facts">
             <div class="fact"><strong>Materiały dydaktyczne</strong><span>Instrukcje, prezentacje, ćwiczenia i materiały dodatkowe są dostępne na stronie uczelnianej oraz w repozytoriach przypisanych do konkretnych zajęć.</span></div>
             <div class="fact"><strong>Konsultacje</strong><span>Sprawy dotyczące zajęć, projektów i zaliczeń najlepiej zgłaszać mailowo z krótkim opisem problemu.</span></div>
@@ -326,7 +326,7 @@
         </article>
 
         <article class="panel" id="badania" role="region" aria-label="Badania">
-          <h2>Badania i działalność naukowa</h2>
+          <!-- Tytuł sekcji wyświetla wspólny nagłówek strony. -->
           <div class="research-intro">
             <h3 class="research-heading">Profil naukowy</h3>
             <p>Jestem naukowcem i inżynierem specjalizującym się w przetwarzaniu multispektralnej informacji obrazowej oraz projektowaniu systemów opartych na naturalnej interakcji człowieka z maszynami. Moja działalność badawcza sytuuje się na styku optoelektroniki, technologii cyfrowych oraz psychologii poznawczej. Koncentruję się na modelowaniu i integracji ludzkich sygnałów percepcyjnych oraz afektywnych w zaawansowanych rozwiązaniach technicznych, które umożliwiają maszynom lepsze zrozumienie stanu użytkownika.</p>
@@ -342,7 +342,7 @@
         </article>
 
         <article class="panel" id="projekty" role="region" aria-label="Projekty">
-          <h2>Projekty</h2>
+          <!-- Tytuł sekcji wyświetla wspólny nagłówek strony. -->
           <p class="data-status" id="projects-status" role="status">Wczytywanie projektów…</p>
           <div class="data-grid" id="projects-list"></div>
         </article>
@@ -362,7 +362,7 @@
         </article>
 
         <article class="panel" id="kontakt" role="region" aria-label="Kontakt">
-          <h2>Kontakt</h2>
+          <!-- Tytuł sekcji wyświetla wspólny nagłówek strony. -->
           <div class="contact">
             <div><strong>Adres</strong><span>Katedra Informatyki i Automatyki<br>Politechnika Rzeszowska<br>al. Powstańców Warszawy 12<br>35 959 Rzeszów<br>pokój D.103</span></div>
             <div><strong>E mail</strong><a href="mailto:m.pomianek@prz.edu.pl">m.pomianek@prz.edu.pl</a><br><span>tel. +48 17 865 14 81</span></div>
@@ -372,7 +372,7 @@
       </section>
     </main>
 
-    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.6">v1.2.6</span></footer>
+    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.7">v1.2.7</span></footer>
   </div>
 
   <script>
@@ -404,6 +404,14 @@
     syncThemeToggle();
     const workspace=document.querySelector('#informacje');
     const panels=[...document.querySelectorAll('.panel')];
+    const headerSection=document.getElementById('header-section');
+    const sectionLabels={
+      studenci:'Dla studentów',
+      badania:'Badania',
+      projekty:'Projekty',
+      publikacje:'Publikacje',
+      kontakt:'Kontakt'
+    };
     const start=document.querySelector('#start');
     const wheel=document.querySelector('#wheel');
     const mq=matchMedia('(hover:hover) and (min-width:861px)');
@@ -456,7 +464,7 @@
     function showHome(){
       start.classList.remove('hidden');
       workspace.classList.remove('visible');
-      document.getElementById('header-section').hidden=true;
+      headerSection.hidden=true;
       panels.forEach(p=>p.classList.remove('active'));
       history.replaceState(null,'',location.pathname+location.search);
       window.scrollTo({top:0,behavior:'smooth'});
@@ -467,7 +475,8 @@
       if(!panels.some(p=>p.id===id)) return;
       start.classList.add('hidden');
       workspace.classList.add('visible');
-      document.getElementById('header-section').hidden=id!=='publikacje';
+      headerSection.textContent='/ '+sectionLabels[id];
+      headerSection.hidden=false;
       panels.forEach(p=>p.classList.toggle('active',p.id===id));
       history.replaceState(null,'',`#${id}`);
       if(scroll) window.scrollTo({top:0,behavior:'smooth'});
