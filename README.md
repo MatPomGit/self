@@ -55,3 +55,12 @@ Kolumna tytułowa jest przesunięta o 18 px w górę (8 px na węższych ekranac
 Maksymalne wymiary koła kategorii zwiększono o 10% i zachowano ograniczenia
 zależne od wysokości okna; na bardzo małych ekranach wielkość koła może być
 mniejsza ze względu na przestrzeń dostępną w widoku.
+
+## Interakcja koła (30.10.2026)
+
+Koło powiększono o 20% względem poprzedniej wersji (z limitami wysokości
+viewportu). Portret powiększono o 30%, a blok tekstowy przesunięto wyżej.
+Podświetlenie głównej kategorii jest utrzymywane przez klasę `.grp.open`
+podczas przemieszczania kursora między podkategoriami; zamknięcie pozostaje
+opóźnione o 650 ms. Podtytuły wewnątrz głównych segmentów nadal reagują
+wyłącznie na najechanie lub fokus samego segmentu.
