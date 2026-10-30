@@ -71,3 +71,10 @@ Stopka `index.html` zawiera numer wersji po prawej stronie, obecnie `v1.0.0`.
 To pierwsza jawnie oznaczona wersja witryny; wcześniejsze wydania nie miały
 numeru wersji. Przy kolejnych publikowanych zmianach należy aktualizować
 numer w widocznym tekście oraz etykiecie dostępności `aria-label`.
+
+## Dopasowanie koła do okna
+
+Koło startowe pomniejszono o około 12%, przesunięto 20 px w górę
+(8 px na ekranach wąskich) i ograniczono jego wymiar w zależności od
+wysokości okna. Układ na bardzo małych ekranach może nadal wymagać
+przewijania w celu zachowania czytelności.
