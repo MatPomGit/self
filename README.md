@@ -125,3 +125,9 @@ W kole kategorii zmieniono kolejność: Projekty zajmują poprzednie miejsce
 Badań, Publikacje miejsce Projektów, a Badania miejsce Publikacji.
 Publikacje są zwartą listą z kopiowaniem cytowania i BibTeX. Dane bibliograficzne
 pochodzą z `docs/data/publications.json`; nieznane pola nie są dopowiadane.
+
+## Wersja v1.1.2
+
+Zakładkę Badania uzupełniono o opis profilu naukowego, metod pracy,
+sześć rozwiniętych specjalizacji i cel integrujący kierunki badawcze.
+Zachowano spójność wizualną ze stroną główną.
