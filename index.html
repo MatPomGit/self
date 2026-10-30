@@ -28,7 +28,7 @@
     .intro{display:grid;grid-template-columns:minmax(0,.45fr) minmax(0,1.55fr);gap:24px;align-items:center}
     .intro.hidden{display:none}
     h1{margin:0;font-family:var(--serif);font-weight:700;font-size:clamp(1.9rem,3.2vw,2.6rem);line-height:1.1;letter-spacing:-.02em}
-    .portrait{display:block;width:clamp(86px,11vh,126px);height:clamp(86px,11vh,126px);border-radius:50%;object-fit:cover;object-position:center;border:2px solid var(--accent);padding:3px;background:#fff;margin:0 0 clamp(10px,2vh,18px)}
+    .portrait{display:block;width:clamp(112px,14.3vh,164px);height:clamp(112px,14.3vh,164px);border-radius:50%;object-fit:cover;object-position:center;border:2px solid var(--accent);padding:3px;background:#fff;margin:0 0 clamp(10px,2vh,18px)}
     .role{margin:14px 0 0;color:var(--accent);font-weight:600}
     .lead{margin:20px 0 0;color:var(--muted);max-width:46ch}
 
@@ -38,9 +38,9 @@
     .seg-body{transform-box:fill-box;transform-origin:center;transition:transform .18s ease}
     .seg path{fill:#f6f9fc;stroke:var(--accent);stroke-width:1.5;stroke-linejoin:miter;transition:fill .18s ease}
     .seg-label{fill:var(--text);font-family:var(--sans);font-size:17px;font-weight:650;text-anchor:middle;dominant-baseline:central;pointer-events:none;transition:fill .18s ease}
-    .grp:hover .seg-body,.grp:focus-within .seg-body{transform:translate(var(--dx),var(--dy))}
-    .grp:hover .seg path,.grp:focus-within .seg path{fill:var(--accent)}
-    .grp:hover .seg-label,.grp:focus-within .seg-label{fill:#fff}
+    .seg:hover .seg-body,.seg:focus-visible .seg-body{transform:translate(var(--dx),var(--dy))}
+    .seg:hover path,.seg:focus-visible path{fill:var(--accent)}
+    .seg:hover .seg-label,.seg:focus-visible .seg-label{fill:#fff}
     .hub{fill:#fff;stroke:var(--accent);stroke-width:1.5}
     .hub-t{fill:var(--text);font-family:var(--serif);font-size:16px;font-weight:700;text-anchor:middle}
     /* Opcje wysuwane z segmentu */
@@ -105,28 +105,32 @@
     header{padding:clamp(10px,1.8vh,20px) 0}
     main{display:flex;flex-direction:column;justify-content:center;min-height:0;padding:clamp(8px,2vh,24px) 0}
     .intro{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(12px,2vw,24px)}
-    .intro>div:first-child{transform:translateY(-18px)}
-    .wheel{width:min(110%,836px,calc((100dvh - 148px)*1.65));max-width:none}
+    .intro>div:first-child{transform:translateY(-42px)}
+    .wheel{width:min(132%,1003px,calc((100dvh - 148px)*1.98));max-width:none}
     footer{padding:clamp(9px,1.5vh,18px) 0}
     /* Nie zamykaj wysuniętych odnośników natychmiast po opuszczeniu segmentu. */
     .subs{visibility:hidden;opacity:0;pointer-events:none;transition:opacity .2s ease,visibility 0s linear .2s}
     .wide .subs{display:block}
-    .grp:hover .subs,.grp:focus-within .subs{opacity:0;pointer-events:none}
+    .grp:hover .subs{opacity:0;pointer-events:none}
     .grp.open .subs,.grp:focus-within .subs{opacity:1;visibility:visible;pointer-events:auto;transition-delay:0s}
     .pill rect{stroke-width:1}
     .pill text{font-size:12.3px}
     .seg-sub{fill:#fff;font-family:var(--sans);font-size:10.5px;font-weight:450;text-anchor:middle;pointer-events:none;opacity:0;transition:opacity .16s ease}
     .seg:hover .seg-sub,.seg:focus-visible .seg-sub{opacity:1}
+    /* Stan aktywny kontrolowany przez JS: nie zależy od hover nad podlinkiem. */
+    .grp.open .seg path,.grp:focus-within .seg path{fill:var(--accent)}
+    .grp.open .seg-label,.grp:focus-within .seg-label{fill:#fff}
+    .grp.open .seg-body,.grp:focus-within .seg-body{transform:translate(var(--dx),var(--dy))}
     .workspace.visible{width:100%}
     @media(max-width:860px){
       .intro{grid-template-columns:1fr;gap:12px}
-      .intro>div:first-child{transform:translateY(-8px)}
-      .wheel{width:min(100%,440px,calc((100dvh - 300px)*1.1));max-width:440px}
+      .intro>div:first-child{transform:translateY(-20px)}
+      .wheel{width:min(100%,528px,calc((100dvh - 300px)*1.32));max-width:528px}
       .subs{display:none!important}
       .seg-sub{font-size:11px}
     }
     @media(max-height:600px) and (min-width:861px){
-      .wheel{width:min(110%,726px,calc((100dvh - 106px)*1.65))}
+      .wheel{width:min(132%,871px,calc((100dvh - 106px)*1.98))}
       .lead{margin-top:10px}
       .role{margin-top:8px}
     }
@@ -143,7 +147,7 @@
     <main>
       <section class="intro" id="start" aria-labelledby="page-title">
         <div>
-          <img class="portrait" src="docs/images/self.png" alt="Portret dr. inż. Mateusza Pomianka" width="126" height="126" decoding="async" fetchpriority="high">
+          <img class="portrait" src="docs/images/self.png" alt="Portret dr. inż. Mateusza Pomianka" width="164" height="164" decoding="async" fetchpriority="high">
           <h1 id="page-title">Informatyka afektywna i&nbsp;robotyka humanoidalna</h1>
           <p class="role">Adiunkt, Katedra Informatyki i Automatyki</p>
           <p class="lead">Dydaktyka, badania i projekty: wizja komputerowa, neuroinformatyka, śledzenie wzroku oraz XR.</p>
