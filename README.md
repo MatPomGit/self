@@ -185,3 +185,10 @@ Pasek postępu przeniesiono do wiersza tytułu manuskryptu i wyrównano
 do prawej krawędzi; usunięto podwójny tytuł panelu Publikacje.
 Nagłówek zawiera pogrubione „/ Publikacje”, a etykieta czasopisma brzmi
 „Docelowe czasopismo”.
+
+## Wersja v1.2.5
+
+Indeks materiałów rozszerzono o pobieranie 13 nowych plików: dokumentów
+PDF/PPTX i siedmiu wykładów robotyki afektywnej. Układ grid ma 3 kolumny
+na ekranach szerokich, 2 na tabletach i 1 na telefonach. Zachowano bezpośrednie
+odnośniki do istniejących zasobów i brak JavaScriptu w indeksie.
