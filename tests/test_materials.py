@@ -27,7 +27,12 @@ class Anchors(HTMLParser):
 class MaterialsTests(unittest.TestCase):
     def test_index_links_resolve(self):
         html = (MATERIALS / "index.html").read_text(encoding="utf-8")
-        self.assertNotIn("<script", html)
+        # Dopuszczamy jedynie skrypty odpowiedzialne za przełącznik motywu.
+        self.assertEqual(html.count("<script>"), 2)
+        self.assertNotIn("<script src=", html)
+        self.assertIn("self-theme", html)
+        self.assertIn('id="theme-toggle"', html)
+        self.assertIn('color-scheme:dark', html)
         self.assertIn("font:14px/1.5", html)
         self.assertIn("a:focus-visible", html)
         self.assertIn("class=\"materials-grid\"", html)
