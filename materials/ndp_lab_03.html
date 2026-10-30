@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>NDP | Laboratorium 03 | Skrypty powłoki Bash</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#172c40;background:#f2f5f8;line-height:1.42}
+*{box-sizing:border-box}html{scroll-behavior:auto}body{margin:0}button,input{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}
+:focus-visible{outline:3px solid #087e8b;outline-offset:2px}
+header{background:#003c82;color:#fff;padding:13px max(14px,calc((100vw - 1220px)/2));border-bottom:3px solid #087e8b}
+header h1{margin:0;font-size:1.13rem;letter-spacing:.005em}header p{margin:2px 0 0;color:#e0f2fc;font-size:.85rem}
+.layout{max-width:1220px;margin:14px auto 28px;display:grid;grid-template-columns:188px minmax(0,1fr);gap:12px;padding:0 12px}
+aside{align-self:start;position:sticky;top:12px;border:1px solid #d8e2eb;border-radius:10px;background:white;padding:12px}
+aside h2{font-size:.91rem;margin:0 0 9px}.nav{display:grid;gap:3px}.nav button{text-align:left;border:0;background:transparent;color:#304b61;border-radius:6px;padding:7px 8px;display:flex;align-items:center;gap:8px;font-size:.89rem;min-height:36px}
+.nav span{font-size:.76rem;border:1px solid #b9cad9;border-radius:50%;width:22px;height:22px;display:inline-grid;place-items:center;flex-shrink:0}
+.nav .active{background:#e8f1f8;color:#003c82;font-weight:700}
+main{min-width:0}.paper{background:white;border:1px solid #d8e2eb;border-radius:10px;padding:17px 22px 20px;min-height:375px}
+.section-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}.step-count{color:#087e8b;font-size:.76rem;font-weight:750;text-transform:uppercase;letter-spacing:.06em}
+h2{font-size:1.32rem;line-height:1.2;margin:5px 0 9px}p{margin:8px 0}.muted{color:#475c70;font-size:.89rem}
+code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace}p code,li code{background:#eaf0f5;color:#142638;border-radius:3px;padding:1px 4px}
+.task-list{margin:9px 0 0;padding:0;list-style:none;counter-reset:task;display:grid;gap:5px}.task{counter-increment:task;display:grid;grid-template-columns:minmax(170px,.87fr) minmax(0,1.5fr);align-items:start;gap:12px;padding:8px 10px;border:1px solid #e0e8ef;border-radius:7px;background:#fcfdff}
+.task-label{display:flex;align-items:flex-start;gap:8px;font-size:.9rem;font-weight:590;line-height:1.35;padding-top:5px}.task-label::before{content:counter(task) ".";color:#087e8b;font-weight:800;flex-shrink:0;min-width:21px}
+.task pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;background:#eaf1f7;color:#0d283e!important;padding:8px 11px;border:1px solid #cbdce9;border-radius:5px;font-size:.9rem;line-height:1.37;tab-size:2;user-select:text}
+.task pre code{color:#0d283e!important;background:transparent!important;font-size:inherit!important;white-space:inherit}
+.task .detail{grid-column:2;font-size:.79rem;color:#42596c;margin-top:-5px}.task.text-only .detail{grid-column:2;margin-top:2px}
+.hint{font-size:.86rem;color:#425568;border-left:3px solid #087e8b;background:#f2f8fa;padding:8px 11px;margin-top:12px}
+.progress{height:4px;display:flex;gap:4px;margin-bottom:13px}.progress i{border-radius:5px;background:#e0e8ef;flex:1}.progress .current{background:#087e8b}
+.actions{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid #e6edf2;margin-top:16px;padding-top:14px}
+.btn{font-size:.88rem;font-weight:700;padding:8px 15px;border-radius:6px;border:1px solid #c2d2df;color:#003c82;background:white}.btn.primary{background:#003c82;border-color:#003c82;color:white}.btn.teal{background:#087e8b;border-color:#087e8b;color:white}
+.starter-files{display:flex;gap:7px;flex-wrap:wrap;margin-top:5px}.starter-files button{border:1px solid #abc1d2;background:#eaf4f8;color:#003c82;border-radius:6px;font-size:.8rem;padding:5px 9px}
+.question{margin:7px 0;padding:10px 12px 11px;border:1px solid #dde7ef;border-radius:7px;min-width:0}.question legend{font-weight:680;font-size:.93rem;padding:0 4px}
+.answer{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}.answer label{display:flex;align-items:flex-start;gap:8px;padding:7px 9px;border:1px solid #dce5ec;border-radius:5px;font-size:.85rem;cursor:pointer;line-height:1.3}
+.answer label:has(input:checked){border-color:#087e8b;background:#ecf8f7}.answer input{flex-shrink:0;accent-color:#087e8b;margin-top:3px}
+.details{font-size:.84rem;color:#495c6a}.album{margin:12px 0}.album input{max-width:160px;border:1px solid #c1d0db;border-radius:5px;padding:6px}
+.kpis{display:flex;gap:9px;margin:11px 0}.kpi{border:1px solid #cddde6;border-radius:7px;padding:10px 15px;background:#f4f9fb}.kpi strong{display:block;font-size:1.35rem;color:#003c82}
+.result-item{margin:7px 0;padding:10px 12px;border:1px solid #dde6ed;border-left:4px solid #b45539;border-radius:5px;font-size:.87rem}.result-item.good{border-left-color:#178055}.result-item p{margin:3px 0}
+footer{max-width:1220px;margin:0 auto 24px;padding:0 15px;color:#687a88;font-size:.77rem;text-align:right}
+@media(max-width:880px){.layout{grid-template-columns:1fr}.nav{display:flex;flex-wrap:wrap}.nav button{flex:1;min-width:95px;justify-content:center}.nav span{display:none}aside{position:static}}
+@media(max-width:650px){header{padding:12px}.paper{padding:13px}.task{grid-template-columns:1fr;gap:5px;padding:9px}.task .detail{grid-column:1;margin-top:0}.task-label{padding-top:0}.answer{grid-template-columns:1fr}}
+@media print{body{background:white}header{background:white;color:black;border-bottom:1px solid #ccc}.layout{display:block;margin:0}aside,.actions,.progress{display:none!important}.paper{border:0;padding:0}.task{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header><h1>Narzędzia dla programistów · Laboratorium 03</h1><p>Skrypty powłoki Bash</p></header>
+<div class="layout"><aside aria-label="Nawigacja"><h2>Przebieg ćwiczenia</h2><nav id="nav" class="nav"></nav></aside>
+<main><div class="paper"><div id="progress" class="progress" aria-hidden="true"></div><section id="content" aria-live="polite"></section><div id="actions" class="actions"></div></div></main></div>
+<footer>KIiA · Politechnika Rzeszowska</footer>
+<script>
+"use strict";
+const CONFIG={"id":"NDP-03","number":"03","title":"Skrypty powłoki Bash","steps":[{"name":"Start","heading":"Zacznij pisać skrypty Bash","intro":"Pracuj w <code>~/cw3</code>. Utwórz i zapisz plik <code>pkt1</code> z plików startowych wbudowanych w instrukcję.","items":[{"label":"Utwórz katalog.","code":"mkdir -p ~/cw3","detail":null,"kind":"code"},{"label":"Przejdź do katalogu.","code":"cd ~/cw3","detail":null,"kind":"code"},{"label":"Pobierz cztery pliki startowe.","code":null,"detail":"Zapisz je w katalogu ~/cw3.","kind":"starter"},{"label":"Podejrzyj pierwszy skrypt.","code":"cat pkt1","detail":null,"kind":"code"},{"label":"Uruchom skrypt przez Bash.","code":"bash pkt1","detail":null,"kind":"code"},{"label":"Nadaj uprawnienia do uruchamiania.","code":"chmod 744 pkt1","detail":null,"kind":"code"},{"label":"Uruchom bezpośrednio.","code":"./pkt1","detail":null,"kind":"code"}],"tail":null},{"name":"Warunki","heading":"Sprawdź istnienie plików","intro":"Uzupełnij plik <code>pkt2</code> warunkiem sprawdzającym obecność <code>pkt1</code> i tworzącym dane1, gdy jeszcze nie istnieje.","items":[{"label":"Wprowadź treść skryptu pkt2.","code":null,"detail":"Skrypt startowy zawiera przykład if i test -f. Przejrzyj go oraz porównaj z dokumentacją Bash.","kind":"text"},{"label":"Sprawdź składnię.","code":"bash -n pkt2","detail":null,"kind":"code"},{"label":"Nadaj uprawnienia.","code":"chmod 744 pkt2","detail":null,"kind":"code"},{"label":"Uruchom skrypt.","code":"./pkt2","detail":null,"kind":"code"},{"label":"Sprawdź utworzony plik.","code":"cat dane1","detail":null,"kind":"code"}],"tail":null},{"name":"Zmienne","heading":"Porównaj dwie liczby","intro":"Skrypt <code>pkt3</code> pobiera dwie liczby i odrzuca brakujące lub niecałkowite dane.","items":[{"label":"Sprawdź składnię programu.","code":"bash -n pkt3","detail":null,"kind":"code"},{"label":"Nadaj uprawnienia.","code":"chmod 744 pkt3","detail":null,"kind":"code"},{"label":"Uruchom program.","code":"./pkt3","detail":null,"kind":"code"},{"label":"Sprawdź trzy warianty.","code":null,"detail":"Podaj pierwszą liczbę większą, drugą większą i liczby równe. Następnie spróbuj pustego wejścia.","kind":"text"},{"label":"Odczytaj kod zakończenia po błędnym wejściu.","code":"echo $?","detail":null,"kind":"code"}],"tail":null},{"name":"Pętla for","heading":"Rozpoznawaj typy obiektów","intro":"Zapisz skrypt <code>pkt4</code> z pętlą for, testującą pliki, katalogi i inne typy obiektów.","items":[{"label":"Pobierz pkt4 z materiałów.","code":null,"detail":"Plik startowy zawiera poprawny przykład testów -f, -d oraz -e.","kind":"text"},{"label":"Sprawdź składnię.","code":"bash -n pkt4","detail":null,"kind":"code"},{"label":"Uruchom skrypt.","code":"bash pkt4","detail":null,"kind":"code"},{"label":"Porównaj wynik z listą obiektów.","code":"ls -la","detail":null,"kind":"code"}],"tail":null},{"name":"While i case","heading":"Wykorzystaj iterację oraz wybór","intro":"Utwórz skrypt <code>pkt5</code> powtarzający wskazany tekst, a następnie menu <code>pkt6</code> z poleceniami a/b/c/x.","items":[{"label":"Utwórz plik pkt5.","code":null,"detail":"Napisz while z licznikiem; użyj read -r do pobrania tekstu i liczby powtórzeń.","kind":"text"},{"label":"Sprawdź składnię pkt5.","code":"bash -n pkt5","detail":null,"kind":"code"},{"label":"Uruchom pkt5.","code":"bash pkt5","detail":null,"kind":"code"},{"label":"Utwórz plik pkt6.","code":null,"detail":"Użyj pętli while i instrukcji case, z obsługą wejść a, b, c, x oraz dodatniej liczby.","kind":"text"},{"label":"Sprawdź składnię pkt6.","code":"bash -n pkt6","detail":null,"kind":"code"},{"label":"Uruchom menu.","code":"bash pkt6","detail":null,"kind":"code"},{"label":"Sprawdź plik daty.log.","code":"cat daty.log","detail":"Plik powstaje po wybraniu opcji a, a daty są dopisywane przez opcję b.","kind":"code"}],"tail":null},{"name":"Vim","heading":"Edytuj kod w Vimie","intro":"Przećwicz podstawowe operacje w kopii skryptu, aby przypadkiem nie nadpisać wersji roboczej.","items":[{"label":"Utwórz kopię pliku.","code":"cp pkt3 pkt3-vim","detail":null,"kind":"code"},{"label":"Otwórz kopię w edytorze.","code":"vim pkt3-vim","detail":null,"kind":"code"},{"label":"Przejdź na początek pliku.","code":null,"detail":"W trybie normalnym użyj gg. Klawisze h/j/k/l przesuwają kursor.","kind":"text"},{"label":"Znajdź tekst.","code":null,"detail":"Wpisz /read, zatwierdź Enter i przechodź dalej klawiszem n.","kind":"text"},{"label":"Przećwicz zmiany.","code":null,"detail":"Klawisz o tworzy linię niżej; Esc wraca do trybu normalnego; dd usuwa wiersz, p go wkleja.","kind":"text"},{"label":"Zapisz i zamknij.","code":null,"detail":"W trybie normalnym wpisz :wq.","kind":"text"},{"label":"Sprawdź składnię po edycji.","code":"bash -n pkt3-vim","detail":null,"kind":"code"}],"tail":null},{"name":"Dodatkowe","heading":"Zadania dodatkowe","intro":"Zadania wykonywane wyłącznie w kontrolowanym środowisku. Nie uruchamiaj bez ograniczenia skryptów alokujących pamięć.","items":[{"label":"Wariant macOS: monitoring CPU i pamięci.","code":null,"detail":"Zaprojektuj skrypt z top i vm_stat, znacznikiem czasu co sekundę oraz trap dla SIGINT. Najpierw sprawdź format wyników na własnym macOS.","kind":"text"},{"label":"Wariant Linux: monitorowanie zasobów.","code":"top -b -n 1 | head -n 8","detail":"Wariant odczytowy, nie zapisuje wyników i nie wymaga uprawnień administratora.","kind":"code"},{"label":"Zaplanuj bezpieczny eksperyment RAM.","code":null,"detail":"Opisz limit pamięci, katalog tymczasowy, warunek zakończenia i sprzątanie SIGINT. Nie uruchamiaj na współdzielonym komputerze.","kind":"text"}],"tail":null},{"name":"Koniec","heading":"Zakończ ćwiczenie","intro":"Zachowaj wykonane skrypty do własnego archiwum, a stanowisko pozostaw uporządkowane.","items":[{"label":"Zweryfikuj składnię czterech plików.","code":"for f in pkt1 pkt2 pkt3 pkt4; do bash -n \"$f\" || exit 1; done","detail":null,"kind":"code"},{"label":"Sprawdź pliki robocze.","code":"ls -la ~/cw3","detail":null,"kind":"code"},{"label":"Zarchiwizuj rozwiązania.","code":null,"detail":"Zapisz pliki we własnym, zatwierdzonym miejscu. Nie zostawiaj poufnych danych w skryptach.","kind":"text"},{"label":"Usuń katalog po uzyskaniu zgody prowadzącego.","code":"rm -ri ~/cw3","detail":"Potwierdzaj usuwanie tylko plików należących do tego ćwiczenia.","kind":"code"}],"tail":null}],"questions":[{"q":"Co oznacza #!/bin/bash na początku pliku?","a":["Komentarz wyświetlany użytkownikowi","Wskazanie interpretera skryptu","Zmianę katalogu","Uprawnienia wykonania"],"ok":1,"why":"Shebang wskazuje interpreter używany przy bezpośrednim uruchomieniu."},{"q":"Dlaczego ./pkt1 może zwrócić Permission denied?","a":["Brak uprawnienia do wykonania","Brak połączenia sieciowego","Niepoprawna nazwa powłoki w terminalu","Plik jest za mały"],"ok":0,"why":"Bit wykonywania musi być ustawiony."},{"q":"Co robi chmod 744 pkt1?","a":["Nadaje wszystkim pełne prawa","Ustawia właścicielowi rwx, pozostałym tylko r","Usuwa plik","Zmienia właściciela"],"ok":1,"why":"7=rwx, 4=r, 4=r."},{"q":"Jak sprawdzić, czy istnieje zwykły plik?","a":["[ -f plik ]","[ -d plik ]","[ -z plik ]","[ -x / ]"],"ok":0,"why":"Test -f sprawdza zwykły plik."},{"q":"Jak pobrać cały wiersz wejścia bez interpretowania backslashy?","a":["echo -r","read -r zmienna","cat -w","printf -r"],"ok":1,"why":"read -r wyłącza specjalne traktowanie backslashy."},{"q":"Która konstrukcja obsługuje wiele wariantów tekstu?","a":["while","case ... esac","chmod","pushd"],"ok":1,"why":"case porównuje wartość z wzorcami."},{"q":"Do czego służy bash -n skrypt?","a":["Uruchamia skrypt na serwerze","Sprawdza składnię bez wykonywania poleceń","Nadaje prawa","Usuwa komentarze"],"ok":1,"why":"Opcja -n odczytuje polecenia bez ich wykonywania."},{"q":"Który zapis rozpoczyna pętlę powtarzaną dopóki warunek jest spełniony?","a":["while warunek; do","case x in","function == x","read -n x"],"ok":0,"why":"while ocenia warunek przed każdą iteracją."},{"q":"Co robi dd w trybie normalnym Vima?","a":["Zapisuje plik","Usuwa bieżący wiersz","Kończy edycję","Duplikuje cały plik"],"ok":1,"why":"dd usuwa wiersz do rejestru Vima."},{"q":"Jak prawidłowo zakończyć Vim z zapisem?","a":[":q!","/write",":wq","gg"],"ok":2,"why":":wq zapisuje i kończy pracę."}],"starter":{"pkt1":"#!/bin/bash\necho \"Test polecenia skryptu\"\n","pkt2":"#!/bin/bash\nif [ -f pkt1 ]; then\n  echo \"Plik pkt1 istnieje\"\nfi\nif [ ! -e dane1 ]; then\n  printf \"Linia tekstu w danych1\\n\" > dane1\nfi\n","pkt3":"#!/bin/bash\nread -r -p \"Pierwsza liczba: \" a\nread -r -p \"Druga liczba: \" b\nif ! [[ \"$a\" =~ ^-?[0-9]+$ && \"$b\" =~ ^-?[0-9]+$ ]]; then\n  echo \"Podaj dwie liczby całkowite\" >&2\n  exit 2\nfi\nif (( a > b )); then\n  echo \"Pierwsza liczba jest większa\"\nelif (( a < b )); then\n  echo \"Druga liczba jest większa\"\nelse\n  echo \"Liczby są równe\"\nfi\n","pkt4":"#!/bin/bash\nfor p in ./*; do\n  [ -e \"$p\" ] || continue\n  if [ -f \"$p\" ]; then\n    echo \"plik: $p\"\n  elif [ -d \"$p\" ]; then\n    echo \"katalog: $p\"\n  else\n    echo \"inny obiekt: $p\"\n  fi\ndone\n"}};
+const STEPS=CONFIG.steps;
+const QUESTIONS=CONFIG.questions;
+const STARTER=CONFIG.starter||{};
+let current=0,completed=false,report=null;
+const quizAnswers=Array(QUESTIONS.length).fill(null);
+let quizAlbum='';
+const $=id=>document.getElementById(id);
+function esc(value){return String(value).replace(/[&<>"']/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));}
+function commandSteps(items){
+ return '<ol class="task-list">'+items.map(({label,code,detail,kind})=>
+  '<li class="task '+(code?'':'text-only')+'"><div class="task-label">'+esc(label)+'</div>'+
+  (code?'<pre><code>'+esc(code)+'</code></pre>':'<div class="details">'+(kind==='starter'?'<div class="starter-files" id="starterFiles"></div>':'')+'</div>')+
+  (detail?'<div class="detail">'+esc(detail)+'</div>':'')+'</li>').join('')+'</ol>';
+}
+function btn(label,variant,fn){const x=document.createElement('button');x.type='button';x.className='btn '+variant;x.textContent=label;x.addEventListener('click',fn);return x;}
+function downloadFile(filename,contents,mime){const blob=new Blob([contents],{type:mime});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.download=filename;a.href=url;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);}
+function show(n){
+ if(completed && n!==STEPS.length+1)return;
+ if(n<0||n>STEPS.length+1 || (n===STEPS.length+1&&!completed))return;
+ current=n;
+ const all=STEPS.map(s=>s.name).concat(['Test','Wyniki']);
+ $('nav').replaceChildren();all.forEach((name,i)=>{const b=document.createElement('button');b.type='button';b.className=i===n?'active':'';b.disabled=(completed&&i!==n)||(!completed&&i===STEPS.length+1);b.innerHTML='<span>'+String(i+1)+'</span>'+esc(name);b.setAttribute('aria-current',i===n?'step':'false');b.addEventListener('click',()=>show(i));$('nav').append(b);});
+ $('progress').innerHTML=all.map((_,i)=>'<i class="'+(i<=n?'current':'')+'"></i>').join('');
+ const c=$('content');
+ if(n<STEPS.length){const s=STEPS[n];c.innerHTML='<div class="step-count">Etap '+(n+1)+' / '+all.length+'</div><h2>'+esc(s.heading)+'</h2><p>'+s.intro+'</p>'+commandSteps(s.items)+(s.tail?'<div class="hint">'+s.tail+'</div>':'');
+  const holder=$('starterFiles');if(holder){Object.entries(STARTER).forEach(([filename,contents])=>{const b=document.createElement('button');b.type='button';b.textContent=filename;b.addEventListener('click',()=>downloadFile(filename,contents,'text/plain;charset=utf-8'));holder.append(b);});}
+ }else if(n===STEPS.length){c.innerHTML='<div class="step-count">Etap '+(n+1)+' / '+all.length+'</div><h2>Sprawdź wiedzę</h2><p>10 pytań, po cztery odpowiedzi. Wybierz po jednej. Wyniki zostaną pokazane po zakończeniu.</p><p class="album"><label for="album">Numer albumu (opcjonalnie): </label><input id="album" type="text" inputmode="numeric" maxlength="12" autocomplete="off"></p><form id="quiz" novalidate></form>';drawQuiz();$('album').value=quizAlbum;$('album').addEventListener('input',e=>quizAlbum=e.target.value);
+ }else{c.innerHTML='<div class="step-count">Etap '+(n+1)+' / '+all.length+'</div><h2>Wynik podejścia</h2><div id="results"></div>';drawResults();}
+ const a=$('actions');a.replaceChildren();if(n>0&&!completed)a.append(btn('Poprzedni','',()=>show(n-1)));
+ if(n<STEPS.length)a.append(btn('Następny','primary',()=>show(n+1)));
+ else if(n===STEPS.length&&!completed)a.append(btn('Zakończ i oceń','teal',grade));
+ else if(n===STEPS.length+1)a.append(btn('Zapisz wynik JSON','primary',saveReport));
+ window.scrollTo(0,0);
+}
+function drawQuiz(){const form=$('quiz');QUESTIONS.forEach((q,i)=>{
+ const field=document.createElement('fieldset');field.className='question';const legend=document.createElement('legend');legend.innerHTML=String(i+1)+'. '+q.q;field.append(legend);
+ const choices=document.createElement('div');choices.className='answer';q.a.forEach((answer,k)=>{const label=document.createElement('label');const radio=document.createElement('input');radio.type='radio';radio.name='q'+i;radio.value=String(k);radio.autocomplete='off';radio.checked=quizAnswers[i]===k;radio.addEventListener('change',()=>quizAnswers[i]=k);label.append(radio,document.createTextNode(answer));choices.append(label);});field.append(choices);form.append(field);});}
+function grade(){if(completed)return;
+ const vals=quizAnswers.slice();
+ const missing=vals.filter(x=>x===null).length;if(missing){alert('Odpowiedz na wszystkie pytania. Brak: '+missing+'.');return;}
+ const album=$('album').value.trim();if(album&&!/^\d{1,12}$/.test(album)){alert('Numer albumu musi zawierać od 1 do 12 cyfr.');return;}
+ const score=vals.reduce((n,a,i)=>n+Number(a===QUESTIONS[i].ok),0);
+ report={schema:'ndp-lab-assessment/1.0',exercise:CONFIG.id,finished_at:new Date().toISOString(),album:album||null,score,max_score:10,percent:score*10,answers:vals.map((answer,i)=>({number:i+1,answer_index:answer,correct:answer===QUESTIONS[i].ok}))};
+ completed=true;show(STEPS.length+1);
+}
+function drawResults(){if(!report)return;const r=$('results');r.innerHTML='<div class="kpis"><div class="kpi">Punkty<strong>'+report.score+' / 10</strong></div><div class="kpi">Wynik<strong>'+report.percent+'%</strong></div></div><p class="details">Poniżej podano ocenę odpowiedzi i poprawne rozwiązania.</p>';
+ QUESTIONS.forEach((q,i)=>{const isCorrect=report.answers[i].correct;const b=document.createElement('div');b.className='result-item '+(isCorrect?'good':'');
+ const h=document.createElement('strong');h.textContent=(i+1)+'. '+(isCorrect?'Poprawnie':'Błąd')+' · '+q.q.replace(/<[^>]*>/g,'');b.append(h);
+ const v=document.createElement('p');v.textContent='Twoja odpowiedź: '+q.a[report.answers[i].answer_index];b.append(v);
+ if(!isCorrect){const c=document.createElement('p');c.textContent='Poprawna odpowiedź: '+q.a[q.ok];b.append(c);}
+ const why=document.createElement('p');why.className='details';why.textContent=q.why;b.append(why);r.append(b);});
+ const p=document.createElement('p');p.className='details';p.textContent='Raport możesz zapisać na komputerze. Nie jest wysyłany automatycznie.';r.append(p);
+}
+function saveReport(){if(!report)return;downloadFile('ndp_lab_'+CONFIG.number+'_wynik_'+(report.album||'anonim')+'.json',JSON.stringify(report,null,2)+'\n','application/json;charset=utf-8');}
+show(0);
+</script>
+</body>
+</html>
