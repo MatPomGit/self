@@ -162,10 +162,12 @@
     .manuscript-list{margin:8px 0;padding-left:21px}
     .manuscript-list li{padding:8px 0}
     .manuscript-list a{font-size:.85rem}
+    .manuscript-description{font-size:.8rem;line-height:1.45;margin-top:4px;max-width:100ch}
     .manuscript-journal,.manuscript-status{font-size:.75rem;color:var(--muted);margin-top:2px}
     .manuscript-track{display:flex;gap:10px;align-items:center;margin-top:5px}
     .manuscript-track progress{height:8px;flex:1;max-width:420px;accent-color:var(--accent)}
     .manuscript-percent{font-size:.73rem;font-variant-numeric:tabular-nums}
+    main:has(.workspace.visible){justify-content:flex-start}
     .workspace.visible{width:100%}
     @media(max-width:860px){
       .intro{grid-template-columns:1fr;gap:12px}
@@ -312,7 +314,7 @@
       </section>
     </main>
 
-    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.0">v1.2.0</span></footer>
+    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.1">v1.2.1</span></footer>
   </div>
 
   <script>
@@ -482,6 +484,7 @@
         const response=await fetch('docs/data/in-progress.json');
         if(!response.ok)throw new Error('HTTP '+response.status);
         const entries=await response.json();
+        if(!Array.isArray(entries)||!entries.length)throw new Error('Nieprawidłowa lista');
         const intro=makeElement('p','', 'Szacunkowy stopień przygotowania manuskryptów do zgłoszenia, nie prawdopodobieństwo akceptacji. Czasopisma oznaczone jako „propozycja” nie są zatwierdzonym wyborem.');
         const list=document.createElement('ol');
         list.className='manuscript-list';
@@ -490,12 +493,13 @@
           const link=makeElement('a','',entry.project.toUpperCase()+' · '+entry.title);
           link.href=entry.projectUrl;link.target='_blank';link.rel='noopener noreferrer';
           const journal=makeElement('div','manuscript-journal', 'Czasopismo: '+entry.journal+(entry.journalConfirmed?' (wybrane)':' (propozycja)'));
+          const description=makeElement('div','manuscript-description',entry.description);
           const status=makeElement('div','manuscript-status',entry.status);
           const bar=document.createElement('progress');
           bar.max=100;bar.value=entry.progress;bar.setAttribute('aria-label','Orientacyjny postęp '+entry.title);
           const percent=makeElement('span','manuscript-percent',entry.progress+'%');
           const track=makeElement('div','manuscript-track');track.append(bar,percent);
-          item.append(link,journal,status,track);list.append(item);
+          item.append(link,description,journal,status,track);list.append(item);
         });
         target.replaceChildren(intro,list);
       }catch(error){

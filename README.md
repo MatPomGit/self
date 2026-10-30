@@ -162,3 +162,10 @@ przygotowania do zgłoszenia, nie zweryfikowany KPI ani szansa akceptacji.
 JFR dla S4D-TAM ma potwierdzony wybór; inne czasopisma są propozycjami,
 które wymagają osobnego zatwierdzenia i kontroli wymagań redakcyjnych.
 Wpisy HOLD pozostawiono jako 0%, nie przedstawiając ich jako aktywnych prac.
+
+## Wersja v1.2.1
+
+Naprawiono brakujący plik `docs/data/in-progress.json` (powodował błąd
+HTTP 404), uzupełniono każdy z 26 wpisów o krótki opis celu, badania i
+rezultatu. Czasopisma pozostają widoczne także jako propozycje. Panel
+szczegółów jest wyrównany do góry zamiast do środka wysokości okna.
