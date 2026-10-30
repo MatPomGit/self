@@ -3,9 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light">
+  <meta name="color-scheme" content="light dark">
   <title>dr inż. Mateusz Pomianek</title>
   <meta name="description" content="Strona wykładowcy dr. inż. Mateusza Pomianka. Dydaktyka, badania, projekty, publikacje i kontakt.">
+  <script>
+    // Ustaw motyw przed renderowaniem, aby uniknac migania jasnej strony.
+    (() => {
+      let stored = null;
+      try { stored = localStorage.getItem('self-theme'); } catch (error) { /* Storage moze byc niedostepny. */ }
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.dataset.theme =
+        stored === 'dark' || (stored !== 'light' && prefersDark) ? 'dark' : 'light';
+    })();
+  </script>
   <style>
     :root{
       --bg:#fff;--text:#1b2430;--muted:#5d6a78;--line:#e3e8ee;--accent:#1d4f7a;--accent-soft:#eef3f8;
@@ -24,6 +34,13 @@
     .header-section{font-family:var(--serif);font-weight:700;font-size:1.05rem;color:var(--muted)}
     .home{margin-left:14px;text-decoration:none;font-family:var(--serif);font-size:1.2rem;font-weight:700;border-radius:4px}
     .affil{color:var(--muted);font-size:.92rem;text-align:right}
+    .header-actions{display:flex;align-items:center;gap:12px;flex-shrink:0}
+    .theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;flex:0 0 40px;border:1px solid var(--line);border-radius:50%;background:var(--bg);color:var(--text);cursor:pointer}
+    .theme-toggle:hover{background:var(--accent-soft);border-color:var(--accent)}
+    .theme-toggle svg{width:19px;height:19px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .theme-sun{display:none}
+    :root[data-theme="dark"] .theme-sun{display:block}
+    :root[data-theme="dark"] .theme-moon{display:none}
     main{flex:1;padding:48px 0 32px}
 
     /* Strona główna */
@@ -189,13 +206,48 @@
       .role{margin-top:8px}
     }
     @media(prefers-reduced-motion:reduce){.subs,.seg-sub{transition:none}}
+    /* Hierarchia ciemnego motywu: powierzchnie zamiast cieni, bez czerni i bieli. */
+    :root[data-theme="dark"]{
+      color-scheme:dark;
+      --bg:#171c24;--text:#e5eaf0;--muted:#b2bdc8;--line:#3b4654;
+      --accent:#93c2e6;--accent-soft:#273443;--surface:#202a35;
+      --raised:#2b3948;--on-accent:#15202b;
+    }
+    :root[data-theme="dark"] .portrait{background:var(--surface)}
+    :root[data-theme="dark"] .seg path{fill:var(--raised)}
+    :root[data-theme="dark"] .seg:hover path,
+    :root[data-theme="dark"] .seg:focus-visible path,
+    :root[data-theme="dark"] .grp.open .seg path,
+    :root[data-theme="dark"] .grp:focus-within .seg path{fill:var(--accent)}
+    :root[data-theme="dark"] .seg:hover .seg-label,
+    :root[data-theme="dark"] .seg:focus-visible .seg-label,
+    :root[data-theme="dark"] .grp.open .seg-label,
+    :root[data-theme="dark"] .grp:focus-within .seg-label,
+    :root[data-theme="dark"] .seg-sub{fill:var(--on-accent)}
+    :root[data-theme="dark"] .hub,
+    :root[data-theme="dark"] .pill rect{fill:var(--surface)}
+    :root[data-theme="dark"] .pill:hover rect,
+    :root[data-theme="dark"] .pill:focus-visible rect{fill:var(--accent)}
+    :root[data-theme="dark"] .pill:hover text,
+    :root[data-theme="dark"] .pill:focus-visible text{fill:var(--on-accent)}
+    :root[data-theme="dark"] .data-card{background:var(--surface)}
+    :root[data-theme="dark"] .data-filters button,
+    :root[data-theme="dark"] .publication-actions button,
+    :root[data-theme="dark"] .publication-actions a{background:var(--surface);color:var(--accent)}
+    :root[data-theme="dark"] .data-filters button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
   </style>
 </head>
 <body>
   <div class="page">
     <header>
       <div class="header-identity"><a class="home" id="home-link" href="#" aria-label="Strona główna">dr inż. Mateusz Pomianek</a><span class="header-section" id="header-section" hidden>/ Publikacje</span></div>
-      <div class="affil">Politechnika Rzeszowska</div>
+      <div class="header-actions">
+        <span class="affil">Politechnika Rzeszowska</span>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Tryb ciemny" aria-pressed="false" title="Włącz tryb ciemny">
+          <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 14.1A8.9 8.9 0 0 1 9.9 3.2a9 9 0 1 0 10.9 10.9Z"/></svg>
+          <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+        </button>
+      </div>
     </header>
 
     <main>
@@ -320,10 +372,36 @@
       </section>
     </main>
 
-    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.5">v1.2.5</span></footer>
+    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.6">v1.2.6</span></footer>
   </div>
 
   <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+    let sessionChoice = false;
+    function syncThemeToggle(){
+      const dark = document.documentElement.dataset.theme === 'dark';
+      themeToggle.setAttribute('aria-pressed', String(dark));
+      themeToggle.title = dark ? 'Włącz tryb jasny' : 'Włącz tryb ciemny';
+    }
+    themeToggle.addEventListener('click', () => {
+      const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = next;
+      sessionChoice = true;
+      try { localStorage.setItem('self-theme', next); } catch (error) { /* Motyw nadal dziala. */ }
+      syncThemeToggle();
+    });
+    if (systemTheme.addEventListener) {
+      systemTheme.addEventListener('change', event => {
+        if (sessionChoice) return;
+        let stored = null;
+        try { stored = localStorage.getItem('self-theme'); } catch (error) { /* Bez storage. */ }
+        if (stored === 'light' || stored === 'dark') return;
+        document.documentElement.dataset.theme = event.matches ? 'dark' : 'light';
+        syncThemeToggle();
+      });
+    }
+    syncThemeToggle();
     const workspace=document.querySelector('#informacje');
     const panels=[...document.querySelectorAll('.panel')];
     const start=document.querySelector('#start');
