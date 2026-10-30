@@ -159,6 +159,13 @@
     .progress-list ul{padding-left:20px;margin:8px 0}
     .progress-list li{padding:6px 0;border-bottom:1px solid var(--line)}
     .progress-list a{color:var(--accent);font-weight:600}
+    .manuscript-list{margin:8px 0;padding-left:21px}
+    .manuscript-list li{padding:8px 0}
+    .manuscript-list a{font-size:.85rem}
+    .manuscript-journal,.manuscript-status{font-size:.75rem;color:var(--muted);margin-top:2px}
+    .manuscript-track{display:flex;gap:10px;align-items:center;margin-top:5px}
+    .manuscript-track progress{height:8px;flex:1;max-width:420px;accent-color:var(--accent)}
+    .manuscript-percent{font-size:.73rem;font-variant-numeric:tabular-nums}
     .workspace.visible{width:100%}
     @media(max-width:860px){
       .intro{grid-template-columns:1fr;gap:12px}
@@ -305,7 +312,7 @@
       </section>
     </main>
 
-    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.1.5">v1.1.5</span></footer>
+    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.0">v1.2.0</span></footer>
   </div>
 
   <script>
@@ -469,18 +476,32 @@
       });
       list.replaceChildren(fragment);
     }
-    const publicArcPages=[["ARC S4D TAM","https://matpomgit.github.io/arc-s4d-tam/"],["ARC RGBT","https://matpomgit.github.io/arc-rgbt/"],["ARC RVI","https://matpomgit.github.io/arc-rvi/"],["ARC DERA HRI","https://matpomgit.github.io/arc-dera-hri/"],["ARC Affective","https://matpomgit.github.io/arc-affective/"]];
-    function renderProgress(){
+    async function renderProgress(){
       const target=document.getElementById('progress-list');
-      const intro=makeElement('p','', 'Publiczne strony projektów badawczych ARC. Prace w toku; poniższa lista nie oznacza zaakceptowanych publikacji.');
-      const list=document.createElement('ul');
-      publicArcPages.forEach(([title,url])=>{
-        const li=document.createElement('li');
-        const link=makeElement('a','',title);
-        link.href=url;link.target='_blank';link.rel='noopener noreferrer';
-        li.append(link);list.append(li);
-      });
-      target.replaceChildren(intro,list);
+      try{
+        const response=await fetch('docs/data/in-progress.json');
+        if(!response.ok)throw new Error('HTTP '+response.status);
+        const entries=await response.json();
+        const intro=makeElement('p','', 'Szacunkowy stopień przygotowania manuskryptów do zgłoszenia, nie prawdopodobieństwo akceptacji. Czasopisma oznaczone jako „propozycja” nie są zatwierdzonym wyborem.');
+        const list=document.createElement('ol');
+        list.className='manuscript-list';
+        entries.sort((a,b)=>b.progress-a.progress).forEach(entry=>{
+          const item=document.createElement('li');
+          const link=makeElement('a','',entry.project.toUpperCase()+' · '+entry.title);
+          link.href=entry.projectUrl;link.target='_blank';link.rel='noopener noreferrer';
+          const journal=makeElement('div','manuscript-journal', 'Czasopismo: '+entry.journal+(entry.journalConfirmed?' (wybrane)':' (propozycja)'));
+          const status=makeElement('div','manuscript-status',entry.status);
+          const bar=document.createElement('progress');
+          bar.max=100;bar.value=entry.progress;bar.setAttribute('aria-label','Orientacyjny postęp '+entry.title);
+          const percent=makeElement('span','manuscript-percent',entry.progress+'%');
+          const track=makeElement('div','manuscript-track');track.append(bar,percent);
+          item.append(link,journal,status,track);list.append(item);
+        });
+        target.replaceChildren(intro,list);
+      }catch(error){
+        target.textContent='Nie udało się wczytać planowanych manuskryptów.';
+        console.error(error);
+      }
     }
     renderProgress();
     document.querySelectorAll('#publication-filters button').forEach(button=>button.addEventListener('click',()=>{

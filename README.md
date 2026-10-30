@@ -152,3 +152,13 @@ wyłącznie do pięciu publicznych stron ARC (strony projektów, bez sugerowania
 statusu recenzowanej publikacji). Przegląd wykazu uczelnianego PRz wykazał
 25 pozycji odpowiadających 25 pozycjom JSON. Ostatnia pozycja uczelnianego
 wykazu podaje w treści rok 2017 przy nagłówku 2016; zachowano dane pierwotne.
+
+## Wersja v1.2.0
+
+Zakładka In progress prezentuje planowane manuskrypty z pięciu publicznych
+projektów ARC, uporządkowane malejąco według szacunkowego postępu prac.
+Dane: `docs/data/in-progress.json`, wartości 0–100% to redakcyjna ocena
+przygotowania do zgłoszenia, nie zweryfikowany KPI ani szansa akceptacji.
+JFR dla S4D-TAM ma potwierdzony wybór; inne czasopisma są propozycjami,
+które wymagają osobnego zatwierdzenia i kontroli wymagań redakcyjnych.
+Wpisy HOLD pozostawiono jako 0%, nie przedstawiając ich jako aktywnych prac.
