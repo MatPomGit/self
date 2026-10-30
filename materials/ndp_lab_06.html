@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>NDP | Laboratorium 06 | System kontroli wersji Git</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#172c40;background:#f2f5f8;line-height:1.42}
+*{box-sizing:border-box}html{scroll-behavior:auto}body{margin:0}button,input{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}
+:focus-visible{outline:3px solid #087e8b;outline-offset:2px}
+header{background:#003c82;color:#fff;padding:13px max(14px,calc((100vw - 1220px)/2));border-bottom:3px solid #087e8b}
+header h1{margin:0;font-size:1.13rem;letter-spacing:.005em}header p{margin:2px 0 0;color:#e0f2fc;font-size:.85rem}
+.layout{max-width:1220px;margin:14px auto 28px;display:grid;grid-template-columns:188px minmax(0,1fr);gap:12px;padding:0 12px}
+aside{align-self:start;position:sticky;top:12px;border:1px solid #d8e2eb;border-radius:10px;background:white;padding:12px}
+aside h2{font-size:.91rem;margin:0 0 9px}.nav{display:grid;gap:3px}.nav button{text-align:left;border:0;background:transparent;color:#304b61;border-radius:6px;padding:7px 8px;display:flex;align-items:center;gap:8px;font-size:.89rem;min-height:36px}
+.nav span{font-size:.76rem;border:1px solid #b9cad9;border-radius:50%;width:22px;height:22px;display:inline-grid;place-items:center;flex-shrink:0}
+.nav .active{background:#e8f1f8;color:#003c82;font-weight:700}
+main{min-width:0}.paper{background:white;border:1px solid #d8e2eb;border-radius:10px;padding:17px 22px 20px;min-height:375px}
+.section-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}.step-count{color:#087e8b;font-size:.76rem;font-weight:750;text-transform:uppercase;letter-spacing:.06em}
+h2{font-size:1.32rem;line-height:1.2;margin:5px 0 9px}p{margin:8px 0}.muted{color:#475c70;font-size:.89rem}
+code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace}p code,li code{background:#eaf0f5;color:#142638;border-radius:3px;padding:1px 4px}
+.task-list{margin:9px 0 0;padding:0;list-style:none;counter-reset:task;display:grid;gap:5px}.task{counter-increment:task;display:grid;grid-template-columns:minmax(170px,.87fr) minmax(0,1.5fr);align-items:start;gap:12px;padding:8px 10px;border:1px solid #e0e8ef;border-radius:7px;background:#fcfdff}
+.task-label{display:flex;align-items:flex-start;gap:8px;font-size:.9rem;font-weight:590;line-height:1.35;padding-top:5px}.task-label::before{content:counter(task) ".";color:#087e8b;font-weight:800;flex-shrink:0;min-width:21px}
+.task pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;background:#eaf1f7;color:#0d283e!important;padding:8px 11px;border:1px solid #cbdce9;border-radius:5px;font-size:.9rem;line-height:1.37;tab-size:2;user-select:text}
+.task pre code{color:#0d283e!important;background:transparent!important;font-size:inherit!important;white-space:inherit}
+.task .detail{grid-column:2;font-size:.79rem;color:#42596c;margin-top:-5px}.task.text-only .detail{grid-column:2;margin-top:2px}
+.hint{font-size:.86rem;color:#425568;border-left:3px solid #087e8b;background:#f2f8fa;padding:8px 11px;margin-top:12px}
+.progress{height:4px;display:flex;gap:4px;margin-bottom:13px}.progress i{border-radius:5px;background:#e0e8ef;flex:1}.progress .current{background:#087e8b}
+.actions{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid #e6edf2;margin-top:16px;padding-top:14px}
+.btn{font-size:.88rem;font-weight:700;padding:8px 15px;border-radius:6px;border:1px solid #c2d2df;color:#003c82;background:white}.btn.primary{background:#003c82;border-color:#003c82;color:white}.btn.teal{background:#087e8b;border-color:#087e8b;color:white}
+.starter-files{display:flex;gap:7px;flex-wrap:wrap;margin-top:5px}.starter-files button{border:1px solid #abc1d2;background:#eaf4f8;color:#003c82;border-radius:6px;font-size:.8rem;padding:5px 9px}
+.question{margin:7px 0;padding:10px 12px 11px;border:1px solid #dde7ef;border-radius:7px;min-width:0}.question legend{font-weight:680;font-size:.93rem;padding:0 4px}
+.answer{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}.answer label{display:flex;align-items:flex-start;gap:8px;padding:7px 9px;border:1px solid #dce5ec;border-radius:5px;font-size:.85rem;cursor:pointer;line-height:1.3}
+.answer label:has(input:checked){border-color:#087e8b;background:#ecf8f7}.answer input{flex-shrink:0;accent-color:#087e8b;margin-top:3px}
+.details{font-size:.84rem;color:#495c6a}.album{margin:12px 0}.album input{max-width:160px;border:1px solid #c1d0db;border-radius:5px;padding:6px}
+.kpis{display:flex;gap:9px;margin:11px 0}.kpi{border:1px solid #cddde6;border-radius:7px;padding:10px 15px;background:#f4f9fb}.kpi strong{display:block;font-size:1.35rem;color:#003c82}
+.result-item{margin:7px 0;padding:10px 12px;border:1px solid #dde6ed;border-left:4px solid #b45539;border-radius:5px;font-size:.87rem}.result-item.good{border-left-color:#178055}.result-item p{margin:3px 0}
+footer{max-width:1220px;margin:0 auto 24px;padding:0 15px;color:#687a88;font-size:.77rem;text-align:right}
+@media(max-width:880px){.layout{grid-template-columns:1fr}.nav{display:flex;flex-wrap:wrap}.nav button{flex:1;min-width:95px;justify-content:center}.nav span{display:none}aside{position:static}}
+@media(max-width:650px){header{padding:12px}.paper{padding:13px}.task{grid-template-columns:1fr;gap:5px;padding:9px}.task .detail{grid-column:1;margin-top:0}.task-label{padding-top:0}.answer{grid-template-columns:1fr}}
+@media print{body{background:white}header{background:white;color:black;border-bottom:1px solid #ccc}.layout{display:block;margin:0}aside,.actions,.progress{display:none!important}.paper{border:0;padding:0}.task{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header><h1>Narzędzia dla programistów · Laboratorium 06</h1><p>System kontroli wersji Git</p></header>
+<div class="layout"><aside aria-label="Nawigacja"><h2>Przebieg ćwiczenia</h2><nav id="nav" class="nav"></nav></aside>
+<main><div class="paper"><div id="progress" class="progress" aria-hidden="true"></div><section id="content" aria-live="polite"></section><div id="actions" class="actions"></div></div></main></div>
+<footer>KIiA · Politechnika Rzeszowska</footer>
+<script>
+"use strict";
+const CONFIG={"id":"NDP-06","number":"06","title":"System kontroli wersji Git","steps":[{"name":"Start","heading":"Przygotowanie środowiska","intro":"Otwórz terminal Bash lub Git Bash. Wykonuj polecenia pojedynczo, w podanej kolejności.","items":[{"label":"Sprawdź zainstalowaną wersję Git.","code":"git --version","detail":null,"kind":"code"}],"tail":null},{"name":"Repozytorium","heading":"Utwórz repozytorium","intro":"Pracuj w katalogu ćwiczenia. Konfiguracja autora dotyczy wyłącznie tego repozytorium.","items":[{"label":"Utwórz katalog.","code":"mkdir ndp-git-lab06","detail":null,"kind":"code"},{"label":"Przejdź do katalogu.","code":"cd ndp-git-lab06","detail":null,"kind":"code"},{"label":"Zainicjalizuj gałąź główną.","code":"git init -b main","detail":null,"kind":"code"},{"label":"Ustaw nazwę autora.","code":"git config user.name \"Student NDP\"","detail":null,"kind":"code"},{"label":"Ustaw adres autora.","code":"git config user.email \"student@example.invalid\"","detail":null,"kind":"code"},{"label":"Sprawdź stan.","code":"git status","detail":null,"kind":"code"}],"tail":"Na wspólnym stanowisku unikaj zmiany konfiguracji globalnej <code>git config --global<\/code>."},{"name":"Commit","heading":"Zapisz pierwsze zmiany","intro":"Utwórz plik, dodaj go do indeksu i zapisz zatwierdzenie.","items":[{"label":"Utwórz plik z jedną linią.","code":"printf 'Pierwsza wersja projektu\\n' > notatki.txt","detail":null,"kind":"code"},{"label":"Obejrzyj nowy plik.","code":"git status","detail":null,"kind":"code"},{"label":"Przygotuj plik do zatwierdzenia.","code":"git add notatki.txt","detail":null,"kind":"code"},{"label":"Sprawdź zawartość indeksu.","code":"git diff --cached","detail":null,"kind":"code"},{"label":"Zapisz commit.","code":"git commit -m \"Dodaj notatki\"","detail":null,"kind":"code"},{"label":"Wyświetl historię.","code":"git log --oneline -3","detail":null,"kind":"code"}],"tail":"Porównaj <code>git diff<\/code> oraz <code>git diff --cached<\/code> po samodzielnej zmianie pliku."},{"name":"Gałęzie","heading":"Utwórz i scal gałąź","intro":"Zapisz zmianę w nowej gałęzi, po czym zintegruj ją z <code>main<\/code>.","items":[{"label":"Utwórz gałąź roboczą.","code":"git switch -c funkcja-opis","detail":null,"kind":"code"},{"label":"Dopisz kolejną linię.","code":"printf 'Druga wersja projektu\\n' >> notatki.txt","detail":null,"kind":"code"},{"label":"Przygotuj zmianę.","code":"git add notatki.txt","detail":null,"kind":"code"},{"label":"Zapisz commit.","code":"git commit -m \"Rozszerz notatki\"","detail":null,"kind":"code"},{"label":"Wróć na main.","code":"git switch main","detail":null,"kind":"code"},{"label":"Scal zmiany.","code":"git merge funkcja-opis","detail":null,"kind":"code"},{"label":"Wyświetl graf historii.","code":"git log --oneline --graph --all -5","detail":null,"kind":"code"}],"tail":"Zwróć uwagę na przypadek <em>fast-forward<\/em>, który nie wymaga osobnego commita scalającego."},{"name":"Zdalne","heading":"Repozytorium zdalne na dysku","intro":"Repozytorium <code>bare<\/code> zastępuje serwer Git. Nie wymaga dostępu do internetu","items":[{"label":"Utwórz repozytorium bare obok katalogu ćwiczenia","code":"git init --bare --initial-branch=main ../ndp-remote.git","detail":null,"kind":"code"},{"label":"Dodaj origin","code":"git remote add origin ../ndp-remote.git","detail":null,"kind":"code"},{"label":"Sprawdź adres zdalny","code":"git remote -v","detail":null,"kind":"code"},{"label":"Wyślij gałąź main","code":"git push -u origin main","detail":null,"kind":"code"},{"label":"Pobierz referencje z origin","code":"git fetch origin","detail":null,"kind":"code"},{"label":"Sprawdź stan synchronizacji","code":"git status","detail":null,"kind":"code"}],"tail":"<code>git fetch<\/code> pobiera dane bez automatycznego scalania, a <code>git pull<\/code> dodatkowo integruje zmiany"},{"name":"Dodatkowe","heading":"Zadania dodatkowe","intro":"Wykonaj je przed zakończeniem ćwiczenia","items":[{"label":"Utwórz nieśledzony plik","code":"printf 'Plik testowy\\n' > tymczasowy.txt","detail":null,"kind":"code"},{"label":"Wyświetl podgląd czyszczenia bez usuwania","code":"git clean -nd","detail":null,"kind":"code"},{"label":"Dopisz wpis, który następnie odwrócisz","code":"printf 'Wpis do cofnięcia\\n' >> notatki.txt","detail":null,"kind":"code"},{"label":"Przygotuj wpis","code":"git add notatki.txt","detail":null,"kind":"code"},{"label":"Zatwierdź wpis","code":"git commit -m \"Dodaj wpis tymczasowy\"","detail":null,"kind":"code"},{"label":"Utwórz commit odwracający ostatnią zmianę","code":"git revert --no-edit HEAD","detail":null,"kind":"code"},{"label":"Sprawdź historię","code":"git log --oneline -3","detail":null,"kind":"code"}],"tail":"Nie używaj <code>git reset --hard<\/code> ani <code>git clean -fd<\/code> w projektach z cudzymi danymi"},{"name":"Zakończenie","heading":"Zakończ ćwiczenie","intro":"Zachowaj lokalne repozytorium i sprawdź wynik przed testem","items":[{"label":"Sprawdź stan końcowy","code":"git status","detail":null,"kind":"code"},{"label":"Zapisz skróconą historię","code":"git log --oneline --all -5","detail":null,"kind":"code"}],"tail":"Repozytorium <code>ndp-git-lab06<\/code> oraz <code>ndp-remote.git<\/code> zostaw w swoim katalogu roboczym; na komputerze współdzielonym postępuj zgodnie z poleceniem prowadzącego"}],"questions":[{"q":"Co pokazuje <code>git status<\/code>?","a":["Status katalogu roboczego i indeksu","Wersję Git na serwerze","Listę wszystkich commitów","Zawartość pliku .gitignore"],"ok":0,"why":"Polecenie raportuje m.in. zmiany nieśledzone, zmodyfikowane i przygotowane"},{"q":"Jak dodać plik do indeksu?","a":["git commit notatki.txt","git stage --drop notatki.txt","git add notatki.txt","git push notatki.txt"],"ok":2,"why":"git add przygotowuje zawartość pliku do zatwierdzenia"},{"q":"Jak porównać indeks z ostatnim commitem?","a":["git diff --cached","git diff --no-index","git status -b","git fetch"],"ok":0,"why":"git diff --cached (lub --staged) pokazuje zmiany w indeksie."},{"q":"Które polecenie tworzy commit?","a":["git pull","git init","git log","git commit -m \"Dodaj notatki\""],"ok":3,"why":"git commit zapisuje zatwierdzenie na podstawie indeksu."},{"q":"Jak utworzyć gałąź i na nią przejść?","a":["git merge -c funkcja","git switch -c funkcja","git branch -d funkcja","git fetch funkcja"],"ok":1,"why":"git switch -c tworzy nową gałąź i przełącza na nią HEAD."},{"q":"Kiedy możliwe jest scalenie fast-forward?","a":["Gdy istnieją konflikty w plikach","Gdy obie gałęzie mają niezależne commity","Gdy gałąź docelowa jest przodkiem gałęzi scalanej","Gdy usunięto całą historię"],"ok":2,"why":"Wówczas Git może przesunąć wskaźnik gałęzi bez commita scalającego."},{"q":"Co robi <code>git fetch<\/code>?","a":["Pobiera zmiany z remote bez automatycznego scalania","Usuwa lokalne commity","Zapisuje bieżące zmiany w indeksie","Zawsze wykonuje merge"],"ok":0,"why":"fetch aktualizuje referencje zdalne; integrację wykonuje się oddzielnie."},{"q":"Jak sprawdzić adres remote <code>origin<\/code>?","a":["git switch origin","git clean origin","git branch -d origin","git remote get-url origin"],"ok":3,"why":"git remote get-url zwraca adres skonfigurowanego zdalnego repozytorium."},{"q":"Jak bezpiecznie podejrzeć pliki wskazane przez git clean?","a":["git clean -fd","git clean -nd","git reset --hard","git push --force"],"ok":1,"why":"-n uruchamia podgląd (dry-run), -d uwzględnia katalogi."},{"q":"Co robi <code>git revert HEAD<\/code>?","a":["Usuwa katalog .git","Przenosi nieśledzone pliki","Tworzy commit odwracający wskazane zmiany","Wymusza zapis na serwerze"],"ok":2,"why":"git revert odwraca skutki commita nowym zatwierdzeniem i zachowuje historię."}]};
+const STEPS=CONFIG.steps;
+const QUESTIONS=CONFIG.questions;
+const STARTER=CONFIG.starter||{};
+let current=0,completed=false,report=null;
+const quizAnswers=Array(QUESTIONS.length).fill(null);
+let quizAlbum='';
+const $=id=>document.getElementById(id);
+function esc(value){return String(value).replace(/[&<>"']/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));}
+function commandSteps(items){
+ return '<ol class="task-list">'+items.map(({label,code,detail,kind})=>
+  '<li class="task '+(code?'':'text-only')+'"><div class="task-label">'+esc(label)+'</div>'+
+  (code?'<pre><code>'+esc(code)+'</code></pre>':'<div class="details">'+(kind==='starter'?'<div class="starter-files" id="starterFiles"></div>':'')+'</div>')+
+  (detail?'<div class="detail">'+esc(detail)+'</div>':'')+'</li>').join('')+'</ol>';
+}
+function btn(label,variant,fn){const x=document.createElement('button');x.type='button';x.className='btn '+variant;x.textContent=label;x.addEventListener('click',fn);return x;}
+function downloadFile(filename,contents,mime){const blob=new Blob([contents],{type:mime});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.download=filename;a.href=url;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);}
+function show(n){
+ if(completed && n!==STEPS.length+1)return;
+ if(n<0||n>STEPS.length+1 || (n===STEPS.length+1&&!completed))return;
+ current=n;
+ const all=STEPS.map(s=>s.name).concat(['Test','Wyniki']);
+ $('nav').replaceChildren();all.forEach((name,i)=>{const b=document.createElement('button');b.type='button';b.className=i===n?'active':'';b.disabled=(completed&&i!==n)||(!completed&&i===STEPS.length+1);b.innerHTML='<span>'+String(i+1)+'</span>'+esc(name);b.setAttribute('aria-current',i===n?'step':'false');b.addEventListener('click',()=>show(i));$('nav').append(b);});
+ $('progress').innerHTML=all.map((_,i)=>'<i class="'+(i<=n?'current':'')+'"></i>').join('');
+ const c=$('content');
+ if(n<STEPS.length){const s=STEPS[n];c.innerHTML='<div class="step-count">Etap '+(n+1)+' / '+all.length+'</div><h2>'+esc(s.heading)+'</h2><p>'+s.intro+'</p>'+commandSteps(s.items)+(s.tail?'<div class="hint">'+s.tail+'</div>':'');
+  const holder=$('starterFiles');if(holder){Object.entries(STARTER).forEach(([filename,contents])=>{const b=document.createElement('button');b.type='button';b.textContent=filename;b.addEventListener('click',()=>downloadFile(filename,contents,'text/plain;charset=utf-8'));holder.append(b);});}
+ }else if(n===STEPS.length){c.innerHTML='<div class="step-count">Etap '+(n+1)+' / '+all.length+'</div><h2>Sprawdź wiedzę</h2><p>10 pytań, po cztery odpowiedzi. Wybierz po jednej. Wyniki zostaną pokazane po zakończeniu.</p><p class="album"><label for="album">Numer albumu (opcjonalnie): </label><input id="album" type="text" inputmode="numeric" maxlength="12" autocomplete="off"></p><form id="quiz" novalidate></form>';drawQuiz();$('album').value=quizAlbum;$('album').addEventListener('input',e=>quizAlbum=e.target.value);
+ }else{c.innerHTML='<div class="step-count">Etap '+(n+1)+' / '+all.length+'</div><h2>Wynik podejścia</h2><div id="results"></div>';drawResults();}
+ const a=$('actions');a.replaceChildren();if(n>0&&!completed)a.append(btn('Poprzedni','',()=>show(n-1)));
+ if(n<STEPS.length)a.append(btn('Następny','primary',()=>show(n+1)));
+ else if(n===STEPS.length&&!completed)a.append(btn('Zakończ i oceń','teal',grade));
+ else if(n===STEPS.length+1)a.append(btn('Zapisz wynik JSON','primary',saveReport));
+ window.scrollTo(0,0);
+}
+function drawQuiz(){const form=$('quiz');QUESTIONS.forEach((q,i)=>{
+ const field=document.createElement('fieldset');field.className='question';const legend=document.createElement('legend');legend.innerHTML=String(i+1)+'. '+q.q;field.append(legend);
+ const choices=document.createElement('div');choices.className='answer';q.a.forEach((answer,k)=>{const label=document.createElement('label');const radio=document.createElement('input');radio.type='radio';radio.name='q'+i;radio.value=String(k);radio.autocomplete='off';radio.checked=quizAnswers[i]===k;radio.addEventListener('change',()=>quizAnswers[i]=k);label.append(radio,document.createTextNode(answer));choices.append(label);});field.append(choices);form.append(field);});}
+function grade(){if(completed)return;
+ const vals=quizAnswers.slice();
+ const missing=vals.filter(x=>x===null).length;if(missing){alert('Odpowiedz na wszystkie pytania. Brak: '+missing+'.');return;}
+ const album=$('album').value.trim();if(album&&!/^\d{1,12}$/.test(album)){alert('Numer albumu musi zawierać od 1 do 12 cyfr.');return;}
+ const score=vals.reduce((n,a,i)=>n+Number(a===QUESTIONS[i].ok),0);
+ report={schema:'ndp-lab-assessment/1.0',exercise:CONFIG.id,finished_at:new Date().toISOString(),album:album||null,score,max_score:10,percent:score*10,answers:vals.map((answer,i)=>({number:i+1,answer_index:answer,correct:answer===QUESTIONS[i].ok}))};
+ completed=true;show(STEPS.length+1);
+}
+function drawResults(){if(!report)return;const r=$('results');r.innerHTML='<div class="kpis"><div class="kpi">Punkty<strong>'+report.score+' / 10</strong></div><div class="kpi">Wynik<strong>'+report.percent+'%</strong></div></div><p class="details">Poniżej podano ocenę odpowiedzi i poprawne rozwiązania.</p>';
+ QUESTIONS.forEach((q,i)=>{const isCorrect=report.answers[i].correct;const b=document.createElement('div');b.className='result-item '+(isCorrect?'good':'');
+ const h=document.createElement('strong');h.textContent=(i+1)+'. '+(isCorrect?'Poprawnie':'Błąd')+' · '+q.q.replace(/<[^>]*>/g,'');b.append(h);
+ const v=document.createElement('p');v.textContent='Twoja odpowiedź: '+q.a[report.answers[i].answer_index];b.append(v);
+ if(!isCorrect){const c=document.createElement('p');c.textContent='Poprawna odpowiedź: '+q.a[q.ok];b.append(c);}
+ const why=document.createElement('p');why.className='details';why.textContent=q.why;b.append(why);r.append(b);});
+}
+function saveReport(){if(!report)return;downloadFile('ndp_lab_'+CONFIG.number+'_wynik_'+(report.album||'anonim')+'.json',JSON.stringify(report,null,2)+'\n','application/json;charset=utf-8');}
+show(0);
+</script>
+</body>
+</html>
