@@ -165,7 +165,8 @@
     .manuscript-list li{padding:5px 0;border-bottom:1px solid var(--line);line-height:1.3}
     .manuscript-list a{font-size:.76rem}
     .manuscript-title{display:block;font-size:.84rem;font-weight:600}
-    .manuscript-project{font-size:.73rem;margin-top:1px}
+    .manuscript-meta{display:flex;align-items:baseline;justify-content:space-between;gap:6px 20px;flex-wrap:wrap;margin-top:1px}
+    .manuscript-project{font-size:.73rem}
     .manuscript-description{font-size:.76rem;line-height:1.35;margin:2px 0;max-width:110ch}
     .manuscript-next{font-size:.74rem;line-height:1.3;margin:2px 0;color:var(--text)}
     .manuscript-journal,.manuscript-status{font-size:.75rem;color:var(--muted);margin-top:2px}
@@ -319,7 +320,7 @@
       </section>
     </main>
 
-    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.2">v1.2.2</span></footer>
+    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.3">v1.2.3</span></footer>
   </div>
 
   <script>
@@ -501,6 +502,7 @@
           const projectLink=makeElement('a','',entry.project.toUpperCase());
           projectLink.href=entry.projectUrl;projectLink.target='_blank';projectLink.rel='noopener noreferrer';
           project.append(projectLink);
+          const meta=makeElement('div','manuscript-meta');
           const description=makeElement('p','manuscript-description',entry.description);
           const next=makeElement('p','manuscript-next','Następny krok: '+entry.nextStep);
           const journal=makeElement('div','manuscript-journal','Czasopismo: ');
@@ -511,7 +513,8 @@
           const bar=document.createElement('progress');bar.max=100;bar.value=entry.progress;
           bar.setAttribute('aria-label','Szacunkowy postęp: '+entry.title);
           track.append(bar,makeElement('span','manuscript-percent',entry.progress+'%'));
-          item.append(title,project,description,next,journal,track);list.append(item);
+          meta.append(project,journal);
+          item.append(title,meta,description,next,track);list.append(item);
         });
         target.replaceChildren(intro,list);
       }catch(error){
