@@ -8,15 +8,19 @@ są od nich rozdzielone.
 | --- | --- |
 | `index.html`, `projects.html`, `publications.html` | Główne strony |
 | `materials/index.html` | Indeks aktualnych materiałów, statyczne listy HTML |
-| `materials/<przedmiot>/index.html` | Strony dziesięciu przedmiotów |
+| `materials/<przedmiot>/index.html` | Strony czterech pozostałych przedmiotów |
 | `materials/ndp_lab_02.html` do `materials/ndp_lab_06.html` | Pięć laboratoriów NDP |
 | `materials/wirr_blok_01.html` do `materials/wirr_blok_04.html` | Cztery bloki WiRR |
-| `materials/bash/` | Strona Bash i pomocnicze programy terminalowe |
+| `materials/bash/` | Pomocnicze programy terminalowe; bez osobnej strony HTML |
 | `materials/templates/` | Szablony do pobrania |
 | `assets/css/`, `assets/js/`, `assets/vendor/` | Wspólne zasoby techniczne witryny |
 | `docs/` | Grafiki i teksty dokumentacyjne |
 | `archive/` | Historyczna wersja strony |
 | `tests/` | Testy regresyjne i statyczne |
+
+Usunięto osobne strony HTML przedmiotów: Bash, LaTeX, Git, Vim,
+Algorytmy i struktury danych oraz Aplikacje mobilne.
+Ich dawne adresy nie są utrzymywane jako przekierowania.
 
 ## Typografia indeksu
 

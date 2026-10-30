@@ -10,10 +10,12 @@ Statyczna witryna naukowa i dydaktyczna publikowana przez GitHub Pages.
 
 Jedynym katalogiem aktualnych materiałów udostępnianych studentom jest `materials/`.
 Punktem wejścia pozostaje `materials/index.html`, prosta strona HTML z listami linków
-bez JavaScriptu, frameworków i generatora. Strony przedmiotów znajdują się w
-`materials/<przedmiot>/index.html`; laboratoria NDP w `materials/ndp_lab_NN.html`,
+bez JavaScriptu, frameworków i generatora. Pozostałe strony przedmiotów znajdują się w
+`materials/<przedmiot>/index.html`; sześć wycofanych stron Bash, LaTeX, Git, Vim,
+Algorytmy i Aplikacje mobilne nie ma osobnych stron HTML. Laboratoria NDP w `materials/ndp_lab_NN.html`,
 a cztery bloki WiRR w `materials/wirr_blok_01.html` do `materials/wirr_blok_04.html`.
 Pliki pomocnicze umieszcza się w `materials/bash/` lub `materials/templates/`.
+Usunięcie strony `materials/bash/index.html` nie usuwa skryptów Bash do pobrania.
 
 Nie przywracaj przestarzałych katalogów `wirr/`, `lectures/`, `library/`,
 `f/`, `h/`, `p/` ani niepublikowanych szkiców wykładów.
