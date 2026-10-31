@@ -7,7 +7,7 @@
   const language = new URLSearchParams(window.location.search).get('lang') === 'en' ? 'en' : 'pl';
 
   const english = {
-    'dr inż. Mateusz Pomianek': 'Mateusz Pomianek, PhD Eng.',
+    'dr inż. Mateusz Pomianek': 'Mateusz Pomianek, PhD, Eng.',
     'Politechnika Rzeszowska': 'Rzeszów University of Technology',
     'Informatyka afektywna i': 'Affective computing and',
     'robotyka humanoidalna': 'humanoid robotics',
@@ -92,7 +92,7 @@
     'pokój D.103': 'Room D.103',
     'E mail': 'Email',
     'dr inż. Mateusz Pomianek · Politechnika Rzeszowska':
-      'Mateusz Pomianek, PhD Eng. · Rzeszów University of Technology',
+      'Mateusz Pomianek, PhD, Eng. · Rzeszów University of Technology',
     'Strona główna': 'Homepage',
     'Tryb ciemny': 'Dark mode',
     'Włącz tryb ciemny': 'Enable dark mode',
@@ -181,7 +181,7 @@
         }
       }
     });
-    document.title = 'Mateusz Pomianek, PhD Eng.';
+    document.title = 'Mateusz Pomianek, PhD, Eng.';
     const description = document.querySelector('meta[name="description"]');
     if (description) description.content =
       'Academic website of Mateusz Pomianek. Research, projects, publications, teaching and contact.';
