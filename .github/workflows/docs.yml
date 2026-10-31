@@ -28,7 +28,7 @@ jobs:
           path: site
           include-hidden-files: true
   deploy:
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.event.head_commit.message == 'deploy(self): publish bilingual Zensical once'))
     needs: build
     runs-on: ubuntu-latest
     permissions:
