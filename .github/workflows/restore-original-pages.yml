@@ -1,0 +1,52 @@
+name: Publish original self website
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: original-self-pages
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Check original website and tests
+        run: |
+          python -m unittest discover -s tests -v
+          python - <<'PY'
+          from pathlib import Path
+          html = Path('index.html').read_text(encoding='utf-8')
+          assert '<svg class="wheel" id="wheel"' in html
+          assert 'href="materials/"' in html
+          assert Path('materials/index.html').is_file()
+          assert Path('docs/data/publications.json').is_file()
+          assert Path('docs/images/self.png').is_file()
+          print('[DONE] Original category wheel and assets verified.')
+          PY
+      - name: Package original HTML, materials and assets
+        run: |
+          mkdir -p _site
+          cp index.html _site/index.html
+          cp -a docs materials _site/
+          touch _site/.nojekyll
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+          include-hidden-files: true
+      - name: Publish GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

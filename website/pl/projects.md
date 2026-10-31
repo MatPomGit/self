@@ -1,3 +1,0 @@
-# Projekty
-
-<!-- projects -->

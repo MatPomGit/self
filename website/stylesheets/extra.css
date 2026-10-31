@@ -1,6 +1,0 @@
-:root { --md-primary-fg-color: #003c82; --md-accent-fg-color: #087e8b; }
-.md-header__topic { font-weight: 600; }
-.profile-photo { width: 180px; height: 180px; object-fit: cover; border-radius: 50%; float: right; margin: 0 0 1rem 2rem; }
-.md-typeset h1, .md-typeset h2 { font-weight: 600; }
-.md-typeset article { border-bottom: 1px solid var(--md-default-fg-color--lightest); padding-bottom: 1rem; margin-bottom: 1.5rem; }
-@media (max-width: 600px) { .profile-photo { float: none; display: block; margin: 0 auto 1.5rem; } }

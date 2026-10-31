@@ -1,3 +1,0 @@
-# Publikacje
-
-<!-- publications -->
