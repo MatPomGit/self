@@ -11,6 +11,8 @@
     'Politechnika Rzeszowska': 'Rzeszów University of Technology',
     'Informatyka afektywna i': 'Affective computing and',
     'robotyka humanoidalna': 'humanoid robotics',
+    'W swojej działalności naukowej łączę informatykę z neuronauką, koncentrując się na badaniach i rozwoju inteligentnych systemów percepcji oraz interakcji człowiek–maszyna, a także na analizie ich wpływu na procesy poznawcze i zachowanie człowieka':
+      'My research integrates computer science and neuroscience, focusing on intelligent perception and human–machine interaction systems and their effects on human cognition and behaviour.',
     'Adiunkt, Katedra Informatyki i Automatyki': 'Assistant Professor, Department of Computer and Control Engineering',
     'Badam i rozwijam inteligentne systemy percepcji, interakcji człowiek–maszyna oraz robotyki, łącząc informatykę z neuronauką.':
       'I research and develop intelligent systems for perception, human–machine interaction and robotics, combining computer science with neuroscience.',
@@ -132,8 +134,13 @@
     'I use these representations to personalise robot interactions and develop specialised diagnostic and clinical applications that support medical and rehabilitation processes. I build digital twins of autonomous systems and use reinforcement learning to improve their operation under complex real-world conditions and changing user needs.',
   ];
 
+  // HTML &nbsp; becomes U+00A0 in text nodes. Match translations independently
+  // of typographic whitespace, without changing the canonical Polish markup.
   function translate(text) {
-    return language === 'en' ? (english[text] || text) : text;
+    if (language !== 'en') return text;
+    if (Object.prototype.hasOwnProperty.call(english, text)) return english[text];
+    const normalized = text.replace(/\s+/gu, ' ').trim();
+    return Object.prototype.hasOwnProperty.call(english, normalized) ? english[normalized] : text;
   }
 
   function apply() {
@@ -158,16 +165,19 @@
     while (walker.nextNode()) {
       const node = walker.currentNode;
       if (node.parentElement.closest('script, style')) continue;
-      const trimmed = node.nodeValue.trim();
-      if (Object.prototype.hasOwnProperty.call(english, trimmed)) {
-        node.nodeValue = node.nodeValue.replace(trimmed, english[trimmed]);
-      }
+      const original = node.nodeValue;
+      const leading = original.match(/^\s*/u)[0];
+      const trailing = original.match(/\s*$/u)[0];
+      const content = original.slice(leading.length, original.length - trailing.length);
+      const translated = translate(content);
+      if (translated !== content) node.nodeValue = leading + translated + trailing;
     }
     document.querySelectorAll('[aria-label], [title], [alt]').forEach(element => {
       for (const attribute of ['aria-label', 'title', 'alt']) {
         if (element.hasAttribute(attribute)) {
           const text = element.getAttribute(attribute);
-          if (english[text]) element.setAttribute(attribute, english[text]);
+          const translated = translate(text);
+          if (translated !== text) element.setAttribute(attribute, translated);
         }
       }
     });
@@ -211,10 +221,19 @@
 
   function publicationMetadata(metadata) {
     if (language !== 'en') return metadata;
+    const months = {
+      stycznia: 'January', lutego: 'February', marca: 'March',
+      kwietnia: 'April', maja: 'May', czerwca: 'June',
+      lipca: 'July', sierpnia: 'August', września: 'September',
+      października: 'October', listopada: 'November', grudnia: 'December',
+      'sty.': 'Jan.', 'lut.': 'Feb.', 'mar.': 'Mar.', 'kwi.': 'Apr.',
+      'cze.': 'Jun.', 'lip.': 'Jul.', 'sie.': 'Aug.', 'wrz.': 'Sep.',
+      'paź.': 'Oct.', 'lis.': 'Nov.', 'gru.': 'Dec.',
+    };
     return metadata
-      .replace(/marca/g, 'March')
-      .replace(/stycznia/g, 'January')
-      .replace(/ pkt/g, ' points')
+      .replace(/\b(stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|września|października|listopada|grudnia|sty\.|lut\.|mar\.|kwi\.|cze\.|lip\.|sie\.|wrz\.|paź\.|lis\.|gru\.)/gu,
+        month => months[month])
+      .replace(/ pkt\b/gu, ' points')
       .replace(/\bt\.\s/g, 'vol. ')
       .replace(/\bnr\s/g, 'no. ')
       .replace(/\bs\.\s/g, 'pp. ');
