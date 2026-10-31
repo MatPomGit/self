@@ -7,6 +7,9 @@ są od nich rozdzielone.
 | Ścieżka | Funkcja |
 | --- | --- |
 | `index.html` | Główna strona witryny |
+| `docs/assets/js/site-i18n.js` | Przełącznik PL/EN i słownik tekstów strony z kołem |
+| `docs/data/projects.en.json`, `docs/data/in-progress.en.json` | Tłumaczenia projektów i manuskryptów |
+| `tests/test_language.js` | Regresja przełącznika, koła i danych w obu językach |
 | `docs/data/projects.json`, `docs/data/publications.json` | Dane projektów i publikacji dla paneli strony głównej |
 | `materials/index.html` | Indeks aktualnych materiałów, responsywny grid CSS |
 | `materials/<przedmiot>/index.html` | Strony czterech pozostałych przedmiotów |
