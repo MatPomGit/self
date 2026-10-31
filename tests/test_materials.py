@@ -87,6 +87,19 @@ class MaterialsTests(unittest.TestCase):
             f"Pliki pominięte w indeksie: {sorted(public_files - linked_files)}",
         )
 
+    def test_compact_layout_uses_independent_columns(self):
+        """Długie karty nie wymuszają pustej wysokości pozostałych."""
+        html = (MATERIALS / "index.html").read_text(encoding="utf-8")
+        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+        self.assertIn(".materials-grid{columns:4 260px;", style)
+        self.assertIn("break-inside:avoid", style)
+        self.assertIn(".materials-columns{display:block}", style)
+        self.assertIn("grid-template-columns:repeat(3,minmax(0,1fr))", style)
+        self.assertIn("materials-list--dense", html)
+        self.assertIn("text-overflow:ellipsis", style)
+        self.assertIn("@media(max-width:620px)", style)
+        self.assertNotIn("grid-column:1/-1", style)
+
     def test_subject_pages_have_valid_navigation(self):
         """Strony przedmiotów nie odsyłają do pustych lub usuniętych zasobów."""
         for subject in SUBJECTS:
