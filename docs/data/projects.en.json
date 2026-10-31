@@ -1,45 +1,56 @@
 [
   {
+    "sourceTitle": "Projekt „ARIANA”",
     "title": "ARIANA project",
     "description": "A system for psychometric measurements and affect recognition using facial expressions, microexpressions, skin temperature, motion, pupils and gaze, with user feedback."
   },
   {
+    "sourceTitle": "Polish ImAging SaTellites „PIAST”",
     "title": "Polish ImAging SaTellites (PIAST)",
     "description": "A constellation of three observation nanosatellites for optoelectronic Earth imaging, demonstration of approximately 5 m resolution images and orbital manoeuvres."
   },
   {
+    "sourceTitle": "Rodzina głowic optoelektronicznych dla rakiet sterowanych „SEEKER”",
     "title": "SEEKER optoelectronic seeker family for guided missiles",
     "description": "Development of multispectral and imaging seekers for anti-aircraft and anti-tank applications, with prototype verification in field tests."
   },
   {
+    "sourceTitle": "„PolFEL” - Projekt polskiego lasera na swobodnych elektronach",
     "title": "PolFEL: Polish free-electron laser",
     "description": "Construction of a Polish free-electron laser by a consortium of eight institutions led by the National Centre for Nuclear Research."
   },
   {
+    "sourceTitle": "Kwantowy generator liczb losowych „OPTOKRYPT”",
     "title": "OPTOKRYPT quantum random number generator",
     "description": "Optical quantum cryptology technologies for data protection in ICT networks; project DOB-SZAFIR/01/A/013/01/2021."
   },
   {
+    "sourceTitle": "Analysis of the possibility of using optoelectronic eye tracking systems as interaction interfaces in mixed reality systems",
     "title": "Analysis of the possibility of using optoelectronic eye tracking systems as interaction interfaces in mixed reality systems",
     "description": "Analysis of optoelectronic eye-tracking systems as interaction interfaces in mixed reality."
   },
   {
+    "sourceTitle": "Analysis of the possibilities of using mixed reality vision systems in scientific research and military applications (RMN/948/2018)",
     "title": "Analysis of the possibilities of using mixed reality vision systems in scientific research and military applications (RMN/948/2018)",
     "description": "Analysis of mixed reality vision systems for scientific research and military applications."
   },
   {
+    "sourceTitle": "Optoelektroniczny system do ochrony perymetrycznej granicy rzecznej „RiverGUARD”",
     "title": "RiverGUARD optoelectronic river-border perimeter protection system",
     "description": "An optoelectronic system for river-border perimeter protection."
   },
   {
+    "sourceTitle": "Active sub-THz 3D scanner for anti-terrorist applications (PBS3/B3/30/2015)",
     "title": "Active sub-THz 3D scanner for anti-terrorist applications (PBS3/B3/30/2015)",
     "description": "An active sub-THz three-dimensional scanner for anti-terrorist applications."
   },
   {
+    "sourceTitle": "Development of a sensor for a virtual trainer - anti-aircraft GROM and PIORUN missile sets",
     "title": "Development of a sensor for a virtual trainer - anti-aircraft GROM and PIORUN missile sets",
     "description": "Development of a sensor for a virtual trainer for GROM and PIORUN anti-aircraft missile systems."
   },
   {
+    "sourceTitle": "Pervasive and User Focused Biometrics Border Project (Common and user-oriented biometric border design) EU–0700259 PROTECT",
     "title": "Pervasive and User Focused Biometrics Border Project (Common and user-oriented biometric border design) EU–0700259 PROTECT",
     "description": "A project on user-oriented biometric systems for border protection."
   }
