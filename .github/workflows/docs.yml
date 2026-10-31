@@ -13,8 +13,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.12'
           cache: pip
@@ -23,9 +23,10 @@ jobs:
       - run: python -m unittest discover -s tests -v
       - run: bash tests/theme_switcher_static_check.sh
       - run: python scripts/build_site.py
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: site
+          include-hidden-files: true
   deploy:
     if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
     needs: build
@@ -39,4 +40,4 @@ jobs:
     steps:
       - name: Publish
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
