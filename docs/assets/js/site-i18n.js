@@ -7,6 +7,7 @@
   const language = new URLSearchParams(window.location.search).get('lang') === 'en' ? 'en' : 'pl';
 
   const english = {
+    'dr inż. Mateusz Pomianek': 'Mateusz Pomianek, PhD Eng.',
     'Politechnika Rzeszowska': 'Rzeszów University of Technology',
     'Informatyka afektywna i': 'Affective computing and',
     'robotyka humanoidalna': 'humanoid robotics',
