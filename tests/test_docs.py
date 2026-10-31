@@ -170,8 +170,10 @@ class SitePublicationTests(unittest.TestCase):
                     raise OSError('Simulated asset copy failure')
                 return original_copytree(src, dst, **kwargs)
 
-            with patch.object(build_site, 'ROOT', repository), \\
-                    patch.object(build_site.shutil, 'copytree', side_effect=failing_copytree):
+            with (
+                patch.object(build_site, 'ROOT', repository),
+                patch.object(build_site.shutil, 'copytree', side_effect=failing_copytree),
+            ):
                 with self.assertRaisesRegex(OSError, 'Simulated asset copy failure'):
                     build_site.publish_site(source, target)
             self.assertEqual((target / 'index.html').read_text(), 'previous home')
