@@ -1,4 +1,4 @@
-name: MkDocs PL and EN
+name: Zensical PL and EN
 on:
   pull_request:
   push:

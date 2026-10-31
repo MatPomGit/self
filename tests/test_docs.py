@@ -27,7 +27,7 @@ class Page(HTMLParser):
             self.links.append(attrs)
 
 
-@unittest.skipUnless(importlib.util.find_spec('mkdocs'), 'Install requirements-docs.txt')
+@unittest.skipUnless(importlib.util.find_spec('zensical'), 'Install requirements-docs.txt')
 class DocsTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

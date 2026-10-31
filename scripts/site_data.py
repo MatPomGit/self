@@ -1,4 +1,4 @@
-"""Render shared portfolio data in both MkDocs languages."""
+"""Render shared portfolio data before either Zensical language build."""
 import json
 from html import escape
 from pathlib import Path
@@ -66,8 +66,8 @@ def publications(english):
     return '\n'.join(sections)
 
 
-def on_page_markdown(markdown, page, config, files):
-    english = config.theme['language'] == 'en'
+def render_page(markdown, language):
+    english = language == 'en'
     if '<!-- projects -->' in markdown:
         entries = read_data('projects.en' if english else 'projects')
         content = '\n'.join(
