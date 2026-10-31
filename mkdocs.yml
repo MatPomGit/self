@@ -1,0 +1,75 @@
+site_name: Mateusz Pomianek
+site_url: https://matpomgit.github.io/self/
+site_description: Badania, projekty, publikacje i dydaktyka
+site_author: Mateusz Pomianek
+docs_dir: website
+site_dir: site
+hooks:
+  - scripts/site_data.py
+theme:
+  name: material
+  language: pl
+  font: false
+  features:
+    - navigation.tabs
+    - navigation.top
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      toggle:
+        icon: material/brightness-7
+        name: Tryb ciemny
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      toggle:
+        icon: material/brightness-4
+        name: Tryb jasny
+plugins:
+  - search
+  - i18n:
+      docs_structure: folder
+      fallback_to_default: false
+      languages:
+        - locale: pl
+          default: true
+          name: Polski
+          build: true
+        - locale: en
+          name: English
+          build: true
+          site_description: Research, projects, publications and teaching
+          theme:
+            palette:
+              - media: "(prefers-color-scheme: light)"
+                scheme: default
+                primary: custom
+                toggle:
+                  icon: material/brightness-7
+                  name: Dark mode
+              - media: "(prefers-color-scheme: dark)"
+                scheme: slate
+                primary: custom
+                toggle:
+                  icon: material/brightness-4
+                  name: Light mode
+          nav_translations:
+            Strona główna: Home
+            Badania: Research
+            Projekty: Projects
+            Publikacje: Publications
+            Dla studentów: Teaching
+            Kontakt: Contact
+nav:
+  - Strona główna: index.md
+  - Badania: research.md
+  - Projekty: projects.md
+  - Publikacje: publications.md
+  - Dla studentów: teaching.md
+  - Kontakt: contact.md
+extra_css:
+  - stylesheets/extra.css
+extra:
+  generator: false
+copyright: Mateusz Pomianek · v1.3.0

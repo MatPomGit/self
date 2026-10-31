@@ -1,53 +1,71 @@
 # self
 
-Witryna naukowa i dydaktyczna publikowana przez GitHub Pages.
+Dwujęzyczna witryna naukowa i dydaktyczna Mateusza Pomianka.
 
 - [Strona główna](https://matpomgit.github.io/self/)
+- [Wersja angielska](https://matpomgit.github.io/self/en/)
 - [Materiały dla studentów](https://matpomgit.github.io/self/materials/)
 - [Struktura repozytorium](docs/STRUCTURE.md)
 
-## Zasady publikacji
+## Wersje językowe w MkDocs
 
-Jedynym katalogiem aktualnych materiałów udostępnianych studentom jest `materials/`.
-Punktem wejścia pozostaje `materials/index.html`, prosta strona HTML z listami linków
-bez JavaScriptu, frameworków i generatora. Pozostałe strony przedmiotów znajdują się w
-`materials/<przedmiot>/index.html`;
+MkDocs Material i `mkdocs-static-i18n` budują wersję polską pod `/self/`
+oraz angielską pod `/self/en/`. Przełącznik języka znajduje się w prawym
+górnym rogu nagłówka. Zmiana języka otwiera odpowiednik aktualnej podstrony.
+Nawigacja, wyszukiwanie i opisy są dostępne w obu językach. Tytuły publikacji
+zachowują oryginalne brzmienie. Materiały dydaktyczne pozostają w języku źródłowym.
 
-## Nowa strona główna
+Źródła stron znajdują się w `website/pl/` i `website/en/`.
+Pliki odpowiadających sobie stron muszą mieć takie same nazwy.
+`mkdocs.yml` określa nawigację, języki i motyw.
 
-`index.html` wykorzystuje układ z kołem kategorii, oparty na projekcie HTML
-przekazanym 30.10.2026. Koło skaluje się do wysokości i szerokości okna;
-w widoku startowym nagłówek, koło i stopka mieszczą się na typowym ekranie
-desktopowym bez przewijania. Na urządzeniach wąskich priorytetem jest
-czytelność, więc przy zbyt małej wysokości dopuszczalne jest przewijanie.
+Projekty i publikacje są renderowane podczas budowania przez
+`scripts/site_data.py` z danych w `docs/data/`. Dane bibliograficzne,
+postępy i docelowe czasopisma mają jedno źródło w istniejących plikach JSON.
+`projects.en.json` zawiera angielskie opisy projektów;
+`in-progress.en.json` zawiera tłumaczenia opisów i kolejnych kroków,
+powiązane z identyfikatorami manuskryptów.
 
-Dodatkowe odnośniki segmentów są dostępne po najechaniu lub ustawieniu
-fokusu klawiatury; zamknięcie po opuszczeniu grupy ma 650 ms opóźnienia.
-Podtytuły w obrębie segmentów pojawiają się tylko po najechaniu na sam
-segment lub ustawieniu na nim fokusu.
+## Budowanie i sprawdzanie
 
-Poprzedni `index.html` zachowano w `docs/archive/index_previous_20261030.html`.
+```bash
+python -m venv .venv
+. .venv/bin/activate
+python -m pip install -r requirements-docs.txt
+python -m unittest discover -s tests -v
+bash tests/theme_switcher_static_check.sh
+python scripts/build_site.py
+python -m http.server 8000 --directory site
+```
 
-Portret na stronie głównej korzysta z `docs/images/self.png` i ma okrągłą ramę CSS.
-Plik jest zasobem strony osobistej, nie należy go przenosić do `materials/`.
+Otwórz `http://localhost:8000/`. Do lokalnego podglądu pod docelowym prefiksem
+`/self/` udostępnij katalog `site/` pod tą ścieżką. Odnośniki do materiałów
+oraz portretu używają publicznego prefiksu `/self/`.
 
-## Zasoby witryny
+Używaj `scripts/build_site.py` do przygotowania publikacji. Skrypt wykonuje
+`mkdocs build --strict`, a następnie kopiuje materiały i zasoby do wyniku.
+Samo `mkdocs build` nie kopiuje katalogu `materials/`.
+Testy MkDocs wymagają zależności z `requirements-docs.txt`; bez nich są pomijane.
 
-Zasoby CSS, JS i vendor znajdują się w `docs/assets/`, zdjęcia i grafiki
-w `docs/images/`, a archiwalne strony w `docs/archive/`. Dokumentacja
-struktury znajduje się w `docs/STRUCTURE.md`. Główne pliki HTML pozostają
-w katalogu głównym, ponieważ obsługują publiczne adresy GitHub Pages.
-Materiały dydaktyczne są odrębnie w `materials/`.
+## Publikowanie
 
-## Podstrony
+Workflow `.github/workflows/docs.yml` sprawdza PR i zmiany na `main`,
+a następnie przygotowuje artefakt Pages. Publikacja następuje wyłącznie
+po ręcznym uruchomieniu tego workflow na `main` (`workflow_dispatch`).
+GitHub Pages musi mieć ustawione źródło **GitHub Actions**.
+Przebiegi PR i zwykłe wysłanie commitu nie publikują witryny.
 
-Strony publikacji i projektów są utrzymywane w `subpages/`.
-Podstrony stosują `<base href="../">`, aby odwołania do `docs/assets/`,
-strony głównej i materiałów były poprawne również z głębszej ścieżki.
-Na stronie startowej stopka ma czcionkę 0,43 rem (50% pierwotnych 0,86 rem).
-Kolumna tytułu na ekranach szerokich otrzymała udział 0,85 fr zamiast 0,55 fr.
+## Zachowane zasoby i adresy
 
----
-`prefers-color-scheme`, co strona główna. Wybór pozostaje zachowany przy
-przejściu między stronami. Lista plików nie została zmieniona; jej dwa
-małe skrypty służą wyłącznie do zapamiętywania i przełączania motywu.
+`materials/` pozostaje jedynym katalogiem aktualnych materiałów dla studentów.
+Skrypt budowania kopiuje pliki bez modyfikacji, dzięki czemu istniejące adresy
+PDF, HTML i plików do pobrania pozostają poprawne.
+
+Dotychczasowy `index.html` z kołem kategorii pozostaje w repozytorium jako
+źródło zachowanej wersji HTML. Po publikacji MkDocs jest dostępny pod
+`/self/legacy.html`. Wykorzystuje zdjęcie `docs/images/self.png`, dane JSON
+w `docs/data/` i własny przełącznik motywu. Starsze wersje znajdują się
+w `docs/archive/`. Plików materiałów i historycznych źródeł nie usuwaj
+bez zweryfikowanego odpowiednika.
+
+Aktualna wersja witryny MkDocs: **1.3.0**. Zachowana strona HTML: **1.2.10**.
