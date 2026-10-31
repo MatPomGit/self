@@ -100,6 +100,17 @@ class MaterialsTests(unittest.TestCase):
         self.assertIn("@media(max-width:620px)", style)
         self.assertNotIn("grid-column:1/-1", style)
 
+    def test_compact_subgroups_have_no_fill_and_small_margins(self):
+        """Nagłówki podgrup są mniejsze, a wewnętrzne ramki przezroczyste."""
+        html = (MATERIALS / "index.html").read_text(encoding="utf-8")
+        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+        self.assertIn("h3{font-size:.68rem;", style)
+        self.assertIn("margin:0 0 2px}", style)
+        self.assertIn(".materials-subgroup{min-width:0;padding:3px 4px 4px;background:transparent;", style)
+        self.assertIn("border:1px solid var(--line);border-radius:5px;margin-top:3px}", style)
+        self.assertIn("column-gap:8px;margin-top:8px", style)
+        self.assertIn("margin:0 0 8px;break-inside:avoid", style)
+
     def test_subject_pages_have_valid_navigation(self):
         """Strony przedmiotów nie odsyłają do pustych lub usuniętych zasobów."""
         for subject in SUBJECTS:
