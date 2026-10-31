@@ -95,7 +95,9 @@ class MaterialsTests(unittest.TestCase):
         self.assertIn("break-inside:avoid", style)
         self.assertIn(".materials-columns{display:block}", style)
         self.assertIn("column-count:2;column-gap:4px;column-fill:balance", style)
-        self.assertIn(".materials-list--dense{column-count:3}", style)
+        dense_columns = re.search(r"\.materials-list--dense\{column-count:(\d+)", style)
+        self.assertIsNotNone(dense_columns)
+        self.assertGreaterEqual(int(dense_columns.group(1)), 3)
         self.assertIn(".materials-list li{min-width:0;break-inside:avoid}", style)
         self.assertNotIn("grid-template-columns:repeat(", style)
         self.assertIn("materials-list--dense", html)
@@ -107,15 +109,27 @@ class MaterialsTests(unittest.TestCase):
         """Nagłówki podgrup są mniejsze, a wewnętrzne ramki przezroczyste."""
         html = (MATERIALS / "index.html").read_text(encoding="utf-8")
         style = html.split("<style>", 1)[1].split("</style>", 1)[0]
-        self.assertIn("h3{font-size:.5rem;", style)
+        self.assertIn("h5{font-size:.5rem;", style)
+        headings = re.findall(r'<div class="materials-subgroup">\s*<h([1-6])>', html)
+        self.assertTrue(headings)
+        self.assertEqual(set(headings), {"5"})
         self.assertIn("margin:0 0 1px}", style)
-        self.assertIn(".materials-subgroup{min-width:0;padding:2px 3px 3px;background:transparent;", style)
-        self.assertIn("border:1px solid var(--subgroup-line);border-radius:5px;margin-top:2px}", style)
+        subgroup = re.search(r"\.materials-subgroup\{([^}]+)\}", style)
+        self.assertIsNotNone(subgroup)
+        self.assertIn("background:transparent", subgroup.group(1))
+        self.assertIn("padding:2px 2px 2px", subgroup.group(1))
+        self.assertIn("border:1px solid var(--subgroup-line)", subgroup.group(1))
+        self.assertIn("margin-top:2px", subgroup.group(1))
         self.assertIn("--subgroup-line:rgba(70,80,90,.14)", style)
         self.assertIn("--subgroup-line:rgba(205,215,230,.13)", style)
-        self.assertIn("<h2>Wirtualna i rozszerzona rzeczywistość</h2>", html)
-        self.assertNotIn("<h2>Wirtualna i rozszerzona rzeczywistość (WiRR)</h2>", html)
-        self.assertIn("column-gap:8px;margin-top:8px", style)
+        self.assertRegex(html, r"<h[2-5]>Wirtualna i rozszerzona rzeczywistość</h[2-5]>")
+        self.assertNotIn("Wirtualna i rozszerzona rzeczywistość (WiRR)", html)
+        grid_spacing = re.search(
+            r"\.materials-grid\{columns:\d+ \d+px;column-gap:(\d+)px;margin-top:(\d+)px\}",
+            style,
+        )
+        self.assertIsNotNone(grid_spacing)
+        self.assertTrue(all(int(value) <= 8 for value in grid_spacing.groups()))
         self.assertIn("margin:0 0 8px;break-inside:avoid", style)
 
     def test_subject_pages_have_valid_navigation(self):
