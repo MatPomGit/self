@@ -23,7 +23,7 @@ body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 system-ui,-ap
 main{max-width:1600px;margin:0 auto;padding:8px 10px 14px}
 h1{font-size:1.45rem;line-height:1.25;margin:0 0 2px}
 h2{font-size:1rem;line-height:1.3;margin:0 0 5px}
-h3{font-size:.60rem;line-height:1.2;font-weight:650;color:var(--muted);margin:0 0 1px}
+h3{font-size:.5rem;line-height:1.2;font-weight:650;color:var(--muted);margin:0 0 1px}
 p{margin:3px 0}
 a,a:visited{color:var(--text);text-decoration:none}
 a:hover{text-decoration:none}
@@ -43,9 +43,9 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:3px}
 .materials-group--wide{grid-column:auto}
 .materials-columns{display:block}
 .materials-subgroup{min-width:0;padding:2px 3px 3px;background:transparent;border:1px solid var(--subgroup-line);border-radius:5px;margin-top:2px}
-.materials-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px 4px}
-.materials-list--dense{grid-template-columns:repeat(3,minmax(0,1fr))}
-.materials-list li{min-width:0}
+.materials-list{list-style:none;margin:0;padding:0;column-count:2;column-gap:4px;column-fill:balance}
+.materials-list--dense{column-count:3}
+.materials-list li{min-width:0;break-inside:avoid}
 .materials-list a{display:block;padding:2px 3px;border-radius:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.35;font-size:.92rem}
 .materials-list a:hover{background:var(--hover)}
 @media(min-width:1450px){.materials-grid{columns:5 260px}}

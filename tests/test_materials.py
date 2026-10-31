@@ -94,7 +94,10 @@ class MaterialsTests(unittest.TestCase):
         self.assertIn(".materials-grid{columns:4 260px;", style)
         self.assertIn("break-inside:avoid", style)
         self.assertIn(".materials-columns{display:block}", style)
-        self.assertIn("grid-template-columns:repeat(3,minmax(0,1fr))", style)
+        self.assertIn("column-count:2;column-gap:4px;column-fill:balance", style)
+        self.assertIn(".materials-list--dense{column-count:3}", style)
+        self.assertIn(".materials-list li{min-width:0;break-inside:avoid}", style)
+        self.assertNotIn("grid-template-columns:repeat(", style)
         self.assertIn("materials-list--dense", html)
         self.assertIn("text-overflow:ellipsis", style)
         self.assertIn("@media(max-width:620px)", style)
@@ -104,7 +107,7 @@ class MaterialsTests(unittest.TestCase):
         """Nagłówki podgrup są mniejsze, a wewnętrzne ramki przezroczyste."""
         html = (MATERIALS / "index.html").read_text(encoding="utf-8")
         style = html.split("<style>", 1)[1].split("</style>", 1)[0]
-        self.assertIn("h3{font-size:.60rem;", style)
+        self.assertIn("h3{font-size:.5rem;", style)
         self.assertIn("margin:0 0 1px}", style)
         self.assertIn(".materials-subgroup{min-width:0;padding:2px 3px 3px;background:transparent;", style)
         self.assertIn("border:1px solid var(--subgroup-line);border-radius:5px;margin-top:2px}", style)
