@@ -10,7 +10,10 @@ from pathlib import Path
 
 import tomli_w
 
-from site_data import render_page
+if __package__:
+    from .site_data import render_page
+else:
+    from site_data import render_page
 
 ROOT = Path(__file__).resolve().parents[1]
 ENGLISH_NAV = {
