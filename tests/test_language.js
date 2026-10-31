@@ -41,6 +41,17 @@ assert.equal(en.publicationMetadata('20 marca 2025 · 10 stycznia 2024'), '20 Ma
 assert.equal(en.publicationMetadata('Microelectronic Devices, s. 28–30, paź. 2020'),
   'Microelectronic Devices, pp. 28–30, Oct. 2020');
 assert.match(html, /themeToggle.setAttribute\('aria-label', action\)/);
+// All Polish interface strings must have an English equivalent. Bibliographic
+// titles are not in the static HTML; street names are proper nouns.
+const staticPage = html.slice(html.indexOf('<body>'), html.indexOf('<script src="docs/assets/js/site-i18n.js">'))
+  .replace(/<div class="research-intro">[\s\S]*?<\/div>/, '');
+const missingUI = [...staticPage.matchAll(/>([^<>]+)</g)]
+  .map(match => match[1].replace(/&nbsp;/g, '\u00a0').trim())
+  .filter(value => /[ąćęłńóśźż]/iu.test(value) && en.translate(value) === value)
+  .filter(value => !['al. Powstańców Warszawy 12', '35 959 Rzeszów'].includes(value));
+assert.deepEqual(missingUI, []);
+assert.equal(en.translate('dr inż. Mateusz Pomianek'), 'Mateusz Pomianek, PhD, Eng.');
+
 
 assert.match(html, /<svg class="wheel" id="wheel"/);
 assert.equal((html.match(/<g class="grp">/g) || []).length, 5);
