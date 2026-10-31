@@ -6,6 +6,7 @@ site_author = "Mateusz Pomianek"
 docs_dir = "website/pl"
 site_dir = "site"
 extra_css = ["stylesheets/extra.css"]
+extra_javascript = ["javascripts/extra.js"]
 copyright = "Mateusz Pomianek · v1.3.0"
 nav = [
   { "Strona główna" = "index.md" },
