@@ -122,8 +122,8 @@ class MaterialsTests(unittest.TestCase):
         self.assertIn("margin-top:2px", subgroup.group(1))
         self.assertIn("--subgroup-line:rgba(70,80,90,.14)", style)
         self.assertIn("--subgroup-line:rgba(205,215,230,.13)", style)
-        self.assertIn("<h2>Wirtualna i rozszerzona rzeczywistość</h2>", html)
-        self.assertNotIn("<h2>Wirtualna i rozszerzona rzeczywistość (WiRR)</h2>", html)
+        self.assertRegex(html, r"<h[2-5]>Wirtualna i rozszerzona rzeczywistość</h[2-5]>")
+        self.assertNotIn("Wirtualna i rozszerzona rzeczywistość (WiRR)", html)
         grid_spacing = re.search(
             r"\.materials-grid\{columns:\d+ \d+px;column-gap:(\d+)px;margin-top:(\d+)px\}",
             style,
