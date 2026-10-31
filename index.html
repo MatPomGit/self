@@ -442,7 +442,9 @@
     function syncThemeToggle(){
       const dark = document.documentElement.dataset.theme === 'dark';
       themeToggle.setAttribute('aria-pressed', String(dark));
-      themeToggle.title = tr(dark ? 'Włącz tryb jasny' : 'Włącz tryb ciemny');
+      const action = tr(dark ? 'Włącz tryb jasny' : 'Włącz tryb ciemny');
+      themeToggle.title = action;
+      themeToggle.setAttribute('aria-label', action);
     }
     themeToggle.addEventListener('click', () => {
       const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
@@ -633,7 +635,7 @@
         const meta=makeElement('div','publication-meta',[entry.authors,entry.year,i18n.publicationMetadata(entry.metadata||'')].filter(Boolean).join(' · '));
         const actions=makeElement('div','publication-actions');
         if(entry.link&&/^https:\/\//.test(entry.link)){
-          const link=makeElement('a','',tr(entry.linkText||'Źródło'));
+          const link=makeElement('a','',i18n.publicationMetadata(tr(entry.linkText||'Źródło')));
           link.href=entry.link;link.target='_blank';link.rel='noopener noreferrer';
           actions.append(link);
         }
