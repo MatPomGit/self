@@ -52,9 +52,10 @@
     .intro{display:grid;grid-template-columns:minmax(0,.45fr) minmax(0,1.55fr);gap:24px;align-items:center}
     .intro.hidden{display:none}
     h1{margin:0;font-family:var(--serif);font-weight:700;font-size:clamp(1.9rem,3.2vw,2.6rem);line-height:1.1;letter-spacing:-.02em}
-    .portrait{display:block;width:clamp(112px,14.3vh,164px);height:clamp(112px,14.3vh,164px);border-radius:50%;object-fit:cover;object-position:center;border:2px solid var(--accent);padding:3px;background:#fff;margin:0 0 clamp(10px,2vh,18px)}
+    .portrait{display:block;width:clamp(112px,14.3vh,180px);height:clamp(112px,14.3vh,180px);
+      border-radius:50%;object-fit:cover;object-position:center;border:2px solid var(--accent);padding:3px;background:#fff;margin:0 0 clamp(10px,2vh,18px)}
     .role{margin:14px 0 0;color:var(--accent);font-weight:600}
-    .lead{margin:20px 0 0;color:var(--muted);max-width:46ch}
+    .lead{margin:20px 0 0;color:var(--muted);max-width:60ch}
 
     /* Koło kategorii */
     .wheel{width:100%;max-width:900px;height:auto;justify-self:center;overflow:visible}
@@ -67,6 +68,7 @@
     .seg:hover .seg-label,.seg:focus-visible .seg-label{fill:#fff}
     .hub{fill:#fff;stroke:var(--accent);stroke-width:1.5}
     .hub-t{fill:var(--text);font-family:var(--serif);font-size:16px;font-weight:700;text-anchor:middle}
+
     /* Opcje wysuwane z segmentu */
     .subs{display:none;opacity:0;pointer-events:none;transition:opacity .15s ease .12s}
     .wide .subs{display:block}
@@ -124,7 +126,7 @@
       html{scroll-behavior:auto}.seg-body,.seg path,.seg text{transition:none}.seg:hover .seg-body,.seg:focus-visible .seg-body{transform:none}
     }
 
-    /* Cała strona startowa jest skalowana do dostępnej wysokości okna. */
+    /* Cała strona startowa jest skalowana do dostępnej wysokości okna */
     .page{min-height:100vh;min-height:100dvh}
     header{padding:clamp(10px,1.8vh,20px) 0}
     main{display:flex;flex-direction:column;justify-content:center;min-height:0;padding:clamp(8px,2vh,24px) 0}
@@ -133,7 +135,8 @@
     .wheel{width:min(116%,882px,calc((100dvh - 184px)*1.74));max-width:none;transform:translateY(-20px)}
     footer{padding:clamp(9px,1.5vh,18px) 0}
     .site-version{color:var(--muted);opacity:.55;white-space:nowrap;margin-left:auto;font-variant-numeric:tabular-nums}
-    /* Nie zamykaj wysuniętych odnośników natychmiast po opuszczeniu segmentu. */
+
+    /* Nie zamykaj wysuniętych odnośników natychmiast po opuszczeniu segmentu */
     .subs{visibility:hidden;opacity:0;pointer-events:none;transition:opacity .2s ease,visibility 0s linear .2s}
     .wide .subs{display:block}
     .grp:hover .subs{opacity:0;pointer-events:none}
@@ -142,11 +145,13 @@
     .pill text{font-size:12.3px}
     .seg-sub{fill:#fff;font-family:var(--sans);font-size:10.5px;font-weight:450;text-anchor:middle;pointer-events:none;opacity:0;transition:opacity .16s ease}
     .seg:hover .seg-sub,.seg:focus-visible .seg-sub{opacity:1}
-    /* Stan aktywny kontrolowany przez JS: nie zależy od hover nad podlinkiem. */
+
+    /* Stan aktywny kontrolowany przez JS: nie zależy od hover nad podlinkiem */
     .grp.open .seg path,.grp:focus-within .seg path{fill:var(--accent)}
     .grp.open .seg-label,.grp:focus-within .seg-label{fill:#fff}
     .grp.open .seg-body,.grp:focus-within .seg-body{transform:translate(var(--dx),var(--dy))}
-    /* Delikatny, nieinteraktywny impuls przesuwający się zgodnie z ruchem zegara. */
+
+    /* Delikatny, nieinteraktywny impuls przesuwający się zgodnie z ruchem zegara */
     .idle-orbit{fill:none;stroke:var(--accent);stroke-width:2;stroke-linecap:round;stroke-dasharray:18 1239;pointer-events:none;transform-origin:230px 230px;animation:orbit-clockwise 12s linear infinite}
     .idle-orbit:nth-of-type(1){stroke-dashoffset:0;opacity:0.72}
     .idle-orbit:nth-of-type(2){stroke-dashoffset:18;opacity:0.6}
@@ -199,6 +204,7 @@
     .manuscript-track{display:flex;gap:8px;align-items:center;justify-content:flex-end;flex:0 0 clamp(118px,20vw,260px);margin-left:auto}
     .manuscript-track progress{height:8px;width:100%;min-width:0;accent-color:var(--accent)}
     .manuscript-percent{font-size:.73rem;font-variant-numeric:tabular-nums}
+
     @media(max-width:540px){
       .publication-heading{flex-wrap:wrap}
       .publication-title{flex:1 1 100%}
@@ -206,7 +212,8 @@
     }
     main:has(.workspace.visible){justify-content:flex-start}
     .workspace.visible{width:100%}
-    /* Typografia tytułu: dwa wiersze na szerokim ekranie, bez poziomego overflow. */
+
+    /* Typografia tytułu: dwa wiersze na szerokim ekranie, bez poziomego overflow */
     #page-title{font-size:clamp(1.9rem,3vw,2.35rem)}
     @media(min-width:1150px){.title-robotics{white-space:nowrap}}
     @media(max-height:690px) and (min-width:861px){
@@ -216,10 +223,12 @@
     #badania .research-intro{font-size:.94rem;line-height:1.57}
     #badania .research-heading{font-size:1.14rem;line-height:1.35;margin:28px 0 6px}
     #badania .research-summary{font-size:.94rem;line-height:1.55}
-    /* Kompaktowe, dekoracyjne ikony linków z czytelnymi etykietami tekstowymi. */
+
+    /* Kompaktowe, dekoracyjne ikony linków z czytelnymi etykietami tekstowymi */
     .contact-links .link{display:inline-flex;align-items:center;gap:7px}
     .contact-links .link-icon{width:16px;height:16px;flex:0 0 16px}
     .contact-links .link-icon-outline{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
     @media(max-width:860px){
       .intro{grid-template-columns:1fr;gap:12px}
       .intro>div:first-child{transform:translateY(-14px)}
@@ -233,7 +242,8 @@
       .role{margin-top:8px}
     }
     @media(prefers-reduced-motion:reduce){.subs,.seg-sub{transition:none}}
-    /* Hierarchia ciemnego motywu: powierzchnie zamiast cieni, bez czerni i bieli. */
+
+    /* Hierarchia ciemnego motywu: powierzchnie zamiast cieni, bez czerni i bieli */
     :root[data-theme="dark"]{
       color-scheme:dark;
       --bg:#171c24;--text:#e5eaf0;--muted:#b2bdc8;--line:#3b4654;
@@ -264,6 +274,7 @@
     :root[data-theme="dark"] .data-filters button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
   </style>
 </head>
+
 <body>
   <div class="page">
     <header>
@@ -284,10 +295,10 @@
     <main>
       <section class="intro" id="start" aria-labelledby="page-title">
         <div>
-          <img class="portrait" src="docs/images/self.png" alt="Portret dr. inż. Mateusza Pomianka" width="164" height="164" decoding="async" fetchpriority="high">
-          <h1 id="page-title">Informatyka afektywna i <span class="title-robotics">robotyka humanoidalna</span></h1>
-          <p class="role">Adiunkt, Katedra Informatyki i Automatyki</p>
-          <p class="lead">Badam i rozwijam inteligentne systemy percepcji, interakcji człowiek–maszyna oraz robotyki, łącząc informatykę z neuronauką.</p>
+          <img class="portrait" src="docs/images/self.png" alt="Portret dr. inż. Mateusza Pomianka" width="180" height="180" decoding="async" fetchpriority="high">
+          <h1 id="page-title">Informatyka afektywna i&nbsp;<span class="title-robotics">robotyka humanoidalna</span></h1>
+          <p class="role">Adiunkt, Katedra Informatyki i&nbsp;Automatyki</p>
+          <p class="lead">W swojej działalności naukowej łączę informatykę z&nbsp;neuronauką, koncentrując się na&nbsp;badaniach i&nbsp;rozwoju inteligentnych systemów percepcji oraz&nbsp;interakcji człowiek–maszyna, a&nbsp;także na&nbsp;analizie ich wpływu na&nbsp;procesy poznawcze i&nbsp;zachowanie człowieka</p>
         </div>
         <svg class="wheel" id="wheel" viewBox="0 0 460 460" role="group" aria-label="Kategorie strony">
           <g class="grp">
