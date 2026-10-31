@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import unittest
+import re
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
@@ -36,7 +37,27 @@ class MaterialsTests(unittest.TestCase):
         self.assertIn("font:14px/1.5", html)
         self.assertIn("a:focus-visible", html)
         self.assertIn('class="materials-grid"', html)
-        self.assertGreaterEqual(html.count('class="materials-group"'), 10)
+        cards = re.findall(
+            r'<section class="materials-group(?: materials-group--wide)?">'
+            r'([\s\S]*?)</section>', html
+        )
+        self.assertEqual(len(cards), 10)
+        for directory in (
+            "narzędzia-dla-programistów",
+            "wirtualna-i-rozszerzona-rzeczywistosc",
+            "programowanie-aplikacji-mobilnych",
+            "robotyka-afektywna",
+            "informatyka-afektywna",
+            "programowanie-gier-komputerowych",
+            "psychoinformatyka",
+            "informatyka-poznawcza",
+            "seminaria-dyplomowe",
+        ):
+            subject_cards = [c for c in cards if f'href="{directory}/' in c]
+            self.assertEqual(len(subject_cards), 1, directory)
+        self.assertIn('class="materials-columns"', html)
+        self.assertIn('text-decoration:none', html)
+        self.assertNotRegex(html, r'<a\b[^>]*>Laboratorium\s')
         self.assertIn("wirr_lab_08.pdf", html)
         self.assertIn("ndp__lab__10.pdf", html)
         self.assertIn("ra_w7.pdf", html)

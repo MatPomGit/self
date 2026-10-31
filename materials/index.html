@@ -16,31 +16,38 @@
 })();
 </script>
 <style>
-:root{color-scheme:light;--bg:#fff;--text:#20242a;--line:#e3e8ee;--accent:#145a8d;--surface:#fff;--raised:#f6f9fc}
-:root[data-theme="dark"]{color-scheme:dark;--bg:#171c24;--text:#e5eaf0;--line:#3b4654;--accent:#93c2e6;--surface:#202a35;--raised:#2b3948}
+:root{color-scheme:light;--bg:#fafaf9;--text:#242526;--muted:#555a60;--line:#d9dcde;--surface:#fff;--raised:#f6f7f7;--hover:#e9ebec;--accent:#145a8d}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#17191c;--text:#e9eaed;--muted:#b7bbc2;--line:#40444a;--surface:#202a35;--raised:#292d33;--hover:#363c44;--accent:#93c2e6}
 body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
-main{max-width:1240px;margin:0 auto;padding:clamp(12px,2vh,20px) 22px 24px}
+main{max-width:1240px;margin:0 auto;padding:clamp(12px,2vh,20px) 22px 30px}
 h1{font-size:1.55rem;line-height:1.25;margin:0 0 12px}
-h2{font-size:1.1rem;line-height:1.35;margin:0 0 8px}
+h2{font-size:1.13rem;line-height:1.35;margin:0 0 12px}
+h3{font-size:.86rem;font-weight:650;color:var(--muted);margin:0 0 8px}
 p{margin:8px 0}
-ul{margin:0;padding-left:23px}
-li{margin:3px 0}
-a{color:var(--accent);text-underline-offset:2px}
-a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+a,a:visited{color:var(--text);text-decoration:none}
+a:hover{text-decoration:none}
+a:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+button:focus-visible{outline:2px solid var(--text);outline-offset:3px}
 .materials-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
 .materials-header>div{min-width:0}
+.materials-header a:hover{background:var(--hover);border-radius:4px}
 .theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;flex:0 0 40px;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--text);cursor:pointer}
-.theme-toggle:hover{border-color:var(--accent);background:var(--raised)}
+.theme-toggle:hover{background:var(--hover)}
 .theme-toggle svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .theme-sun{display:none}
 :root[data-theme="dark"] .theme-sun{display:block}
 :root[data-theme="dark"] .theme-moon{display:none}
-.materials-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(12px,2vw,22px);align-items:start;margin-top:14px}
-.materials-group{min-width:0;padding:12px 14px;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
-.materials-group a{overflow-wrap:anywhere}
-@media(max-width:1000px){.materials-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:600px){main{padding:18px 16px 30px}.materials-grid{grid-template-columns:1fr}}
+.materials-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start;margin-top:18px}
+.materials-group{min-width:0;padding:18px;border:1px solid var(--line);border-radius:9px;background:var(--surface)}
+.materials-group--wide{grid-column:1/-1}
+.materials-columns{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;align-items:start}
+.materials-subgroup{min-width:0;padding:11px 12px;background:var(--raised);border:1px solid var(--line);border-radius:7px}
+.materials-list{list-style:none;margin:0;padding:0;display:grid;gap:3px}
+.materials-list li{min-width:0}
+.materials-list a{display:block;padding:5px 8px;border-radius:5px;overflow-wrap:anywhere;line-height:1.45}
+.materials-list a:hover{background:var(--hover)}
+@media(max-width:750px){.materials-grid{grid-template-columns:1fr}.materials-group--wide{grid-column:auto}}
+@media(max-width:600px){main{padding:18px 16px 30px}.materials-group{padding:14px}.materials-columns{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -56,171 +63,221 @@ button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
   </button>
 </header>
 <div class="materials-grid">
+<section class="materials-group materials-group--wide">
+<h2>Narzędzia dla programistów</h2>
+<div class="materials-columns">
+<div class="materials-subgroup">
+<h3>Laboratoria PDF</h3>
+<ul class="materials-list">
+<li><a href="narzędzia-dla-programistów/ndp__lab__01.pdf" download>lab_01</a></li>
+<li><a href="narzędzia-dla-programistów/ndp__lab__02.pdf" download>lab_02</a></li>
+<li><a href="narzędzia-dla-programistów/ndp__lab__03.pdf" download>lab_03</a></li>
+<li><a href="narzędzia-dla-programistów/ndp__lab__04.pdf" download>lab_04</a></li>
+<li><a href="narzędzia-dla-programistów/ndp__lab__05.pdf" download>lab_05</a></li>
+<li><a href="narzędzia-dla-programistów/ndp__lab__06.pdf" download>lab_06</a></li>
+<li><a href="narzędzia-dla-programistów/ndp__lab__07.pdf" download>lab_07</a></li>
+<li><a href="narzędzia-dla-programistów/ndp__lab__08.pdf" download>lab_08</a></li>
+<li><a href="narzędzia-dla-programistów/ndp__lab__09.pdf" download>lab_09</a></li>
+<li><a href="narzędzia-dla-programistów/ndp__lab__10.pdf" download>lab_10</a></li>
+</ul>
+</div>
+<div class="materials-subgroup">
+<h3>Laboratoria HTML</h3>
+<ul class="materials-list">
+<li><a href="narzędzia-dla-programistów/ndp_lab_02.html">lab_02 · HTML</a></li>
+<li><a href="narzędzia-dla-programistów/ndp_lab_03.html">lab_03 · HTML</a></li>
+<li><a href="narzędzia-dla-programistów/ndp_lab_04.html">lab_04 · HTML</a></li>
+<li><a href="narzędzia-dla-programistów/ndp_lab_05.html">lab_05 · HTML</a></li>
+<li><a href="narzędzia-dla-programistów/ndp_lab_06.html">lab_06 · HTML</a></li>
+</ul>
+</div>
+<div class="materials-subgroup">
+<h3>Narzędzia</h3>
+<ul class="materials-list">
+<li><a href="narzędzia-dla-programistów/ascii_player" download>ascii_player</a></li>
+<li><a href="narzędzia-dla-programistów/student" download>student</a></li>
+<li><a href="narzędzia-dla-programistów/system_tui" download>system_tui</a></li>
+</ul>
+</div>
+</div>
+</section>
+<section class="materials-group materials-group--wide">
+<h2>Wirtualna i rozszerzona rzeczywistość (WiRR)</h2>
+<div class="materials-columns">
+<div class="materials-subgroup">
+<h3>Laboratoria</h3>
+<ul class="materials-list">
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_01.pdf" download>lab_01</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_02.pdf" download>lab_02</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_03.pdf" download>lab_03</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_04.pdf" download>lab_04</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_05.pdf" download>lab_05</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_06.pdf" download>lab_06</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_07.pdf" download>lab_07</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_08.pdf" download>lab_08</a></li>
+</ul>
+</div>
+<div class="materials-subgroup">
+<h3>Wykłady</h3>
+<ul class="materials-list">
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w04.pdf" download>w_04</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w05.pdf" download>w_05</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w06.pdf" download>w_06</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w07.pdf" download>w_07</a></li>
+</ul>
+</div>
+<div class="materials-subgroup">
+<h3>Materiały HTML</h3>
+<ul class="materials-list">
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_blok_01.html">blok_01</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_blok_02.html">blok_02</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_blok_03.html">blok_03</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_blok_04.html">blok_04</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/w05-offline.html">w_05 · offline</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/w06-offline.html">w_06 · offline</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/w07-offline.html">w_07 · offline</a></li>
+</ul>
+</div>
+<div class="materials-subgroup">
+<h3>Konfiguracja</h3>
+<ul class="materials-list">
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/unity-setup.pdf" download>Instalacja Unity</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/quest3-deploy.pdf" download>Wdrażanie na Quest 3</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/android-ar-deploy.pdf" download>Wdrażanie Android AR</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/viture-luma-ultra.pdf" download>VITURE Luma Ultra</a></li>
+</ul>
+</div>
+</div>
+</section>
+<section class="materials-group materials-group--wide">
+<h2>Programowanie aplikacji mobilnych</h2>
+<div class="materials-columns">
+<div class="materials-subgroup">
+<h3>Wykłady</h3>
+<ul class="materials-list">
+<li><a href="programowanie-aplikacji-mobilnych/pam_w01_intro.pdf" download>w_01 · Wprowadzenie</a></li>
+<li><a href="programowanie-aplikacji-mobilnych/pam_w02_hardware.pdf" download>w_02 · Sprzęt</a></li>
+<li><a href="programowanie-aplikacji-mobilnych/pam_w03_projektowanie.pdf" download>w_03 · Projektowanie</a></li>
+<li><a href="programowanie-aplikacji-mobilnych/pam_w04_ui.pdf" download>w_04 · Interfejs użytkownika</a></li>
+<li><a href="programowanie-aplikacji-mobilnych/pam_w05_natywne.pdf" download>w_05 · Aplikacje natywne</a></li>
+<li><a href="programowanie-aplikacji-mobilnych/pam_w06_cross.pdf" download>w_06 · Rozwiązania wieloplatformowe</a></li>
+<li><a href="programowanie-aplikacji-mobilnych/pam_w07_sensors.pdf" download>w_07 · Czujniki</a></li>
+<li><a href="programowanie-aplikacji-mobilnych/pam_w08_IoT.pdf" download>w_08 · Internet rzeczy</a></li>
+<li><a href="programowanie-aplikacji-mobilnych/pam_w09_affective.pdf" download>w_09 · Informatyka afektywna</a></li>
+<li><a href="programowanie-aplikacji-mobilnych/pam_w10_xr.pdf" download>w_10 · XR</a></li>
+<li><a href="programowanie-aplikacji-mobilnych/pam_w11_games.pdf" download>w_11 · Gry</a></li>
+<li><a href="programowanie-aplikacji-mobilnych/pam_w12_robots.pdf" download>w_12 · Robotyka</a></li>
+</ul>
+</div>
+<div class="materials-subgroup">
+<h3>Laboratoria</h3>
+<ul class="materials-list">
+<li><a href="programowanie-aplikacji-mobilnych/pam_lab_01.pdf" download>lab_01</a></li>
+<li><a href="programowanie-aplikacji-mobilnych/pam_lab_02.pdf" download>lab_02</a></li>
+<li><a href="programowanie-aplikacji-mobilnych/pam_lab_03_.pdf" download>lab_03</a></li>
+<li><a href="programowanie-aplikacji-mobilnych/pam_lab_04.pdf" download>lab_04</a></li>
+<li><a href="programowanie-aplikacji-mobilnych/pam_lab_05.pdf" download>lab_05</a></li>
+</ul>
+</div>
+<div class="materials-subgroup">
+<h3>Źródła</h3>
+<ul class="materials-list">
+<li><a href="programowanie-aplikacji-mobilnych/BABOK.url" download>BABOK</a></li>
+<li><a href="programowanie-aplikacji-mobilnych/MobileWiki (beta).url" download>MobileWiki (beta)</a></li>
+<li><a href="programowanie-aplikacji-mobilnych/PMBOK.url" download>PMBOK</a></li>
+<li><a href="programowanie-aplikacji-mobilnych/SWEBOK-4.url" download>SWEBOK-4</a></li>
+<li><a href="programowanie-aplikacji-mobilnych/SWEBOK-4a.url" download>SWEBOK-4a</a></li>
+</ul>
+</div>
+</div>
+</section>
 <section class="materials-group">
-<h2>Strony przedmiotów</h2>
-<ul>
-<li><a href="psychoinformatyka/">Psychoinformatyka</a></li>
-<li><a href="robotyka-afektywna/">Robotyka afektywna</a></li>
-<li><a href="informatyka-poznawcza/">Informatyka poznawcza</a></li>
+<h2>Robotyka afektywna</h2>
+<div class="materials-columns">
+<div class="materials-subgroup">
+<h3>Przedmiot</h3>
+<ul class="materials-list">
+<li><a href="robotyka-afektywna/">Strona przedmiotu</a></li>
+</ul>
+</div>
+<div class="materials-subgroup">
+<h3>Wykłady</h3>
+<ul class="materials-list">
+<li><a href="robotyka-afektywna/ra_w01.pdf" download>w_01</a></li>
+<li><a href="robotyka-afektywna/ra_w2.pdf" download>w_02</a></li>
+<li><a href="robotyka-afektywna/ra_w3.pdf" download>w_03</a></li>
+<li><a href="robotyka-afektywna/ra_w4.pdf" download>w_04</a></li>
+<li><a href="robotyka-afektywna/ra_w5.pdf" download>w_05</a></li>
+<li><a href="robotyka-afektywna/ra_w6.pdf" download>w_06</a></li>
+<li><a href="robotyka-afektywna/ra_w7.pdf" download>w_07</a></li>
+</ul>
+</div>
+</div>
+</section>
+<section class="materials-group">
+<h2>Informatyka afektywna</h2>
+<ul class="materials-list">
+<li><a href="informatyka-afektywna/ia_lab_01.pdf" download>lab_01</a></li>
+<li><a href="informatyka-afektywna/ia_lab_02.pdf" download>lab_02</a></li>
+<li><a href="informatyka-afektywna/ia_lab_03.pdf" download>lab_03</a></li>
+<li><a href="informatyka-afektywna/ia_lab_04.pdf" download>lab_04</a></li>
+<li><a href="informatyka-afektywna/ia_lab_05.pdf" download>lab_05</a></li>
+<li><a href="informatyka-afektywna/ia_lab_06.pdf" download>lab_06</a></li>
+<li><a href="informatyka-afektywna/ia_lab_07.pdf" download>lab_07</a></li>
 </ul>
 </section>
 <section class="materials-group">
-<h2>Narzędzia dla programistów: strony laboratoriów</h2>
-<ul>
-<li><a href="narzędzia-dla-programistów/ndp_lab_02.html">Laboratorium 2 (HTML)</a></li>
-<li><a href="narzędzia-dla-programistów/ndp_lab_03.html">Laboratorium 3 (HTML)</a></li>
-<li><a href="narzędzia-dla-programistów/ndp_lab_04.html">Laboratorium 4 (HTML)</a></li>
-<li><a href="narzędzia-dla-programistów/ndp_lab_05.html">Laboratorium 5 (HTML)</a></li>
-<li><a href="narzędzia-dla-programistów/ndp_lab_06.html">Laboratorium 6 (HTML)</a></li>
+<h2>Programowanie gier komputerowych</h2>
+<ul class="materials-list">
+<li><a href="programowanie-gier-komputerowych/pgk_lab_1.pdf" download>lab_01</a></li>
+<li><a href="programowanie-gier-komputerowych/pgk_lab_2.pdf" download>lab_02</a></li>
+<li><a href="programowanie-gier-komputerowych/pgk_lab_3.pdf" download>lab_03</a></li>
+<li><a href="programowanie-gier-komputerowych/pgk_lab_4.pdf" download>lab_04</a></li>
+<li><a href="programowanie-gier-komputerowych/pgk_lab_5.pdf" download>lab_05</a></li>
+<li><a href="programowanie-gier-komputerowych/pgk_lab_6.pdf" download>lab_06</a></li>
+<li><a href="programowanie-gier-komputerowych/pgk_lab_7.pdf" download>lab_07</a></li>
 </ul>
 </section>
 <section class="materials-group">
-<h2>Narzędzia dla programistów: instrukcje PDF</h2>
-<ul>
-<li><a href="narzędzia-dla-programistów/ndp__lab__01.pdf" download>Laboratorium 1 (PDF)</a></li>
-<li><a href="narzędzia-dla-programistów/ndp__lab__02.pdf" download>Laboratorium 2 (PDF)</a></li>
-<li><a href="narzędzia-dla-programistów/ndp__lab__03.pdf" download>Laboratorium 3 (PDF)</a></li>
-<li><a href="narzędzia-dla-programistów/ndp__lab__04.pdf" download>Laboratorium 4 (PDF)</a></li>
-<li><a href="narzędzia-dla-programistów/ndp__lab__05.pdf" download>Laboratorium 5 (PDF)</a></li>
-<li><a href="narzędzia-dla-programistów/ndp__lab__06.pdf" download>Laboratorium 6 (PDF)</a></li>
-<li><a href="narzędzia-dla-programistów/ndp__lab__07.pdf" download>Laboratorium 7 (PDF)</a></li>
-<li><a href="narzędzia-dla-programistów/ndp__lab__08.pdf" download>Laboratorium 8 (PDF)</a></li>
-<li><a href="narzędzia-dla-programistów/ndp__lab__09.pdf" download>Laboratorium 9 (PDF)</a></li>
-<li><a href="narzędzia-dla-programistów/ndp__lab__10.pdf" download>Laboratorium 10 (PDF)</a></li>
+<h2>Psychoinformatyka</h2>
+<ul class="materials-list">
+<li><a href="psychoinformatyka/">Strona przedmiotu</a></li>
 </ul>
 </section>
 <section class="materials-group">
-<h2>WiRR: bloki i materiały przeglądarkowe</h2>
-<ul>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_blok_01.html">Blok 1 (HTML)</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_blok_02.html">Blok 2 (HTML)</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_blok_03.html">Blok 3 (HTML)</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_blok_04.html">Blok 4 (HTML)</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/w05-offline.html">Wykład 5, wersja offline (HTML)</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/w06-offline.html">Wykład 6, wersja offline (HTML)</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/w07-offline.html">Wykład 7, wersja offline (HTML)</a></li>
-</ul>
-</section>
-<section class="materials-group">
-<h2>WiRR: laboratoria</h2>
-<ul>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_01.pdf" download>Laboratorium 1 (PDF)</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_02.pdf" download>Laboratorium 2 (PDF)</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_03.pdf" download>Laboratorium 3 (PDF)</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_04.pdf" download>Laboratorium 4 (PDF)</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_05.pdf" download>Laboratorium 5 (PDF)</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_06.pdf" download>Laboratorium 6 (PDF)</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_07.pdf" download>Laboratorium 7 (PDF)</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_08.pdf" download>Laboratorium 8 (PDF)</a></li>
-</ul>
-</section>
-<section class="materials-group">
-<h2>WiRR: wykłady i konfiguracja</h2>
-<ul>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w04.pdf" download>Wykład 4 (PDF)</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w05.pdf" download>Wykład 5 (PDF)</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w06.pdf" download>Wykład 6 (PDF)</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w07.pdf" download>Wykład 7 (PDF)</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/unity-setup.pdf" download>Instalacja Unity (PDF)</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/quest3-deploy.pdf" download>Wdrażanie na Quest 3 (PDF)</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/android-ar-deploy.pdf" download>Wdrażanie Android AR (PDF)</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/viture-luma-ultra.pdf" download>VITURE Luma Ultra (PDF)</a></li>
-</ul>
-</section>
-<section class="materials-group">
-<h2>Programowanie aplikacji mobilnych: wykłady</h2>
-<ul>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w01_intro.pdf" download>Wykład 1: Wprowadzenie (PDF)</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w02_hardware.pdf" download>Wykład 2: Sprzęt (PDF)</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w03_projektowanie.pdf" download>Wykład 3: Projektowanie (PDF)</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w04_ui.pdf" download>Wykład 4: Interfejs użytkownika (PDF)</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w05_natywne.pdf" download>Wykład 5: Aplikacje natywne (PDF)</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w06_cross.pdf" download>Wykład 6: Rozwiązania wieloplatformowe (PDF)</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w07_sensors.pdf" download>Wykład 7: Czujniki (PDF)</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w08_IoT.pdf" download>Wykład 8: Internet rzeczy (PDF)</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w09_affective.pdf" download>Wykład 9: Informatyka afektywna (PDF)</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w10_xr.pdf" download>Wykład 10: XR (PDF)</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w11_games.pdf" download>Wykład 11: Gry (PDF)</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w12_robots.pdf" download>Wykład 12: Robotyka (PDF)</a></li>
-</ul>
-</section>
-<section class="materials-group">
-<h2>Programowanie aplikacji mobilnych: laboratoria i źródła</h2>
-<ul>
-<li><a href="programowanie-aplikacji-mobilnych/pam_lab_01.pdf" download>Laboratorium 1 (PDF)</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_lab_02.pdf" download>Laboratorium 2 (PDF)</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_lab_03_.pdf" download>Laboratorium 3 (PDF)</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_lab_04.pdf" download>Laboratorium 4 (PDF)</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_lab_05.pdf" download>Laboratorium 5 (PDF)</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/BABOK.url" download>BABOK.url (skrót internetowy)</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/MobileWiki (beta).url" download>MobileWiki (beta).url (skrót internetowy)</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/PMBOK.url" download>PMBOK.url (skrót internetowy)</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/SWEBOK-4.url" download>SWEBOK-4.url (skrót internetowy)</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/SWEBOK-4a.url" download>SWEBOK-4a.url (skrót internetowy)</a></li>
-</ul>
-</section>
-<section class="materials-group">
-<h2>Informatyka afektywna: laboratoria</h2>
-<ul>
-<li><a href="informatyka-afektywna/ia_lab_01.pdf" download>Laboratorium 1 (PDF)</a></li>
-<li><a href="informatyka-afektywna/ia_lab_02.pdf" download>Laboratorium 2 (PDF)</a></li>
-<li><a href="informatyka-afektywna/ia_lab_03.pdf" download>Laboratorium 3 (PDF)</a></li>
-<li><a href="informatyka-afektywna/ia_lab_04.pdf" download>Laboratorium 4 (PDF)</a></li>
-<li><a href="informatyka-afektywna/ia_lab_05.pdf" download>Laboratorium 5 (PDF)</a></li>
-<li><a href="informatyka-afektywna/ia_lab_06.pdf" download>Laboratorium 6 (PDF)</a></li>
-<li><a href="informatyka-afektywna/ia_lab_07.pdf" download>Laboratorium 7 (PDF)</a></li>
-</ul>
-</section>
-<section class="materials-group">
-<h2>Programowanie gier komputerowych: laboratoria</h2>
-<ul>
-<li><a href="programowanie-gier-komputerowych/pgk_lab_1.pdf" download>Laboratorium 1 (PDF)</a></li>
-<li><a href="programowanie-gier-komputerowych/pgk_lab_2.pdf" download>Laboratorium 2 (PDF)</a></li>
-<li><a href="programowanie-gier-komputerowych/pgk_lab_3.pdf" download>Laboratorium 3 (PDF)</a></li>
-<li><a href="programowanie-gier-komputerowych/pgk_lab_4.pdf" download>Laboratorium 4 (PDF)</a></li>
-<li><a href="programowanie-gier-komputerowych/pgk_lab_5.pdf" download>Laboratorium 5 (PDF)</a></li>
-<li><a href="programowanie-gier-komputerowych/pgk_lab_6.pdf" download>Laboratorium 6 (PDF)</a></li>
-<li><a href="programowanie-gier-komputerowych/pgk_lab_7.pdf" download>Laboratorium 7 (PDF)</a></li>
-</ul>
-</section>
-<section class="materials-group">
-<h2>Robotyka afektywna: wykłady</h2>
-<ul>
-<li><a href="robotyka-afektywna/ra_w01.pdf" download>Wykład 1 (PDF)</a></li>
-<li><a href="robotyka-afektywna/ra_w2.pdf" download>Wykład 2 (PDF)</a></li>
-<li><a href="robotyka-afektywna/ra_w3.pdf" download>Wykład 3 (PDF)</a></li>
-<li><a href="robotyka-afektywna/ra_w4.pdf" download>Wykład 4 (PDF)</a></li>
-<li><a href="robotyka-afektywna/ra_w5.pdf" download>Wykład 5 (PDF)</a></li>
-<li><a href="robotyka-afektywna/ra_w6.pdf" download>Wykład 6 (PDF)</a></li>
-<li><a href="robotyka-afektywna/ra_w7.pdf" download>Wykład 7 (PDF)</a></li>
+<h2>Informatyka poznawcza</h2>
+<ul class="materials-list">
+<li><a href="informatyka-poznawcza/">Strona przedmiotu</a></li>
 </ul>
 </section>
 <section class="materials-group">
 <h2>Seminaria dyplomowe</h2>
-<ul>
-<li><a href="seminaria-dyplomowe/Jak_pisac_prace_dyplomową.pdf" download>Jak pisać pracę dyplomową (PDF)</a></li>
-<li><a href="seminaria-dyplomowe/Jak_pisac_prace_dyplomową.pptx" download>Jak pisać pracę dyplomową (PPTX)</a></li>
-<li><a href="seminaria-dyplomowe/szablon_WEII.pdf" download>Szablon WEiI (PDF)</a></li>
-<li><a href="seminaria-dyplomowe/weiiszablon.tex" download>Szablon WEiI (TeX)</a></li>
+<ul class="materials-list">
+<li><a href="seminaria-dyplomowe/Jak_pisac_prace_dyplomową.pdf" download>Jak pisać pracę dyplomową · PDF</a></li>
+<li><a href="seminaria-dyplomowe/Jak_pisac_prace_dyplomową.pptx" download>Jak pisać pracę dyplomową · PPTX</a></li>
+<li><a href="seminaria-dyplomowe/szablon_WEII.pdf" download>Szablon WEiI · PDF</a></li>
+<li><a href="seminaria-dyplomowe/weiiszablon.tex" download>Szablon WEiI · TeX</a></li>
 </ul>
 </section>
 <section class="materials-group">
-<h2>Prezentacje i opracowania</h2>
-<ul>
-<li><a href="AI_dla_psychologow.pdf" download>AI dla psychologów (PDF)</a></li>
-<li><a href="AI_dla_psychologow.pptx" download>AI dla psychologów (PPTX)</a></li>
-<li><a href="EEG_Arns_Conners_i_Kraemer_z_2013.pdf" download>EEG: Arns, Conners i Kraemer (PDF)</a></li>
-<li><a href="Galea_EEG_neuroXR.pdf" download>Galea EEG / NeuroXR (PDF)</a></li>
+<h2>Pozostałe materiały</h2>
+<div class="materials-columns">
+<div class="materials-subgroup">
+<h3>Prezentacje i opracowania</h3>
+<ul class="materials-list">
+<li><a href="AI_dla_psychologow.pdf" download>AI dla psychologów · PDF</a></li>
+<li><a href="AI_dla_psychologow.pptx" download>AI dla psychologów · PPTX</a></li>
+<li><a href="EEG_Arns_Conners_i_Kraemer_z_2013.pdf" download>EEG: Arns, Conners i Kraemer</a></li>
+<li><a href="Galea_EEG_neuroXR.pdf" download>Galea EEG / NeuroXR</a></li>
 </ul>
-</section>
-<section class="materials-group">
-<h2>Pliki pomocnicze</h2>
-<ul>
-<li><a href="narzędzia-dla-programistów/ascii_player" download>ascii_player (skrypt / narzędzie)</a></li>
-<li><a href="narzędzia-dla-programistów/student" download>student (skrypt / narzędzie)</a></li>
-<li><a href="narzędzia-dla-programistów/system_tui" download>system_tui (skrypt / narzędzie)</a></li>
-<li><a href="templates/library-template.csv" download>library-template.csv (szablon CSV)</a></li>
+</div>
+<div class="materials-subgroup">
+<h3>Szablony</h3>
+<ul class="materials-list">
+<li><a href="templates/library-template.csv" download>library-template.csv</a></li>
 </ul>
+</div>
+</div>
 </section>
 </div>
 </main>
