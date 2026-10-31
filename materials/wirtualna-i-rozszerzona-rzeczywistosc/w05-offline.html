@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WiRR 05 | Interakcja XR: hover, select, activate</title>
+<style>
+:root{--blue:#003c82;--teal:#087e8b;--ink:#183047;--stroke:#9db8ce}
+*{box-sizing:border-box}body{margin:0;font:17px/1.5 system-ui,sans-serif;color:var(--ink);background:white}
+main{max-width:1250px;margin:auto;padding:24px}h1{color:var(--blue);line-height:1.2;margin:8px 0}h2{font-size:1.15rem}
+small,.note{color:#415c70}.panel{border:1px solid #c9d7e2;border-radius:14px;background:#f9fbfd;padding:18px;margin:16px 0}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0}
+button{font:inherit;padding:8px 14px;border:1.5px solid var(--stroke);border-radius:8px;color:var(--blue);background:#fff;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+button[aria-pressed=true]{background:var(--blue);color:#fff}
+.graph{overflow-x:auto}svg{display:block;width:100%;min-width:950px;height:auto}
+.node rect{fill:#edf4fa;stroke:var(--stroke);stroke-width:2}.node.active rect{fill:#d8f2ed;stroke:var(--teal);stroke-width:4}
+.node text{font-size:17px;font-weight:700;fill:var(--ink)}.node .second{font-size:14px;font-weight:400}
+.edge{stroke:var(--blue);stroke-width:3;fill:none}
+#stage-text{min-height:3em}.inputs{display:flex;flex-wrap:wrap;gap:18px}.inputs label{display:grid;gap:5px;min-width:175px}
+input[type=range]{width:210px;accent-color:var(--teal)}
+output{font-variant-numeric:tabular-nums;font-weight:bold}
+.status{font-weight:700;padding:5px 12px;background:#e9edf3;border-radius:8px}
+@media(max-width:650px){main{padding:12px}body{font-size:16px}.panel{padding:12px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important}}
+</style></head><body><main>
+<small>WiRR · Wykład 05 · offline · v1.0.1 · 2026-10-30</small>
+<h1>Interakcja XR: hover, select, activate</h1><p>Zmieniaj stan interakcji oraz aktualność próbki śledzenia. <strong>Model dydaktyczny</strong></p>
+<section class="panel"><h2>Interaktywny diagram</h2><div class="graph">
+<svg viewBox="0 0 970 225" role="img" aria-labelledby="flow-title flow-desc">
+<title id="flow-title">Interakcja XR: hover, select, activate</title><desc id="flow-desc">Przepływ przez 5 kolejnych etapów, zaznaczanych pojedynczo. Poniżej znajduje się tekst opisujący etap.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7Z" fill="#003c82"/></marker></defs>
+<path class="edge" d="M192 116 H208" marker-end="url(#arrow)"/>
+<path class="edge" d="M382 116 H398" marker-end="url(#arrow)"/>
+<path class="edge" d="M572 116 H588" marker-end="url(#arrow)"/>
+<path class="edge" d="M762 116 H778" marker-end="url(#arrow)"/><g class="node" data-i="0" transform="translate(18,60)"><rect width="174" height="112" rx="12"/><text x="87" y="47" text-anchor="middle">Hover</text><text class="second" x="87" y="77" text-anchor="middle">wskazanie</text></g>
+<g class="node" data-i="1" transform="translate(208,60)"><rect width="174" height="112" rx="12"/><text x="87" y="47" text-anchor="middle">Select</text><text class="second" x="87" y="77" text-anchor="middle">wybór</text></g>
+<g class="node" data-i="2" transform="translate(398,60)"><rect width="174" height="112" rx="12"/><text x="87" y="47" text-anchor="middle">Walidacja</text><text class="second" x="87" y="77" text-anchor="middle">tracking</text></g>
+<g class="node" data-i="3" transform="translate(588,60)"><rect width="174" height="112" rx="12"/><text x="87" y="47" text-anchor="middle">Activate</text><text class="second" x="87" y="77" text-anchor="middle">wykonanie</text></g>
+<g class="node" data-i="4" transform="translate(778,60)"><rect width="174" height="112" rx="12"/><text x="87" y="47" text-anchor="middle">Potwierdzenie</text><text class="second" x="87" y="77" text-anchor="middle">albo blokada</text></g></svg></div>
+<div class="controls"><button type="button" id="play" aria-pressed="false">Odtwarzaj</button><button type="button" id="step">Następny etap</button><button type="button" id="reset">Od początku</button></div>
+<strong id="stage-label"></strong><p id="stage-text" aria-live="polite"></p></section>
+<section class="panel"><h2>Eksperyment: bramka aktywacji</h2><div class="inputs">
+<label>Wiek pozy <output id="age-value">80 ms</output><input id="age" type="range" min="0" max="400" step="10" value="80"></label>
+<label>Próg aktualności <output id="limit-value">150 ms</output><input id="limit" type="range" min="50" max="300" step="10" value="150"></label>
+<label><span><input id="tracked" type="checkbox" checked> Śledzenie dostępne</span></label>
+</div><div class="controls"><button id="hover" type="button">Hover</button><button id="select" type="button">Select</button><button id="activate" type="button">Activate</button><button id="cancel" type="button">Anuluj</button></div>
+<p><span class="status" id="result" role="status" aria-live="polite">Gotowość</span></p><p class="note">Wywołanie Activate jest jednorazowe dla jednego Select. Hover nie uruchamia akcji. Dwell jest pokazane w W05 jako osobna technika czasowa, nie jako pomiar eye trackera.</p></section>
+</main><script>
+"use strict";
+const STEPS=[["Hover","wskazanie","Cel został wskazany. Sama obecność wskaźnika nie wykonuje operacji."],["Select","wybór","Wybrano obiekt. Zdarzenie Select nie oznacza jeszcze Activate."],["Walidacja","tracking","Sprawdzana jest aktualność próbki, poprawność śledzenia i jednorazowość wykonania."],["Activate","wykonanie","Polecenie może zostać zaakceptowane tylko przy wybranym celu oraz aktualnym śledzeniu."],["Potwierdzenie","albo blokada","Wynik demonstracji aktualizuje się poniżej; nie wysyła komend do urządzeń."]];
+const N=STEPS.length;
+const nodes=[...document.querySelectorAll(".node")];
+const motion=window.matchMedia("(prefers-reduced-motion: reduce)");
+const play=document.getElementById("play");
+let index=0,timer=null;
+function stop(){if(timer!==null){clearInterval(timer);timer=null;}play.textContent="Odtwarzaj";play.setAttribute("aria-pressed","false");}
+function render(){nodes.forEach((node,i)=>node.classList.toggle("active",i===index));document.getElementById("stage-label").textContent="Etap "+(index+1)+"/"+N;document.getElementById("stage-text").textContent=STEPS[index][2];}
+function next(){index=(index+1)%N;render();}
+play.addEventListener("click",()=>{if(timer!==null){stop();return;}if(motion.matches){stop();return;}timer=setInterval(next,1500);play.textContent="Pauza";play.setAttribute("aria-pressed","true");});
+document.getElementById("step").addEventListener("click",()=>{stop();next();});
+document.getElementById("reset").addEventListener("click",()=>{stop();index=0;render();});
+document.addEventListener("visibilitychange",()=>{if(document.hidden)stop();});
+motion.addEventListener("change",()=>{if(motion.matches)stop();});
+const age=document.getElementById("age"),limit=document.getElementById("limit"),tracked=document.getElementById("tracked"),result=document.getElementById("result");
+let hovered=false,selected=false,consumed=false;
+function allowed(){return tracked.checked&&Number(age.value)<=Number(limit.value);}
+function status(t){result.textContent=t;}
+function refresh(){document.getElementById("age-value").textContent=age.value+" ms";document.getElementById("limit-value").textContent=limit.value+" ms";if(!allowed()){selected=false;consumed=false;status("BLOKADA · nieaktualne lub utracone śledzenie");}}
+for(const el of [age,limit,tracked])el.addEventListener("input",refresh);
+document.getElementById("hover").addEventListener("click",()=>{hovered=true;status("HOVER · bez wykonania");});
+document.getElementById("select").addEventListener("click",()=>{if(selected){status(consumed?"SELECT · aktywacja już zużyta":"SELECT · obiekt jest już wybrany");return;}selected=hovered&&allowed();if(selected)consumed=false;status(selected?"SELECT · można zatwierdzić":"BLOKADA · wymagane hover i aktualne śledzenie");});
+document.getElementById("activate").addEventListener("click",()=>{if(!selected||!allowed()||consumed){status("ODRZUCONO · brak wyboru, aktualnej pozy lub ponowne wykonanie");return;}consumed=true;status("AKCEPTACJA · jednorazowa aktywacja (symulowana)");});
+document.getElementById("cancel").addEventListener("click",()=>{hovered=false;selected=false;consumed=false;status("ANULOWANO");});
+render();
+</script></body></html>

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>WiRR W07 | ROS 2, Unity i OpenXR</title>
+<style>
+:root{color-scheme:light;--blue:#003c82;--teal:#087e8b;--ink:#183047;--pale:#edf4fa;--line:#9db8ce}
+*{box-sizing:border-box}body{margin:0;background:#fff;color:var(--ink);font:18px/1.5 system-ui,"Noto Sans",sans-serif}
+main{max-width:1320px;margin:auto;padding:24px 28px 36px}
+h1{font-size:clamp(1.7rem,3.5vw,2.7rem);line-height:1.13;color:var(--blue);margin:0 0 6px}
+h2{font-size:1.15rem;margin:0 0 12px}
+p{margin:.4rem 0 1rem}.minor{color:#415c70;font-size:.88rem}.eyebrow{font-size:.85rem;font-weight:700;letter-spacing:.08em;color:var(--teal);text-transform:uppercase}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.version{color:#4b6375;font-size:.8rem}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
+button{font:inherit;border:1.5px solid #a9bed0;border-radius:9px;background:#fff;color:var(--blue);padding:8px 14px;cursor:pointer}
+button:hover,button:focus-visible{border-color:var(--blue);outline-offset:3px}
+button[aria-pressed=true],.primary{background:var(--blue);color:white;border-color:var(--blue)}
+.panel{border:1px solid #c9d7e2;border-radius:16px;background:#f9fbfd;padding:18px;margin-top:14px}
+.chart-wrap{width:100%;overflow-x:auto}
+svg{display:block;width:100%;min-width:740px;height:auto}
+.node rect{fill:var(--pale);stroke:var(--line);stroke-width:2}
+.node.active rect{fill:#d8f2ed;stroke:var(--teal);stroke-width:4}
+.node text{fill:var(--ink);font-family:system-ui,sans-serif}
+.node-first{font-size:23px;font-weight:700}.node-second{font-size:18px}.node-number{font-size:15px;fill:#45677e!important}
+.edge{fill:none;stroke:var(--blue);stroke-width:3}
+.edge.active{stroke:var(--teal);stroke-width:5;stroke-dasharray:9 5;animation:flow .6s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-28}}
+.legend{display:flex;flex-wrap:wrap;gap:18px;color:#425d6e;font-size:.83rem}
+.sample{display:grid;grid-template-columns:repeat(2,minmax(200px,1fr));gap:14px 30px;max-width:740px}
+.sample label{display:flex;flex-direction:column;gap:6px}
+.sample label.checkbox{flex-direction:row;align-items:center;gap:8px}
+input[type=range]{width:100%;accent-color:var(--teal)}input[type=checkbox]{width:18px;height:18px;accent-color:var(--teal)}
+.readout{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.status{display:inline-block;border-radius:9px;padding:4px 11px;font-weight:750;background:#e4e9ef;color:#1c3045}
+.status.live{background:#d7f1e1;color:#175a39}
+.status.stale,.status.invalid{background:#fff0d1;color:#754800}
+.status.nodata{background:#e6eaf0;color:#455365}
+#stage-text{font-size:1.06rem;min-height:3.5rem}
+.note{font-size:.85rem;color:#385366}
+:focus-visible{outline:3px solid var(--teal)}
+@media(max-width:650px){main{padding:14px}.panel{padding:12px}.sample{grid-template-columns:1fr}body{font-size:16px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}
+@media print{.toolbar,.sample{display:none}.panel{break-inside:avoid}}
+</style>
+</head>
+<body>
+<main>
+  <div class="topline"><span class="eyebrow">WiRR · Wykład 07 · demonstracja prowadzącego</span><span class="version">v1.0.1 · 2026-10-30</span></div>
+  <h1>ROS 2 → Unity → OpenXR</h1>
+  <p>Model przepływu informacji. <strong>Symulacja dydaktyczna offline, bez połączenia z robotem i bez publikowania komend.</strong></p>
+  <nav class="toolbar" aria-label="Wybór kierunku przepływu">
+    <button type="button" data-mode="telemetry" aria-pressed="true">Stan robota → XR</button>
+    <button type="button" data-mode="input" aria-pressed="false">Wejście XR → bramka</button>
+  </nav>
+  <section class="panel" aria-label="Graf przepływu">
+    <div class="chart-wrap">
+      <svg id="flow-graph" viewBox="0 0 1240 258" role="img" aria-labelledby="flow-title flow-desc">
+        <title id="flow-title">Dydaktyczny graf przepływu ROS 2 i OpenXR</title>
+        <desc id="flow-desc">Sześć kolejnych etapów. W trybie stanu robota: ROS 2, most ROS TCP, konektor Unity, walidacja, scena Unity XR i wyświetlanie OpenXR. W trybie wejścia: sygnał kontrolera, OpenXR, Unity i zablokowana bramka poleceń.</desc>
+        <defs><marker id="head" markerWidth="8" markerHeight="8" refX="7" refY="3.5" orient="auto"><path d="M0 0 L7 3.5 L0 7 Z" fill="#003c82"/></marker></defs>
+        <path class="edge" data-edge="0" d="M205 141 H232" marker-end="url(#head)"/>
+<path class="edge" data-edge="1" d="M409 141 H436" marker-end="url(#head)"/>
+<path class="edge" data-edge="2" d="M613 141 H640" marker-end="url(#head)"/>
+<path class="edge" data-edge="3" d="M817 141 H844" marker-end="url(#head)"/>
+<path class="edge" data-edge="4" d="M1021 141 H1048" marker-end="url(#head)"/>
+        <g class="node active" data-index="0">
+  <rect x="34" y="78" width="170" height="128" rx="14"/>
+  <text class="node-first" x="119" y="132" text-anchor="middle">ROS 2</text>
+  <text class="node-second" x="119" y="162" text-anchor="middle">/joint_states</text>
+  <text class="node-number" x="119" y="191" text-anchor="middle">1/6</text>
+</g>
+<g class="node" data-index="1">
+  <rect x="238" y="78" width="170" height="128" rx="14"/>
+  <text class="node-first" x="323" y="132" text-anchor="middle">ROS-TCP</text>
+  <text class="node-second" x="323" y="162" text-anchor="middle">Endpoint</text>
+  <text class="node-number" x="323" y="191" text-anchor="middle">2/6</text>
+</g>
+<g class="node" data-index="2">
+  <rect x="442" y="78" width="170" height="128" rx="14"/>
+  <text class="node-first" x="527" y="132" text-anchor="middle">Unity</text>
+  <text class="node-second" x="527" y="162" text-anchor="middle">ROS Connector</text>
+  <text class="node-number" x="527" y="191" text-anchor="middle">3/6</text>
+</g>
+<g class="node" data-index="3">
+  <rect x="646" y="78" width="170" height="128" rx="14"/>
+  <text class="node-first" x="731" y="132" text-anchor="middle">Walidacja</text>
+  <text class="node-second" x="731" y="162" text-anchor="middle">JointState</text>
+  <text class="node-number" x="731" y="191" text-anchor="middle">4/6</text>
+</g>
+<g class="node" data-index="4">
+  <rect x="850" y="78" width="170" height="128" rx="14"/>
+  <text class="node-first" x="935" y="132" text-anchor="middle">Scena</text>
+  <text class="node-second" x="935" y="162" text-anchor="middle">Unity XR</text>
+  <text class="node-number" x="935" y="191" text-anchor="middle">5/6</text>
+</g>
+<g class="node" data-index="5">
+  <rect x="1054" y="78" width="170" height="128" rx="14"/>
+  <text class="node-first" x="1139" y="132" text-anchor="middle">OpenXR</text>
+  <text class="node-second" x="1139" y="162" text-anchor="middle">HMD</text>
+  <text class="node-number" x="1139" y="191" text-anchor="middle">6/6</text>
+</g>
+      </svg>
+    </div>
+    <div class="legend"><span>Podświetlenie: bieżący etap</span><span>Animowana strzałka: kierunek przejścia</span></div>
+    <div class="toolbar" aria-label="Sterowanie animacją">
+      <button type="button" id="play" class="primary" aria-pressed="false">Odtwarzaj</button>
+      <button type="button" id="step">Następny etap</button>
+      <button type="button" id="reset">Od początku</button>
+    </div>
+    <p><strong id="stage-label">Etap 1/6</strong></p>
+    <p id="stage-text" aria-live="polite"></p>
+  </section>
+  <section class="panel" id="samples">
+    <h2>Stan próbki JointState (wartości symulowane)</h2>
+    <div class="sample">
+      <label>Wiek próbki: <strong><output id="age-value">80 ms</output></strong><input id="age" type="range" min="0" max="600" step="20" value="80"/></label>
+      <label>Próg aktualności: <strong><output id="limit-value">200 ms</output></strong><input id="limit" type="range" min="50" max="500" step="50" value="200"/></label>
+      <label class="checkbox"><input id="available" type="checkbox" checked/> Otrzymano próbkę</label>
+      <label class="checkbox"><input id="valid" type="checkbox" checked/> Struktura i czas poprawne</label>
+    </div>
+    <p class="readout"><strong>Status:</strong><span class="status" id="sample-status" role="status" aria-live="polite">LIVE</span></p>
+    <p class="minor">Próg 200 ms jest przykładem dydaktycznym, a nie wymogiem bezpieczeństwa. Zmiana suwaków nie emuluje sieci ROS 2, QoS ani realnego czasu urządzeń.</p>
+  </section>
+  <p class="note">ROS-TCP-Endpoint i ROS-TCP-Connector pokazano jako <strong>przykładową architekturę integracji</strong>. ROS 2, Unity i OpenXR nie wymuszają użycia tego mostu. Ścieżka wejściowa jest wyłącznie ilustracją, bez implementacji sterowania sprzętem.</p>
+</main>
+<script>
+"use strict";
+const FLOWS={"telemetry":{"nodes":[["ROS 2","/joint_states"],["ROS-TCP","Endpoint"],["Unity","ROS Connector"],["Walidacja","JointState"],["Scena","Unity XR"],["OpenXR","HMD"]],"descriptions":["Węzeł ROS 2 publikuje sensor_msgs/msg/JointState na temacie /joint_states.","ROS-TCP-Endpoint jest dodatkowym mostem ROS 2 → TCP; nie stanowi części OpenXR.","ROS-TCP-Connector odbiera dane w Unity. Sam odbiór nie oznacza, że próbka jest poprawna.","Aplikacja sprawdza strukturę, nazwy i jednostki przegubów oraz spójność czasu.","Model Unity może zostać odświeżony wyłącznie przy poprawnej i aktualnej próbce.","Unity wyświetla scenę przez warstwę XR/OpenXR. OpenXR nie transportuje wiadomości ROS 2."]},"input":{"nodes":[["Kontroler","XR"],["OpenXR","runtime"],["Unity","XR Input"],["Logika","interakcji"],["Bramka","komend"],["ROS 2","BLOKADA"]],"descriptions":["Operator porusza kontrolerem. To sygnał wejściowy, a nie polecenie ruchu robota.","OpenXR runtime przekazuje stan wejścia do aplikacji XR.","Unity Input System / XR Interaction Toolkit interpretuje stan kontrolera.","Logika aplikacji może wyznaczyć intencję sterowania, ale nie jest to wykonanie ruchu.","Realne polecenia wymagałyby odrębnej walidacji, autoryzacji i ochrony wykonawczej.","Bramka pozostaje zamknięta: ta demonstracja nie publikuje komend ani nie łączy się z ROS 2."]}};
+function classifySample(age,threshold,available,valid){
+  if(!available) return "NO_DATA";
+  if(!valid || !Number.isFinite(age) || !Number.isFinite(threshold) || age<0 || threshold<=0) return "INVALID";
+  return age>threshold ? "STALE" : "LIVE";
+}
+const nodes=Array.from(document.querySelectorAll(".node"));
+const edges=Array.from(document.querySelectorAll(".edge"));
+const age=document.getElementById("age");
+const limit=document.getElementById("limit");
+const available=document.getElementById("available");
+const valid=document.getElementById("valid");
+const status=document.getElementById("sample-status");
+const playButton=document.getElementById("play");
+const reducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)");
+let mode="telemetry",index=0,timer=null;
+function stop(){
+  if(timer!==null){clearInterval(timer);timer=null;}
+  playButton.textContent="Odtwarzaj";
+  playButton.setAttribute("aria-pressed","false");
+}
+function renderSample(){
+  document.getElementById("age-value").textContent=age.value+" ms";
+  document.getElementById("limit-value").textContent=limit.value+" ms";
+  const state=classifySample(Number(age.value),Number(limit.value),available.checked,valid.checked);
+  const labels={LIVE:"LIVE · aktualna",STALE:"STALE · przeterminowana",NO_DATA:"BRAK DANYCH",INVALID:"BŁĘDNE DANE"};
+  status.className="status "+({LIVE:"live",STALE:"stale",NO_DATA:"nodata",INVALID:"invalid"}[state]);
+  status.textContent=labels[state];
+  document.getElementById("samples").hidden=(mode!=="telemetry");
+}
+function renderStage(){
+  const flow=FLOWS[mode];
+  nodes.forEach((node,i)=>{
+    node.classList.toggle("active",i===index);
+    node.querySelector(".node-first").textContent=flow.nodes[i][0];
+    node.querySelector(".node-second").textContent=flow.nodes[i][1];
+  });
+  edges.forEach((edge,i)=>edge.classList.toggle("active",index>0 && i===index-1));
+  document.getElementById("stage-label").textContent="Etap "+(index+1)+"/6";
+  document.getElementById("stage-text").textContent=flow.descriptions[index];
+  renderSample();
+}
+function next(){index=(index+1)%6;renderStage();}
+for(const button of document.querySelectorAll("[data-mode]")){
+  button.addEventListener("click",()=>{
+    stop();mode=button.dataset.mode;index=0;
+    document.querySelectorAll("[data-mode]").forEach(b=>b.setAttribute("aria-pressed",String(b===button)));
+    renderStage();
+  });
+}
+for(const element of [age,limit,available,valid])element.addEventListener("input",renderSample);
+playButton.addEventListener("click",()=>{
+  if(timer!==null){stop();return;}
+  if(reducedMotion.matches){
+    playButton.textContent="Odtwarzanie automatyczne wyłączone (ograniczenie ruchu)";
+    playButton.setAttribute("aria-pressed","false");
+    return;
+  }
+  timer=setInterval(next,1600);
+  playButton.textContent="Pauza";
+  playButton.setAttribute("aria-pressed","true");
+});
+document.getElementById("step").addEventListener("click",()=>{stop();next();});
+document.getElementById("reset").addEventListener("click",()=>{stop();index=0;renderStage();});
+document.addEventListener("visibilitychange",()=>{if(document.hidden)stop();});
+reducedMotion.addEventListener("change",()=>{if(reducedMotion.matches)stop();});
+renderStage();
+</script>
+</body>
+</html>

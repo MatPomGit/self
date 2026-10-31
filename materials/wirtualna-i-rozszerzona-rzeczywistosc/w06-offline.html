@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WiRR 06 | OpenXR: budżet i potok klatki XR</title>
+<style>
+:root{--blue:#003c82;--teal:#087e8b;--ink:#183047;--stroke:#9db8ce}
+*{box-sizing:border-box}body{margin:0;font:17px/1.5 system-ui,sans-serif;color:var(--ink);background:white}
+main{max-width:1250px;margin:auto;padding:24px}h1{color:var(--blue);line-height:1.2;margin:8px 0}h2{font-size:1.15rem}
+small,.note{color:#415c70}.panel{border:1px solid #c9d7e2;border-radius:14px;background:#f9fbfd;padding:18px;margin:16px 0}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:14px 0}
+button{font:inherit;padding:8px 14px;border:1.5px solid var(--stroke);border-radius:8px;color:var(--blue);background:#fff;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+button[aria-pressed=true]{background:var(--blue);color:#fff}
+.graph{overflow-x:auto}svg{display:block;width:100%;min-width:1140px;height:auto}
+.node rect{fill:#edf4fa;stroke:var(--stroke);stroke-width:2}.node.active rect{fill:#d8f2ed;stroke:var(--teal);stroke-width:4}
+.node text{font-size:17px;font-weight:700;fill:var(--ink)}.node .second{font-size:14px;font-weight:400}
+.edge{stroke:var(--blue);stroke-width:3;fill:none}
+#stage-text{min-height:3em}.inputs{display:flex;flex-wrap:wrap;gap:18px}.inputs label{display:grid;gap:5px;min-width:175px}
+input[type=range]{width:210px;accent-color:var(--teal)}
+output{font-variant-numeric:tabular-nums;font-weight:bold}
+.status{font-weight:700;padding:5px 12px;background:#e9edf3;border-radius:8px}
+@media(max-width:650px){main{padding:12px}body{font-size:16px}.panel{padding:12px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important}}
+</style></head><body><main>
+<small>WiRR · Wykład 06 · offline · v1.0.0 · 2026-10-30</small>
+<h1>OpenXR: budżet i potok klatki XR</h1><p>Prześledź potok prezentacji i porównaj syntetyczne czasy CPU/GPU z budżetem częstotliwości. <strong>Model dydaktyczny, nie pomiar urządzenia ani połączenie ze sprzętem.</strong></p>
+<section class="panel"><h2>Interaktywny diagram</h2><div class="graph">
+<svg viewBox="0 0 1160 225" role="img" aria-labelledby="flow-title flow-desc">
+<title id="flow-title">OpenXR: budżet i potok klatki XR</title><desc id="flow-desc">Przepływ przez 6 kolejnych etapów, zaznaczanych pojedynczo. Poniżej znajduje się tekst opisujący etap.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7Z" fill="#003c82"/></marker></defs>
+<path class="edge" d="M192 116 H208" marker-end="url(#arrow)"/>
+<path class="edge" d="M382 116 H398" marker-end="url(#arrow)"/>
+<path class="edge" d="M572 116 H588" marker-end="url(#arrow)"/>
+<path class="edge" d="M762 116 H778" marker-end="url(#arrow)"/>
+<path class="edge" d="M952 116 H968" marker-end="url(#arrow)"/><g class="node" data-i="0" transform="translate(18,60)"><rect width="174" height="112" rx="12"/><text x="87" y="47" text-anchor="middle">xrWaitFrame</text><text class="second" x="87" y="77" text-anchor="middle">czas wyświetlenia</text></g>
+<g class="node" data-i="1" transform="translate(208,60)"><rect width="174" height="112" rx="12"/><text x="87" y="47" text-anchor="middle">xrBeginFrame</text><text class="second" x="87" y="77" text-anchor="middle">początek klatki</text></g>
+<g class="node" data-i="2" transform="translate(398,60)"><rect width="174" height="112" rx="12"/><text x="87" y="47" text-anchor="middle">xrLocateViews</text><text class="second" x="87" y="77" text-anchor="middle">pozy widoków</text></g>
+<g class="node" data-i="3" transform="translate(588,60)"><rect width="174" height="112" rx="12"/><text x="87" y="47" text-anchor="middle">Aplikacja</text><text class="second" x="87" y="77" text-anchor="middle">CPU + GPU</text></g>
+<g class="node" data-i="4" transform="translate(778,60)"><rect width="174" height="112" rx="12"/><text x="87" y="47" text-anchor="middle">xrEndFrame</text><text class="second" x="87" y="77" text-anchor="middle">warstwy</text></g>
+<g class="node" data-i="5" transform="translate(968,60)"><rect width="174" height="112" rx="12"/><text x="87" y="47" text-anchor="middle">Kompozytor</text><text class="second" x="87" y="77" text-anchor="middle">prezentacja</text></g></svg></div>
+<div class="controls"><button type="button" id="play" aria-pressed="false">Odtwarzaj</button><button type="button" id="step">Następny etap</button><button type="button" id="reset">Od początku</button></div>
+<strong id="stage-label"></strong><p id="stage-text" aria-live="polite"></p></section>
+<section class="panel"><h2>Eksperyment: budżet klatki</h2><div class="inputs">
+<label>Częstotliwość <output id="hz-value">90 Hz</output><input id="hz" type="range" min="60" max="120" step="10" value="90"></label>
+<label>CPU main thread <output id="cpu-value">7 ms</output><input id="cpu" type="range" min="1" max="25" step="0.5" value="7"></label>
+<label>GPU <output id="gpu-value">9 ms</output><input id="gpu" type="range" min="1" max="25" step="0.5" value="9"></label>
+</div><p>Okres odświeżania: <output id="budget"></output>. Estymowany koszt w uproszczonym modelu równoległych etapów: <output id="cost"></output>.</p>
+<p><span id="result" role="status" aria-live="polite" class="status"></span></p>
+<p class="note">Przyjmujemy przybliżenie max(CPU,GPU), bez synchronizacji, narzutu runtime i jitter. Nie jest to rzeczywisty licznik FPS ani motion-to-photon. Budżetu nie należy interpretować jako twardego kryterium komfortu.</p></section>
+<p class="note">Wszystkie wartości są syntetyczne. Dokument działa lokalnie bez bibliotek, żądań sieciowych, Unity i ROS 2. Przy systemowej preferencji ograniczenia ruchu automatyczne odtwarzanie jest wyłączone.</p>
+</main><script>
+"use strict";
+const STEPS=[["xrWaitFrame","czas wyświetlenia","Runtime określa przewidywany czas prezentacji oraz shouldRender."],["xrBeginFrame","początek klatki","Aplikacja rozpoczyna klatkę. Faza ta nie gwarantuje, że powstanie nowy obraz."],["xrLocateViews","pozy widoków","Pozycje widoków są estymowane dla predictedDisplayTime."],["Aplikacja","CPU + GPU","Silnik renderuje widoki, jeżeli shouldRender pozwala na renderowanie."],["xrEndFrame","warstwy","Aplikacja przekazuje warstwy kompozytorowi, a nie bezpośrednio ekranowi."],["Kompozytor","prezentacja","Runtime może przeprowadzić reprojekcję. Prezentacja nie musi oznaczać nowej klatki aplikacji."]];
+const N=STEPS.length;
+const nodes=[...document.querySelectorAll(".node")];
+const motion=window.matchMedia("(prefers-reduced-motion: reduce)");
+const play=document.getElementById("play");
+let index=0,timer=null;
+function stop(){if(timer!==null){clearInterval(timer);timer=null;}play.textContent="Odtwarzaj";play.setAttribute("aria-pressed","false");}
+function render(){nodes.forEach((node,i)=>node.classList.toggle("active",i===index));document.getElementById("stage-label").textContent="Etap "+(index+1)+"/"+N;document.getElementById("stage-text").textContent=STEPS[index][2];}
+function next(){index=(index+1)%N;render();}
+play.addEventListener("click",()=>{if(timer!==null){stop();return;}if(motion.matches){stop();return;}timer=setInterval(next,1500);play.textContent="Pauza";play.setAttribute("aria-pressed","true");});
+document.getElementById("step").addEventListener("click",()=>{stop();next();});
+document.getElementById("reset").addEventListener("click",()=>{stop();index=0;render();});
+document.addEventListener("visibilitychange",()=>{if(document.hidden)stop();});
+motion.addEventListener("change",()=>{if(motion.matches)stop();});
+const hz=document.getElementById("hz"),cpu=document.getElementById("cpu"),gpu=document.getElementById("gpu");
+function updateBudget(){const period=1000/Number(hz.value),cost=Math.max(Number(cpu.value),Number(gpu.value));
+for(const id of ["hz","cpu","gpu"])document.getElementById(id+"-value").textContent=document.getElementById(id).value+(id==="hz"?" Hz":" ms");
+document.getElementById("budget").textContent=period.toFixed(2)+" ms";
+document.getElementById("cost").textContent=cost.toFixed(1)+" ms";
+document.getElementById("result").textContent=cost<=period?"W BUDŻECIE (model uproszczony)":"PRZEKROCZENIE BUDŻETU (model uproszczony)";
+}
+for(const el of [hz,cpu,gpu])el.addEventListener("input",updateBudget);
+updateBudget();
+render();
+</script></body></html>
