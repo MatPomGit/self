@@ -16,14 +16,14 @@
 })();
 </script>
 <style>
-:root{color-scheme:light;--bg:#fafaf9;--text:#242526;--muted:#555a60;--line:#d9dcde;--surface:#fff;--raised:#f6f7f7;--hover:#e9ebec;--accent:#145a8d}
-:root[data-theme="dark"]{color-scheme:dark;--bg:#17191c;--text:#e9eaed;--muted:#b7bbc2;--line:#40444a;--surface:#202a35;--raised:#292d33;--hover:#363c44;--accent:#93c2e6}
+:root{color-scheme:light;--bg:#fafaf9;--text:#242526;--muted:#555a60;--line:#d9dcde;--surface:#fff;--raised:#f6f7f7;--hover:#e9ebec;--accent:#145a8d;--subgroup-line:rgba(70,80,90,.14)}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#17191c;--text:#e9eaed;--muted:#b7bbc2;--line:#40444a;--surface:#202a35;--raised:#292d33;--hover:#363c44;--accent:#93c2e6;--subgroup-line:rgba(205,215,230,.13)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
 main{max-width:1600px;margin:0 auto;padding:8px 10px 14px}
 h1{font-size:1.45rem;line-height:1.25;margin:0 0 2px}
 h2{font-size:1rem;line-height:1.3;margin:0 0 5px}
-h3{font-size:.68rem;line-height:1.2;font-weight:650;color:var(--muted);margin:0 0 2px}
+h3{font-size:.60rem;line-height:1.2;font-weight:650;color:var(--muted);margin:0 0 1px}
 p{margin:3px 0}
 a,a:visited{color:var(--text);text-decoration:none}
 a:hover{text-decoration:none}
@@ -42,7 +42,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:3px}
 .materials-group{display:inline-block;width:100%;min-width:0;padding:8px 9px;border:1px solid var(--line);border-radius:7px;background:var(--surface);margin:0 0 8px;break-inside:avoid}
 .materials-group--wide{grid-column:auto}
 .materials-columns{display:block}
-.materials-subgroup{min-width:0;padding:3px 4px 4px;background:transparent;border:1px solid var(--line);border-radius:5px;margin-top:3px}
+.materials-subgroup{min-width:0;padding:2px 3px 3px;background:transparent;border:1px solid var(--subgroup-line);border-radius:5px;margin-top:2px}
 .materials-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px 4px}
 .materials-list--dense{grid-template-columns:repeat(3,minmax(0,1fr))}
 .materials-list li{min-width:0}
@@ -104,7 +104,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:3px}
 </div>
 </section>
 <section class="materials-group materials-group--wide">
-<h2>Wirtualna i rozszerzona rzeczywistość (WiRR)</h2>
+<h2>Wirtualna i rozszerzona rzeczywistość</h2>
 <div class="materials-columns">
 <div class="materials-subgroup">
 <h3>Laboratoria</h3>
