@@ -104,10 +104,14 @@ class MaterialsTests(unittest.TestCase):
         """Nagłówki podgrup są mniejsze, a wewnętrzne ramki przezroczyste."""
         html = (MATERIALS / "index.html").read_text(encoding="utf-8")
         style = html.split("<style>", 1)[1].split("</style>", 1)[0]
-        self.assertIn("h3{font-size:.68rem;", style)
-        self.assertIn("margin:0 0 2px}", style)
-        self.assertIn(".materials-subgroup{min-width:0;padding:3px 4px 4px;background:transparent;", style)
-        self.assertIn("border:1px solid var(--line);border-radius:5px;margin-top:3px}", style)
+        self.assertIn("h3{font-size:.60rem;", style)
+        self.assertIn("margin:0 0 1px}", style)
+        self.assertIn(".materials-subgroup{min-width:0;padding:2px 3px 3px;background:transparent;", style)
+        self.assertIn("border:1px solid var(--subgroup-line);border-radius:5px;margin-top:2px}", style)
+        self.assertIn("--subgroup-line:rgba(70,80,90,.14)", style)
+        self.assertIn("--subgroup-line:rgba(205,215,230,.13)", style)
+        self.assertIn("<h2>Wirtualna i rozszerzona rzeczywistość</h2>", html)
+        self.assertNotIn("<h2>Wirtualna i rozszerzona rzeczywistość (WiRR)</h2>", html)
         self.assertIn("column-gap:8px;margin-top:8px", style)
         self.assertIn("margin:0 0 8px;break-inside:avoid", style)
 
