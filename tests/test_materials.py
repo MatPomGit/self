@@ -66,6 +66,35 @@ class MaterialsTests(unittest.TestCase):
             f"Pliki pominięte w indeksie: {sorted(public_files - linked_files)}",
         )
 
+    def test_subject_pages_have_valid_navigation(self):
+        """Strony przedmiotów nie odsyłają do pustych lub usuniętych zasobów."""
+        for subject in SUBJECTS:
+            page = MATERIALS / subject / "index.html"
+            html = page.read_text(encoding="utf-8")
+            parser = Anchors()
+            parser.feed(html)
+            self.assertNotIn('href="#"', html, subject)
+            for href in parser.links:
+                with self.subTest(subject=subject, href=href):
+                    self.assertTrue(href)
+                    parts = urlsplit(href)
+                    if parts.scheme or parts.netloc:
+                        continue
+                    self.assertNotEqual(href, "#")
+                    target = (page.parent / unquote(parts.path)).resolve()
+                    self.assertTrue(target.is_relative_to(ROOT))
+                    if target.is_dir():
+                        target /= "index.html"
+                    self.assertTrue(target.is_file(), href)
+                    if parts.fragment:
+                        target_html = target.read_text(encoding="utf-8")
+                        self.assertIn(f'id="{unquote(parts.fragment)}"', target_html)
+        robotics = (MATERIALS / "robotyka-afektywna" / "index.html")
+        html = robotics.read_text(encoding="utf-8")
+        for number in range(1, 8):
+            filename = "ra_w01.pdf" if number == 1 else f"ra_w{number}.pdf"
+            self.assertIn(f'href="{filename}"', html)
+
     def test_expected_html_pages_exist(self):
         for subject in SUBJECTS:
             self.assertTrue((MATERIALS / subject / "index.html").is_file())
