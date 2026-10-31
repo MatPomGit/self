@@ -3,6 +3,7 @@
 Witryna naukowa i dydaktyczna publikowana przez GitHub Pages.
 
 - [Strona główna](https://matpomgit.github.io/self/)
+- [English version](https://matpomgit.github.io/self/?lang=en)
 - [Materiały dla studentów](https://matpomgit.github.io/self/materials/)
 - [Struktura repozytorium](docs/STRUCTURE.md)
 
@@ -12,6 +13,24 @@ Jedynym katalogiem aktualnych materiałów udostępnianych studentom jest `mater
 Punktem wejścia pozostaje `materials/index.html`, prosta strona HTML z listami linków
 bez JavaScriptu, frameworków i generatora. Pozostałe strony przedmiotów znajdują się w
 `materials/<przedmiot>/index.html`;
+
+## Wersje językowe strony głównej
+
+Przełącznik `PL / EN` znajduje się w prawym górnym rogu oryginalnej
+strony z kołem kategorii. Wersja polska jest domyślna; angielska jest
+dostępna pod `/?lang=en` (w GitHub Pages: `/self/?lang=en`).
+Przełączanie zachowuje aktualnie otwartą kategorię przez fragment URL.
+Obie wersje wykorzystują ten sam `index.html` i tę samą geometrię koła.
+
+Angielskie etykiety i opisy znajdują się w `docs/assets/js/site-i18n.js`,
+a teksty projektów oraz manuskryptów w `docs/data/*.en.json`.
+Tytuły publikacji i metadane bibliograficzne nie są automatycznie tłumaczone.
+Materiały dydaktyczne zachowują oryginalny język i adresy.
+Bez JavaScriptu pozostaje dostępna polska strona statyczna.
+
+Walidacja: `python -m unittest discover -s tests -v` oraz
+`node tests/test_language.js`. Publikacja GitHub Pages sprawdza oba języki
+bez zastępowania oryginalnego `index.html` przez generator.
 
 ## Nowa strona główna
 
