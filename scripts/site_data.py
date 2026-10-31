@@ -11,6 +11,30 @@ def read_data(name):
     return json.loads((DATA / f'{name}.json').read_text(encoding='utf-8'))
 
 
+def project_entries(english):
+    """Match translations by the immutable Polish source title, not row order."""
+    originals = read_data('projects')
+    if not english:
+        return originals
+
+    source_titles = [entry['title'] for entry in originals]
+    if len(set(source_titles)) != len(source_titles):
+        raise ValueError('Duplicate source project titles')
+
+    translations = {}
+    for entry in read_data('projects.en'):
+        source_title = entry['sourceTitle']
+        if source_title in translations:
+            raise ValueError(f'Duplicate project translation: {source_title}')
+        translations[source_title] = entry
+
+    if set(translations) != set(source_titles):
+        missing = sorted(set(source_titles) - set(translations))
+        extra = sorted(set(translations) - set(source_titles))
+        raise ValueError(f'Project translation mismatch: missing={missing}, extra={extra}')
+    return [translations[title] for title in source_titles]
+
+
 def publications(english):
     labels = ({'journal': 'Journal articles', 'conference': 'Conference papers',
                'patent': 'Patents'} if english else
@@ -56,7 +80,7 @@ def publications(english):
         sections.append(
             f'<article><h3>{escape(item["title"])}</h3>'
             f'<p><a href="{escape(item["projectUrl"], quote=True)}">{escape(item["project"])}</a>'
-            f' · {item["progress"]}% · {escape(status)}</p>'
+            f' · {escape(str(item["progress"]))}% · {escape(status)}</p>'
             f'<p>{escape(translated["description"])}</p>'
             f'<p>{journal}: <a href="{escape(item["journalUrl"], quote=True)}">'
             f'{escape(item["journal"])}</a> ({confirmed})</p>'
@@ -69,7 +93,7 @@ def publications(english):
 def render_page(markdown, language):
     english = language == 'en'
     if '<!-- projects -->' in markdown:
-        entries = read_data('projects.en' if english else 'projects')
+        entries = project_entries(english)
         content = '\n'.join(
             f'<article><h2>{escape(x["title"])}</h2><p>{escape(x["description"])}</p></article>\n'
             for x in entries
