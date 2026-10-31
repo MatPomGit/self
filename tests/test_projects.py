@@ -55,7 +55,7 @@ class ProjectsTests(unittest.TestCase):
         self.assertIn("if(entry.category)card.append(", HTML)
 
     def test_version(self):
-        self.assertIn("v1.2.10", HTML)
+        self.assertIn("v1.2.11", HTML)
 
 
 if __name__ == "__main__":

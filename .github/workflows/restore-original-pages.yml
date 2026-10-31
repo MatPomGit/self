@@ -1,16 +1,30 @@
 name: Publish original self website
 on:
+  pull_request:
   push:
     branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
 concurrency:
-  group: original-self-pages
+  group: original-self-pages-${{ github.ref }}
   cancel-in-progress: false
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Validate HTML and translations
+        run: |
+          python -m unittest discover -s tests -v
+          node --check docs/assets/js/site-i18n.js
+          node tests/test_language.js
   publish:
-    if: github.ref == 'refs/heads/main'
+    needs: check
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     permissions:
       contents: read

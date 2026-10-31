@@ -72,7 +72,8 @@ class ThemeTests(unittest.TestCase):
 
     def test_section_headings_are_in_shared_header(self):
         self.assertIn('<h1 class="header-section" id="header-section" hidden>', HTML)
-        self.assertIn("headerSection.textContent='/ '+sectionLabels[id]", HTML)
+        self.assertIn("headerSection.textContent='/ '+tr(sectionLabels[id])", HTML)
+        self.assertIn("history.replaceState(null,'',location.pathname+location.search+`#${id}`);", HTML)
         for key, label in (("projekty", "Projekty"), ("badania", "Badania"),
                            ("kontakt", "Kontakt"), ("publikacje", "Publikacje")):
             self.assertIn(key + ":'" + label + "'", HTML)
@@ -150,7 +151,7 @@ class ThemeTests(unittest.TestCase):
         self.assertIn('.manuscript-next{font-size:inherit;line-height:inherit;', HTML)
 
     def test_version(self):
-        self.assertIn("v1.2.10", HTML)
+        self.assertIn("v1.2.11", HTML)
 
 
 if __name__ == "__main__":

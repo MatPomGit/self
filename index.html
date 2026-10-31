@@ -35,6 +35,11 @@
     .home{margin-left:14px;text-decoration:none;font-family:var(--serif);font-size:1.2rem;font-weight:700;border-radius:4px}
     .affil{color:var(--muted);font-size:.92rem;text-align:right}
     .header-actions{display:flex;align-items:center;gap:12px;flex-shrink:0}
+    .language-switch{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--line);border-radius:20px;padding:3px;background:var(--bg);font-size:.75rem;font-weight:650}
+    .language-switch a{display:inline-flex;align-items:center;justify-content:center;min-width:31px;min-height:30px;padding:0 5px;border-radius:15px;text-decoration:none;color:var(--muted)}
+    .language-switch a:hover,.language-switch a:focus-visible{color:var(--accent)}
+    .language-switch a[aria-current="page"]{background:var(--accent);color:var(--bg)}
+    :root[data-theme="dark"] .language-switch a[aria-current="page"]{color:var(--on-accent)}
     .theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;flex:0 0 40px;border:1px solid var(--line);border-radius:50%;background:var(--bg);color:var(--text);cursor:pointer}
     .theme-toggle:hover{background:var(--accent-soft);border-color:var(--accent)}
     .theme-toggle svg{width:19px;height:19px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
@@ -265,6 +270,10 @@
       <div class="header-identity"><a class="home" id="home-link" href="#" aria-label="Strona główna">dr inż. Mateusz Pomianek</a><h1 class="header-section" id="header-section" hidden>/ Publikacje</h1></div>
       <div class="header-actions">
         <span class="affil">Politechnika Rzeszowska</span>
+        <nav class="language-switch" aria-label="Język strony">
+          <a href="?lang=pl" hreflang="pl" lang="pl" aria-current="page">PL</a>
+          <a href="?lang=en" hreflang="en" lang="en">EN</a>
+        </nav>
         <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Tryb ciemny" aria-pressed="false" title="Włącz tryb ciemny">
           <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 14.1A8.9 8.9 0 0 1 9.9 3.2a9 9 0 1 0 10.9 10.9Z"/></svg>
           <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
@@ -408,17 +417,21 @@
       </section>
     </main>
 
-    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.10">v1.2.10</span></footer>
+    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.11">v1.2.11</span></footer>
   </div>
 
+  <script src="docs/assets/js/site-i18n.js"></script>
   <script>
+    const i18n=window.SiteI18n;
+    i18n.apply();
+    const tr=i18n.translate;
     const themeToggle = document.getElementById('theme-toggle');
     const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
     let sessionChoice = false;
     function syncThemeToggle(){
       const dark = document.documentElement.dataset.theme === 'dark';
       themeToggle.setAttribute('aria-pressed', String(dark));
-      themeToggle.title = dark ? 'Włącz tryb jasny' : 'Włącz tryb ciemny';
+      themeToggle.title = tr(dark ? 'Włącz tryb jasny' : 'Włącz tryb ciemny');
     }
     themeToggle.addEventListener('click', () => {
       const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
@@ -511,10 +524,10 @@
       if(!panels.some(p=>p.id===id)) return;
       start.classList.add('hidden');
       workspace.classList.add('visible');
-      headerSection.textContent='/ '+sectionLabels[id];
+      headerSection.textContent='/ '+tr(sectionLabels[id]);
       headerSection.hidden=false;
       panels.forEach(p=>p.classList.toggle('active',p.id===id));
-      history.replaceState(null,'',`#${id}`);
+      history.replaceState(null,'',location.pathname+location.search+`#${id}`);
       if(scroll) window.scrollTo({top:0,behavior:'smooth'});
     }
 
@@ -541,12 +554,17 @@
       try{
         const response=await fetch(path);
         if(!response.ok)throw new Error('HTTP '+response.status);
-        const records=await response.json();
-        if(!Array.isArray(records))throw new Error('Nieprawidłowy format danych');
+        let records=await response.json();
+        if(!Array.isArray(records))throw new Error(tr('Nieprawidłowy format danych'));
+        if(i18n.language==='en' && path==='docs/data/projects.json'){
+          const translatedResponse=await fetch('docs/data/projects.en.json');
+          if(!translatedResponse.ok)throw new Error('HTTP '+translatedResponse.status);
+          records=i18n.translateProjects(records,await translatedResponse.json());
+        }
         render(records);
         status.hidden=true;
       }catch(error){
-        status.textContent='Nie udało się pobrać danych. Odśwież stronę, aby spróbować ponownie.';
+        status.textContent=tr('Nie udało się pobrać danych. Odśwież stronę, aby spróbować ponownie.');
         console.error('Błąd wczytywania '+path,error);
       }
     }
@@ -586,11 +604,11 @@
     async function copyCitation(content,button){
       try{
         await navigator.clipboard.writeText(content);
-        const old=button.textContent;button.textContent='Skopiowano';
+        const old=button.textContent;button.textContent=tr('Skopiowano');
         setTimeout(()=>{button.textContent=old},1600);
       }catch(error){
         const status=document.getElementById('citation-status');
-        status.textContent='Nie można skopiować automatycznie. Sprawdź uprawnienia przeglądarki.';
+        status.textContent=tr('Nie można skopiować automatycznie. Sprawdź uprawnienia przeglądarki.');
       }
     }
     function renderPublications(filter='all'){
@@ -601,16 +619,16 @@
         const item=makeElement('li','publication-item');
         const body=makeElement('div','publication-body');
         const name=makeElement('div','publication-title',entry.title);
-        const meta=makeElement('div','publication-meta',[entry.authors,entry.year,entry.metadata].filter(Boolean).join(' · '));
+        const meta=makeElement('div','publication-meta',[entry.authors,entry.year,i18n.publicationMetadata(entry.metadata||'')].filter(Boolean).join(' · '));
         const actions=makeElement('div','publication-actions');
         if(entry.link&&/^https:\/\//.test(entry.link)){
-          const link=makeElement('a','',entry.linkText||'Źródło');
+          const link=makeElement('a','',tr(entry.linkText||'Źródło'));
           link.href=entry.link;link.target='_blank';link.rel='noopener noreferrer';
           actions.append(link);
         }
-        const cite=makeElement('button','', 'Cite');cite.type='button';
+        const cite=makeElement('button','',tr('Cite'));cite.type='button';
         cite.addEventListener('click',()=>copyCitation(citationText(entry),cite));
-        const bib=makeElement('button','','copy BibTeX');bib.type='button';
+        const bib=makeElement('button','',tr('copy BibTeX'));bib.type='button';
         bib.addEventListener('click',()=>copyCitation(bibtexText(entry,index),bib));
         actions.append(cite,bib);
         const heading=makeElement('div','publication-heading');
@@ -625,9 +643,14 @@
       try{
         const response=await fetch('docs/data/in-progress.json');
         if(!response.ok)throw new Error('HTTP '+response.status);
-        const entries=await response.json();
-        if(!Array.isArray(entries)||entries.length===0)throw new Error('Brak manuskryptów');
-        const intro=makeElement('p','', 'Postęp szacunkowy; czasopisma docelowe mogą ulec zmianie. Punktacja według wykazu 2024, jeśli zweryfikowana.');
+        let entries=await response.json();
+        if(!Array.isArray(entries)||entries.length===0)throw new Error(tr('Brak manuskryptów'));
+        if(i18n.language==='en'){
+          const translationResponse=await fetch('docs/data/in-progress.en.json');
+          if(!translationResponse.ok)throw new Error('HTTP '+translationResponse.status);
+          entries=i18n.translateManuscripts(entries,await translationResponse.json());
+        }
+        const intro=makeElement('p','',tr('Postęp szacunkowy; czasopisma docelowe mogą ulec zmianie. Punktacja według wykazu 2024, jeśli zweryfikowana.'));
         const list=document.createElement('ol');list.className='manuscript-list';
         entries.sort((a,b)=>b.progress-a.progress).forEach(entry=>{
           const item=document.createElement('li');
@@ -635,17 +658,17 @@
           const project=makeElement('div','manuscript-project');
           const projectLink=makeElement('a','',entry.project.toUpperCase());
           projectLink.href=entry.projectUrl;projectLink.target='_blank';projectLink.rel='noopener noreferrer';
-          const next=makeElement('span','manuscript-next','Następny krok: '+entry.nextStep);
+          const next=makeElement('span','manuscript-next',tr('Następny krok: ')+entry.nextStep);
           project.append(projectLink,document.createTextNode(', '),next);
           const meta=makeElement('div','manuscript-meta');
           const description=makeElement('p','manuscript-description',entry.description);
-          const journal=makeElement('div','manuscript-journal','Docelowe czasopismo: ');
+          const journal=makeElement('div','manuscript-journal',tr('Docelowe czasopismo: '));
           const journalLink=makeElement('a','',entry.journal);
           journalLink.href=entry.journalUrl;journalLink.target='_blank';journalLink.rel='noopener noreferrer';
-          journal.append(journalLink,document.createTextNode(' ('+(entry.ministerialPoints==null?'pkt: do weryfikacji':entry.ministerialPoints+' pkt')+')'));
+          journal.append(journalLink,document.createTextNode(' ('+(entry.ministerialPoints==null?tr('pkt: do weryfikacji'):entry.ministerialPoints+tr(' pkt'))+')'));
           const track=makeElement('div','manuscript-track');
           const bar=document.createElement('progress');bar.max=100;bar.value=entry.progress;
-          bar.setAttribute('aria-label','Szacunkowy postęp: '+entry.title);
+          bar.setAttribute('aria-label',tr('Szacunkowy postęp: ')+entry.title);
           track.append(bar,makeElement('span','manuscript-percent',entry.progress+'%'));
           const heading=makeElement('div','manuscript-heading');
           heading.append(title,track);
@@ -654,7 +677,7 @@
         });
         target.replaceChildren(intro,list);
       }catch(error){
-        target.textContent='Nie udało się wczytać planowanych manuskryptów.';
+        target.textContent=tr('Nie udało się wczytać planowanych manuskryptów.');
         console.error(error);
       }
     }
