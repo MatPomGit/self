@@ -23,7 +23,7 @@ Skrypt budowania ustawia język i angielską nawigację dla drugiego przebiegu.
 Projekty i publikacje są przygotowywane przed budowaniem przez
 `scripts/site_data.py` z danych w `docs/data/`. Dane bibliograficzne,
 postępy i docelowe czasopisma mają jedno źródło w istniejących plikach JSON.
-`projects.en.json` zawiera angielskie opisy projektów;
+`projects.en.json` zawiera angielskie opisy projektów, wiązane z polskimi tytułami przez `sourceTitle` (kolejność wpisów nie ma znaczenia);
 `in-progress.en.json` zawiera tłumaczenia opisów i kolejnych kroków,
 powiązane z identyfikatorami manuskryptów.
 
@@ -44,8 +44,11 @@ Otwórz `http://localhost:8000/`. Do lokalnego podglądu pod docelowym prefiksem
 oraz portretu używają publicznego prefiksu `/self/`.
 
 Używaj `scripts/build_site.py` do przygotowania publikacji. Skrypt przygotowuje kompletną treść obu języków w katalogu tymczasowym,
-wykonuje dwa przebiegi `zensical build --strict`, a następnie kopiuje materiały
-i zasoby do wyniku. Nie korzysta z hooków ani pluginów MkDocs.
+wykonuje dwa przebiegi `zensical build --strict` i kopiuje materiały
+oraz zasoby do katalogu roboczego obok wyniku. Poprzedni katalog `site/`
+pozostaje nienaruszony, jeżeli budowanie lub kopiowanie zakończy się błędem.
+Podmiana następuje dopiero po przygotowaniu pełnego zestawu plików.
+Skrypt nie nadpisuje istniejącego katalogu bez znacznika `.nojekyll`. Nie korzysta z hooków ani pluginów MkDocs.
 Nie używaj samego `zensical build` do publikacji, ponieważ pomija on przygotowanie
 portfolio, wersji angielskiej i katalogu `materials/`.
 Testy Zensical wymagają zależności z `requirements-docs.txt`; bez nich są pomijane.
