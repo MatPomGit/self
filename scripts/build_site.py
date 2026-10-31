@@ -48,14 +48,46 @@ def build_language(base, language, stage):
                     '--config-file', str(config_file)], cwd=stage, check=True)
 
 
+def publish_site(output, target):
+    """Complete a candidate site before replacing the previous result.
+
+    Both directories reside on the same filesystem. A failed build or asset
+    copy leaves the existing site intact; a failed final rename is rolled back.
+    """
+    target.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix='.self-publish-', dir=target.parent) as temp:
+        work = Path(temp)
+        candidate = work / 'site'
+        shutil.copytree(output, candidate)
+        for name in ('materials', 'docs'):
+            shutil.copytree(ROOT / name, candidate / name, dirs_exist_ok=True)
+        shutil.copy2(ROOT / 'index.html', candidate / 'legacy.html')
+        (candidate / '.nojekyll').touch()
+
+        previous = work / 'previous-site'
+        had_previous = target.exists()
+        if had_previous:
+            target.rename(previous)
+        try:
+            candidate.rename(target)
+        except OSError:
+            if had_previous:
+                previous.rename(target)
+            raise
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--site-dir', type=Path, default=ROOT / 'site')
     args = parser.parse_args()
-    target = args.site_dir.resolve()
-    if (target == ROOT or target in ROOT.parents or
+    target = args.site_dir.absolute()
+    if (target.is_symlink() or target.name != 'site' or
+            target == ROOT or target in ROOT.parents or
             (target.is_relative_to(ROOT) and target != ROOT / 'site')):
-        parser.error('Use site/ or a directory outside the repository.')
+        parser.error('Choose site/ or an external directory named site.')
+    if target.exists() and (not target.is_dir() or
+                            not (target / '.nojekyll').is_file()):
+        parser.error('Refusing to overwrite an unrecognised output directory.')
     base = tomllib.loads((ROOT / 'zensical.toml').read_text(encoding='utf-8'))
     polish = {p.relative_to(ROOT / 'website/pl') for p in (ROOT / 'website/pl').rglob('*.md')}
     english = {p.relative_to(ROOT / 'website/en') for p in (ROOT / 'website/en').rglob('*.md')}
@@ -67,13 +99,7 @@ def main():
         shutil.copytree(ROOT / 'website/overrides', stage / 'overrides')
         for language in ('pl', 'en'):
             build_language(base, language, stage)
-        if target.exists():
-            shutil.rmtree(target)
-        shutil.copytree(output, target)
-    for name in ('materials', 'docs'):
-        shutil.copytree(ROOT / name, target / name, dirs_exist_ok=True)
-    shutil.copy2(ROOT / 'index.html', target / 'legacy.html')
-    (target / '.nojekyll').touch()
+        publish_site(output, target)
     print('[DONE] Polish and English Zensical site built; teaching URLs preserved.')
 
 
