@@ -38,7 +38,8 @@ class MaterialsTests(unittest.TestCase):
         self.assertIn("a:focus-visible", html)
         self.assertIn('class="materials-grid"', html)
         cards = re.findall(
-            r'<section class="materials-group(?: materials-group--wide)?">'
+            r'<section class="materials-group(?: materials-group--wide)?"'
+            r'(?: data-materials-subject="[^"]+")?>'
             r'([\s\S]*?)</section>', html
         )
         self.assertGreaterEqual(len(cards), 17)
