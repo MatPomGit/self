@@ -11,7 +11,9 @@ Witryna naukowa i dydaktyczna publikowana przez GitHub Pages.
 
 Jedynym katalogiem aktualnych materiałów udostępnianych studentom jest `materials/`.
 Punktem wejścia pozostaje `materials/index.html`, prosta strona HTML z listami linków
-bez frameworków i generatora. Skrypt domyślnie pokazuje najnowsze wersje PDF;
+bez frameworków. `scripts/sync_materials.py` podczas CI automatycznie
+wyszukuje nowe pliki w `materials/`, aktualizuje przeniesione odnośniki
+oraz uzupełnia indeks przed testami i publikacją Pages. Skrypt domyślnie pokazuje najnowsze wersje PDF;
 trzy kliknięcia przycisku PDF/Wszystkie przełączają pełną listę. Bez JavaScriptu
 pełna lista pozostaje dostępna. Pozostałe strony przedmiotów znajdują się w
 `materials/<przedmiot>/index.html`;
