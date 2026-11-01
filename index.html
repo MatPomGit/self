@@ -455,7 +455,7 @@
     const themeToggle = document.getElementById('theme-toggle');
     const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
     let sessionChoice = false;
-  let themeTransitionTimer;
+    let themeTransitionTimer;
     function changeTheme(next) {
       const root = document.documentElement;
       if (root.dataset.theme === next) return;
@@ -464,7 +464,6 @@
       clearTimeout(themeTransitionTimer);
       themeTransitionTimer = setTimeout(() => root.classList.remove('theme-transition'), 2500);
     }
-  
     function syncThemeToggle(){
       const dark = document.documentElement.dataset.theme === 'dark';
       themeToggle.setAttribute('aria-pressed', String(dark));
