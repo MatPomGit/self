@@ -180,6 +180,9 @@ def add_links(card: str, names: list[str], subject: str) -> str:
             blocks.append(f'<li><a href="{href}" download title="{escape(Path(name).name, quote=True)}">{label}</a></li>')
         blocks.extend(["</ul>", "</div>"])
     blocks.append("<!-- AUTO MATERIALS END -->")
+    # Canonicalize whitespace before the generated block for repeatable builds.
+    position = card.rfind("</section>")
+    card = card[:position].rstrip() + card[position:]
     return card.replace("</section>", "\n" + "\n".join(blocks) + "\n</section>", 1)
 
 
