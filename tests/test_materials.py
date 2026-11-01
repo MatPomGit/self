@@ -41,7 +41,7 @@ class MaterialsTests(unittest.TestCase):
             r'<section class="materials-group(?: materials-group--wide)?">'
             r'([\s\S]*?)</section>', html
         )
-        self.assertEqual(len(cards), 10)
+        self.assertEqual(len(cards), 17)
         for directory in (
             "narzędzia-dla-programistów",
             "wirtualna-i-rozszerzona-rzeczywistosc",
@@ -52,6 +52,14 @@ class MaterialsTests(unittest.TestCase):
             "psychoinformatyka",
             "informatyka-poznawcza",
             "seminaria-dyplomowe",
+            "Kto-Co-Jak",
+            "Nowoczesne-technologie-w-psychologii",
+            "analiza-eeg",
+            "diagnoza-psychologiczna",
+            "nawigacja-robotow-humanoidalnych",
+            "neuropsychologia",
+            "psychologia-poznawcza",
+            "inne",
         ):
             subject_cards = [c for c in cards if f'href="{directory}/' in c]
             self.assertEqual(len(subject_cards), 1, directory)
@@ -86,6 +94,14 @@ class MaterialsTests(unittest.TestCase):
             public_files - linked_files,
             f"Pliki pominięte w indeksie: {sorted(public_files - linked_files)}",
         )
+
+    def test_pptx_links_are_dark_orange_in_both_themes(self):
+        html = (MATERIALS / "index.html").read_text(encoding="utf-8")
+        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+        self.assertIn("--pptx:#9b4400", style)
+        self.assertIn("--pptx:#f0a14a", style)
+        self.assertIn('a[href$=".pptx" i]:visited{color:var(--pptx)}', style)
+        self.assertRegex(html, r'href="[^"]+\.pptx"')
 
     def test_compact_layout_uses_independent_columns(self):
         """Długie karty nie wymuszają pustej wysokości pozostałych."""
