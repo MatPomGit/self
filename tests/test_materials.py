@@ -125,7 +125,7 @@ class MaterialsTests(unittest.TestCase):
         ):
             self.assertIn(selector, html)
         for variable in ("--lecture:", "--lab:", "--heading:"):
-            self.assertEqual(html.count(variable), 2)
+            self.assertEqual(len(re.findall(re.escape(variable) + r"#[0-9a-fA-F]{6}", html)), 2)
         self.assertIn('font-size:.86rem;line-height:1.15;font-weight:700;color:var(--heading)', html)
         for expected in (
             'class="material-link--lab" href="narzędzia-dla-programistów/ndp__lab__01.pdf"',
