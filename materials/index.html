@@ -37,8 +37,7 @@ a[href$=".pptx" i],a[href$=".pptx" i]:visited{color:var(--pptx)}
 a:focus-visible{outline:3px solid var(--text);outline-offset:2px}
 button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 .materials-header{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.materials-view-toggle{position:absolute;left:62%;top:50%;transform:translate(-50%,-50%);min-width:80px;height:34px;padding:0 8px;border:1px solid var(--line);border-radius:5px;background:var(--surface);color:var(--text);font:inherit;font-size:.8rem;cursor:pointer}
-.materials-view-toggle:hover{background:var(--hover)}
+.materials-view-toggle{position:absolute;left:62%;top:50%;transform:translate(-50%,-50%);min-width:80px;height:34px;padding:0;border:0;background:transparent;cursor:pointer}
 [hidden]{display:none!important}
 .materials-header>div{min-width:0}
 .materials-header a:hover{background:var(--hover);border-radius:4px}
@@ -84,7 +83,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
   <div>
     <h2><a href="../">&#8592; Strona główna</a>  / Materiały dla studentów</h2>
   </div>
-  <button class="materials-view-toggle" id="materials-view-toggle" type="button" aria-label="Widok PDF. Kliknij trzy razy, aby wyświetlić wszystkie pliki" aria-pressed="false" title="Kliknij trzy razy, aby wyświetlić wszystkie pliki">PDF</button>
+  <button class="materials-view-toggle" id="materials-view-toggle" type="button" aria-label="Widok PDF. Kliknij trzy razy, aby wyświetlić wszystkie pliki" aria-pressed="false" title="Kliknij trzy razy, aby wyświetlić wszystkie pliki"></button>
   <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Tryb ciemny" aria-pressed="false" title="Włącz tryb ciemny">
     <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 14.1A8.9 8.9 0 0 1 9.9 3.2a9 9 0 1 0 10.9 10.9Z"/></svg>
     <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
@@ -521,7 +520,6 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
       group.hidden = !showAll && !group.querySelector('.materials-list li:not([hidden])');
     }
     document.documentElement.dataset.materialsView = view;
-    viewToggle.textContent = showAll ? 'Wszystkie' : 'PDF';
     viewToggle.setAttribute('aria-pressed', String(showAll));
     const instruction = showAll
       ? 'Widok wszystkich plików. Kliknij trzy razy, aby wyświetlić tylko PDF'

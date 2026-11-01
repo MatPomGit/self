@@ -72,7 +72,7 @@ vm.runInNewContext(script, {
 function clickAt(time) { now = time; viewToggle.events.click(); }
 assert.equal(root.dataset.materialsView, 'pdf');
 assert.equal(viewToggle.attrs['aria-pressed'], 'false');
-assert.equal(viewToggle.textContent, 'PDF');
+assert.equal(viewToggle.textContent, '');
 assert.equal(pdfOld.item.hidden, true, 'starszy PDF ukryty');
 assert.equal(pdfNew.item.hidden, false, 'najnowszy PDF widoczny');
 assert.equal(pdfSimple.item.hidden, false, 'rozszerzenie wielkimi literami');
@@ -86,7 +86,7 @@ assert.equal(root.dataset.materialsView, 'pdf', 'dwa kliknięcia nie wystarczą'
 clickAt(500);
 assert.equal(root.dataset.materialsView, 'all');
 assert.equal(viewToggle.attrs['aria-pressed'], 'true');
-assert.equal(viewToggle.textContent, 'Wszystkie');
+assert.equal(viewToggle.textContent, '');
 assert.equal(pdfOld.item.hidden, false);
 assert.equal(htmlFile.item.hidden, false);
 assert.equal(subgroupOther.hidden, false);
@@ -102,4 +102,8 @@ assert.equal(viewToggle.attrs['aria-pressed'], 'false');
 assert.equal(pageGroup.hidden, true);
 assert.ok(html.includes('.materials-view-toggle{position:static;transform:none;'));
 assert.ok(html.includes('[hidden]{display:none!important}'));
+assert.ok(html.includes('min-width:80px;height:34px;padding:0;border:0;background:transparent;cursor:pointer'));
+assert.ok(html.includes('aria-pressed="false" title="Kliknij trzy razy, aby wyświetlić wszystkie pliki"></button>'));
+assert.ok(!html.includes('.materials-view-toggle:hover{background:var(--hover)}'));
+assert.match(viewToggle.attrs['aria-label'], /Kliknij trzy razy/);
 console.log('[DONE] MATERIALS_VIEW_PASS');
