@@ -16,7 +16,8 @@ from urllib.parse import quote, unquote, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "materials" / "index.html"
 CARD = re.compile(
-    r'<section class="materials-group(?: materials-group--wide)?">[\s\S]*?</section>'
+    r'<section class="materials-group(?: materials-group--wide)?"'
+    r'(?: data-materials-subject="[^"]+")?>[\s\S]*?</section>'
 )
 LINK = re.compile(r'(?P<before><a\b[^>]*\bhref=")(?P<href>[^"]+)(?P<after>")')
 AUTO = re.compile(
@@ -125,7 +126,8 @@ def render(source: str, materials: Path) -> tuple[str, list[str]]:
         if len(paths) > 1:
             failures.append(f"Mixed subject paths in one materials card: {sorted(paths)}")
         subjects.update(paths)
-        subject = next(iter(paths), None)
+        tag = re.search(r'data-materials-subject="([^"]+)"', card)
+        subject = unescape(tag.group(1)) if tag else next(iter(paths), None)
         if subject:
             missing = sorted(
                 (name for name in files
@@ -148,7 +150,9 @@ def render(source: str, materials: Path) -> tuple[str, list[str]]:
         new_cards = []
         for subject, names in sorted(by_subject.items(), key=lambda item: item[0].casefold()):
             title = escape(subject.replace("-", " ").replace("_", " ").capitalize())
-            blank = f'<section class="materials-group">\n<h4>{title}</h4>\n</section>'
+            blank = (f'<section class="materials-group" '
+                     f'data-materials-subject="{escape(subject, quote=True)}">\n'
+                     f'<h4>{title}</h4>\n</section>')
             new_cards.append(add_links(blank, names, subject))
         marker = "</div>\n\n<script>"
         if marker not in result:
