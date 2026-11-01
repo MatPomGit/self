@@ -272,6 +272,22 @@
     :root[data-theme="dark"] .publication-actions button,
     :root[data-theme="dark"] .publication-actions a{background:var(--surface);color:var(--accent)}
     :root[data-theme="dark"] .data-filters button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent)}
+
+/* Animuj kolory tylko podczas przełączenia, nie podczas ładowania strony. */
+:root.theme-transition body,
+:root.theme-transition body *,
+:root.theme-transition body *::before,
+:root.theme-transition body *::after {
+  transition: background-color 2.5s ease-in-out, color 2.5s ease-in-out,
+              border-color 2.5s ease-in-out, fill 2.5s ease-in-out,
+              stroke 2.5s ease-in-out;
+}
+@media(prefers-reduced-motion:reduce){
+  :root.theme-transition body,
+  :root.theme-transition body *,
+  :root.theme-transition body *::before,
+  :root.theme-transition body *::after {transition:none}
+}
   </style>
 </head>
 
@@ -439,6 +455,16 @@
     const themeToggle = document.getElementById('theme-toggle');
     const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
     let sessionChoice = false;
+  let themeTransitionTimer;
+    function changeTheme(next) {
+      const root = document.documentElement;
+      if (root.dataset.theme === next) return;
+      root.classList.add('theme-transition');
+      root.dataset.theme = next;
+      clearTimeout(themeTransitionTimer);
+      themeTransitionTimer = setTimeout(() => root.classList.remove('theme-transition'), 2500);
+    }
+  
     function syncThemeToggle(){
       const dark = document.documentElement.dataset.theme === 'dark';
       themeToggle.setAttribute('aria-pressed', String(dark));
@@ -448,7 +474,7 @@
     }
     themeToggle.addEventListener('click', () => {
       const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-      document.documentElement.dataset.theme = next;
+      changeTheme(next);
       sessionChoice = true;
       try { localStorage.setItem('self-theme', next); } catch (error) { /* Motyw nadal dziala. */ }
       syncThemeToggle();
@@ -459,7 +485,7 @@
         let stored = null;
         try { stored = localStorage.getItem('self-theme'); } catch (error) { /* Bez storage. */ }
         if (stored === 'light' || stored === 'dark') return;
-        document.documentElement.dataset.theme = event.matches ? 'dark' : 'light';
+        changeTheme(event.matches ? 'dark' : 'light');
         syncThemeToggle();
       });
     }
