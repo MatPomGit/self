@@ -17,11 +17,12 @@ class GeometryTests(unittest.TestCase):
         self.assertEqual(kind(595.28, 841.89), "lab")
         self.assertIsNone(kind(1600, 1000))
 
-    def test_pdfinfo(self):
-        with patch("scripts.classify_materials.subprocess.run") as run:
-            run.return_value = Mock(returncode=0, stdout="Page    1 size: 960 x 540 pts")
+    def test_pdf_dimensions(self):
+        with patch("scripts.classify_materials.PdfReader") as reader:
+            box = Mock(width=960, height=540)
+            reader.return_value.pages = [Mock(cropbox=box)]
             self.assertEqual(dimensions(Path("sample.pdf")), (960., 540.))
-            run.return_value = Mock(returncode=1, stdout="")
+            reader.return_value.pages = []
             self.assertIsNone(dimensions(Path("sample.pdf")))
 
     def test_office_files_and_link_overrides(self):

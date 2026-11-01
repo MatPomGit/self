@@ -5,7 +5,8 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 import re
-import subprocess
+
+from pypdf import PdfReader
 from urllib.parse import unquote, urlsplit
 from xml.etree import ElementTree as ET
 from zipfile import ZipFile, BadZipFile
@@ -13,7 +14,6 @@ from zipfile import ZipFile, BadZipFile
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "materials" / "index.html"
 ANCHOR = re.compile(r'(<li>\s*<a)(?: class="([^"]*)")?(\s+href="([^"]+)"[^>]*>)')
-SIZE = re.compile(r'^\s*Page(?:\s+\d+)?\s+size:\s*([\d.]+)\s*x\s*([\d.]+)', re.I | re.M)
 W_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
 P_NS = "http://schemas.openxmlformats.org/presentationml/2006/main"
 
@@ -33,17 +33,11 @@ def dimensions(path: Path) -> tuple[float, float] | None:
     ext = path.suffix.lower()
     if ext == ".pdf":
         try:
-            proc = subprocess.run(
-                ["pdfinfo", "-f", "1", "-l", "1", str(path)],
-                capture_output=True, text=True, errors="replace",
-                check=False, timeout=25,
-            )
-        except FileNotFoundError as exc:
-            raise RuntimeError("Wymagany pdfinfo (poppler-utils)") from exc
-        except subprocess.TimeoutExpired:
+            page = PdfReader(str(path), strict=False).pages[0]
+            box = page.cropbox
+            return float(box.width), float(box.height)
+        except (OSError, ValueError, IndexError, KeyError):
             return None
-        match = SIZE.search(proc.stdout) if proc.returncode == 0 else None
-        return (float(match[1]), float(match[2])) if match else None
     if ext not in (".pptx", ".docx"):
         return None
     try:

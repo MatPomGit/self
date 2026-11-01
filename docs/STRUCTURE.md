@@ -34,7 +34,7 @@ aktualnych plików dla studentów jest `materials/`.
   Odnośniki do wykładów są niebieskawe, do laboratoriów zielonkawe.
   `scripts/classify_materials.py` rozpoznaje 16:9 i 4:3 jako wykłady,
   a A4 (pionowo lub poziomo) jako instrukcje. Odczytuje rozmiar pierwszej
-  strony PDF (`pdfinfo`), slajdu PPTX lub strony DOCX. Pliki TeX/HTML z
+  strony PDF (`pypdf`), slajdu PPTX lub strony DOCX. Pliki TeX/HTML z
   odpowiadającym PDF dziedziczą klasyfikację. Nieznane formaty zachowują
   dotychczasowy kolor. Klasyfikację wykonuje workflow przed publikacją.
 
