@@ -181,7 +181,11 @@ def add_links(card: str, names: list[str], subject: str) -> str:
         for name in entries:
             href = escape(href_for(name), quote=True)
             label = escape(label_for(name))
-            blocks.append(f'<li><a href="{href}" download title="{escape(Path(name).name, quote=True)}">{label}</a></li>')
+            download = "" if Path(name).suffix.casefold() == ".html" else " download"
+            blocks.append(
+                f'<li><a href="{href}"{download} '
+                f'title="{escape(Path(name).name, quote=True)}">{label}</a></li>'
+            )
         blocks.extend(["</ul>", "</div>"])
     blocks.append("<!-- AUTO MATERIALS END -->")
     # Canonicalize whitespace before the generated block for repeatable builds.
