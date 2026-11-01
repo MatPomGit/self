@@ -278,9 +278,9 @@
 :root.theme-transition body *,
 :root.theme-transition body *::before,
 :root.theme-transition body *::after {
-  transition: background-color 2.5s ease-in-out, color 2.5s ease-in-out,
-              border-color 2.5s ease-in-out, fill 2.5s ease-in-out,
-              stroke 2.5s ease-in-out;
+  transition: background-color 1.5s ease-in-out, color 1.5s ease-in-out,
+              border-color 1.5s ease-in-out, fill 1.5s ease-in-out,
+              stroke 1.5s ease-in-out;
 }
 @media(prefers-reduced-motion:reduce){
   :root.theme-transition body,
@@ -462,7 +462,7 @@
       root.classList.add('theme-transition');
       root.dataset.theme = next;
       clearTimeout(themeTransitionTimer);
-      themeTransitionTimer = setTimeout(() => root.classList.remove('theme-transition'), 2500);
+      themeTransitionTimer = setTimeout(() => root.classList.remove('theme-transition'), 1500);
     }
     function syncThemeToggle(){
       const dark = document.documentElement.dataset.theme === 'dark';
