@@ -31,8 +31,13 @@ aktualnych plików dla studentów jest `materials/`.
   jasnego i ciemnego oraz istniejące ścieżki pobierania.
 - Karty są uporządkowane tematycznie: programowanie, XR i robotyka,
   informatyka/neuronauka, psychologia oraz materiały ogólne.
-  Odnośniki do wykładów są niebieskawe, do laboratoriów zielonkawe,
-  a pozostałe PPTX zachowują pomarańczowy akcent.
+  Odnośniki do wykładów są niebieskawe, do laboratoriów zielonkawe.
+  `scripts/classify_materials.py` rozpoznaje 16:9 i 4:3 jako wykłady,
+  a A4 (pionowo lub poziomo) jako instrukcje. Odczytuje rozmiar pierwszej
+  strony PDF (`pdfinfo`), slajdu PPTX lub strony DOCX. Pliki TeX/HTML z
+  odpowiadającym PDF dziedziczą klasyfikację. Nieznane formaty zachowują
+  dotychczasowy kolor. Klasyfikację wykonuje workflow przed publikacją.
+
 - Domyślnie widoczne są tylko PDF, a spośród plików o tym samym rdzeniu nazwy
   wygrywa najwyższy numer wersji `vX.Y.Z`. Pozostałe formaty i starsze wersje
   są dostępne po trzech kliknięciach przycisku w nagłówku (odstęp do 1,8 s).

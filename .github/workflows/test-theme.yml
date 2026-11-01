@@ -1,10 +1,10 @@
 name: Sprawdzenie motywu self
 on:
   pull_request:
-    paths: ["index.html", "docs/data/projects.json", "materials/index.html", "tests/test_theme.py", "tests/test_materials.py", "tests/test_materials_view.js", "tests/test_projects.py", ".github/workflows/test-theme.yml"]
+    paths: ["index.html", "docs/data/projects.json", "materials/index.html", "tests/test_theme.py", "tests/test_materials.py", "tests/test_materials_view.js", "tests/test_classify_materials.py", "scripts/classify_materials.py", "tests/test_projects.py", ".github/workflows/test-theme.yml"]
   push:
     branches: [main]
-    paths: ["index.html", "docs/data/projects.json", "materials/index.html", "tests/test_theme.py", "tests/test_materials.py", "tests/test_materials_view.js", "tests/test_projects.py", ".github/workflows/test-theme.yml"]
+    paths: ["index.html", "docs/data/projects.json", "materials/index.html", "tests/test_theme.py", "tests/test_materials.py", "tests/test_materials_view.js", "tests/test_classify_materials.py", "scripts/classify_materials.py", "tests/test_projects.py", ".github/workflows/test-theme.yml"]
 permissions:
   contents: read
 jobs:
@@ -15,5 +15,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - run: python scripts/classify_materials.py --write
+      - run: python scripts/classify_materials.py --check
       - run: python -m unittest discover -s tests -p "test_*.py" -v
       - run: node tests/test_materials_view.js
