@@ -1,0 +1,166 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage{lmodern}
+\usepackage[margin=2.0cm]{geometry}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{url}
+
+\definecolor{navy}{RGB}{27,42,86}
+\definecolor{lgray}{RGB}{240,240,244}
+
+\titleformat{\section}{\large\bfseries\color{navy}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\bfseries\color{navy}}{\thesubsection.}{0.5em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.6pt}
+\fancyhead[L]{\small Neurofizjologia i pomiar EEG}
+\fancyhead[R]{\small Instrukcja laboratoryjna nr 1}
+\fancyfoot[C]{\small\thepage}
+
+\newcommand{\infobox}[1]{%
+  \par\noindent\colorbox{lgray}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{2pt}#1\vspace{2pt}}}\par\vspace{4pt}}
+
+\title{\vspace{-1.5cm}\textbf{\color{navy}Instrukcja laboratoryjna nr 1}\\[4pt]
+\Large Wprowadzenie do badań elektrofizjologicznych}
+\author{\vspace{-1.5cm}dr inż. Mateusz Pomianek}
+\date{\vspace{-1.4cm}\today}
+
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\section{Cele zajęć}
+\begin{itemize}[nosep]
+  \item Zapoznanie studentów z historycznym i teoretycznym podłożem elektroencefalografii (EEG).
+  \item Wyjaśnienie neurofizjologicznych źródeł sygnału EEG i jego związku z aktywnością korową.
+  \item Przegląd głównych zastosowań EEG w badaniach nad zaburzeniami psychicznymi i funkcjonowaniem poznawczym.
+  \item Wprowadzenie do podstawowej terminologii wykorzystywanej w dalszych zajęciach laboratoryjnych.
+\end{itemize}
+
+\section{Wprowadzenie teoretyczne}
+
+\subsection{Rys historyczny}
+Hans Berger w 1929 roku jako pierwszy zarejestrował i opisał ludzką elektroencefalografię, odkrywając rytm alfa. Wcześniejsze prace Richarda Catona (1875) na zwierzętach wykazały istnienie prądów elektrycznych w mózgu. Rozwój wzmacniaczy elektronicznych w latach 30.--50. XX wieku oraz komputeryzacja analizy sygnału od lat 70. umożliwiły przejście od klinicznej obserwacji zapisu papierowego do ilościowej analizy EEG (qEEG).
+
+\subsection{Źródła sygnału EEG}
+Sygnał rejestrowany na powierzchni skóry głowy jest sumą \textbf{postsynaptycznych potencjałów wzbudzających i hamujących (EPSP/IPSP)} generowanych głównie przez neurony piramidowe warstw III i V kory mózgowej, których dendryty ułożone są prostopadle do powierzchni kory (organizacja \emph{open field}). Pojedynczy potencjał czynnościowy jest zbyt krótki i słaby, by wygenerować mierzalny sygnał powierzchniowy -- konieczna jest \textbf{synchroniczna aktywacja} dużej liczby (rzędu $10^4$--$10^7$) sąsiadujących neuronów.
+
+\subsection{Pasma częstotliwości}
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Pasmo} &
+\textbf{Zakres (Hz)} &
+\textbf{Typowy kontekst wystąpienia}\\
+\midrule
+Delta ($\delta$) & 0,5--4 & Sen głęboki (NREM N3), patologia u dorosłych w czuwaniu\\
+Theta ($\theta$) & 4--8 & Senność, procesy pamięciowe, dzieci\\
+Alfa ($\alpha$) & 8--13 & Czuwanie z zamkniętymi oczami, relaksacja\\
+Beta ($\beta$) & 13--30 & Czuwanie aktywne, koncentracja, napięcie\\
+Gamma ($\gamma$) & $>$30 & Wiązanie percepcyjne, procesy poznawcze wyższego rzędu\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Strukturalne i funkcjonalne obszary mózgu a topografia zapisu EEG}
+Rozmieszczenie elektrod w systemie 10--20 (szczegółowo omawiane na zajęciach 2) nie jest przypadkowe -- odpowiada w przybliżeniu położeniu głównych płatów kory leżących pod danym obszarem czaszki. Znajomość tej zgrubnej korespondencji jest niezbędna do sensownej interpretacji topografii sygnału.
+
+\begin{center}
+\begin{tabular}{p{0.1\textwidth} p{0.35\textwidth} p{0.45\textwidth}}
+\toprule
+\textbf{Elektrody} &
+\textbf{Leżąca struktura} &
+\textbf{Powiązana funkcja / aktywność} \\
+\midrule
+Fp, F & Płat czołowy (kora przedczołowa, kora ruchowa dodatkowa) & Funkcje wykonawcze, planowanie, kontrola uwagi; asymetria pasma alfa jako korelat regulacji emocji\\
+C & Płat ciemieniowy przedśrodkowy / kora ruchowa i czuciowa pierwotna & Planowanie i wykonywanie ruchu; rytm mu (8--13 Hz), tłumiony podczas ruchu i jego obserwacji\\
+T & Płat skroniowy (kora słuchowa, struktury przyśrodkowo-skroniowe) & Przetwarzanie słuchowe i językowe, procesy pamięciowe (aktywność theta)\\
+P & Płat ciemieniowy & Integracja czuciowo-przestrzenna, uwaga przestrzenna\\
+O & Płat potyliczny (kora wzrokowa pierwotna i asocjacyjna) & Przetwarzanie wzrokowe; główny generator dominującego rytmu alfa przy zamkniętych oczach\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Ważne zastrzeżenie -- przewodnictwo objętościowe.} Sygnał elektryczny generowany w korze rozprzestrzenia się przez tkanki o różnej przewodności (opony mózgowe, płyn mózgowo-rdzeniowy, czaszka, skóra) zanim dotrze do elektrody -- zjawisko to nazywa się \emph{przewodnictwem objętościowym (volume conduction)}. W efekcie potencjał zarejestrowany w danym punkcie skalpu jest mieszaniną aktywności wielu, czasem odległych, generatorów korowych, a nie \guillemotleft fotografią\guillemotright{} leżącej bezpośrednio pod nim kory. Ponadto EEG jest najbardziej czułe na źródła o orientacji dipolowej zbliżonej do prostopadłej względem powierzchni czaszki (typowe dla neuronów w grzbietach zakrętów), słabiej rejestrując aktywność generowaną w głębi bruzd. Zagadnienie to jest bezpośrednio powiązane z problemem analizy źródłowej, omawianym szczegółowo na zajęciach 4.
+
+\subsection{EEG w badaniach zaburzeń psychicznych i funkcjonowania poznawczego}
+\begin{center}
+\begin{tabular}{p{0.20\textwidth} p{0.70\textwidth}}
+\toprule
+\textbf{Obszar kliniczny} &
+\textbf{Typowe nieprawidłowości / zastosowania EEG}\\
+\midrule
+Schizofrenia & Redukcja amplitudy komponentu P300, zaburzenia synchronizacji oscylacji gamma (deficyt \emph{binding}), nadmiar wolnofalowej aktywności theta/delta\\
+Zaburzenia nastroju & Asymetria czołowa pasma alfa (relatywnie niższa aktywacja lewej kory przedczołowej) jako korelat podatności na depresję\\
+ADHD & Podwyższony (choć dyskusyjny jako samodzielny biomarker) stosunek mocy theta/beta w odprowadzeniach czołowo-środkowych\\
+Otępienia & Postępujące spowolnienie rytmu podstawowego (przesunięcie w kierunku theta/delta), zmniejszenie zmienności i złożoności sygnału\\
+Padaczka & Interiktalne wyładowania iglica--fala (spike-wave), lokalizacja ogniska padaczkorodnego\\
+Zaburzenia snu & Polisomnografia -- klasyfikacja stadiów snu na podstawie wzorców EEG, EOG i EMG\\
+Funkcjonowanie poznawcze & Potencjały wywołane (P300, N400) i moc pasmowa jako korelaty uwagi, pamięci roboczej i przetwarzania językowego\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\infobox{\textbf{Do zapamiętania:} EEG mierzy zsumowaną aktywność synaptyczną, nie pojedyncze potencjały czynnościowe. Rozdzielczość czasowa jest rzędu milisekund, natomiast przestrzenna -- ograniczona przez przewodnictwo objętościowe do rzędu centymetrów.}
+
+\section{Sprzęt i oprogramowanie wykorzystywane na zajęciach}
+Prezentacja poglądowa: wzmacniacz EEG, przykładowy czepek z elektrodami, oprogramowanie do akwizycji i wizualizacji sygnału (np. BrainVision Recorder/Analyzer, EEGLAB w środowisku MATLAB lub Python/MNE). Szczegółowe omówienie budowy i zasady działania aparatury oraz procedury jej przygotowania stanowi przedmiot zajęć 2.
+
+\section{Przebieg zajęć}
+\begin{center}
+\begin{tabular}{p{0.15\textwidth} p{0.80\textwidth}}
+\toprule
+\textbf{Czas} &
+\textbf{Aktywność}\\
+\midrule
+0--10 min & Wprowadzenie, omówienie celów zajęć i sylabusa laboratorium.\\
+10--30 min & Wykład: historia EEG, neurofizjologiczne źródła sygnału, pasma częstotliwości.\\
+30--50 min & Wykład: strukturalne i funkcjonalne obszary mózgu a topografia zapisu EEG, przewodnictwo objętościowe.\\
+50--60 min & Przerwa.\\
+60--80 min & Wykład: zastosowania EEG w zaburzeniach psychicznych i funkcjonowaniu poznawczym.\\
+80--105 min & Praca w grupach: analiza fragmentów opublikowanych badań EEG (zadanie 1) i mapowanie płat--funkcja--pasmo (zadanie 2).\\
+105--115 min & Krótka prezentacja wniosków grup i dyskusja.\\
+115--120 min & Podsumowanie, zapowiedź kolejnych zajęć (sprzęt i procedura badania).\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Zadania do wykonania}
+\begin{enumerate}[label=\textbf{Zadanie \arabic*.}, leftmargin=2.7cm]
+  \item W grupach 3--4-osobowych przeanalizujcie przydzielony przez prowadzącego artykuł naukowy wykorzystujący EEG (np. w kontekście ADHD, schizofrenii lub uwagi). Zidentyfikujcie: cel badania, badane pasmo/miary, wnioski kliniczne.
+  \item Na schemacie rozmieszczenia elektrod 10--20 zaznaczcie i podpiszcie granice czterech głównych płatów mózgu, a dla każdego obszaru wskażcie jedną typową funkcję poznawczą oraz jedno dominujące pasmo/zjawisko EEG z nim związane.
+  \item Przygotujcie 3-minutową prezentację ustną podsumowującą analizowany artykuł (zadanie 1), ze wskazaniem mocnych i słabych stron metodologicznych.
+  \item Indywidualnie: sporządźcie tabelę porównawczą pięciu pasm częstotliwości EEG wraz z przykładami zastosowań klinicznych (do oddania na kolejnych zajęciach).
+\end{enumerate}
+
+\section{Kryteria zaliczenia ćwiczenia}
+Aktywny udział w dyskusji grupowej i poprawność mapowania płat--funkcja--pasmo (40\%), poprawność merytoryczna prezentacji artykułu (30\%), oddana tabela porównawcza pasm (30\%).
+
+\section{Pytania kontrolne}
+\begin{enumerate}[nosep]
+  \item Dlaczego pojedynczy potencjał czynnościowy neuronu nie jest widoczny w zapisie EEG?
+  \item Jakie znaczenie ma organizacja \emph{open field} neuronów piramidowych dla powstawania sygnału EEG?
+  \item Na czym polega zjawisko przewodnictwa objętościowego i jakie ma konsekwencje dla interpretacji topografii EEG?
+  \item Jaka struktura mózgowa jest głównym generatorem dominującego rytmu alfa przy zamkniętych oczach?
+  \item Podaj przykład nieprawidłowości EEG charakterystycznej dla schizofrenii oraz dla otępienia.
+\end{enumerate}
+
+\section{Literatura}
+\begin{enumerate}[nosep]
+  \item Szumska, I. (2019). \emph{Neurofizjologia i neuropsychologia -- skrypt dla studentów AEH}. Wydawnictwo AEH.
+  \item Kalat, J. W. (2019). \emph{Biological Psychology}. Cengage Learning.
+  \item Biasiucci, A., Franceschiello, B., \& Murray, M. M. (2019). Electroencephalography. \emph{Current Biology, 29}(3), R80--R85.
+\end{enumerate}
+
+\end{document}

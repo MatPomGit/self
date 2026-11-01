@@ -1,0 +1,110 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage{lmodern}
+\usepackage[margin=2.3cm]{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\definecolor{navy}{RGB}{27,42,86}
+\definecolor{lgray}{RGB}{240,240,244}
+
+\titleformat{\section}{\large\bfseries\color{navy}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\bfseries\color{navy}}{\thesubsection.}{0.5em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.6pt}
+\fancyhead[L]{\small Neurofizjologia i pomiar EEG}
+\fancyhead[R]{\small Instrukcja laboratoryjna nr 2}
+\fancyfoot[C]{\small\thepage}
+
+\newcommand{\infobox}[1]{%
+  \par\noindent\colorbox{lgray}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{2pt}#1\vspace{2pt}}}\par\vspace{4pt}}
+
+\title{\vspace{-1.5cm}\textbf{\color{navy}Instrukcja laboratoryjna nr 2}\\[4pt]
+\Large Sprzęt do badań EEG i procedura przygotowania rejestracji}
+\author{Neurofizjologia i pomiar EEG\\ Psychologia, studia II stopnia --- specjalność neuropsychologia kliniczna}
+\date{Czas trwania zajęć: 120 minut}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\section{Cele zajęć}
+\begin{itemize}[nosep]
+  \item Zapoznanie z rodzajami elektrod i czepków EEG oraz zasadą działania wzmacniacza sygnału.
+  \item Nauka prawidłowego przygotowania stanowiska badawczego zgodnie z systemem 10--20.
+  \item Ćwiczenie procedury zakładania czepka i osiągania niskiej impedancji elektrod.
+  \item Kształtowanie właściwego kontaktu z osobą badaną podczas przygotowania do badania.
+\end{itemize}
+
+\section{Wprowadzenie teoretyczne}
+
+\subsection{Rodzaje elektrod}
+\begin{itemize}[nosep]
+  \item \textbf{Elektrody mokre (żelowe/pastowe)} -- Ag/AgCl, wymagają żelu przewodzącego; wysoka jakość sygnału, niska impedancja (docelowo $<5$--$10\,\text{k}\Omega$), czasochłonne przygotowanie.
+  \item \textbf{Elektrody suche} -- brak konieczności aplikacji żelu, szybsze zakładanie, wyższa i mniej stabilna impedancja, częściej stosowane w rozwiązaniach mobilnych/konsumenckich.
+  \item \textbf{Elektrody aktywne vs. pasywne} -- elektrody aktywne zawierają wstępny wzmacniacz przy samej elektrodzie, co zwiększa odporność na zakłócenia przy dłuższych kablach.
+\end{itemize}
+
+\subsection{System rozmieszczenia elektrod 10--20}
+Międzynarodowy system 10--20 (Jasper, 1958) definiuje pozycje elektrod na podstawie procentowych odległości (10\% i 20\%) między punktami anatomicznymi: nasion, inion oraz punktami przedusznymi. Litery oznaczają okolicę (Fp -- czołowo-biegunowa, F -- czołowa, C -- centralna, P -- ciemieniowa, O -- potyliczna, T -- skroniowa), a cyfry -- stronę (parzyste: prawa, nieparzyste: lewa, z: linia środkowa). Zagęszczone warianty (10--10, 10--5) stosuje się przy większej liczbie kanałów.
+
+\subsection{Wzmacniacz sygnału i impedancja}
+Wzmacniacz EEG podnosi amplitudę mikrowoltowego sygnału (rzędu 10--100 $\mu$V) do poziomu umożliwiającego digitalizację, jednocześnie odfiltrowując zakłócenia sieciowe (50 Hz) dzięki wzmocnieniu różnicowemu (\emph{common mode rejection}). Wysoka i niejednorodna impedancja między elektrodami zniekształca sygnał i zwiększa podatność na artefakty -- dlatego kontrola impedancji jest obowiązkowym etapem przed rejestracją.
+
+\infobox{\textbf{Zasada bezpieczeństwa i komfortu:} Osoba badana musi być informowana o każdym etapie przygotowania, mieć możliwość przerwania procedury oraz komfortowe warunki (temperatura, oświetlenie, brak pośpiechu).}
+
+\section{Sprzęt i materiały}
+Czepek EEG (rozmiary S/M/L), zestaw elektrod Ag/AgCl, żel przewodzący, strzykawki do aplikacji żelu, taśma miernicza, wzmacniacz EEG, oprogramowanie do kontroli impedancji, ręczniki papierowe, spirytus do oczyszczenia skóry.
+
+\section{Przebieg zajęć (harmonogram, 120 min)}
+\begin{center}
+\begin{tabular}{@{}p{2.3cm}p{11.7cm}@{}}
+\toprule
+\textbf{Czas} & \textbf{Aktywność}\\
+\midrule
+0--10 min & Powtórzenie materiału z zajęć 1, wprowadzenie do systemu 10--20.\\
+10--30 min & Prezentacja rodzajów elektrod, czepków i wzmacniacza -- pokaz sprzętu.\\
+30--45 min & Demonstracja prowadzącego: pomiar głowy, dobór rozmiaru czepka, zakładanie czepka.\\
+45--55 min & Przerwa.\\
+55--90 min & Ćwiczenia praktyczne w parach: zakładanie czepka i aplikacja żelu (zadanie 1).\\
+90--110 min & Kontrola impedancji i korekta przygotowania elektrod (zadanie 2).\\
+110--120 min & Zdjęcie czepka, omówienie trudności, podsumowanie.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Zadania do wykonania}
+\begin{enumerate}[label=\textbf{Zadanie \arabic*.}, leftmargin=2.7cm]
+  \item W parach: zmierzcie obwód głowy oraz odległość nasion--inion partnera/partnerki, dobierzcie odpowiedni rozmiar czepka i prawidłowo go załóżcie, lokalizując punkt Cz.
+  \item Zaaplikujcie żel przewodzący do min. 8 wskazanych przez prowadzącego elektrod, a następnie zmierzcie impedancję każdej z nich, dążąc do wartości poniżej progu ustalonego przez prowadzącego.
+  \item Sporządźcie krótki protokół przygotowania badania (checklist) zawierający wszystkie kroki procedury wraz z potencjalnymi źródłami błędu.
+\end{enumerate}
+
+\section{Kryteria zaliczenia ćwiczenia}
+Poprawność wykonania procedury zakładania czepka i lokalizacji elektrod (40\%), osiągnięta jakość impedancji (30\%), jakość merytoryczna protokołu/checklisty (30\%).
+
+\section{Pytania kontrolne}
+\begin{enumerate}[nosep]
+  \item Na czym polega procentowy podział głowy w systemie 10--20?
+  \item Dlaczego wysoka impedancja pogarsza jakość sygnału EEG?
+  \item Jakie są zalety i wady elektrod suchych względem mokrych?
+  \item Jakie elementy procedury służą zapewnieniu komfortu osoby badanej?
+\end{enumerate}
+
+\section{Literatura}
+\begin{enumerate}[nosep]
+  \item Szumska, I. (2019). \emph{Neurofizjologia i neuropsychologia -- skrypt dla studentów AEH}. Wydawnictwo AEH.
+  \item Biasiucci, A., Franceschiello, B., \& Murray, M. M. (2019). Electroencephalography. \emph{Current Biology, 29}(3), R80--R85.
+  \item Kalat, J. W. (2019). \emph{Biological Psychology}. Cengage Learning.
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,126 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage{lmodern}
+\usepackage[margin=2.3cm]{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\definecolor{navy}{RGB}{27,42,86}
+\definecolor{lgray}{RGB}{240,240,244}
+
+\titleformat{\section}{\large\bfseries\color{navy}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\bfseries\color{navy}}{\thesubsection.}{0.5em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.6pt}
+\fancyhead[L]{\small Neurofizjologia i pomiar EEG}
+\fancyhead[R]{\small Instrukcja laboratoryjna nr 5}
+\fancyfoot[C]{\small\thepage}
+
+\newcommand{\infobox}[1]{%
+  \par\noindent\colorbox{lgray}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{2pt}#1\vspace{2pt}}}\par\vspace{4pt}}
+
+\title{\vspace{-1.5cm}\textbf{\color{navy}Instrukcja laboratoryjna nr 5}\\[4pt]
+\Large Metodologia badań psychofizjologicznych III: pełny proces analizy danych EEG -- od sygnału surowego do wyników}
+\author{Neurofizjologia i pomiar EEG\\ Psychologia, studia II stopnia --- specjalność neuropsychologia kliniczna}
+\date{Czas trwania zajęć: 120 minut}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\section{Cele zajęć}
+\begin{itemize}[nosep]
+  \item Poznanie pełnego procesu (\emph{pipeline}) przetwarzania danych EEG od rejestracji do gotowych wyników.
+  \item Nauka identyfikacji i usuwania typowych artefaktów (mrugnięcia, ruchy gałek ocznych, napięcie mięśniowe).
+  \item Zapoznanie z filtrowaniem sygnału i metodą analizy składowych niezależnych (ICA).
+  \item Praktyczne przeprowadzenie kompletnej ścieżki obróbki danych na przykładowym zbiorze.
+\end{itemize}
+
+\section{Wprowadzenie teoretyczne}
+
+\subsection{Etapy przetwarzania danych EEG}
+\begin{enumerate}[nosep]
+  \item \textbf{Import i inspekcja wzrokowa} surowego zapisu.
+  \item \textbf{Filtrowanie} -- filtr górnoprzepustowy (usuwa dryf wolnofalowy, np. $<$0,1--0,5 Hz), dolnoprzepustowy (ogranicza szum wysokoczęstotliwościowy) i filtr notch (usuwa zakłócenia sieciowe 50 Hz).
+  \item \textbf{Ponowne odniesienie (re-referencing)}, np. do średniej z elektrod (\emph{average reference}) lub elektrod wyrostka sutkowatego.
+  \item \textbf{Detekcja i korekta artefaktów} -- manualna lub automatyczna (progowanie amplitudy, ICA).
+  \item \textbf{Segmentacja} danych na epoki związane ze zdarzeniami.
+  \item \textbf{Odrzucanie epok} zawierających artefakty rezydualne (\emph{artifact rejection}).
+  \item \textbf{Uśrednianie/agregacja} i analiza statystyczna wyników.
+\end{enumerate}
+
+\subsection{Typowe artefakty i ich charakterystyka}
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Artefakt} & \textbf{Źródło} & \textbf{Charakterystyka w zapisie}\\
+\midrule
+Mrugnięcia & Ruch powiek & Duża amplituda, kanały czołowe (Fp1/Fp2)\\
+Ruchy gałek ocznych & Aktywność mięśni okoruchowych & Wolna fala, kanały czołowe, przeciwna polaryzacja\\
+EMG (napięcie mięśni) & Skurcze mięśni czaszki/karku & Wysoka częstotliwość, nieregularne skoki\\
+Artefakt sieciowy & Zakłócenia elektryczne 50 Hz & Wąskopasmowy pik na 50 Hz\\
+Artefakt ruchowy & Ruch elektrody/kabla & Nagłe, skokowe zmiany amplitudy\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Analiza składowych niezależnych (ICA)}
+\textbf{ICA (Independent Component Analysis)} rozkłada wielokanałowy sygnał EEG na statystycznie niezależne składowe, z których część odpowiada aktywności neuronalnej, a część -- artefaktom (np. gałkoocznym, mięśniowym) o charakterystycznym rozkładzie przestrzennym i widmowym. Identyfikacja i usunięcie składowych artefaktowych, a następnie rekonstrukcja sygnału bez nich, pozwala zachować dane z okresów zawierających mrugnięcia zamiast je odrzucać.
+
+\infobox{\textbf{Zasada dobrej praktyki:} Każdy krok pipeline'u powinien być udokumentowany (parametry filtrów, kryteria odrzucania epok, liczba usuniętych składowych ICA) w celu zapewnienia powtarzalności analizy.}
+
+\section{Sprzęt i oprogramowanie}
+Środowisko EEGLAB/MATLAB lub MNE-Python, przykładowy surowy zbiór danych EEG (paradygmat oddball z zajęć 3), skrypt startowy pipeline'u udostępniony przez prowadzącego.
+
+\section{Przebieg zajęć (harmonogram, 120 min)}
+\begin{center}
+\begin{tabular}{@{}p{2.3cm}p{11.7cm}@{}}
+\toprule
+\textbf{Czas} & \textbf{Aktywność}\\
+\midrule
+0--15 min & Wykład: etapy pipeline'u, przegląd typowych artefaktów.\\
+15--30 min & Wykład: zasada działania ICA i jej zastosowanie do korekcji artefaktów.\\
+30--50 min & Demonstracja: filtrowanie, re-referencing i wizualna inspekcja danych.\\
+50--60 min & Przerwa.\\
+60--85 min & Ćwiczenie praktyczne: identyfikacja artefaktów i uruchomienie ICA (zadanie 1).\\
+85--105 min & Ćwiczenie praktyczne: odrzucanie składowych artefaktowych i rekonstrukcja sygnału, segmentacja epok (zadanie 2).\\
+105--120 min & Krytyczna ocena jakości uzyskanych danych, dyskusja, podsumowanie.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Zadania do wykonania}
+\begin{enumerate}[label=\textbf{Zadanie \arabic*.}, leftmargin=2.7cm]
+  \item Na udostępnionych surowych danych zastosujcie filtr górno- i dolnoprzepustowy oraz filtr notch, a następnie wykonajcie wizualną inspekcję i oznaczcie widoczne artefakty (typ, kanał, przybliżony czas wystąpienia).
+  \item Uruchomcie dekompozycję ICA, zidentyfikujcie co najmniej dwie składowe artefaktowe (na podstawie topografii i widma) i usuńcie je, rekonstruując oczyszczony sygnał.
+  \item Wykonajcie segmentację oczyszczonych danych i porównajcie liczbę odrzuconych epok przed i po korekcji ICA; sformułujcie krótki wniosek o jakości danych.
+\end{enumerate}
+
+\section{Kryteria zaliczenia ćwiczenia}
+Poprawność identyfikacji artefaktów (30\%), poprawność wykonania i interpretacji ICA (40\%), jakość wniosków końcowych (30\%).
+
+\section{Pytania kontrolne}
+\begin{enumerate}[nosep]
+  \item Jaką funkcję pełni filtr górnoprzepustowy w przetwarzaniu wstępnym EEG?
+  \item Jak odróżnić w zapisie EEG artefakt mrugnięcia od ruchu gałek ocznych?
+  \item Na czym polega przewaga korekcji ICA nad prostym odrzucaniem epok z artefaktami?
+  \item Dlaczego dokumentowanie parametrów pipeline'u jest istotne metodologicznie?
+\end{enumerate}
+
+\section{Literatura}
+\begin{enumerate}[nosep]
+  \item Chaddad, A., Wu, Y., Kateb, R., \& Bouridane, A. (2023). Electroencephalography signal processing. \emph{Sensors, 23}(14), 6434.
+  \item Biasiucci, A., Franceschiello, B., \& Murray, M. M. (2019). Electroencephalography. \emph{Current Biology, 29}(3), R80--R85.
+  \item Szumska, I. (2019). \emph{Neurofizjologia i neuropsychologia -- skrypt dla studentów AEH}. Wydawnictwo AEH.
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,118 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage{lmodern}
+\usepackage[margin=2.3cm]{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\definecolor{navy}{RGB}{27,42,86}
+\definecolor{lgray}{RGB}{240,240,244}
+
+\titleformat{\section}{\large\bfseries\color{navy}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\bfseries\color{navy}}{\thesubsection.}{0.5em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.6pt}
+\fancyhead[L]{\small Neurofizjologia i pomiar EEG}
+\fancyhead[R]{\small Instrukcja laboratoryjna nr 6}
+\fancyfoot[C]{\small\thepage}
+
+\newcommand{\infobox}[1]{%
+  \par\noindent\colorbox{lgray}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{2pt}#1\vspace{2pt}}}\par\vspace{4pt}}
+
+\title{\vspace{-1.5cm}\textbf{\color{navy}Instrukcja laboratoryjna nr 6}\\[4pt]
+\Large Inne metody psychofizjologiczne: EMG, EOG, EKG, GSR i eyetracking}
+\author{Neurofizjologia i pomiar EEG\\ Psychologia, studia II stopnia --- specjalność neuropsychologia kliniczna}
+\date{Czas trwania zajęć: 120 minut}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\section{Cele zajęć}
+\begin{itemize}[nosep]
+  \item Zapoznanie z zasadą działania i zastosowaniem elektromiografii (EMG), elektrookulografii (EOG), elektrokardiografii (EKG), odpowiedzi skórno-galwanicznej (GSR/EDA) oraz eyetrackingu.
+  \item Wskazanie komplementarności tych metod względem EEG w badaniach psychologicznych.
+  \item Praktyczne wykonanie pomiarów wybranych sygnałów psychofizjologicznych.
+  \item Interpretacja uzyskanych danych w kontekście stanów emocjonalnych i poznawczych.
+\end{itemize}
+
+\section{Wprowadzenie teoretyczne}
+
+\subsection{Przegląd metod}
+\begin{center}
+\begin{tabular}{@{}p{1.6cm}p{5.3cm}p{6.9cm}@{}}
+\toprule
+\textbf{Metoda} & \textbf{Co mierzy} & \textbf{Typowe zastosowanie w psychologii}\\
+\midrule
+EMG & Aktywność elektryczną mięśni szkieletowych (potencjały motoryczne) & Ocena napięcia mięśniowego, mikroekspresje mimiczne (m. \emph{corrugator}, \emph{zygomaticus}), reakcje afektywne\\
+EOG & Różnicę potencjałów rogówkowo-siatkówkowych związaną z ruchem gałki ocznej & Rejestracja sakkad i mrugnięć; korekcja artefaktów w EEG\\
+EKG & Aktywność elektryczną serca (depolaryzacja/repolaryzacja) & Zmienność rytmu zatokowego (HRV) jako wskaźnik regulacji autonomicznej i stresu\\
+GSR/EDA & Przewodnictwo skóry zależne od aktywności gruczołów potowych & Pobudzenie emocjonalne (\emph{arousal}), reakcja orientacyjna, wykrywacz kłamstw\\
+Eyetracker & Kierunek spojrzenia, fiksacje, sakkady, rozszerzenie źrenicy & Uwaga wzrokowa, obciążenie poznawcze, procesy czytania i decyzji\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Wspólne podłoże: układ autonomiczny}
+EKG i GSR odzwierciedlają aktywność \textbf{autonomicznego układu nerwowego} -- EKG (a zwłaszcza HRV) jest czuła na balans współczulno--przywspółczulny, natomiast GSR jest miarą czysto współczulną (gruczoły potowe unerwione wyłącznie współczulnie), co czyni ją szczególnie czułym, choć niespecyficznym wskaźnikiem pobudzenia emocjonalnego.
+
+\subsection{Multimodalne badania psychofizjologiczne}
+Łączenie EEG z EOG, EMG, EKG, GSR lub eyetrackingiem pozwala na: (1) korekcję artefaktów okoruchowych w EEG za pomocą równoległego zapisu EOG, (2) triangulację wskaźników emocji (komponent centralny -- EEG/asymetria czołowa; obwodowy -- GSR/EKG; behawioralny -- EMG twarzy), (3) precyzyjne wiązanie zapisu neuronalnego z momentem fiksacji wzroku w badaniach uwagi wzrokowej.
+
+\infobox{\textbf{Do zapamiętania:} Żadna pojedyncza miara psychofizjologiczna nie jest jednoznacznym \guillemotleft odczytem\guillemotright{} stanu psychicznego -- interpretacja wymaga zawsze kontekstu zadania i triangulacji z innymi wskaźnikami.}
+
+\section{Sprzęt i oprogramowanie}
+Zestaw czujników EMG (elektrody powierzchniowe), EOG, EKG (elektrody kończynowe/klatkowe), czujnik GSR (elektrody palcowe), eyetracker stacjonarny lub zintegrowany z monitorem, oprogramowanie do akwizycji wieloskładnikowej (polygraf/BIOPAC lub równoważne).
+
+\section{Przebieg zajęć (harmonogram, 120 min)}
+\begin{center}
+\begin{tabular}{@{}p{2.3cm}p{11.7cm}@{}}
+\toprule
+\textbf{Czas} & \textbf{Aktywność}\\
+\midrule
+0--20 min & Wykład: przegląd metod EMG, EOG, EKG, GSR, eyetracking -- zasady i zastosowania.\\
+20--35 min & Wykład: podłoże autonomiczne GSR i EKG, koncepcja badań multimodalnych.\\
+35--50 min & Demonstracja: podłączenie czujników EMG, GSR i EKG na ochotniku.\\
+50--60 min & Przerwa.\\
+60--85 min & Ćwiczenie w grupach: rejestracja GSR i EMG twarzy w odpowiedzi na bodźce emocjonalne (zadanie 1).\\
+85--105 min & Ćwiczenie w grupach: krótkie zadanie z eyetrackerem -- mapa fiksacji na materiale wizualnym (zadanie 2).\\
+105--120 min & Prezentacja wyników grup, dyskusja i podsumowanie całego cyklu laboratoriów.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Zadania do wykonania}
+\begin{enumerate}[label=\textbf{Zadanie \arabic*.}, leftmargin=2.7cm]
+  \item Podłączcie czujniki GSR oraz EMG (mięsień \emph{corrugator supercilii}) i zarejestrujcie reakcje osoby badanej na sekwencję 5 obrazów o zróżnicowanej walencji emocjonalnej (przyjemne/neutralne/nieprzyjemne). Odnotujcie amplitudę odpowiedzi GSR i aktywność EMG dla każdego obrazu.
+  \item Przeprowadźcie krótkie badanie eyetrackingowe (materiał wizualny wskazany przez prowadzącego) i wygenerujcie mapę cieplną fiksacji oraz ścieżkę skanowania (\emph{scanpath}).
+  \item Przygotujcie wspólne, krótkie podsumowanie porównujące wzorce reakcji fizjologicznych (GSR/EMG) z rozkładem uwagi wzrokowej (eyetracking) dla tych samych bodźców.
+\end{enumerate}
+
+\section{Kryteria zaliczenia ćwiczenia}
+Poprawność techniczna rejestracji GSR/EMG (30\%), poprawność wykonania badania eyetrackingowego (30\%), jakość interpretacyjna podsumowania łączącego obie metody (40\%).
+
+\section{Pytania kontrolne}
+\begin{enumerate}[nosep]
+  \item Dlaczego GSR jest uznawana za czysto \guillemotleft współczulny\guillemotright{} wskaźnik pobudzenia?
+  \item W jaki sposób zapis EOG może zostać wykorzystany do korekcji artefaktów w danych EEG?
+  \item Jakie miary dostarcza eyetracking i co mówią one o procesach poznawczych?
+  \item Podaj przykład badania, w którym uzasadnione byłoby jednoczesne rejestrowanie EEG i GSR.
+\end{enumerate}
+
+\section{Literatura}
+\begin{enumerate}[nosep]
+  \item Kalat, J. W. (2019). \emph{Biological Psychology}. Cengage Learning.
+  \item Szumska, I. (2019). \emph{Neurofizjologia i neuropsychologia -- skrypt dla studentów AEH}. Wydawnictwo AEH.
+  \item Biasiucci, A., Franceschiello, B., \& Murray, M. M. (2019). Electroencephalography. \emph{Current Biology, 29}(3), R80--R85.
+\end{enumerate}
+
+\end{document}

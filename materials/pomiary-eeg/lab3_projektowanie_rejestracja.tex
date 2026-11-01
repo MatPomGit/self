@@ -1,0 +1,110 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage{lmodern}
+\usepackage[margin=2.3cm]{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\definecolor{navy}{RGB}{27,42,86}
+\definecolor{lgray}{RGB}{240,240,244}
+
+\titleformat{\section}{\large\bfseries\color{navy}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\bfseries\color{navy}}{\thesubsection.}{0.5em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.6pt}
+\fancyhead[L]{\small Neurofizjologia i pomiar EEG}
+\fancyhead[R]{\small Instrukcja laboratoryjna nr 3}
+\fancyfoot[C]{\small\thepage}
+
+\newcommand{\infobox}[1]{%
+  \par\noindent\colorbox{lgray}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{2pt}#1\vspace{2pt}}}\par\vspace{4pt}}
+
+\title{\vspace{-1.5cm}\textbf{\color{navy}Instrukcja laboratoryjna nr 3}\\[4pt]
+\Large Projektowanie eksperymentu EEG i rejestracja danych}
+\author{Neurofizjologia i pomiar EEG\\ Psychologia, studia II stopnia --- specjalność neuropsychologia kliniczna}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\section{Cele zajęć}
+\begin{itemize}[nosep]
+  \item Nauka projektowania paradygmatu eksperymentalnego adekwatnego do pytania badawczego EEG.
+  \item Zapoznanie z zasadami doboru i synchronizacji bodźców (znaczniki/triggery) z zapisem EEG.
+  \item Ćwiczenie praktycznego przeprowadzenia rejestracji EEG w warunkach laboratoryjnych.
+  \item Utrwalenie zasad prawidłowego kontaktu z osobą badaną w trakcie właściwego badania.
+\end{itemize}
+
+\section{Wprowadzenie teoretyczne}
+
+\subsection{Rodzaje paradygmatów badawczych w EEG}
+\begin{itemize}[nosep]
+  \item \textbf{Rejestracja spoczynkowa (resting-state)} -- z oczami otwartymi (EO) i zamkniętymi (EC), 3--5 minut na warunek; baza do analiz mocy widmowej.
+  \item \textbf{Paradygmaty związane ze zdarzeniami (event-related)} -- prezentacja bodźców z rejestrowanymi znacznikami czasowymi, podstawa analizy potencjałów wywołanych (ERP).
+  \item \textbf{Paradygmaty typu oddball} -- rzadkie bodźce docelowe wśród częstych standardowych, stosowane do badania komponentu P300.
+  \item \textbf{Zadania ciągłe} -- np. zadania Go/No-Go, Stroop -- łączą pomiar behawioralny (czas reakcji, poprawność) z zapisem EEG.
+\end{itemize}
+
+\subsection{Synchronizacja bodźców i znaczników (triggerów)}
+Precyzyjna analiza ERP wymaga dokładnego, submilisekundowego znakowania momentu prezentacji bodźca w strumieniu EEG. Realizuje się to poprzez wysyłanie kodów cyfrowych (\emph{event markers}) z komputera prezentującego bodźce do wzmacniacza EEG, zwykle przez port równoległy/USB lub interfejs sieciowy dedykowanego oprogramowania. Błędy synchronizacji (jitter) obniżają precyzję pomiaru latencji komponentów ERP.
+
+\subsection{Kontrola zmiennych zakłócających}
+Projekt eksperymentu EEG musi minimalizować artefakty przewidywalne już na etapie planowania: ruchy gałek ocznych i mrugnięcia (instrukcja dot. fiksacji wzroku), napięcie mięśniowe (wygodna pozycja, oparcie głowy), zakłócenia elektryczne otoczenia (ekranowanie, uziemienie sprzętu).
+
+\infobox{\textbf{Zasada etyczna:} Osoba badana musi wyrazić świadomą zgodę, być poinformowana o przebiegu badania i mieć prawo do rezygnacji na każdym etapie bez podawania przyczyny.}
+
+\section{Sprzęt i oprogramowanie}
+Stanowisko EEG z poprzednich zajęć, komputer do prezentacji bodźców (np. PsychoPy/E-Prime), kabel/interfejs do wysyłania znaczników, gotowy skrypt prostego paradygmatu oddball lub zadania Go/No-Go.
+
+\section{Przebieg zajęć (harmonogram, 120 min)}
+\begin{center}
+\begin{tabular}{@{}p{2.3cm}p{11.7cm}@{}}
+\toprule
+\textbf{Czas} & \textbf{Aktywność}\\
+\midrule
+0--15 min & Wykład: rodzaje paradygmatów, znaczniki czasowe, kontrola artefaktów.\\
+15--35 min & Prezentacja przykładowego skryptu paradygmatu oddball i konfiguracji znaczników.\\
+35--55 min & Praca w grupach: projektowanie własnego prostego paradygmatu (zadanie 1).\\
+55--65 min & Przerwa.\\
+65--90 min & Przygotowanie osoby badanej (czepek, impedancja) i próbna rejestracja EEG (zadanie 2).\\
+90--115 min & Właściwa rejestracja krótkiego paradygmatu w rolach naprzemiennych badacz/osoba badana (zadanie 3).\\
+115--120 min & Zapis i zabezpieczenie danych, podsumowanie.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Zadania do wykonania}
+\begin{enumerate}[label=\textbf{Zadanie \arabic*.}, leftmargin=2.7cm]
+  \item W grupach zaprojektujcie krótki paradygmat oddball (bodźce standardowe 80\%, docelowe 20\%) wraz z instrukcją dla osoby badanej i schematem kodowania znaczników.
+  \item Przygotujcie stanowisko badawcze zgodnie z procedurą z zajęć 2 i wykonajcie 2-minutową rejestrację próbną w celu weryfikacji jakości sygnału i poprawności znaczników.
+  \item Przeprowadźcie właściwą, ok. 8-minutową rejestrację zaprojektowanego paradygmatu, zamieniając się rolami badacza i osoby badanej.
+\end{enumerate}
+
+\section{Kryteria zaliczenia ćwiczenia}
+Poprawność projektu paradygmatu (30\%), jakość techniczna przeprowadzonej rejestracji, w tym zsynchronizowanie znaczników (40\%), właściwy kontakt z osobą badaną (30\%).
+
+\section{Pytania kontrolne}
+\begin{enumerate}[nosep]
+  \item Czym różni się paradygmat spoczynkowy od paradygmatu związanego ze zdarzeniami?
+  \item Dlaczego precyzja znaczników czasowych jest krytyczna dla analizy ERP?
+  \item Jakie źródła artefaktów można ograniczyć już na etapie projektowania badania?
+  \item Jakie elementy powinna zawierać instrukcja dla osoby badanej w zadaniu oddball?
+\end{enumerate}
+
+\section{Literatura}
+\begin{enumerate}[nosep]
+  \item Szumska, I. (2019). \emph{Neurofizjologia i neuropsychologia -- skrypt dla studentów AEH}. Wydawnictwo AEH.
+  \item Chaddad, A., Wu, Y., Kateb, R., \& Bouridane, A. (2023). Electroencephalography signal processing. \emph{Sensors, 23}(14), 6434.
+  \item Kalat, J. W. (2019). \emph{Biological Psychology}. Cengage Learning.
+\end{enumerate}
+
+\end{document}

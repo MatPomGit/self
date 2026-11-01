@@ -1,0 +1,121 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage{lmodern}
+\usepackage[margin=2.3cm]{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\definecolor{navy}{RGB}{27,42,86}
+\definecolor{lgray}{RGB}{240,240,244}
+
+\titleformat{\section}{\large\bfseries\color{navy}}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\bfseries\color{navy}}{\thesubsection.}{0.5em}{}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.6pt}
+\fancyhead[L]{\small Neurofizjologia i pomiar EEG}
+\fancyhead[R]{\small Instrukcja laboratoryjna nr 4}
+\fancyfoot[C]{\small\thepage}
+
+\newcommand{\infobox}[1]{%
+  \par\noindent\colorbox{lgray}{\parbox{\dimexpr\linewidth-2\fboxsep}{\vspace{2pt}#1\vspace{2pt}}}\par\vspace{4pt}}
+
+\title{\vspace{-1.5cm}\textbf{\color{navy}Instrukcja laboratoryjna nr 4}\\[4pt]
+\Large Metodologia badań psychofizjologicznych II: analiza potencjałów wywołanych i analiza częstotliwościowa}
+\author{Neurofizjologia i pomiar EEG\\ Psychologia, studia II stopnia --- specjalność neuropsychologia kliniczna}
+\date{Czas trwania zajęć: 120 minut}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\section{Cele zajęć}
+\begin{itemize}[nosep]
+  \item Wprowadzenie do metody potencjałów wywołanych (ERP) -- zasady segmentacji i uśredniania.
+  \item Zapoznanie z głównymi komponentami ERP i ich interpretacją poznawczą.
+  \item Wprowadzenie do analizy częstotliwościowej (widmowej) sygnału EEG -- transformata Fouriera i moc widmowa.
+  \item Praktyczne wykonanie podstawowej analizy ERP oraz analizy widmowej na przykładowych danych.
+\end{itemize}
+
+\section{Wprowadzenie teoretyczne}
+
+\subsection{Metoda potencjałów wywołanych (ERP)}
+Pojedyncza odpowiedź mózgu na bodziec jest zwykle niewidoczna na tle spontanicznej aktywności EEG (stosunek sygnału do szumu jest niski). \textbf{Uśrednianie} wielu segmentów (\emph{epok}) zsynchronizowanych względem momentu prezentacji bodźca eliminuje aktywność niezwiązaną czasowo z bodźcem, uwydatniając stały w czasie komponent odpowiedzi -- potencjał wywołany.
+
+\subsection{Główne komponenty ERP}
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{Komponent} & \textbf{Latencja} & \textbf{Interpretacja poznawcza}\\
+\midrule
+N100/P100 & 80--130 ms & Wczesne przetwarzanie sensoryczne, uwaga\\
+N170 & ok. 170 ms & Przetwarzanie twarzy\\
+N200 & 200--350 ms & Detekcja niezgodności, kontrola konfliktu\\
+P300 (P3) & 250--500 ms & Ewaluacja bodźca, alokacja uwagi, aktualizacja pamięci\\
+N400 & ok. 400 ms & Przetwarzanie semantyczne, niezgodność znaczeniowa\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Analiza czasowo-częstotliwościowa i moc widmowa}
+Podczas gdy ERP opisuje uśrednioną, zablokowaną fazowo odpowiedź na bodziec, \textbf{analiza widmowa} (np. transformata Fouriera, FFT) rozkłada sygnał ciągły na składowe częstotliwościowe, ujawniając moc poszczególnych pasm (delta--gamma) niezależnie od precyzyjnego zablokowania w fazie z bodźcem. \textbf{Analiza czasowo-częstotliwościowa} (np. transformata falkowa) łączy obie perspektywy, pokazując zmiany mocy widmowej w czasie względem zdarzenia (np. desynchronizację/synchronizację związaną ze zdarzeniem, ERD/ERS).
+
+\subsection{Podstawy analizy źródłowej}
+Analiza źródłowa (\emph{source localization}) próbuje odtworzyć, w oparciu o rozkład potencjału na powierzchni skóry głowy i model przewodnictwa tkanek, przybliżoną lokalizację generatorów korowych sygnału (np. metody dipolowe, sLORETA). Jest to zagadnienie odwrotne (\emph{inverse problem}) o niejednoznacznym rozwiązaniu, wymagające założeń upraszczających.
+
+\infobox{\textbf{Do zapamiętania:} ERP wymaga wielu powtórzeń tego samego typu bodźca (zwykle $\geq$30--50 epok na warunek) ze względu na niski stosunek sygnału do szumu pojedynczej próby.}
+
+\section{Sprzęt i oprogramowanie}
+Komputery z zainstalowanym środowiskiem do analizy EEG (np. EEGLAB/MATLAB lub MNE-Python), przykładowy zbiór danych z paradygmatu oddball zarejestrowany na poprzednich zajęciach lub udostępniony przez prowadzącego.
+
+\section{Przebieg zajęć (harmonogram, 120 min)}
+\begin{center}
+\begin{tabular}{@{}p{2.3cm}p{11.7cm}@{}}
+\toprule
+\textbf{Czas} & \textbf{Aktywność}\\
+\midrule
+0--20 min & Wykład: zasada uśredniania ERP, główne komponenty i ich interpretacja.\\
+20--35 min & Wykład: podstawy analizy widmowej i czasowo-częstotliwościowej, wprowadzenie do analizy źródłowej.\\
+35--55 min & Demonstracja: segmentacja danych, uśrednianie i wizualizacja ERP w oprogramowaniu.\\
+55--65 min & Przerwa.\\
+65--95 min & Ćwiczenie praktyczne: samodzielne wyznaczenie komponentu P300 na danych z zadania oddball (zadanie 1).\\
+95--115 min & Ćwiczenie praktyczne: obliczenie mocy widmowej pasm dla warunku EO/EC (zadanie 2).\\
+115--120 min & Dyskusja wyników, podsumowanie.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Zadania do wykonania}
+\begin{enumerate}[label=\textbf{Zadanie \arabic*.}, leftmargin=2.7cm]
+  \item Na udostępnionych danych z paradygmatu oddball wykonajcie segmentację epok, uśrednienie osobno dla bodźców standardowych i docelowych oraz zidentyfikujcie amplitudę i latencję komponentu P300 w elektrodzie Pz.
+  \item Obliczcie i porównajcie moc widmową pasma alfa dla warunków EO i EC (efekt blokady alfa) na elektrodach potylicznych.
+  \item Sporządźcie krótkie sprawozdanie (0,5--1 strony) opisujące uzyskane wyniki i ich zgodność z oczekiwaniami teoretycznymi.
+\end{enumerate}
+
+\section{Kryteria zaliczenia ćwiczenia}
+Poprawność techniczna analizy ERP (35\%), poprawność analizy widmowej (35\%), jakość merytoryczna sprawozdania (30\%).
+
+\section{Pytania kontrolne}
+\begin{enumerate}[nosep]
+  \item Dlaczego pojedyncza próba nie pozwala na wiarygodne zidentyfikowanie komponentu ERP?
+  \item Jaką funkcję poznawczą odzwierciedla klasycznie komponent P300?
+  \item Czym różni się analiza widmowa od analizy czasowo-częstotliwościowej?
+  \item Na czym polega zagadnienie odwrotne w analizie źródłowej EEG?
+\end{enumerate}
+
+\section{Literatura}
+\begin{enumerate}[nosep]
+  \item Kalat, J. W. (2019). \emph{Biological Psychology}. Cengage Learning.
+  \item Chaddad, A., Wu, Y., Kateb, R., \& Bouridane, A. (2023). Electroencephalography signal processing. \emph{Sensors, 23}(14), 6434.
+  \item Biasiucci, A., Franceschiello, B., \& Murray, M. M. (2019). Electroencephalography. \emph{Current Biology, 29}(3), R80--R85.
+\end{enumerate}
+
+\end{document}
