@@ -102,6 +102,7 @@ class MaterialsTests(unittest.TestCase):
         html = (MATERIALS / "index.html").read_text(encoding="utf-8")
         titles = re.findall(r"<h4>([^<]+)</h4>", html)
         self.assertEqual(titles[:17], [
+            "Kto, co, jak",
             "Narzędzia dla programistów",
             "Programowanie aplikacji mobilnych",
             "Programowanie gier komputerowych",
@@ -117,7 +118,6 @@ class MaterialsTests(unittest.TestCase):
             "Diagnoza psychologiczna",
             "Nowoczesne technologie w psychologii",
             "Seminaria dyplomowe",
-            "Kto, co, jak",
             "Pozostałe",
         ])
         for selector in (
@@ -170,6 +170,8 @@ class MaterialsTests(unittest.TestCase):
         html = (MATERIALS / "index.html").read_text(encoding="utf-8")
         style = html.split("<style>", 1)[1].split("</style>", 1)[0]
         self.assertIn(".materials-grid{columns:4 260px;", style)
+        self.assertIn("@media(min-width:1450px){.materials-grid{columns:4 280px}}", style)
+        self.assertNotIn("columns:5", style)
         self.assertIn("break-inside:avoid", style)
         self.assertIn(".materials-columns{display:block}", style)
         self.assertIn("column-count:2;column-gap:4px;column-fill:balance", style)
