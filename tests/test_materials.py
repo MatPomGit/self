@@ -101,7 +101,7 @@ class MaterialsTests(unittest.TestCase):
         self.assertIn("--pptx:#9b4400", style)
         self.assertIn("--pptx:#f0a14a", style)
         self.assertIn('a[href$=".pptx" i]:visited{color:var(--pptx)}', style)
-        self.assertRegex(html, r'href="[^"]+\\.pptx"')
+        self.assertRegex(html, r'href="[^"]+\.pptx"')
 
     def test_compact_layout_uses_independent_columns(self):
         """Długie karty nie wymuszają pustej wysokości pozostałych."""
