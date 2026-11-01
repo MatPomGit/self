@@ -27,6 +27,32 @@ assert.equal(en.translate('kategorię'), 'category');
 assert.equal(en.translate('Dla studentów'), 'For students');
 assert.equal(pl.translate('Dla studentów'), 'Dla studentów');
 
+const lead = html.match(/<p class="lead">([^<]+)<\/p>/)[1].replace(/&nbsp;/g, '\u00a0');
+const role = html.match(/<p class="role">([^<]+)<\/p>/)[1].replace(/&nbsp;/g, '\u00a0');
+assert.match(en.translate(lead), /^My research integrates computer science and neuroscience/);
+assert.equal(en.translate(role), 'Assistant Professor, Department of Computer and Control Engineering');
+assert.equal(en.translate('Informatyka afektywna i\u00a0'), 'Affective computing and');
+assert.equal(en.translate('  Wybierz  '), 'Choose a');
+assert.equal(en.translate('Unknown academic label'), 'Unknown academic label');
+assert.equal(pl.translate(lead), lead);
+assert.equal(en.publicationMetadata('t. 25, nr 20, s. 6460 · MEiN: 100 pkt'),
+  'vol. 25, no. 20, pp. 6460 · MEiN: 100 points');
+assert.equal(en.publicationMetadata('20 marca 2025 · 10 stycznia 2024'), '20 March 2025 · 10 January 2024');
+assert.equal(en.publicationMetadata('Microelectronic Devices, s. 28–30, paź. 2020'),
+  'Microelectronic Devices, pp. 28–30, Oct. 2020');
+assert.match(html, /themeToggle.setAttribute\('aria-label', action\)/);
+// All Polish interface strings must have an English equivalent. Bibliographic
+// titles are not in the static HTML; street names are proper nouns.
+const staticPage = html.slice(html.indexOf('<body>'), html.indexOf('<script src="docs/assets/js/site-i18n.js">'))
+  .replace(/<div class="research-intro">[\s\S]*?<\/div>/, '');
+const missingUI = [...staticPage.matchAll(/>([^<>]+)</g)]
+  .map(match => match[1].replace(/&nbsp;/g, '\u00a0').trim())
+  .filter(value => /[ąćęłńóśźż]/iu.test(value) && en.translate(value) === value)
+  .filter(value => !['al. Powstańców Warszawy 12', '35 959 Rzeszów'].includes(value));
+assert.deepEqual(missingUI, []);
+assert.equal(en.translate('dr inż. Mateusz Pomianek'), 'Mateusz Pomianek, PhD, Eng.');
+
+
 assert.match(html, /<svg class="wheel" id="wheel"/);
 assert.equal((html.match(/<g class="grp">/g) || []).length, 5);
 assert.match(html, /<nav class="language-switch" aria-label="Język strony">/);
