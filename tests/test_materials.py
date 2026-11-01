@@ -95,6 +95,48 @@ class MaterialsTests(unittest.TestCase):
             f"Pliki pominięte w indeksie: {sorted(public_files - linked_files)}",
         )
 
+
+    def test_subject_order_and_file_colors(self):
+        """Pokrewne przedmioty sąsiadują, a typ materiału ma własny kolor."""
+        html = (MATERIALS / "index.html").read_text(encoding="utf-8")
+        titles = re.findall(r"<h4>([^<]+)</h4>", html)
+        self.assertEqual(titles, [
+            "Narzędzia dla programistów",
+            "Programowanie aplikacji mobilnych",
+            "Programowanie gier komputerowych",
+            "Wirtualna i rozszerzona rzeczywistość",
+            "Nawigacja robotów humanoidalnych",
+            "Robotyka afektywna",
+            "Informatyka afektywna",
+            "Informatyka poznawcza",
+            "Psychoinformatyka",
+            "Analiza EEG",
+            "Neuropsychologia",
+            "Psychologia poznawcza",
+            "Diagnoza psychologiczna",
+            "Nowoczesne technologie w psychologii",
+            "Seminaria dyplomowe",
+            "Kto, co, jak",
+            "Pozostałe",
+        ])
+        for selector in (
+            ".materials-list a.material-link--lecture",
+            ".materials-list a.material-link--lab",
+        ):
+            self.assertIn(selector, html)
+        for variable in ("--lecture:", "--lab:", "--heading:"):
+            self.assertEqual(html.count(variable), 2)
+        self.assertIn('font-size:.86rem;line-height:1.15;font-weight:700;color:var(--heading)', html)
+        for expected in (
+            'class="material-link--lab" href="narzędzia-dla-programistów/ndp__lab__01.pdf"',
+            'class="material-link--lab" href="analiza-eeg/lab1_wprowadzenie.pdf"',
+            'class="material-link--lab" href="diagnoza-psychologiczna/diagnoza_lab1.docx"',
+            'class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w01_intro.pdf"',
+            'class="material-link--lecture" href="robotyka-afektywna/ra_w2.pdf"',
+            'class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w01.pptx"',
+        ):
+            self.assertIn(expected, html)
+
     def test_pptx_links_are_dark_orange_in_both_themes(self):
         html = (MATERIALS / "index.html").read_text(encoding="utf-8")
         style = html.split("<style>", 1)[1].split("</style>", 1)[0]

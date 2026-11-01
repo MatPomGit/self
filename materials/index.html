@@ -20,20 +20,22 @@
 </script>
 
 <style>
-:root{color-scheme:light;--bg:#fafaf9;--text:#242526;--muted:#555a60;--line:#d9dcde;--surface:#fff;--raised:#f6f7f7;--hover:#e9ebec;--accent:#145a8d;--pptx:#9b4400;--subgroup-line:rgba(70,80,90,.14)}
-:root[data-theme="dark"]{color-scheme:dark;--bg:#17191c;--text:#e9eaed;--muted:#b7bbc2;--line:#40444a;--surface:#202a35;--raised:#292d33;--hover:#363c44;--accent:#93c2e6;--pptx:#f0a14a;--subgroup-line:rgba(205,215,230,.13)}
+:root{color-scheme:light;--bg:#fafaf9;--text:#242526;--muted:#555a60;--line:#d9dcde;--surface:#fff;--raised:#f6f7f7;--hover:#e9ebec;--accent:#145a8d;--pptx:#9b4400;--lecture:#315f88;--lab:#346e4c;--heading:#213f5a;--subgroup-line:rgba(70,80,90,.14)}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#17191c;--text:#e9eaed;--muted:#b7bbc2;--line:#40444a;--surface:#202a35;--raised:#292d33;--hover:#363c44;--accent:#93c2e6;--pptx:#f0a14a;--lecture:#a8cbed;--lab:#a8d7b5;--heading:#e0ebf5;--subgroup-line:rgba(205,215,230,.13)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
 main{max-width:1600px;margin:0 auto;padding:8px 10px 12px}
 h1{font-size:1.45rem;line-height:1.25;margin:0 0 2px}
 h2{font-size:1.15rem;line-height:1.2;margin:0 0 4px}
 h3{font-size:0.85rem;line-height:1.2;margin:0 0 3px}
-h4{font-size:0.75rem;line-height:1.1;font-weight:650;color:var(--muted);margin:0 0 2px}
+h4{font-size:.86rem;line-height:1.15;font-weight:700;color:var(--heading);margin:0 0 3px}
 h5{font-size:.5rem;line-height:1;font-weight:450;color:var(--muted);margin:0 0 1px}
 p{margin:2px 0}
 a,a:visited{color:var(--text);text-decoration:none}
 a:hover{text-decoration:underline}
 a[href$=".pptx" i],a[href$=".pptx" i]:visited{color:var(--pptx)}
+.materials-list a.material-link--lecture,.materials-list a.material-link--lecture:visited{color:var(--lecture)}
+.materials-list a.material-link--lab,.materials-list a.material-link--lab:visited{color:var(--lab)}
 a:focus-visible{outline:3px solid var(--text);outline-offset:2px}
 button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 .materials-header{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -97,27 +99,27 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 <div class="materials-subgroup">
 <h5>Labs PDF</h5>
 <ul class="materials-list materials-list--dense">
-<li><a href="narzędzia-dla-programistów/ndp__lab__01.pdf" download>lab_01</a></li>
-<li><a href="narzędzia-dla-programistów/ndp__lab__02.pdf" download>lab_02</a></li>
-<li><a href="narzędzia-dla-programistów/ndp__lab__03.pdf" download>lab_03</a></li>
-<li><a href="narzędzia-dla-programistów/ndp__lab__04.pdf" download>lab_04</a></li>
-<li><a href="narzędzia-dla-programistów/ndp__lab__05.pdf" download>lab_05</a></li>
-<li><a href="narzędzia-dla-programistów/ndp__lab__06.pdf" download>lab_06</a></li>
-<li><a href="narzędzia-dla-programistów/ndp__lab__07.pdf" download>lab_07</a></li>
-<li><a href="narzędzia-dla-programistów/ndp__lab__08.pdf" download>lab_08</a></li>
-<li><a href="narzędzia-dla-programistów/ndp__lab__09.pdf" download>lab_09</a></li>
-<li><a href="narzędzia-dla-programistów/ndp__lab__10.pdf" download>lab_10</a></li>
+<li><a class="material-link--lab" href="narzędzia-dla-programistów/ndp__lab__01.pdf" download>lab_01</a></li>
+<li><a class="material-link--lab" href="narzędzia-dla-programistów/ndp__lab__02.pdf" download>lab_02</a></li>
+<li><a class="material-link--lab" href="narzędzia-dla-programistów/ndp__lab__03.pdf" download>lab_03</a></li>
+<li><a class="material-link--lab" href="narzędzia-dla-programistów/ndp__lab__04.pdf" download>lab_04</a></li>
+<li><a class="material-link--lab" href="narzędzia-dla-programistów/ndp__lab__05.pdf" download>lab_05</a></li>
+<li><a class="material-link--lab" href="narzędzia-dla-programistów/ndp__lab__06.pdf" download>lab_06</a></li>
+<li><a class="material-link--lab" href="narzędzia-dla-programistów/ndp__lab__07.pdf" download>lab_07</a></li>
+<li><a class="material-link--lab" href="narzędzia-dla-programistów/ndp__lab__08.pdf" download>lab_08</a></li>
+<li><a class="material-link--lab" href="narzędzia-dla-programistów/ndp__lab__09.pdf" download>lab_09</a></li>
+<li><a class="material-link--lab" href="narzędzia-dla-programistów/ndp__lab__10.pdf" download>lab_10</a></li>
 </ul>
 </div>
 
 <div class="materials-subgroup">
 <h5>Labs HTML</h5>
 <ul class="materials-list materials-list--dense">
-<li><a href="narzędzia-dla-programistów/ndp_lab_02.html" title="lab_02 · HTML">lab_02</a></li>
-<li><a href="narzędzia-dla-programistów/ndp_lab_03.html" title="lab_03 · HTML">lab_03</a></li>
-<li><a href="narzędzia-dla-programistów/ndp_lab_04.html" title="lab_04 · HTML">lab_04</a></li>
-<li><a href="narzędzia-dla-programistów/ndp_lab_05.html" title="lab_05 · HTML">lab_05</a></li>
-<li><a href="narzędzia-dla-programistów/ndp_lab_06.html" title="lab_06 · HTML">lab_06</a></li>
+<li><a class="material-link--lab" href="narzędzia-dla-programistów/ndp_lab_02.html" title="lab_02 · HTML">lab_02</a></li>
+<li><a class="material-link--lab" href="narzędzia-dla-programistów/ndp_lab_03.html" title="lab_03 · HTML">lab_03</a></li>
+<li><a class="material-link--lab" href="narzędzia-dla-programistów/ndp_lab_04.html" title="lab_04 · HTML">lab_04</a></li>
+<li><a class="material-link--lab" href="narzędzia-dla-programistów/ndp_lab_05.html" title="lab_05 · HTML">lab_05</a></li>
+<li><a class="material-link--lab" href="narzędzia-dla-programistów/ndp_lab_06.html" title="lab_06 · HTML">lab_06</a></li>
 </ul></div>
 
 <div class="materials-subgroup">
@@ -129,92 +131,33 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 </ul></div></div></section>
 
 <section class="materials-group materials-group--wide">
-<h4>Wirtualna i rozszerzona rzeczywistość</h4>
-<div class="materials-columns">
-<div class="materials-subgroup">
-<h5>labs PDF</h5>
-<ul class="materials-list materials-list--dense">
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_01.pdf" download>lab_01</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_02.pdf" download>lab_02</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_03.pdf" download>lab_03</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_04.pdf" download>lab_04</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_05.pdf" download>lab_05</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_06.pdf" download>lab_06</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_07.pdf" download>lab_07</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_08.pdf" download>lab_08</a></li>
-</ul></div>
-<div class="materials-subgroup">
-<h5>Dodatkowe ćwiczenia XR</h5>
-<ul class="materials-list">
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/Lab_1_XR.pdf" download title="Lab_1_XR.pdf">lab_01 · PDF</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/Lab_2_XR.pdf" download title="Lab_2_XR.pdf">lab_02 · PDF</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/Lab_3_XR.pdf" download title="Lab_3_XR.pdf">lab_03 · PDF</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/Lab_4_XR.pdf" download title="Lab_4_XR.pdf">lab_04 · PDF</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/Lab_5_XR.pdf" download title="Lab_5_XR.pdf">lab_05 · PDF</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/Lab_6_XR.pdf" download title="Lab_6_XR.pdf">lab_06 · PDF</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/Lab_7_XR.pdf" download title="Lab_7_XR.pdf">lab_07 · PDF</a></li>
-</ul></div>
-
-
-<div class="materials-subgroup">
-<h5>Wykłady</h5>
-<ul class="materials-list materials-list--dense">
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w04.pdf" download>w_04</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w05.pdf" download>w_05</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w06.pdf" download>w_06</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w07.pdf" download>w_07</a></li>
-</ul></div>
-
-<div class="materials-subgroup">
-<h5>Materiały HTML</h5>
-<ul class="materials-list materials-list--dense">
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_blok_01.html">blok_01</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_blok_02.html">blok_02</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_blok_03.html">blok_03</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_blok_04.html">blok_04</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/w05-offline.html">w_05 · offline</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/w06-offline.html">w_06 · offline</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/w07-offline.html">w_07 · offline</a></li>
-</ul></div>
-
-<div class="materials-subgroup">
-<h5>Konfiguracja</h5>
-<ul class="materials-list">
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/unity-setup.pdf" download title="Instalacja Unity">Instalacja Unity</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/quest3-deploy.pdf" download title="Wdrażanie na Quest 3">Wdrażanie na Quest 3</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/android-ar-deploy.pdf" download title="Wdrażanie Android AR">Wdrażanie Android AR</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/viture-luma-ultra.pdf" download title="VITURE Luma Ultra">VITURE Luma Ultra</a></li>
-<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/SSQ-qs.pdf" download title="Simulator Sickness Questionnaire">SSQ</a></li>
-</ul></div></div></section>
-
-<section class="materials-group materials-group--wide">
 <h4>Programowanie aplikacji mobilnych</h4>
 <div class="materials-columns">
 <div class="materials-subgroup">
 <h5>Wykłady</h5>
 <ul class="materials-list">
-<li><a href="programowanie-aplikacji-mobilnych/pam_w01_intro.pdf" download title="w_01 · Wprowadzenie">w_01 · Wprowadzenie</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w02_hardware.pdf" download>w_02 · Sprzęt</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w03_projektowanie.pdf" download title="w_03 · Projektowanie">w_03 · Projektowanie</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w04_ui.pdf" download title="w_04 · Interfejs użytkownika">w_04 · Interfejs użytkownika</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w05_natywne.pdf" download title="w_05 · Aplikacje natywne">w_05 · Aplikacje natywne</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w06_cross.pdf" download title="w_06 · Rozwiązania wieloplatformowe">w_06 · Rozwiązania wieloplatformowe</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w07_sensors.pdf" download title="w_07 · Czujniki">w_07 · Czujniki</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w08_IoT.pdf" download title="w_08 · Internet rzeczy">w_08 · Internet rzeczy</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w09_affective.pdf" download title="w_09 · Informatyka afektywna">w_09 · Informatyka afektywna</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w10_xr.pdf" download>w_10 · XR</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w11_games.pdf" download>w_11 · Gry</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_w12_robots.pdf" download title="w_12 · Robotyka">w_12 · Robotyka</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w01_intro.pdf" download title="w_01 · Wprowadzenie">w_01 · Wprowadzenie</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w02_hardware.pdf" download>w_02 · Sprzęt</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w03_projektowanie.pdf" download title="w_03 · Projektowanie">w_03 · Projektowanie</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w04_ui.pdf" download title="w_04 · Interfejs użytkownika">w_04 · Interfejs użytkownika</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w05_natywne.pdf" download title="w_05 · Aplikacje natywne">w_05 · Aplikacje natywne</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w06_cross.pdf" download title="w_06 · Rozwiązania wieloplatformowe">w_06 · Rozwiązania wieloplatformowe</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w07_sensors.pdf" download title="w_07 · Czujniki">w_07 · Czujniki</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w08_IoT.pdf" download title="w_08 · Internet rzeczy">w_08 · Internet rzeczy</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w09_affective.pdf" download title="w_09 · Informatyka afektywna">w_09 · Informatyka afektywna</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w10_xr.pdf" download>w_10 · XR</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w11_games.pdf" download>w_11 · Gry</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w12_robots.pdf" download title="w_12 · Robotyka">w_12 · Robotyka</a></li>
 </ul></div>
 
 <div class="materials-subgroup">
 <h5>labs</h5>
 <ul class="materials-list materials-list--dense">
-<li><a href="programowanie-aplikacji-mobilnych/pam_lab_01.pdf" download>lab_01</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_lab_02.pdf" download>lab_02</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_lab_03_.pdf" download>lab_03</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_lab_04.pdf" download>lab_04</a></li>
-<li><a href="programowanie-aplikacji-mobilnych/pam_lab_05.pdf" download>lab_05</a></li>
+<li><a class="material-link--lab" href="programowanie-aplikacji-mobilnych/pam_lab_01.pdf" download>lab_01</a></li>
+<li><a class="material-link--lab" href="programowanie-aplikacji-mobilnych/pam_lab_02.pdf" download>lab_02</a></li>
+<li><a class="material-link--lab" href="programowanie-aplikacji-mobilnych/pam_lab_03_.pdf" download>lab_03</a></li>
+<li><a class="material-link--lab" href="programowanie-aplikacji-mobilnych/pam_lab_04.pdf" download>lab_04</a></li>
+<li><a class="material-link--lab" href="programowanie-aplikacji-mobilnych/pam_lab_05.pdf" download>lab_05</a></li>
 </ul></div>
 
 <div class="materials-subgroup">
@@ -228,6 +171,111 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 </ul></div></div></section>
 
 <section class="materials-group">
+<h4>Programowanie gier komputerowych</h4>
+<ul class="materials-list materials-list--dense">
+<li><a class="material-link--lab" href="programowanie-gier-komputerowych/pgk_lab_1.pdf" download>lab_01</a></li>
+<li><a class="material-link--lab" href="programowanie-gier-komputerowych/pgk_lab_2.pdf" download>lab_02</a></li>
+<li><a class="material-link--lab" href="programowanie-gier-komputerowych/pgk_lab_3.pdf" download>lab_03</a></li>
+<li><a class="material-link--lab" href="programowanie-gier-komputerowych/pgk_lab_4.pdf" download>lab_04</a></li>
+<li><a class="material-link--lab" href="programowanie-gier-komputerowych/pgk_lab_5.pdf" download>lab_05</a></li>
+<li><a class="material-link--lab" href="programowanie-gier-komputerowych/pgk_lab_6.pdf" download>lab_06</a></li>
+<li><a class="material-link--lab" href="programowanie-gier-komputerowych/pgk_lab_7.pdf" download>lab_07</a></li>
+</ul></section>
+
+<section class="materials-group materials-group--wide">
+<h4>Wirtualna i rozszerzona rzeczywistość</h4>
+<div class="materials-columns">
+<div class="materials-subgroup">
+<h5>labs PDF</h5>
+<ul class="materials-list materials-list--dense">
+<li><a class="material-link--lab" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_01.pdf" download>lab_01</a></li>
+<li><a class="material-link--lab" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_02.pdf" download>lab_02</a></li>
+<li><a class="material-link--lab" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_03.pdf" download>lab_03</a></li>
+<li><a class="material-link--lab" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_04.pdf" download>lab_04</a></li>
+<li><a class="material-link--lab" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_05.pdf" download>lab_05</a></li>
+<li><a class="material-link--lab" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_06.pdf" download>lab_06</a></li>
+<li><a class="material-link--lab" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_07.pdf" download>lab_07</a></li>
+<li><a class="material-link--lab" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_08.pdf" download>lab_08</a></li>
+</ul></div>
+<div class="materials-subgroup">
+<h5>Dodatkowe ćwiczenia XR</h5>
+<ul class="materials-list">
+<li><a class="material-link--lab" href="wirtualna-i-rozszerzona-rzeczywistosc/Lab_1_XR.pdf" download title="Lab_1_XR.pdf">lab_01 · PDF</a></li>
+<li><a class="material-link--lab" href="wirtualna-i-rozszerzona-rzeczywistosc/Lab_2_XR.pdf" download title="Lab_2_XR.pdf">lab_02 · PDF</a></li>
+<li><a class="material-link--lab" href="wirtualna-i-rozszerzona-rzeczywistosc/Lab_3_XR.pdf" download title="Lab_3_XR.pdf">lab_03 · PDF</a></li>
+<li><a class="material-link--lab" href="wirtualna-i-rozszerzona-rzeczywistosc/Lab_4_XR.pdf" download title="Lab_4_XR.pdf">lab_04 · PDF</a></li>
+<li><a class="material-link--lab" href="wirtualna-i-rozszerzona-rzeczywistosc/Lab_5_XR.pdf" download title="Lab_5_XR.pdf">lab_05 · PDF</a></li>
+<li><a class="material-link--lab" href="wirtualna-i-rozszerzona-rzeczywistosc/Lab_6_XR.pdf" download title="Lab_6_XR.pdf">lab_06 · PDF</a></li>
+<li><a class="material-link--lab" href="wirtualna-i-rozszerzona-rzeczywistosc/Lab_7_XR.pdf" download title="Lab_7_XR.pdf">lab_07 · PDF</a></li>
+</ul></div>
+
+
+<div class="materials-subgroup">
+<h5>Wykłady</h5>
+<ul class="materials-list materials-list--dense">
+<li><a class="material-link--lecture" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w04.pdf" download>w_04</a></li>
+<li><a class="material-link--lecture" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w05.pdf" download>w_05</a></li>
+<li><a class="material-link--lecture" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w06.pdf" download>w_06</a></li>
+<li><a class="material-link--lecture" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w07.pdf" download>w_07</a></li>
+</ul></div>
+
+<div class="materials-subgroup">
+<h5>Materiały HTML</h5>
+<ul class="materials-list materials-list--dense">
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_blok_01.html">blok_01</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_blok_02.html">blok_02</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_blok_03.html">blok_03</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_blok_04.html">blok_04</a></li>
+<li><a class="material-link--lecture" href="wirtualna-i-rozszerzona-rzeczywistosc/w05-offline.html">w_05 · offline</a></li>
+<li><a class="material-link--lecture" href="wirtualna-i-rozszerzona-rzeczywistosc/w06-offline.html">w_06 · offline</a></li>
+<li><a class="material-link--lecture" href="wirtualna-i-rozszerzona-rzeczywistosc/w07-offline.html">w_07 · offline</a></li>
+</ul></div>
+
+<div class="materials-subgroup">
+<h5>Konfiguracja</h5>
+<ul class="materials-list">
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/unity-setup.pdf" download title="Instalacja Unity">Instalacja Unity</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/quest3-deploy.pdf" download title="Wdrażanie na Quest 3">Wdrażanie na Quest 3</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/android-ar-deploy.pdf" download title="Wdrażanie Android AR">Wdrażanie Android AR</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/viture-luma-ultra.pdf" download title="VITURE Luma Ultra">VITURE Luma Ultra</a></li>
+<li><a href="wirtualna-i-rozszerzona-rzeczywistosc/SSQ-qs.pdf" download title="Simulator Sickness Questionnaire">SSQ</a></li>
+</ul></div></div></section>
+
+<section class="materials-group">
+<h4>Nawigacja robotów humanoidalnych</h4>
+<div class="materials-columns">
+<div class="materials-subgroup">
+<h5>PDF</h5>
+<ul class="materials-list">
+<li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w01.pdf" download title="robo_w01.pdf">w_01 · PDF</a></li>
+<li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w02.pdf" download title="robo_w02.pdf">w_02 · PDF</a></li>
+<li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w03.pdf" download title="robo_w03.pdf">w_03 · PDF</a></li>
+<li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w04.pdf" download title="robo_w04.pdf">w_04 · PDF</a></li>
+<li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w05.pdf" download title="robo_w05.pdf">w_05 · PDF</a></li>
+<li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w06.pdf" download title="robo_w06.pdf">w_06 · PDF</a></li>
+<li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w07.pdf" download title="robo_w07.pdf">w_07 · PDF</a></li>
+<li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w08.pdf" download title="robo_w08.pdf">w_08 · PDF</a></li>
+<li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w09.pdf" download title="robo_w09.pdf">w_09 · PDF</a></li>
+<li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w10.pdf" download title="robo_w10.pdf">w_10 · PDF</a></li>
+</ul></div>
+<div class="materials-subgroup">
+<h5>PPTX</h5>
+<ul class="materials-list">
+<li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w01.pptx" download title="robo_w01.pptx">w_01 · PPTX</a></li>
+<li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w02.pptx" download title="robo_w02.pptx">w_02 · PPTX</a></li>
+<li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w03.pptx" download title="robo_w03.pptx">w_03 · PPTX</a></li>
+<li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w04.pptx" download title="robo_w04.pptx">w_04 · PPTX</a></li>
+<li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w05.pptx" download title="robo_w05.pptx">w_05 · PPTX</a></li>
+<li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w06.pptx" download title="robo_w06.pptx">w_06 · PPTX</a></li>
+<li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w07.pptx" download title="robo_w07.pptx">w_07 · PPTX</a></li>
+<li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w08.pptx" download title="robo_w08.pptx">w_08 · PPTX</a></li>
+<li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w09.pptx" download title="robo_w09.pptx">w_09 · PPTX</a></li>
+<li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w10.pptx" download title="robo_w10.pptx">w_10 · PPTX</a></li>
+</ul></div>
+</div>
+</section>
+
+<section class="materials-group">
 <h4>Robotyka afektywna</h4>
 <div class="materials-columns">
 <div class="materials-subgroup">
@@ -239,43 +287,25 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 <div class="materials-subgroup">
 <h5>Wykłady</h5>
 <ul class="materials-list materials-list--dense">
-<li><a href="robotyka-afektywna/ra_w01.pdf" download>w_01</a></li>
-<li><a href="robotyka-afektywna/ra_w2.pdf" download>w_02</a></li>
-<li><a href="robotyka-afektywna/ra_w3.pdf" download>w_03</a></li>
-<li><a href="robotyka-afektywna/ra_w4.pdf" download>w_04</a></li>
-<li><a href="robotyka-afektywna/ra_w5.pdf" download>w_05</a></li>
-<li><a href="robotyka-afektywna/ra_w6.pdf" download>w_06</a></li>
-<li><a href="robotyka-afektywna/ra_w7.pdf" download>w_07</a></li>
+<li><a class="material-link--lecture" href="robotyka-afektywna/ra_w01.pdf" download>w_01</a></li>
+<li><a class="material-link--lecture" href="robotyka-afektywna/ra_w2.pdf" download>w_02</a></li>
+<li><a class="material-link--lecture" href="robotyka-afektywna/ra_w3.pdf" download>w_03</a></li>
+<li><a class="material-link--lecture" href="robotyka-afektywna/ra_w4.pdf" download>w_04</a></li>
+<li><a class="material-link--lecture" href="robotyka-afektywna/ra_w5.pdf" download>w_05</a></li>
+<li><a class="material-link--lecture" href="robotyka-afektywna/ra_w6.pdf" download>w_06</a></li>
+<li><a class="material-link--lecture" href="robotyka-afektywna/ra_w7.pdf" download>w_07</a></li>
 </ul></div></div></section>
 
 <section class="materials-group">
 <h4>Informatyka afektywna</h4>
 <ul class="materials-list materials-list--dense">
-<li><a href="informatyka-afektywna/ia_lab_01.pdf" download>lab_01</a></li>
-<li><a href="informatyka-afektywna/ia_lab_02.pdf" download>lab_02</a></li>
-<li><a href="informatyka-afektywna/ia_lab_03.pdf" download>lab_03</a></li>
-<li><a href="informatyka-afektywna/ia_lab_04.pdf" download>lab_04</a></li>
-<li><a href="informatyka-afektywna/ia_lab_05.pdf" download>lab_05</a></li>
-<li><a href="informatyka-afektywna/ia_lab_06.pdf" download>lab_06</a></li>
-<li><a href="informatyka-afektywna/ia_lab_07.pdf" download>lab_07</a></li>
-</ul></section>
-
-<section class="materials-group">
-<h4>Programowanie gier komputerowych</h4>
-<ul class="materials-list materials-list--dense">
-<li><a href="programowanie-gier-komputerowych/pgk_lab_1.pdf" download>lab_01</a></li>
-<li><a href="programowanie-gier-komputerowych/pgk_lab_2.pdf" download>lab_02</a></li>
-<li><a href="programowanie-gier-komputerowych/pgk_lab_3.pdf" download>lab_03</a></li>
-<li><a href="programowanie-gier-komputerowych/pgk_lab_4.pdf" download>lab_04</a></li>
-<li><a href="programowanie-gier-komputerowych/pgk_lab_5.pdf" download>lab_05</a></li>
-<li><a href="programowanie-gier-komputerowych/pgk_lab_6.pdf" download>lab_06</a></li>
-<li><a href="programowanie-gier-komputerowych/pgk_lab_7.pdf" download>lab_07</a></li>
-</ul></section>
-
-<section class="materials-group">
-<h4>Psychoinformatyka</h4>
-<ul class="materials-list">
-<li><a href="psychoinformatyka/" title="Strona przedmiotu">Strona przedmiotu</a></li>
+<li><a class="material-link--lab" href="informatyka-afektywna/ia_lab_01.pdf" download>lab_01</a></li>
+<li><a class="material-link--lab" href="informatyka-afektywna/ia_lab_02.pdf" download>lab_02</a></li>
+<li><a class="material-link--lab" href="informatyka-afektywna/ia_lab_03.pdf" download>lab_03</a></li>
+<li><a class="material-link--lab" href="informatyka-afektywna/ia_lab_04.pdf" download>lab_04</a></li>
+<li><a class="material-link--lab" href="informatyka-afektywna/ia_lab_05.pdf" download>lab_05</a></li>
+<li><a class="material-link--lab" href="informatyka-afektywna/ia_lab_06.pdf" download>lab_06</a></li>
+<li><a class="material-link--lab" href="informatyka-afektywna/ia_lab_07.pdf" download>lab_07</a></li>
 </ul></section>
 
 <section class="materials-group">
@@ -285,20 +315,102 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 </ul></section>
 
 <section class="materials-group">
-<h4>Seminaria dyplomowe</h4>
+<h4>Psychoinformatyka</h4>
 <ul class="materials-list">
-<li><a href="seminaria-dyplomowe/Jak_pisac_prace_dyplomową.pdf" download title="Jak pisać pracę dyplomową · PDF">Jak pisać pracę dyplomową · PDF</a></li>
-<li><a href="seminaria-dyplomowe/Jak_pisac_prace_dyplomową.pptx" download title="Jak pisać pracę dyplomową · PPTX">Jak pisać pracę dyplomową · PPTX</a></li>
-<li><a href="seminaria-dyplomowe/szablon_WEII.pdf" download title="Szablon WEiI · PDF">Szablon WEiI · PDF</a></li>
-<li><a href="seminaria-dyplomowe/weiiszablon.tex" download title="Szablon WEiI · TeX">Szablon WEiI · TeX</a></li>
+<li><a href="psychoinformatyka/" title="Strona przedmiotu">Strona przedmiotu</a></li>
 </ul></section>
 
 <section class="materials-group">
-<h4>Kto, co, jak</h4>
+<h4>Analiza EEG</h4>
+<div class="materials-columns">
+<div class="materials-subgroup">
+<h5>Laboratoria PDF</h5>
 <ul class="materials-list">
-<li><a href="Kto-Co-Jak/KtoCoJak.pdf" download title="KtoCoJak.pdf">Kto, co, jak · PDF</a></li>
-<li><a href="Kto-Co-Jak/KtoCoJak.pptx" download title="KtoCoJak.pptx">Kto, co, jak · PPTX</a></li>
+<li><a class="material-link--lab" href="analiza-eeg/lab1_wprowadzenie.pdf" download title="lab1_wprowadzenie.pdf">lab_01 · PDF</a></li>
+<li><a class="material-link--lab" href="analiza-eeg/lab2_sprzet_procedura.pdf" download title="lab2_sprzet_procedura.pdf">lab_02 · PDF</a></li>
+<li><a class="material-link--lab" href="analiza-eeg/lab3_projektowanie_rejestracja.pdf" download title="lab3_projektowanie_rejestracja.pdf">lab_03 · PDF</a></li>
+<li><a class="material-link--lab" href="analiza-eeg/lab4_erp_czestotliwosc.pdf" download title="lab4_erp_czestotliwosc.pdf">lab_04 · PDF</a></li>
+<li><a class="material-link--lab" href="analiza-eeg/lab5_pipeline_analizy.pdf" download title="lab5_pipeline_analizy.pdf">lab_05 · PDF</a></li>
+<li><a class="material-link--lab" href="analiza-eeg/lab6_inne_metody.pdf" download title="lab6_inne_metody.pdf">lab_06 · PDF</a></li>
+</ul></div>
+<div class="materials-subgroup">
+<h5>Źródła TeX</h5>
+<ul class="materials-list">
+<li><a class="material-link--lab" href="analiza-eeg/lab1_wprowadzenie.tex" download title="lab1_wprowadzenie.tex">lab_01 · TEX</a></li>
+<li><a class="material-link--lab" href="analiza-eeg/lab2_sprzet_procedura.tex" download title="lab2_sprzet_procedura.tex">lab_02 · TEX</a></li>
+<li><a class="material-link--lab" href="analiza-eeg/lab3_projektowanie_rejestracja.tex" download title="lab3_projektowanie_rejestracja.tex">lab_03 · TEX</a></li>
+<li><a class="material-link--lab" href="analiza-eeg/lab4_erp_czestotliwosc.tex" download title="lab4_erp_czestotliwosc.tex">lab_04 · TEX</a></li>
+<li><a class="material-link--lab" href="analiza-eeg/lab5_pipeline_analizy.tex" download title="lab5_pipeline_analizy.tex">lab_05 · TEX</a></li>
+<li><a class="material-link--lab" href="analiza-eeg/lab6_inne_metody.tex" download title="lab6_inne_metody.tex">lab_06 · TEX</a></li>
+</ul></div>
+<div class="materials-subgroup">
+<h5>Pozostałe</h5>
+<ul class="materials-list">
+<li><a href="analiza-eeg/eeg-sim.url" download title="eeg-sim.url">Symulator EEG · URL</a></li>
+<li><a href="analiza-eeg/MATLAB_EEG.pdf" download title="MATLAB_EEG.pdf">MATLAB EEG · PDF</a></li>
+<li><a href="analiza-eeg/Python_EEG.pdf" download title="Python_EEG.pdf">Python EEG · PDF</a></li>
+</ul></div>
+</div>
+</section>
+
+<section class="materials-group">
+<h4>Neuropsychologia</h4>
+<ul class="materials-list">
+<li><a class="material-link--lab" href="neuropsychologia/neuro_lab_01.pdf" download title="neuro_lab_01.pdf">lab_01 · PDF</a></li>
+<li><a class="material-link--lab" href="neuropsychologia/neuro_lab_02.pdf" download title="neuro_lab_02.pdf">lab_02 · PDF</a></li>
+<li><a class="material-link--lab" href="neuropsychologia/neuro_lab_03.pdf" download title="neuro_lab_03.pdf">lab_03 · PDF</a></li>
+<li><a class="material-link--lab" href="neuropsychologia/neuro_lab_04.pdf" download title="neuro_lab_04.pdf">lab_04 · PDF</a></li>
 </ul>
+</section>
+
+<section class="materials-group">
+<h4>Psychologia poznawcza</h4>
+<div class="materials-columns">
+<div class="materials-subgroup">
+<h5>PDF</h5>
+<ul class="materials-list">
+<li><a class="material-link--lab" href="psychologia-poznawcza/psych_pozn_lab1.pdf" download title="psych_pozn_lab1.pdf">lab_01 · PDF</a></li>
+<li><a class="material-link--lab" href="psychologia-poznawcza/psych_pozn_lab2.pdf" download title="psych_pozn_lab2.pdf">lab_02 · PDF</a></li>
+<li><a class="material-link--lab" href="psychologia-poznawcza/psych_pozn_lab3.pdf" download title="psych_pozn_lab3.pdf">lab_03 · PDF</a></li>
+<li><a class="material-link--lab" href="psychologia-poznawcza/psych_pozn_lab4.pdf" download title="psych_pozn_lab4.pdf">lab_04 · PDF</a></li>
+<li><a class="material-link--lab" href="psychologia-poznawcza/psych_pozn_lab5.pdf" download title="psych_pozn_lab5.pdf">lab_05 · PDF</a></li>
+<li><a class="material-link--lab" href="psychologia-poznawcza/psych_pozn_lab6.pdf" download title="psych_pozn_lab6.pdf">lab_06 · PDF</a></li>
+</ul></div>
+<div class="materials-subgroup">
+<h5>DOCX</h5>
+<ul class="materials-list">
+<li><a class="material-link--lab" href="psychologia-poznawcza/psych_pozn_lab1.docx" download title="psych_pozn_lab1.docx">lab_01 · DOCX</a></li>
+<li><a class="material-link--lab" href="psychologia-poznawcza/psych_pozn_lab2.docx" download title="psych_pozn_lab2.docx">lab_02 · DOCX</a></li>
+<li><a class="material-link--lab" href="psychologia-poznawcza/psych_pozn_lab3.docx" download title="psych_pozn_lab3.docx">lab_03 · DOCX</a></li>
+<li><a class="material-link--lab" href="psychologia-poznawcza/psych_pozn_lab4.docx" download title="psych_pozn_lab4.docx">lab_04 · DOCX</a></li>
+<li><a class="material-link--lab" href="psychologia-poznawcza/psych_pozn_lab5.docx" download title="psych_pozn_lab5.docx">lab_05 · DOCX</a></li>
+<li><a class="material-link--lab" href="psychologia-poznawcza/psych_pozn_lab6.docx" download title="psych_pozn_lab6.docx">lab_06 · DOCX</a></li>
+</ul></div>
+</div>
+</section>
+
+<section class="materials-group">
+<h4>Diagnoza psychologiczna</h4>
+<div class="materials-columns">
+<div class="materials-subgroup">
+<h5>PDF</h5>
+<ul class="materials-list">
+<li><a class="material-link--lab" href="diagnoza-psychologiczna/diagnoza_lab1.pdf" download title="diagnoza_lab1.pdf">lab_01 · PDF</a></li>
+<li><a class="material-link--lab" href="diagnoza-psychologiczna/diagnoza_lab2.pdf" download title="diagnoza_lab2.pdf">lab_02 · PDF</a></li>
+<li><a class="material-link--lab" href="diagnoza-psychologiczna/diagnoza_lab3.pdf" download title="diagnoza_lab3.pdf">lab_03 · PDF</a></li>
+<li><a class="material-link--lab" href="diagnoza-psychologiczna/diagnoza_lab4.pdf" download title="diagnoza_lab4.pdf">lab_04 · PDF</a></li>
+<li><a class="material-link--lab" href="diagnoza-psychologiczna/diagnoza_lab5.pdf" download title="diagnoza_lab5.pdf">lab_05 · PDF</a></li>
+</ul></div>
+<div class="materials-subgroup">
+<h5>DOCX</h5>
+<ul class="materials-list">
+<li><a class="material-link--lab" href="diagnoza-psychologiczna/diagnoza_lab1.docx" download title="diagnoza_lab1.docx">lab_01 · DOCX</a></li>
+<li><a class="material-link--lab" href="diagnoza-psychologiczna/diagnoza_lab2.docx" download title="diagnoza_lab2.docx">lab_02 · DOCX</a></li>
+<li><a class="material-link--lab" href="diagnoza-psychologiczna/diagnoza_lab3.docx" download title="diagnoza_lab3.docx">lab_03 · DOCX</a></li>
+<li><a class="material-link--lab" href="diagnoza-psychologiczna/diagnoza_lab4.docx" download title="diagnoza_lab4.docx">lab_04 · DOCX</a></li>
+<li><a class="material-link--lab" href="diagnoza-psychologiczna/diagnoza_lab5.docx" download title="diagnoza_lab5.docx">lab_05 · DOCX</a></li>
+</ul></div>
+</div>
 </section>
 
 <section class="materials-group">
@@ -322,130 +434,20 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 </section>
 
 <section class="materials-group">
-<h4>Analiza EEG</h4>
-<div class="materials-columns">
-<div class="materials-subgroup">
-<h5>Laboratoria PDF</h5>
+<h4>Seminaria dyplomowe</h4>
 <ul class="materials-list">
-<li><a href="analiza-eeg/lab1_wprowadzenie.pdf" download title="lab1_wprowadzenie.pdf">lab_01 · PDF</a></li>
-<li><a href="analiza-eeg/lab2_sprzet_procedura.pdf" download title="lab2_sprzet_procedura.pdf">lab_02 · PDF</a></li>
-<li><a href="analiza-eeg/lab3_projektowanie_rejestracja.pdf" download title="lab3_projektowanie_rejestracja.pdf">lab_03 · PDF</a></li>
-<li><a href="analiza-eeg/lab4_erp_czestotliwosc.pdf" download title="lab4_erp_czestotliwosc.pdf">lab_04 · PDF</a></li>
-<li><a href="analiza-eeg/lab5_pipeline_analizy.pdf" download title="lab5_pipeline_analizy.pdf">lab_05 · PDF</a></li>
-<li><a href="analiza-eeg/lab6_inne_metody.pdf" download title="lab6_inne_metody.pdf">lab_06 · PDF</a></li>
-</ul></div>
-<div class="materials-subgroup">
-<h5>Źródła TeX</h5>
-<ul class="materials-list">
-<li><a href="analiza-eeg/lab1_wprowadzenie.tex" download title="lab1_wprowadzenie.tex">lab_01 · TEX</a></li>
-<li><a href="analiza-eeg/lab2_sprzet_procedura.tex" download title="lab2_sprzet_procedura.tex">lab_02 · TEX</a></li>
-<li><a href="analiza-eeg/lab3_projektowanie_rejestracja.tex" download title="lab3_projektowanie_rejestracja.tex">lab_03 · TEX</a></li>
-<li><a href="analiza-eeg/lab4_erp_czestotliwosc.tex" download title="lab4_erp_czestotliwosc.tex">lab_04 · TEX</a></li>
-<li><a href="analiza-eeg/lab5_pipeline_analizy.tex" download title="lab5_pipeline_analizy.tex">lab_05 · TEX</a></li>
-<li><a href="analiza-eeg/lab6_inne_metody.tex" download title="lab6_inne_metody.tex">lab_06 · TEX</a></li>
-</ul></div>
-<div class="materials-subgroup">
-<h5>Pozostałe</h5>
-<ul class="materials-list">
-<li><a href="analiza-eeg/eeg-sim.url" download title="eeg-sim.url">Symulator EEG · URL</a></li>
-<li><a href="analiza-eeg/MATLAB_EEG.pdf" download title="MATLAB_EEG.pdf">MATLAB EEG · PDF</a></li>
-<li><a href="analiza-eeg/Python_EEG.pdf" download title="Python_EEG.pdf">Python EEG · PDF</a></li>
-</ul></div>
-</div>
-</section>
+<li><a href="seminaria-dyplomowe/Jak_pisac_prace_dyplomową.pdf" download title="Jak pisać pracę dyplomową · PDF">Jak pisać pracę dyplomową · PDF</a></li>
+<li><a href="seminaria-dyplomowe/Jak_pisac_prace_dyplomową.pptx" download title="Jak pisać pracę dyplomową · PPTX">Jak pisać pracę dyplomową · PPTX</a></li>
+<li><a href="seminaria-dyplomowe/szablon_WEII.pdf" download title="Szablon WEiI · PDF">Szablon WEiI · PDF</a></li>
+<li><a href="seminaria-dyplomowe/weiiszablon.tex" download title="Szablon WEiI · TeX">Szablon WEiI · TeX</a></li>
+</ul></section>
 
 <section class="materials-group">
-<h4>Diagnoza psychologiczna</h4>
-<div class="materials-columns">
-<div class="materials-subgroup">
-<h5>PDF</h5>
+<h4>Kto, co, jak</h4>
 <ul class="materials-list">
-<li><a href="diagnoza-psychologiczna/diagnoza_lab1.pdf" download title="diagnoza_lab1.pdf">lab_01 · PDF</a></li>
-<li><a href="diagnoza-psychologiczna/diagnoza_lab2.pdf" download title="diagnoza_lab2.pdf">lab_02 · PDF</a></li>
-<li><a href="diagnoza-psychologiczna/diagnoza_lab3.pdf" download title="diagnoza_lab3.pdf">lab_03 · PDF</a></li>
-<li><a href="diagnoza-psychologiczna/diagnoza_lab4.pdf" download title="diagnoza_lab4.pdf">lab_04 · PDF</a></li>
-<li><a href="diagnoza-psychologiczna/diagnoza_lab5.pdf" download title="diagnoza_lab5.pdf">lab_05 · PDF</a></li>
-</ul></div>
-<div class="materials-subgroup">
-<h5>DOCX</h5>
-<ul class="materials-list">
-<li><a href="diagnoza-psychologiczna/diagnoza_lab1.docx" download title="diagnoza_lab1.docx">lab_01 · DOCX</a></li>
-<li><a href="diagnoza-psychologiczna/diagnoza_lab2.docx" download title="diagnoza_lab2.docx">lab_02 · DOCX</a></li>
-<li><a href="diagnoza-psychologiczna/diagnoza_lab3.docx" download title="diagnoza_lab3.docx">lab_03 · DOCX</a></li>
-<li><a href="diagnoza-psychologiczna/diagnoza_lab4.docx" download title="diagnoza_lab4.docx">lab_04 · DOCX</a></li>
-<li><a href="diagnoza-psychologiczna/diagnoza_lab5.docx" download title="diagnoza_lab5.docx">lab_05 · DOCX</a></li>
-</ul></div>
-</div>
-</section>
-
-<section class="materials-group">
-<h4>Nawigacja robotów humanoidalnych</h4>
-<div class="materials-columns">
-<div class="materials-subgroup">
-<h5>PDF</h5>
-<ul class="materials-list">
-<li><a href="nawigacja-robotow-humanoidalnych/robo_w01.pdf" download title="robo_w01.pdf">w_01 · PDF</a></li>
-<li><a href="nawigacja-robotow-humanoidalnych/robo_w02.pdf" download title="robo_w02.pdf">w_02 · PDF</a></li>
-<li><a href="nawigacja-robotow-humanoidalnych/robo_w03.pdf" download title="robo_w03.pdf">w_03 · PDF</a></li>
-<li><a href="nawigacja-robotow-humanoidalnych/robo_w04.pdf" download title="robo_w04.pdf">w_04 · PDF</a></li>
-<li><a href="nawigacja-robotow-humanoidalnych/robo_w05.pdf" download title="robo_w05.pdf">w_05 · PDF</a></li>
-<li><a href="nawigacja-robotow-humanoidalnych/robo_w06.pdf" download title="robo_w06.pdf">w_06 · PDF</a></li>
-<li><a href="nawigacja-robotow-humanoidalnych/robo_w07.pdf" download title="robo_w07.pdf">w_07 · PDF</a></li>
-<li><a href="nawigacja-robotow-humanoidalnych/robo_w08.pdf" download title="robo_w08.pdf">w_08 · PDF</a></li>
-<li><a href="nawigacja-robotow-humanoidalnych/robo_w09.pdf" download title="robo_w09.pdf">w_09 · PDF</a></li>
-<li><a href="nawigacja-robotow-humanoidalnych/robo_w10.pdf" download title="robo_w10.pdf">w_10 · PDF</a></li>
-</ul></div>
-<div class="materials-subgroup">
-<h5>PPTX</h5>
-<ul class="materials-list">
-<li><a href="nawigacja-robotow-humanoidalnych/robo_w01.pptx" download title="robo_w01.pptx">w_01 · PPTX</a></li>
-<li><a href="nawigacja-robotow-humanoidalnych/robo_w02.pptx" download title="robo_w02.pptx">w_02 · PPTX</a></li>
-<li><a href="nawigacja-robotow-humanoidalnych/robo_w03.pptx" download title="robo_w03.pptx">w_03 · PPTX</a></li>
-<li><a href="nawigacja-robotow-humanoidalnych/robo_w04.pptx" download title="robo_w04.pptx">w_04 · PPTX</a></li>
-<li><a href="nawigacja-robotow-humanoidalnych/robo_w05.pptx" download title="robo_w05.pptx">w_05 · PPTX</a></li>
-<li><a href="nawigacja-robotow-humanoidalnych/robo_w06.pptx" download title="robo_w06.pptx">w_06 · PPTX</a></li>
-<li><a href="nawigacja-robotow-humanoidalnych/robo_w07.pptx" download title="robo_w07.pptx">w_07 · PPTX</a></li>
-<li><a href="nawigacja-robotow-humanoidalnych/robo_w08.pptx" download title="robo_w08.pptx">w_08 · PPTX</a></li>
-<li><a href="nawigacja-robotow-humanoidalnych/robo_w09.pptx" download title="robo_w09.pptx">w_09 · PPTX</a></li>
-<li><a href="nawigacja-robotow-humanoidalnych/robo_w10.pptx" download title="robo_w10.pptx">w_10 · PPTX</a></li>
-</ul></div>
-</div>
-</section>
-
-<section class="materials-group">
-<h4>Neuropsychologia</h4>
-<ul class="materials-list">
-<li><a href="neuropsychologia/neuro_lab_01.pdf" download title="neuro_lab_01.pdf">lab_01 · PDF</a></li>
-<li><a href="neuropsychologia/neuro_lab_02.pdf" download title="neuro_lab_02.pdf">lab_02 · PDF</a></li>
-<li><a href="neuropsychologia/neuro_lab_03.pdf" download title="neuro_lab_03.pdf">lab_03 · PDF</a></li>
-<li><a href="neuropsychologia/neuro_lab_04.pdf" download title="neuro_lab_04.pdf">lab_04 · PDF</a></li>
+<li><a href="Kto-Co-Jak/KtoCoJak.pdf" download title="KtoCoJak.pdf">Kto, co, jak · PDF</a></li>
+<li><a href="Kto-Co-Jak/KtoCoJak.pptx" download title="KtoCoJak.pptx">Kto, co, jak · PPTX</a></li>
 </ul>
-</section>
-
-<section class="materials-group">
-<h4>Psychologia poznawcza</h4>
-<div class="materials-columns">
-<div class="materials-subgroup">
-<h5>PDF</h5>
-<ul class="materials-list">
-<li><a href="psychologia-poznawcza/psych_pozn_lab1.pdf" download title="psych_pozn_lab1.pdf">lab_01 · PDF</a></li>
-<li><a href="psychologia-poznawcza/psych_pozn_lab2.pdf" download title="psych_pozn_lab2.pdf">lab_02 · PDF</a></li>
-<li><a href="psychologia-poznawcza/psych_pozn_lab3.pdf" download title="psych_pozn_lab3.pdf">lab_03 · PDF</a></li>
-<li><a href="psychologia-poznawcza/psych_pozn_lab4.pdf" download title="psych_pozn_lab4.pdf">lab_04 · PDF</a></li>
-<li><a href="psychologia-poznawcza/psych_pozn_lab5.pdf" download title="psych_pozn_lab5.pdf">lab_05 · PDF</a></li>
-<li><a href="psychologia-poznawcza/psych_pozn_lab6.pdf" download title="psych_pozn_lab6.pdf">lab_06 · PDF</a></li>
-</ul></div>
-<div class="materials-subgroup">
-<h5>DOCX</h5>
-<ul class="materials-list">
-<li><a href="psychologia-poznawcza/psych_pozn_lab1.docx" download title="psych_pozn_lab1.docx">lab_01 · DOCX</a></li>
-<li><a href="psychologia-poznawcza/psych_pozn_lab2.docx" download title="psych_pozn_lab2.docx">lab_02 · DOCX</a></li>
-<li><a href="psychologia-poznawcza/psych_pozn_lab3.docx" download title="psych_pozn_lab3.docx">lab_03 · DOCX</a></li>
-<li><a href="psychologia-poznawcza/psych_pozn_lab4.docx" download title="psych_pozn_lab4.docx">lab_04 · DOCX</a></li>
-<li><a href="psychologia-poznawcza/psych_pozn_lab5.docx" download title="psych_pozn_lab5.docx">lab_05 · DOCX</a></li>
-<li><a href="psychologia-poznawcza/psych_pozn_lab6.docx" download title="psych_pozn_lab6.docx">lab_06 · DOCX</a></li>
-</ul></div>
-</div>
 </section>
 
 <section class="materials-group">

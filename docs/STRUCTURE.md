@@ -29,6 +29,10 @@ aktualnych plików dla studentów jest `materials/`.
   i sygnalizuje nowy plik, którego nie wpisano na listę.
 - Indeks zachowuje zwykły HTML, responsywną siatkę CSS, obsługę trybu
   jasnego i ciemnego oraz istniejące ścieżki pobierania.
+- Karty są uporządkowane tematycznie: programowanie, XR i robotyka,
+  informatyka/neuronauka, psychologia oraz materiały ogólne.
+  Odnośniki do wykładów są niebieskawe, do laboratoriów zielonkawe,
+  a pozostałe PPTX zachowują pomarańczowy akcent.
 - Domyślnie widoczne są tylko PDF, a spośród plików o tym samym rdzeniu nazwy
   wygrywa najwyższy numer wersji `vX.Y.Z`. Pozostałe formaty i starsze wersje
   są dostępne po trzech kliknięciach przycisku w nagłówku (odstęp do 1,8 s).
