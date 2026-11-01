@@ -162,7 +162,7 @@ class MaterialsTests(unittest.TestCase):
                 self.assertGreater(style.index(selector), lab)
                 self.assertEqual(style.count(f"--{variable}:{light}"), 1)
                 self.assertEqual(style.count(f"--{variable}:{dark}"), 1)
-                self.assertRegex(html, rf'href="[^"]+\\.{extension}"')
+                self.assertRegex(html, rf'href="[^"]+\.{extension}"')
 
     def test_compact_layout_uses_independent_columns(self):
         """Długie karty nie wymuszają pustej wysokości pozostałych."""
