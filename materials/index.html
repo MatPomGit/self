@@ -36,7 +36,10 @@ a:hover{text-decoration:underline}
 a[href$=".pptx" i],a[href$=".pptx" i]:visited{color:var(--pptx)}
 a:focus-visible{outline:3px solid var(--text);outline-offset:2px}
 button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
-.materials-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.materials-header{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.materials-view-toggle{position:absolute;left:62%;top:50%;transform:translate(-50%,-50%);min-width:80px;height:34px;padding:0 8px;border:1px solid var(--line);border-radius:5px;background:var(--surface);color:var(--text);font:inherit;font-size:.8rem;cursor:pointer}
+.materials-view-toggle:hover{background:var(--hover)}
+[hidden]{display:none!important}
 .materials-header>div{min-width:0}
 .materials-header a:hover{background:var(--hover);border-radius:4px}
 .theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;flex:0 0 36px;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--text);cursor:pointer}
@@ -56,7 +59,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 .materials-list a{display:block;padding:2px 2px;border-radius:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.15;font-size:.74rem}
 .materials-list a:hover{background:var(--hover)}
 @media(min-width:1450px){.materials-grid{columns:5 280px}}
-@media(max-width:620px){main{padding:10px 10px 14px}.materials-grid{columns:1}.materials-group{margin-bottom:8px}.materials-list a{padding:4px 4px;white-space:normal;overflow-wrap:anywhere}}
+@media(max-width:620px){main{padding:10px 10px 14px}.materials-header{flex-wrap:wrap}.materials-header>div{flex-basis:100%}.materials-view-toggle{position:static;transform:none;margin-left:auto}.materials-grid{columns:1}.materials-group{margin-bottom:8px}.materials-list a{padding:4px 4px;white-space:normal;overflow-wrap:anywhere}}
 
 /* Animuj kolory tylko podczas przełączenia, nie podczas ładowania strony. */
 :root.theme-transition body,
@@ -81,6 +84,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
   <div>
     <h2><a href="../">&#8592; Strona główna</a>  / Materiały dla studentów</h2>
   </div>
+  <button class="materials-view-toggle" id="materials-view-toggle" type="button" aria-label="Widok PDF. Kliknij trzy razy, aby wyświetlić wszystkie pliki" aria-pressed="false" title="Kliknij trzy razy, aby wyświetlić wszystkie pliki">PDF</button>
   <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Tryb ciemny" aria-pressed="false" title="Włącz tryb ciemny">
     <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.8 14.1A8.9 8.9 0 0 1 9.9 3.2a9 9 0 1 0 10.9 10.9Z"/></svg>
     <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
@@ -473,6 +477,70 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 </div></main>
 
 <script>
+
+  // W widoku podstawowym pokazuj tylko najnowszą wersję każdego PDF.
+  const viewToggle = document.getElementById('materials-view-toggle');
+  const materialsLinks = Array.from(document.querySelectorAll('.materials-list a[href]'));
+  const latestVersions = new Map();
+  function comparePdfVersions(left, right) {
+    for (let index = 0; index < Math.max(left.length, right.length); index++) {
+      const difference = (left[index] || 0) - (right[index] || 0);
+      if (difference) return difference;
+    }
+    return 0;
+  }
+  function pdfVersionInfo(path) {
+    if (!/\.pdf$/i.test(path)) return null;
+    const match = /[._-]v(\d+(?:[._]\d+)*)\.pdf$/i.exec(path);
+    return {
+      family: (match ? path.slice(0, match.index) : path.slice(0, -4)).toLowerCase(),
+      version: match ? match[1].split(/[._]/).map(Number) : [0]
+    };
+  }
+  for (const link of materialsLinks) {
+    const info = pdfVersionInfo(link.getAttribute('href'));
+    if (!info) continue;
+    const current = latestVersions.get(info.family);
+    if (!current || comparePdfVersions(info.version, current) > 0) {
+      latestVersions.set(info.family, info.version);
+    }
+  }
+  const currentPdfs = new Set(materialsLinks.filter(link => {
+    const info = pdfVersionInfo(link.getAttribute('href'));
+    return info && comparePdfVersions(info.version, latestVersions.get(info.family)) === 0;
+  }));
+  function setMaterialsView(view) {
+    const showAll = view === 'all';
+    for (const link of materialsLinks) {
+      link.closest('li').hidden = !showAll && !currentPdfs.has(link);
+    }
+    for (const group of document.querySelectorAll('.materials-group')) {
+      for (const subgroup of group.querySelectorAll('.materials-subgroup')) {
+        subgroup.hidden = !showAll && !subgroup.querySelector('.materials-list li:not([hidden])');
+      }
+      group.hidden = !showAll && !group.querySelector('.materials-list li:not([hidden])');
+    }
+    document.documentElement.dataset.materialsView = view;
+    viewToggle.textContent = showAll ? 'Wszystkie' : 'PDF';
+    viewToggle.setAttribute('aria-pressed', String(showAll));
+    const instruction = showAll
+      ? 'Widok wszystkich plików. Kliknij trzy razy, aby wyświetlić tylko PDF'
+      : 'Widok PDF. Kliknij trzy razy, aby wyświetlić wszystkie pliki';
+    viewToggle.setAttribute('aria-label', instruction);
+    viewToggle.title = instruction;
+  }
+  let viewClicks = 0;
+  let lastViewClick = 0;
+  viewToggle.addEventListener('click', () => {
+    const now = Date.now();
+    viewClicks = now - lastViewClick <= 1800 ? viewClicks + 1 : 1;
+    lastViewClick = now;
+    if (viewClicks < 3) return;
+    viewClicks = 0;
+    setMaterialsView(document.documentElement.dataset.materialsView === 'pdf' ? 'all' : 'pdf');
+  });
+  setMaterialsView('pdf');
+
   const themeToggle = document.getElementById('theme-toggle');
   const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
   let sessionChoice = false;

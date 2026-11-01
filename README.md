@@ -11,7 +11,9 @@ Witryna naukowa i dydaktyczna publikowana przez GitHub Pages.
 
 Jedynym katalogiem aktualnych materiałów udostępnianych studentom jest `materials/`.
 Punktem wejścia pozostaje `materials/index.html`, prosta strona HTML z listami linków
-bez JavaScriptu, frameworków i generatora. Pozostałe strony przedmiotów znajdują się w
+bez frameworków i generatora. Skrypt domyślnie pokazuje najnowsze wersje PDF;
+trzy kliknięcia przycisku PDF/Wszystkie przełączają pełną listę. Bez JavaScriptu
+pełna lista pozostaje dostępna. Pozostałe strony przedmiotów znajdują się w
 `materials/<przedmiot>/index.html`;
 
 ## Wersje językowe strony głównej
@@ -68,5 +70,5 @@ Kolumna tytułu na ekranach szerokich otrzymała udział 0,85 fr zamiast 0,55 fr
 
 ---
 `prefers-color-scheme`, co strona główna. Wybór pozostaje zachowany przy
-przejściu między stronami. Lista plików nie została zmieniona; jej dwa
-małe skrypty służą wyłącznie do zapamiętywania i przełączania motywu.
+przejściu między stronami. Lista plików nie została zmieniona. Skrypty strony materiałów obsługują
+motyw oraz dwustopniowy widok spisu (PDF / wszystkie pliki).
