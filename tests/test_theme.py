@@ -52,6 +52,25 @@ class ThemeTests(unittest.TestCase):
         self.assertLess(HTML.index("document.documentElement.dataset.theme ="),
                         HTML.index("<style>"))
 
+    def test_theme_change_uses_smooth_colors_and_reduced_motion(self):
+        for page in (HTML, MATERIALS_HTML):
+            with self.subTest(page="home" if page is HTML else "materials"):
+                self.assertIn("function changeTheme(next)", page)
+                self.assertIn("root.classList.add('theme-transition')", page)
+                self.assertIn("root.classList.remove('theme-transition')", page)
+                self.assertIn("setTimeout(() => root.classList.remove('theme-transition'), 2500)", page)
+                self.assertIn("background-color 2.5s ease-in-out", page)
+                self.assertIn("color 2.5s ease-in-out", page)
+                self.assertIn("border-color 2.5s ease-in-out", page)
+                self.assertIn("fill 2.5s ease-in-out", page)
+                self.assertIn("stroke 2.5s ease-in-out", page)
+                self.assertIn("@media(prefers-reduced-motion:reduce)", page)
+                self.assertIn("theme-transition body *::after {transition:none}", page)
+                self.assertIn("changeTheme(next);", page)
+                self.assertIn("changeTheme(event.matches ? 'dark' : 'light');", page)
+                self.assertLess(page.index("document.documentElement.dataset.theme ="),
+                                page.index("<style>"))
+
     def test_dark_palette(self):
         css = re.search(r':root\[data-theme="dark"\]\s*\{([^}]+)\}', HTML)
         self.assertIsNotNone(css)
