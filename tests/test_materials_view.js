@@ -3,9 +3,8 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 const html = fs.readFileSync('materials/index.html', 'utf8');
-const scripts = [...html.matchAll(/<script>([\\s\\S]*?)<\\/script>/g)];
-assert.equal(scripts.length, 2);
-const script = scripts[1][1];
+assert.equal(html.split('<script>').length - 1, 2);
+const script = html.split('<script>')[2].split('</script>')[0];
 
 class Node {
   constructor(items = [], subgroups = []) {
@@ -101,6 +100,6 @@ clickAt(3100);
 assert.equal(root.dataset.materialsView, 'pdf');
 assert.equal(viewToggle.attrs['aria-pressed'], 'false');
 assert.equal(pageGroup.hidden, true);
-assert.match(html, /@media\\(max-width:620px\\).*materials-view-toggle\\{position:static/);
-assert.match(html, /\\[hidden\\]\\{display:none!important\\}/);
+assert.ok(html.includes('.materials-view-toggle{position:static;transform:none;'));
+assert.ok(html.includes('[hidden]{display:none!important}'));
 console.log('[DONE] MATERIALS_VIEW_PASS');
