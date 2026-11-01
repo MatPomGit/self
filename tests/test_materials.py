@@ -139,6 +139,31 @@ class MaterialsTests(unittest.TestCase):
         self.assertIn('a[href$=".pptx" i]:visited{color:var(--pptx)}', style)
         self.assertRegex(html, r'href="[^"]+\.pptx"')
 
+
+    def test_format_colors_override_document_kind(self):
+        """PPTX, TeX i HTML zachowują swoje kolory także z klasą wykład/lab."""
+        html = (MATERIALS / "index.html").read_text(encoding="utf-8")
+        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+        lecture = style.index(".materials-list a.material-link--lecture")
+        lab = style.index(".materials-list a.material-link--lab")
+        for extension, variable, light, dark in (
+            ("pptx", "pptx", "#9b4400", "#f0a14a"),
+            ("tex", "tex", "#754a84", "#cbb0ea"),
+            ("html", "html", "#1b6a75", "#83d6df"),
+        ):
+            with self.subTest(extension=extension):
+                selector = (
+                    f'.materials-list a[href$=".{extension}" i],'
+                    f'.materials-list a[href$=".{extension}" i]:visited'
+                    f'{{color:var(--{variable})}}'
+                )
+                self.assertIn(selector, style)
+                self.assertGreater(style.index(selector), lecture)
+                self.assertGreater(style.index(selector), lab)
+                self.assertEqual(style.count(f"--{variable}:{light}"), 1)
+                self.assertEqual(style.count(f"--{variable}:{dark}"), 1)
+                self.assertRegex(html, rf'href="[^"]+\\.{extension}"')
+
     def test_compact_layout_uses_independent_columns(self):
         """Długie karty nie wymuszają pustej wysokości pozostałych."""
         html = (MATERIALS / "index.html").read_text(encoding="utf-8")

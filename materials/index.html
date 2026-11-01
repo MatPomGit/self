@@ -20,8 +20,8 @@
 </script>
 
 <style>
-:root{color-scheme:light;--bg:#fafaf9;--text:#242526;--muted:#555a60;--line:#d9dcde;--surface:#fff;--raised:#f6f7f7;--hover:#e9ebec;--accent:#145a8d;--pptx:#9b4400;--lecture:#315f88;--lab:#346e4c;--heading:#213f5a;--subgroup-line:rgba(70,80,90,.14)}
-:root[data-theme="dark"]{color-scheme:dark;--bg:#17191c;--text:#e9eaed;--muted:#b7bbc2;--line:#40444a;--surface:#202a35;--raised:#292d33;--hover:#363c44;--accent:#93c2e6;--pptx:#f0a14a;--lecture:#a8cbed;--lab:#a8d7b5;--heading:#e0ebf5;--subgroup-line:rgba(205,215,230,.13)}
+:root{color-scheme:light;--bg:#fafaf9;--text:#242526;--muted:#555a60;--line:#d9dcde;--surface:#fff;--raised:#f6f7f7;--hover:#e9ebec;--accent:#145a8d;--pptx:#9b4400;--tex:#754a84;--html:#1b6a75;--lecture:#315f88;--lab:#346e4c;--heading:#213f5a;--subgroup-line:rgba(70,80,90,.14)}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#17191c;--text:#e9eaed;--muted:#b7bbc2;--line:#40444a;--surface:#202a35;--raised:#292d33;--hover:#363c44;--accent:#93c2e6;--pptx:#f0a14a;--tex:#cbb0ea;--html:#83d6df;--lecture:#a8cbed;--lab:#a8d7b5;--heading:#e0ebf5;--subgroup-line:rgba(205,215,230,.13)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
 main{max-width:1600px;margin:0 auto;padding:8px 10px 12px}
@@ -33,9 +33,12 @@ h5{font-size:.5rem;line-height:1;font-weight:450;color:var(--muted);margin:0 0 1
 p{margin:2px 0}
 a,a:visited{color:var(--text);text-decoration:none}
 a:hover{text-decoration:underline}
-a[href$=".pptx" i],a[href$=".pptx" i]:visited{color:var(--pptx)}
 .materials-list a.material-link--lecture,.materials-list a.material-link--lecture:visited{color:var(--lecture)}
 .materials-list a.material-link--lab,.materials-list a.material-link--lab:visited{color:var(--lab)}
+/* Format pliku ma pierwszeństwo przed typem materiału. */
+.materials-list a[href$=".pptx" i],.materials-list a[href$=".pptx" i]:visited{color:var(--pptx)}
+.materials-list a[href$=".tex" i],.materials-list a[href$=".tex" i]:visited{color:var(--tex)}
+.materials-list a[href$=".html" i],.materials-list a[href$=".html" i]:visited{color:var(--html)}
 a:focus-visible{outline:3px solid var(--text);outline-offset:2px}
 button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 .materials-header{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px}
