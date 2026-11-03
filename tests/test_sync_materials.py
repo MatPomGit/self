@@ -94,5 +94,40 @@ class MaterialsSyncTests(unittest.TestCase):
             self.assertEqual(render(generated, root), (generated, []))
 
 
+    def test_subject_directories_differing_only_in_case_share_card(self):
+        with TemporaryDirectory() as temp:
+            root = self.make_root(temp)
+            alternate = root / "Example"
+            alternate.mkdir()
+            (alternate / "other.pdf").write_bytes(b"fixture")
+            (alternate / "extra.pdf").write_bytes(b"fixture")
+            source = BASE.replace(
+                "</ul>\n</section>",
+                '<li><a href="Example/other.pdf" download>other</a></li>\n</ul>\n</section>',
+            )
+            result, issues = render(source, root)
+            self.assertFalse(issues)
+            self.assertIn('href="Example/extra.pdf"', result)
+            self.assertEqual(result.count('<section class="materials-group"'), 1)
+            self.assertEqual(render(result, root), (result, []))
+
+    def test_new_subject_is_inserted_before_matching_grid_close(self):
+        with TemporaryDirectory() as temp:
+            root = self.make_root(temp)
+            (root / "new-subject").mkdir()
+            (root / "new-subject" / "new.pdf").write_bytes(b"fixture")
+            source = BASE.replace("</div>\n\n<script>", "</div></main>\n\n<script>")
+            result, issues = render(source, root)
+            self.assertFalse(issues)
+            self.assertIn('href="new-subject/new.pdf"', result)
+            self.assertLess(result.index('href="new-subject/new.pdf"'),
+                            result.index("</div></main>"))
+            self.assertEqual(render(result, root), (result, []))
+
+    def test_current_materials_index_has_no_stale_links(self):
+        from scripts.sync_materials import INDEX
+        _, issues = render(INDEX.read_text(encoding="utf-8"), INDEX.parent)
+        self.assertFalse(issues)
+
 if __name__ == "__main__":
     unittest.main()

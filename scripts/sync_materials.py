@@ -123,7 +123,7 @@ def render(source: str, materials: Path) -> tuple[str, list[str]]:
             return m.group("before") + escape(href, quote=True) + m.group("after")
 
         card = LINK.sub(fix_link, card)
-        if len(paths) > 1:
+        if len({path.casefold() for path in paths}) > 1:
             failures.append(f"Mixed subject paths in one materials card: {sorted(paths)}")
         subjects.update(paths)
         tag = re.search(r'data-materials-subject="([^"]+)"', card)
@@ -131,7 +131,8 @@ def render(source: str, materials: Path) -> tuple[str, list[str]]:
         if subject:
             missing = sorted(
                 (name for name in files
-                 if name.startswith(subject + "/") and name not in seen),
+                 if name.split("/", 1)[0].casefold() == subject.casefold()
+                 and name not in seen),
                 key=str.casefold,
             )
             if missing:
@@ -154,11 +155,22 @@ def render(source: str, materials: Path) -> tuple[str, list[str]]:
                      f'data-materials-subject="{escape(subject, quote=True)}">\n'
                      f'<h4>{title}</h4>\n</section>')
             new_cards.append(add_links(blank, names, subject))
-        marker = "</div>\n\n<script>"
-        if marker not in result:
+        # Locate the grid's matching closing div even with a surrounding main.
+        grid = re.search(
+            r'<div\b[^>]*class="[^"]*\bmaterials-grid\b[^"]*"[^>]*>', result
+        )
+        close = None
+        if grid:
+            depth = 1
+            for tag in re.finditer(r'</?div\b[^>]*>', result[grid.end():], re.I):
+                depth += -1 if tag.group().startswith("</") else 1
+                if depth == 0:
+                    close = grid.end() + tag.start()
+                    break
+        if close is None:
             failures.append("Cannot locate end of materials grid")
         else:
-            result = result.replace(marker, "\n".join(new_cards) + "\n" + marker, 1)
+            result = result[:close] + "\n".join(new_cards) + "\n" + result[close:]
     if not CARD.search(source):
         failures.append("No materials cards found")
     return result, failures
@@ -167,7 +179,7 @@ def render(source: str, materials: Path) -> tuple[str, list[str]]:
 def add_links(card: str, names: list[str], subject: str) -> str:
     grouped: dict[str, list[str]] = defaultdict(list)
     for name in names:
-        remainder = Path(name).relative_to(subject)
+        remainder = Path(*Path(name).parts[1:])
         group = remainder.parent.as_posix()
         grouped[group].append(name)
     blocks = ["<!-- AUTO MATERIALS BEGIN -->"]
