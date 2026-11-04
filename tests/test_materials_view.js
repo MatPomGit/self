@@ -258,6 +258,6 @@ assert.match(html, /--lecture-edit:#254c6c/);
 assert.match(html, /--lecture-edit:#87a8ca/);
 assert.match(html, /--lab-edit:#27563b/);
 assert.match(html, /--lab-edit:#85b098/);
-assert.match(html, /material-format--editable:visited\{color:var\(--edit\);text-decoration:underline/);
+assert.match(html, /a\.material-link--editable:visited\{color:var\(--edit\);text-decoration:underline/);
 assert.match(html, /data-materials-view="all"/);
 console.log('[DONE] MATERIALS_FORMAT_PAIRS_PASS');
