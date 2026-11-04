@@ -210,7 +210,7 @@ class MaterialsTests(unittest.TestCase):
         self.assertTrue(headings)
         self.assertEqual(set(headings), {"5"})
         self.assertIn("margin:0 0 1px}", style)
-        subgroup = re.search(r"\.materials-subgroup\{([^}]+)\}", style)
+        subgroup = re.search(r"(?m)^\.materials-subgroup\{([^}]+)\}", style)
         self.assertIsNotNone(subgroup)
         self.assertIn("background:transparent", subgroup.group(1))
         self.assertIn("padding:2px 2px 2px", subgroup.group(1))
