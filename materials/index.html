@@ -20,8 +20,8 @@
 </script>
 
 <style>
-:root{color-scheme:light;--bg:#fafaf9;--text:#242526;--muted:#555a60;--line:#d9dcde;--surface:#fff;--raised:#f6f7f7;--hover:#e9ebec;--accent:#145a8d;--pptx:#9b4400;--tex:#754a84;--html:#1b6a75;--lecture:#315f88;--lab:#346e4c;--heading:#213f5a;--subgroup-line:rgba(70,80,90,.14)}
-:root[data-theme="dark"]{color-scheme:dark;--bg:#17191c;--text:#e9eaed;--muted:#b7bbc2;--line:#40444a;--surface:#202a35;--raised:#292d33;--hover:#363c44;--accent:#93c2e6;--pptx:#f0a14a;--tex:#cbb0ea;--html:#83d6df;--lecture:#a8cbed;--lab:#a8d7b5;--heading:#e0ebf5;--subgroup-line:rgba(205,215,230,.13)}
+:root{color-scheme:light;--bg:#fafaf9;--text:#242526;--muted:#555a60;--line:#d9dcde;--surface:#fff;--raised:#f6f7f7;--hover:#e9ebec;--accent:#145a8d;--pptx:#9b4400;--tex:#754a84;--html:#1b6a75;--lecture:#315f88;--lab:#346e4c;--heading:#213f5a;--lecture-edit:#254c6c;--lab-edit:#27563b;--edit:#151b20;--subgroup-line:rgba(70,80,90,.14)}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#17191c;--text:#e9eaed;--muted:#b7bbc2;--line:#40444a;--surface:#202a35;--raised:#292d33;--hover:#363c44;--accent:#93c2e6;--pptx:#f0a14a;--tex:#cbb0ea;--html:#83d6df;--lecture:#a8cbed;--lab:#a8d7b5;--heading:#e0ebf5;--lecture-edit:#87a8ca;--lab-edit:#85b098;--edit:#c2ccd5;--subgroup-line:rgba(205,215,230,.13)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
 main{max-width:1600px;margin:0 auto;padding:8px 10px 12px}
@@ -39,6 +39,20 @@ a:hover{text-decoration:underline}
 .materials-list a[href$=".pptx" i],.materials-list a[href$=".pptx" i]:visited{color:var(--pptx)}
 .materials-list a[href$=".tex" i],.materials-list a[href$=".tex" i]:visited{color:var(--tex)}
 .materials-list a[href$=".html" i],.materials-list a[href$=".html" i]:visited{color:var(--html)}
+/* Warianty źródłowe mają o ton ciemniejszy kolor niż odpowiadające im PDF. */
+.materials-list li[data-materials-kind="lecture"] .material-format--editable,
+.materials-list li[data-materials-kind="lecture"] .material-format--editable:visited{color:var(--lecture-edit)}
+.materials-list li[data-materials-kind="lab"] .material-format--editable,
+.materials-list li[data-materials-kind="lab"] .material-format--editable:visited{color:var(--lab-edit)}
+.materials-list .material-format--editable,.materials-list .material-format--editable:visited,
+.materials-list a.material-link--editable,.materials-list a.material-link--editable:visited{color:var(--edit);text-decoration:underline;text-underline-offset:2px}
+.materials-list li[data-materials-kind="lecture"] .material-format--pdf{color:var(--lecture)}
+.materials-list li[data-materials-kind="lab"] .material-format--pdf{color:var(--lab)}
+.materials-list .material-formats{display:inline;white-space:normal}
+.materials-list li.materials-row--variants>a{display:inline;white-space:normal;overflow-wrap:anywhere}
+.materials-list .material-formats a{display:inline;padding:0;font-size:inherit;line-height:inherit;white-space:nowrap}
+.materials-list .material-formats a::before{content:" · ";white-space:pre;color:var(--muted)}
+:root:not([data-materials-view="all"]) .materials-list .material-formats{display:none}
 a:focus-visible{outline:3px solid var(--text);outline-offset:2px}
 button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 .materials-header{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -486,6 +500,101 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
   // W widoku podstawowym pokazuj tylko najnowszą wersję każdego PDF.
   const viewToggle = document.getElementById('materials-view-toggle');
   const materialsLinks = Array.from(document.querySelectorAll('.materials-list a[href]'));
+  const EDITABLE_EXTENSIONS = new Set(['docx', 'pptx', 'tex', 'typ', 'qmd']);
+
+  // Jedna pozycja na dokument: PDF jest linkiem głównym, formaty obok
+  // są osobnymi, dostępnymi z klawiatury odnośnikami do pobrania.
+  function prepareMaterialRows() {
+    const rows = Array.from(document.querySelectorAll('.materials-list li'));
+    const pdfByStem = new Map();
+    const detached = new Set();
+    function pathInfo(link) {
+      const path = link.getAttribute('href').split(/[?#]/, 1)[0];
+      const match = /\.([^.\/]+)$/.exec(path);
+      return {
+        extension: match ? match[1].toLowerCase() : '',
+        stem: match ? path.slice(0, -match[0].length).toLowerCase() : path.toLowerCase()
+      };
+    }
+    function labelWithoutExtension(text) {
+      return text.replace(/\s*·\s*(?:PDF|DOCX|PPTX|TEX|TYP|QMD)\s*$/i, '').trim();
+    }
+    function kindOf(link) {
+      if (link.classList.contains('material-link--lecture')) return 'lecture';
+      if (link.classList.contains('material-link--lab')) return 'lab';
+      return 'other';
+    }
+    for (const row of rows) {
+      const link = row.querySelector('a[href]');
+      if (!link) continue;
+      const info = pathInfo(link);
+      row.dataset.materialsKind = kindOf(link);
+      if (info.extension === 'pdf') {
+        pdfByStem.set(info.stem, row);
+        link.textContent = labelWithoutExtension(link.textContent);
+        row.classList.add('materials-row--variants');
+        const formats = document.createElement('span');
+        formats.className = 'material-formats';
+        const format = document.createElement('a');
+        format.className = 'material-format--pdf';
+        format.setAttribute('href', link.getAttribute('href'));
+        format.setAttribute('download', '');
+        format.title = 'Pobierz PDF: ' + link.textContent;
+        format.setAttribute('aria-label', format.title);
+        format.textContent = 'PDF';
+        formats.appendChild(format);
+        row.appendChild(formats);
+      }
+    }
+    for (const row of rows) {
+      const link = row.querySelector('a[href]');
+      if (!link) continue;
+      const info = pathInfo(link);
+      if (!EDITABLE_EXTENSIONS.has(info.extension)) continue;
+      {
+        const pdfRow = pdfByStem.get(info.stem);
+        if (pdfRow) {
+          const formats = pdfRow.querySelector('.material-formats');
+          if (!formats) throw new Error('Brak linku PDF dla wersji edytowalnej');
+          link.textContent = info.extension.toUpperCase();
+          link.classList.add('material-format--editable');
+          link.setAttribute('download', '');
+          link.title = 'Pobierz ' + info.extension.toUpperCase() + ': ' + pdfRow.querySelector('a[href]').textContent;
+          link.setAttribute('aria-label', link.title);
+          formats.appendChild(link);
+          row.remove();
+          detached.add(row);
+        } else {
+          link.textContent = labelWithoutExtension(link.textContent) + ' · ' + info.extension.toUpperCase();
+          link.classList.add('material-link--editable');
+        }
+      }
+    }
+    const liveRows = rows.filter(row => !detached.has(row));
+
+    // Zachowaj istniejącą kolejność wewnątrz kategorii, lecz zawsze
+    // umieszczaj wykłady przed laboratoriami w każdym przedmiocie.
+    const rank = row => row.dataset.materialsKind === 'lecture' ? 0 :
+      row.dataset.materialsKind === 'lab' ? 1 : 2;
+    for (const group of document.querySelectorAll('.materials-group')) {
+      for (const list of group.querySelectorAll('.materials-list')) {
+        const ordered = Array.from(list.children).filter(item => item.tagName === 'LI');
+        ordered.sort((a, b) => rank(a) - rank(b));
+        ordered.forEach(item => list.appendChild(item));
+      }
+      const columns = group.querySelector('.materials-columns');
+      if (!columns) continue;
+      const blocks = Array.from(columns.children).filter(item => item.classList.contains('materials-subgroup'));
+      const blockRank = block => {
+        const kinds = Array.from(block.querySelectorAll('.materials-list li')).map(rank);
+        return kinds.length ? Math.min(...kinds) : 3;
+      };
+      blocks.sort((a, b) => blockRank(a) - blockRank(b));
+      blocks.forEach(block => columns.appendChild(block));
+    }
+    return liveRows;
+  }
+  const materialRows = typeof document.createElement === 'function' ? prepareMaterialRows() : null;
   const latestVersions = new Map();
   function comparePdfVersions(left, right) {
     for (let index = 0; index < Math.max(left.length, right.length); index++) {
@@ -516,8 +625,15 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
   }));
   function setMaterialsView(view) {
     const showAll = view === 'all';
-    for (const link of materialsLinks) {
-      link.closest('li').hidden = !showAll && !currentPdfs.has(link);
+    if (materialRows) {
+      for (const row of materialRows) {
+        const primary = row.querySelector('a[href]');
+        row.hidden = !showAll && !currentPdfs.has(primary);
+      }
+    } else {
+      for (const link of materialsLinks) {
+        link.closest('li').hidden = !showAll && !currentPdfs.has(link);
+      }
     }
     for (const group of document.querySelectorAll('.materials-group')) {
       for (const subgroup of group.querySelectorAll('.materials-subgroup')) {
