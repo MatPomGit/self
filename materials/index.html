@@ -534,14 +534,6 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
         pdfByStem.set(info.stem, row);
         link.textContent = labelWithoutExtension(link.textContent);
         row.classList.add('materials-row--variants');
-      }
-    }
-    for (const row of rows) {
-      const link = row.querySelector('a[href]');
-      if (!link) continue;
-      const info = pathInfo(link);
-      if (info.extension !== 'pdf' && !EDITABLE_EXTENSIONS.has(info.extension)) continue;
-      if (info.extension === 'pdf') {
         const formats = document.createElement('span');
         formats.className = 'material-formats';
         const format = document.createElement('a');
@@ -552,7 +544,14 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
         format.textContent = 'PDF';
         formats.appendChild(format);
         row.appendChild(formats);
-      } else {
+      }
+    }
+    for (const row of rows) {
+      const link = row.querySelector('a[href]');
+      if (!link) continue;
+      const info = pathInfo(link);
+      if (!EDITABLE_EXTENSIONS.has(info.extension)) continue;
+      {
         const pdfRow = pdfByStem.get(info.stem);
         if (pdfRow) {
           const formats = pdfRow.querySelector('.material-formats');
