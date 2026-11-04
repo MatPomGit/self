@@ -20,8 +20,8 @@
 </script>
 
 <style>
-:root{color-scheme:light;--bg:#fafaf9;--text:#242526;--muted:#555a60;--line:#d9dcde;--surface:#fff;--raised:#f6f7f7;--hover:#e9ebec;--accent:#145a8d;--pptx:#9b4400;--tex:#754a84;--html:#1b6a75;--lecture:#315f88;--lab:#346e4c;--heading:#213f5a;--lecture-edit:#254c6c;--lab-edit:#27563b;--edit:#3e505c;--subgroup-line:rgba(70,80,90,.14)}
-:root[data-theme="dark"]{color-scheme:dark;--bg:#17191c;--text:#e9eaed;--muted:#b7bbc2;--line:#40444a;--surface:#202a35;--raised:#292d33;--hover:#363c44;--accent:#93c2e6;--pptx:#f0a14a;--tex:#cbb0ea;--html:#83d6df;--lecture:#a8cbed;--lab:#a8d7b5;--heading:#e0ebf5;--lecture-edit:#87a8ca;--lab-edit:#85b098;--edit:#a4b1be;--subgroup-line:rgba(205,215,230,.13)}
+:root{color-scheme:light;--bg:#fafaf9;--text:#242526;--muted:#555a60;--line:#d9dcde;--surface:#fff;--raised:#f6f7f7;--hover:#e9ebec;--accent:#145a8d;--pptx:#9b4400;--tex:#754a84;--html:#1b6a75;--lecture:#315f88;--lab:#346e4c;--heading:#213f5a;--lecture-edit:#254c6c;--lab-edit:#27563b;--edit:#151b20;--subgroup-line:rgba(70,80,90,.14)}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#17191c;--text:#e9eaed;--muted:#b7bbc2;--line:#40444a;--surface:#202a35;--raised:#292d33;--hover:#363c44;--accent:#93c2e6;--pptx:#f0a14a;--tex:#cbb0ea;--html:#83d6df;--lecture:#a8cbed;--lab:#a8d7b5;--heading:#e0ebf5;--lecture-edit:#87a8ca;--lab-edit:#85b098;--edit:#c2ccd5;--subgroup-line:rgba(205,215,230,.13)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
 main{max-width:1600px;margin:0 auto;padding:8px 10px 12px}
@@ -36,6 +36,9 @@ a:hover{text-decoration:underline}
 .materials-list a.material-link--lecture,.materials-list a.material-link--lecture:visited{color:var(--lecture)}
 .materials-list a.material-link--lab,.materials-list a.material-link--lab:visited{color:var(--lab)}
 /* Format pliku ma pierwszeństwo przed typem materiału. */
+.materials-list a[href$=".pptx" i],.materials-list a[href$=".pptx" i]:visited{color:var(--pptx)}
+.materials-list a[href$=".tex" i],.materials-list a[href$=".tex" i]:visited{color:var(--tex)}
+.materials-list a[href$=".html" i],.materials-list a[href$=".html" i]:visited{color:var(--html)}
 /* Warianty źródłowe mają o ton ciemniejszy kolor niż odpowiadające im PDF. */
 .materials-list li[data-materials-kind="lecture"] .material-format--editable,
 .materials-list li[data-materials-kind="lecture"] .material-format--editable:visited{color:var(--lecture-edit)}
@@ -50,10 +53,6 @@ a:hover{text-decoration:underline}
 .materials-list .material-formats a{display:inline;padding:0;font-size:inherit;line-height:inherit;white-space:nowrap}
 .materials-list .material-formats a::before{content:" · ";white-space:pre;color:var(--muted)}
 :root:not([data-materials-view="all"]) .materials-list .material-formats{display:none}
-
-.materials-list a[href$=".pptx" i],.materials-list a[href$=".pptx" i]:visited{color:var(--pptx)}
-.materials-list a[href$=".tex" i],.materials-list a[href$=".tex" i]:visited{color:var(--tex)}
-.materials-list a[href$=".html" i],.materials-list a[href$=".html" i]:visited{color:var(--html)}
 a:focus-visible{outline:3px solid var(--text);outline-offset:2px}
 button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 .materials-header{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -540,7 +539,8 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
         format.className = 'material-format--pdf';
         format.setAttribute('href', link.getAttribute('href'));
         format.setAttribute('download', '');
-        format.title = 'Pobierz PDF';
+        format.title = 'Pobierz PDF: ' + link.textContent;
+        format.setAttribute('aria-label', format.title);
         format.textContent = 'PDF';
         formats.appendChild(format);
         row.appendChild(formats);
@@ -559,7 +559,8 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
           link.textContent = info.extension.toUpperCase();
           link.classList.add('material-format--editable');
           link.setAttribute('download', '');
-          link.title = 'Pobierz ' + info.extension.toUpperCase();
+          link.title = 'Pobierz ' + info.extension.toUpperCase() + ': ' + pdfRow.querySelector('a[href]').textContent;
+          link.setAttribute('aria-label', link.title);
           formats.appendChild(link);
           row.remove();
           detached.add(row);
