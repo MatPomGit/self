@@ -134,6 +134,7 @@ class Element {
   }
   getAttribute(name) { return this.attributes[name] ?? null; }
   setAttribute(name, value) { this.attributes[name] = String(value); }
+  removeAttribute(name) { delete this.attributes[name]; }
   appendChild(child) {
     if (child.parentNode) {
       const siblings = child.parentNode.children;
@@ -189,7 +190,7 @@ function row(list, filename, caption, kind = '') {
   const li = attach(list, 'li');
   const a = attach(li, 'a', kind ? 'material-link--' + kind : '');
   a.setAttribute('href', filename);
-  a.setAttribute('download', '');
+  if (!/\.html?$/i.test(filename)) a.setAttribute('download', '');
   a.textContent = caption;
   return {li, a};
 }
@@ -208,6 +209,8 @@ const orphan = row(sources.list, 'course/standalone.tex', 'standalone · TEX');
 const lectures = subgroup();
 const pdfLecture = row(lectures.list, 'course/w01.pdf', 'w_01 · PDF', 'lecture');
 const pptxLecture = row(sources.list, 'course/w01.pptx', 'w_01 · PPTX', 'lecture');
+const htmlLecture = row(sources.list, 'course/w01.html', 'w_01 · HTML', 'lecture');
+const orphanHtml = row(sources.list, 'course/standalone.html', 'standalone · HTML', 'lab');
 pdfLecture.a.setAttribute('data-material-title', 'Wprowadzenie do badań XR');
 const pairedOnly = subgroup();
 const pairedSource = row(pairedOnly.list, 'course/lab_02.qmd', 'lab_02 · QMD', 'lab');
@@ -232,6 +235,9 @@ vm.runInNewContext(script, {
 const labFormats = pdfLab.li.querySelector('.material-formats');
 const lectureFormats = pdfLecture.li.querySelector('.material-formats');
 assert.equal(pdfLab.a.textContent, 'lab_02', 'tryb podstawowy bez rozszerzenia');
+assert.equal(pdfLab.a.getAttribute('download'), null, 'nazwa pliku otwiera PDF zamiast pobierać');
+assert.match(pdfLab.a.getAttribute('aria-label'), /^Otwórz PDF:/);
+assert.equal(orphanHtml.a.getAttribute('download'), null);
 assert.equal(labFormats.children.length, 3);
 assert.deepEqual(labFormats.children.map(x => x.textContent), ['PDF', 'DOCX', 'QMD']);
 assert.deepEqual(labFormats.children.map(x => x.getAttribute('href')), [
@@ -240,16 +246,22 @@ assert.deepEqual(labFormats.children.map(x => x.getAttribute('href')), [
 assert.equal(labFormats.children[1].getAttribute('download'), '');
 assert.ok(labFormats.children[1].classList.contains('material-format--editable'));
 assert.equal(lectureFormats.children[1], pptxLecture.a);
+assert.deepEqual(lectureFormats.children.map(x => x.textContent), ['PDF', 'PPTX', 'HTML']);
+assert.equal(lectureFormats.children[2], htmlLecture.a, 'HTML jako osobny wariant tego samego dokumentu');
+assert.equal(htmlLecture.a.getAttribute('download'), null, 'HTML otwiera stronę');
+assert.match(htmlLecture.a.getAttribute('aria-label'), /^Otwórz HTML:/);
 assert.equal(pairedSource.li.parentNode, null, 'źródłowe QMD w wierszu PDF');
 assert.equal(pdfLecture.a.getAttribute('title'), 'Wprowadzenie do badań XR');
 assert.match(lectureFormats.children[1].title, /Wprowadzenie do badań XR/);
 assert.equal(editor.li.parentNode, null, 'bez zduplikowanej pozycji DOCX');
 assert.equal(pptxLecture.li.parentNode, null, 'bez zduplikowanej pozycji PPTX');
+assert.equal(htmlLecture.li.parentNode, null, 'bez zduplikowanej pozycji HTML');
 assert.equal(columns.children[0], lectures.block, 'wykłady przed laboratoriami');
 assert.equal(columns.children[1], labs.block);
 assert.equal(displayRoot.dataset.materialsView, 'pdf');
 assert.equal(pdfLab.li.hidden, false);
 assert.equal(orphan.li.hidden, true);
+assert.equal(orphanHtml.li.hidden, true);
 assert.equal(sources.block.hidden, true);
 assert.equal(pairedOnly.block.hidden, true);
 tick = 100; fullToggle.events.click();
@@ -257,10 +269,14 @@ tick = 200; fullToggle.events.click();
 tick = 300; fullToggle.events.click();
 assert.equal(displayRoot.dataset.materialsView, 'all');
 assert.equal(orphan.li.hidden, false, 'samodzielny TEX tylko w pełnym widoku');
+assert.equal(orphanHtml.li.hidden, false, 'samodzielny HTML tylko w pełnym widoku');
 assert.ok(orphan.a.classList.contains('material-link--editable'));
 assert.equal(orphan.a.textContent, 'standalone');
 assert.equal(orphan.a.children.length, 1);
 assert.equal(orphan.a.children[0].textContent, ' · TEX');
+assert.equal(orphanHtml.a.textContent, 'standalone');
+assert.equal(orphanHtml.a.children[0].textContent, ' · HTML');
+assert.ok(orphanHtml.a.children[0].classList.contains('material-format--standalone'));
 assert.ok(orphan.a.children[0].classList.contains('material-format--standalone'));
 assert.equal(sources.block.hidden, false);
 assert.equal(pairedOnly.block.hidden, true, 'pusta podgrupa ukryta także w trybie pełnym');
@@ -274,7 +290,9 @@ assert.match(html, /a\.material-link--editable:visited\{color:var\(--edit\);text
 assert.match(html, /data-materials-view="all"/);
 assert.match(html, /grid-template-columns:repeat\(auto-fit,minmax\(min\(100%,var\(--material-min,7\.2rem\)\)/);
 assert.match(html, /data-materials-view="all"\] \.materials-list--dense\{--material-min:7\.5rem/);
-assert.match(html, /\.materials-list \.material-formats\{display:inline;font-size:\.61rem/);
-assert.match(html, /\.materials-list \.material-format--standalone\{font-size:\.61rem/);
+assert.match(html, /\.materials-list \.material-formats\{display:inline;font-size:\.56rem/);
+assert.match(html, /\.materials-list \.material-format--standalone\{font-size:\.56rem/);
 assert.match(html, /materials-group--flow\{display:block;break-inside:auto/);
+assert.match(html, /\.materials-list a\{display:block;[^\n]*font-size:\.7rem/);
+assert.match(html, /const BROWSER_EXTENSIONS = new Set\(\['html', 'htm'\]\)/);
 console.log('[DONE] MATERIALS_FORMAT_PAIRS_PASS');

@@ -183,6 +183,9 @@ class MaterialsTests(unittest.TestCase):
         self.assertRegex(html, r'<section class="materials-group materials-group--flow">\s*<h4>Pozostałe</h4>')
         self.assertIn("materials-list--dense", html)
         self.assertIn("text-overflow:ellipsis", style)
+        self.assertIn("font-size:.7rem}", style)
+        self.assertIn(".materials-list .material-formats{display:inline;font-size:.56rem", style)
+        self.assertIn(".materials-list .material-format--standalone{font-size:.56rem", style)
         self.assertIn("@media(max-width:620px)", style)
         self.assertNotIn("grid-column:1/-1", style)
 
