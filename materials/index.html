@@ -69,10 +69,15 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 .materials-grid{columns:4 260px;column-gap:6px;margin-top:6px}
 .materials-group{display:inline-block;width:100%;min-width:0;padding:8px 8px;border:1px solid var(--line);border-radius:6px;background:var(--surface);margin:0 0 8px;break-inside:avoid}
 .materials-group--wide{grid-column:auto}
+.materials-group--flow{display:block;break-inside:auto;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.materials-group--flow>h4{break-after:avoid}
+.materials-group--flow .materials-subgroup{break-inside:avoid}
 .materials-columns{display:block}
 .materials-subgroup{min-width:0;padding:2px 2px 2px;background:transparent;border:1px solid var(--subgroup-line);border-radius:4px;margin-top:2px}
-.materials-list{list-style:none;margin:0;padding:0;column-count:2;column-gap:4px;column-fill:balance}
-.materials-list--dense{column-count:6;line-height:0.9em;}
+.materials-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,var(--material-min,9rem)),1fr));column-gap:4px;row-gap:1px;align-items:start}
+.materials-list--descriptive{--material-min:15rem}
+:root[data-materials-view="all"] .materials-list--dense{--material-min:8.2rem}
+.materials-list--dense{--material-min:5.5rem;line-height:1.05;}
 .materials-list li{min-width:0;break-inside:avoid}
 .materials-list a{display:block;padding:2px 2px;border-radius:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.15;font-size:.74rem}
 .materials-list a:hover{background:var(--hover)}
@@ -122,7 +127,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 <h4>Narzędzia dla programistów</h4><div class="materials-columns">
 
 <div class="materials-subgroup">
-<h5>Labs PDF</h5>
+<h5>Laboratoria</h5>
 <ul class="materials-list materials-list--dense">
 <li><a class="material-link--lab" href="narzędzia-dla-programistów/ndp__lab__01.pdf" download>lab_01</a></li>
 <li><a class="material-link--lab" href="narzędzia-dla-programistów/ndp__lab__02.pdf" download>lab_02</a></li>
@@ -138,7 +143,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 </div>
 
 <div class="materials-subgroup">
-<h5>Labs HTML</h5>
+<h5>Laboratoria online</h5>
 <ul class="materials-list materials-list--dense">
 <li><a class="material-link--lab" href="narzędzia-dla-programistów/ndp_lab_02.html" title="lab_02 · HTML">lab_02</a></li>
 <li><a class="material-link--lab" href="narzędzia-dla-programistów/ndp_lab_03.html" title="lab_03 · HTML">lab_03</a></li>
@@ -176,7 +181,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 </ul></div>
 
 <div class="materials-subgroup">
-<h5>labs</h5>
+<h5>Laboratoria</h5>
 <ul class="materials-list materials-list--dense">
 <li><a class="material-link--lab" href="programowanie-aplikacji-mobilnych/pam_lab_01.pdf" download>lab_01</a></li>
 <li><a class="material-link--lab" href="programowanie-aplikacji-mobilnych/pam_lab_02.pdf" download>lab_02</a></li>
@@ -211,7 +216,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 <h4>Wirtualna i rozszerzona rzeczywistość</h4>
 <div class="materials-columns">
 <div class="materials-subgroup">
-<h5>labs PDF</h5>
+<h5>Laboratoria</h5>
 <ul class="materials-list materials-list--dense">
 <li><a class="material-link--lab" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_01.pdf" download>lab_01</a></li>
 <li><a class="material-link--lab" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_lab_02.pdf" download>lab_02</a></li>
@@ -238,10 +243,10 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 <div class="materials-subgroup">
 <h5>Wykłady</h5>
 <ul class="materials-list materials-list--dense">
-<li><a class="material-link--lecture" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w04.pdf" download>w_04</a></li>
-<li><a class="material-link--lecture" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w05.pdf" download>w_05</a></li>
-<li><a class="material-link--lecture" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w06.pdf" download>w_06</a></li>
-<li><a class="material-link--lecture" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w07.pdf" download>w_07</a></li>
+<li><a class="material-link--lecture" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w04.pdf" download data-material-title="Śledzenie i rozumienie sceny">w_04</a></li>
+<li><a class="material-link--lecture" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w05.pdf" download data-material-title="Interakcja człowiek–system w XR">w_05</a></li>
+<li><a class="material-link--lecture" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w06.pdf" download data-material-title="Renderowanie i wydajność aplikacji XR">w_06</a></li>
+<li><a class="material-link--lecture" href="wirtualna-i-rozszerzona-rzeczywistosc/wirr_w07.pdf" download data-material-title="Cyfrowy bliźniak, ROS 2 i teleoperacja XR">w_07</a></li>
 </ul></div>
 
 <div class="materials-subgroup">
@@ -270,7 +275,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 <h4>Nawigacja robotów humanoidalnych</h4>
 <div class="materials-columns">
 <div class="materials-subgroup">
-<h5>PDF</h5>
+<h5>Wykłady</h5>
 <ul class="materials-list">
 <li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w01.pdf" download title="robo_w01.pdf">w_01 · PDF</a></li>
 <li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w02.pdf" download title="robo_w02.pdf">w_02 · PDF</a></li>
@@ -284,7 +289,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 <li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w10.pdf" download title="robo_w10.pdf">w_10 · PDF</a></li>
 </ul></div>
 <div class="materials-subgroup">
-<h5>PPTX</h5>
+<h5>Wersje edytowalne</h5>
 <ul class="materials-list">
 <li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w01.pptx" download title="robo_w01.pptx">w_01 · PPTX</a></li>
 <li><a class="material-link--lecture" href="nawigacja-robotow-humanoidalnych/robo_w02.pptx" download title="robo_w02.pptx">w_02 · PPTX</a></li>
@@ -349,7 +354,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 <h4>Analiza EEG</h4>
 <div class="materials-columns">
 <div class="materials-subgroup">
-<h5>Laboratoria PDF</h5>
+<h5>Laboratoria</h5>
 <ul class="materials-list">
 <li><a class="material-link--lab" href="analiza-eeg/lab1_wprowadzenie.pdf" download title="lab1_wprowadzenie.pdf">lab_01 · PDF</a></li>
 <li><a class="material-link--lab" href="analiza-eeg/lab2_sprzet_procedura.pdf" download title="lab2_sprzet_procedura.pdf">lab_02 · PDF</a></li>
@@ -392,7 +397,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 <h4>Psychologia poznawcza</h4>
 <div class="materials-columns">
 <div class="materials-subgroup">
-<h5>PDF</h5>
+<h5>Laboratoria</h5>
 <ul class="materials-list">
 <li><a class="material-link--lab" href="psychologia-poznawcza/psych_pozn_lab1.pdf" download title="psych_pozn_lab1.pdf">lab_01 · PDF</a></li>
 <li><a class="material-link--lab" href="psychologia-poznawcza/psych_pozn_lab2.pdf" download title="psych_pozn_lab2.pdf">lab_02 · PDF</a></li>
@@ -402,7 +407,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 <li><a class="material-link--lab" href="psychologia-poznawcza/psych_pozn_lab6.pdf" download title="psych_pozn_lab6.pdf">lab_06 · PDF</a></li>
 </ul></div>
 <div class="materials-subgroup">
-<h5>DOCX</h5>
+<h5>Wersje edytowalne</h5>
 <ul class="materials-list">
 <li><a class="material-link--lab" href="psychologia-poznawcza/psych_pozn_lab1.docx" download title="psych_pozn_lab1.docx">lab_01 · DOCX</a></li>
 <li><a class="material-link--lab" href="psychologia-poznawcza/psych_pozn_lab2.docx" download title="psych_pozn_lab2.docx">lab_02 · DOCX</a></li>
@@ -418,7 +423,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 <h4>Diagnoza psychologiczna</h4>
 <div class="materials-columns">
 <div class="materials-subgroup">
-<h5>PDF</h5>
+<h5>Laboratoria</h5>
 <ul class="materials-list">
 <li><a class="material-link--lab" href="diagnoza-psychologiczna/diagnoza_lab1.pdf" download title="diagnoza_lab1.pdf">lab_01 · PDF</a></li>
 <li><a class="material-link--lab" href="diagnoza-psychologiczna/diagnoza_lab2.pdf" download title="diagnoza_lab2.pdf">lab_02 · PDF</a></li>
@@ -427,7 +432,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 <li><a class="material-link--lab" href="diagnoza-psychologiczna/diagnoza_lab5.pdf" download title="diagnoza_lab5.pdf">lab_05 · PDF</a></li>
 </ul></div>
 <div class="materials-subgroup">
-<h5>DOCX</h5>
+<h5>Wersje edytowalne</h5>
 <ul class="materials-list">
 <li><a class="material-link--lab" href="diagnoza-psychologiczna/diagnoza_lab1.docx" download title="diagnoza_lab1.docx">lab_01 · DOCX</a></li>
 <li><a class="material-link--lab" href="diagnoza-psychologiczna/diagnoza_lab2.docx" download title="diagnoza_lab2.docx">lab_02 · DOCX</a></li>
@@ -442,8 +447,8 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 <h4>Nowoczesne technologie w psychologii</h4>
 <div class="materials-columns">
 <div class="materials-subgroup">
-<h5>PDF</h5>
-<ul class="materials-list">
+<h5>Wykłady</h5>
+<ul class="materials-list materials-list--descriptive">
 <li><a class="material-link--lecture" href="Nowoczesne-technologie-w-psychologii/E-terapia.pdf" download title="E-terapia.pdf">E terapia · PDF</a></li>
 <li><a class="material-link--lecture" href="Nowoczesne-technologie-w-psychologii/intuicja_przeciwko_prawdopodobienstwu.pdf" download title="intuicja_przeciwko_prawdopodobienstwu.pdf">intuicja przeciwko prawdopodobienstwu · PDF</a></li>
 <li><a class="material-link--lecture" href="Nowoczesne-technologie-w-psychologii/Nowoczesna psychologia.pdf" download title="Nowoczesna psychologia.pdf">Nowoczesna psychologia · PDF</a></li>
@@ -454,8 +459,8 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 <li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/Galea_EEG_neuroXR.pdf" download title="Galea_EEG_neuroXR.pdf">Galea EEG neuroXR · PDF</a></li>
 </ul></div>
 <div class="materials-subgroup">
-<h5>PPTX</h5>
-<ul class="materials-list">
+<h5>Wersje edytowalne</h5>
+<ul class="materials-list materials-list--descriptive">
 <li><a class="material-link--lecture" href="Nowoczesne-technologie-w-psychologii/E-terapia.pptx" download title="E-terapia.pptx">E terapia · PPTX</a></li>
 <li><a class="material-link--lecture" href="Nowoczesne-technologie-w-psychologii/intuicja_przeciwko_prawdopodobienstwu.pptx" download title="intuicja_przeciwko_prawdopodobienstwu.pptx">intuicja przeciwko prawdopodobienstwu · PPTX</a></li>
 <li><a class="material-link--lecture" href="Nowoczesne-technologie-w-psychologii/Nowoczesna psychologia.pptx" download title="Nowoczesna psychologia.pptx">Nowoczesna psychologia · PPTX</a></li>
@@ -468,7 +473,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 
 <section class="materials-group">
 <h4>Seminaria dyplomowe</h4>
-<ul class="materials-list">
+<ul class="materials-list materials-list--descriptive">
 <li><a class="material-link--lecture" href="seminaria-dyplomowe/Jak_pisac_prace_dyplomową.pdf" download title="Jak pisać pracę dyplomową · PDF">Jak pisać pracę dyplomową · PDF</a></li>
 <li><a class="material-link--lecture" href="seminaria-dyplomowe/Jak_pisac_prace_dyplomową.pptx" download title="Jak pisać pracę dyplomową · PPTX">Jak pisać pracę dyplomową · PPTX</a></li>
 <li><a class="material-link--lab" href="seminaria-dyplomowe/szablon_WEII.pdf" download title="Szablon WEiI · PDF">Szablon WEiI · PDF</a></li>
@@ -476,17 +481,17 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 </ul></section>
 
 
-<section class="materials-group">
+<section class="materials-group materials-group--flow">
 <h4>Pozostałe</h4>
 <div class="materials-columns">
 <div class="materials-subgroup">
-<h5>PDF</h5>
+<h5>Materiały</h5>
 <ul class="materials-list">
 <li><a class="material-link--lecture" href="inne/formaty-3d.pdf" download title="formaty-3d.pdf">formaty 3d · PDF</a></li>
 <li><a class="material-link--lecture" href="inne/HCI.pdf" download title="HCI.pdf">HCI · PDF</a></li>
 </ul></div>
 <div class="materials-subgroup">
-<h5>PPTX</h5>
+<h5>Wersje edytowalne</h5>
 <ul class="materials-list">
 <li><a class="material-link--lecture" href="inne/formaty-3d.pptx" download title="formaty-3d.pptx">formaty 3d · PPTX</a></li>
 <li><a class="material-link--lecture" href="inne/HCI.pptx" download title="HCI.pptx">HCI · PPTX</a></li>
@@ -519,6 +524,26 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
     function labelWithoutExtension(text) {
       return text.replace(/\s*·\s*(?:PDF|DOCX|PPTX|TEX|TYP|QMD)\s*$/i, '').trim();
     }
+    function tooltipFor(link) {
+      const explicit = link.getAttribute('data-material-title');
+      if (explicit) return explicit;
+      const label = labelWithoutExtension(link.textContent);
+      const filename = decodeURIComponent(link.getAttribute('href').split(/[?#]/, 1)[0].split('/').pop());
+      const existing = link.getAttribute('title');
+      // Zachowaj tytuły redakcyjne; tytuł równy nazwie pliku jest mało przydatny.
+      if (existing && existing !== filename && existing !== label &&
+          !/\.(pdf|docx|pptx|tex|typ|qmd)$/i.test(existing)) return existing;
+      const detail = label.match(/^(?:w[_-]?\d+|lab[_-]?\d+)\s*·\s*(.+)$/i);
+      if (detail) return detail[1];
+      const stem = filename.replace(/\.[^.]+$/, '');
+      const parts = /(?:^|[_-])(?:lab|w)\d+[_-](.+)$/i.exec(stem);
+      if (parts) {
+        const description = parts[1].replace(/[_-]+/g, ' ').trim();
+        if (description && !/^(notes|student|instructor|v\d+)$/i.test(description))
+          return description.charAt(0).toUpperCase() + description.slice(1);
+      }
+      return label;
+    }
     function kindOf(link) {
       if (link.classList.contains('material-link--lecture')) return 'lecture';
       if (link.classList.contains('material-link--lab')) return 'lab';
@@ -529,6 +554,8 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
       if (!link) continue;
       const info = pathInfo(link);
       row.dataset.materialsKind = kindOf(link);
+      const tooltip = tooltipFor(link);
+      if (tooltip) link.setAttribute('title', tooltip);
       if (info.extension === 'pdf') {
         pdfByStem.set(info.stem, row);
         link.textContent = labelWithoutExtension(link.textContent);
@@ -539,7 +566,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
         format.className = 'material-format--pdf';
         format.setAttribute('href', link.getAttribute('href'));
         format.setAttribute('download', '');
-        format.title = 'Pobierz PDF: ' + link.textContent;
+        format.title = 'Pobierz PDF: ' + (link.getAttribute('title') || link.textContent);
         format.setAttribute('aria-label', format.title);
         format.textContent = 'PDF';
         formats.appendChild(format);
@@ -559,7 +586,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
           link.textContent = info.extension.toUpperCase();
           link.classList.add('material-format--editable');
           link.setAttribute('download', '');
-          link.title = 'Pobierz ' + info.extension.toUpperCase() + ': ' + pdfRow.querySelector('a[href]').textContent;
+          link.title = 'Pobierz ' + info.extension.toUpperCase() + ': ' + (pdfRow.querySelector('a[href]').getAttribute('title') || pdfRow.querySelector('a[href]').textContent);
           link.setAttribute('aria-label', link.title);
           formats.appendChild(link);
           row.remove();
@@ -637,9 +664,9 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
     }
     for (const group of document.querySelectorAll('.materials-group')) {
       for (const subgroup of group.querySelectorAll('.materials-subgroup')) {
-        subgroup.hidden = !showAll && !subgroup.querySelector('.materials-list li:not([hidden])');
+        subgroup.hidden = !subgroup.querySelector('.materials-list li:not([hidden])');
       }
-      group.hidden = !showAll && !group.querySelector('.materials-list li:not([hidden])');
+      group.hidden = !group.querySelector('.materials-list li:not([hidden])');
     }
     document.documentElement.dataset.materialsView = view;
     viewToggle.setAttribute('aria-pressed', String(showAll));

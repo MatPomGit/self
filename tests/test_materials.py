@@ -38,7 +38,7 @@ class MaterialsTests(unittest.TestCase):
         self.assertIn("a:focus-visible", html)
         self.assertIn('class="materials-grid"', html)
         cards = re.findall(
-            r'<section class="materials-group(?: materials-group--wide)?"'
+            r'<section class="materials-group(?: materials-group--(?:wide|flow))*"'
             r'(?: data-materials-subject="[^"]+")?>'
             r'([\s\S]*?)</section>', html
         )
@@ -174,16 +174,32 @@ class MaterialsTests(unittest.TestCase):
         self.assertNotIn("columns:5", style)
         self.assertIn("break-inside:avoid", style)
         self.assertIn(".materials-columns{display:block}", style)
-        self.assertIn("column-count:2;column-gap:4px;column-fill:balance", style)
-        dense_columns = re.search(r"\.materials-list--dense\{column-count:(\d+)", style)
-        self.assertIsNotNone(dense_columns)
-        self.assertGreaterEqual(int(dense_columns.group(1)), 3)
+        self.assertIn("display:grid;grid-template-columns:repeat(auto-fit,minmax(", style)
+        self.assertIn("--material-min:5.5rem", style)
+        self.assertIn(".materials-list--descriptive{--material-min:15rem}", style)
+        self.assertIn(':root[data-materials-view="all"] .materials-list--dense{--material-min:8.2rem}', style)
         self.assertIn(".materials-list li{min-width:0;break-inside:avoid}", style)
-        self.assertNotIn("grid-template-columns:repeat(", style)
+        self.assertIn(".materials-group--flow{display:block;break-inside:auto;", style)
+        self.assertRegex(html, r'<section class="materials-group materials-group--flow">\s*<h4>Pozostałe</h4>')
         self.assertIn("materials-list--dense", html)
         self.assertIn("text-overflow:ellipsis", style)
         self.assertIn("@media(max-width:620px)", style)
         self.assertNotIn("grid-column:1/-1", style)
+
+    def test_descriptive_material_headings_and_verified_tooltips(self):
+        """Nagłówki typów materiałów i tytuły źródłowe nie są generyczne."""
+        html = (MATERIALS / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn("<h5>Laboratoria PDF</h5>", html)
+        self.assertNotIn("<h5>Labs PDF</h5>", html)
+        self.assertNotIn("<h5>labs PDF</h5>", html)
+        self.assertNotIn("<h5>PDF</h5>", html)
+        self.assertIn("<h5>Wykłady</h5>", html)
+        self.assertIn("<h5>Laboratoria</h5>", html)
+        self.assertIn('data-material-title="Interakcja człowiek–system w XR"', html)
+        self.assertIn('data-material-title="Śledzenie i rozumienie sceny"', html)
+        self.assertIn("function tooltipFor(link)", html)
+        self.assertIn("link.setAttribute('title', tooltip)", html)
+        self.assertIn("subgroup.hidden = !subgroup.querySelector(", html)
 
     def test_compact_subgroups_have_no_fill_and_small_margins(self):
         """Nagłówki podgrup są mniejsze, a wewnętrzne ramki przezroczyste."""
@@ -194,7 +210,7 @@ class MaterialsTests(unittest.TestCase):
         self.assertTrue(headings)
         self.assertEqual(set(headings), {"5"})
         self.assertIn("margin:0 0 1px}", style)
-        subgroup = re.search(r"\.materials-subgroup\{([^}]+)\}", style)
+        subgroup = re.search(r"(?m)^\.materials-subgroup\{([^}]+)\}", style)
         self.assertIsNotNone(subgroup)
         self.assertIn("background:transparent", subgroup.group(1))
         self.assertIn("padding:2px 2px 2px", subgroup.group(1))

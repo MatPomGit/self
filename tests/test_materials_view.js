@@ -208,6 +208,10 @@ const orphan = row(sources.list, 'course/standalone.tex', 'standalone · TEX');
 const lectures = subgroup();
 const pdfLecture = row(lectures.list, 'course/w01.pdf', 'w_01 · PDF', 'lecture');
 const pptxLecture = row(sources.list, 'course/w01.pptx', 'w_01 · PPTX', 'lecture');
+pdfLecture.a.setAttribute('data-material-title', 'Wprowadzenie do badań XR');
+const pairedOnly = subgroup();
+const pairedSource = row(pairedOnly.list, 'course/lab_02.qmd', 'lab_02 · QMD', 'lab');
+
 const fullToggle = button();
 const fullTheme = button();
 const displayRoot = {dataset:{theme:'light'},classList:{add(){},remove(){}}};
@@ -228,14 +232,17 @@ vm.runInNewContext(script, {
 const labFormats = pdfLab.li.querySelector('.material-formats');
 const lectureFormats = pdfLecture.li.querySelector('.material-formats');
 assert.equal(pdfLab.a.textContent, 'lab_02', 'tryb podstawowy bez rozszerzenia');
-assert.equal(labFormats.children.length, 2);
-assert.deepEqual(labFormats.children.map(x => x.textContent), ['PDF', 'DOCX']);
+assert.equal(labFormats.children.length, 3);
+assert.deepEqual(labFormats.children.map(x => x.textContent), ['PDF', 'DOCX', 'QMD']);
 assert.deepEqual(labFormats.children.map(x => x.getAttribute('href')), [
-  'course/lab_02.pdf', 'course/lab_02.docx'
+  'course/lab_02.pdf', 'course/lab_02.docx', 'course/lab_02.qmd'
 ]);
 assert.equal(labFormats.children[1].getAttribute('download'), '');
 assert.ok(labFormats.children[1].classList.contains('material-format--editable'));
 assert.equal(lectureFormats.children[1], pptxLecture.a);
+assert.equal(pairedSource.li.parentNode, null, 'źródłowe QMD w wierszu PDF');
+assert.equal(pdfLecture.a.getAttribute('title'), 'Wprowadzenie do badań XR');
+assert.match(lectureFormats.children[1].title, /Wprowadzenie do badań XR/);
 assert.equal(editor.li.parentNode, null, 'bez zduplikowanej pozycji DOCX');
 assert.equal(pptxLecture.li.parentNode, null, 'bez zduplikowanej pozycji PPTX');
 assert.equal(columns.children[0], lectures.block, 'wykłady przed laboratoriami');
@@ -244,6 +251,7 @@ assert.equal(displayRoot.dataset.materialsView, 'pdf');
 assert.equal(pdfLab.li.hidden, false);
 assert.equal(orphan.li.hidden, true);
 assert.equal(sources.block.hidden, true);
+assert.equal(pairedOnly.block.hidden, true);
 tick = 100; fullToggle.events.click();
 tick = 200; fullToggle.events.click();
 tick = 300; fullToggle.events.click();
@@ -252,6 +260,7 @@ assert.equal(orphan.li.hidden, false, 'samodzielny TEX tylko w pełnym widoku');
 assert.ok(orphan.a.classList.contains('material-link--editable'));
 assert.equal(orphan.a.textContent, 'standalone · TEX');
 assert.equal(sources.block.hidden, false);
+assert.equal(pairedOnly.block.hidden, true, 'pusta podgrupa ukryta także w trybie pełnym');
 assert.equal(labs.block.hidden, false);
 assert.equal(lectures.block.hidden, false);
 assert.match(html, /--lecture-edit:#254c6c/);
@@ -260,4 +269,6 @@ assert.match(html, /--lab-edit:#27563b/);
 assert.match(html, /--lab-edit:#85b098/);
 assert.match(html, /a\.material-link--editable:visited\{color:var\(--edit\);text-decoration:underline/);
 assert.match(html, /data-materials-view="all"/);
+assert.match(html, /grid-template-columns:repeat\(auto-fit,minmax\(/);
+assert.match(html, /materials-group--flow\{display:block;break-inside:auto/);
 console.log('[DONE] MATERIALS_FORMAT_PAIRS_PASS');

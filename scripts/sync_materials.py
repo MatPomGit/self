@@ -16,7 +16,7 @@ from urllib.parse import quote, unquote, urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "materials" / "index.html"
 CARD = re.compile(
-    r'<section class="materials-group(?: materials-group--wide)?"'
+    r'<section class="materials-group(?: materials-group--(?:wide|flow))*"'
     r'(?: data-materials-subject="[^"]+")?>[\s\S]*?</section>'
 )
 LINK = re.compile(r'(?P<before><a\b[^>]*\bhref=")(?P<href>[^"]+)(?P<after>")')
