@@ -57,7 +57,7 @@ class PreflightTests(unittest.TestCase):
             self.assertEqual(problem(path), "missing PDF header")
             path.write_bytes(b"%PDF-1.7\nmissing termination")
             self.assertEqual(problem(path), "missing PDF EOF marker")
-            path.write_bytes(b"%PDF-1.4\n%%EOF\n")
+            path.write_bytes(b"%PDF-1.4\n1 0 obj\nnot-a-pdf-object\nendobj\n%%EOF\n")
             self.assertIn("unreadable PDF structure", problem(path))
 
 
