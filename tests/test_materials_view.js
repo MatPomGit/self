@@ -288,7 +288,7 @@ assert.match(html, /--lab-edit:#27563b/);
 assert.match(html, /--lab-edit:#85b098/);
 assert.match(html, /a\.material-link--editable:visited\{color:var\(--edit\);text-decoration:underline/);
 assert.match(html, /data-materials-view="all"/);
-assert.match(html, /grid-template-columns:repeat\(auto-fit,minmax\(min\(100%,var\(--material-min,7\.2rem\)\)/);
+assert.match(html, /grid-template-columns:repeat\(auto-fill,minmax\(min\(100%,var\(--material-min,7\.2rem\)\),var\(--material-min,7\.2rem\)\)\)/);
 assert.match(html, /data-materials-view="all"\] \.materials-list--dense\{--material-min:7\.5rem/);
 assert.match(html, /\.materials-list \.material-formats\{display:inline;font-size:\.56rem/);
 assert.match(html, /\.materials-list \.material-format--standalone\{font-size:\.56rem/);
