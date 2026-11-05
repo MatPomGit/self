@@ -63,7 +63,7 @@ class ProjectsTests(unittest.TestCase):
                 self.assertNotIn("github.com", str(project))
                 self.assertNotIn("doi.org", str(project))
                 if project["period"] != "Data do potwierdzenia":
-                    self.assertRegex(project["period"], r"^20\\d{2}(?:[–-]20\\d{2}|[–-]obecnie)?$")
+                    self.assertRegex(project["period"], r"^20\d{2}(?:[–-]20\d{2}|[–-]obecnie)?$")
         uncertain = [p["title"] for p in projects if p["period"] == "Data do potwierdzenia"]
         self.assertEqual(uncertain, ["Sensor trenażera GROM / PIORUN"])
 
@@ -80,7 +80,7 @@ class ProjectsTests(unittest.TestCase):
         self.assertEqual(sum(p["period"] == "2026–present" for p in translations), len(CURRENT))
 
     def test_promotional_ui_has_sections_and_no_project_links(self):
-        panel = re.search(r'<article class="panel" id="projekty"[^>]*>[\\s\\S]*?</article>', HTML)
+        panel = re.search(r'<article class="panel" id="projekty"[^>]*>[\s\S]*?</article>', HTML)
         self.assertIsNotNone(panel)
         self.assertNotIn("<a ", panel.group(0))
         self.assertIn('id="projects-list"', panel.group(0))
