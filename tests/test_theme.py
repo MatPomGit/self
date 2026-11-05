@@ -150,6 +150,26 @@ class ThemeTests(unittest.TestCase):
         self.assertLess(plain.index('Tworzenie modeli świata'), plain.index('Mózg również'))
         self.assertNotIn('<a ', content)
 
+    def test_research_work_follows_the_complete_introduction(self):
+        panel = re.search(r'<article class="panel" id="badania"[^>]*>([\s\S]*?)</article>', HTML)
+        self.assertIsNotNone(panel)
+        content = panel.group(1)
+        introduction = content.index('class="research-intro"')
+        conclusion = content.index('class="research-summary"')
+        work = content.index('class="research-work"')
+        self.assertLess(introduction, conclusion)
+        self.assertLess(conclusion, work)
+        self.assertIn('Nad czym pracuję', content)
+        work_section = content.split('<div class="research-work">', 1)[1]
+        self.assertEqual(work_section.count('<p>'), 2)
+        for phrase in ('optoelektronika', 'sztucznej inteligencji',
+                       'roboty humanoidalne', 'rzeczywistość wirtualna',
+                       'neuronauka i psychologia', 'okulografii, EEG'):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, work_section)
+        self.assertLessEqual(len(re.sub(r'<[^>]+>', ' ', work_section).split()), 150)
+        self.assertNotIn('<a ', work_section)
+
     def test_contact_links_have_icons(self):
         import re
         section = re.search(r'<article class="panel" id="kontakt"[\s\S]*?</article>', HTML)
@@ -191,7 +211,7 @@ class ThemeTests(unittest.TestCase):
         self.assertIn('.manuscript-next{font-size:inherit;line-height:inherit;', HTML)
 
     def test_version(self):
-        self.assertIn("v1.2.16", HTML)
+        self.assertIn("v1.2.17", HTML)
 
 
 if __name__ == "__main__":
