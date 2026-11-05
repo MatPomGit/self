@@ -37,11 +37,12 @@ aktualnych plików dla studentów jest `materials/`.
   indeksu po aktualizacji. `tests/test_sync_materials.py` obejmuje brakujący,
   przeniesiony, nowy i niejednoznaczny plik oraz idempotencję generatora.
 - Indeks zachowuje zwykły HTML, oba motywy i istniejące ścieżki pobierania.
-  Domyślny układ CSS dobiera liczbę kolumn do szerokości okna. W przeglądarkach
-  z ResizeObserver siatka typu masonry mierzy rzeczywistą wysokość każdej karty
-  i zagęszcza układ. Obszerne karty mogą zajmować dwie kolumny, a długie tytuły
-  są zawijane bez obcinania. Po przełączeniu PDF/wszystkie pliki układ jest
-  przeliczany ponownie; kolejność kart i odnośniki pozostają bez zmian.
+  Responsywne kolumny CSS (docelowo trzy na szerokim ekranie, dwie na średnim,
+  jedna na telefonie) równoważą wysokość i pozwalają kartom zajmować tylko
+  naturalnie potrzebne miejsce. Każda karta pozostaje w jednej kolumnie;
+  wyeliminowano układ z szerokimi kartami generującymi puste obszary.
+  Kolumny wewnątrz paneli dobierają liczbę pozycji do dostępnej szerokości,
+  a długie nazwy nie są obcinane. Układ działa bez dodatkowego JS.
 - Karty są uporządkowane tematycznie: programowanie, XR i robotyka,
   informatyka/neuronauka, psychologia oraz materiały ogólne.
   Odnośniki do wykładów są niebieskawe, do laboratoriów zielonkawe.

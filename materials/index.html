@@ -67,32 +67,25 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 .theme-sun{display:none}
 :root[data-theme="dark"] .theme-sun{display:block}
 :root[data-theme="dark"] .theme-moon{display:none}
-.materials-grid{columns:auto 17rem;column-gap:8px;margin-top:8px}
-.materials-group{display:inline-block;width:100%;min-width:0;padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--surface);margin:0 0 8px;break-inside:avoid}
+.materials-grid{columns:auto 28rem;column-gap:10px;margin-top:8px}
+.materials-group{display:inline-block;vertical-align:top;width:100%;min-width:0;padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--surface);margin:0 0 10px;break-inside:avoid;page-break-inside:avoid}
 .materials-group--wide{grid-column:auto}
 .materials-group--flow{display:inline-block;break-inside:avoid}
 .materials-group--flow>h4{break-after:avoid}
 .materials-group--flow .materials-subgroup{break-inside:avoid}
 .materials-columns{display:block}
 .materials-subgroup{min-width:0;padding:2px 2px 2px;background:transparent;border:1px solid var(--subgroup-line);border-radius:4px;margin-top:2px}
-.materials-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,var(--material-min,7.2rem)),1fr));column-gap:6px;row-gap:2px;align-items:start}
+.materials-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,var(--material-min,7.2rem)),1fr));column-gap:8px;row-gap:2px;align-items:start}
 .materials-list--descriptive{--material-min:11rem}
 :root[data-materials-view="all"] .materials-list--dense{--material-min:7.5rem}
 .materials-list--dense{--material-min:5.5rem;line-height:1.1}
 .materials-list li{min-width:0;break-inside:avoid}
-.materials-list a{display:block;padding:2px;border-radius:4px;overflow-wrap:anywhere;white-space:normal;line-height:1.2;font-size:.7rem}
+.materials-list a{display:block;padding:2px;border-radius:4px;overflow-wrap:break-word;white-space:normal;line-height:1.2;font-size:.7rem}
 .materials-list a:hover{background:var(--hover)}
-/* JS oblicza wysokość wierszy na podstawie faktycznego rozmiaru kart.
-   Bez JS działa responsywny układ wielokolumnowy powyżej. */
-.materials-grid--masonry{display:grid;columns:auto;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));grid-auto-rows:8px;grid-auto-flow:dense;gap:8px;align-items:start}
-.materials-grid--masonry .materials-group{display:block;min-width:0;margin:0;grid-row-end:span var(--material-row-span,1);align-self:start}
-.materials-grid--masonry .materials-group--wide,
-.materials-grid--masonry .materials-group--adaptive-wide{grid-column:span 2}
-.materials-grid--masonry .materials-group--wide .materials-list:not(.materials-list--dense),
-.materials-grid--masonry .materials-group--adaptive-wide .materials-list:not(.materials-list--dense){--material-min:10.5rem}
-@media(max-width:700px){
-  .materials-grid--masonry .materials-group--wide,
-  .materials-grid--masonry .materials-group--adaptive-wide{grid-column:span 1}
+/* Niezależne kolumny nie tworzą pustych komórek po kartach o różnej wysokości.
+   Przeglądarka bilansuje ich wysokość bez skryptu zmieniającego DOM. */
+@media(min-width:720px) and (max-width:1000px){
+  .materials-grid{columns:auto 22rem}
 }
 @media(max-width:620px){
   main{padding:10px 10px 14px}
@@ -677,7 +670,6 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
     const info = pdfVersionInfo(link.getAttribute('href'));
     return info && comparePdfVersions(info.version, latestVersions.get(info.family)) === 0;
   }));
-  let requestMaterialsLayout = null;
   function setMaterialsView(view) {
     const showAll = view === 'all';
     if (materialRows) {
@@ -703,7 +695,6 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
       : 'Widok PDF. Kliknij trzy razy, aby wyświetlić wszystkie pliki';
     viewToggle.setAttribute('aria-label', instruction);
     viewToggle.title = instruction;
-    if (requestMaterialsLayout) requestMaterialsLayout();
   }
   let viewClicks = 0;
   let lastViewClick = 0;
@@ -754,52 +745,6 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
   }
   syncThemeToggle();
 
-  // Mierz wysokości kart zamiast wymuszać cztery jednakowe kolumny.
-  // ResizeObserver obsługuje zmianę szerokości, zawijanie podpisów i filtr PDF.
-  function initAdaptiveMaterialsGrid() {
-    if (typeof document.querySelector !== 'function' ||
-        typeof ResizeObserver !== 'function' ||
-        typeof window.requestAnimationFrame !== 'function' ||
-        typeof window.getComputedStyle !== 'function') return null;
-    const grid = document.querySelector('.materials-grid');
-    if (!grid) return null;
-    const cards = Array.from(grid.querySelectorAll('.materials-group'));
-    let pending = false;
-    function reflow() {
-      if (pending) return;
-      pending = true;
-      window.requestAnimationFrame(() => {
-        pending = false;
-        // Dużo pozycji lub długie tytuły wymagają dwóch kolumn siatki.
-        for (const card of cards) {
-          if (card.hidden) continue;
-          const rows = Array.from(card.querySelectorAll('.materials-list li:not([hidden])'));
-          const chars = rows.reduce((sum, row) => sum + row.textContent.trim().length, 0);
-          card.classList.toggle('materials-group--adaptive-wide',
-            rows.length >= 16 || chars >= 260);
-        }
-        const computed = window.getComputedStyle(grid);
-        const rowHeight = parseFloat(computed.gridAutoRows) || 8;
-        const gap = parseFloat(computed.rowGap) || 8;
-        for (const card of cards) {
-          if (card.hidden) continue;
-          const height = card.getBoundingClientRect().height;
-          const rows = Math.max(1, Math.ceil((height + gap) / (rowHeight + gap)));
-          if (card.style.getPropertyValue('--material-row-span') !== String(rows)) {
-            card.style.setProperty('--material-row-span', String(rows));
-          }
-        }
-      });
-    }
-    grid.classList.add('materials-grid--masonry');
-    const observer = new ResizeObserver(reflow);
-    observer.observe(grid);
-    cards.forEach(card => observer.observe(card));
-    window.addEventListener('load', reflow, {once:true});
-    reflow();
-    return reflow;
-  }
-  requestMaterialsLayout = initAdaptiveMaterialsGrid();
 </script>
 </body>
 </html>
