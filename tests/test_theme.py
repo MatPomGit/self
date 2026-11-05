@@ -130,7 +130,7 @@ class ThemeTests(unittest.TestCase):
         self.assertIn('#badania .research-heading{font-size:1.14rem', HTML)
 
     def test_research_story_is_short_and_human(self):
-        panel = re.search(r'<article class="panel" id="badania"[^>]*>([\\s\\S]*?)</article>', HTML)
+        panel = re.search(r'<article class="panel" id="badania"[^>]*>([\s\S]*?)</article>', HTML)
         self.assertIsNotNone(panel)
         content = panel.group(1)
         self.assertEqual(content.count('class="research-heading"'), 3)
