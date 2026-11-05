@@ -88,7 +88,8 @@ const researchWork = html.match(/<div class="research-work">([\s\S]*?)<\/div>/)?
 assert.ok(researchWork, 'Research-work section follows the philosophical story');
 const workParagraphs = [...researchWork.matchAll(/<p>([\s\S]*?)<\/p>/g)];
 assert.equal(workParagraphs.length, 2, 'The work section has exactly two concise paragraphs');
-assert.ok(html.indexOf('class="research-summary"') < html.indexOf('class="research-work"'));
+assert.ok(html.indexOf('class="research-summary"') > html.indexOf('class="research-work"'));
+assert.equal((html.match(/class="research-summary"/g) || []).length, 1, 'One conclusion at the end');
 assert.equal(englishParagraphs.length, polishParagraphs.length + workParagraphs.length, 'PL/EN research paragraph counts match');
 assert.match(source, /#badania \.research-intro p, #badania \.research-work p/);
 assert.ok(englishParagraphs.every(text => text.length > 80), 'English paragraphs have content');
