@@ -25,6 +25,8 @@ assert.equal(pl.language, 'pl');
 assert.equal(en.translate('Wybierz'), 'Choose a');
 assert.equal(en.translate('kategorię'), 'category');
 assert.equal(en.translate('Dla studentów'), 'For students');
+assert.equal(en.translate('Aktualne programy badawczo-rozwojowe'), 'Current research and development programmes');
+assert.equal(en.translate('Wybrane projekty i konsorcja'), 'Selected projects and consortia');
 assert.equal(pl.translate('Dla studentów'), 'Dla studentów');
 
 const lead = html.match(/<p class="lead">([^<]+)<\/p>/)[1].replace(/&nbsp;/g, '\u00a0');
@@ -84,6 +86,7 @@ for (let index = 0; index < projects.length; index++) {
   const translation = projectTranslations.find(x => x.sourceTitle === sourceProject.title);
   assert.ok(translation, sourceProject.title);
   assert.equal(localizedProjects[index].title, translation.title);
+  assert.equal(localizedProjects[index].period, translation.period);
   assert.equal(localizedProjects[index].description, translation.description);
 }
 assert.throws(() => en.translateProjects(projects, projectTranslations.slice(1)), /mismatch|Missing/);
