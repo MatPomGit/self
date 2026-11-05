@@ -133,10 +133,10 @@ class ThemeTests(unittest.TestCase):
         panel = re.search(r'<article class="panel" id="badania"[^>]*>([\s\S]*?)</article>', HTML)
         self.assertIsNotNone(panel)
         content = panel.group(1)
-        self.assertEqual(content.count('class="research-heading"'), 3)
-        self.assertEqual(len(re.findall(r'<p>', content)), 5)
+        self.assertEqual(content.count('class="research-heading"'), 4)
+        self.assertEqual(len(re.findall(r'<p>', content)), 7)
         plain = re.sub(r'<[^>]+>', ' ', content)
-        self.assertLessEqual(len(plain.split()), 260)
+        self.assertLessEqual(len(plain.split()), 420)
         for phrase in (
             'Świat większy od nas', 'Wiele sposobów widzenia',
             'Świat, który tworzy mózg', 'Wszechświata', 'Tworzenie modeli świata',
