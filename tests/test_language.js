@@ -29,7 +29,7 @@ assert.equal(en.translate('Świat większy od nas'), 'A world bigger than us');
 assert.equal(en.translate('Wiele sposobów widzenia'), 'Many ways of seeing');
 assert.equal(en.translate('Świat, który tworzy mózg'), 'The world our brains create');
 assert.equal(en.translate('Nad czym pracuję'), 'What I work on');
-assert.equal(en.translate('Najbardziej interesuje mnie'), 'What fascinates me most is');
+assert.equal(en.translate('Największą satysfakcję daje mi'), 'What I enjoy most is');
 assert.equal(en.translate('Aktualne programy badawczo-rozwojowe'), 'Current research and development programmes');
 assert.equal(en.translate('Wybrane projekty i konsorcja'), 'Selected projects and consortia');
 assert.equal(pl.translate('Dla studentów'), 'Dla studentów');
