@@ -25,6 +25,15 @@ class GeometryTests(unittest.TestCase):
             reader.return_value.pages = []
             self.assertIsNone(dimensions(Path("sample.pdf")))
 
+    def test_truncated_pdf_does_not_abort_geometry_classification(self):
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            invalid = root / "broken.pdf"
+            invalid.write_bytes(b"\r\n")
+            self.assertIsNone(dimensions(invalid))
+            html = '<li><a href="broken.pdf">Broken PDF</a></li>'
+            self.assertEqual(classify(html, root), (html, []))
+
     def test_office_files_and_link_overrides(self):
         with TemporaryDirectory() as tmp:
             folder = Path(tmp)
