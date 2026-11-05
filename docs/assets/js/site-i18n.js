@@ -82,6 +82,7 @@
     'Świat większy od nas': 'A world bigger than us',
     'Wiele sposobów widzenia': 'Many ways of seeing',
     'Świat, który tworzy mózg': 'The world our brains create',
+    'Nad czym pracuję': 'What I work on',
     'Najbardziej interesuje mnie': 'What fascinates me most is',
     'nie tylko to, jaki świat jest, ale jak różne umysły i systemy próbują nadać mu sens.':
       'not just what the world is like, but how different minds and systems try to make sense of it.',
@@ -103,7 +104,7 @@
     'Kategorie strony': 'Website categories',
     'Informacje szczegółowe': 'Detailed information',
     'Filtruj publikacje': 'Filter publications',
-    'Wersja strony 1.2.16': 'Website version 1.2.16',
+    'Wersja strony 1.2.17': 'Website version 1.2.17',
     'Język strony': 'Site language',
     'Źródło': 'Source',
     'Skopiowano': 'Copied',
@@ -133,6 +134,8 @@
     'I am also curious about how machines might perceive reality. Without our senses or experiences, what kind of picture of their surroundings would they build? What might they notice that we overlook, and what would remain invisible to them?',
     'And then I come back to people. Our brains do not show us the world directly; they build their own model from sensations, memories and expectations. Why can two people experience the same event so differently? How does their understanding of the world shape their choices, emotions and relationships?',
     'I bring these questions into my research through experiments, programming and engineering. I am an Assistant Professor at Rzeszów University of Technology and earned my doctorate at the Military University of Technology. I especially enjoy those moments when a change in perspective sparks a new idea.',
+    'My research roots are in optoelectronics, imaging and measurement systems. Today I also develop approaches based on artificial intelligence, computer vision and combining data from different sensors. I am especially interested in humanoid robots, autonomous systems, and virtual and augmented reality. I like technology that does more than impress: it should be intuitive, useful and safe.',
+    'Neuroscience and psychology are equally close to my interests. I study attention, emotions and behaviour through eye tracking, EEG and experimental methods. I am curious about what happens between a person and an intelligent system: where trust comes from, how we make decisions, and how to design solutions that respond to our needs.',
   ];
 
   // HTML &nbsp; becomes U+00A0 in text nodes. Match translations independently
@@ -156,7 +159,7 @@
     });
     if (language !== 'en') return;
 
-    const paragraphs = document.querySelectorAll('#badania .research-intro p');
+    const paragraphs = document.querySelectorAll('#badania .research-intro p, #badania .research-work p');
     if (paragraphs.length !== researchParagraphs.length) {
       throw new Error('Unexpected number of research paragraphs');
     }
