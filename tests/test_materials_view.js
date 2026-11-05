@@ -292,7 +292,7 @@ assert.match(html, /grid-template-columns:repeat\(auto-fit,minmax\(min\(100%,var
 assert.match(html, /data-materials-view="all"\] \.materials-list--dense\{--material-min:7\.5rem/);
 assert.match(html, /\.materials-list \.material-formats\{display:inline;font-size:\.56rem/);
 assert.match(html, /\.materials-list \.material-format--standalone\{font-size:\.56rem/);
-assert.match(html, /materials-group--flow\{display:block;break-inside:auto/);
+assert.match(html, /materials-group--flow\{display:inline-block;break-inside:avoid/);
 assert.match(html, /\.materials-list a\{display:block;[^\n]*font-size:\.7rem/);
 assert.match(html, /const BROWSER_EXTENSIONS = new Set\(\['html', 'htm'\]\)/);
 console.log('[DONE] MATERIALS_FORMAT_PAIRS_PASS');
