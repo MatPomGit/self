@@ -7,6 +7,7 @@ from pathlib import Path
 import re
 
 from pypdf import PdfReader
+from pypdf.errors import PdfReadError
 from urllib.parse import unquote, urlsplit
 from xml.etree import ElementTree as ET
 from zipfile import ZipFile, BadZipFile
@@ -36,7 +37,7 @@ def dimensions(path: Path) -> tuple[float, float] | None:
             page = PdfReader(str(path), strict=False).pages[0]
             box = page.cropbox
             return float(box.width), float(box.height)
-        except (OSError, ValueError, IndexError, KeyError):
+        except (OSError, ValueError, IndexError, KeyError, PdfReadError):
             return None
     if ext not in (".pptx", ".docx"):
         return None
