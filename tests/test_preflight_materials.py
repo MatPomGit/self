@@ -4,6 +4,8 @@ from tempfile import TemporaryDirectory
 import unittest
 from zipfile import ZipFile
 
+from pypdf import PdfWriter
+
 from scripts.preflight_materials import problem, quarantine, scan
 
 
@@ -14,7 +16,10 @@ class PreflightTests(unittest.TestCase):
             subject = materials / "course"
             subject.mkdir(parents=True)
             good_pdf = subject / "good.pdf"
-            good_pdf.write_bytes(b"%PDF-1.4\n1 0 obj\nendobj\n%%EOF\n")
+            writer = PdfWriter()
+            writer.add_blank_page(width=595, height=842)
+            with good_pdf.open("wb") as output:
+                writer.write(output)
             good_pptx = subject / "good.pptx"
             with ZipFile(good_pptx, "w") as archive:
                 archive.writestr("ppt/presentation.xml", "<presentation/>")
@@ -52,6 +57,8 @@ class PreflightTests(unittest.TestCase):
             self.assertEqual(problem(path), "missing PDF header")
             path.write_bytes(b"%PDF-1.7\nmissing termination")
             self.assertEqual(problem(path), "missing PDF EOF marker")
+            path.write_bytes(b"%PDF-1.4\n%%EOF\n")
+            self.assertIn("unreadable PDF structure", problem(path))
 
 
 if __name__ == "__main__":
