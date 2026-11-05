@@ -28,6 +28,7 @@ assert.equal(en.translate('Dla studentów'), 'For students');
 assert.equal(en.translate('Świat większy od nas'), 'A world bigger than us');
 assert.equal(en.translate('Wiele sposobów widzenia'), 'Many ways of seeing');
 assert.equal(en.translate('Świat, który tworzy mózg'), 'The world our brains create');
+assert.equal(en.translate('Nad czym pracuję'), 'What I work on');
 assert.equal(en.translate('Najbardziej interesuje mnie'), 'What fascinates me most is');
 assert.equal(en.translate('Aktualne programy badawczo-rozwojowe'), 'Current research and development programmes');
 assert.equal(en.translate('Wybrane projekty i konsorcja'), 'Selected projects and consortia');
@@ -50,7 +51,7 @@ assert.match(html, /themeToggle.setAttribute\('aria-label', action\)/);
 // All Polish interface strings must have an English equivalent. Bibliographic
 // titles are not in the static HTML; street names are proper nouns.
 const staticPage = html.slice(html.indexOf('<body>'), html.indexOf('<script src="docs/assets/js/site-i18n.js">'))
-  .replace(/<div class="research-intro">[\s\S]*?<\/div>/, '');
+  .replace(/<div class="research-(?:intro|work)">[\s\S]*?<\/div>/g, '');
 const missingUI = [...staticPage.matchAll(/>([^<>]+)</g)]
   .map(match => match[1].replace(/&nbsp;/g, '\u00a0').trim())
   .filter(value => /[ąćęłńóśźż]/iu.test(value) && en.translate(value) === value)
@@ -83,11 +84,19 @@ assert.equal(polishParagraphs.length, 5, 'Short research story has five paragrap
 const englishParagraphsSource = source.match(/const researchParagraphs = \[([\s\S]*?)\n  \];/)?.[1];
 assert.ok(englishParagraphsSource, 'Research translations are present');
 const englishParagraphs = vm.runInNewContext('[' + englishParagraphsSource + ']', {});
-assert.equal(englishParagraphs.length, polishParagraphs.length, 'PL/EN research story paragraph counts match');
+const researchWork = html.match(/<div class="research-work">([\s\S]*?)<\/div>/)?.[1];
+assert.ok(researchWork, 'Research-work section follows the philosophical story');
+const workParagraphs = [...researchWork.matchAll(/<p>([\s\S]*?)<\/p>/g)];
+assert.equal(workParagraphs.length, 2, 'The work section has exactly two concise paragraphs');
+assert.ok(html.indexOf('class="research-summary"') < html.indexOf('class="research-work"'));
+assert.equal(englishParagraphs.length, polishParagraphs.length + workParagraphs.length, 'PL/EN research paragraph counts match');
+assert.match(source, /#badania \.research-intro p, #badania \.research-work p/);
 assert.ok(englishParagraphs.every(text => text.length > 80), 'English paragraphs have content');
 assert.match(englishParagraphs[0], /universe/);
 assert.match(englishParagraphs[1], /models of the world/);
 assert.match(englishParagraphs[3], /brains/);
+assert.match(englishParagraphs[5], /optoelectronics/);
+assert.match(englishParagraphs[6], /Neuroscience and psychology/);
 
 const projects = JSON.parse(read('docs/data/projects.json'));
 const projectTranslations = JSON.parse(read('docs/data/projects.en.json'));
