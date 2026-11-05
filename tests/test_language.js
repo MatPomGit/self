@@ -97,7 +97,7 @@ assert.match(englishParagraphs[0], /universe/);
 assert.match(englishParagraphs[1], /models of the world/);
 assert.match(englishParagraphs[3], /brains/);
 assert.match(englishParagraphs[5], /optoelectronics/);
-assert.match(englishParagraphs[6], /Neuroscience and psychology/);
+assert.match(englishParagraphs[6], /neuroscience and psychology/);
 
 const projects = JSON.parse(read('docs/data/projects.json'));
 const projectTranslations = JSON.parse(read('docs/data/projects.en.json'));
