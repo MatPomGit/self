@@ -83,6 +83,8 @@
     'Wiele sposobów widzenia': 'Many ways of seeing',
     'Świat, który tworzy mózg': 'The world our brains create',
     'Nad czym pracuję': 'What I work on',
+    'Największą satysfakcję daje mi chwila, gdy z ciekawości rodzi się pomysł, a z pomysłu coś, co pomaga nam lepiej rozumieć świat lub siebie nawzajem.':
+      'My greatest satisfaction comes when curiosity becomes an idea, and that idea becomes something that helps us understand the world or each other a little better.',
     'Największą satysfakcję daje mi': 'What I enjoy most is',
     'chwila, gdy z ciekawości rodzi się pomysł, a z pomysłu coś, co pomaga nam lepiej rozumieć świat lub siebie nawzajem.':
       'the moment curiosity turns into an idea, and that idea into something that helps us understand the world or one another a little better.',
