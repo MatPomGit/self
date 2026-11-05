@@ -129,6 +129,24 @@ class ThemeTests(unittest.TestCase):
         self.assertIn('#badania .research-intro{font-size:.94rem', HTML)
         self.assertIn('#badania .research-heading{font-size:1.14rem', HTML)
 
+    def test_research_story_is_short_and_human(self):
+        panel = re.search(r'<article class="panel" id="badania"[^>]*>([\s\S]*?)</article>', HTML)
+        self.assertIsNotNone(panel)
+        content = panel.group(1)
+        self.assertEqual(content.count('class="research-heading"'), 3)
+        self.assertEqual(len(re.findall(r'<p>', content)), 4)
+        plain = re.sub(r'<[^>]+>', ' ', content)
+        self.assertLessEqual(len(plain.split()), 270)
+        for phrase in (
+            'Co mnie ciekawi', 'Nad czym pracuję', 'Jak podchodzę do badań',
+            'optoelektronika', 'informatyką', 'roboty humanoidalne',
+            'neuronauka i psychologia', 'okulografii, EEG',
+            'Politechniki Rzeszowskiej', 'Wojskowej Akademii Technicznej',
+        ):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, plain)
+        self.assertNotIn('<a ', content)
+
     def test_contact_links_have_icons(self):
         import re
         section = re.search(r'<article class="panel" id="kontakt"[\s\S]*?</article>', HTML)
@@ -170,7 +188,7 @@ class ThemeTests(unittest.TestCase):
         self.assertIn('.manuscript-next{font-size:inherit;line-height:inherit;', HTML)
 
     def test_version(self):
-        self.assertIn("v1.2.13", HTML)
+        self.assertIn("v1.2.14", HTML)
 
 
 if __name__ == "__main__":

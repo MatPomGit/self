@@ -79,12 +79,12 @@
     'Robotyka afektywna': 'Affective robotics',
     'Interakcja człowiek robot, percepcja oraz kognitywne systemy robotyczne.':
       'Human–robot interaction, perception and cognitive robotic systems.',
-    'Profil naukowy': 'Academic profile',
-    'Kompetencje inżynierskie i systemy autonomiczne': 'Engineering and autonomous systems',
-    'Robotyka afektywna i neuroinformatyka': 'Affective robotics and neuroinformatics',
-    'Cel badań:': 'Research goal:',
-    'budowa systemów, które nie tylko odbierają sygnały, ale też inteligentnie je interpretują i odpowiadają w sposób dostosowany do kontekstu.':
-      'develop systems that perceive signals, intelligently interpret them and respond appropriately to their context.',
+    'Co mnie ciekawi': 'What interests me',
+    'Nad czym pracuję': 'What I work on',
+    'Jak podchodzę do badań': 'How I approach research',
+    'Największą satysfakcję daje mi': 'What I enjoy most is',
+    'chwila, gdy dobry pomysł zamienia się w rozwiązanie, które naprawdę komuś pomaga.':
+      'seeing a good idea become something that genuinely helps someone.',
     'Wczytywanie projektów…': 'Loading projects…',
     'Wczytywanie publikacji…': 'Loading publications…',
     'Źródło:': 'Source:',
@@ -103,7 +103,7 @@
     'Kategorie strony': 'Website categories',
     'Informacje szczegółowe': 'Detailed information',
     'Filtruj publikacje': 'Filter publications',
-    'Wersja strony 1.2.13': 'Website version 1.2.13',
+    'Wersja strony 1.2.14': 'Website version 1.2.14',
     'Język strony': 'Site language',
     'Źródło': 'Source',
     'Skopiowano': 'Copied',
@@ -128,12 +128,10 @@
   };
 
   const researchParagraphs = [
-    'I am a researcher and engineer specialising in multispectral image processing and systems based on natural human–machine interaction. My work connects optoelectronics, digital technologies and cognitive psychology. I model and integrate human perceptual and affective signals to help machines interpret the user’s state.',
-    'I work as an Assistant Professor at the Department of Computer and Control Engineering, Rzeszów University of Technology. My research disciplines include automation, electronics, electrical engineering and space technologies, as well as computer science. I received my doctorate in engineering and technical sciences at the Institute of Optoelectronics, Military University of Technology. I follow the European Charter for Researchers, with an emphasis on ethics, integrity and transparency.',
-    'I develop multisensor systems that use computer vision, machine learning and data fusion to infer human and environmental states. I design and integrate systems for acquiring physiological parameters, including motion, gaze direction and facial expressions. This work uses 3D scanning, photogrammetry and spatial modelling.',
-    'I also develop immersive augmented and virtual reality environments for natural multimodal human–machine interfaces. My experience in security technologies includes optoelectronic guidance systems, battlefield simulators and trainers, and real-time AR systems that support situational awareness. I combine perception with real-time control to develop robotic architectures for precise and safe human collaboration.',
-    'Affective robotics and brain–computer interface signal analysis are central to my work. I study and integrate eye-tracking data, emotional expressions and EEG activity. These signals support adaptive perceptual and cognitive architectures for humanoid robots and embodied AI.',
-    'I use these representations to personalise robot interactions and develop specialised diagnostic and clinical applications that support medical and rehabilitation processes. I build digital twins of autonomous systems and use reinforcement learning to improve their operation under complex real-world conditions and changing user needs.',
+    'If you ask me what I do, I find it hard to give a one-word answer. I am most drawn to questions that connect different worlds: how machines can better perceive and interpret their surroundings, how they can work with people, and what we can learn about ourselves along the way. That is why my work moves between engineering, computer science and the study of human behaviour.',
+    'My research roots are in optoelectronics, imaging and measurement systems. Today, I also develop approaches based on artificial intelligence, computer vision and data from multiple sensors. I am especially interested in humanoid robots, autonomous systems, and virtual and augmented reality. I like technology that does more than impress: it should be intuitive, useful and safe.',
+    'Neuroscience and psychology are equally important to me. I study attention, emotion and behaviour using eye tracking, EEG and experimental methods. I am curious about what happens between people and intelligent systems: where trust comes from, how we make decisions, and how to build technologies that adapt to our needs.',
+    'I am an Assistant Professor in the Department of Computer and Control Engineering at Rzeszów University of Technology. I earned my PhD at the Institute of Optoelectronics, Military University of Technology, and have also worked on security and space-technology projects. I value open discussion, testing unconventional ideas, and working with people who see a problem differently from me.',
   ];
 
   // HTML &nbsp; becomes U+00A0 in text nodes. Match translations independently
