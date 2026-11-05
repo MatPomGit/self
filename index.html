@@ -473,10 +473,11 @@
       </section>
     </main>
 
-    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.18">v1.2.18</span></footer>
+    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.19">v1.2.19</span></footer>
   </div>
 
   <script src="docs/assets/js/site-i18n.js"></script>
+<script src="docs/assets/js/publication-utils.js"></script>
   <script>
     const i18n=window.SiteI18n;
     i18n.apply();
@@ -663,27 +664,11 @@
       list.replaceChildren(fragment);
     }
     let publicationRecords=[];
+    let activePublicationFilter='all';
     function citationText(entry){
       return [entry.authors||'',entry.year?'('+entry.year+').':'',entry.title+'.',entry.metadata||''].filter(Boolean).join(' ').replace(/\s+/g,' ').trim();
     }
-    function bibtexKey(entry,index){
-      const last=(entry.authors||'author').split(',')[0].trim().split(' ')[0].normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zA-Z0-9]/g,'').toLowerCase();
-      return (last||'author')+(entry.year||'nd')+'_'+(index+1);
-    }
-    function bibtexEscape(value){
-      return String(value||'').replace(/\\/g,'\\textbackslash{}').replace(/[{}]/g,char=>'\\'+char);
-    }
-    function bibtexAuthors(authors){
-      return String(authors||'').split(',').map(name=>name.trim()).filter(Boolean).map(name=>{
-        const parts=name.match(/^(.+?)\s+((?:[A-ZĄĆĘŁŃÓŚŹŻ]\.)+)$/u);
-        return parts?parts[1]+', '+parts[2]:name;
-      }).join(' and ');
-    }
-    function bibtexText(entry,index){
-      const type={journal:'article',conference:'inproceedings',patent:'misc'}[entry.type]||'misc';
-      const props=[['title',entry.title],['year',entry.year],['author',bibtexAuthors(entry.authors)],['note',entry.metadata],['url',entry.link]].filter(([key,value])=>value!=null&&String(value).trim());
-      return '@'+type+'{'+bibtexKey(entry,index)+',\n'+props.map(([key,value])=>'  '+key+' = {'+bibtexEscape(value)+'}').join(',\n')+'\n}';
-    }
+    const {safeHttpsUrl,bibtexText}=window.SelfPublications;
     async function copyCitation(content,button){
       try{
         await navigator.clipboard.writeText(content);
@@ -704,9 +689,10 @@
         const name=makeElement('div','publication-title',entry.title);
         const meta=makeElement('div','publication-meta',[entry.authors,entry.year,i18n.publicationMetadata(entry.metadata||'')].filter(Boolean).join(' · '));
         const actions=makeElement('div','publication-actions');
-        if(entry.link&&/^https:\/\//.test(entry.link)){
+        const publicationUrl=safeHttpsUrl(entry.link);
+        if(publicationUrl){
           const link=makeElement('a','',i18n.publicationMetadata(tr(entry.linkText||'Źródło')));
-          link.href=entry.link;link.target='_blank';link.rel='noopener noreferrer';
+          link.href=publicationUrl;link.target='_blank';link.rel='noopener noreferrer';
           actions.append(link);
         }
         const cite=makeElement('button','',tr('Cite'));cite.type='button';
@@ -739,15 +725,17 @@
           const item=document.createElement('li');
           const title=makeElement('strong','manuscript-title',entry.title);
           const project=makeElement('div','manuscript-project');
-          const projectLink=makeElement('a','',entry.project.toUpperCase());
-          projectLink.href=entry.projectUrl;projectLink.target='_blank';projectLink.rel='noopener noreferrer';
+          const projectUrl=safeHttpsUrl(entry.projectUrl);
+          const projectLink=makeElement(projectUrl?'a':'span','',entry.project.toUpperCase());
+          if(projectUrl){projectLink.href=projectUrl;projectLink.target='_blank';projectLink.rel='noopener noreferrer';}
           const next=makeElement('span','manuscript-next',tr('Następny krok: ')+entry.nextStep);
           project.append(projectLink,document.createTextNode(', '),next);
           const meta=makeElement('div','manuscript-meta');
           const description=makeElement('p','manuscript-description',entry.description);
           const journal=makeElement('div','manuscript-journal',tr('Docelowe czasopismo: '));
-          const journalLink=makeElement('a','',entry.journal);
-          journalLink.href=entry.journalUrl;journalLink.target='_blank';journalLink.rel='noopener noreferrer';
+          const journalUrl=safeHttpsUrl(entry.journalUrl);
+          const journalLink=makeElement(journalUrl?'a':'span','',entry.journal);
+          if(journalUrl){journalLink.href=journalUrl;journalLink.target='_blank';journalLink.rel='noopener noreferrer';}
           journal.append(journalLink,document.createTextNode(' ('+(entry.ministerialPoints==null?tr('pkt: do weryfikacji'):entry.ministerialPoints+tr(' pkt'))+')'));
           const track=makeElement('div','manuscript-track');
           const bar=document.createElement('progress');bar.max=100;bar.value=entry.progress;
@@ -767,13 +755,17 @@
     renderProgress();
     document.querySelectorAll('#publication-filters button').forEach(button=>button.addEventListener('click',()=>{
       document.querySelectorAll('#publication-filters button').forEach(item=>item.setAttribute('aria-pressed',String(item===button)));
-      const progress=button.dataset.filter==='progress';
+      activePublicationFilter=button.dataset.filter;
+      const progress=activePublicationFilter==='progress';
       document.getElementById('publications-list').hidden=progress;
       document.getElementById('progress-list').hidden=!progress;
-      if(!progress)renderPublications(button.dataset.filter);
+      if(!progress)renderPublications(activePublicationFilter);
     }));
     loadData('docs/data/projects.json','projects-list','projects-status',renderProjects);
-    loadData('docs/data/publications.json','publications-list','publications-status',records=>{publicationRecords=records;renderPublications()});
+    loadData('docs/data/publications.json','publications-list','publications-status',records=>{
+      publicationRecords=records;
+      if(activePublicationFilter!=='progress')renderPublications(activePublicationFilter);
+    });
 
     const requested=location.hash.slice(1);
     if(requested) activateTab(requested,false);

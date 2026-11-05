@@ -77,8 +77,11 @@ motyw oraz dwustopniowy widok spisu (PDF / wszystkie pliki).
 
 ## Odporność CI na niespójności materiałów
 
-Workflow GitHub Pages wykonuje przed walidacją **preflight dokumentów** i
-**deterministyczne uzgodnienie indeksu**:
+Workflow GitHub Pages sprawdza odnośniki w źródłowym HTML, wykonuje **preflight dokumentów**
+i **deterministyczne uzgodnienie indeksu**. Zweryfikowany katalog jest pakowany
+jeden raz, a zadanie publikacji wdraża ten sam artefakt bez ponownego budowania.
+Dodatkowy workflow testu motywu jest uruchamiany tylko ręcznie:
+
 
 - `python scripts/preflight_materials.py --check` jest trybem lokalnym tylko do
   odczytu; zwraca błąd, gdy wykryje uszkodzony PDF, PPTX, DOCX lub ODP.

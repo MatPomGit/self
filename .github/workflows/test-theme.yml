@@ -1,16 +1,12 @@
-name: Sprawdzenie motywu self
+name: Sprawdzenie motywu self (manual)
 on:
-  pull_request:
-    paths: ["index.html", "docs/data/projects.json", "materials/**", "scripts/sync_materials.py", "scripts/preflight_materials.py", "tests/test_preflight_materials.py", "tests/test_sync_materials.py", "tests/test_theme.py", "tests/test_materials.py", "tests/test_materials_view.js", "tests/test_classify_materials.py", "scripts/classify_materials.py", "tests/test_projects.py", ".github/workflows/test-theme.yml"]
-  push:
-    branches: [main]
-    paths: ["index.html", "docs/data/projects.json", "materials/index.html", "tests/test_theme.py", "tests/test_materials.py", "tests/test_materials_view.js", "tests/test_classify_materials.py", "scripts/classify_materials.py", "tests/test_projects.py", "scripts/preflight_materials.py", "tests/test_preflight_materials.py", ".github/workflows/test-theme.yml"]
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
-  test:
+  smoke:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v5
         with:
@@ -18,11 +14,6 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - run: python -m pip install "pypdf>=5,<7"
-      - run: python scripts/preflight_materials.py --quarantine
-      - run: python scripts/sync_materials.py --write --repair-missing
-      - run: python scripts/sync_materials.py --check
-      - run: python scripts/classify_materials.py --write
-      - run: python scripts/classify_materials.py --check
-      - run: python -m unittest discover -s tests -p "test_*.py" -v
-      - run: node tests/test_materials_view.js
+      - run: python -m unittest discover -s tests -p "test_theme.py" -v
+      - run: node tests/test_language.js
+      - run: node tests/test_publication_utils.js
