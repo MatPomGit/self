@@ -84,13 +84,13 @@ assert.equal(polishParagraphs.length, 5, 'Short research story has five paragrap
 const englishParagraphsSource = source.match(/const researchParagraphs = \[([\s\S]*?)\n  \];/)?.[1];
 assert.ok(englishParagraphsSource, 'Research translations are present');
 const englishParagraphs = vm.runInNewContext('[' + englishParagraphsSource + ']', {});
-const researchWork = html.match(/<div class="research-work">([\s\S]*?)<\\/div>/)?.[1];
+const researchWork = html.match(/<div class="research-work">([\s\S]*?)<\/div>/)?.[1];
 assert.ok(researchWork, 'Research-work section follows the philosophical story');
 const workParagraphs = [...researchWork.matchAll(/<p>([\s\S]*?)<\\/p>/g)];
 assert.equal(workParagraphs.length, 2, 'The work section has exactly two concise paragraphs');
 assert.ok(html.indexOf('class="research-summary"') < html.indexOf('class="research-work"'));
 assert.equal(englishParagraphs.length, polishParagraphs.length + workParagraphs.length, 'PL/EN research paragraph counts match');
-assert.match(source, /#badania \\.research-intro p, #badania \\.research-work p/);
+assert.match(source, /#badania \.research-intro p, #badania \.research-work p/);
 assert.ok(englishParagraphs.every(text => text.length > 80), 'English paragraphs have content');
 assert.match(englishParagraphs[0], /universe/);
 assert.match(englishParagraphs[1], /models of the world/);
