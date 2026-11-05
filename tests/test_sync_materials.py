@@ -82,6 +82,43 @@ class MaterialsSyncTests(unittest.TestCase):
             self.assertTrue(any("Missing/ambiguous" in error for error in issues))
             self.assertIn('href="example/existing.pdf"', broken)
 
+    def test_ci_repair_prunes_only_stale_standalone_links(self):
+        with TemporaryDirectory() as temp:
+            root = self.make_root(temp)
+            source = BASE.replace(
+                "</ul>",
+                '<li><a href="example/missing.html">old HTML</a></li>\n</ul>',
+            )
+            warnings = []
+            output, failures = render(source, root, repair_missing=True, warnings=warnings)
+            self.assertFalse(failures)
+            self.assertNotIn("missing.html", output)
+            self.assertIn('href="example/existing.pdf"', output)
+            self.assertEqual(len(warnings), 1)
+            self.assertEqual(render(output, root), (output, []))
+
+    def test_ci_repair_fails_closed_on_ambiguous_rename(self):
+        with TemporaryDirectory() as temp:
+            root = self.make_root(temp)
+            (root / "example" / "series_v1.pdf").write_bytes(b"fixture")
+            (root / "example" / "series_v2.pdf").write_bytes(b"fixture")
+            source = BASE.replace(
+                "</ul>",
+                '<li><a href="example/series.pdf">ambiguous</a></li>\n</ul>',
+            )
+            warnings = []
+            output, failures = render(source, root, repair_missing=True, warnings=warnings)
+            self.assertTrue(any("Missing/ambiguous material" in x for x in failures))
+            self.assertIn('href="example/series.pdf"', output)
+            self.assertEqual(warnings, [])
+
+    def test_ci_repair_does_not_hide_unsupported_links(self):
+        with TemporaryDirectory() as temp:
+            root = self.make_root(temp)
+            source = BASE.replace("example/existing.pdf", "../outside.pdf")
+            _, failures = render(source, root, repair_missing=True)
+            self.assertTrue(any("Unsupported link" in x for x in failures))
+
     def test_generated_index_pages_use_directory_url(self):
         with TemporaryDirectory() as temp:
             root = self.make_root(temp)
