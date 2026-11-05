@@ -83,9 +83,9 @@
     'Wiele sposobów widzenia': 'Many ways of seeing',
     'Świat, który tworzy mózg': 'The world our brains create',
     'Nad czym pracuję': 'What I work on',
-    'Najbardziej interesuje mnie': 'What fascinates me most is',
-    'nie tylko to, jaki świat jest, ale jak różne umysły i systemy próbują nadać mu sens.':
-      'not just what the world is like, but how different minds and systems try to make sense of it.',
+    'Największą satysfakcję daje mi': 'What I enjoy most is',
+    'chwila, gdy z ciekawości rodzi się pomysł, a z pomysłu coś, co pomaga nam lepiej rozumieć świat lub siebie nawzajem.':
+      'the moment curiosity turns into an idea, and that idea into something that helps us understand the world or one another a little better.',
     'Wczytywanie projektów…': 'Loading projects…',
     'Wczytywanie publikacji…': 'Loading publications…',
     'Źródło:': 'Source:',
@@ -104,7 +104,7 @@
     'Kategorie strony': 'Website categories',
     'Informacje szczegółowe': 'Detailed information',
     'Filtruj publikacje': 'Filter publications',
-    'Wersja strony 1.2.17': 'Website version 1.2.17',
+    'Wersja strony 1.2.18': 'Website version 1.2.18',
     'Język strony': 'Site language',
     'Źródło': 'Source',
     'Skopiowano': 'Copied',
@@ -133,9 +133,9 @@
     'Building models of the world has always been a passion of mine. The same thing can be described in many ways; each reveals something, while simplifying or leaving something else out. I am not looking for one perfect picture of reality. I enjoy seeing what changes when we look from a different angle.',
     'I am also curious about how machines might perceive reality. Without our senses or experiences, what kind of picture of their surroundings would they build? What might they notice that we overlook, and what would remain invisible to them?',
     'And then I come back to people. Our brains do not show us the world directly; they build their own model from sensations, memories and expectations. Why can two people experience the same event so differently? How does their understanding of the world shape their choices, emotions and relationships?',
-    'I bring these questions into my research through experiments, programming and engineering. I am an Assistant Professor at Rzeszów University of Technology and earned my doctorate at the Military University of Technology. I especially enjoy those moments when a change in perspective sparks a new idea.',
-    'My research roots are in optoelectronics, imaging and measurement systems. Today I also develop approaches based on artificial intelligence, computer vision and combining data from different sensors. I am especially interested in humanoid robots, autonomous systems, and virtual and augmented reality. I like technology that does more than impress: it should be intuitive, useful and safe.',
-    'Neuroscience and psychology are equally close to my interests. I study attention, emotions and behaviour through eye tracking, EEG and experimental methods. I am curious about what happens between a person and an intelligent system: where trust comes from, how we make decisions, and how to design solutions that respond to our needs.',
+    'These questions are at the heart of my research. I bring experiments, programming and engineering together to explore how different pictures of the world take shape, and how machines might build their own. I am an Assistant Professor at Rzeszów University of Technology and earned my doctorate at the Military University of Technology.',
+    'I started with optoelectronics, imaging and measurement systems. Over time, artificial intelligence became a natural next step: analysing images, combining sensor data and designing systems that can make sense of their surroundings. This led me to humanoid robots, autonomous systems, and virtual and augmented reality.',
+    'But understanding how people see the world matters just as much to me. That is why I also explore neuroscience and psychology, studying attention, emotions and behaviour through eye tracking, EEG and experiments. I am especially curious about where these two perspectives meet: people and intelligent machines. What makes us trust one another? How can technology respond better to our needs?',
   ];
 
   // HTML &nbsp; becomes U+00A0 in text nodes. Match translations independently
