@@ -134,14 +134,14 @@ class ThemeTests(unittest.TestCase):
         self.assertIsNotNone(panel)
         content = panel.group(1)
         self.assertEqual(content.count('class="research-heading"'), 3)
-        self.assertEqual(len(re.findall(r'<p>', content)), 4)
+        self.assertEqual(len(re.findall(r'<p>', content)), 5)
         plain = re.sub(r'<[^>]+>', ' ', content)
-        self.assertLessEqual(len(plain.split()), 270)
+        self.assertLessEqual(len(plain.split()), 260)
         for phrase in (
-            'Co mnie ciekawi', 'Nad czym pracuję', 'Jak podchodzę do badań',
-            'optoelektronika', 'informatyką', 'roboty humanoidalne',
-            'neuronauka i psychologia', 'okulografii, EEG',
-            'Politechniki Rzeszowskiej', 'Wojskowej Akademii Technicznej',
+            'Świat, który widzimy', 'Rzeczywistość ma wiele twarzy',
+            'Od człowieka po Wszechświat', 'ludzki mózg', 'wspomnień, emocji',
+            'inteligentna maszyna', 'Tworzenie modeli świata', 'kosmos',
+            'Astronomia', 'Politechniki Rzeszowskiej', 'Wojskowej Akademii Technicznej',
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, plain)
@@ -188,7 +188,7 @@ class ThemeTests(unittest.TestCase):
         self.assertIn('.manuscript-next{font-size:inherit;line-height:inherit;', HTML)
 
     def test_version(self):
-        self.assertIn("v1.2.14", HTML)
+        self.assertIn("v1.2.15", HTML)
 
 
 if __name__ == "__main__":
