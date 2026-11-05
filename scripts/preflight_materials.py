@@ -105,7 +105,7 @@ def main() -> int:
         with open(summary, "a", encoding="utf-8") as output:
             output.write(f"\n### Materials preflight: {len(issues)} invalid file(s)\n")
             for relative, reason in issues:
-                output.write(f"- \`{relative.as_posix()}\`: {reason}\n")
+                output.write(f"- `{relative.as_posix()}`: {reason}\n")
             if issues and args.quarantine:
                 output.write("\nFiles above were excluded from the temporary build, not deleted from Git.\n")
     return int(bool(issues) and args.check)
