@@ -7,7 +7,7 @@
   },
   {
     "sourceTitle": "ARC-RVI · Autonomiczna inspekcja wizualna",
-    "title": "ARC-RVI · Autonomiczna inspekcja wizualna",
+    "title": "ARC-RVI · Autonomous Visual Inspection",
     "period": "2026–present",
     "description": "We develop methods for robots to locate targets, plan viewpoints, and assess the completeness and quality of visual inspection records."
   },
@@ -31,7 +31,7 @@
   },
   {
     "sourceTitle": "SAPIENS · Człowiek i robot humanoidalny",
-    "title": "SAPIENS · Człowiek i robot humanoidalny",
+    "title": "SAPIENS · Human–Humanoid Interaction",
     "period": "2026–present",
     "description": "We study how direct interaction with a humanoid robot shapes trust, agency, social presence and the perception of emotional cues."
   },
@@ -49,7 +49,7 @@
   },
   {
     "sourceTitle": "S4D-TAM · Nawigacja autonomiczna",
-    "title": "S4D-TAM · Nawigacja autonomiczna",
+    "title": "S4D-TAM · Autonomous Navigation",
     "period": "2026–present",
     "description": "We design evaluation methods for autonomous navigation in GNSS-degraded environments using scene semantics and 3D/4D spatial information."
   },
@@ -61,7 +61,7 @@
   },
   {
     "sourceTitle": "ARC-ADHD · Adaptacyjna gra badawcza",
-    "title": "ARC-ADHD · Adaptacyjna gra badawcza",
+    "title": "ARC-ADHD · Adaptive Research Game",
     "period": "2026–present",
     "description": "We design a research game to study recovery of goal-directed behaviour after a challenge, distinguishing task improvement from real-world transfer."
   },
@@ -73,13 +73,13 @@
   },
   {
     "sourceTitle": "DERA-HRI · Emocje w interakcji z robotem",
-    "title": "DERA-HRI · Emocje w interakcji z robotem",
+    "title": "DERA-HRI · Emotions in Robot Interaction",
     "period": "2026–present",
     "description": "We develop a research instrument for describing emotional experiences after robot interaction, including responsiveness, trust and control."
   },
   {
     "sourceTitle": "MindDx · Symulator diagnozy psychologicznej",
-    "title": "MindDx · Symulator diagnozy psychologicznej",
+    "title": "MindDx · Psychological Assessment Simulator",
     "period": "2026–present",
     "description": "An interactive educational environment for case analysis, hypothesis formation and diagnostic decision-making without risk to real patients."
   },
@@ -91,61 +91,61 @@
   },
   {
     "sourceTitle": "PIAST · Satelitarne obrazowanie Ziemi",
-    "title": "PIAST · Satelitarne obrazowanie Ziemi",
+    "title": "PIAST · Satellite Earth Observation",
     "period": "2021–2025",
     "description": "Work within a three-nanosatellite Earth-observation programme advancing Polish optoelectronics and imaging capabilities."
   },
   {
     "sourceTitle": "SEEKER · Głowice optoelektroniczne",
-    "title": "SEEKER · Głowice optoelektroniczne",
+    "title": "SEEKER · Optoelectronic Seekers",
     "period": "2021–2025",
     "description": "Development of multispectral and imaging optoelectronic systems for defence applications, including prototyping and verification."
   },
   {
     "sourceTitle": "PolFEL · Laser na swobodnych elektronach",
-    "title": "PolFEL · Laser na swobodnych elektronach",
+    "title": "PolFEL · Free-Electron Laser",
     "period": "2019–2023",
     "description": "Participation in the development of Poland's first free-electron laser infrastructure for studying ultrafast processes in matter."
   },
   {
     "sourceTitle": "OPTOKRYPT · Kryptografia kwantowa",
-    "title": "OPTOKRYPT · Kryptografia kwantowa",
+    "title": "OPTOKRYPT · Quantum Cryptography",
     "period": "2021–2024",
     "description": "Research into optical information-security technologies, including quantum random-number generation and secure key distribution."
   },
   {
     "sourceTitle": "Eye Tracking w rzeczywistości mieszanej",
-    "title": "Eye Tracking w rzeczywistości mieszanej",
+    "title": "Eye Tracking in Mixed Reality",
     "period": "2020–2022",
     "description": "Leading research into gaze-based control and interaction with objects in mixed-reality environments."
   },
   {
     "sourceTitle": "Systemy wizyjne XR w nauce i obronności",
-    "title": "Systemy wizyjne XR w nauce i obronności",
+    "title": "XR Vision Systems for Research and Defence",
     "period": "2018–2020",
     "description": "Leading research on mixed-reality vision systems for scientific experiments and military applications."
   },
   {
     "sourceTitle": "RiverGUARD · Ochrona granic rzecznych",
-    "title": "RiverGUARD · Ochrona granic rzecznych",
+    "title": "RiverGUARD · River-Border Monitoring",
     "period": "2019",
     "description": "Work on an optoelectronic monitoring and protection system for river borders in challenging field conditions."
   },
   {
     "sourceTitle": "Skaner 3D sub-THz",
-    "title": "Skaner 3D sub-THz",
+    "title": "3D Sub-THz Scanner",
     "period": "2015–2019",
     "description": "Participation in an active 3D sub-terahertz scanner project for non-contact security screening."
   },
   {
     "sourceTitle": "Sensor trenażera GROM / PIORUN",
-    "title": "Sensor trenażera GROM / PIORUN",
+    "title": "GROM / PIORUN Trainer Sensor",
     "period": "Dates to be confirmed",
     "description": "Development of a sensor for a virtual GROM/PIORUN anti-aircraft system trainer supporting realistic operator training."
   },
   {
     "sourceTitle": "PROTECT · Biometria kontroli granicznej",
-    "title": "PROTECT · Biometria kontroli granicznej",
+    "title": "PROTECT · Border-Control Biometrics",
     "period": "2016–2019",
     "description": "A European project exploring less intrusive and more robust border controls through multimodal biometrics and privacy safeguards."
   }
