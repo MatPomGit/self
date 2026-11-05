@@ -1,46 +1,152 @@
 [
   {
-    "title": "Projekt „ARIANA”",
-    "description": "System do pomiarów psychometrycznych i rozpoznawania afektu na podstawie mimiki, mikroekspresji, temperatury skóry, ruchu, źrenic i spojrzenia, z informacją zwrotną dla użytkownika."
+    "phase": "current",
+    "title": "ARC-RGBT",
+    "period": "2026–obecnie",
+    "description": "Łączymy obraz widzialny i termowizyjny, by badać skuteczność detekcji obiektów w trudnych warunkach oraz granice niezawodności fuzji sensorów."
   },
   {
-    "title": "Polish ImAging SaTellites „PIAST”",
-    "description": "Konstelacja trzech nanosatelitów obserwacyjnych do optoelektronicznego obrazowania Ziemi, demonstracji obrazów o rozdzielczości około 5 m oraz manewrów orbitalnych."
+    "phase": "current",
+    "title": "ARC-RVI · Autonomiczna inspekcja wizualna",
+    "period": "2026–obecnie",
+    "description": "Rozwijamy metody, dzięki którym robot lokalizuje obiekt, planuje ujęcia i ocenia kompletność oraz jakość dokumentacji wizualnej."
   },
   {
-    "title": "Rodzina głowic optoelektronicznych dla rakiet sterowanych „SEEKER”",
-    "description": "Opracowanie wielospektralnych i obrazujących głowic naprowadzających do zastosowań przeciwlotniczych oraz przeciwpancernych, z weryfikacją prototypów w warunkach poligonowych."
+    "phase": "current",
+    "title": "ARC-HRI-SAFETY",
+    "period": "2026–obecnie",
+    "description": "Projektujemy systemy przewidywania ryzyka podczas współpracy człowieka z robotem humanoidalnym, łącząc percepcję sceny z analizą ruchu i zasadami bezpieczeństwa."
   },
   {
-    "title": "„PolFEL” - Projekt polskiego lasera na swobodnych elektronach",
-    "description": "Budowa polskiego lasera na swobodnych elektronach przez konsorcjum ośmiu jednostek, którego liderem jest Narodowe Centrum Badań Jądrowych."
+    "phase": "current",
+    "title": "ARC-AFFECTIVE",
+    "period": "2026–obecnie",
+    "description": "Badamy, jak łączyć sygnały fizjologiczne, obraz i zachowanie, aby lepiej rozumieć stany poznawcze i projektować interfejsy reagujące na kontekst użytkownika."
   },
   {
-    "title": "Kwantowy generator liczb losowych „OPTOKRYPT”",
-    "description": "Technologie optyczne kryptologii kwantowej do ochrony danych w sieciach teleinformatycznych; projekt DOB-SZAFIR/01/A/013/01/2021."
+    "phase": "current",
+    "title": "ContextNDD",
+    "period": "2026–obecnie",
+    "description": "Tworzymy ramy analizy zachowania uwzględniające kontekst sytuacji i indywidualne różnice, zamiast opierać ocenę wyłącznie na etykietach diagnostycznych."
   },
   {
-    "title": "Analysis of the possibility of using optoelectronic eye tracking systems as interaction interfaces in mixed reality systems",
-    "description": "Analiza zastosowania optoelektronicznych systemów śledzenia wzroku jako interfejsów interakcji w rzeczywistości mieszanej."
+    "phase": "current",
+    "title": "SAPIENS · Człowiek i robot humanoidalny",
+    "period": "2026–obecnie",
+    "description": "Badamy, jak bezpośrednia interakcja z humanoidem wpływa na zaufanie, poczucie sprawczości, obecność społeczną i odbiór sygnałów emocjonalnych."
   },
   {
-    "title": "Analysis of the possibilities of using mixed reality vision systems in scientific research and military applications (RMN/948/2018)",
-    "description": "Analiza możliwości wykorzystania systemów wizyjnych rzeczywistości mieszanej w badaniach naukowych i zastosowaniach wojskowych."
+    "phase": "current",
+    "title": "ARC Mobile Eye Tracking",
+    "period": "2026–obecnie",
+    "description": "Sprawdzamy możliwości pomiaru kierunku spojrzenia za pomocą smartfonu oraz wpływ kalibracji, oświetlenia i ruchu głowy na dokładność estymacji."
   },
   {
-    "title": "Optoelektroniczny system do ochrony perymetrycznej granicy rzecznej „RiverGUARD”",
-    "description": "System optoelektroniczny przeznaczony do ochrony perymetrycznej granicy rzecznej."
+    "phase": "current",
+    "title": "EEG Neurolyze",
+    "period": "2026–obecnie",
+    "description": "Rozwijamy narzędzia do rejestracji, przetwarzania i powtarzalnej analizy sygnałów EEG, z naciskiem na jakość danych i odtwarzalność wyników."
   },
   {
-    "title": "Active sub-THz 3D scanner for anti-terrorist applications (PBS3/B3/30/2015)",
-    "description": "Aktywny skaner trójwymiarowy w zakresie sub-THz, przeznaczony do zastosowań antyterrorystycznych."
+    "phase": "current",
+    "title": "S4D-TAM · Nawigacja autonomiczna",
+    "period": "2026–obecnie",
+    "description": "Projektujemy metody oceny nawigacji bezzałogowej w warunkach ograniczonego sygnału GNSS, wykorzystując semantykę sceny i dane przestrzenne 3D/4D."
   },
   {
-    "title": "Development of a sensor for a virtual trainer - anti-aircraft GROM and PIORUN missile sets",
-    "description": "Opracowanie sensora do wirtualnego trenażera przeciwlotniczych zestawów GROM i PIORUN."
+    "phase": "current",
+    "title": "ARC Attachment Dynamics",
+    "period": "2026–obecnie",
+    "description": "Łączymy psychologię przywiązania z modelowaniem dynamicznym, aby badać zmiany bliskości, autonomii i poczucia bezpieczeństwa w relacjach."
   },
   {
-    "title": "Pervasive and User Focused Biometrics Border Project (Common and user-oriented biometric border design) EU–0700259 PROTECT",
-    "description": "Projekt systemów biometrycznych do ochrony granic, zorientowany na użytkownika."
+    "phase": "current",
+    "title": "ARC-ADHD · Adaptacyjna gra badawcza",
+    "period": "2026–obecnie",
+    "description": "Projektujemy grę do badania powrotu do działania po trudnym bodźcu, rozdzielając postępy w zadaniu od ewentualnego transferu umiejętności poza grę."
+  },
+  {
+    "phase": "current",
+    "title": "AI Cognitive Resilience",
+    "period": "2026–obecnie",
+    "description": "Badamy, czy odpowiedzi sztucznej inteligencji zmieniają przekonania dzięki jakości dowodów, czy raczej dzięki sile i formie perswazji."
+  },
+  {
+    "phase": "current",
+    "title": "DERA-HRI · Emocje w interakcji z robotem",
+    "period": "2026–obecnie",
+    "description": "Opracowujemy narzędzie badawcze do opisu emocji i doświadczeń po kontakcie z robotem, uwzględniające responsywność, zaufanie i kontrolę."
+  },
+  {
+    "phase": "current",
+    "title": "MindDx · Symulator diagnozy psychologicznej",
+    "period": "2026–obecnie",
+    "description": "Interaktywne środowisko edukacyjne do analizy przypadków, stawiania hipotez i ćwiczenia decyzji diagnostycznych bez ryzyka dla rzeczywistych pacjentów."
+  },
+  {
+    "phase": "previous",
+    "title": "ARIANA",
+    "period": "2024",
+    "description": "Koncepcja wielomodalnej platformy badania reakcji emocjonalnych, łączącej okulografię, obraz VIS/IR, pomiary ruchu i narzędzia psychometryczne."
+  },
+  {
+    "phase": "previous",
+    "title": "PIAST · Satelitarne obrazowanie Ziemi",
+    "period": "2021–2025",
+    "description": "Prace w programie trzech nanosatelitów obserwacyjnych, rozwijającym polskie technologie optoelektroniczne i zdolności obrazowania Ziemi."
+  },
+  {
+    "phase": "previous",
+    "title": "SEEKER · Głowice optoelektroniczne",
+    "period": "2021–2025",
+    "description": "Rozwój wielospektralnych i obrazujących układów optoelektronicznych do zastosowań obronnych, obejmujący prototypowanie i weryfikację rozwiązań."
+  },
+  {
+    "phase": "previous",
+    "title": "PolFEL · Laser na swobodnych elektronach",
+    "period": "2019–2023",
+    "description": "Udział w rozwoju infrastruktury pierwszego polskiego lasera na swobodnych elektronach, otwierającej możliwości badań ultraszybkich procesów w materii."
+  },
+  {
+    "phase": "previous",
+    "title": "OPTOKRYPT · Kryptografia kwantowa",
+    "period": "2021–2024",
+    "description": "Prace nad optycznymi technologiami ochrony informacji: generowaniem losowości kwantowej i bezpieczną dystrybucją kluczy szyfrujących."
+  },
+  {
+    "phase": "previous",
+    "title": "Eye Tracking w rzeczywistości mieszanej",
+    "period": "2020–2022",
+    "description": "Kierowanie badaniami nad wykorzystaniem śledzenia wzroku do sterowania i interakcji z obiektami w środowiskach rzeczywistości mieszanej."
+  },
+  {
+    "phase": "previous",
+    "title": "Systemy wizyjne XR w nauce i obronności",
+    "period": "2018–2020",
+    "description": "Kierowanie analizą możliwości wykorzystania technologii rzeczywistości mieszanej w eksperymentach naukowych i zastosowaniach wojskowych."
+  },
+  {
+    "phase": "previous",
+    "title": "RiverGUARD · Ochrona granic rzecznych",
+    "period": "2019",
+    "description": "Prace nad optoelektronicznym systemem obserwacji i ochrony granic rzecznych w wymagających warunkach terenowych."
+  },
+  {
+    "phase": "previous",
+    "title": "Skaner 3D sub-THz",
+    "period": "2015–2019",
+    "description": "Udział w opracowaniu aktywnego skanera trójwymiarowego wykorzystującego fale subterahercowe do bezkontaktowej kontroli bezpieczeństwa."
+  },
+  {
+    "phase": "previous",
+    "title": "Sensor trenażera GROM / PIORUN",
+    "period": "Data do potwierdzenia",
+    "description": "Opracowanie sensora do wirtualnego trenażera przeciwlotniczych zestawów GROM i PIORUN, wspierającego realistyczne szkolenie operatorów."
+  },
+  {
+    "phase": "previous",
+    "title": "PROTECT · Biometria kontroli granicznej",
+    "period": "2016–2019",
+    "description": "Europejski projekt nad mniej inwazyjną i bardziej odporną kontrolą granic z użyciem biometrii wielomodalnej i ochrony prywatności."
   }
 ]

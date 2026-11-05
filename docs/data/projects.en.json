@@ -1,57 +1,152 @@
 [
   {
-    "sourceTitle": "Projekt „ARIANA”",
-    "title": "ARIANA project",
-    "description": "A system for psychometric measurements and affect recognition using facial expressions, microexpressions, skin temperature, motion, pupils and gaze, with user feedback."
+    "sourceTitle": "ARC-RGBT",
+    "title": "ARC-RGBT",
+    "period": "2026–present",
+    "description": "We combine visible and thermal imagery to study object detection under difficult conditions and the reliability limits of sensor fusion."
   },
   {
-    "sourceTitle": "Polish ImAging SaTellites „PIAST”",
-    "title": "Polish ImAging SaTellites (PIAST)",
-    "description": "A constellation of three observation nanosatellites for optoelectronic Earth imaging, demonstration of approximately 5 m resolution images and orbital manoeuvres."
+    "sourceTitle": "ARC-RVI · Autonomiczna inspekcja wizualna",
+    "title": "ARC-RVI · Autonomous Visual Inspection",
+    "period": "2026–present",
+    "description": "We develop methods for robots to locate targets, plan viewpoints, and assess the completeness and quality of visual inspection records."
   },
   {
-    "sourceTitle": "Rodzina głowic optoelektronicznych dla rakiet sterowanych „SEEKER”",
-    "title": "SEEKER optoelectronic seeker family for guided missiles",
-    "description": "Development of multispectral and imaging seekers for anti-aircraft and anti-tank applications, with prototype verification in field tests."
+    "sourceTitle": "ARC-HRI-SAFETY",
+    "title": "ARC-HRI-SAFETY",
+    "period": "2026–present",
+    "description": "We design predictive risk-assessment methods for human–humanoid collaboration, combining scene perception, motion analysis and safety constraints."
   },
   {
-    "sourceTitle": "„PolFEL” - Projekt polskiego lasera na swobodnych elektronach",
-    "title": "PolFEL: Polish free-electron laser",
-    "description": "Construction of a Polish free-electron laser by a consortium of eight institutions led by the National Centre for Nuclear Research."
+    "sourceTitle": "ARC-AFFECTIVE",
+    "title": "ARC-AFFECTIVE",
+    "period": "2026–present",
+    "description": "We explore how physiological signals, vision and behaviour can support cognitive-state research and context-aware interactive systems."
   },
   {
-    "sourceTitle": "Kwantowy generator liczb losowych „OPTOKRYPT”",
-    "title": "OPTOKRYPT quantum random number generator",
-    "description": "Optical quantum cryptology technologies for data protection in ICT networks; project DOB-SZAFIR/01/A/013/01/2021."
+    "sourceTitle": "ContextNDD",
+    "title": "ContextNDD",
+    "period": "2026–present",
+    "description": "We develop a context-sensitive framework for behavioural analysis that respects individual differences rather than relying on diagnostic labels alone."
   },
   {
-    "sourceTitle": "Analysis of the possibility of using optoelectronic eye tracking systems as interaction interfaces in mixed reality systems",
-    "title": "Analysis of the possibility of using optoelectronic eye tracking systems as interaction interfaces in mixed reality systems",
-    "description": "Analysis of optoelectronic eye-tracking systems as interaction interfaces in mixed reality."
+    "sourceTitle": "SAPIENS · Człowiek i robot humanoidalny",
+    "title": "SAPIENS · Human–Humanoid Interaction",
+    "period": "2026–present",
+    "description": "We study how direct interaction with a humanoid robot shapes trust, agency, social presence and the perception of emotional cues."
   },
   {
-    "sourceTitle": "Analysis of the possibilities of using mixed reality vision systems in scientific research and military applications (RMN/948/2018)",
-    "title": "Analysis of the possibilities of using mixed reality vision systems in scientific research and military applications (RMN/948/2018)",
-    "description": "Analysis of mixed reality vision systems for scientific research and military applications."
+    "sourceTitle": "ARC Mobile Eye Tracking",
+    "title": "ARC Mobile Eye Tracking",
+    "period": "2026–present",
+    "description": "We investigate smartphone-based gaze estimation and how calibration, lighting and head movement affect measurement accuracy."
   },
   {
-    "sourceTitle": "Optoelektroniczny system do ochrony perymetrycznej granicy rzecznej „RiverGUARD”",
-    "title": "RiverGUARD optoelectronic river-border perimeter protection system",
-    "description": "An optoelectronic system for river-border perimeter protection."
+    "sourceTitle": "EEG Neurolyze",
+    "title": "EEG Neurolyze",
+    "period": "2026–present",
+    "description": "We develop tools for EEG acquisition, processing and reproducible analysis, with an emphasis on data quality and traceable results."
   },
   {
-    "sourceTitle": "Active sub-THz 3D scanner for anti-terrorist applications (PBS3/B3/30/2015)",
-    "title": "Active sub-THz 3D scanner for anti-terrorist applications (PBS3/B3/30/2015)",
-    "description": "An active sub-THz three-dimensional scanner for anti-terrorist applications."
+    "sourceTitle": "S4D-TAM · Nawigacja autonomiczna",
+    "title": "S4D-TAM · Autonomous Navigation",
+    "period": "2026–present",
+    "description": "We design evaluation methods for autonomous navigation in GNSS-degraded environments using scene semantics and 3D/4D spatial information."
   },
   {
-    "sourceTitle": "Development of a sensor for a virtual trainer - anti-aircraft GROM and PIORUN missile sets",
-    "title": "Development of a sensor for a virtual trainer - anti-aircraft GROM and PIORUN missile sets",
-    "description": "Development of a sensor for a virtual trainer for GROM and PIORUN anti-aircraft missile systems."
+    "sourceTitle": "ARC Attachment Dynamics",
+    "title": "ARC Attachment Dynamics",
+    "period": "2026–present",
+    "description": "We combine attachment psychology with dynamic modelling to study changes in closeness, autonomy and perceived security in relationships."
   },
   {
-    "sourceTitle": "Pervasive and User Focused Biometrics Border Project (Common and user-oriented biometric border design) EU–0700259 PROTECT",
-    "title": "Pervasive and User Focused Biometrics Border Project (Common and user-oriented biometric border design) EU–0700259 PROTECT",
-    "description": "A project on user-oriented biometric systems for border protection."
+    "sourceTitle": "ARC-ADHD · Adaptacyjna gra badawcza",
+    "title": "ARC-ADHD · Adaptive Research Game",
+    "period": "2026–present",
+    "description": "We design a research game to study recovery of goal-directed behaviour after a challenge, distinguishing task improvement from real-world transfer."
+  },
+  {
+    "sourceTitle": "AI Cognitive Resilience",
+    "title": "AI Cognitive Resilience",
+    "period": "2026–present",
+    "description": "We investigate whether AI responses shift beliefs through evidence quality or through persuasive wording and presentation."
+  },
+  {
+    "sourceTitle": "DERA-HRI · Emocje w interakcji z robotem",
+    "title": "DERA-HRI · Emotions in Robot Interaction",
+    "period": "2026–present",
+    "description": "We develop a research instrument for describing emotional experiences after robot interaction, including responsiveness, trust and control."
+  },
+  {
+    "sourceTitle": "MindDx · Symulator diagnozy psychologicznej",
+    "title": "MindDx · Psychological Assessment Simulator",
+    "period": "2026–present",
+    "description": "An interactive educational environment for case analysis, hypothesis formation and diagnostic decision-making without risk to real patients."
+  },
+  {
+    "sourceTitle": "ARIANA",
+    "title": "ARIANA",
+    "period": "2024",
+    "description": "A multimodal affect-research platform concept combining eye tracking, visible/infrared imaging, movement sensing and psychometrics."
+  },
+  {
+    "sourceTitle": "PIAST · Satelitarne obrazowanie Ziemi",
+    "title": "PIAST · Satellite Earth Observation",
+    "period": "2021–2025",
+    "description": "Work within a three-nanosatellite Earth-observation programme advancing Polish optoelectronics and imaging capabilities."
+  },
+  {
+    "sourceTitle": "SEEKER · Głowice optoelektroniczne",
+    "title": "SEEKER · Optoelectronic Seekers",
+    "period": "2021–2025",
+    "description": "Development of multispectral and imaging optoelectronic systems for defence applications, including prototyping and verification."
+  },
+  {
+    "sourceTitle": "PolFEL · Laser na swobodnych elektronach",
+    "title": "PolFEL · Free-Electron Laser",
+    "period": "2019–2023",
+    "description": "Participation in the development of Poland's first free-electron laser infrastructure for studying ultrafast processes in matter."
+  },
+  {
+    "sourceTitle": "OPTOKRYPT · Kryptografia kwantowa",
+    "title": "OPTOKRYPT · Quantum Cryptography",
+    "period": "2021–2024",
+    "description": "Research into optical information-security technologies, including quantum random-number generation and secure key distribution."
+  },
+  {
+    "sourceTitle": "Eye Tracking w rzeczywistości mieszanej",
+    "title": "Eye Tracking in Mixed Reality",
+    "period": "2020–2022",
+    "description": "Leading research into gaze-based control and interaction with objects in mixed-reality environments."
+  },
+  {
+    "sourceTitle": "Systemy wizyjne XR w nauce i obronności",
+    "title": "XR Vision Systems for Research and Defence",
+    "period": "2018–2020",
+    "description": "Leading research on mixed-reality vision systems for scientific experiments and military applications."
+  },
+  {
+    "sourceTitle": "RiverGUARD · Ochrona granic rzecznych",
+    "title": "RiverGUARD · River-Border Monitoring",
+    "period": "2019",
+    "description": "Work on an optoelectronic monitoring and protection system for river borders in challenging field conditions."
+  },
+  {
+    "sourceTitle": "Skaner 3D sub-THz",
+    "title": "3D Sub-THz Scanner",
+    "period": "2015–2019",
+    "description": "Participation in an active 3D sub-terahertz scanner project for non-contact security screening."
+  },
+  {
+    "sourceTitle": "Sensor trenażera GROM / PIORUN",
+    "title": "GROM / PIORUN Trainer Sensor",
+    "period": "Dates to be confirmed",
+    "description": "Development of a sensor for a virtual GROM/PIORUN anti-aircraft system trainer supporting realistic operator training."
+  },
+  {
+    "sourceTitle": "PROTECT · Biometria kontroli granicznej",
+    "title": "PROTECT · Border-Control Biometrics",
+    "period": "2016–2019",
+    "description": "A European project exploring less intrusive and more robust border controls through multimodal biometrics and privacy safeguards."
   }
 ]

@@ -34,6 +34,8 @@
     'Projekty': 'Projects',
     'Badania i rozwój': 'Research and development',
     'Wszystkie projekty': 'All projects',
+    'Aktualne programy badawczo-rozwojowe': 'Current research and development programmes',
+    'Wybrane projekty i konsorcja': 'Selected projects and consortia',
     'Publikacje': 'Publications',
     '/ Publikacje': '/ Publications',
     'Dorobek naukowy': 'Research outputs',
@@ -101,7 +103,7 @@
     'Kategorie strony': 'Website categories',
     'Informacje szczegółowe': 'Detailed information',
     'Filtruj publikacje': 'Filter publications',
-    'Wersja strony 1.2.11': 'Website version 1.2.11',
+    'Wersja strony 1.2.12': 'Website version 1.2.12',
     'Język strony': 'Site language',
     'Źródło': 'Source',
     'Skopiowano': 'Copied',
@@ -198,10 +200,10 @@
     if (mapped.size !== originals.length) throw new Error('Project translation count mismatch');
     return originals.map(original => {
       const translation = mapped.get(original.title);
-      if (!translation || !translation.title || !translation.description) {
+      if (!translation || !translation.title || !translation.period || !translation.description) {
         throw new Error('Missing translation for project: ' + original.title);
       }
-      return { ...original, title: translation.title, description: translation.description };
+      return { ...original, title: translation.title, period: translation.period, description: translation.description };
     });
   }
 
