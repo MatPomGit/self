@@ -138,13 +138,16 @@ class ThemeTests(unittest.TestCase):
         plain = re.sub(r'<[^>]+>', ' ', content)
         self.assertLessEqual(len(plain.split()), 260)
         for phrase in (
-            'Świat, który widzimy', 'Rzeczywistość ma wiele twarzy',
-            'Od człowieka po Wszechświat', 'ludzki mózg', 'wspomnień, emocji',
-            'inteligentna maszyna', 'Tworzenie modeli świata', 'kosmos',
+            'Świat większy od nas', 'Wiele sposobów widzenia',
+            'Świat, który tworzy mózg', 'Wszechświata', 'Tworzenie modeli świata',
+            'maszyny', 'Mózg', 'doznań, wspomnień i oczekiwań',
             'Astronomia', 'Politechniki Rzeszowskiej', 'Wojskowej Akademii Technicznej',
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, plain)
+        # Natural progression: universe -> world models -> human perception.
+        self.assertLess(plain.index('Wszechświata'), plain.index('Tworzenie modeli świata'))
+        self.assertLess(plain.index('Tworzenie modeli świata'), plain.index('Mózg również'))
         self.assertNotIn('<a ', content)
 
     def test_contact_links_have_icons(self):
@@ -188,7 +191,7 @@ class ThemeTests(unittest.TestCase):
         self.assertIn('.manuscript-next{font-size:inherit;line-height:inherit;', HTML)
 
     def test_version(self):
-        self.assertIn("v1.2.15", HTML)
+        self.assertIn("v1.2.16", HTML)
 
 
 if __name__ == "__main__":

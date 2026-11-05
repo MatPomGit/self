@@ -79,12 +79,12 @@
     'Robotyka afektywna': 'Affective robotics',
     'Interakcja człowiek robot, percepcja oraz kognitywne systemy robotyczne.':
       'Human–robot interaction, perception and cognitive robotic systems.',
-    'Świat, który widzimy': 'The world we see',
-    'Rzeczywistość ma wiele twarzy': 'Reality has many faces',
-    'Od człowieka po Wszechświat': 'From the human mind to the universe',
-    'Najbardziej lubię': 'What I enjoy most are',
-    'pytania, które zmieniają sposób, w jaki patrzę na świat.':
-      'questions that change the way I see the world.',
+    'Świat większy od nas': 'A world bigger than us',
+    'Wiele sposobów widzenia': 'Many ways of seeing',
+    'Świat, który tworzy mózg': 'The world our brains create',
+    'Najbardziej interesuje mnie': 'What fascinates me most is',
+    'nie tylko to, jaki świat jest, ale jak różne umysły i systemy próbują nadać mu sens.':
+      'not just what the world is like, but how different minds and systems try to make sense of it.',
     'Wczytywanie projektów…': 'Loading projects…',
     'Wczytywanie publikacji…': 'Loading publications…',
     'Źródło:': 'Source:',
@@ -103,7 +103,7 @@
     'Kategorie strony': 'Website categories',
     'Informacje szczegółowe': 'Detailed information',
     'Filtruj publikacje': 'Filter publications',
-    'Wersja strony 1.2.15': 'Website version 1.2.15',
+    'Wersja strony 1.2.16': 'Website version 1.2.16',
     'Język strony': 'Site language',
     'Źródło': 'Source',
     'Skopiowano': 'Copied',
@@ -128,11 +128,11 @@
   };
 
   const researchParagraphs = [
-    'For as long as I can remember, I have been fascinated by the human brain and how it creates the reality we take for granted. Two people can look at the same thing and see entirely different worlds. How much of what we perceive belongs to the world itself, and how much comes from our memories, emotions and expectations? And how does this personal picture shape our choices, relationships and everyday lives?',
-    'For me, it is just as fascinating to turn the perspective around: how might something without human senses, such as an intelligent machine, perceive people and their surroundings? What would it notice, and what would remain invisible?',
-    'Building models of the world has always been a passion of mine. I doubt there is a single description of reality that explains everything. Every model helps us understand something, but each also simplifies or leaves something out. That is why I enjoy looking for different ways of seeing.',
-    'That curiosity takes me from studying human perception to designing intelligent systems that build their own representations of their surroundings. My daily work blends experiments, programming and engineering. I am an Assistant Professor at Rzeszów University of Technology and earned my doctorate at the Military University of Technology.',
-    'And then there is space. The more I think about its vastness, the more remarkable it seems that humans, so small in the universe, can even attempt to understand it. Astronomy reminds me how little we know and how many questions are still worth asking.',
+    'I have always been curious about the world itself: what happens right beside us and what unfolds far beyond Earth. When I think about the sheer scale of the universe, I am amazed that humans, so small in comparison, can even attempt to understand it. Astronomy keeps me humble, but it also makes me more curious.',
+    'Building models of the world has always been a passion of mine. The same thing can be described in many ways; each reveals something, while simplifying or leaving something else out. I am not looking for one perfect picture of reality. I enjoy seeing what changes when we look from a different angle.',
+    'I am also curious about how machines might perceive reality. Without our senses or experiences, what kind of picture of their surroundings would they build? What might they notice that we overlook, and what would remain invisible to them?',
+    'And then I come back to people. Our brains do not show us the world directly; they build their own model from sensations, memories and expectations. Why can two people experience the same event so differently? How does their understanding of the world shape their choices, emotions and relationships?',
+    'I bring these questions into my research through experiments, programming and engineering. I am an Assistant Professor at Rzeszów University of Technology and earned my doctorate at the Military University of Technology. I especially enjoy those moments when a change in perspective sparks a new idea.',
   ];
 
   // HTML &nbsp; becomes U+00A0 in text nodes. Match translations independently

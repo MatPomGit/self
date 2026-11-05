@@ -109,7 +109,7 @@ class ProjectsTests(unittest.TestCase):
         self.assertNotIn("cursor:pointer", HTML.split(".project-cards{", 1)[1].split(".data-card .project-period", 1)[0])
 
     def test_version(self):
-        self.assertIn("v1.2.15", HTML)
+        self.assertIn("v1.2.16", HTML)
 
 
 if __name__ == "__main__":
