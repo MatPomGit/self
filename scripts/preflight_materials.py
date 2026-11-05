@@ -13,6 +13,9 @@ from pathlib import Path
 import shutil
 from zipfile import BadZipFile, ZipFile
 
+from pypdf import PdfReader
+from pypdf.errors import PdfReadError
+
 ROOT = Path(__file__).resolve().parents[1]
 MATERIALS = ROOT / "materials"
 DOCUMENT_PARTS = {
@@ -39,6 +42,11 @@ def problem(path: Path) -> str | None:
                 return "missing PDF header"
             if b"%%EOF" not in trailer:
                 return "missing PDF EOF marker"
+            try:
+                page = PdfReader(str(path), strict=False).pages[0]
+                _ = float(page.mediabox.width)
+            except (OSError, ValueError, IndexError, KeyError, PdfReadError) as exc:
+                return f"unreadable PDF structure ({type(exc).__name__})"
             return None
         with ZipFile(path) as archive:
             if DOCUMENT_PARTS[suffix] not in archive.namelist():
