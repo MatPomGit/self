@@ -20,6 +20,10 @@ CARD = re.compile(
     r'(?: data-materials-subject="[^"]+")?>[\s\S]*?</section>'
 )
 LINK = re.compile(r'(?P<before><a\b[^>]*\bhref=")(?P<href>[^"]+)(?P<after>")')
+SINGLE_LINK_ITEM = re.compile(
+    r'<li\b[^>]*>\s*<a\b[^>]*\bhref="[^"]+"[^>]*>[\s\S]*?</a>\s*</li>',
+    re.I,
+)
 AUTO = re.compile(
     r'\n?<!-- AUTO MATERIALS BEGIN -->[\s\S]*?<!-- AUTO MATERIALS END -->\n?'
 )
@@ -52,12 +56,12 @@ def target_of(href: str, files: dict[str, Path]) -> str | None:
     return relative if relative in files else None
 
 
-def relocated(href: str, files: dict[str, Path]) -> str | None:
-    """Repair unique moves/renames within the same subject, never guess others."""
+def relocation_candidates(href: str, files: dict[str, Path]) -> list[str]:
+    """Return all plausible matches; ambiguity must not be silently repaired."""
     current = unquote(urlsplit(unescape(href)).path).removeprefix("./")
     parts = Path(current).parts
     if not parts:
-        return None
+        return []
     subject = parts[0]
     basename = Path(current).name.casefold()
     candidates = [
@@ -65,18 +69,20 @@ def relocated(href: str, files: dict[str, Path]) -> str | None:
         if Path(name).parts[0] == subject
         and Path(name).name.casefold() == basename
     ]
-    if len(candidates) == 1:
-        return candidates[0]
     if candidates:
-        return None
+        return candidates
     key = file_key(current)
     suffix = Path(current).suffix.casefold()
-    candidates = [
+    return [
         name for name in files
         if Path(name).parts[0] == subject
         and Path(name).suffix.casefold() == suffix
         and file_key(name) == key
     ]
+
+
+def relocated(href: str, files: dict[str, Path]) -> str | None:
+    candidates = relocation_candidates(href, files)
     return candidates[0] if len(candidates) == 1 else None
 
 
@@ -93,8 +99,11 @@ def label_for(name: str) -> str:
     return path.stem.replace("_", " ").replace("-", " ").strip() or path.name
 
 
-def render(source: str, materials: Path) -> tuple[str, list[str]]:
-    """Return deterministically regenerated HTML and actionable errors."""
+def render(
+    source: str, materials: Path, *, repair_missing: bool = False,
+    warnings: list[str] | None = None,
+) -> tuple[str, list[str]]:
+    """Regenerate HTML; optionally omit simple stale links in ephemeral CI builds."""
     files = inventory(materials)
     source = AUTO.sub("\n", source)
     failures: list[str] = []
@@ -122,6 +131,22 @@ def render(source: str, materials: Path) -> tuple[str, list[str]]:
             paths.add(path.split("/", 1)[0])
             return m.group("before") + escape(href, quote=True) + m.group("after")
 
+        if repair_missing:
+            def remove_stale_item(m: re.Match[str]) -> str:
+                item = m.group(0)
+                link = LINK.search(item)
+                if link is None:
+                    return item
+                href = link.group("href")
+                part = urlsplit(unescape(href))
+                if part.scheme or part.netloc or part.path.startswith("../"):
+                    return item
+                if target_of(href, files) or relocation_candidates(href, files):
+                    return item
+                if warnings is not None:
+                    warnings.append(f"Removed missing standalone material link: {href}")
+                return ""
+            card = SINGLE_LINK_ITEM.sub(remove_stale_item, card)
         card = LINK.sub(fix_link, card)
         if len({path.casefold() for path in paths}) > 1:
             failures.append(f"Mixed subject paths in one materials card: {sorted(paths)}")
@@ -211,9 +236,25 @@ def main() -> int:
     action = parser.add_mutually_exclusive_group(required=True)
     action.add_argument("--write", action="store_true")
     action.add_argument("--check", action="store_true")
+    parser.add_argument("--repair-missing", action="store_true",
+                        help="Omit missing standalone links from temporary generated index")
     args = parser.parse_args()
+    if args.repair_missing and not args.write:
+        parser.error("--repair-missing is supported only with --write")
     source = INDEX.read_text(encoding="utf-8")
-    output, failures = render(source, INDEX.parent)
+    warnings: list[str] = []
+    output, failures = render(source, INDEX.parent,
+                              repair_missing=args.repair_missing, warnings=warnings)
+    for warning in warnings:
+        print("[WARN] " + warning)
+        safe = warning.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+        print(f"::warning::{safe}")
+    summary = __import__("os").getenv("GITHUB_STEP_SUMMARY")
+    if summary and warnings:
+        with open(summary, "a", encoding="utf-8") as report:
+            report.write(f"\n### Repaired {len(warnings)} missing material link(s)\n")
+            for warning in warnings:
+                report.write(f"- {warning}\n")
     for failure in failures:
         print("[FAIL] " + failure)
     if failures:
