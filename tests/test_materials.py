@@ -169,21 +169,21 @@ class MaterialsTests(unittest.TestCase):
         """Karty układają się w niezależnych kolumnach bez pustych pól siatki."""
         html = (MATERIALS / "index.html").read_text(encoding="utf-8")
         style = html.split("<style>", 1)[1].split("</style>", 1)[0]
-        self.assertIn(".materials-grid{columns:auto 28rem;column-gap:10px;", style)
+        self.assertIn(".materials-grid{columns:auto 22rem;column-gap:7px;", style)
         self.assertIn("@media(min-width:720px) and (max-width:1000px)", style)
-        self.assertIn(".materials-grid{columns:auto 22rem}", style)
+        self.assertIn(".materials-grid{columns:auto 20rem}", style)
         self.assertIn("@media(max-width:620px)", style)
         self.assertIn(".materials-grid{columns:1}", style)
         self.assertIn(".materials-group{display:inline-block;vertical-align:top;width:100%", style)
         self.assertIn("break-inside:avoid;page-break-inside:avoid", style)
         self.assertIn(".materials-group--flow{display:inline-block;break-inside:avoid}", style)
         self.assertIn(".materials-columns{display:block}", style)
-        self.assertIn("grid-template-columns:repeat(auto-fit,minmax(min(100%,var(--material-min,7.2rem)),1fr))", style)
-        self.assertIn(".materials-list--descriptive{--material-min:11rem}", style)
+        self.assertIn("grid-template-columns:repeat(auto-fill,minmax(min(100%,var(--material-min,7.2rem)),var(--material-min,7.2rem)))", style)
+        self.assertIn(".materials-list--descriptive{--material-min:10.4rem}", style)
         self.assertIn("--material-min:5.5rem", style)
         self.assertIn(':root[data-materials-view="all"] .materials-list--dense{--material-min:7.5rem}', style)
         self.assertIn(".materials-list li{min-width:0;break-inside:avoid}", style)
-        self.assertIn("overflow-wrap:break-word;white-space:normal", style)
+        self.assertIn("padding:1px 1px;border-radius:4px;overflow-wrap:break-word;white-space:normal;line-height:1.12", style)
         self.assertIn("font-size:.7rem}", style)
         self.assertIn(".materials-list .material-formats{display:inline;font-size:.56rem", style)
         self.assertIn(".materials-list .material-format--standalone{font-size:.56rem", style)
@@ -229,12 +229,12 @@ class MaterialsTests(unittest.TestCase):
         self.assertRegex(html, r"<h[2-5]>Wirtualna i rozszerzona rzeczywistość</h[2-5]>")
         self.assertNotIn("Wirtualna i rozszerzona rzeczywistość (WiRR)", html)
         grid_spacing = re.search(
-            r"\.materials-grid\{columns:auto 28rem;column-gap:(\d+)px;margin-top:(\d+)px\}",
+            r"\.materials-grid\{columns:auto 22rem;column-gap:(\d+)px;margin-top:(\d+)px\}",
             style,
         )
         self.assertIsNotNone(grid_spacing)
-        self.assertTrue(all(int(value) <= 10 for value in grid_spacing.groups()))
-        self.assertIn("margin:0 0 10px;break-inside:avoid", style)
+        self.assertTrue(all(int(value) <= 7 for value in grid_spacing.groups()))
+        self.assertIn("margin:0 0 7px;break-inside:avoid", style)
 
     def test_subject_pages_have_valid_navigation(self):
         """Strony przedmiotów nie odsyłają do pustych lub usuniętych zasobów."""
