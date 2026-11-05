@@ -171,8 +171,11 @@
     .data-card p{margin:6px 0;color:var(--muted);font-size:.88rem;overflow-wrap:anywhere}
     .data-card .data-category{font-size:.76rem;color:var(--accent);font-weight:650}
     .data-card a{font-size:.85rem;color:var(--accent);overflow-wrap:anywhere}
-    .projects-source{font-size:.77rem;color:var(--muted);margin:18px 0 0}
-    .projects-source a{color:var(--accent)}
+    .project-section + .project-section{margin-top:32px}
+    .project-section-title{font:650 1.12rem/1.4 var(--sans);margin:22px 0 4px}
+    .project-cards{margin-top:12px}
+    .data-card .project-period{font-size:.77rem;font-variant-numeric:tabular-nums;color:var(--muted);margin:0 0 8px}
+    .data-card h3{overflow-wrap:anywhere}
     .data-status{color:var(--muted)}
     .data-filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
     .data-filters button{border:1px solid var(--line);background:#fff;border-radius:5px;padding:5px 10px;cursor:pointer}
@@ -402,8 +405,7 @@
         <article class="panel" id="projekty" role="region" aria-label="Projekty">
           <!-- Tytuł sekcji wyświetla wspólny nagłówek strony. -->
           <p class="data-status" id="projects-status" role="status">Wczytywanie projektów…</p>
-          <div class="data-grid" id="projects-list"></div>
-          <p class="projects-source">Źródło: <a href="https://mpomianek.v.prz.edu.pl/praca-naukowa/uczestnictwo-w-organizacjach-i-projektach" target="_blank" rel="noopener noreferrer">Wykaz projektów na stronie uczelnianej PRz</a>.</p>
+          <div id="projects-list" class="project-sections"></div>
         </article>
 
         <article class="panel" id="publikacje" role="region" aria-label="Publikacje">
@@ -444,7 +446,7 @@
       </section>
     </main>
 
-    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.11">v1.2.11</span></footer>
+    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.12">v1.2.12</span></footer>
   </div>
 
   <script src="docs/assets/js/site-i18n.js"></script>
@@ -609,11 +611,27 @@
     function renderProjects(records){
       const list=document.getElementById('projects-list');
       const fragment=document.createDocumentFragment();
-      records.forEach(entry=>{
-        const card=makeElement('article','data-card');
-        if(entry.category)card.append(makeElement('div','data-category',entry.category));
-        card.append(makeElement('h3','',entry.title),makeElement('p','',entry.description));
-        fragment.append(card);
+      const groups=[
+        ['current','Aktualne programy badawczo-rozwojowe'],
+        ['previous','Wybrane projekty i konsorcja']
+      ];
+      groups.forEach(([phase,label])=>{
+        const projects=records.filter(entry=>entry.phase===phase);
+        if(!projects.length)return;
+        const section=makeElement('section','project-section');
+        const heading=makeElement('h2','project-section-title',tr(label));
+        const grid=makeElement('div','data-grid project-cards');
+        projects.forEach(entry=>{
+          const card=makeElement('article','data-card');
+          card.append(
+            makeElement('h3','',entry.title),
+            makeElement('div','project-period',entry.period),
+            makeElement('p','',entry.description)
+          );
+          grid.append(card);
+        });
+        section.append(heading,grid);
+        fragment.append(section);
       });
       list.replaceChildren(fragment);
     }
