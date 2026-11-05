@@ -74,3 +74,25 @@ Kolumna tytułu na ekranach szerokich otrzymała udział 0,85 fr zamiast 0,55 fr
 `prefers-color-scheme`, co strona główna. Wybór pozostaje zachowany przy
 przejściu między stronami. Lista plików nie została zmieniona. Skrypty strony materiałów obsługują
 motyw oraz dwustopniowy widok spisu (PDF / wszystkie pliki).
+
+## Odporność CI na niespójności materiałów
+
+Workflow GitHub Pages wykonuje przed walidacją **preflight dokumentów** i
+**deterministyczne uzgodnienie indeksu**:
+
+- `python scripts/preflight_materials.py --check` jest trybem lokalnym tylko do
+  odczytu; zwraca błąd, gdy wykryje uszkodzony PDF, PPTX, DOCX lub ODP.
+- W GitHub Actions `--quarantine` przenosi niepoprawne dokumenty **wyłącznie
+  w efemerycznym katalogu runnera** poza `materials/` i publikuje ostrzeżenie
+  oraz podsumowanie. Nie wykonuje commitów ani usuwania plików z repozytorium.
+  Opublikowany indeks i artefakt Pages pomijają te pliki.
+- `python scripts/sync_materials.py --write --repair-missing` usuwa z roboczej
+  kopii indeksu tylko proste odnośniki do nieistniejących plików, po próbie
+  jednoznacznego odnalezienia przeniesionej wersji. Wątpliwe dopasowania,
+  niebezpieczne linki i błędy strukturalne nadal zatrzymują CI.
+- `--check` pozostaje rygorystyczne. Testy regresyjne sprawdzają
+  idempotentność regeneracji indeksu oraz obsługę uszkodzonych plików.
+
+Ostrzeżenia można znaleźć w logach i `GITHUB_STEP_SUMMARY`. Jeśli dokument
+zostanie przywrócony w kolejnym commicie, następny przebieg CI ponownie go
+zaindeksuje, ponieważ źródłowe dane pozostają nienaruszone.

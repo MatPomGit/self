@@ -1,10 +1,10 @@
 name: Sprawdzenie motywu self
 on:
   pull_request:
-    paths: ["index.html", "docs/data/projects.json", "materials/**", "scripts/sync_materials.py", "tests/test_sync_materials.py", "tests/test_theme.py", "tests/test_materials.py", "tests/test_materials_view.js", "tests/test_classify_materials.py", "scripts/classify_materials.py", "tests/test_projects.py", ".github/workflows/test-theme.yml"]
+    paths: ["index.html", "docs/data/projects.json", "materials/**", "scripts/sync_materials.py", "scripts/preflight_materials.py", "tests/test_preflight_materials.py", "tests/test_sync_materials.py", "tests/test_theme.py", "tests/test_materials.py", "tests/test_materials_view.js", "tests/test_classify_materials.py", "scripts/classify_materials.py", "tests/test_projects.py", ".github/workflows/test-theme.yml"]
   push:
     branches: [main]
-    paths: ["index.html", "docs/data/projects.json", "materials/index.html", "tests/test_theme.py", "tests/test_materials.py", "tests/test_materials_view.js", "tests/test_classify_materials.py", "scripts/classify_materials.py", "tests/test_projects.py", ".github/workflows/test-theme.yml"]
+    paths: ["index.html", "docs/data/projects.json", "materials/index.html", "tests/test_theme.py", "tests/test_materials.py", "tests/test_materials_view.js", "tests/test_classify_materials.py", "scripts/classify_materials.py", "tests/test_projects.py", "scripts/preflight_materials.py", "tests/test_preflight_materials.py", ".github/workflows/test-theme.yml"]
 permissions:
   contents: read
 jobs:
@@ -19,7 +19,8 @@ jobs:
         with:
           python-version: "3.12"
       - run: python -m pip install "pypdf>=5,<7"
-      - run: python scripts/sync_materials.py --write
+      - run: python scripts/preflight_materials.py --quarantine
+      - run: python scripts/sync_materials.py --write --repair-missing
       - run: python scripts/sync_materials.py --check
       - run: python scripts/classify_materials.py --write
       - run: python scripts/classify_materials.py --check
