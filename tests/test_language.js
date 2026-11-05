@@ -25,6 +25,10 @@ assert.equal(pl.language, 'pl');
 assert.equal(en.translate('Wybierz'), 'Choose a');
 assert.equal(en.translate('kategorię'), 'category');
 assert.equal(en.translate('Dla studentów'), 'For students');
+assert.equal(en.translate('Co mnie ciekawi'), 'What interests me');
+assert.equal(en.translate('Nad czym pracuję'), 'What I work on');
+assert.equal(en.translate('Jak podchodzę do badań'), 'How I approach research');
+assert.equal(en.translate('Największą satysfakcję daje mi'), 'What I enjoy most is');
 assert.equal(en.translate('Aktualne programy badawczo-rozwojowe'), 'Current research and development programmes');
 assert.equal(en.translate('Wybrane projekty i konsorcja'), 'Selected projects and consortia');
 assert.equal(pl.translate('Dla studentów'), 'Dla studentów');
@@ -71,6 +75,16 @@ assert.doesNotMatch(html, /zensical|mkdocs-material/i);
 for (const match of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)) {
   new vm.Script(match[1]);
 }
+
+const story = html.match(/<div class="research-intro">([\s\S]*?)<\/div>/)?.[1];
+assert.ok(story, 'Research story is present');
+const polishParagraphs = [...story.matchAll(/<p>([\s\S]*?)<\/p>/g)];
+assert.equal(polishParagraphs.length, 4, 'Short research story has four paragraphs');
+const englishParagraphsSource = source.match(/const researchParagraphs = \[([\s\S]*?)\n  \];/)?.[1];
+assert.ok(englishParagraphsSource, 'Research translations are present');
+const englishParagraphs = vm.runInNewContext('[' + englishParagraphsSource + ']', {});
+assert.equal(englishParagraphs.length, polishParagraphs.length, 'PL/EN research story paragraph counts match');
+assert.ok(englishParagraphs.every(text => text.length > 80), 'English paragraphs have content');
 
 const projects = JSON.parse(read('docs/data/projects.json'));
 const projectTranslations = JSON.parse(read('docs/data/projects.en.json'));
