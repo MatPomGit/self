@@ -165,29 +165,35 @@ class MaterialsTests(unittest.TestCase):
                 self.assertEqual(style.count(f"--{variable}:{dark}"), 1)
                 self.assertRegex(html, rf'href="[^"]+\.{extension}"')
 
-    def test_compact_layout_uses_independent_columns(self):
-        """Długie karty nie wymuszają pustej wysokości pozostałych."""
+    def test_adaptive_grid_uses_measured_masonry_cards(self):
+        """Szerokość kart i wysokość kafli zależą od treści i okna."""
         html = (MATERIALS / "index.html").read_text(encoding="utf-8")
         style = html.split("<style>", 1)[1].split("</style>", 1)[0]
-        self.assertIn(".materials-grid{columns:4 260px;", style)
-        self.assertIn("@media(min-width:1450px){.materials-grid{columns:4 280px}}", style)
-        self.assertNotIn("columns:5", style)
-        self.assertIn("break-inside:avoid", style)
+        self.assertIn(".materials-grid{columns:auto 17rem;", style)
+        self.assertIn(".materials-grid--masonry{display:grid;", style)
+        self.assertIn("grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr))", style)
+        self.assertIn("grid-auto-flow:dense", style)
+        self.assertIn("grid-auto-rows:8px", style)
+        self.assertIn("grid-row-end:span var(--material-row-span,1)", style)
+        self.assertIn(".materials-group--adaptive-wide{grid-column:span 2}", style)
         self.assertIn(".materials-columns{display:block}", style)
-        self.assertIn("display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,var(--material-min,7.2rem)),1fr)", style)
         self.assertIn("--material-min:5.5rem", style)
-        self.assertIn(".materials-list--descriptive{--material-min:15rem}", style)
+        self.assertIn("--material-min:11rem", style)
         self.assertIn(':root[data-materials-view="all"] .materials-list--dense{--material-min:7.5rem}', style)
         self.assertIn(".materials-list li{min-width:0;break-inside:avoid}", style)
-        self.assertIn(".materials-group--flow{display:block;break-inside:auto;", style)
-        self.assertRegex(html, r'<section class="materials-group materials-group--flow">\s*<h4>Pozostałe</h4>')
-        self.assertIn("materials-list--dense", html)
-        self.assertIn("text-overflow:ellipsis", style)
+        self.assertIn(".materials-group--flow{display:inline-block;break-inside:avoid}", style)
         self.assertIn("font-size:.7rem}", style)
+        self.assertIn("overflow-wrap:anywhere;white-space:normal", style)
+        self.assertNotIn("text-overflow:ellipsis", style)
+        self.assertNotIn("columns:4 260px", style)
+        self.assertIn("rows.length >= 16 || chars >= 260", html)
+        self.assertIn("new ResizeObserver(reflow)", html)
+        self.assertIn("requestMaterialsLayout = initAdaptiveMaterialsGrid()", html)
+        self.assertIn("if (requestMaterialsLayout) requestMaterialsLayout()", html)
+        self.assertIn("@media(max-width:700px)", style)
+        self.assertIn("@media(max-width:620px)", style)
         self.assertIn(".materials-list .material-formats{display:inline;font-size:.56rem", style)
         self.assertIn(".materials-list .material-format--standalone{font-size:.56rem", style)
-        self.assertIn("@media(max-width:620px)", style)
-        self.assertNotIn("grid-column:1/-1", style)
 
     def test_descriptive_material_headings_and_verified_tooltips(self):
         """Nagłówki typów materiałów i tytuły źródłowe nie są generyczne."""
@@ -224,7 +230,7 @@ class MaterialsTests(unittest.TestCase):
         self.assertRegex(html, r"<h[2-5]>Wirtualna i rozszerzona rzeczywistość</h[2-5]>")
         self.assertNotIn("Wirtualna i rozszerzona rzeczywistość (WiRR)", html)
         grid_spacing = re.search(
-            r"\.materials-grid\{columns:\d+ \d+px;column-gap:(\d+)px;margin-top:(\d+)px\}",
+            r"\.materials-grid\{columns:auto 17rem;column-gap:(\d+)px;margin-top:(\d+)px\}",
             style,
         )
         self.assertIsNotNone(grid_spacing)
