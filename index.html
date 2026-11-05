@@ -173,7 +173,22 @@
     .data-card a{font-size:.85rem;color:var(--accent);overflow-wrap:anywhere}
     .project-section + .project-section{margin-top:32px}
     .project-section-title{font:650 1.12rem/1.4 var(--sans);margin:22px 0 4px}
-    .project-cards{margin-top:12px}
+    .project-cards{margin-top:12px;grid-auto-rows:1fr}
+    .project-cards .data-card{
+      display:flex;flex-direction:column;min-height:220px;height:100%;
+      background:var(--bg);
+      transition:background-color .18s ease,border-color .18s ease,box-shadow .18s ease;
+    }
+    @media(hover:hover){
+      .project-cards .data-card:hover{
+        background:var(--accent-soft);
+        border-color:color-mix(in srgb,var(--accent) 32%,var(--line));
+        box-shadow:0 4px 16px rgba(29,79,122,.09);
+      }
+    }
+    @media(prefers-reduced-motion:reduce){
+      .project-cards .data-card{transition:none}
+    }
     .data-card .project-period{font-size:.77rem;font-variant-numeric:tabular-nums;color:var(--muted);margin:0 0 8px}
     .data-card h3{overflow-wrap:anywhere}
     .data-status{color:var(--muted)}
@@ -271,6 +286,13 @@
     :root[data-theme="dark"] .pill:hover text,
     :root[data-theme="dark"] .pill:focus-visible text{fill:var(--on-accent)}
     :root[data-theme="dark"] .data-card{background:var(--surface)}
+    @media(hover:hover){
+      :root[data-theme="dark"] .project-cards .data-card:hover{
+        background:var(--raised);
+        border-color:color-mix(in srgb,var(--accent) 40%,var(--line));
+        box-shadow:0 4px 16px rgba(0,0,0,.18);
+      }
+    }
     :root[data-theme="dark"] .data-filters button,
     :root[data-theme="dark"] .publication-actions button,
     :root[data-theme="dark"] .publication-actions a{background:var(--surface);color:var(--accent)}
@@ -446,7 +468,7 @@
       </section>
     </main>
 
-    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.12">v1.2.12</span></footer>
+    <footer><span>dr inż. Mateusz Pomianek · Politechnika Rzeszowska</span><span class="site-version" aria-label="Wersja strony 1.2.13">v1.2.13</span></footer>
   </div>
 
   <script src="docs/assets/js/site-i18n.js"></script>
