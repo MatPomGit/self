@@ -93,8 +93,23 @@ class ProjectsTests(unittest.TestCase):
         self.assertNotIn("makeElement('a'", renderer)
         self.assertNotIn("href", renderer)
 
+    def test_cards_have_consistent_height_and_hover(self):
+        # Each grid uses equal-size implicit rows. The tallest card determines
+        # the row height without clipping translations or long descriptions.
+        self.assertIn(".project-cards{margin-top:12px;grid-auto-rows:1fr}", HTML)
+        self.assertIn("display:flex;flex-direction:column;min-height:220px;height:100%", HTML)
+        self.assertIn("background:var(--accent-soft)", HTML)
+        self.assertIn(".project-cards .data-card:hover", HTML)
+        self.assertIn('data-theme="dark"] .project-cards .data-card:hover', HTML)
+        self.assertIn("background:var(--raised)", HTML)
+        self.assertIn("box-shadow:0 4px 16px", HTML)
+        self.assertIn("@media(hover:hover)", HTML)
+        self.assertIn(".project-cards .data-card{transition:none}", HTML)
+        self.assertNotIn("overflow:hidden", HTML.split(".project-cards{", 1)[1].split(".data-card .project-period", 1)[0])
+        self.assertNotIn("cursor:pointer", HTML.split(".project-cards{", 1)[1].split(".data-card .project-period", 1)[0])
+
     def test_version(self):
-        self.assertIn("v1.2.12", HTML)
+        self.assertIn("v1.2.13", HTML)
 
 
 if __name__ == "__main__":
