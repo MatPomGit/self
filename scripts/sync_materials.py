@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 from collections import defaultdict
 from html import escape, unescape
+import os
 from pathlib import Path
 import re
 from urllib.parse import quote, unquote, urlsplit
@@ -249,7 +250,7 @@ def main() -> int:
         print("[WARN] " + warning)
         safe = warning.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
         print(f"::warning::{safe}")
-    summary = __import__("os").getenv("GITHUB_STEP_SUMMARY")
+    summary = os.getenv("GITHUB_STEP_SUMMARY")
     if summary and warnings:
         with open(summary, "a", encoding="utf-8") as report:
             report.write(f"\n### Repaired {len(warnings)} missing material link(s)\n")
