@@ -1,61 +1,100 @@
-"""Regresja: zakładka Projekty odpowiada oficjalnemu wykazowi PRz."""
+"""Spójność promocyjnej karty projektów, dat i wersji językowych."""
 from __future__ import annotations
 
 import json
+import re
 import unittest
-from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "docs/data/projects.json"
+TRANSLATIONS = ROOT / "docs/data/projects.en.json"
 HTML = (ROOT / "index.html").read_text(encoding="utf-8")
-SOURCE = "https://mpomianek.v.prz.edu.pl/praca-naukowa/uczestnictwo-w-organizacjach-i-projektach"
 
-EXPECTED_TITLES = [
-        "Projekt „ARIANA”",
-        "Polish ImAging SaTellites „PIAST”",
-        "Rodzina głowic optoelektronicznych dla rakiet sterowanych „SEEKER”",
-        "„PolFEL” - Projekt polskiego lasera na swobodnych elektronach",
-        "Kwantowy generator liczb losowych „OPTOKRYPT”",
-        "Analysis of the possibility of using optoelectronic eye tracking systems as interaction interfaces in mixed reality systems",
-        "Analysis of the possibilities of using mixed reality vision systems in scientific research and military applications (RMN/948/2018)",
-        "Optoelektroniczny system do ochrony perymetrycznej granicy rzecznej „RiverGUARD”",
-        "Active sub-THz 3D scanner for anti-terrorist applications (PBS3/B3/30/2015)",
-        "Development of a sensor for a virtual trainer - anti-aircraft GROM and PIORUN missile sets",
-        "Pervasive and User Focused Biometrics Border Project (Common and user-oriented biometric border design) EU–0700259 PROTECT"
+CURRENT = [
+    "ARC-RGBT",
+    "ARC-RVI · Autonomiczna inspekcja wizualna",
+    "ARC-HRI-SAFETY",
+    "ARC-AFFECTIVE",
+    "ContextNDD",
+    "SAPIENS · Człowiek i robot humanoidalny",
+    "ARC Mobile Eye Tracking",
+    "EEG Neurolyze",
+    "S4D-TAM · Nawigacja autonomiczna",
+    "ARC Attachment Dynamics",
+    "ARC-ADHD · Adaptacyjna gra badawcza",
+    "AI Cognitive Resilience",
+    "DERA-HRI · Emocje w interakcji z robotem",
+    "MindDx · Symulator diagnozy psychologicznej",
+]
+PREVIOUS = [
+    "ARIANA",
+    "PIAST · Satelitarne obrazowanie Ziemi",
+    "SEEKER · Głowice optoelektroniczne",
+    "PolFEL · Laser na swobodnych elektronach",
+    "OPTOKRYPT · Kryptografia kwantowa",
+    "Eye Tracking w rzeczywistości mieszanej",
+    "Systemy wizyjne XR w nauce i obronności",
+    "RiverGUARD · Ochrona granic rzecznych",
+    "Skaner 3D sub-THz",
+    "Sensor trenażera GROM / PIORUN",
+    "PROTECT · Biometria kontroli granicznej",
 ]
 
 
 class ProjectsTests(unittest.TestCase):
-    def test_matches_official_list_order_and_count(self):
+    def test_current_and_previous_portfolio(self):
         projects = json.loads(DATA.read_text(encoding="utf-8"))
-        self.assertEqual([p["title"] for p in projects], EXPECTED_TITLES)
-        self.assertEqual(len(projects), 11)
-        self.assertEqual(len(set(EXPECTED_TITLES)), 11)
-        self.assertTrue(all(p["description"].strip() for p in projects))
+        self.assertEqual([p["title"] for p in projects if p["phase"] == "current"], CURRENT)
+        self.assertEqual([p["title"] for p in projects if p["phase"] == "previous"], PREVIOUS)
+        self.assertEqual(len(projects), 25)
+        self.assertEqual(len({p["title"] for p in projects}), len(projects))
 
-    def test_no_previous_generic_project_cards(self):
+    def test_dates_copy_and_no_outbound_links(self):
         projects = json.loads(DATA.read_text(encoding="utf-8"))
-        titles = [p["title"] for p in projects]
-        for old in (
-            "MEMS Eye-Tracking", "Varifocal HMD Calibration",
-            "Digital Twin Validation", "VR Pipelines for Medical Data",
-            "Kognitywna Robotyka Humanoidalna", "Technologie obronne",
-            "Rehabilitacja XR", "Diagnostyka wspomagana AI",
-        ):
-            with self.subTest(old=old):
-                self.assertNotIn(old, titles)
+        for project in projects:
+            with self.subTest(project=project["title"]):
+                self.assertIn(project["phase"], ("current", "previous"))
+                self.assertTrue(project["period"].strip())
+                self.assertTrue(project["description"].strip())
+                self.assertLessEqual(len(project["description"]), 270)
+                self.assertNotIn("http://", str(project))
+                self.assertNotIn("https://", str(project))
+                self.assertNotIn("github.com", str(project))
+                self.assertNotIn("doi.org", str(project))
+                if project["period"] != "Data do potwierdzenia":
+                    self.assertRegex(project["period"], r"^20\\d{2}(?:[–-]20\\d{2}|[–-]obecnie)?$")
+        uncertain = [p["title"] for p in projects if p["period"] == "Data do potwierdzenia"]
+        self.assertEqual(uncertain, ["Sensor trenażera GROM / PIORUN"])
 
-    def test_source_and_single_project_entry_point(self):
-        self.assertIn('href="' + SOURCE + '"', HTML)
-        self.assertIn('id="projects-list"', HTML)
+    def test_bilingual_project_data(self):
+        projects = json.loads(DATA.read_text(encoding="utf-8"))
+        translations = json.loads(TRANSLATIONS.read_text(encoding="utf-8"))
+        self.assertEqual(len(projects), len(translations))
+        self.assertEqual([p["title"] for p in projects], [p["sourceTitle"] for p in translations])
+        for project in translations:
+            with self.subTest(project=project["sourceTitle"]):
+                self.assertTrue(project["title"].strip())
+                self.assertTrue(project["period"].strip())
+                self.assertTrue(project["description"].strip())
+        self.assertEqual(sum(p["period"] == "2026–present" for p in translations), len(CURRENT))
+
+    def test_promotional_ui_has_sections_and_no_project_links(self):
+        panel = re.search(r'<article class="panel" id="projekty"[^>]*>[\\s\\S]*?</article>', HTML)
+        self.assertIsNotNone(panel)
+        self.assertNotIn("<a ", panel.group(0))
+        self.assertIn('id="projects-list"', panel.group(0))
+        self.assertIn("Aktualne programy badawczo-rozwojowe", HTML)
+        self.assertIn("Wybrane projekty i konsorcja", HTML)
+        self.assertIn("makeElement('div','project-period',entry.period)", HTML)
         self.assertIn("loadData('docs/data/projects.json'", HTML)
-        self.assertIn('>Wszystkie projekty</text>', HTML)
-        self.assertNotIn('>OPTOKRYPT</text>', HTML)
-        self.assertIn("if(entry.category)card.append(", HTML)
+        renderer = HTML.split("function renderProjects(records){", 1)[1].split("let publicationRecords", 1)[0]
+        self.assertNotIn("createElement('a'", renderer)
+        self.assertNotIn("makeElement('a'", renderer)
+        self.assertNotIn("href", renderer)
 
     def test_version(self):
-        self.assertIn("v1.2.11", HTML)
+        self.assertIn("v1.2.12", HTML)
 
 
 if __name__ == "__main__":
