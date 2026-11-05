@@ -51,7 +51,7 @@ assert.match(html, /themeToggle.setAttribute\('aria-label', action\)/);
 // All Polish interface strings must have an English equivalent. Bibliographic
 // titles are not in the static HTML; street names are proper nouns.
 const staticPage = html.slice(html.indexOf('<body>'), html.indexOf('<script src="docs/assets/js/site-i18n.js">'))
-  .replace(/<div class="research-intro">[\s\S]*?<\/div>/, '');
+  .replace(/<div class="research-(?:intro|work)">[\s\S]*?<\/div>/g, '');
 const missingUI = [...staticPage.matchAll(/>([^<>]+)</g)]
   .map(match => match[1].replace(/&nbsp;/g, '\u00a0').trim())
   .filter(value => /[ąćęłńóśźż]/iu.test(value) && en.translate(value) === value)
