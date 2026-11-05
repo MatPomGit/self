@@ -79,12 +79,12 @@
     'Robotyka afektywna': 'Affective robotics',
     'Interakcja człowiek robot, percepcja oraz kognitywne systemy robotyczne.':
       'Human–robot interaction, perception and cognitive robotic systems.',
-    'Co mnie ciekawi': 'What interests me',
-    'Nad czym pracuję': 'What I work on',
-    'Jak podchodzę do badań': 'How I approach research',
-    'Największą satysfakcję daje mi': 'What I enjoy most is',
-    'chwila, gdy dobry pomysł zamienia się w rozwiązanie, które naprawdę komuś pomaga.':
-      'seeing a good idea become something that genuinely helps someone.',
+    'Świat, który widzimy': 'The world we see',
+    'Rzeczywistość ma wiele twarzy': 'Reality has many faces',
+    'Od człowieka po Wszechświat': 'From the human mind to the universe',
+    'Najbardziej lubię': 'What I enjoy most are',
+    'pytania, które zmieniają sposób, w jaki patrzę na świat.':
+      'questions that change the way I see the world.',
     'Wczytywanie projektów…': 'Loading projects…',
     'Wczytywanie publikacji…': 'Loading publications…',
     'Źródło:': 'Source:',
@@ -103,7 +103,7 @@
     'Kategorie strony': 'Website categories',
     'Informacje szczegółowe': 'Detailed information',
     'Filtruj publikacje': 'Filter publications',
-    'Wersja strony 1.2.14': 'Website version 1.2.14',
+    'Wersja strony 1.2.15': 'Website version 1.2.15',
     'Język strony': 'Site language',
     'Źródło': 'Source',
     'Skopiowano': 'Copied',
@@ -128,10 +128,11 @@
   };
 
   const researchParagraphs = [
-    'If you ask me what I do, I find it hard to give a one-word answer. I am most drawn to questions that connect different worlds: how machines can better perceive and interpret their surroundings, how they can work with people, and what we can learn about ourselves along the way. That is why my work moves between engineering, computer science and the study of human behaviour.',
-    'My research roots are in optoelectronics, imaging and measurement systems. Today, I also develop approaches based on artificial intelligence, computer vision and data from multiple sensors. I am especially interested in humanoid robots, autonomous systems, and virtual and augmented reality. I like technology that does more than impress: it should be intuitive, useful and safe.',
-    'Neuroscience and psychology are equally important to me. I study attention, emotion and behaviour using eye tracking, EEG and experimental methods. I am curious about what happens between people and intelligent systems: where trust comes from, how we make decisions, and how to build technologies that adapt to our needs.',
-    'I am an Assistant Professor in the Department of Computer and Control Engineering at Rzeszów University of Technology. I earned my PhD at the Institute of Optoelectronics, Military University of Technology, and have also worked on security and space-technology projects. I value open discussion, testing unconventional ideas, and working with people who see a problem differently from me.',
+    'For as long as I can remember, I have been fascinated by the human brain and how it creates the reality we take for granted. Two people can look at the same thing and see entirely different worlds. How much of what we perceive belongs to the world itself, and how much comes from our memories, emotions and expectations? And how does this personal picture shape our choices, relationships and everyday lives?',
+    'For me, it is just as fascinating to turn the perspective around: how might something without human senses, such as an intelligent machine, perceive people and their surroundings? What would it notice, and what would remain invisible?',
+    'Building models of the world has always been a passion of mine. I doubt there is a single description of reality that explains everything. Every model helps us understand something, but each also simplifies or leaves something out. That is why I enjoy looking for different ways of seeing.',
+    'That curiosity takes me from studying human perception to designing intelligent systems that build their own representations of their surroundings. My daily work blends experiments, programming and engineering. I am an Assistant Professor at Rzeszów University of Technology and earned my doctorate at the Military University of Technology.',
+    'And then there is space. The more I think about its vastness, the more remarkable it seems that humans, so small in the universe, can even attempt to understand it. Astronomy reminds me how little we know and how many questions are still worth asking.',
   ];
 
   // HTML &nbsp; becomes U+00A0 in text nodes. Match translations independently
