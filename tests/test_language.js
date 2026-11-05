@@ -29,7 +29,7 @@ assert.equal(en.translate('Świat większy od nas'), 'A world bigger than us');
 assert.equal(en.translate('Wiele sposobów widzenia'), 'Many ways of seeing');
 assert.equal(en.translate('Świat, który tworzy mózg'), 'The world our brains create');
 assert.equal(en.translate('Nad czym pracuję'), 'What I work on');
-assert.equal(en.translate('Najbardziej interesuje mnie'), 'What fascinates me most is');
+assert.equal(en.translate('Największą satysfakcję daje mi'), 'What I enjoy most is');
 assert.equal(en.translate('Aktualne programy badawczo-rozwojowe'), 'Current research and development programmes');
 assert.equal(en.translate('Wybrane projekty i konsorcja'), 'Selected projects and consortia');
 assert.equal(pl.translate('Dla studentów'), 'Dla studentów');
@@ -88,7 +88,8 @@ const researchWork = html.match(/<div class="research-work">([\s\S]*?)<\/div>/)?
 assert.ok(researchWork, 'Research-work section follows the philosophical story');
 const workParagraphs = [...researchWork.matchAll(/<p>([\s\S]*?)<\/p>/g)];
 assert.equal(workParagraphs.length, 2, 'The work section has exactly two concise paragraphs');
-assert.ok(html.indexOf('class="research-summary"') < html.indexOf('class="research-work"'));
+assert.ok(html.indexOf('class="research-summary"') > html.indexOf('class="research-work"'));
+assert.equal((html.match(/class="research-summary"/g) || []).length, 1, 'One conclusion at the end');
 assert.equal(englishParagraphs.length, polishParagraphs.length + workParagraphs.length, 'PL/EN research paragraph counts match');
 assert.match(source, /#badania \.research-intro p, #badania \.research-work p/);
 assert.ok(englishParagraphs.every(text => text.length > 80), 'English paragraphs have content');
@@ -96,7 +97,7 @@ assert.match(englishParagraphs[0], /universe/);
 assert.match(englishParagraphs[1], /models of the world/);
 assert.match(englishParagraphs[3], /brains/);
 assert.match(englishParagraphs[5], /optoelectronics/);
-assert.match(englishParagraphs[6], /Neuroscience and psychology/);
+assert.match(englishParagraphs[6], /neuroscience and psychology/);
 
 const projects = JSON.parse(read('docs/data/projects.json'));
 const projectTranslations = JSON.parse(read('docs/data/projects.en.json'));
