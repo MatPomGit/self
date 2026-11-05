@@ -67,25 +67,25 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 .theme-sun{display:none}
 :root[data-theme="dark"] .theme-sun{display:block}
 :root[data-theme="dark"] .theme-moon{display:none}
-.materials-grid{columns:auto 28rem;column-gap:10px;margin-top:8px}
-.materials-group{display:inline-block;vertical-align:top;width:100%;min-width:0;padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--surface);margin:0 0 10px;break-inside:avoid;page-break-inside:avoid}
+.materials-grid{columns:auto 22rem;column-gap:7px;margin-top:6px}
+.materials-group{display:inline-block;vertical-align:top;width:100%;min-width:0;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--surface);margin:0 0 7px;break-inside:avoid;page-break-inside:avoid}
 .materials-group--wide{grid-column:auto}
 .materials-group--flow{display:inline-block;break-inside:avoid}
 .materials-group--flow>h4{break-after:avoid}
 .materials-group--flow .materials-subgroup{break-inside:avoid}
 .materials-columns{display:block}
 .materials-subgroup{min-width:0;padding:2px 2px 2px;background:transparent;border:1px solid var(--subgroup-line);border-radius:4px;margin-top:2px}
-.materials-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,var(--material-min,7.2rem)),1fr));column-gap:8px;row-gap:2px;align-items:start}
-.materials-list--descriptive{--material-min:11rem}
+.materials-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,var(--material-min,7.2rem)),var(--material-min,7.2rem)));column-gap:4px;row-gap:0;align-items:start}
+.materials-list--descriptive{--material-min:10.4rem}
 :root[data-materials-view="all"] .materials-list--dense{--material-min:7.5rem}
-.materials-list--dense{--material-min:5.5rem;line-height:1.1}
+.materials-list--dense{--material-min:5.5rem;line-height:1.05}
 .materials-list li{min-width:0;break-inside:avoid}
-.materials-list a{display:block;padding:2px;border-radius:4px;overflow-wrap:break-word;white-space:normal;line-height:1.2;font-size:.7rem}
+.materials-list a{display:block;padding:1px 1px;border-radius:4px;overflow-wrap:break-word;white-space:normal;line-height:1.12;font-size:.7rem}
 .materials-list a:hover{background:var(--hover)}
 /* Niezależne kolumny nie tworzą pustych komórek po kartach o różnej wysokości.
    Przeglądarka bilansuje ich wysokość bez skryptu zmieniającego DOM. */
 @media(min-width:720px) and (max-width:1000px){
-  .materials-grid{columns:auto 22rem}
+  .materials-grid{columns:auto 20rem}
 }
 @media(max-width:620px){
   main{padding:10px 10px 14px}
@@ -93,7 +93,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
   .materials-header>div{flex-basis:100%}
   .materials-view-toggle{position:static;transform:none;margin-left:auto}
   .materials-grid{columns:1}
-  .materials-list a{padding:4px 4px}
+  .materials-list a{padding:3px 2px}
 }
 
 /* Animuj kolory tylko podczas przełączenia, nie podczas ładowania strony. */
