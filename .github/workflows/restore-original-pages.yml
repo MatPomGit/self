@@ -42,6 +42,7 @@ jobs:
           node tests/test_language.js
           node tests/test_publication_utils.js
           node tests/test_materials_view.js
+          node tests/test_materials_layout.js
           bash tests/theme_switcher_static_check.sh
       # Upload the exact checked files once; deploy job must not rebuild.
       - name: Package validated website
