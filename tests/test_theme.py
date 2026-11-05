@@ -214,7 +214,7 @@ class ThemeTests(unittest.TestCase):
         self.assertIn('.manuscript-next{font-size:inherit;line-height:inherit;', HTML)
 
     def test_version(self):
-        self.assertIn("v1.2.18", HTML)
+        self.assertIn("v1.2.19", HTML)
 
 
 if __name__ == "__main__":
