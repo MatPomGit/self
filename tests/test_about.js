@@ -49,8 +49,8 @@ async function exercise(language, data = about, responseOk = true) {
 }
 
 (async () => {
-  assert.equal(about.pl.paragraphs.length, 10);
-  assert.equal(about.en.paragraphs.length, 10);
+  assert.equal(about.pl.paragraphs.length, 7);
+  assert.equal(about.en.paragraphs.length, 7);
   for (const language of ['pl', 'en']) {
     const {elements, errors} = await exercise(language);
     const story = about[language];
@@ -61,7 +61,7 @@ async function exercise(language, data = about, responseOk = true) {
     assert.equal(rendered[0].className, 'research-heading');
     assert.equal(rendered[0].textContent, story.title);
     assert.deepEqual(rendered.slice(1).map(x => x.textContent), story.paragraphs);
-    assert.equal(rendered.length, 11, 'One title and ten intact paragraphs');
+    assert.equal(rendered.length, 8, 'One title and seven intact paragraphs');
   }
   const failed = await exercise('pl', about, false);
   assert.equal(failed.elements.get('research-status').hidden, false);
