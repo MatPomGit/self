@@ -77,27 +77,28 @@ for (const match of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)) 
   new vm.Script(match[1]);
 }
 
-const story = html.match(/<div class="research-intro">([\s\S]*?)<\/div>/)?.[1];
-assert.ok(story, 'Research story is present');
-const polishParagraphs = [...story.matchAll(/<p>([\s\S]*?)<\/p>/g)];
-assert.equal(polishParagraphs.length, 5, 'Short research story has five paragraphs');
-const englishParagraphsSource = source.match(/const researchParagraphs = \[([\s\S]*?)\n  \];/)?.[1];
-assert.ok(englishParagraphsSource, 'Research translations are present');
-const englishParagraphs = vm.runInNewContext('[' + englishParagraphsSource + ']', {});
-const researchWork = html.match(/<div class="research-work">([\s\S]*?)<\/div>/)?.[1];
-assert.ok(researchWork, 'Research-work section follows the philosophical story');
-const workParagraphs = [...researchWork.matchAll(/<p>([\s\S]*?)<\/p>/g)];
-assert.equal(workParagraphs.length, 2, 'The work section has exactly two concise paragraphs');
-assert.ok(html.indexOf('class="research-summary"') > html.indexOf('class="research-work"'));
-assert.equal((html.match(/class="research-summary"/g) || []).length, 1, 'One conclusion at the end');
-assert.equal(englishParagraphs.length, polishParagraphs.length + workParagraphs.length, 'PL/EN research paragraph counts match');
-assert.match(source, /#badania \.research-intro p, #badania \.research-work p/);
-assert.ok(englishParagraphs.every(text => text.length > 80), 'English paragraphs have content');
-assert.match(englishParagraphs[0], /universe/);
-assert.match(englishParagraphs[1], /models of the world/);
-assert.match(englishParagraphs[3], /brains/);
-assert.match(englishParagraphs[5], /optoelectronics/);
-assert.match(englishParagraphs[6], /neuroscience and psychology/);
+const about = JSON.parse(read('docs/data/about.json'));
+assert.deepEqual(Object.keys(about).sort(), ['en','pl']);
+for (const language of ['pl','en']) {
+  assert.equal(about[language].intro.length, 5, 'Five introductory paragraphs in ' + language);
+  assert.equal(about[language].work.length, 2, 'Two research paragraphs in ' + language);
+  assert.ok(about[language].summary.trim(), 'A closing thought exists in ' + language);
+  assert.ok([...about[language].intro, ...about[language].work].every(text => text.length > 80));
+}
+assert.match(about.pl.intro[0], /Zawsze ciekawił mnie świat/);
+assert.match(about.en.intro[0], /universe/);
+assert.match(about.en.intro[1], /models of the world/);
+assert.match(about.en.intro[3], /brains/);
+assert.match(about.en.work[0], /optoelectronics/);
+assert.match(about.en.work[1], /neuroscience and psychology/);
+assert.ok(html.includes('<div class="research-intro" id="research-intro"></div>'));
+assert.ok(html.includes('<div class="research-work" id="research-work"></div>'));
+assert.ok(html.includes('id="research-summary"'));
+assert.ok(html.includes("fetch('docs/data/about.json')"));
+assert.doesNotMatch(html, /Zawsze ciekawił mnie świat/);
+assert.doesNotMatch(source, /const researchParagraphs/);
+assert.equal(en.translate('Wczytywanie opisu…'), 'Loading biography…');
+assert.equal(en.translate('Nie udało się wczytać opisu.'), 'Could not load the biography.');
 
 const projects = JSON.parse(read('docs/data/projects.json'));
 const projectTranslations = JSON.parse(read('docs/data/projects.en.json'));
