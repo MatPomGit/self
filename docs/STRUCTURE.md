@@ -6,6 +6,7 @@ aktualnych plików dla studentów jest `materials/`.
 | Ścieżka | Funkcja |
 | --- | --- |
 | `index.html` | Strona główna z kołem kategorii i przełącznikiem języka |
+| `docs/data/about.json` | Pełny opis osoby i pracy badawczej, po polsku (`pl`) i angielsku (`en`) |
 | `docs/assets/`, `docs/data/`, `docs/images/` | Zasoby techniczne, dane i obrazy |
 | `docs/archive/` | Archiwalne warianty witryny |
 | `materials/index.html` | Automatycznie uzupełniany przy budowaniu katalog; domyślnie aktualne PDF |
