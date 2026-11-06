@@ -1,4 +1,4 @@
-// Regression tests: the research biography is loaded from one bilingual file.
+// Regression tests: the complete personal biography is loaded from bilingual JSON.
 'use strict';
 
 const assert = require('node:assert/strict');
@@ -14,7 +14,7 @@ assert.ok(start >= 0 && end > start, 'Biography loader exists in the homepage');
 const loader = html.slice(start, end + call.length);
 
 async function exercise(language, data = about, responseOk = true) {
-  const elements = new Map(['research-status', 'research-intro', 'research-work', 'research-summary']
+  const elements = new Map(['research-status', 'research-intro']
     .map(id => [id, {
       id, hidden: false, textContent: '', children: [],
       replaceChildren(...values) {
@@ -28,7 +28,6 @@ async function exercise(language, data = about, responseOk = true) {
   const errors = [];
   const makeElement = (tag, className, value) => ({tag, className, textContent:value, children:[]});
   const translate = value => language === 'en' ? ({
-    'Nad czym pracuję':'What I work on',
     'Nie udało się wczytać opisu.':'Could not load the biography.',
   })[value] || value : value;
   const context = {
@@ -50,22 +49,25 @@ async function exercise(language, data = about, responseOk = true) {
 }
 
 (async () => {
+  assert.equal(about.pl.paragraphs.length, 10);
+  assert.equal(about.en.paragraphs.length, 10);
   for (const language of ['pl', 'en']) {
     const {elements, errors} = await exercise(language);
     const story = about[language];
+    const rendered = elements.get('research-intro').children;
     assert.deepEqual(errors, []);
     assert.equal(elements.get('research-status').hidden, true);
-    assert.deepEqual(elements.get('research-intro').children.map(x => x.textContent), story.intro);
-    assert.deepEqual(elements.get('research-work').children.slice(1).map(x => x.textContent), story.work);
-    assert.equal(elements.get('research-work').children[0].textContent,
-      language === 'pl' ? 'Nad czym pracuję' : 'What I work on');
-    assert.equal(elements.get('research-summary').textContent, story.summary);
+    assert.equal(rendered[0].tag, 'h3');
+    assert.equal(rendered[0].className, 'research-heading');
+    assert.equal(rendered[0].textContent, story.title);
+    assert.deepEqual(rendered.slice(1).map(x => x.textContent), story.paragraphs);
+    assert.equal(rendered.length, 11, 'One title and ten intact paragraphs');
   }
   const failed = await exercise('pl', about, false);
   assert.equal(failed.elements.get('research-status').hidden, false);
   assert.equal(failed.elements.get('research-status').textContent, 'Nie udało się wczytać opisu.');
   assert.equal(failed.errors.length, 1);
-  const invalid = await exercise('en', {pl:about.pl,en:{intro:[],work:[],summary:''}});
+  const invalid = await exercise('en', {pl:about.pl,en:{title:'',paragraphs:[]}});
   assert.equal(invalid.elements.get('research-status').textContent, 'Could not load the biography.');
   console.log('[DONE] ABOUT_CONTENT_LOADER_PASS');
 })().catch(error => {console.error(error); process.exitCode = 1;});
