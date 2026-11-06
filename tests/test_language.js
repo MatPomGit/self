@@ -89,7 +89,7 @@ assert.match(about.pl.paragraphs[0], /^Gdy ktoś pyta mnie, czym się zajmuję/)
 assert.match(about.pl.paragraphs[2], /ludzki mózg/);
 assert.match(about.pl.paragraphs[4], /Instytucie Optoelektroniki/);
 assert.match(about.pl.paragraphs[6], /^W nauce cenię współpracę/);
-assert.match(about.en.paragraphs[0], /^When someone asks what I do/);
+assert.match(about.en.paragraphs[0], /^When someone asks me what I do/);
 assert.match(about.en.paragraphs[4], /Institute of Optoelectronics/);
 assert.match(about.en.paragraphs[6], /^In science, I value working/);
 assert.ok(html.includes('<div class="research-intro" id="research-intro"></div>'));
