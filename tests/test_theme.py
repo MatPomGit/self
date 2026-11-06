@@ -130,48 +130,59 @@ class ThemeTests(unittest.TestCase):
         self.assertIn('#badania .research-heading{font-size:1.14rem', HTML)
 
     def test_research_story_is_short_and_human(self):
-        panel = re.search(r'<article class="panel" id="badania"[^>]*>([\s\S]*?)</article>', HTML)
-        self.assertIsNotNone(panel)
-        content = panel.group(1)
-        self.assertEqual(content.count('class="research-heading"'), 1)
-        self.assertEqual(len(re.findall(r'<p>', content)), 7)
-        plain = re.sub(r'<[^>]+>', ' ', content)
+        """Tekst opisu przechowywany jest wyłącznie w zewnętrznych danych."""
+        import json
+        data = json.loads((ROOT / "docs/data/about.json").read_text(encoding="utf-8"))
+        self.assertEqual(set(data), {"pl", "en"})
+        for language in ("pl", "en"):
+            with self.subTest(language=language):
+                story = data[language]
+                self.assertEqual(len(story["intro"]), 5)
+                self.assertEqual(len(story["work"]), 2)
+                self.assertTrue(story["summary"].strip())
+                self.assertTrue(all(paragraph.strip() for paragraph in
+                                    story["intro"] + story["work"]))
+        plain = " ".join(data["pl"]["intro"] + data["pl"]["work"] + [data["pl"]["summary"]])
         self.assertLessEqual(len(plain.split()), 420)
         for phrase in (
-            'Zawsze ciekawił mnie świat sam w sobie', 'Nad czym pracuję',
-            'Wszechświata', 'Tworzenie modeli świata',
-            'maszyny', 'Mózg', 'doznań, wspomnień i oczekiwań',
+            'Zawsze ciekawił mnie świat sam w sobie', 'Wszechświata',
+            'Tworzenie modeli świata', 'maszyny', 'Mózg',
+            'doznań, wspomnień i oczekiwań',
             'Politechniki Rzeszowskiej', 'Wojskowej Akademii Technicznej',
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, plain)
-        # Natural progression: universe -> world models -> human perception.
         self.assertLess(plain.index('Wszechświata'), plain.index('Tworzenie modeli świata'))
         self.assertLess(plain.index('Tworzenie modeli świata'), plain.index('Mózg również'))
-        self.assertNotIn('<a ', content)
+        self.assertNotIn('<a ', plain)
 
     def test_research_work_flows_into_single_closing_thought(self):
-        panel = re.search(r'<article class="panel" id="badania"[^>]*>([\s\S]*?)</article>', HTML)
+        import json
+        panel = re.search(r'<article class="panel" id="badania"[^>]*>([\\s\\S]*?)</article>', HTML)
         self.assertIsNotNone(panel)
         content = panel.group(1)
-        introduction = content.index('class="research-intro"')
-        conclusion = content.index('class="research-summary"')
-        work = content.index('class="research-work"')
-        self.assertLess(introduction, work)
+        intro = content.index('id="research-intro"')
+        work = content.index('id="research-work"')
+        conclusion = content.index('id="research-summary"')
+        self.assertLess(intro, work)
         self.assertLess(work, conclusion)
-        self.assertIn('Z tych pytań wyrasta moja praca badawcza', content)
-        self.assertIn('Największą satysfakcję daje mi', content)
+        self.assertIn('id="research-status"', content)
+        self.assertIn("fetch('docs/data/about.json')", HTML)
+        self.assertNotIn('Z tych pytań wyrasta moja praca badawcza', content)
         self.assertEqual(content.count('class="research-summary"'), 1)
-        self.assertIn('Nad czym pracuję', content)
-        work_section = content.split('<div class="research-work">', 1)[1]
-        self.assertEqual(work_section.count('<p>'), 2)
+        self.assertNotIn('<a ', content)
+
+        data = json.loads((ROOT / "docs/data/about.json").read_text(encoding="utf-8"))
+        story = data["pl"]
+        self.assertIn('Z tych pytań wyrasta moja praca badawcza', story["intro"][-1])
+        self.assertIn('Największą satysfakcję daje mi', story["summary"])
+        work_text = " ".join(story["work"])
         for phrase in ('optoelektroniki', 'sztuczna inteligencja',
                        'robotami humanoidalnymi', 'rzeczywistością wirtualną',
                        'neuronauką i psychologią', 'okulografii, EEG'):
             with self.subTest(phrase=phrase):
-                self.assertIn(phrase, work_section)
-        self.assertLessEqual(len(re.sub(r'<[^>]+>', ' ', work_section).split()), 150)
-        self.assertNotIn('<a ', work_section)
+                self.assertIn(phrase, work_text)
+        self.assertLessEqual(len(work_text.split()), 150)
 
     def test_contact_links_have_icons(self):
         import re
