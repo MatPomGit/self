@@ -34,16 +34,20 @@ jobs:
         run: |
           python scripts/classify_materials.py --write
           python scripts/classify_materials.py --check
-      - name: Validate HTML, translations and interactive behaviors
+      - name: Validate Python content, metadata and links
+        run: python -m unittest discover -s tests -v
+      - name: Validate JavaScript syntax and interactive behavior
         run: |
-          python -m unittest discover -s tests -v
           node --check docs/assets/js/site-i18n.js
           node --check docs/assets/js/publication-utils.js
+          node --check tests/test_materials_layout.js
           node tests/test_language.js
           node tests/test_publication_utils.js
           node tests/test_materials_view.js
-          node tests/test_materials_layout.js
-          bash tests/theme_switcher_static_check.sh
+      - name: Validate responsive materials layout
+        run: node tests/test_materials_layout.js
+      - name: Validate theme switching
+        run: bash tests/theme_switcher_static_check.sh
       # Upload the exact checked files once; deploy job must not rebuild.
       - name: Package validated website
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'

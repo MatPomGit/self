@@ -165,35 +165,6 @@ class MaterialsTests(unittest.TestCase):
                 self.assertEqual(style.count(f"--{variable}:{dark}"), 1)
                 self.assertRegex(html, rf'href="[^"]+\.{extension}"')
 
-    def test_balanced_columns_are_responsive_and_compact(self):
-        """Karty układają się w niezależnych kolumnach bez pustych pól siatki."""
-        html = (MATERIALS / "index.html").read_text(encoding="utf-8")
-        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
-        self.assertIn(".materials-grid{columns:auto 22rem;column-gap:7px;", style)
-        self.assertIn("@media(min-width:720px) and (max-width:1000px)", style)
-        self.assertIn(".materials-grid{columns:auto 20rem}", style)
-        self.assertIn("@media(max-width:620px)", style)
-        self.assertIn(".materials-grid{columns:1}", style)
-        self.assertIn(".materials-group{display:inline-block;vertical-align:top;width:100%", style)
-        self.assertIn("break-inside:avoid;page-break-inside:avoid", style)
-        self.assertIn(".materials-group--flow{display:inline-block;break-inside:avoid}", style)
-        self.assertIn(".materials-columns{display:block}", style)
-        self.assertIn("grid-template-columns:repeat(auto-fill,minmax(min(100%,var(--material-min,7.2rem)),var(--material-min,7.2rem)))", style)
-        self.assertIn(".materials-list--descriptive{--material-min:10.4rem}", style)
-        self.assertIn("--material-min:5.5rem", style)
-        self.assertIn(':root[data-materials-view="all"] .materials-list--dense{--material-min:7.5rem}', style)
-        self.assertIn(".materials-list li{min-width:0;break-inside:avoid}", style)
-        self.assertIn("padding:1px 1px;border-radius:4px;overflow-wrap:break-word;white-space:normal;line-height:1.12", style)
-        self.assertIn("font-size:.7rem}", style)
-        self.assertIn(".materials-list .material-formats{display:inline;font-size:.56rem", style)
-        self.assertIn(".materials-list .material-format--standalone{font-size:.56rem", style)
-        self.assertNotIn("grid-auto-flow:dense", style)
-        self.assertNotIn("grid-row-end:span", style)
-        self.assertNotIn("materials-group--adaptive-wide", html)
-        self.assertNotIn("materials-grid--masonry", html)
-        self.assertNotIn("initAdaptiveMaterialsGrid", html)
-        self.assertNotIn("text-overflow:ellipsis", style)
-
     def test_descriptive_material_headings_and_verified_tooltips(self):
         """Nagłówki typów materiałów i tytuły źródłowe nie są generyczne."""
         html = (MATERIALS / "index.html").read_text(encoding="utf-8")
@@ -228,14 +199,6 @@ class MaterialsTests(unittest.TestCase):
         self.assertIn("--subgroup-line:rgba(205,215,230,.13)", style)
         self.assertRegex(html, r"<h[2-5]>Wirtualna i rozszerzona rzeczywistość</h[2-5]>")
         self.assertNotIn("Wirtualna i rozszerzona rzeczywistość (WiRR)", html)
-        grid_spacing = re.search(
-            r"\.materials-grid\{columns:auto 22rem;column-gap:(\d+)px;margin-top:(\d+)px\}",
-            style,
-        )
-        self.assertIsNotNone(grid_spacing)
-        self.assertTrue(all(int(value) <= 7 for value in grid_spacing.groups()))
-        self.assertIn("margin:0 0 7px;break-inside:avoid", style)
-
     def test_subject_pages_have_valid_navigation(self):
         """Strony przedmiotów nie odsyłają do pustych lub usuniętych zasobów."""
         for subject in SUBJECTS:
