@@ -460,22 +460,22 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 <div class="materials-subgroup">
 <h5>Wykłady</h5>
 <ul class="materials-list materials-list--descriptive">
-<li><a class="material-link--lecture" href="Nowoczesne-technologie-w-psychologii/E-terapia.pdf" download title="E-terapia.pdf">E terapia · PDF</a></li>
-<li><a class="material-link--lecture" href="Nowoczesne-technologie-w-psychologii/intuicja_a_prbl.pdf" download title="intuicja_a_prbl.pdf">intuicja przeciwko prawdopodobienstwu · PDF</a></li>
-<li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/AI_dla_psychologow.pdf" download title="AI_dla_psychologow.pdf">AI dla psychologow · PDF</a></li>
-<li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/ASD12C_w_Polsce.pdf" download title="ASD12C_w_Polsce.pdf">ASD12C w Polsce · PDF</a></li>
-<li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/EEG_Arns_Conners_i_Kraemer_2013.pdf" download title="EEG_Arns_Conners_i_Kraemer_2013.pdf">EEG Arns Conners i Kraemer 2013 · PDF</a></li>
-<li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/EEG_BIDS_Psychofizjologia_2026.pdf" download title="EEG_BIDS_Psychofizjologia_2026.pdf">EEG BIDS Psychofizjologia 2026 · PDF</a></li>
-<li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/Galea_EEG_neuroXR.pdf" download title="Galea_EEG_neuroXR.pdf">Galea EEG neuroXR · PDF</a></li>
+<li><a class="material-link--lecture" href="Nowoczesne-technologie-w-psychologii/E-terapia.pdf" download title="w_01 · E terapia">w_01</a></li>
+<li><a class="material-link--lecture" href="Nowoczesne-technologie-w-psychologii/intuicja_a_prbl.pdf" download title="w_02 · intuicja przeciwko prawdopodobienstwu">w_02</a></li>
+<li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/AI_dla_psychologow.pdf" download title="w_03 · AI dla psychologow">w_03</a></li>
+<li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/ASD12C_w_Polsce.pdf" download title="w_04 · ASD12C w Polsce">w_04</a></li>
+<li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/EEG_Arns_Conners_i_Kraemer_2013.pdf" download title="w_05 · EEG Arns Conners i Kraemer 2013">w_05</a></li>
+<li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/EEG_BIDS_Psychofizjologia_2026.pdf" download title="w_06 · EEG BIDS Psychofizjologia 2026">w_06</a></li>
+<li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/Galea_EEG_neuroXR.pdf" download title="w_07 · Galea EEG neuroXR">w_07</a></li>
 </ul></div>
 <div class="materials-subgroup">
 <h5>Wersje edytowalne</h5>
 <ul class="materials-list materials-list--descriptive">
-<li><a class="material-link--lecture" href="Nowoczesne-technologie-w-psychologii/E-terapia.pptx" download title="E-terapia.pptx">E terapia · PPTX</a></li>
-<li><a class="material-link--lecture" href="Nowoczesne-technologie-w-psychologii/intuicja_a_prbl.pptx" download title="intuicja_a_prbl.pptx">intuicja przeciwko prawdopodobienstwu · PPTX</a></li>
-<li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/AI_dla_psychologow.pptx" download title="AI_dla_psychologow.pptx">AI dla psychologow · PPTX</a></li>
-<li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/ASD12C_w_Polsce.pptx" download title="ASD12C_w_Polsce.pptx">ASD12C w Polsce · PPTX</a></li>
-<li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/EEG_BIDS_Psychofizjologia_2026.pptx" download title="EEG_BIDS_Psychofizjologia_2026.pptx">EEG BIDS Psychofizjologia 2026 · PPTX</a></li>
+<li><a class="material-link--lecture" href="Nowoczesne-technologie-w-psychologii/E-terapia.pptx" download title="w_01 · E terapia">w_01</a></li>
+<li><a class="material-link--lecture" href="Nowoczesne-technologie-w-psychologii/intuicja_a_prbl.pptx" download title="w_02 · intuicja przeciwko prawdopodobienstwu">w_02</a></li>
+<li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/AI_dla_psychologow.pptx" download title="w_03 · AI dla psychologow">w_03</a></li>
+<li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/ASD12C_w_Polsce.pptx" download title="w_04 · ASD12C w Polsce">w_04</a></li>
+<li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/EEG_BIDS_Psychofizjologia_2026.pptx" download title="w_06 · EEG BIDS Psychofizjologia 2026">w_06</a></li>
 </ul></div>
 </div>
 </section>
@@ -552,7 +552,8 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
         if (description && !/^(notes|student|instructor|v\d+)$/i.test(description))
           return description.charAt(0).toUpperCase() + description.slice(1);
       }
-      return label;
+      // Gdy brak tytułu redakcyjnego, pokaż rzeczywistą nazwę pliku.
+      return /^(?:w|lab)[_-]\d+$/i.test(label) ? filename : label;
     }
     function kindOf(link) {
       if (link.classList.contains('material-link--lecture')) return 'lecture';
