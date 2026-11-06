@@ -126,20 +126,40 @@ class ThemeTests(unittest.TestCase):
         self.assertIn('max-height:690px', HTML)
 
     def test_research_typography(self):
-        self.assertIn('#badania .research-intro{font-size:.90rem', HTML)
-        self.assertIn('#badania .research-heading{font-size:1.14rem', HTML)
+        block = re.search(r'#badania \.research-intro\{([^}]+)\}', HTML)
+        self.assertIsNotNone(block)
+        for declaration in ("width:100%", "max-width:1000px", "margin-inline:auto",
+                            "padding-inline:clamp(16px,2vw,24px)",
+                            "font-size:.90rem", "line-height:1.65"):
+            with self.subTest(declaration=declaration):
+                self.assertIn(declaration, block.group(1))
+        self.assertIn('#badania .research-heading{', HTML)
+        self.assertIn('font-size:1.14rem', HTML)
+        self.assertIn('border-inline-start:2px solid var(--accent)', HTML)
+        self.assertIn('#badania .research-intro a{color:var(--accent)', HTML)
+        self.assertIn('#badania .research-intro blockquote{border-inline-start:2px solid var(--accent)', HTML)
 
-    def test_research_entrance_animation_is_scoped_and_accessible(self):
-        """Akapity animują się po aktywacji panelu, bez wymuszania ruchu."""
-        self.assertIn('@keyframes about-text-enter{', HTML)
+    def test_section_entrance_animation_is_scoped_and_accessible(self):
+        """Sekcje i akapity wchodzą płynnie, z możliwością redukcji ruchu."""
+        self.assertIn('@keyframes section-text-enter{', HTML)
         self.assertIn('from{opacity:0;transform:translateY(8px)}', HTML)
         self.assertIn('to{opacity:1;transform:translateY(0)}', HTML)
+        self.assertIn('.panel.active:not(#badania){', HTML)
         self.assertIn('#badania.active .research-intro > *{', HTML)
-        self.assertIn('animation:about-text-enter .4s', HTML)
-        for index in range(2, 7):
-            self.assertIn(f'#badania.active .research-intro > :nth-child({index})', HTML)
+        self.assertEqual(HTML.count('animation:section-text-enter 300ms'), 2)
+        for index, delay in enumerate(range(40, 201, 40), start=2):
+            self.assertIn(
+                f'#badania.active .research-intro > :nth-child({index})'
+                f'{{animation-delay:{delay}ms}}',
+                HTML,
+            )
         self.assertIn('@media(prefers-reduced-motion:reduce){', HTML)
-        self.assertIn('#badania.active .research-intro > *{animation:none}', HTML)
+        self.assertRegex(
+            HTML,
+            r'@media\(prefers-reduced-motion:reduce\)\{\s*'
+            r'\.panel\.active:not\(#badania\),\s*'
+            r'#badania\.active \.research-intro > \*\{animation:none\}',
+        )
         self.assertIn("panels.forEach(p=>p.classList.toggle('active',p.id===id))", HTML)
 
     def test_research_biography_is_complete(self):
