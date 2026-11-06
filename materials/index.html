@@ -69,13 +69,16 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 .theme-sun{display:none}
 :root[data-theme="dark"] .theme-sun{display:block}
 :root[data-theme="dark"] .theme-moon{display:none}
-.materials-grid{columns:auto 22rem;column-gap:7px;margin-top:6px}
+.materials-grid{columns:5 16rem;column-gap:7px;margin-top:6px}
 .materials-group{display:inline-block;vertical-align:top;width:100%;min-width:0;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--surface);margin:0 0 7px;break-inside:avoid;page-break-inside:avoid}
 .materials-group--wide{grid-column:auto}
 .materials-group--flow{display:inline-block;break-inside:avoid}
 .materials-group--flow>h4{break-after:avoid}
 .materials-group--flow .materials-subgroup{break-inside:avoid}
-.materials-columns{display:block}
+.materials-columns{display:flex;flex-wrap:wrap;align-items:flex-start;gap:3px}
+.materials-columns>.materials-subgroup{flex:1 1 8rem;max-width:100%}
+/* Długie moduły korzystają z całej szerokości karty; krótsze mogą sąsiadować. */
+.materials-columns>.materials-subgroup:has(.materials-list li:nth-child(n+9):not([hidden])){flex-basis:100%}
 .materials-subgroup{min-width:0;padding:2px 2px 2px;background:transparent;border:1px solid var(--subgroup-line);border-radius:4px;margin-top:2px}
 .materials-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;column-gap:4px;row-gap:0;align-items:baseline}
 .materials-list--dense{line-height:1.05}
@@ -85,7 +88,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 /* Niezależne kolumny nie tworzą pustych komórek po kartach o różnej wysokości.
    Przeglądarka bilansuje ich wysokość bez skryptu zmieniającego DOM. */
 @media(min-width:720px) and (max-width:1000px){
-  .materials-grid{columns:auto 20rem}
+  .materials-grid{columns:4 15rem}
 }
 @media(max-width:620px){
   main{padding:10px 10px 14px}
