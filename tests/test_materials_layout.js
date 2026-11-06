@@ -32,14 +32,28 @@ function cssLength(value, unit, label) {
 
 const grid = rules('.materials-grid');
 assert.equal(grid.length, 3, 'Desktop, medium-width and mobile grid rules required');
-const desktop = /^auto\s+(\d+(?:\.\d+)?)rem$/.exec(grid[0].columns || '');
-const medium = /^auto\s+(\d+(?:\.\d+)?)rem$/.exec(grid[1].columns || '');
-assert.ok(desktop, 'Desktop cards must use automatic rem-width columns');
-assert.ok(medium, 'Medium-width cards must use automatic rem-width columns');
-const desktopWidth = Number(desktop[1]);
-const mediumWidth = Number(medium[1]);
-assert.ok(desktopWidth >= 18 && desktopWidth <= 24, 'Desktop cards should stay compact (18-24rem)');
-assert.ok(mediumWidth >= 16 && mediumWidth <= desktopWidth, 'Medium viewport cards should stay compact');
+const desktop = /^([45])\s+(\d+(?:\.\d+)?)rem$/.exec(grid[0].columns || '');
+const medium = /^([234])\s+(\d+(?:\.\d+)?)rem$/.exec(grid[1].columns || '');
+assert.ok(desktop, 'Desktop must cap automatic columns at four or five');
+assert.ok(medium, 'Medium viewport must cap automatic columns');
+const desktopLimit = Number(desktop[1]);
+const mediumLimit = Number(medium[1]);
+const desktopWidth = Number(desktop[2]);
+const mediumWidth = Number(medium[2]);
+assert.equal(desktopLimit, 5, 'Desktop must support up to five columns');
+assert.equal(mediumLimit, 4, 'Medium viewport must support up to four columns');
+assert.ok(desktopWidth >= 15 && desktopWidth <= 18, 'Desktop cards must remain compact (15-18rem)');
+assert.ok(mediumWidth >= 14 && mediumWidth <= desktopWidth, 'Medium cards must remain compact');
+function estimatedColumnCount(viewport, countLimit, widthRem, gapPx) {
+  const innerWidth = Math.min(viewport, 1600) - 20;
+  return Math.min(countLimit, Math.max(1, Math.floor((innerWidth + gapPx) / (widthRem * 16 + gapPx))));
+}
+assert.equal(estimatedColumnCount(1280, desktopLimit, desktopWidth, 7), 4,
+  '1280px viewport should fit four cards across');
+assert.equal(estimatedColumnCount(1440, desktopLimit, desktopWidth, 7), 5,
+  '1440px viewport should fit five cards across');
+assert.equal(estimatedColumnCount(1920, desktopLimit, desktopWidth, 7), 5,
+  'The five-column limit must hold on wide screens');
 assert.ok(cssLength(grid[0]['column-gap'], 'px', 'Desktop gap') <= 8);
 assert.ok(cssLength(grid[0]['margin-top'], 'px', 'Grid top margin') <= 8);
 assert.equal(grid[2].columns, '1', 'Mobile view must use one column');
@@ -54,7 +68,16 @@ assert.equal(group['break-inside'], 'avoid');
 assert.ok(cssLength(group.padding, 'px', 'Card padding') <= 8);
 assert.ok((group.margin || '').startsWith('0 0 '), 'Cards must not have a top margin');
 assert.equal(one('.materials-group--flow')['break-inside'], 'avoid');
-assert.equal(one('.materials-columns').display, 'block');
+const columns = one('.materials-columns');
+assert.equal(columns.display, 'flex', 'Module groups must flow beside one another');
+assert.equal(columns['flex-wrap'], 'wrap', 'Module groups must wrap instead of overflowing');
+assert.equal(columns['align-items'], 'flex-start');
+assert.ok(cssLength(columns.gap, 'px', 'Internal module gap') <= 4);
+const subgroupFlow = one('.materials-columns>.materials-subgroup');
+assert.equal(subgroupFlow.flex, '1 1 8rem', 'Short modules must share available width');
+assert.equal(subgroupFlow['max-width'], '100%');
+assert.equal(one('.materials-columns>.materials-subgroup:has(.materials-list li:nth-child(n+9):not([hidden]))')['flex-basis'], '100%',
+  'Modules with at least nine visible files need a full-width row');
 
 const list = one('.materials-list');
 assert.equal(list.display, 'flex', 'Items must use their intrinsic text widths');
