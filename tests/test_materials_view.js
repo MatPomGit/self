@@ -211,6 +211,7 @@ const pdfLecture = row(lectures.list, 'course/w01.pdf', 'w_01 · PDF', 'lecture'
 const pamLecture = row(lectures.list, 'course/pam_w02_hardware.pdf', 'w_02', 'lecture');
 pamLecture.a.setAttribute('title', 'w_02 · Sprzęt');
 const verboseLecture = row(lectures.list, 'course/pam_w03_projektowanie.pdf', 'w_03 · Projektowanie aplikacji mobilnych', 'lecture');
+const unnamedLecture = row(lectures.list, 'course/ra_w04.pdf', 'w_04', 'lecture');
 const pptxLecture = row(sources.list, 'course/w01.pptx', 'w_01 · PPTX', 'lecture');
 const htmlLecture = row(sources.list, 'course/w01.html', 'w_01 · HTML', 'lecture');
 const orphanHtml = row(sources.list, 'course/standalone.html', 'standalone · HTML', 'lab');
