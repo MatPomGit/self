@@ -237,22 +237,43 @@
     @media(max-height:690px) and (min-width:861px){
       .intro>div:first-child{transform:translateY(-54px)}
     }
-    /* Mniejsze liternictwo tylko w widoku badań. */
-    #badania .research-intro{font-size:.90rem;line-height:1.57}
-    #badania .research-heading{font-size:1.14rem;line-height:1.35;margin:0 0 12px}
-    @keyframes about-text-enter{
+    /* Czytelna szerokość wierszy i spokojny rytm czytania sekcji „O mnie”. */
+    #badania .research-intro{
+      width:100%;
+      max-width:1000px;
+      margin-inline:auto;
+      padding-inline:clamp(16px,2vw,24px);
+      font-size:.90rem;
+      line-height:1.65;
+    }
+    #badania .research-heading{
+      font-size:1.14rem;
+      line-height:1.35;
+      margin:0 0 12px;
+      border-inline-start:2px solid var(--accent);
+      padding-inline-start:12px;
+    }
+    #badania .research-intro a{color:var(--accent);text-underline-offset:.15em}
+    #badania .research-intro blockquote{border-inline-start:2px solid var(--accent);padding-inline-start:16px;margin-inline:0}
+
+    /* Jednorazowe wejście panelu po aktywowaniu; akapity „O mnie” osobno. */
+    @keyframes section-text-enter{
       from{opacity:0;transform:translateY(8px)}
       to{opacity:1;transform:translateY(0)}
     }
-    #badania.active .research-intro > *{
-      animation:about-text-enter .4s cubic-bezier(.2,.7,.2,1) both;
+    .panel.active:not(#badania){
+      animation:section-text-enter 300ms cubic-bezier(.2,.7,.2,1) both;
     }
-    #badania.active .research-intro > :nth-child(2){animation-delay:55ms}
-    #badania.active .research-intro > :nth-child(3){animation-delay:110ms}
-    #badania.active .research-intro > :nth-child(4){animation-delay:165ms}
-    #badania.active .research-intro > :nth-child(5){animation-delay:220ms}
-    #badania.active .research-intro > :nth-child(6){animation-delay:275ms}
+    #badania.active .research-intro > *{
+      animation:section-text-enter 300ms cubic-bezier(.2,.7,.2,1) both;
+    }
+    #badania.active .research-intro > :nth-child(2){animation-delay:40ms}
+    #badania.active .research-intro > :nth-child(3){animation-delay:80ms}
+    #badania.active .research-intro > :nth-child(4){animation-delay:120ms}
+    #badania.active .research-intro > :nth-child(5){animation-delay:160ms}
+    #badania.active .research-intro > :nth-child(6){animation-delay:200ms}
     @media(prefers-reduced-motion:reduce){
+      .panel.active:not(#badania),
       #badania.active .research-intro > *{animation:none}
     }
 
