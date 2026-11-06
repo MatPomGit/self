@@ -40,6 +40,7 @@ jobs:
         run: |
           node --check docs/assets/js/site-i18n.js
           node --check docs/assets/js/publication-utils.js
+          node --check tests/test_materials_layout.js
           node tests/test_language.js
           node tests/test_publication_utils.js
           node tests/test_materials_view.js
