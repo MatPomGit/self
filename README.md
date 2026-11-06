@@ -22,8 +22,8 @@ pełna lista pozostaje dostępna. Pozostałe strony przedmiotów znajdują się 
 
 Opis w sekcji „Badania” jest przechowywany w jednym pliku:
 [`docs/data/about.json`](docs/data/about.json). Obie wersje językowe
-(`pl` i `en`) zawierają po pięć akapitów wprowadzenia (`intro`),
-dwa akapity o pracy badawczej (`work`) oraz zakończenie (`summary`).
+(`pl` i `en`) zawierają tytuł (`title`) oraz pełny,
+dziesięcioakapitowy opis (`paragraphs`) zachowujący kolejność narracji.
 Strona ładuje tę treść automatycznie, bez powielania tekstu w
 `index.html` lub w słowniku tłumaczeń. Edycja opisu wymaga zmiany
 wyłącznie tego pliku. Ładowanie i obsługę błędów sprawdza
