@@ -83,11 +83,11 @@
     'Wiele sposobów widzenia': 'Many ways of seeing',
     'Świat, który tworzy mózg': 'The world our brains create',
     'Nad czym pracuję': 'What I work on',
-    'Największą satysfakcję daje mi chwila, gdy z ciekawości rodzi się pomysł, a z pomysłu coś, co pomaga nam lepiej rozumieć świat lub siebie nawzajem.':
-      'My greatest satisfaction comes when curiosity becomes an idea, and that idea becomes something that helps us understand the world or each other a little better.',
     'Największą satysfakcję daje mi': 'What I enjoy most is',
     'chwila, gdy z ciekawości rodzi się pomysł, a z pomysłu coś, co pomaga nam lepiej rozumieć świat lub siebie nawzajem.':
       'the moment curiosity turns into an idea, and that idea into something that helps us understand the world or one another a little better.',
+    'Wczytywanie opisu…': 'Loading biography…',
+    'Nie udało się wczytać opisu.': 'Could not load the biography.',
     'Wczytywanie projektów…': 'Loading projects…',
     'Wczytywanie publikacji…': 'Loading publications…',
     'Źródło:': 'Source:',
@@ -130,16 +130,6 @@
     'tel. +48 17 865 14 81': 'phone +48 17 865 14 81',
   };
 
-  const researchParagraphs = [
-    'I have always been curious about the world itself: what happens right beside us and what unfolds far beyond Earth. When I think about the sheer scale of the universe, I am amazed that humans, so small in comparison, can even attempt to understand it. Astronomy keeps me humble, but it also makes me more curious.',
-    'Building models of the world has always been a passion of mine. The same thing can be described in many ways; each reveals something, while simplifying or leaving something else out. I am not looking for one perfect picture of reality. I enjoy seeing what changes when we look from a different angle.',
-    'I am also curious about how machines might perceive reality. Without our senses or experiences, what kind of picture of their surroundings would they build? What might they notice that we overlook, and what would remain invisible to them?',
-    'And then I come back to people. Our brains do not show us the world directly; they build their own model from sensations, memories and expectations. Why can two people experience the same event so differently? How does their understanding of the world shape their choices, emotions and relationships?',
-    'These questions are at the heart of my research. I bring experiments, programming and engineering together to explore how different pictures of the world take shape, and how machines might build their own. I am an Assistant Professor at Rzeszów University of Technology and earned my doctorate at the Military University of Technology.',
-    'I started with optoelectronics, imaging and measurement systems. Over time, artificial intelligence became a natural next step: analysing images, combining sensor data and designing systems that can make sense of their surroundings. This led me to humanoid robots, autonomous systems, and virtual and augmented reality.',
-    'But understanding how people see the world matters just as much to me. That is why I also explore neuroscience and psychology, studying attention, emotions and behaviour through eye tracking, EEG and experiments. I am especially curious about where these two perspectives meet: people and intelligent machines. What makes us trust one another? How can technology respond better to our needs?',
-  ];
-
   // HTML &nbsp; becomes U+00A0 in text nodes. Match translations independently
   // of typographic whitespace, without changing the canonical Polish markup.
   function translate(text) {
@@ -160,12 +150,6 @@
       });
     });
     if (language !== 'en') return;
-
-    const paragraphs = document.querySelectorAll('#badania .research-intro p, #badania .research-work p');
-    if (paragraphs.length !== researchParagraphs.length) {
-      throw new Error('Unexpected number of research paragraphs');
-    }
-    paragraphs.forEach((node, index) => { node.textContent = researchParagraphs[index]; });
 
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     while (walker.nextNode()) {
