@@ -82,17 +82,17 @@ assert.deepEqual(Object.keys(about).sort(), ['en','pl']);
 assert.equal(about.pl.title, 'O mnie');
 assert.equal(about.en.title, 'About me');
 for (const language of ['pl','en']) {
-  assert.equal(about[language].paragraphs.length, 7, 'Seven concise paragraphs in ' + language);
+  assert.equal(about[language].paragraphs.length, 5, 'Five concise paragraphs in ' + language);
   assert.ok(about[language].paragraphs.every(text => text.length > 80));
 }
 assert.match(about.pl.paragraphs[0], /^Gdy ktoś pyta mnie, czym się zajmuję/);
 assert.match(about.pl.paragraphs[2], /ludzki mózg/);
-assert.match(about.pl.paragraphs[3], /kamera, czujnik termiczny czy lidar/i);
-assert.match(about.pl.paragraphs[4], /Instytucie Optoelektroniki/);
-assert.match(about.pl.paragraphs[6], /^Najwięcej uczę się podczas współpracy/);
+assert.match(about.pl.paragraphs[1], /kamera, czujnik termiczny czy lidar/i);
+assert.match(about.pl.paragraphs[3], /Instytucie Optoelektroniki/);
+assert.match(about.pl.paragraphs[4], /Największą satysfakcję daje mi/);
 assert.match(about.en.paragraphs[0], /^When someone asks me what I do/);
-assert.match(about.en.paragraphs[4], /Institute of Optoelectronics/);
-assert.match(about.en.paragraphs[6], /^I learn the most when working/);
+assert.match(about.en.paragraphs[3], /Institute of Optoelectronics/);
+assert.match(about.en.paragraphs[4], /What gives me the greatest satisfaction/);
 assert.ok(html.includes('<div class="research-intro" id="research-intro"></div>'));
 assert.ok(!html.includes('id="research-work"'));
 assert.ok(!html.includes('id="research-summary"'));
