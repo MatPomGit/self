@@ -411,19 +411,10 @@
 
         <article class="panel" id="badania" role="region" aria-label="Badania">
           <!-- Tytuł sekcji wyświetla wspólny nagłówek strony. -->
-          <div class="research-intro">
-            <p>Zawsze ciekawił mnie świat sam w sobie: to, co dzieje się tuż obok nas, i to, co rozgrywa się daleko poza Ziemią. Kiedy myślę o ogromie Wszechświata, zadziwia mnie, że człowiek, tak niewielki wobec niego, potrafi w ogóle próbować go zrozumieć.</p>
-            <p>Tworzenie modeli świata od zawsze było moją pasją. Tę samą rzecz można opisać na wiele sposobów; każdy coś ujawnia, a coś innego upraszcza lub pomija. Nie szukam jednego idealnego obrazu rzeczywistości. Lubię sprawdzać, co zmienia się, gdy spojrzymy z innej strony.</p>
-            <p>Ciekawi mnie również, jak rzeczywistość mogą postrzegać maszyny. Jeśli nie mają naszych zmysłów ani doświadczeń, to jaki obraz otoczenia zbudują? Co zauważą, czego my nie widzimy, i co dla nich pozostanie niewidoczne?</p>
-            <p>Mózg również nie pokazuje nam świata wprost, lecz tworzy własny jego model z doznań, wspomnień i oczekiwań. Dlaczego dwie osoby potrafią tak inaczej przeżyć to samo zdarzenie? Jak ich sposób rozumienia świata wpływa na decyzje, emocje i relacje?</p>
-            <p>Z tych pytań wyrasta moja praca badawcza. Łączę w niej eksperymenty, programowanie i inżynierię, by sprawdzać, jak powstają różne obrazy świata i jak mogą je budować maszyny. Jestem adiunktem Politechniki Rzeszowskiej, a doktorat uzyskałem w Wojskowej Akademii Technicznej.</p>
-          </div>
-          <div class="research-work">
-            <h3 class="research-heading">Nad czym pracuję</h3>
-            <p>Zaczynałem od optoelektroniki, obrazowania i systemów pomiarowych. Z czasem naturalnym krokiem stała się dla mnie sztuczna inteligencja: analiza obrazów, łączenie danych z czujników i projektowanie systemów, które potrafią odnajdywać się w otoczeniu. Stąd moje zainteresowanie robotami humanoidalnymi, systemami autonomicznymi oraz rzeczywistością wirtualną i rozszerzoną.</p>
-            <p>Ale równie ważne jest dla mnie to, jak świat widzi człowiek. Dlatego zajmuję się także neuronauką i psychologią, badam uwagę, emocje i zachowanie, korzystając m.in. z okulografii, EEG i eksperymentów. Szczególnie ciekawi mnie spotkanie tych dwóch perspektyw: człowieka i inteligentnej maszyny. Co sprawia, że sobie ufamy? Jak technologia może lepiej odpowiadać na nasze potrzeby?</p>
-          </div>
-          <p class="research-summary">Największą satysfakcję daje mi chwila, gdy z ciekawości rodzi się pomysł, a z pomysłu coś, co pomaga nam lepiej rozumieć świat lub siebie nawzajem.</p>
+          <p class="data-status" id="research-status" role="status">Wczytywanie opisu…</p>
+          <div class="research-intro" id="research-intro"></div>
+          <div class="research-work" id="research-work"></div>
+          <p class="research-summary" id="research-summary"></p>
         </article>
 
         <article class="panel" id="projekty" role="region" aria-label="Projekty">
@@ -614,6 +605,33 @@
       if(value!==undefined)element.textContent=value;
       return element;
     };
+    async function loadAbout(){
+      const status=document.getElementById('research-status');
+      try{
+        const response=await fetch('docs/data/about.json');
+        if(!response.ok)throw new Error('HTTP '+response.status);
+        const data=await response.json();
+        const description=data[i18n.language];
+        if(!description || !Array.isArray(description.intro) || !Array.isArray(description.work)
+            || description.intro.length!==5 || description.work.length!==2
+            || [...description.intro,...description.work,description.summary].some(
+              text=>typeof text!=='string' || !text.trim()
+            ))throw new Error('Invalid biography data');
+        const intro=document.createDocumentFragment();
+        description.intro.forEach(text=>intro.append(makeElement('p','',text)));
+        const work=document.createDocumentFragment();
+        work.append(makeElement('h3','research-heading',tr('Nad czym pracuję')));
+        description.work.forEach(text=>work.append(makeElement('p','',text)));
+        document.getElementById('research-intro').replaceChildren(intro);
+        document.getElementById('research-work').replaceChildren(work);
+        document.getElementById('research-summary').textContent=description.summary;
+        status.hidden=true;
+      }catch(error){
+        status.textContent=tr('Nie udało się wczytać opisu.');
+        console.error('Błąd wczytywania docs/data/about.json',error);
+      }
+    }
+    loadAbout();
     async function loadData(path,listId,statusId,render){
       const status=document.getElementById(statusId);
       try{
