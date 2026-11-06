@@ -238,8 +238,23 @@
       .intro>div:first-child{transform:translateY(-54px)}
     }
     /* Mniejsze liternictwo tylko w widoku badań. */
-    #badania .research-intro{font-size:.91rem;line-height:1.57}
+    #badania .research-intro{font-size:.90rem;line-height:1.57}
     #badania .research-heading{font-size:1.14rem;line-height:1.35;margin:0 0 12px}
+    @keyframes about-text-enter{
+      from{opacity:0;transform:translateY(8px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+    #badania.active .research-intro > *{
+      animation:about-text-enter .4s cubic-bezier(.2,.7,.2,1) both;
+    }
+    #badania.active .research-intro > :nth-child(2){animation-delay:55ms}
+    #badania.active .research-intro > :nth-child(3){animation-delay:110ms}
+    #badania.active .research-intro > :nth-child(4){animation-delay:165ms}
+    #badania.active .research-intro > :nth-child(5){animation-delay:220ms}
+    #badania.active .research-intro > :nth-child(6){animation-delay:275ms}
+    @media(prefers-reduced-motion:reduce){
+      #badania.active .research-intro > *{animation:none}
+    }
 
     /* Kompaktowe, dekoracyjne ikony linków z czytelnymi etykietami tekstowymi */
     .contact-links .link{display:inline-flex;align-items:center;gap:7px}
