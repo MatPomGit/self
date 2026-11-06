@@ -151,12 +151,12 @@ class ThemeTests(unittest.TestCase):
             "Gdy ktoś pyta mnie, czym się zajmuję"))
         self.assertIn("Wszechświata", paragraphs[1])
         self.assertIn("ludzki mózg", paragraphs[2])
-        self.assertIn("inteligentnych maszyn", paragraphs[3])
+        self.assertIn("czujnik termiczny czy lidar", paragraphs[3])
         self.assertIn("Instytucie Optoelektroniki Wojskowej Akademii Technicznej",
                       paragraphs[4])
         self.assertIn("Politechniki Rzeszowskiej", paragraphs[5])
         self.assertIn("okulografię, EEG", paragraphs[5])
-        self.assertIn("Największą satysfakcję", paragraphs[6])
+        self.assertIn("Najwięcej uczę się podczas współpracy", paragraphs[6])
 
     def test_research_biography_renders_without_embedded_prose(self):
         panel = re.search(
