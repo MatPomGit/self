@@ -1,5 +1,5 @@
-/* Bilingual labels for the original, wheel-based static homepage.
- * The Polish HTML remains the canonical markup and works without this file.
+/* Bilingual UI labels for the wheel homepage.
+ * The research biography is loaded separately from docs/data/about.json.
  */
 (() => {
   'use strict';
