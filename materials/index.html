@@ -51,7 +51,7 @@ a:hover{text-decoration:underline}
 .materials-list .material-formats{display:inline;font-size:.56rem;line-height:1.15;white-space:normal}
 .materials-list .material-format--standalone{font-size:.56rem;line-height:1.15;white-space:nowrap}
 .materials-list li.materials-row--variants{display:flex;align-items:baseline;min-width:0;overflow:hidden}
-.materials-list li.materials-row--variants>a{display:block;flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.materials-list li.materials-row--variants>a{display:block;flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .materials-list li.materials-row--variants .material-formats{display:inline-flex;flex:0 0 auto;white-space:nowrap}
 .materials-list .material-formats a{display:inline;padding:0;font-size:inherit;line-height:inherit;white-space:nowrap}
 .materials-list .material-formats a::before{content:" · ";white-space:pre;color:var(--muted)}
@@ -77,11 +77,9 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 .materials-group--flow .materials-subgroup{break-inside:avoid}
 .materials-columns{display:block}
 .materials-subgroup{min-width:0;padding:2px 2px 2px;background:transparent;border:1px solid var(--subgroup-line);border-radius:4px;margin-top:2px}
-.materials-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,var(--material-min,7.2rem)),var(--material-min,7.2rem)));column-gap:4px;row-gap:0;align-items:start}
-.materials-list--descriptive{--material-min:10.4rem}
-:root[data-materials-view="all"] .materials-list--dense{--material-min:7.5rem}
-.materials-list--dense{--material-min:5.5rem;line-height:1.05}
-.materials-list li{min-width:0;break-inside:avoid}
+.materials-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;column-gap:4px;row-gap:0;align-items:baseline}
+.materials-list--dense{line-height:1.05}
+.materials-list li{flex:0 1 auto;min-width:0;max-width:100%;break-inside:avoid}
 .materials-list a{display:block;min-width:0;max-width:100%;padding:1px 1px;border-radius:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.12;font-size:.7rem}
 .materials-list a:hover{background:var(--hover)}
 /* Niezależne kolumny nie tworzą pustych komórek po kartach o różnej wysokości.
