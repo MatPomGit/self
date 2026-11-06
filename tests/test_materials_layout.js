@@ -8,7 +8,7 @@ assert.ok(style, 'Materials page must include its stylesheet');
 // Look up individual CSS declarations so spacing and property order can change.
 function rules(selector) {
   const escaped = selector.replace(/[^a-zA-Z0-9-]/g, character => '\\' + character);
-  const pattern = new RegExp(escaped + '\\s*\\{([^{}]*)\\}', 'g');
+  const pattern = new RegExp('(?:^|\\n)\\s*' + escaped + '\\s*\\{([^{}]*)\\}', 'g');
   return [...style.matchAll(pattern)].map(([, body]) =>
     Object.fromEntries(body.split(';').map(part => part.trim()).filter(Boolean).map(entry => {
       const separator = entry.indexOf(':');
@@ -25,7 +25,7 @@ function one(selector) {
 function cssLength(value, unit, label) {
   // CSS allows zero without units; it is equivalent to 0px or 0rem.
   if (value === '0') return 0;
-  const match = new RegExp('^(\\d+(?:\\.\\d+)?)' + unit + '$').exec(value || '');
+  const match = new RegExp('^((?:\\d+(?:\\.\\d*)?|\\.\\d+))' + unit + '$').exec(value || '');
   assert.ok(match, label + ': expected ' + unit + ', received ' + value);
   return Number(match[1]);
 }
@@ -66,7 +66,8 @@ assert.ok(fixedTracks.test(tracks), 'File grid must use fixed-width auto-fill tr
 assert.ok(cssLength(list['column-gap'], 'px', 'Link column gap') <= 6);
 assert.ok(cssLength(list['row-gap'], 'px', 'Link row gap') <= 2);
 
-const links = one('.materials-list a');
+const links = rules('.materials-list a')[0];
+assert.ok(links, 'Main link CSS rule missing');
 assert.equal(links['white-space'], 'normal', 'Long filenames must wrap');
 assert.ok(['break-word', 'anywhere'].includes(links['overflow-wrap']), 'Long filenames must not overflow');
 assert.ok(cssLength(links['font-size'], 'rem', 'File label size') <= 0.75);
