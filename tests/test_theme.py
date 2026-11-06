@@ -126,8 +126,21 @@ class ThemeTests(unittest.TestCase):
         self.assertIn('max-height:690px', HTML)
 
     def test_research_typography(self):
-        self.assertIn('#badania .research-intro{font-size:.91rem', HTML)
+        self.assertIn('#badania .research-intro{font-size:.90rem', HTML)
         self.assertIn('#badania .research-heading{font-size:1.14rem', HTML)
+
+    def test_research_entrance_animation_is_scoped_and_accessible(self):
+        """Akapity animują się po aktywacji panelu, bez wymuszania ruchu."""
+        self.assertIn('@keyframes about-text-enter{', HTML)
+        self.assertIn('from{opacity:0;transform:translateY(8px)}', HTML)
+        self.assertIn('to{opacity:1;transform:translateY(0)}', HTML)
+        self.assertIn('#badania.active .research-intro > *{', HTML)
+        self.assertIn('animation:about-text-enter .4s', HTML)
+        for index in range(2, 7):
+            self.assertIn(f'#badania.active .research-intro > :nth-child({index})', HTML)
+        self.assertIn('@media(prefers-reduced-motion:reduce){', HTML)
+        self.assertIn('#badania.active .research-intro > *{animation:none}', HTML)
+        self.assertIn("panels.forEach(p=>p.classList.toggle('active',p.id===id))", HTML)
 
     def test_research_biography_is_complete(self):
         """Opis zachowuje spójną narrację bez powtórzeń i skraca oryginał."""
