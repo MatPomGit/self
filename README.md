@@ -18,6 +18,17 @@ trzy kliknięcia przycisku PDF/Wszystkie przełączają pełną listę. Bez Java
 pełna lista pozostaje dostępna. Pozostałe strony przedmiotów znajdują się w
 `materials/<przedmiot>/index.html`;
 
+## Opis osoby i badań
+
+Opis w sekcji „Badania” jest przechowywany w jednym pliku:
+[`docs/data/about.json`](docs/data/about.json). Obie wersje językowe
+(`pl` i `en`) zawierają po pięć akapitów wprowadzenia (`intro`),
+dwa akapity o pracy badawczej (`work`) oraz zakończenie (`summary`).
+Strona ładuje tę treść automatycznie, bez powielania tekstu w
+`index.html` lub w słowniku tłumaczeń. Edycja opisu wymaga zmiany
+wyłącznie tego pliku. Ładowanie i obsługę błędów sprawdza
+`node tests/test_about.js`.
+
 ## Wersje językowe strony głównej
 
 Przełącznik `PL / EN` znajduje się w prawym górnym rogu oryginalnej

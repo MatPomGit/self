@@ -1,0 +1,30 @@
+{
+  "pl": {
+    "intro": [
+      "Zawsze ciekawił mnie świat sam w sobie: to, co dzieje się tuż obok nas, i to, co rozgrywa się daleko poza Ziemią. Kiedy myślę o ogromie Wszechświata, zadziwia mnie, że człowiek, tak niewielki wobec niego, potrafi w ogóle próbować go zrozumieć.",
+      "Tworzenie modeli świata od zawsze było moją pasją. Tę samą rzecz można opisać na wiele sposobów; każdy coś ujawnia, a coś innego upraszcza lub pomija. Nie szukam jednego idealnego obrazu rzeczywistości. Lubię sprawdzać, co zmienia się, gdy spojrzymy z innej strony.",
+      "Ciekawi mnie również, jak rzeczywistość mogą postrzegać maszyny. Jeśli nie mają naszych zmysłów ani doświadczeń, to jaki obraz otoczenia zbudują? Co zauważą, czego my nie widzimy, i co dla nich pozostanie niewidoczne?",
+      "Mózg również nie pokazuje nam świata wprost, lecz tworzy własny jego model z doznań, wspomnień i oczekiwań. Dlaczego dwie osoby potrafią tak inaczej przeżyć to samo zdarzenie? Jak ich sposób rozumienia świata wpływa na decyzje, emocje i relacje?",
+      "Z tych pytań wyrasta moja praca badawcza. Łączę w niej eksperymenty, programowanie i inżynierię, by sprawdzać, jak powstają różne obrazy świata i jak mogą je budować maszyny. Jestem adiunktem Politechniki Rzeszowskiej, a doktorat uzyskałem w Wojskowej Akademii Technicznej."
+    ],
+    "work": [
+      "Zaczynałem od optoelektroniki, obrazowania i systemów pomiarowych. Z czasem naturalnym krokiem stała się dla mnie sztuczna inteligencja: analiza obrazów, łączenie danych z czujników i projektowanie systemów, które potrafią odnajdywać się w otoczeniu. Stąd moje zainteresowanie robotami humanoidalnymi, systemami autonomicznymi oraz rzeczywistością wirtualną i rozszerzoną.",
+      "Ale równie ważne jest dla mnie to, jak świat widzi człowiek. Dlatego zajmuję się także neuronauką i psychologią, badam uwagę, emocje i zachowanie, korzystając m.in. z okulografii, EEG i eksperymentów. Szczególnie ciekawi mnie spotkanie tych dwóch perspektyw: człowieka i inteligentnej maszyny. Co sprawia, że sobie ufamy? Jak technologia może lepiej odpowiadać na nasze potrzeby?"
+    ],
+    "summary": "Największą satysfakcję daje mi chwila, gdy z ciekawości rodzi się pomysł, a z pomysłu coś, co pomaga nam lepiej rozumieć świat lub siebie nawzajem."
+  },
+  "en": {
+    "intro": [
+      "I have always been curious about the world itself: what happens right beside us and what unfolds far beyond Earth. When I think about the sheer scale of the universe, I am amazed that humans, so small in comparison, can even attempt to understand it. Astronomy keeps me humble, but it also makes me more curious.",
+      "Building models of the world has always been a passion of mine. The same thing can be described in many ways; each reveals something, while simplifying or leaving something else out. I am not looking for one perfect picture of reality. I enjoy seeing what changes when we look from a different angle.",
+      "I am also curious about how machines might perceive reality. Without our senses or experiences, what kind of picture of their surroundings would they build? What might they notice that we overlook, and what would remain invisible to them?",
+      "And then I come back to people. Our brains do not show us the world directly; they build their own model from sensations, memories and expectations. Why can two people experience the same event so differently? How does their understanding of the world shape their choices, emotions and relationships?",
+      "These questions are at the heart of my research. I bring experiments, programming and engineering together to explore how different pictures of the world take shape, and how machines might build their own. I am an Assistant Professor at Rzeszów University of Technology and earned my doctorate at the Military University of Technology."
+    ],
+    "work": [
+      "I started with optoelectronics, imaging and measurement systems. Over time, artificial intelligence became a natural next step: analysing images, combining sensor data and designing systems that can make sense of their surroundings. This led me to humanoid robots, autonomous systems, and virtual and augmented reality.",
+      "But understanding how people see the world matters just as much to me. That is why I also explore neuroscience and psychology, studying attention, emotions and behaviour through eye tracking, EEG and experiments. I am especially curious about where these two perspectives meet: people and intelligent machines. What makes us trust one another? How can technology respond better to our needs?"
+    ],
+    "summary": "My greatest satisfaction comes when curiosity becomes an idea, and that idea becomes something that helps us understand the world or each other a little better."
+  }
+}
