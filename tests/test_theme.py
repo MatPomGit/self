@@ -130,7 +130,7 @@ class ThemeTests(unittest.TestCase):
         self.assertIn('#badania .research-heading{font-size:1.14rem', HTML)
 
     def test_research_biography_is_complete(self):
-        """Treść opisu jest przechowywana wyłącznie w zewnętrznym pliku danych."""
+        """Opis zachowuje spójną narrację bez powtórzeń i skraca oryginał."""
         import json
         data = json.loads((ROOT / "docs/data/about.json").read_text(encoding="utf-8"))
         self.assertEqual(set(data), {"pl", "en"})
@@ -139,22 +139,24 @@ class ThemeTests(unittest.TestCase):
         for language in ("pl", "en"):
             with self.subTest(language=language):
                 paragraphs = data[language]["paragraphs"]
-                self.assertEqual(len(paragraphs), 10)
-                self.assertTrue(all(isinstance(paragraph, str) and paragraph.strip()
-                                    for paragraph in paragraphs))
-                self.assertGreater(len(" ".join(paragraphs).split()), 650)
+                self.assertEqual(len(paragraphs), 7)
+                self.assertTrue(all(isinstance(p, str) and len(p.strip()) > 80
+                                    for p in paragraphs))
+                words = len(" ".join(paragraphs).split())
+                self.assertGreater(words, 300)
+                self.assertLess(words, 550)
 
         paragraphs = data["pl"]["paragraphs"]
         self.assertTrue(paragraphs[0].startswith(
             "Gdy ktoś pyta mnie, czym się zajmuję"))
-        self.assertTrue(paragraphs[-1].startswith(
-            "Być może właśnie dlatego tak trudno mi jednoznacznie"))
+        self.assertIn("Wszechświata", paragraphs[1])
+        self.assertIn("ludzki mózg", paragraphs[2])
+        self.assertIn("inteligentnych maszyn", paragraphs[3])
         self.assertIn("Instytucie Optoelektroniki Wojskowej Akademii Technicznej",
-                      paragraphs[5])
-        self.assertIn("okulografii, elektroencefalografii (EEG)",
-                      paragraphs[7])
-        self.assertIn("swobodną wymianę myśli", paragraphs[8])
-        self.assertIn("Największą satysfakcję daje mi moment", paragraphs[9])
+                      paragraphs[4])
+        self.assertIn("Politechniki Rzeszowskiej", paragraphs[5])
+        self.assertIn("okulografię, EEG", paragraphs[5])
+        self.assertIn("Największą satysfakcję", paragraphs[6])
 
     def test_research_biography_renders_without_embedded_prose(self):
         panel = re.search(
