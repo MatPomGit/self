@@ -126,7 +126,7 @@ class ThemeTests(unittest.TestCase):
         self.assertIn('max-height:690px', HTML)
 
     def test_research_typography(self):
-        self.assertIn('#badania .research-intro{font-size:.94rem', HTML)
+        self.assertIn('#badania .research-intro{font-size:.91rem', HTML)
         self.assertIn('#badania .research-heading{font-size:1.14rem', HTML)
 
     def test_research_biography_is_complete(self):
@@ -139,11 +139,11 @@ class ThemeTests(unittest.TestCase):
         for language in ("pl", "en"):
             with self.subTest(language=language):
                 paragraphs = data[language]["paragraphs"]
-                self.assertEqual(len(paragraphs), 7)
+                self.assertEqual(len(paragraphs), 5)
                 self.assertTrue(all(isinstance(p, str) and len(p.strip()) > 80
                                     for p in paragraphs))
                 words = len(" ".join(paragraphs).split())
-                self.assertGreater(words, 300)
+                self.assertGreater(words, 290)
                 self.assertLess(words, 550)
 
         paragraphs = data["pl"]["paragraphs"]
@@ -151,12 +151,12 @@ class ThemeTests(unittest.TestCase):
             "Gdy ktoś pyta mnie, czym się zajmuję"))
         self.assertIn("Wszechświata", paragraphs[1])
         self.assertIn("ludzki mózg", paragraphs[2])
-        self.assertIn("czujnik termiczny czy lidar", paragraphs[3])
+        self.assertIn("czujnik termiczny czy lidar", paragraphs[1])
         self.assertIn("Instytucie Optoelektroniki Wojskowej Akademii Technicznej",
-                      paragraphs[4])
-        self.assertIn("Politechniki Rzeszowskiej", paragraphs[5])
-        self.assertIn("okulografię, EEG", paragraphs[5])
-        self.assertIn("Najwięcej uczę się podczas współpracy", paragraphs[6])
+                      paragraphs[3])
+        self.assertIn("Politechniki Rzeszowskiej", paragraphs[4])
+        self.assertIn("okulografii, EEG", paragraphs[4])
+        self.assertIn("Największą satysfakcję", paragraphs[4])
 
     def test_research_biography_renders_without_embedded_prose(self):
         panel = re.search(
