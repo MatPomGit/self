@@ -129,60 +129,49 @@ class ThemeTests(unittest.TestCase):
         self.assertIn('#badania .research-intro{font-size:.94rem', HTML)
         self.assertIn('#badania .research-heading{font-size:1.14rem', HTML)
 
-    def test_research_story_is_short_and_human(self):
-        """Tekst opisu przechowywany jest wyłącznie w zewnętrznych danych."""
+    def test_research_biography_is_complete(self):
+        """Treść opisu jest przechowywana wyłącznie w zewnętrznym pliku danych."""
         import json
         data = json.loads((ROOT / "docs/data/about.json").read_text(encoding="utf-8"))
         self.assertEqual(set(data), {"pl", "en"})
+        self.assertEqual(data["pl"]["title"], "O mnie")
+        self.assertEqual(data["en"]["title"], "About me")
         for language in ("pl", "en"):
             with self.subTest(language=language):
-                story = data[language]
-                self.assertEqual(len(story["intro"]), 5)
-                self.assertEqual(len(story["work"]), 2)
-                self.assertTrue(story["summary"].strip())
-                self.assertTrue(all(paragraph.strip() for paragraph in
-                                    story["intro"] + story["work"]))
-        plain = " ".join(data["pl"]["intro"] + data["pl"]["work"] + [data["pl"]["summary"]])
-        self.assertLessEqual(len(plain.split()), 420)
-        for phrase in (
-            'Zawsze ciekawił mnie świat sam w sobie', 'Wszechświata',
-            'Tworzenie modeli świata', 'maszyny', 'Mózg',
-            'doznań, wspomnień i oczekiwań',
-            'Politechniki Rzeszowskiej', 'Wojskowej Akademii Technicznej',
-        ):
-            with self.subTest(phrase=phrase):
-                self.assertIn(phrase, plain)
-        self.assertLess(plain.index('Wszechświata'), plain.index('Tworzenie modeli świata'))
-        self.assertLess(plain.index('Tworzenie modeli świata'), plain.index('Mózg również'))
-        self.assertNotIn('<a ', plain)
+                paragraphs = data[language]["paragraphs"]
+                self.assertEqual(len(paragraphs), 10)
+                self.assertTrue(all(isinstance(paragraph, str) and paragraph.strip()
+                                    for paragraph in paragraphs))
+                self.assertGreater(len(" ".join(paragraphs).split()), 650)
 
-    def test_research_work_flows_into_single_closing_thought(self):
-        import json
-        panel = re.search(r'<article class="panel" id="badania"[^>]*>([\s\S]*?)</article>', HTML)
+        paragraphs = data["pl"]["paragraphs"]
+        self.assertTrue(paragraphs[0].startswith(
+            "Gdy ktoś pyta mnie, czym się zajmuję"))
+        self.assertTrue(paragraphs[-1].startswith(
+            "Być może właśnie dlatego tak trudno mi jednoznacznie"))
+        self.assertIn("Instytucie Optoelektroniki Wojskowej Akademii Technicznej",
+                      paragraphs[5])
+        self.assertIn("okulografii, elektroencefalografii (EEG)",
+                      paragraphs[7])
+        self.assertIn("swobodną wymianę myśli", paragraphs[8])
+        self.assertIn("Największą satysfakcję daje mi moment", paragraphs[9])
+
+    def test_research_biography_renders_without_embedded_prose(self):
+        panel = re.search(
+            r'<article class="panel" id="badania"[^>]*>([\s\S]*?)</article>',
+            HTML,
+        )
         self.assertIsNotNone(panel)
         content = panel.group(1)
-        intro = content.index('id="research-intro"')
-        work = content.index('id="research-work"')
-        conclusion = content.index('id="research-summary"')
-        self.assertLess(intro, work)
-        self.assertLess(work, conclusion)
         self.assertIn('id="research-status"', content)
+        self.assertIn('id="research-intro"', content)
+        self.assertNotIn('id="research-work"', content)
+        self.assertNotIn('id="research-summary"', content)
         self.assertIn("fetch('docs/data/about.json')", HTML)
-        self.assertNotIn('Z tych pytań wyrasta moja praca badawcza', content)
-        self.assertEqual(content.count('class="research-summary"'), 1)
+        self.assertIn("makeElement('h3','research-heading',description.title)", HTML)
+        self.assertIn("description.paragraphs.forEach", HTML)
+        self.assertNotIn('Gdy ktoś pyta mnie, czym się zajmuję', HTML)
         self.assertNotIn('<a ', content)
-
-        data = json.loads((ROOT / "docs/data/about.json").read_text(encoding="utf-8"))
-        story = data["pl"]
-        self.assertIn('Z tych pytań wyrasta moja praca badawcza', story["intro"][-1])
-        self.assertIn('Największą satysfakcję daje mi', story["summary"])
-        work_text = " ".join(story["work"])
-        for phrase in ('optoelektroniki', 'sztuczna inteligencja',
-                       'robotami humanoidalnymi', 'rzeczywistością wirtualną',
-                       'neuronauką i psychologią', 'okulografii, EEG'):
-            with self.subTest(phrase=phrase):
-                self.assertIn(phrase, work_text)
-        self.assertLessEqual(len(work_text.split()), 150)
 
     def test_contact_links_have_icons(self):
         import re
