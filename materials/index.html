@@ -70,16 +70,16 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 :root[data-theme="dark"] .theme-sun{display:block}
 :root[data-theme="dark"] .theme-moon{display:none}
 .materials-grid{columns:5 16rem;column-gap:7px;margin-top:6px}
-.materials-group{display:inline-block;vertical-align:top;width:100%;min-width:0;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--surface);margin:0 0 7px;break-inside:avoid;page-break-inside:avoid}
+.materials-group{display:block;width:100%;min-width:0;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--surface);margin:0 0 7px;break-inside:auto;page-break-inside:auto;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 .materials-group--wide{grid-column:auto}
-.materials-group--flow{display:inline-block;break-inside:avoid}
-.materials-group--flow>h4{break-after:avoid}
-.materials-group--flow .materials-subgroup{break-inside:avoid}
+.materials-group--flow{display:block;break-inside:auto}
+.materials-group>h4,.materials-subgroup>h5{break-after:avoid}
+.materials-group--flow .materials-subgroup{break-inside:auto}
 .materials-columns{display:flex;flex-wrap:wrap;align-items:flex-start;gap:3px}
 .materials-columns>.materials-subgroup{flex:1 1 8rem;max-width:100%}
 /* Długie moduły korzystają z całej szerokości karty; krótsze mogą sąsiadować. */
 .materials-columns>.materials-subgroup:has(.materials-list li:nth-child(n+9):not([hidden])){flex-basis:100%}
-.materials-subgroup{min-width:0;padding:2px 2px 2px;background:transparent;border:1px solid var(--subgroup-line);border-radius:4px;margin-top:2px}
+.materials-subgroup{min-width:0;padding:2px 2px 2px;background:transparent;border:1px solid var(--subgroup-line);border-radius:4px;margin-top:2px;break-inside:auto;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 .materials-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;column-gap:4px;row-gap:0;align-items:baseline}
 .materials-list--dense{line-height:1.05}
 .materials-list li{flex:0 1 auto;min-width:0;max-width:100%;break-inside:avoid}
@@ -461,8 +461,8 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 <div class="materials-subgroup">
 <h5>Wykłady</h5>
 <ul class="materials-list materials-list--descriptive">
-<li><a class="material-link--lecture" href="Nowoczesne-technologie-w-psychologii/E-terapia.pdf" download title="w_01 · E terapia">w_01</a></li>
-<li><a class="material-link--lecture" href="Nowoczesne-technologie-w-psychologii/intuicja_a_prbl.pdf" download title="w_02 · intuicja przeciwko prawdopodobienstwu">w_02</a></li>
+<li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/E-terapia.pdf" download title="w_01 · E terapia">w_01</a></li>
+<li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/intuicja_a_prbl.pdf" download title="w_02 · intuicja przeciwko prawdopodobienstwu">w_02</a></li>
 <li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/AI_dla_psychologow.pdf" download title="w_03 · AI dla psychologow">w_03</a></li>
 <li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/ASD12C_w_Polsce.pdf" download title="w_04 · ASD12C w Polsce">w_04</a></li>
 <li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/EEG_Arns_Conners_i_Kraemer_2013.pdf" download title="w_05 · EEG Arns Conners i Kraemer 2013">w_05</a></li>
@@ -472,8 +472,8 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 <div class="materials-subgroup">
 <h5>Wersje edytowalne</h5>
 <ul class="materials-list materials-list--descriptive">
-<li><a class="material-link--lecture" href="Nowoczesne-technologie-w-psychologii/E-terapia.pptx" download title="w_01 · E terapia">w_01</a></li>
-<li><a class="material-link--lecture" href="Nowoczesne-technologie-w-psychologii/intuicja_a_prbl.pptx" download title="w_02 · intuicja przeciwko prawdopodobienstwu">w_02</a></li>
+<li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/E-terapia.pptx" download title="w_01 · E terapia">w_01</a></li>
+<li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/intuicja_a_prbl.pptx" download title="w_02 · intuicja przeciwko prawdopodobienstwu">w_02</a></li>
 <li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/AI_dla_psychologow.pptx" download title="w_03 · AI dla psychologow">w_03</a></li>
 <li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/ASD12C_w_Polsce.pptx" download title="w_04 · ASD12C w Polsce">w_04</a></li>
 <li><a class="material-link--lecture" href="nowoczesne-technologie-w-psychologii/EEG_BIDS_Psychofizjologia_2026.pptx" download title="w_06 · EEG BIDS Psychofizjologia 2026">w_06</a></li>
