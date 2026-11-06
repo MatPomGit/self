@@ -146,6 +146,21 @@ class MaterialsTests(unittest.TestCase):
             self.assertEqual(short_title, f"w_{number}")
             self.assertTrue(full_title.startswith(short_title + " · "))
 
+        modern = re.search(
+            r"<h4>Nowoczesne technologie w psychologii</h4>(.*?)</section>",
+            html, re.S,
+        )
+        self.assertIsNotNone(modern)
+        modern_lectures = re.findall(
+            r'href="[^"]+\.pdf" download title="(w_\d{2} · [^"]+)">(w_\d{2})</a>',
+            modern.group(1),
+        )
+        self.assertEqual(len(modern_lectures), 7)
+        self.assertEqual(
+            [short for _, short in modern_lectures],
+            [f"w_{n:02d}" for n in range(1, 8)],
+        )
+
     def test_pptx_links_are_dark_orange_in_both_themes(self):
         html = (MATERIALS / "index.html").read_text(encoding="utf-8")
         style = html.split("<style>", 1)[1].split("</style>", 1)[0]
