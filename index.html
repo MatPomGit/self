@@ -239,9 +239,7 @@
     }
     /* Mniejsze liternictwo tylko w widoku badań. */
     #badania .research-intro{font-size:.94rem;line-height:1.57}
-    #badania .research-work{font-size:.94rem;line-height:1.57;margin-top:26px}
-    #badania .research-heading{font-size:1.14rem;line-height:1.35;margin:28px 0 6px}
-    #badania .research-summary{font-size:.94rem;line-height:1.55}
+    #badania .research-heading{font-size:1.14rem;line-height:1.35;margin:0 0 12px}
 
     /* Kompaktowe, dekoracyjne ikony linków z czytelnymi etykietami tekstowymi */
     .contact-links .link{display:inline-flex;align-items:center;gap:7px}
@@ -413,8 +411,6 @@
           <!-- Tytuł sekcji wyświetla wspólny nagłówek strony. -->
           <p class="data-status" id="research-status" role="status">Wczytywanie opisu…</p>
           <div class="research-intro" id="research-intro"></div>
-          <div class="research-work" id="research-work"></div>
-          <p class="research-summary" id="research-summary"></p>
         </article>
 
         <article class="panel" id="projekty" role="region" aria-label="Projekty">
@@ -612,19 +608,14 @@
         if(!response.ok)throw new Error('HTTP '+response.status);
         const data=await response.json();
         const description=data[i18n.language];
-        if(!description || !Array.isArray(description.intro) || !Array.isArray(description.work)
-            || description.intro.length!==5 || description.work.length!==2
-            || [...description.intro,...description.work,description.summary].some(
-              text=>typeof text!=='string' || !text.trim()
-            ))throw new Error('Invalid biography data');
-        const intro=document.createDocumentFragment();
-        description.intro.forEach(text=>intro.append(makeElement('p','',text)));
-        const work=document.createDocumentFragment();
-        work.append(makeElement('h3','research-heading',tr('Nad czym pracuję')));
-        description.work.forEach(text=>work.append(makeElement('p','',text)));
-        document.getElementById('research-intro').replaceChildren(intro);
-        document.getElementById('research-work').replaceChildren(work);
-        document.getElementById('research-summary').textContent=description.summary;
+        if(!description || typeof description.title!=='string' || !description.title.trim()
+            || !Array.isArray(description.paragraphs) || !description.paragraphs.length
+            || description.paragraphs.some(text=>typeof text!=='string' || !text.trim()))
+          throw new Error('Invalid biography data');
+        const content=document.createDocumentFragment();
+        content.append(makeElement('h3','research-heading',description.title));
+        description.paragraphs.forEach(text=>content.append(makeElement('p','',text)));
+        document.getElementById('research-intro').replaceChildren(content);
         status.hidden=true;
       }catch(error){
         status.textContent=tr('Nie udało się wczytać opisu.');
