@@ -158,7 +158,7 @@ class ThemeTests(unittest.TestCase):
 
     def test_research_work_flows_into_single_closing_thought(self):
         import json
-        panel = re.search(r'<article class="panel" id="badania"[^>]*>([\\s\\S]*?)</article>', HTML)
+        panel = re.search(r'<article class="panel" id="badania"[^>]*>([\s\S]*?)</article>', HTML)
         self.assertIsNotNone(panel)
         content = panel.group(1)
         intro = content.index('id="research-intro"')
