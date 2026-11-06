@@ -132,6 +132,20 @@ class MaterialsTests(unittest.TestCase):
         self.assertIn('class="material-link--lecture"', html)
         self.assertIn('class="material-link--lab"', html)
 
+    def test_pam_lecture_codes_and_hover_titles(self):
+        """Wykłady PAM mają krótkie nazwy nawet przed uruchomieniem JavaScriptu."""
+        html = (MATERIALS / "index.html").read_text(encoding="utf-8")
+        lecture_links = re.findall(
+            r'<a class="material-link--lecture" '
+            r'href="programowanie-aplikacji-mobilnych/pam_w(\d{2})_[^"]+\.pdf" '
+            r'download title="(w_\d{2} · [^"]+)">(w_\d{2})</a>',
+            html,
+        )
+        self.assertEqual(len(lecture_links), 12)
+        for number, full_title, short_title in lecture_links:
+            self.assertEqual(short_title, f"w_{number}")
+            self.assertTrue(full_title.startswith(short_title + " · "))
+
     def test_pptx_links_are_dark_orange_in_both_themes(self):
         html = (MATERIALS / "index.html").read_text(encoding="utf-8")
         style = html.split("<style>", 1)[1].split("</style>", 1)[0]
