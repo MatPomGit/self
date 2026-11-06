@@ -29,6 +29,12 @@ Strona ładuje tę treść automatycznie, bez powielania tekstu w
 wyłącznie tego pliku. Ładowanie i obsługę błędów sprawdza
 `node tests/test_about.js`.
 
+Tekst ma maksymalną szerokość kontenera 1000 px, dodatkowe marginesy
+wewnętrzne i interlinię 1,65 przy czcionce 0,90 rem. Wejście poszczególnych
+akapitów oraz pozostałych paneli jest animowane przez 300 ms; ustawienie
+`prefers-reduced-motion: reduce` całkowicie wyłącza te animacje.
+Kolorystyczne akcenty wykorzystują istniejącą zmienną motywu `--accent`.
+
 ## Wersje językowe strony głównej
 
 Przełącznik `PL / EN` znajduje się w prawym górnym rogu oryginalnej
