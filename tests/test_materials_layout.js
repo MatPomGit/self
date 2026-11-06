@@ -61,13 +61,22 @@ assert.ok(style.includes('@media(min-width:720px) and (max-width:1000px)'), 'Med
 assert.ok(style.includes('@media(max-width:620px)'), 'Mobile viewport breakpoint missing');
 
 const group = one('.materials-group');
-assert.equal(group.display, 'inline-block');
-assert.equal(group['vertical-align'], 'top');
+assert.equal(group.display, 'block', 'Block cards must be fragmentable across columns');
 assert.equal(group.width, '100%');
-assert.equal(group['break-inside'], 'avoid');
+assert.equal(group['break-inside'], 'auto', 'Card content must be able to continue in the next column');
+assert.equal(group['page-break-inside'], 'auto');
+assert.equal(group['box-decoration-break'], 'clone', 'Fragment borders and padding must be preserved');
 assert.ok(cssLength(group.padding, 'px', 'Card padding') <= 8);
 assert.ok((group.margin || '').startsWith('0 0 '), 'Cards must not have a top margin');
-assert.equal(one('.materials-group--flow')['break-inside'], 'avoid');
+const flow = one('.materials-group--flow');
+assert.equal(flow.display, 'block', 'Large cards cannot remain inline-block');
+assert.equal(flow['break-inside'], 'auto', 'Long cards must split between columns');
+assert.equal(one('.materials-group--flow .materials-subgroup')['break-inside'], 'auto');
+const subgroup = one('.materials-subgroup');
+assert.equal(subgroup['break-inside'], 'auto', 'A single long module must be fragmentable');
+assert.equal(subgroup['box-decoration-break'], 'clone');
+assert.equal(one('.materials-group>h4,.materials-subgroup>h5')['break-after'], 'avoid',
+  'Headings should stay with the first row of their content');
 const columns = one('.materials-columns');
 assert.equal(columns.display, 'flex', 'Module groups must flow beside one another');
 assert.equal(columns['flex-wrap'], 'wrap', 'Module groups must wrap instead of overflowing');
@@ -106,6 +115,7 @@ assert.ok(cssLength(links['font-size'], 'rem', 'File label size') <= 0.75);
 const item = one('.materials-list li');
 assert.equal(item.flex, '0 1 auto', 'List items must shrink-wrap their contents');
 assert.equal(item['max-width'], '100%', 'Long names must not overflow their subgroup');
+assert.equal(item['break-inside'], 'avoid', 'Individual file links must remain whole at a column boundary');
 assert.ok(!style.includes('--material-min'), 'Unused fixed track widths must be removed');
 assert.equal(one('.materials-list--dense')['line-height'], '1.05');
 assert.ok(cssLength(one('.materials-list .material-formats')['font-size'], 'rem', 'Format suffix') <= 0.6);

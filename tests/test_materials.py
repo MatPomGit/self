@@ -27,6 +27,19 @@ class Anchors(HTMLParser):
 
 
 class MaterialsTests(unittest.TestCase):
+    def test_material_directories_have_no_case_only_duplicates(self):
+        """Własności zasobów nie mogą zależeć od wielkości liter systemu plików."""
+        names = [path.name for path in MATERIALS.iterdir() if path.is_dir()]
+        folded = [name.casefold() for name in names]
+        self.assertEqual(len(folded), len(set(folded)),
+                         "Katalogi materiałów różnią się tylko wielkością liter")
+        self.assertTrue((MATERIALS / "nowoczesne-technologie-w-psychologii").is_dir())
+        self.assertFalse((MATERIALS / "Nowoczesne-technologie-w-psychologii").exists())
+        for name in ("E-terapia.pdf", "E-terapia.pptx",
+                     "intuicja_a_prbl.pdf", "intuicja_a_prbl.pptx"):
+            with self.subTest(name=name):
+                self.assertTrue((MATERIALS / "nowoczesne-technologie-w-psychologii" / name).is_file())
+
     def test_index_links_and_inventory(self):
         html = (MATERIALS / "index.html").read_text(encoding="utf-8")
         self.assertEqual(html.count("<script>"), 2)
@@ -54,7 +67,7 @@ class MaterialsTests(unittest.TestCase):
             "informatyka-poznawcza",
             "seminaria-dyplomowe",
             "Kto-Co-Jak",
-            "Nowoczesne-technologie-w-psychologii",
+            "nowoczesne-technologie-w-psychologii",
             "analiza-eeg",
             "diagnoza-psychologiczna",
             "nawigacja-robotow-humanoidalnych",
