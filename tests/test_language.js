@@ -79,23 +79,24 @@ for (const match of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)) 
 
 const about = JSON.parse(read('docs/data/about.json'));
 assert.deepEqual(Object.keys(about).sort(), ['en','pl']);
+assert.equal(about.pl.title, 'O mnie');
+assert.equal(about.en.title, 'About me');
 for (const language of ['pl','en']) {
-  assert.equal(about[language].intro.length, 5, 'Five introductory paragraphs in ' + language);
-  assert.equal(about[language].work.length, 2, 'Two research paragraphs in ' + language);
-  assert.ok(about[language].summary.trim(), 'A closing thought exists in ' + language);
-  assert.ok([...about[language].intro, ...about[language].work].every(text => text.length > 80));
+  assert.equal(about[language].paragraphs.length, 10, 'Ten complete paragraphs in ' + language);
+  assert.ok(about[language].paragraphs.every(text => text.length > 80));
 }
-assert.match(about.pl.intro[0], /Zawsze ciekawił mnie świat/);
-assert.match(about.en.intro[0], /universe/);
-assert.match(about.en.intro[1], /models of the world/);
-assert.match(about.en.intro[3], /brains/);
-assert.match(about.en.work[0], /optoelectronics/);
-assert.match(about.en.work[1], /neuroscience and psychology/);
+assert.match(about.pl.paragraphs[0], /^Gdy ktoś pyta mnie, czym się zajmuję/);
+assert.match(about.pl.paragraphs[3], /Szczególnie fascynującym przykładem/);
+assert.match(about.pl.paragraphs[5], /Instytucie Optoelektroniki/);
+assert.match(about.pl.paragraphs[9], /^Być może właśnie dlatego/);
+assert.match(about.en.paragraphs[0], /^When someone asks what I do/);
+assert.match(about.en.paragraphs[5], /Institute of Optoelectronics/);
+assert.match(about.en.paragraphs[9], /^Perhaps this is precisely why/);
 assert.ok(html.includes('<div class="research-intro" id="research-intro"></div>'));
-assert.ok(html.includes('<div class="research-work" id="research-work"></div>'));
-assert.ok(html.includes('id="research-summary"'));
+assert.ok(!html.includes('id="research-work"'));
+assert.ok(!html.includes('id="research-summary"'));
 assert.ok(html.includes("fetch('docs/data/about.json')"));
-assert.doesNotMatch(html, /Zawsze ciekawił mnie świat/);
+assert.doesNotMatch(html, /Gdy ktoś pyta mnie, czym się zajmuję/);
 assert.doesNotMatch(source, /const researchParagraphs/);
 assert.equal(en.translate('Wczytywanie opisu…'), 'Loading biography…');
 assert.equal(en.translate('Nie udało się wczytać opisu.'), 'Could not load the biography.');
