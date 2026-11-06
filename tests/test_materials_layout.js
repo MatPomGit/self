@@ -57,12 +57,10 @@ assert.equal(one('.materials-group--flow')['break-inside'], 'avoid');
 assert.equal(one('.materials-columns').display, 'block');
 
 const list = one('.materials-list');
-assert.equal(list.display, 'grid');
-// Fixed maximum track width prevents filenames stretching across a wide card.
-// Fallback variable values must match for both min and max expressions.
-const tracks = (list['grid-template-columns'] || '').replace(/\s+/g, '');
-const fixedTracks = /^repeat\(auto-fill,minmax\(min\(100%,var\(--material-min,([0-9.]+rem)\)\),var\(--material-min,\1\)\)\)$/;
-assert.ok(fixedTracks.test(tracks), 'File grid must use fixed-width auto-fill tracks, not auto-fit/1fr');
+assert.equal(list.display, 'flex', 'Items must use their intrinsic text widths');
+assert.equal(list['flex-wrap'], 'wrap', 'Items should flow onto the next line when necessary');
+assert.ok(!list['grid-template-columns'], 'Fixed-width grid tracks must not reserve empty space');
+assert.equal(list['align-items'], 'baseline', 'Adjacent file names should align on the text baseline');
 assert.ok(cssLength(list['column-gap'], 'px', 'Link column gap') <= 6);
 assert.ok(cssLength(list['row-gap'], 'px', 'Link row gap') <= 2);
 
@@ -78,11 +76,15 @@ const variantName = one('.materials-list li.materials-row--variants>a');
 const variantFormats = one('.materials-list li.materials-row--variants .material-formats');
 assert.equal(variantRow.display, 'flex', 'PDF and variants must share a row');
 assert.equal(variantName['text-overflow'], 'ellipsis', 'PDF labels must truncate without hiding formats');
+assert.equal(variantName.flex, '0 1 auto', 'PDF labels must not stretch to fill empty space');
 assert.equal(variantName['min-width'], '0', 'PDF labels need shrinkable flex width');
 assert.equal(variantFormats['flex'], '0 0 auto', 'File formats must remain visible');
 assert.ok(cssLength(links['font-size'], 'rem', 'File label size') <= 0.75);
-assert.equal(one(':root[data-materials-view="all"] .materials-list--dense')['--material-min'], '7.5rem');
-assert.ok(cssLength(one('.materials-list--dense')['--material-min'], 'rem', 'Dense track width') <= 6);
+const item = one('.materials-list li');
+assert.equal(item.flex, '0 1 auto', 'List items must shrink-wrap their contents');
+assert.equal(item['max-width'], '100%', 'Long names must not overflow their subgroup');
+assert.ok(!style.includes('--material-min'), 'Unused fixed track widths must be removed');
+assert.equal(one('.materials-list--dense')['line-height'], '1.05');
 assert.ok(cssLength(one('.materials-list .material-formats')['font-size'], 'rem', 'Format suffix') <= 0.6);
 assert.ok(cssLength(one('.materials-list .material-format--standalone')['font-size'], 'rem', 'Standalone format suffix') <= 0.6);
 
