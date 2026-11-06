@@ -261,6 +261,7 @@ assert.equal(pamLecture.a.getAttribute('title'), 'w_02 · Sprzęt', 'PAM preserv
 assert.equal(pamLecture.a.getAttribute('aria-label'), 'Otwórz PDF: w_02 · Sprzęt');
 assert.equal(verboseLecture.a.textContent, 'w_03', 'Other verbose lecture labels are shortened');
 assert.equal(verboseLecture.a.getAttribute('title'), 'Projektowanie aplikacji mobilnych', 'Full text remains in tooltip');
+assert.equal(unnamedLecture.a.getAttribute('title'), 'ra_w04.pdf', 'Undescribed lecture exposes its full filename');
 assert.match(lectureFormats.children[1].title, /Wprowadzenie do badań XR/);
 assert.equal(editor.li.parentNode, null, 'bez zduplikowanej pozycji DOCX');
 assert.equal(pptxLecture.li.parentNode, null, 'bez zduplikowanej pozycji PPTX');
