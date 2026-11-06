@@ -50,7 +50,9 @@ a:hover{text-decoration:underline}
 .materials-list li[data-materials-kind="lab"] .material-format--pdf{color:var(--lab)}
 .materials-list .material-formats{display:inline;font-size:.56rem;line-height:1.15;white-space:normal}
 .materials-list .material-format--standalone{font-size:.56rem;line-height:1.15;white-space:nowrap}
-.materials-list li.materials-row--variants>a{display:inline;white-space:normal;overflow-wrap:anywhere}
+.materials-list li.materials-row--variants{display:flex;align-items:baseline;min-width:0;overflow:hidden}
+.materials-list li.materials-row--variants>a{display:block;flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.materials-list li.materials-row--variants .material-formats{display:inline-flex;flex:0 0 auto;white-space:nowrap}
 .materials-list .material-formats a{display:inline;padding:0;font-size:inherit;line-height:inherit;white-space:nowrap}
 .materials-list .material-formats a::before{content:" · ";white-space:pre;color:var(--muted)}
 :root:not([data-materials-view="all"]) .materials-list .material-formats{display:none}
@@ -80,7 +82,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 :root[data-materials-view="all"] .materials-list--dense{--material-min:7.5rem}
 .materials-list--dense{--material-min:5.5rem;line-height:1.05}
 .materials-list li{min-width:0;break-inside:avoid}
-.materials-list a{display:block;padding:1px 1px;border-radius:4px;overflow-wrap:break-word;white-space:normal;line-height:1.12;font-size:.7rem}
+.materials-list a{display:block;min-width:0;max-width:100%;padding:1px 1px;border-radius:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;line-height:1.12;font-size:.7rem}
 .materials-list a:hover{background:var(--hover)}
 /* Niezależne kolumny nie tworzą pustych komórek po kartach o różnej wysokości.
    Przeglądarka bilansuje ich wysokość bez skryptu zmieniającego DOM. */
@@ -178,18 +180,18 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 <div class="materials-subgroup">
 <h5>Wykłady</h5>
 <ul class="materials-list">
-<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w01_intro.pdf" download title="w_01 · Wprowadzenie">w_01 · Wprowadzenie</a></li>
-<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w02_hardware.pdf" download>w_02 · Sprzęt</a></li>
-<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w03_projektowanie.pdf" download title="w_03 · Projektowanie">w_03 · Projektowanie</a></li>
-<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w04_ui.pdf" download title="w_04 · Interfejs użytkownika">w_04 · Interfejs użytkownika</a></li>
-<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w05_natywne.pdf" download title="w_05 · Aplikacje natywne">w_05 · Aplikacje natywne</a></li>
-<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w06_cross.pdf" download title="w_06 · Rozwiązania wieloplatformowe">w_06 · Rozwiązania wieloplatformowe</a></li>
-<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w07_sensors.pdf" download title="w_07 · Czujniki">w_07 · Czujniki</a></li>
-<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w08_IoT.pdf" download title="w_08 · Internet rzeczy">w_08 · Internet rzeczy</a></li>
-<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w09_affective.pdf" download title="w_09 · Informatyka afektywna">w_09 · Informatyka afektywna</a></li>
-<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w10_xr.pdf" download>w_10 · XR</a></li>
-<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w11_games.pdf" download>w_11 · Gry</a></li>
-<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w12_robots.pdf" download title="w_12 · Robotyka">w_12 · Robotyka</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w01_intro.pdf" download title="w_01 · Wprowadzenie">w_01</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w02_hardware.pdf" download title="w_02 · Sprzęt">w_02</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w03_projektowanie.pdf" download title="w_03 · Projektowanie">w_03</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w04_ui.pdf" download title="w_04 · Interfejs użytkownika">w_04</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w05_natywne.pdf" download title="w_05 · Aplikacje natywne">w_05</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w06_cross.pdf" download title="w_06 · Rozwiązania wieloplatformowe">w_06</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w07_sensors.pdf" download title="w_07 · Czujniki">w_07</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w08_IoT.pdf" download title="w_08 · Internet rzeczy">w_08</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w09_affective.pdf" download title="w_09 · Informatyka afektywna">w_09</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w10_xr.pdf" download title="w_10 · XR">w_10</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w11_games.pdf" download title="w_11 · Gry">w_11</a></li>
+<li><a class="material-link--lecture" href="programowanie-aplikacji-mobilnych/pam_w12_robots.pdf" download title="w_12 · Robotyka">w_12</a></li>
 </ul></div>
 
 <div class="materials-subgroup">
@@ -557,13 +559,25 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
       if (link.classList.contains('material-link--lab')) return 'lab';
       return 'other';
     }
+    function lectureCode(link, info) {
+      if (!link.classList.contains('material-link--lecture')) return null;
+      const label = labelWithoutExtension(link.textContent);
+      const number = /^(?:w|wykład)[ _-]?(\d{1,3})(?=$|[\s·._-])/i.exec(label) ||
+        /(?:^|[\/_.-])w[_-]?(\d{1,3})(?=[_.-]|$)/i.exec(info.stem);
+      return number ? 'w_' + number[1].padStart(2, '0') : null;
+    }
     for (const row of rows) {
       const link = row.querySelector('a[href]');
       if (!link) continue;
       const info = pathInfo(link);
       row.dataset.materialsKind = kindOf(link);
       const tooltip = tooltipFor(link);
-      if (tooltip) link.setAttribute('title', tooltip);
+      if (tooltip) {
+        link.setAttribute('title', tooltip);
+        link.setAttribute('aria-label', tooltip);
+      }
+      const code = lectureCode(link, info);
+      if (code) link.textContent = code;
       if (info.extension === 'pdf') {
         pdfByStem.set(info.stem, row);
         link.textContent = labelWithoutExtension(link.textContent);
