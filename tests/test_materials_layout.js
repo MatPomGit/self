@@ -25,7 +25,7 @@ function one(selector) {
 function cssLength(value, unit, label) {
   // CSS allows zero without units; it is equivalent to 0px or 0rem.
   if (value === '0') return 0;
-  const match = new RegExp('^(\\d+(?:\\.\\d+)?)' + unit + '
+  const match = new RegExp('^(\\d+(?:\\.\\d+)?)' + unit + '$').exec(value || '');
   assert.ok(match, label + ': expected ' + unit + ', received ' + value);
   return Number(match[1]);
 }
