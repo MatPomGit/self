@@ -9,7 +9,7 @@
     "phase": "current",
     "title": "ARC-RVI · Autonomiczna inspekcja wizualna",
     "period": "2026–obecnie",
-    "description": "Rozwój metod autonomicznej inspekcji wizualnej: lokalizacji obiektu, planowania ujęć oraz oceny kompletności i jakości dokumentacji tworzonej przez robota"
+    "description": "Rozwój metod autonomicznej inspekcji wizualnej: lokalizacji obiektu, planowania ujęć, oceny kompletności i jakości dokumentacji tworzonej przez robota"
   },
   {
     "phase": "current",
@@ -21,13 +21,13 @@
     "phase": "current",
     "title": "ARC-AFFECTIVE",
     "period": "2026–obecnie",
-    "description": "Badania nad zmianami uwagi i obciążenia poznawczego podczas zadań, także w XR. Rozwój personalizowanej estymacji stanu użytkownika na podstawie EEG z Muse S Athena i danych behawioralnych"
+    "description": "Personalizowana estymacja stanu (uwaga i obciążenie poznawczego) podczas zadań, na podstawie EEG z Muse S Athena i danych behawioralnych"
   },
   {
     "phase": "current",
     "title": "XR-Cognition · Adaptacyjne środowiska poznawcze",
     "period": "2026–obecnie",
-    "description": "Rozwój adaptacyjnych środowisk XR dostosowujących trudność zadań i prezentację bodźców do bieżących możliwości poznawczych użytkownika. Badania nad sprzężeniem zwrotnym wykorzystującym EEG i okulografię"
+    "description": "Rozwój adaptacyjnych środowisk XR dostosowujących trudność zadań i prezentację bodźców do możliwości poznawczych użytkownika"
   },
   {
     "phase": "current",
