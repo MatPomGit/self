@@ -3,7 +3,7 @@
     "phase": "current",
     "title": "ARC-RGBT",
     "period": "2026–obecnie",
-    "description": "Fuzją obrazu widzialnego i termowizyjnego w detekcji obiektów w trudnych warunkach"
+    "description": "Fuzja obrazu widzialnego i termowizyjnego w detekcji obiektów w trudnych warunkach"
   },
   {
     "phase": "current",
@@ -21,7 +21,7 @@
     "phase": "current",
     "title": "ARC-AFFECTIVE",
     "period": "2026–obecnie",
-    "description": "Personalizowana estymacja stanu (uwaga i obciążenie poznawczego) podczas zadań, na podstawie EEG z Muse S Athena i danych behawioralnych"
+    "description": "Personalizowana estymacja uwagi i obciążenia poznawczego podczas zadań na podstawie EEG z Muse S Athena i danych behawioralnych"
   },
   {
     "phase": "current",
@@ -51,7 +51,7 @@
     "phase": "current",
     "title": "EEG Neurolyze",
     "period": "2026–obecnie",
-    "description": "Rozwój narzędzi do rejestracji i analizy EEG z Muse S Athena, kontroli jakości danych orazsynchronizacji zdarzeń i integracji z XR"
+    "description": "Rozwój narzędzi do rejestracji i analizy EEG z Muse S Athena, kontroli jakości danych oraz planowanej synchronizacji zdarzeń i integracji z XR; pomiary sprzętowe wymagają walidacji."
   },
   {
     "phase": "current",
@@ -123,7 +123,7 @@
     "phase": "previous",
     "title": "Mikroruchy oka · Potencjalne biomarkery neurodegeneracji",
     "period": "2019–2024",
-    "description": "Badania nad monitorowaniem mikroruchów oka i analizą cech okulomotorycznych jako biomarkerów zaburzeń neurodegeneracyjnych"
+    "description": "Badania nad monitorowaniem mikroruchów oka i analizą cech okulomotorycznych jako potencjalnych biomarkerów zaburzeń neurodegeneracyjnych"
   },
   {
     "phase": "previous",
