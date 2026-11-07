@@ -104,7 +104,7 @@ class ProjectsTests(unittest.TestCase):
         for language in (projects[title]["description"], translations[title]["description"]):
             self.assertIn("XR", language)
             self.assertIn("EEG", language)
-        self.assertIn("sprzężenie zwrotne", projects[title]["description"])
+        self.assertIn("sprzężeniem zwrotnym", projects[title]["description"])
         self.assertIn("feedback", translations[title]["description"])
 
     def test_ocular_micromovements_history_and_translation(self):
