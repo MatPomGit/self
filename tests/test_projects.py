@@ -16,6 +16,7 @@ CURRENT = [
     "ARC-RVI · Autonomiczna inspekcja wizualna",
     "ARC-HRI-SAFETY",
     "ARC-AFFECTIVE",
+    "XR-Cognition · Adaptacyjne środowiska poznawcze",
     "ContextNDD",
     "SAPIENS · Człowiek i robot humanoidalny",
     "ARC Mobile Eye Tracking",
@@ -47,7 +48,7 @@ class ProjectsTests(unittest.TestCase):
         projects = json.loads(DATA.read_text(encoding="utf-8"))
         self.assertEqual([p["title"] for p in projects if p["phase"] == "current"], CURRENT)
         self.assertEqual([p["title"] for p in projects if p["phase"] == "previous"], PREVIOUS)
-        self.assertEqual(len(projects), 25)
+        self.assertEqual(len(projects), 26)
         self.assertEqual(len({p["title"] for p in projects}), len(projects))
 
     def test_dates_copy_and_no_outbound_links(self):
@@ -92,6 +93,18 @@ class ProjectsTests(unittest.TestCase):
         self.assertIn("cognitive workload", translations["ARC-AFFECTIVE"]["description"])
         self.assertIn("wymagają walidacji", projects["EEG Neurolyze"]["description"])
         self.assertIn("require validation", translations["EEG Neurolyze"]["description"])
+
+    def test_xr_cognition_is_a_distinct_bilingual_project(self):
+        projects = {p["title"]: p for p in json.loads(DATA.read_text(encoding="utf-8"))}
+        translations = {p["sourceTitle"]: p for p in json.loads(TRANSLATIONS.read_text(encoding="utf-8"))}
+        title = "XR-Cognition · Adaptacyjne środowiska poznawcze"
+        self.assertEqual(projects[title]["phase"], "current")
+        self.assertEqual(translations[title]["title"], "XR-Cognition · Adaptive Cognitive Environments")
+        for language in (projects[title]["description"], translations[title]["description"]):
+            self.assertIn("XR", language)
+            self.assertIn("EEG", language)
+        self.assertIn("sprzężenie zwrotne", projects[title]["description"])
+        self.assertIn("feedback", translations[title]["description"])
 
     def test_promotional_ui_has_sections_and_no_project_links(self):
         panel = re.search(r'<article class="panel" id="projekty"[^>]*>[\s\S]*?</article>', HTML)
