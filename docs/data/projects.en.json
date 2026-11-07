@@ -21,7 +21,7 @@
     "sourceTitle": "ARC-AFFECTIVE",
     "title": "ARC-AFFECTIVE",
     "period": "2026–present",
-    "description": "We explore how physiological signals, vision and behaviour can support cognitive-state research and context-aware interactive systems."
+    "description": "We study moment-to-moment attention and cognitive workload during tasks, including XR environments. We combine Muse S Athena EEG with behavioural data to develop and validate personalised estimates of user state."
   },
   {
     "sourceTitle": "ContextNDD",
@@ -45,7 +45,7 @@
     "sourceTitle": "EEG Neurolyze",
     "title": "EEG Neurolyze",
     "period": "2026–present",
-    "description": "We develop tools for EEG acquisition, processing and reproducible analysis, with an emphasis on data quality and traceable results."
+    "description": "We develop Muse S Athena EEG acquisition and analysis tools with data-quality checks. The platform is intended to support cognitive experiments and event synchronisation, including future XR integration; physical recordings still require validation."
   },
   {
     "sourceTitle": "S4D-TAM · Nawigacja autonomiczna",
