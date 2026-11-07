@@ -25,6 +25,12 @@
   },
   {
     "phase": "current",
+    "title": "XR-Cognition · Adaptacyjne środowiska poznawcze",
+    "period": "2026–obecnie",
+    "description": "Projektujemy adaptacyjne środowiska XR, które dostosowują trudność zadań i prezentację bodźców do bieżących możliwości poznawczych użytkownika. Badamy sprzężenie zwrotne oparte na EEG, okulografii i wynikach behawioralnych."
+  },
+  {
+    "phase": "current",
     "title": "ContextNDD",
     "period": "2026–obecnie",
     "description": "Tworzymy ramy analizy zachowania uwzględniające kontekst sytuacji i indywidualne różnice, zamiast opierać ocenę wyłącznie na etykietach diagnostycznych."
