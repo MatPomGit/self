@@ -3,55 +3,55 @@
     "phase": "current",
     "title": "ARC-RGBT",
     "period": "2026–obecnie",
-    "description": "Badania nad fuzją obrazu widzialnego i termowizyjnego w detekcji obiektów w trudnych warunkach, ze szczególnym uwzględnieniem granic niezawodności metod łączenia danych sensorycznych."
+    "description": "Fuzją obrazu widzialnego i termowizyjnego w detekcji obiektów w trudnych warunkach"
   },
   {
     "phase": "current",
     "title": "ARC-RVI · Autonomiczna inspekcja wizualna",
     "period": "2026–obecnie",
-    "description": "Rozwój metod autonomicznej inspekcji wizualnej: lokalizacji obiektu, planowania ujęć oraz oceny kompletności i jakości dokumentacji tworzonej przez robota."
+    "description": "Rozwój metod autonomicznej inspekcji wizualnej: lokalizacji obiektu, planowania ujęć oraz oceny kompletności i jakości dokumentacji tworzonej przez robota"
   },
   {
     "phase": "current",
     "title": "ARC-HRI-SAFETY",
     "period": "2026–obecnie",
-    "description": "Prace nad przewidywaniem ryzyka we współpracy człowieka z robotem humanoidalnym, z wykorzystaniem percepcji sceny, analizy ruchu i wymagań bezpieczeństwa."
+    "description": "Przewidywanie ryzyka we współpracy człowieka z robotem humanoidalnym, z wykorzystaniem percepcji sceny, analizy ruchu i wymagań bezpieczeństwa"
   },
   {
     "phase": "current",
     "title": "ARC-AFFECTIVE",
     "period": "2026–obecnie",
-    "description": "Badania nad zmianami uwagi i obciążenia poznawczego podczas zadań, także w XR. Rozwój personalizowanej estymacji stanu użytkownika na podstawie EEG z Muse S Athena i danych behawioralnych."
+    "description": "Badania nad zmianami uwagi i obciążenia poznawczego podczas zadań, także w XR. Rozwój personalizowanej estymacji stanu użytkownika na podstawie EEG z Muse S Athena i danych behawioralnych"
   },
   {
     "phase": "current",
     "title": "XR-Cognition · Adaptacyjne środowiska poznawcze",
     "period": "2026–obecnie",
-    "description": "Rozwój adaptacyjnych środowisk XR dostosowujących trudność zadań i prezentację bodźców do bieżących możliwości poznawczych użytkownika. Badania nad sprzężeniem zwrotnym wykorzystującym EEG, okulografię i dane behawioralne."
+    "description": "Rozwój adaptacyjnych środowisk XR dostosowujących trudność zadań i prezentację bodźców do bieżących możliwości poznawczych użytkownika. Badania nad sprzężeniem zwrotnym wykorzystującym EEG i okulografię"
   },
   {
     "phase": "current",
     "title": "ContextNDD",
     "period": "2026–obecnie",
-    "description": "Rozwój ram analizy zachowania uwzględniających kontekst sytuacyjny i różnice indywidualne, bez sprowadzania charakterystyki użytkownika wyłącznie do etykiet diagnostycznych."
+    "description": "Rozwój ram analizy zachowania uwzględniających kontekst sytuacyjny i różnice indywidualne, bez sprowadzania charakterystyki użytkownika wyłącznie do etykiet diagnostycznych"
   },
   {
     "phase": "current",
     "title": "SAPIENS · Człowiek i robot humanoidalny",
     "period": "2026–obecnie",
-    "description": "Badania nad wpływem bezpośredniej interakcji z robotem humanoidalnym na zaufanie, poczucie sprawczości, obecność społeczną oraz interpretację sygnałów emocjonalnych."
+    "description": "Badania nad wpływem bezpośredniej interakcji z robotem humanoidalnym na zaufanie, poczucie sprawczości, obecność społeczną oraz interpretację sygnałów emocjonalnych"
   },
   {
     "phase": "current",
     "title": "ARC Mobile Eye Tracking",
     "period": "2026–obecnie",
-    "description": "Badania nad estymacją kierunku spojrzenia za pomocą smartfonu oraz wpływem kalibracji, oświetlenia i ruchu głowy na dokładność pomiaru."
+    "description": "Badania nad estymacją kierunku spojrzenia za pomocą smartfonu oraz wpływem kalibracji, oświetlenia i ruchu głowy na dokładność pomiaru"
   },
   {
     "phase": "current",
     "title": "EEG Neurolyze",
     "period": "2026–obecnie",
-    "description": "Rozwój narzędzi do rejestracji i analizy EEG z Muse S Athena oraz kontroli jakości danych. Planowana obsługa eksperymentów poznawczych, synchronizacji zdarzeń i integracji z XR; pomiary sprzętowe wymagają walidacji."
+    "description": "Rozwój narzędzi do rejestracji i analizy EEG z Muse S Athena, kontroli jakości danych orazsynchronizacji zdarzeń i integracji z XR"
   },
   {
     "phase": "current",
@@ -63,73 +63,73 @@
     "phase": "current",
     "title": "ARC Attachment Dynamics",
     "period": "2026–obecnie",
-    "description": "Badania nad dynamicznymi zmianami bliskości, autonomii i poczucia bezpieczeństwa w relacjach, z wykorzystaniem psychologii przywiązania i modelowania dynamicznego."
+    "description": "Badania nad dynamicznymi zmianami bliskości, autonomii i poczucia bezpieczeństwa w relacjach, z wykorzystaniem psychologii przywiązania i modelowania dynamicznego"
   },
   {
     "phase": "current",
     "title": "ARC-ADHD · Adaptacyjna gra badawcza",
     "period": "2026–obecnie",
-    "description": "Rozwój adaptacyjnej gry do badania powrotu do działania po trudnym bodźcu, z rozróżnieniem poprawy wyników w zadaniu i ewentualnego transferu umiejętności poza grę."
+    "description": "Adaptacyjna gra do badania powrotu do działania po trudnym bodźcu, z rozróżnieniem poprawy wyników w zadaniu i transferu umiejętności poza grę"
   },
   {
     "phase": "current",
     "title": "AI Cognitive Resilience",
     "period": "2026–obecnie",
-    "description": "Badania nad wpływem jakości dowodów oraz siły i formy perswazji w odpowiedziach AI na zmianę przekonań odbiorców."
+    "description": "Badania nad wpływem jakości dowodów oraz siły i formy perswazji w odpowiedziach AI na zmianę przekonań odbiorców"
   },
   {
     "phase": "current",
     "title": "DERA-HRI · Emocje w interakcji z robotem",
     "period": "2026–obecnie",
-    "description": "Opracowanie narzędzia do badania emocji i doświadczeń związanych z interakcją z robotem, z uwzględnieniem responsywności, zaufania i poczucia kontroli."
+    "description": "Narzędzie do badania emocji i doświadczeń związanych z interakcją z robotem, z uwzględnieniem responsywności, zaufania i poczucia kontroli"
   },
   {
     "phase": "current",
     "title": "MindDx · Symulator diagnozy psychologicznej",
     "period": "2026–obecnie",
-    "description": "Rozwój interaktywnego środowiska edukacyjnego do analizy przypadków, formułowania hipotez i doskonalenia decyzji diagnostycznych bez ryzyka dla rzeczywistych pacjentów."
+    "description": "Rozwój interaktywnego środowiska do analizy przypadków, formułowania hipotez i doskonalenia diagnozy bez ryzyka dla rzeczywistych pacjentów"
   },
   {
     "phase": "previous",
     "title": "ARIANA",
     "period": "2024",
-    "description": "Koncepcja wielomodalnej platformy badania reakcji emocjonalnych, łączącej okulografię, obraz VIS/IR, pomiary ruchu i narzędzia psychometryczne."
+    "description": "Koncepcja wielomodalnej platformy badania reakcji emocjonalnych, łączącej okulografię, obraz VIS/IR, pomiary ruchu i narzędzia psychometryczne"
   },
   {
     "phase": "previous",
     "title": "PIAST · Satelitarne obrazowanie Ziemi",
     "period": "2021–2025",
-    "description": "Prace w programie trzech nanosatelitów obserwacyjnych, rozwijającym polskie technologie optoelektroniczne i zdolności obrazowania Ziemi."
+    "description": "Prace w programie trzech nanosatelitów obserwacyjnych, rozwijającym polskie technologie optoelektroniczne i zdolności obrazowania Ziemi"
   },
   {
     "phase": "previous",
     "title": "SEEKER · Głowice optoelektroniczne",
     "period": "2021–2025",
-    "description": "Rozwój wielospektralnych i obrazujących układów optoelektronicznych do zastosowań obronnych, obejmujący prototypowanie i weryfikację rozwiązań."
+    "description": "Rozwój wielospektralnych i obrazujących układów optoelektronicznych do zastosowań obronnych, obejmujący prototypowanie i weryfikację rozwiązań"
   },
   {
     "phase": "previous",
     "title": "PolFEL · Laser na swobodnych elektronach",
     "period": "2019–2023",
-    "description": "Udział w rozwoju infrastruktury pierwszego polskiego lasera na swobodnych elektronach, otwierającej możliwości badań ultraszybkich procesów w materii."
+    "description": "Udział w rozwoju infrastruktury pierwszego polskiego lasera na swobodnych elektronach, otwierającej możliwości badań ultraszybkich procesów w materii"
   },
   {
     "phase": "previous",
     "title": "OPTOKRYPT · Kryptografia kwantowa",
     "period": "2021–2024",
-    "description": "Prace nad optycznymi technologiami ochrony informacji: generowaniem losowości kwantowej i bezpieczną dystrybucją kluczy szyfrujących."
+    "description": "Prace nad optycznymi technologiami ochrony informacji: generowaniem losowości kwantowej i bezpieczną dystrybucją kluczy szyfrujących"
   },
   {
     "phase": "previous",
     "title": "Mikroruchy oka · Potencjalne biomarkery neurodegeneracji",
     "period": "2019–2024",
-    "description": "Badania nad monitorowaniem mikroruchów oka i analizą cech okulomotorycznych jako potencjalnych biomarkerów zaburzeń neurodegeneracyjnych, z uwzględnieniem ograniczeń pomiarowych i interpretacyjnych."
+    "description": "Badania nad monitorowaniem mikroruchów oka i analizą cech okulomotorycznych jako biomarkerów zaburzeń neurodegeneracyjnych"
   },
   {
     "phase": "previous",
     "title": "Eye Tracking w rzeczywistości mieszanej",
     "period": "2020–2022",
-    "description": "Kierowanie badaniami nad wykorzystaniem śledzenia wzroku do sterowania i interakcji z obiektami w środowiskach rzeczywistości mieszanej."
+    "description": "Kierowanie badaniami nad wykorzystaniem śledzenia wzroku do sterowania i interakcji z obiektami w środowiskach XR"
   },
   {
     "phase": "previous",
@@ -147,7 +147,7 @@
     "phase": "previous",
     "title": "Skaner 3D sub-THz",
     "period": "2015–2019",
-    "description": "Udział w opracowaniu aktywnego skanera trójwymiarowego wykorzystującego fale subterahercowe do bezkontaktowej kontroli bezpieczeństwa."
+    "description": "Opracowanie aktywnego skanera trójwymiarowego wykorzystującego fale subterahercowe do bezkontaktowej kontroli bezpieczeństwa"
   },
   {
     "phase": "previous",
