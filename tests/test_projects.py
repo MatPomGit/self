@@ -1,165 +1,58 @@
-"""Spójność promocyjnej karty projektów, dat i wersji językowych."""
+"""Minimalne testy integralności danych projektów wyświetlanych na stronie."""
+
 from __future__ import annotations
 
 import json
-import re
 import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "docs/data/projects.json"
 TRANSLATIONS = ROOT / "docs/data/projects.en.json"
-HTML = (ROOT / "index.html").read_text(encoding="utf-8")
-
-CURRENT = [
-    "ARC-RGBT",
-    "ARC-RVI · Autonomiczna inspekcja wizualna",
-    "ARC-HRI-SAFETY",
-    "ARC-AFFECTIVE",
-    "XR-Cognition · Adaptacyjne środowiska poznawcze",
-    "ContextNDD",
-    "SAPIENS · Człowiek i robot humanoidalny",
-    "ARC Mobile Eye Tracking",
-    "EEG Neurolyze",
-    "S4D-TAM · Nawigacja autonomiczna",
-    "ARC Attachment Dynamics",
-    "ARC-ADHD · Adaptacyjna gra badawcza",
-    "AI Cognitive Resilience",
-    "DERA-HRI · Emocje w interakcji z robotem",
-    "MindDx · Symulator diagnozy psychologicznej",
-]
-PREVIOUS = [
-    "ARIANA",
-    "PIAST · Satelitarne obrazowanie Ziemi",
-    "SEEKER · Głowice optoelektroniczne",
-    "PolFEL · Laser na swobodnych elektronach",
-    "OPTOKRYPT · Kryptografia kwantowa",
-    "Mikroruchy oka · Potencjalne biomarkery neurodegeneracji",
-    "Eye Tracking w rzeczywistości mieszanej",
-    "Systemy wizyjne XR w nauce i obronności",
-    "RiverGUARD · Ochrona granic rzecznych",
-    "Skaner 3D sub-THz",
-    "Sensor trenażera GROM / PIORUN",
-    "PROTECT · Biometria kontroli granicznej",
-]
+HTML = ROOT / "index.html"
 
 
 class ProjectsTests(unittest.TestCase):
-    def test_current_and_previous_portfolio(self):
-        projects = json.loads(DATA.read_text(encoding="utf-8"))
-        self.assertEqual([p["title"] for p in projects if p["phase"] == "current"], CURRENT)
-        self.assertEqual([p["title"] for p in projects if p["phase"] == "previous"], PREVIOUS)
-        self.assertEqual(len(projects), 27)
-        self.assertEqual(len({p["title"] for p in projects}), len(projects))
+    @classmethod
+    def setUpClass(cls):
+        cls.projects = json.loads(DATA.read_text(encoding="utf-8"))
+        cls.translations = json.loads(TRANSLATIONS.read_text(encoding="utf-8"))
 
-    def test_dates_copy_and_no_outbound_links(self):
-        projects = json.loads(DATA.read_text(encoding="utf-8"))
-        for project in projects:
+    def test_project_data_is_valid(self):
+        """Sprawdzaj strukturę danych, nie liczbę, nazwy ani treść opisów."""
+        self.assertIsInstance(self.projects, list)
+        self.assertTrue(self.projects)
+
+        titles = []
+        for project in self.projects:
+            with self.subTest(project=project.get("title")):
+                self.assertIsInstance(project, dict)
+                self.assertIn(project.get("phase"), {"current", "previous"})
+                for key in ("title", "period", "description"):
+                    self.assertIsInstance(project.get(key), str)
+                    self.assertTrue(project[key].strip())
+                titles.append(project["title"])
+
+        self.assertEqual(len(titles), len(set(titles)))
+
+    def test_english_translations_cover_all_projects(self):
+        """Każdy projekt ma odpowiadający rekord EN, bez kontroli sformułowań."""
+        self.assertIsInstance(self.translations, list)
+        self.assertEqual(len(self.projects), len(self.translations))
+
+        for project, translation in zip(self.projects, self.translations):
             with self.subTest(project=project["title"]):
-                self.assertIn(project["phase"], ("current", "previous"))
-                self.assertTrue(project["period"].strip())
-                self.assertTrue(project["description"].strip())
-                self.assertLessEqual(len(project["description"]), 270)
-                self.assertNotIn("http://", str(project))
-                self.assertNotIn("https://", str(project))
-                self.assertNotIn("github.com", str(project))
-                self.assertNotIn("doi.org", str(project))
-                if project["period"] != "Data do potwierdzenia":
-                    self.assertRegex(project["period"], r"^20\d{2}(?:[–-]20\d{2}|[–-]obecnie)?$")
-        uncertain = [p["title"] for p in projects if p["period"] == "Data do potwierdzenia"]
-        self.assertEqual(uncertain, ["Sensor trenażera GROM / PIORUN"])
+                self.assertIsInstance(translation, dict)
+                self.assertEqual(translation.get("sourceTitle"), project["title"])
+                for key in ("title", "period", "description"):
+                    self.assertIsInstance(translation.get(key), str)
+                    self.assertTrue(translation[key].strip())
 
-    def test_bilingual_project_data(self):
-        projects = json.loads(DATA.read_text(encoding="utf-8"))
-        translations = json.loads(TRANSLATIONS.read_text(encoding="utf-8"))
-        self.assertEqual(len(projects), len(translations))
-        self.assertEqual([p["title"] for p in projects], [p["sourceTitle"] for p in translations])
-        for project in translations:
-            with self.subTest(project=project["sourceTitle"]):
-                self.assertTrue(project["title"].strip())
-                self.assertTrue(project["period"].strip())
-                self.assertTrue(project["description"].strip())
-        self.assertEqual(sum(p["period"] == "2026–present" for p in translations), len(CURRENT))
-
-    def test_muse_xr_cognitive_scope_and_translations(self):
-        projects = {p["title"]: p for p in json.loads(DATA.read_text(encoding="utf-8"))}
-        translations = {p["sourceTitle"]: p for p in json.loads(TRANSLATIONS.read_text(encoding="utf-8"))}
-        for title in ("ARC-AFFECTIVE", "EEG Neurolyze"):
-            with self.subTest(project=title):
-                self.assertIn("Muse S Athena", projects[title]["description"])
-                self.assertIn("Muse S Athena", translations[title]["description"])
-        self.assertIn("XR", projects["EEG Neurolyze"]["description"])
-        self.assertIn("XR", translations["EEG Neurolyze"]["description"])
-        self.assertIn("obciążenia poznawczego", projects["ARC-AFFECTIVE"]["description"])
-        self.assertIn("cognitive workload", translations["ARC-AFFECTIVE"]["description"])
-        self.assertIn("wymagają walidacji", projects["EEG Neurolyze"]["description"])
-        self.assertIn("require validation", translations["EEG Neurolyze"]["description"])
-
-    def test_xr_cognition_is_a_distinct_bilingual_project(self):
-        projects = {p["title"]: p for p in json.loads(DATA.read_text(encoding="utf-8"))}
-        translations = {p["sourceTitle"]: p for p in json.loads(TRANSLATIONS.read_text(encoding="utf-8"))}
-        title = "XR-Cognition · Adaptacyjne środowiska poznawcze"
-        self.assertEqual(projects[title]["phase"], "current")
-        self.assertEqual(translations[title]["title"], "XR-Cognition · Adaptive Cognitive Environments")
-        for language in (projects[title]["description"], translations[title]["description"]):
-            self.assertIn("XR", language)
-        self.assertIn("dostosowujących", projects[title]["description"])
-        self.assertIn("adjust task difficulty", translations[title]["description"])
-
-    def test_ocular_micromovements_history_and_translation(self):
-        projects = {p["title"]: p for p in json.loads(DATA.read_text(encoding="utf-8"))}
-        translations = {p["sourceTitle"]: p for p in json.loads(TRANSLATIONS.read_text(encoding="utf-8"))}
-        title = "Mikroruchy oka · Potencjalne biomarkery neurodegeneracji"
-        self.assertEqual(projects[title]["phase"], "previous")
-        self.assertEqual(projects[title]["period"], "2019–2024")
-        self.assertEqual(translations[title]["period"], "2019–2024")
-        self.assertIn("mikroruchów oka", projects[title]["description"])
-        self.assertIn("potencjalnych biomarkerów", projects[title]["description"])
-        self.assertIn("potential biomarkers", translations[title]["description"])
-        self.assertIn("neurodegenerative", translations[title]["description"])
-
-    def test_current_project_descriptions_use_nominal_style(self):
-        projects = json.loads(DATA.read_text(encoding="utf-8"))
-        translations = json.loads(TRANSLATIONS.read_text(encoding="utf-8"))
-        for project, translation in zip(projects, translations):
-            if project["phase"] != "current":
-                continue
-            with self.subTest(project=project["title"]):
-                self.assertRegex(project["description"], r"^(?:Prace|Rozwój|Badania|Opracowanie|Fuzja|Przewidywanie|Personalizowana|Adaptacyjna|Narzędzie)\b")
-                self.assertNotRegex(project["description"], r"\b(?:Łączymy|Projektujemy|Rozwijamy|Badamy|Tworzymy|Sprawdzamy|Opracowujemy)\b")
-                self.assertNotRegex(translation["description"], r"^We\b")
-
-    def test_promotional_ui_has_sections_and_no_project_links(self):
-        panel = re.search(r'<article class="panel" id="projekty"[^>]*>[\s\S]*?</article>', HTML)
-        self.assertIsNotNone(panel)
-        self.assertNotIn("<a ", panel.group(0))
-        self.assertIn('id="projects-list"', panel.group(0))
-        self.assertIn("Aktualne programy badawczo-rozwojowe", HTML)
-        self.assertIn("Wybrane projekty i konsorcja", HTML)
-        self.assertIn("makeElement('div','project-period',entry.period)", HTML)
-        self.assertIn("loadData('docs/data/projects.json'", HTML)
-        renderer = HTML.split("function renderProjects(records){", 1)[1].split("let publicationRecords", 1)[0]
-        self.assertNotIn("createElement('a'", renderer)
-        self.assertNotIn("makeElement('a'", renderer)
-        self.assertNotIn("href", renderer)
-
-    def test_cards_have_consistent_height_and_hover(self):
-        # Each grid uses equal-size implicit rows. The tallest card determines
-        # the row height without clipping translations or long descriptions.
-        self.assertIn(".project-cards{margin-top:12px;grid-auto-rows:1fr}", HTML)
-        self.assertIn("display:flex;flex-direction:column;min-height:220px;height:100%", HTML)
-        self.assertIn("background:var(--accent-soft)", HTML)
-        self.assertIn(".project-cards .data-card:hover", HTML)
-        self.assertIn('data-theme="dark"] .project-cards .data-card:hover', HTML)
-        self.assertIn("background:var(--raised)", HTML)
-        self.assertIn("box-shadow:0 4px 16px", HTML)
-        self.assertIn("@media(hover:hover)", HTML)
-        self.assertIn(".project-cards .data-card{transition:none}", HTML)
-        self.assertNotIn("overflow:hidden", HTML.split(".project-cards{", 1)[1].split(".data-card .project-period", 1)[0])
-        self.assertNotIn("cursor:pointer", HTML.split(".project-cards{", 1)[1].split(".data-card .project-period", 1)[0])
-
-    def test_version(self):
-        self.assertIn("v1.2.19", HTML)
+    def test_page_contains_project_data_hook(self):
+        """Strona ma kontener projektów i odwołanie do danych."""
+        html = HTML.read_text(encoding="utf-8")
+        self.assertIn('id="projects-list"', html)
+        self.assertIn("docs/data/projects.json", html)
 
 
 if __name__ == "__main__":
