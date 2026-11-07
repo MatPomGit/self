@@ -3,91 +3,91 @@
     "phase": "current",
     "title": "ARC-RGBT",
     "period": "2026–obecnie",
-    "description": "Łączymy obraz widzialny i termowizyjny, by badać skuteczność detekcji obiektów w trudnych warunkach oraz granice niezawodności fuzji sensorów."
+    "description": "Badania nad fuzją obrazu widzialnego i termowizyjnego w detekcji obiektów w trudnych warunkach, ze szczególnym uwzględnieniem granic niezawodności metod łączenia danych sensorycznych."
   },
   {
     "phase": "current",
     "title": "ARC-RVI · Autonomiczna inspekcja wizualna",
     "period": "2026–obecnie",
-    "description": "Rozwijamy metody, dzięki którym robot lokalizuje obiekt, planuje ujęcia i ocenia kompletność oraz jakość dokumentacji wizualnej."
+    "description": "Rozwój metod autonomicznej inspekcji wizualnej: lokalizacji obiektu, planowania ujęć oraz oceny kompletności i jakości dokumentacji tworzonej przez robota."
   },
   {
     "phase": "current",
     "title": "ARC-HRI-SAFETY",
     "period": "2026–obecnie",
-    "description": "Projektujemy systemy przewidywania ryzyka podczas współpracy człowieka z robotem humanoidalnym, łącząc percepcję sceny z analizą ruchu i zasadami bezpieczeństwa."
+    "description": "Prace nad przewidywaniem ryzyka we współpracy człowieka z robotem humanoidalnym, z wykorzystaniem percepcji sceny, analizy ruchu i wymagań bezpieczeństwa."
   },
   {
     "phase": "current",
     "title": "ARC-AFFECTIVE",
     "period": "2026–obecnie",
-    "description": "Badamy bieżące zmiany uwagi i obciążenia poznawczego podczas zadań, także w środowiskach XR. Łączymy EEG z Muse S Athena z danymi behawioralnymi, aby opracować i zwalidować personalizowane metody estymacji stanu użytkownika."
+    "description": "Badania nad zmianami uwagi i obciążenia poznawczego podczas zadań, także w XR. Rozwój personalizowanej estymacji stanu użytkownika na podstawie EEG z Muse S Athena i danych behawioralnych."
   },
   {
     "phase": "current",
     "title": "XR-Cognition · Adaptacyjne środowiska poznawcze",
     "period": "2026–obecnie",
-    "description": "Projektujemy adaptacyjne środowiska XR, które dostosowują trudność zadań i prezentację bodźców do bieżących możliwości poznawczych użytkownika. Badamy sprzężenie zwrotne oparte na EEG, okulografii i wynikach behawioralnych."
+    "description": "Rozwój adaptacyjnych środowisk XR dostosowujących trudność zadań i prezentację bodźców do bieżących możliwości poznawczych użytkownika. Badania nad sprzężeniem zwrotnym wykorzystującym EEG, okulografię i dane behawioralne."
   },
   {
     "phase": "current",
     "title": "ContextNDD",
     "period": "2026–obecnie",
-    "description": "Tworzymy ramy analizy zachowania uwzględniające kontekst sytuacji i indywidualne różnice, zamiast opierać ocenę wyłącznie na etykietach diagnostycznych."
+    "description": "Rozwój ram analizy zachowania uwzględniających kontekst sytuacyjny i różnice indywidualne, bez sprowadzania charakterystyki użytkownika wyłącznie do etykiet diagnostycznych."
   },
   {
     "phase": "current",
     "title": "SAPIENS · Człowiek i robot humanoidalny",
     "period": "2026–obecnie",
-    "description": "Badamy, jak bezpośrednia interakcja z humanoidem wpływa na zaufanie, poczucie sprawczości, obecność społeczną i odbiór sygnałów emocjonalnych."
+    "description": "Badania nad wpływem bezpośredniej interakcji z robotem humanoidalnym na zaufanie, poczucie sprawczości, obecność społeczną oraz interpretację sygnałów emocjonalnych."
   },
   {
     "phase": "current",
     "title": "ARC Mobile Eye Tracking",
     "period": "2026–obecnie",
-    "description": "Sprawdzamy możliwości pomiaru kierunku spojrzenia za pomocą smartfonu oraz wpływ kalibracji, oświetlenia i ruchu głowy na dokładność estymacji."
+    "description": "Badania nad estymacją kierunku spojrzenia za pomocą smartfonu oraz wpływem kalibracji, oświetlenia i ruchu głowy na dokładność pomiaru."
   },
   {
     "phase": "current",
     "title": "EEG Neurolyze",
     "period": "2026–obecnie",
-    "description": "Rozwijamy narzędzia do rejestracji i analizy EEG z Muse S Athena oraz kontroli jakości danych. Platforma ma wspierać eksperymenty poznawcze i synchronizację zdarzeń, w tym przyszłą integrację z XR; pomiary sprzętowe wymagają walidacji."
+    "description": "Rozwój narzędzi do rejestracji i analizy EEG z Muse S Athena oraz kontroli jakości danych. Planowana obsługa eksperymentów poznawczych, synchronizacji zdarzeń i integracji z XR; pomiary sprzętowe wymagają walidacji."
   },
   {
     "phase": "current",
     "title": "S4D-TAM · Nawigacja autonomiczna",
     "period": "2026–obecnie",
-    "description": "Projektujemy metody oceny nawigacji bezzałogowej w warunkach ograniczonego sygnału GNSS, wykorzystując semantykę sceny i dane przestrzenne 3D/4D."
+    "description": "Rozwój metod oceny nawigacji bezzałogowej przy ograniczonej dostępności GNSS, z wykorzystaniem semantyki sceny i danych przestrzennych 3D/4D."
   },
   {
     "phase": "current",
     "title": "ARC Attachment Dynamics",
     "period": "2026–obecnie",
-    "description": "Łączymy psychologię przywiązania z modelowaniem dynamicznym, aby badać zmiany bliskości, autonomii i poczucia bezpieczeństwa w relacjach."
+    "description": "Badania nad dynamicznymi zmianami bliskości, autonomii i poczucia bezpieczeństwa w relacjach, z wykorzystaniem psychologii przywiązania i modelowania dynamicznego."
   },
   {
     "phase": "current",
     "title": "ARC-ADHD · Adaptacyjna gra badawcza",
     "period": "2026–obecnie",
-    "description": "Projektujemy grę do badania powrotu do działania po trudnym bodźcu, rozdzielając postępy w zadaniu od ewentualnego transferu umiejętności poza grę."
+    "description": "Rozwój adaptacyjnej gry do badania powrotu do działania po trudnym bodźcu, z rozróżnieniem poprawy wyników w zadaniu i ewentualnego transferu umiejętności poza grę."
   },
   {
     "phase": "current",
     "title": "AI Cognitive Resilience",
     "period": "2026–obecnie",
-    "description": "Badamy, czy odpowiedzi sztucznej inteligencji zmieniają przekonania dzięki jakości dowodów, czy raczej dzięki sile i formie perswazji."
+    "description": "Badania nad wpływem jakości dowodów oraz siły i formy perswazji w odpowiedziach AI na zmianę przekonań odbiorców."
   },
   {
     "phase": "current",
     "title": "DERA-HRI · Emocje w interakcji z robotem",
     "period": "2026–obecnie",
-    "description": "Opracowujemy narzędzie badawcze do opisu emocji i doświadczeń po kontakcie z robotem, uwzględniające responsywność, zaufanie i kontrolę."
+    "description": "Opracowanie narzędzia do badania emocji i doświadczeń związanych z interakcją z robotem, z uwzględnieniem responsywności, zaufania i poczucia kontroli."
   },
   {
     "phase": "current",
     "title": "MindDx · Symulator diagnozy psychologicznej",
     "period": "2026–obecnie",
-    "description": "Interaktywne środowisko edukacyjne do analizy przypadków, stawiania hipotez i ćwiczenia decyzji diagnostycznych bez ryzyka dla rzeczywistych pacjentów."
+    "description": "Rozwój interaktywnego środowiska edukacyjnego do analizy przypadków, formułowania hipotez i doskonalenia decyzji diagnostycznych bez ryzyka dla rzeczywistych pacjentów."
   },
   {
     "phase": "previous",
