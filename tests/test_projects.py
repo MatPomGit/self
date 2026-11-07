@@ -79,6 +79,20 @@ class ProjectsTests(unittest.TestCase):
                 self.assertTrue(project["description"].strip())
         self.assertEqual(sum(p["period"] == "2026–present" for p in translations), len(CURRENT))
 
+    def test_muse_xr_cognitive_scope_and_translations(self):
+        projects = {p["title"]: p for p in json.loads(DATA.read_text(encoding="utf-8"))}
+        translations = {p["sourceTitle"]: p for p in json.loads(TRANSLATIONS.read_text(encoding="utf-8"))}
+        for title in ("ARC-AFFECTIVE", "EEG Neurolyze"):
+            with self.subTest(project=title):
+                self.assertIn("Muse S Athena", projects[title]["description"])
+                self.assertIn("XR", projects[title]["description"])
+                self.assertIn("Muse S Athena", translations[title]["description"])
+                self.assertIn("XR", translations[title]["description"])
+        self.assertIn("obciążenia poznawczego", projects["ARC-AFFECTIVE"]["description"])
+        self.assertIn("cognitive workload", translations["ARC-AFFECTIVE"]["description"])
+        self.assertIn("wymagają walidacji", projects["EEG Neurolyze"]["description"])
+        self.assertIn("require validation", translations["EEG Neurolyze"]["description"])
+
     def test_promotional_ui_has_sections_and_no_project_links(self):
         panel = re.search(r'<article class="panel" id="projekty"[^>]*>[\s\S]*?</article>', HTML)
         self.assertIsNotNone(panel)
