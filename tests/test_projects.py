@@ -34,6 +34,7 @@ PREVIOUS = [
     "SEEKER · Głowice optoelektroniczne",
     "PolFEL · Laser na swobodnych elektronach",
     "OPTOKRYPT · Kryptografia kwantowa",
+    "Mikroruchy oka · Potencjalne biomarkery neurodegeneracji",
     "Eye Tracking w rzeczywistości mieszanej",
     "Systemy wizyjne XR w nauce i obronności",
     "RiverGUARD · Ochrona granic rzecznych",
@@ -48,7 +49,7 @@ class ProjectsTests(unittest.TestCase):
         projects = json.loads(DATA.read_text(encoding="utf-8"))
         self.assertEqual([p["title"] for p in projects if p["phase"] == "current"], CURRENT)
         self.assertEqual([p["title"] for p in projects if p["phase"] == "previous"], PREVIOUS)
-        self.assertEqual(len(projects), 26)
+        self.assertEqual(len(projects), 27)
         self.assertEqual(len({p["title"] for p in projects}), len(projects))
 
     def test_dates_copy_and_no_outbound_links(self):
@@ -105,6 +106,18 @@ class ProjectsTests(unittest.TestCase):
             self.assertIn("EEG", language)
         self.assertIn("sprzężenie zwrotne", projects[title]["description"])
         self.assertIn("feedback", translations[title]["description"])
+
+    def test_ocular_micromovements_history_and_translation(self):
+        projects = {p["title"]: p for p in json.loads(DATA.read_text(encoding="utf-8"))}
+        translations = {p["sourceTitle"]: p for p in json.loads(TRANSLATIONS.read_text(encoding="utf-8"))}
+        title = "Mikroruchy oka · Potencjalne biomarkery neurodegeneracji"
+        self.assertEqual(projects[title]["phase"], "previous")
+        self.assertEqual(projects[title]["period"], "2019–2024")
+        self.assertEqual(translations[title]["period"], "2019–2024")
+        self.assertIn("mikroruchów oka", projects[title]["description"])
+        self.assertIn("potencjalnych biomarkerów", projects[title]["description"])
+        self.assertIn("potential biomarkers", translations[title]["description"])
+        self.assertIn("neurodegenerative", translations[title]["description"])
 
     def test_promotional_ui_has_sections_and_no_project_links(self):
         panel = re.search(r'<article class="panel" id="projekty"[^>]*>[\s\S]*?</article>', HTML)
