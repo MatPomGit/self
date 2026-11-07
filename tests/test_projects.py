@@ -104,7 +104,7 @@ class ProjectsTests(unittest.TestCase):
         for language in (projects[title]["description"], translations[title]["description"]):
             self.assertIn("XR", language)
             self.assertIn("EEG", language)
-        self.assertIn("sprzężenie zwrotne", projects[title]["description"])
+        self.assertIn("sprzężeniem zwrotnym", projects[title]["description"])
         self.assertIn("feedback", translations[title]["description"])
 
     def test_ocular_micromovements_history_and_translation(self):
@@ -118,6 +118,17 @@ class ProjectsTests(unittest.TestCase):
         self.assertIn("potencjalnych biomarkerów", projects[title]["description"])
         self.assertIn("potential biomarkers", translations[title]["description"])
         self.assertIn("neurodegenerative", translations[title]["description"])
+
+    def test_current_project_descriptions_use_nominal_style(self):
+        projects = json.loads(DATA.read_text(encoding="utf-8"))
+        translations = json.loads(TRANSLATIONS.read_text(encoding="utf-8"))
+        for project, translation in zip(projects, translations):
+            if project["phase"] != "current":
+                continue
+            with self.subTest(project=project["title"]):
+                self.assertRegex(project["description"], r"^(?:Prace|Rozwój|Badania|Opracowanie)\b")
+                self.assertNotRegex(project["description"], r"\b(?:Łączymy|Projektujemy|Rozwijamy|Badamy|Tworzymy|Sprawdzamy|Opracowujemy)\b")
+                self.assertNotRegex(translation["description"], r"^We\b")
 
     def test_promotional_ui_has_sections_and_no_project_links(self):
         panel = re.search(r'<article class="panel" id="projekty"[^>]*>[\s\S]*?</article>', HTML)

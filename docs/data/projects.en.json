@@ -3,91 +3,91 @@
     "sourceTitle": "ARC-RGBT",
     "title": "ARC-RGBT",
     "period": "2026–present",
-    "description": "We combine visible and thermal imagery to study object detection under difficult conditions and the reliability limits of sensor fusion."
+    "description": "Research on visible–thermal image fusion for object detection in challenging conditions, with emphasis on the reliability limits of multisensor approaches."
   },
   {
     "sourceTitle": "ARC-RVI · Autonomiczna inspekcja wizualna",
     "title": "ARC-RVI · Autonomous Visual Inspection",
     "period": "2026–present",
-    "description": "We develop methods for robots to locate targets, plan viewpoints, and assess the completeness and quality of visual inspection records."
+    "description": "Development of autonomous visual inspection methods for target localisation, viewpoint planning and assessment of the completeness and quality of robot-generated imagery."
   },
   {
     "sourceTitle": "ARC-HRI-SAFETY",
     "title": "ARC-HRI-SAFETY",
     "period": "2026–present",
-    "description": "We design predictive risk-assessment methods for human–humanoid collaboration, combining scene perception, motion analysis and safety constraints."
+    "description": "Development of risk-prediction methods for human–humanoid collaboration based on scene perception, motion analysis and safety constraints."
   },
   {
     "sourceTitle": "ARC-AFFECTIVE",
     "title": "ARC-AFFECTIVE",
     "period": "2026–present",
-    "description": "We study moment-to-moment attention and cognitive workload during tasks, including XR environments. We combine Muse S Athena EEG with behavioural data to develop and validate personalised estimates of user state."
+    "description": "Research on task-related fluctuations in attention and cognitive workload, including XR settings. Development of personalised user-state estimation from Muse S Athena EEG and behavioural data."
   },
   {
     "sourceTitle": "XR-Cognition · Adaptacyjne środowiska poznawcze",
     "title": "XR-Cognition · Adaptive Cognitive Environments",
     "period": "2026–present",
-    "description": "We design adaptive XR environments that adjust task difficulty and stimulus presentation to the user's current cognitive capacity. We investigate feedback based on EEG, eye tracking and behavioural performance."
+    "description": "Development of adaptive XR environments that adjust task difficulty and stimulus presentation to current cognitive capacity. Research on feedback using EEG, eye tracking and behavioural data."
   },
   {
     "sourceTitle": "ContextNDD",
     "title": "ContextNDD",
     "period": "2026–present",
-    "description": "We develop a context-sensitive framework for behavioural analysis that respects individual differences rather than relying on diagnostic labels alone."
+    "description": "Development of context-sensitive behavioural analysis methods that account for individual differences without reducing user profiles to diagnostic labels."
   },
   {
     "sourceTitle": "SAPIENS · Człowiek i robot humanoidalny",
     "title": "SAPIENS · Human–Humanoid Interaction",
     "period": "2026–present",
-    "description": "We study how direct interaction with a humanoid robot shapes trust, agency, social presence and the perception of emotional cues."
+    "description": "Research on the effects of direct human–humanoid interaction on trust, agency, social presence and the interpretation of emotional cues."
   },
   {
     "sourceTitle": "ARC Mobile Eye Tracking",
     "title": "ARC Mobile Eye Tracking",
     "period": "2026–present",
-    "description": "We investigate smartphone-based gaze estimation and how calibration, lighting and head movement affect measurement accuracy."
+    "description": "Research on smartphone-based gaze estimation and the effects of calibration, lighting and head movement on measurement accuracy."
   },
   {
     "sourceTitle": "EEG Neurolyze",
     "title": "EEG Neurolyze",
     "period": "2026–present",
-    "description": "We develop Muse S Athena EEG acquisition and analysis tools with data-quality checks. The platform is intended to support cognitive experiments and event synchronisation, including future XR integration; physical recordings still require validation."
+    "description": "Development of Muse S Athena EEG acquisition and analysis tools with data-quality checks. Planned support for cognitive experiments, event synchronisation and XR integration; physical recordings require validation."
   },
   {
     "sourceTitle": "S4D-TAM · Nawigacja autonomiczna",
     "title": "S4D-TAM · Autonomous Navigation",
     "period": "2026–present",
-    "description": "We design evaluation methods for autonomous navigation in GNSS-degraded environments using scene semantics and 3D/4D spatial information."
+    "description": "Development of autonomous navigation evaluation methods for GNSS-degraded conditions using scene semantics and 3D/4D spatial data."
   },
   {
     "sourceTitle": "ARC Attachment Dynamics",
     "title": "ARC Attachment Dynamics",
     "period": "2026–present",
-    "description": "We combine attachment psychology with dynamic modelling to study changes in closeness, autonomy and perceived security in relationships."
+    "description": "Research on dynamic changes in closeness, autonomy and perceived security in relationships through attachment theory and dynamic modelling."
   },
   {
     "sourceTitle": "ARC-ADHD · Adaptacyjna gra badawcza",
     "title": "ARC-ADHD · Adaptive Research Game",
     "period": "2026–present",
-    "description": "We design a research game to study recovery of goal-directed behaviour after a challenge, distinguishing task improvement from real-world transfer."
+    "description": "Development of an adaptive research game investigating recovery of goal-directed behaviour after challenging stimuli, distinguishing task gains from transfer beyond the game."
   },
   {
     "sourceTitle": "AI Cognitive Resilience",
     "title": "AI Cognitive Resilience",
     "period": "2026–present",
-    "description": "We investigate whether AI responses shift beliefs through evidence quality or through persuasive wording and presentation."
+    "description": "Research on how evidence quality and the strength and framing of AI-generated persuasion influence belief change."
   },
   {
     "sourceTitle": "DERA-HRI · Emocje w interakcji z robotem",
     "title": "DERA-HRI · Emotions in Robot Interaction",
     "period": "2026–present",
-    "description": "We develop a research instrument for describing emotional experiences after robot interaction, including responsiveness, trust and control."
+    "description": "Development of an instrument for studying emotional responses and experiences during robot interaction, including responsiveness, trust and perceived control."
   },
   {
     "sourceTitle": "MindDx · Symulator diagnozy psychologicznej",
     "title": "MindDx · Psychological Assessment Simulator",
     "period": "2026–present",
-    "description": "An interactive educational environment for case analysis, hypothesis formation and diagnostic decision-making without risk to real patients."
+    "description": "Development of an interactive learning environment for case analysis, hypothesis formulation and diagnostic decision-making without risk to real patients."
   },
   {
     "sourceTitle": "ARIANA",
