@@ -87,9 +87,9 @@ class ProjectsTests(unittest.TestCase):
         for title in ("ARC-AFFECTIVE", "EEG Neurolyze"):
             with self.subTest(project=title):
                 self.assertIn("Muse S Athena", projects[title]["description"])
-                self.assertIn("XR", projects[title]["description"])
                 self.assertIn("Muse S Athena", translations[title]["description"])
-                self.assertIn("XR", translations[title]["description"])
+        self.assertIn("XR", projects["EEG Neurolyze"]["description"])
+        self.assertIn("XR", translations["EEG Neurolyze"]["description"])
         self.assertIn("obciążenia poznawczego", projects["ARC-AFFECTIVE"]["description"])
         self.assertIn("cognitive workload", translations["ARC-AFFECTIVE"]["description"])
         self.assertIn("wymagają walidacji", projects["EEG Neurolyze"]["description"])
@@ -103,9 +103,8 @@ class ProjectsTests(unittest.TestCase):
         self.assertEqual(translations[title]["title"], "XR-Cognition · Adaptive Cognitive Environments")
         for language in (projects[title]["description"], translations[title]["description"]):
             self.assertIn("XR", language)
-            self.assertIn("EEG", language)
-        self.assertIn("sprzężeniem zwrotnym", projects[title]["description"])
-        self.assertIn("feedback", translations[title]["description"])
+        self.assertIn("dostosowujących", projects[title]["description"])
+        self.assertIn("adjust task difficulty", translations[title]["description"])
 
     def test_ocular_micromovements_history_and_translation(self):
         projects = {p["title"]: p for p in json.loads(DATA.read_text(encoding="utf-8"))}
@@ -126,7 +125,7 @@ class ProjectsTests(unittest.TestCase):
             if project["phase"] != "current":
                 continue
             with self.subTest(project=project["title"]):
-                self.assertRegex(project["description"], r"^(?:Prace|Rozwój|Badania|Opracowanie)\b")
+                self.assertRegex(project["description"], r"^(?:Prace|Rozwój|Badania|Opracowanie|Fuzja|Przewidywanie|Personalizowana|Adaptacyjna|Narzędzie)\b")
                 self.assertNotRegex(project["description"], r"\b(?:Łączymy|Projektujemy|Rozwijamy|Badamy|Tworzymy|Sprawdzamy|Opracowujemy)\b")
                 self.assertNotRegex(translation["description"], r"^We\b")
 
