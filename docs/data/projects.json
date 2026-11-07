@@ -21,7 +21,7 @@
     "phase": "current",
     "title": "ARC-AFFECTIVE",
     "period": "2026–obecnie",
-    "description": "Badamy, jak łączyć sygnały fizjologiczne, obraz i zachowanie, aby lepiej rozumieć stany poznawcze i projektować interfejsy reagujące na kontekst użytkownika."
+    "description": "Badamy bieżące zmiany uwagi i obciążenia poznawczego podczas zadań, także w środowiskach XR. Łączymy EEG z Muse S Athena z danymi behawioralnymi, aby opracować i zwalidować personalizowane metody estymacji stanu użytkownika."
   },
   {
     "phase": "current",
@@ -45,7 +45,7 @@
     "phase": "current",
     "title": "EEG Neurolyze",
     "period": "2026–obecnie",
-    "description": "Rozwijamy narzędzia do rejestracji, przetwarzania i powtarzalnej analizy sygnałów EEG, z naciskiem na jakość danych i odtwarzalność wyników."
+    "description": "Rozwijamy narzędzia do rejestracji i analizy EEG z Muse S Athena oraz kontroli jakości danych. Platforma ma wspierać eksperymenty poznawcze i synchronizację zdarzeń, w tym przyszłą integrację z XR; pomiary sprzętowe wymagają walidacji."
   },
   {
     "phase": "current",
