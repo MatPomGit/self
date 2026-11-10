@@ -19,7 +19,7 @@
     'Kontakt': 'Contact',
     'Kontakt i profile': 'Contact and profiles',
     'Adres': 'Address',
-    'E-mail i telefon': 'Email and phone',
+    'E-mail': 'Email',
     'Profil uczelniany': 'University profile',
     'Ludzie Nauki': 'People of Science',
     'Dla': 'For',
@@ -128,7 +128,6 @@
     'Cite': 'Cite',
     'copy BibTeX': 'Copy BibTeX',
     'XR, HCI i HRI': 'XR, HCI and HRI',
-    'tel. +48 17 865 14 81': 'phone +48 17 865 14 81',
   };
 
   // HTML &nbsp; becomes U+00A0 in text nodes. Match translations independently
