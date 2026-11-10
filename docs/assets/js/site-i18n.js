@@ -21,6 +21,7 @@
     'Adres': 'Address',
     'E-mail i telefon': 'Email and phone',
     'Profil uczelniany': 'University profile',
+    'Ludzie Nauki': 'People of Science',
     'Dla': 'For',
     'studentów': 'students',
     'Dla studentów': 'For students',

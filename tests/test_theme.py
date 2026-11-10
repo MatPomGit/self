@@ -212,15 +212,22 @@ class ThemeTests(unittest.TestCase):
         import re
         section = re.search(r'<article class="panel" id="kontakt"[\s\S]*?</article>', HTML)
         self.assertIsNotNone(section)
-        self.assertEqual(section.group(0).count('class="link-icon'), 3)
-        self.assertEqual(section.group(0).count('aria-hidden="true"'), 3)
+        self.assertEqual(section.group(0).count('class="link-icon'), 6)
+        self.assertEqual(section.group(0).count('aria-hidden="true"'), 6)
         for text, url in (
             ("GitHub", "https://github.com/MatPomGit"),
             ("ORCID", "https://orcid.org/0000-0001-7769-8919"),
             ("Profil uczelniany", "https://mpomianek.v.prz.edu.pl/"),
+            ("Google Scholar", "https://scholar.google.com/citations?user=B_NDcwsAAAAJ&amp;hl=pl"),
+            ("LinkedIn", "https://www.linkedin.com/in/mateusz-pomianek-136455168"),
+            ("Ludzie Nauki", "https://ludzie.nauka.gov.pl/ln/profiles/mateusz.pomianek.cwqxhvIDAOX"),
         ):
             self.assertIn(url, section.group(0))
             self.assertIn("<span>" + text + "</span>", section.group(0))
+            self.assertRegex(
+                section.group(0),
+                re.escape('href="' + url + '"') + r' target="_blank" rel="noopener noreferrer"',
+            )
 
     def test_work_in_progress_filter_matches_wheel(self):
         self.assertNotIn(">Cytowania</text>", HTML)
@@ -249,7 +256,7 @@ class ThemeTests(unittest.TestCase):
         self.assertIn('.manuscript-next{font-size:inherit;line-height:inherit;', HTML)
 
     def test_version(self):
-        self.assertIn("v1.2.19", HTML)
+        self.assertIn("v1.2.20", HTML)
 
 
 if __name__ == "__main__":

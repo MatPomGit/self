@@ -25,6 +25,8 @@ assert.equal(pl.language, 'pl');
 assert.equal(en.translate('Wybierz'), 'Choose a');
 assert.equal(en.translate('kategorię'), 'category');
 assert.equal(en.translate('Dla studentów'), 'For students');
+assert.equal(en.translate('Ludzie Nauki'), 'People of Science');
+assert.equal(pl.translate('Ludzie Nauki'), 'Ludzie Nauki');
 assert.equal(en.translate('Świat większy od nas'), 'A world bigger than us');
 assert.equal(en.translate('Wiele sposobów widzenia'), 'Many ways of seeing');
 assert.equal(en.translate('Świat, który tworzy mózg'), 'The world our brains create');
