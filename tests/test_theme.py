@@ -208,6 +208,19 @@ class ThemeTests(unittest.TestCase):
         self.assertNotIn('Gdy ktoś pyta mnie, czym się zajmuję', HTML)
         self.assertNotIn('<a ', content)
 
+    def test_contact_does_not_publish_office_phone(self):
+        """Adres e-mail zostaje, ale numer służbowy nie jest publikowany."""
+        contact = re.search(r'<article class="panel" id="kontakt"[\s\S]*?</article>', HTML)
+        self.assertIsNotNone(contact)
+        self.assertIn('href="mailto:m.pomianek@prz.edu.pl"', contact.group(0))
+        self.assertNotIn("tel. +48 17 865 14 81", contact.group(0))
+        self.assertNotIn("E-mail i telefon", HTML)
+        self.assertIn('>E-mail</text>', HTML)
+        archive = (ROOT / "docs/archive/index_previous_20261030.html").read_text(encoding="utf-8")
+        translations = (ROOT / "docs/assets/js/site-i18n.js").read_text(encoding="utf-8")
+        for page in (HTML, archive, translations):
+            self.assertNotIn("17 865 14 81", page)
+
     def test_contact_links_have_icons(self):
         import re
         section = re.search(r'<article class="panel" id="kontakt"[\s\S]*?</article>', HTML)
@@ -256,7 +269,7 @@ class ThemeTests(unittest.TestCase):
         self.assertIn('.manuscript-next{font-size:inherit;line-height:inherit;', HTML)
 
     def test_version(self):
-        self.assertIn("v1.2.20", HTML)
+        self.assertIn("v1.2.21", HTML)
 
 
 if __name__ == "__main__":
