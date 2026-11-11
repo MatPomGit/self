@@ -43,8 +43,8 @@ class ContentAuditTests(unittest.TestCase):
             self.assertEqual(result['counts']['format_groups'], 1)
             self.assertEqual(result['counts']['extraction_incomplete'], 1)
             pair = next(x for x in result['pairs'] if
-                        'Pierwsza' in x['a'] + x['b'] and
-                        'Druga' in x['a'] + x['b'])
+                        'pierwsza' in x['a'] + x['b'] and
+                        'druga' in x['a'] + x['b'])
             self.assertGreater(pair['coverage_shorter_5gram'], .75)
             self.assertEqual(pair['classification'], 'NEAR_TEXT_DUPLICATE_CANDIDATE')
             self.assertTrue(pair['evidence'])
