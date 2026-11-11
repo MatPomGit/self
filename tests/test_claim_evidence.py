@@ -8,7 +8,7 @@ from xml.sax.saxutils import escape
 from scripts.audit_content_overlap import Extracted
 from scripts.audit_repeated_claims import (
     REPORTS, UNIQUE_PAIR, claim_candidates, distinct_passages,
-    docx_tables, analyze, save
+    docx_tables, table_row_metrics, analyze, save
 )
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -63,6 +63,23 @@ class ClaimEvidenceTests(unittest.TestCase):
         self.assertTrue(candidates)
         self.assertLess(candidates[0]["fraction_5gram_found_in_other"],.1)
         self.assertIs(candidates[0]["verified_unique"],False)
+
+    def test_reordered_table_columns_are_not_mistaken_for_unique_data(self):
+        from scripts.audit_content_overlap import grams, tokens
+        # A PDF may flatten a table into another column order.
+        pdf="Metoda Wartość Opis Robotyka 85 procent Analiza"
+        docx="Opis Metoda Wartość Analiza Robotyka 85 procent"
+        score=table_row_metrics(
+            docx,grams(tokens(pdf)),set(tokens(pdf)))
+        self.assertEqual(score["fraction_words_found_in_pdf"],1.)
+        self.assertEqual(score["triage_flag"],"LAYOUT_REORDERING_POSSIBLE")
+
+    def test_strongly_shared_sections_not_mislabelled_distinct(self):
+        repeated=("Porównanie metod klasyfikacji emocji w systemach "
+                  "multimodalnych na wielu próbach danych. ")*11
+        a=fake_doc("a",[repeated])
+        b=fake_doc("b",[repeated])
+        self.assertFalse(distinct_passages(a,b))
 
     def test_docx_table_rows_keep_cells(self):
         with TemporaryDirectory() as tmp:

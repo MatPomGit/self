@@ -206,3 +206,13 @@ Dla korekty wniosku rozdzielono trzy rodzaje dowodów:
 zasadność interpretacji. Sam wynik embeddingów **nie zastępuje**
 punktów (2) i (3). Nie wykonano automatycznych zmian w oryginalnych
 DOCX/PDF.
+
+### Kontrola artefaktów ekstrakcji PDF
+
+Porównanie tabel przeprowadza się dwoma niezależnymi wskaźnikami:
+pokryciem **uporządkowanych 5-gramów** i pokryciem **zbioru słów**.
+Niska zgodność 5-gramów przy wysokiej zgodności słów może wskazywać
+wyłącznie zmianę kolejności kolumn podczas ekstrakcji PDF.
+Nie wolno interpretować jej automatycznie jako informacji unikalnej.
+Fragmenty o wysokiej zgodności tekstowej (≥80% 5-gramów) nie są
+raportowane na liście kandydatów do zachowania jako „odrębna treść”.

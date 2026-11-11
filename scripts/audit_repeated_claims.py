@@ -107,6 +107,8 @@ def distinct_passages(a,b,limit=10):
         if not needle:
             continue
         fraction=len(needle & target)/len(needle) if target else 0.
+        if fraction >= .8:
+            continue  # Already textually well represented in the other report.
         rows.append({
             "source":a.path,"locator":p["locator"],
             "fraction_5gram_found_in_other":round(fraction,4),
@@ -115,6 +117,28 @@ def distinct_passages(a,b,limit=10):
         })
     rows.sort(key=lambda x:(x["fraction_5gram_found_in_other"],x["locator"]))
     return rows[:limit]
+
+
+def table_row_metrics(rowtext, target_grams, target_words):
+    """Compare word sets as a layout-tolerant complement to ordered 5-grams."""
+    words=tokens(rowtext)
+    g=grams(words)
+    if len(g)<3:
+        return None
+    five=len(g & target_grams)/len(g) if target_grams else 0.
+    meaningful={w for w in words if len(w)>2}
+    shared=len(meaningful & target_words)/len(meaningful) if meaningful else 0.
+    if five < .3 and shared >= .75:
+        flag="LAYOUT_REORDERING_POSSIBLE"
+    elif five < .5 and shared < .6:
+        flag="POTENTIALLY_DISTINCT_ROW_WORDING"
+    else:
+        flag="OVERLAPPING_ROW_CONTENT"
+    return {
+        "fraction_5gram_found_in_pdf":round(five,4),
+        "fraction_words_found_in_pdf":round(shared,4),
+        "triage_flag":flag,
+    }
 
 
 def analyze(root,scope):
@@ -148,15 +172,15 @@ def analyze(root,scope):
     a=load(UNIQUE_PAIR[0]);b=load(UNIQUE_PAIR[1])
     tables=docx_tables(scope/UNIQUE_PAIR[0])
     comparative=grams(b.words)
+    comparative_words=set(b.words)
     table_rows=[]
     for row in tables:
         rowtext=" ".join(row["cells"])
-        g=grams(tokens(rowtext))
-        if len(g)<3:
+        scores=table_row_metrics(rowtext,comparative,comparative_words)
+        if scores is None:
             continue
-        match=len(g & comparative)/len(g)
         table_rows.append({
-            **row,"fraction_5gram_found_in_pdf":round(match,4),
+            **row,**scores,
             "verified_unique":False,
         })
     table_rows.sort(key=lambda x:(x["fraction_5gram_found_in_pdf"],x["locator"]))
@@ -216,8 +240,10 @@ def save(report,dest):
                          f"“{x['excerpt'][:190]}”")
     lines.append("### Table-row candidates")
     for x in unique["table_rows_needing_check"][:8]:
-        lines.append(f"- {x['locator']} (coverage: "
-                     f"{x['fraction_5gram_found_in_pdf']:.1%}) — "
+        lines.append(f"- {x['locator']} (5-gram: "
+                     f"{x['fraction_5gram_found_in_pdf']:.1%}; "
+                     f"word coverage: {x['fraction_words_found_in_pdf']:.1%}; "
+                     f"flag: {x['triage_flag']}) — "
                      f"{' | '.join(x['cells'])[:190]}")
     (dest/"claim_evidence.md").write_text("\n".join(lines)+"\n",encoding="utf-8")
 
