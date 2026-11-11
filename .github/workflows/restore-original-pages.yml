@@ -38,6 +38,19 @@ jobs:
         run: python scripts/build_short_links.py --site . --check
       - name: Validate Python content, metadata and links
         run: python -m unittest discover -s tests -v
+      - name: Pilot content-overlap audit (read-only, PR only)
+        if: github.event_name == 'pull_request'
+        continue-on-error: true
+        run: |
+          python scripts/audit_content_overlap.py --scope files/inne/analizy --output-dir "$RUNNER_TEMP/content-audit" --top 20 --ci-summary
+      - name: Save content-overlap pilot report
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: content-overlap-pilot
+          path: ${{ runner.temp }}/content-audit/
+          retention-days: 7
+          if-no-files-found: warn
       - name: Validate JavaScript syntax and interactive behavior
         run: |
           node --check docs/assets/js/site-i18n.js
