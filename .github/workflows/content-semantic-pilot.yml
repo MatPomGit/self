@@ -73,6 +73,11 @@ jobs:
             --model-dir "$RUNNER_TEMP/models/multilingual" \
             --output-dir "$RUNNER_TEMP/content-semantic" \
             --threshold 0.76
+      - name: Separate substantive reuse from citations and generic topical matches
+        run: |
+          python scripts/triage_semantic_results.py \
+            --input "$RUNNER_TEMP/content-semantic/semantic.json" \
+            --output-dir "$RUNNER_TEMP/content-semantic"
       - name: Summarize semantic candidate rankings without report excerpts
         if: success()
         run: |
@@ -83,6 +88,7 @@ jobs:
           root = Path(os.environ['RUNNER_TEMP']) / 'content-semantic'
           doc = json.loads((root / 'semantic.json').read_text(encoding='utf-8'))
           bench = json.loads((root / 'semantic_benchmark.json').read_text(encoding='utf-8'))
+          triage = json.loads((root / 'semantic_triage.json').read_text(encoding='utf-8'))
           print('SEMANTIC_RESULTS ' + json.dumps({
               'documents': doc['documents'],
               'passages': doc['passages'],
@@ -97,6 +103,12 @@ jobs:
                   'fraction_a': row['matched_fraction_a'],
                   'fraction_b': row['matched_fraction_b']
               }, ensure_ascii=False))
+          print('SEMANTIC_TRIAGE_SUMMARY ' + json.dumps({
+              'classes': triage['counts_by_class'],
+              'retained': triage['pairs_retained'],
+              'total': triage['candidate_pairs_total'],
+              'verified': False
+          }, ensure_ascii=False))
           print('SEMANTIC_BENCH ' + json.dumps({
               'confusion': bench['confusion'],
               'precision': bench['precision'],
@@ -106,6 +118,7 @@ jobs:
           }, ensure_ascii=False))
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as out:
               out.write((root / 'semantic.md').read_text(encoding='utf-8'))
+              out.write('\n\n' + (root / 'semantic_triage.md').read_text(encoding='utf-8'))
               out.write('\n\n### Synthetic benchmark (not real-corpus validation)\n')
               out.write('Precision: ' + str(bench['precision']) +
                         '; recall: ' + str(bench['recall']) +

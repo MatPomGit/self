@@ -138,3 +138,36 @@ Model musi być pozyskany z wiarygodnego źródła i sprawdzony przed
 instalacją. Skrypt nie wykonuje samodzielnie bootstrapu modelu;
 CI testuje jedynie orkiestrację z kontrolowanym fałszywym encoderem,
 **nie rzeczywiste wnioskowanie semantyczne**.
+
+## Evidence-aware triage po uruchomieniu modelu
+
+`scripts/triage_semantic_results.py` klasyfikuje zachowane w
+`semantic.json` świadectwa podobieństwa:
+
+- `BROAD_CONTENT_REUSE_CANDIDATE` – wiele dopasowanych fragmentów oraz
+  dwukierunkowe pokrycie (wstępne ≥35% w obu dokumentach).
+- `LOCAL_CONTENT_OVERLAP_CANDIDATE` – powtarzające się konkretne
+  wypowiedzi, ale bez przesłanek do scalania całych raportów.
+- `SHARED_BIBLIOGRAPHY_CANDIDATE` – wysokie wyniki dotyczą przede
+  wszystkim wspólnych pozycji literatury i DOI.
+- `SHARED_KEYWORDS_CANDIDATE` – wspólne słowa kluczowe, nie wyniki.
+- `TOPIC_SIMILARITY_LOW_COVERAGE` – pokrewne zagadnienie lub nieliczne
+  dopasowane fragmenty.
+
+Dodatkowy flag `NUMERIC_CLAIM_REVIEW_REQUIRED` wyłapuje podobne
+sformułowania zawierające wartości, progi lub jednostki. Nie dowodzi,
+że podana liczba jest poprawna, identyczna lub wiarygodna.
+Wyniki zapisane jako `semantic_triage.json` i
+`semantic_triage.md` wraz z pozostałymi artefaktami eksperymentu.
+
+```bash
+python scripts/triage_semantic_results.py \
+  --input reports/content-audit/semantic/semantic.json \
+  --output-dir reports/content-audit/semantic
+```
+
+Klasyfikacja działa **tylko na zapisanych fragmentach dowodowych**;
+jeżeli wykaz par został obcięty do top N, sumy klas odnoszą się
+wyłącznie do zapisanych pozycji. Żaden wynik nie jest oceną
+merytorycznej tożsamości wniosków. Przed usuwaniem lub łączeniem
+raportów wymagana jest weryfikacja źródeł i twierdzeń.
