@@ -74,3 +74,67 @@ Pliki publicznej strony nie są modyfikowane. Narzędzie odmówi zapisu
 wyników w `files/`, `docs/`, `materials/` i `_site/`.
 Duże, silnie skompresowane XML wewnątrz ODT/DOCX są odrzucane przed
 dekompresją. Wszystkie klasyfikacje wymagają sprawdzenia treści.
+
+## Faza 2 — embeddingi wielojęzyczne offline (opcjonalne wykonanie lokalne)
+
+Nowy skrypt `scripts/audit_semantic_overlap.py` przeszukuje wszystkie
+**40 dokumentów logicznych**, dzieląc je na oznaczone stroną/akapitem
+fragmenty i szukając semantycznie podobnych wypowiedzi.
+
+W przeciwieństwie do pilotażu leksykalnego wykonanie tej fazy **wymaga
+rzeczywistego, już pobranego modelu embeddingowego**. Ścieżka
+`--model-dir` musi wskazywać folder modelu na komputerze wykonującym
+analizę. Kod nigdy nie próbuje pobierać modelu ani wysyłać dokumentów
+do API. Ustawia `HF_HUB_OFFLINE=1`, `TRANSFORMERS_OFFLINE=1`,
+`trust_remote_code=False` i `local_files_only=True`.
+
+Wymagane lokalnie: `numpy>=1.26,<3`, `sentence-transformers`,
+`pypdf>=5,<7`. W pełni odseparowane od CI publikacji strony.
+Przykładowo na komputerze mającym już zainstalowany model wielojęzyczny:
+
+```bash
+python scripts/audit_semantic_overlap.py \
+  --scope files/inne/analizy \
+  --model-dir /opt/models/paraphrase-multilingual-MiniLM-L12-v2 \
+  --output-dir reports/content-audit/semantic \
+  --threshold 0.76
+```
+
+**Wyniki:** `semantic.json` i `semantic.md`: ranking dokumentów,
+zgodne semantycznie fragmenty z lokalizacją, SHA-256 źródeł,
+parametry modelu i status `UNVERIFIED`.
+Próg 0.76 jest wstępny i **nie został skalibrowany na raportach**.
+
+### Zestaw kontrolny
+
+`tests/fixtures/semantic_pairs.json` zawiera 15 **syntetycznych** par:
+dosłowne powtórzenia, parafrazy PL, parafrazy PL–EN, wspólną tematykę,
+sprzeczne twierdzenia oraz dokumenty niezwiązane. Sprzeczność nie jest
+równoważnością merytoryczną nawet wtedy, gdy embeddingi są podobne.
+
+Po przygotowaniu modelu uruchom:
+
+```bash
+python scripts/evaluate_semantic_benchmark.py \
+  --model-dir /opt/models/paraphrase-multilingual-MiniLM-L12-v2 \
+  --output-dir reports/content-audit/semantic
+```
+
+Wynik `semantic_benchmark.json` zawiera macierz pomyłek,
+precision, recall, F1 i balanced accuracy. To **test syntetyczny**,
+a nie miarodajna walidacja na prawdziwych raportach.
+Przed decyzją o konsolidacji konieczny jest niezależny, reprezentatywny
+zbiór ludzkich ocen na fragmentach rzeczywistego korpusu.
+
+### Interpretacja wyników
+
+**Embedding wykrywa podobieństwo znaczeniowe, ale nie dowodzi tożsamości
+hipotez, metod, wyników, jednostek miary ani zgodności liczbowej.**
+Często podaje wysokie wyniki dla twierdzeń sprzecznych. Potencjalne
+pokrycie jest kandydatem do weryfikacji, nigdy automatycznym
+`MERGE` lub `SUPERSEDE`.
+
+Model musi być pozyskany z wiarygodnego źródła i sprawdzony przed
+instalacją. Skrypt nie wykonuje samodzielnie bootstrapu modelu;
+CI testuje jedynie orkiestrację z kontrolowanym fałszywym encoderem,
+**nie rzeczywiste wnioskowanie semantyczne**.
