@@ -216,3 +216,15 @@ wyłącznie zmianę kolejności kolumn podczas ekstrakcji PDF.
 Nie wolno interpretować jej automatycznie jako informacji unikalnej.
 Fragmenty o wysokiej zgodności tekstowej (≥80% 5-gramów) nie są
 raportowane na liście kandydatów do zachowania jako „odrębna treść”.
+
+## Tryb uruchamiania kosztowniejszego modelu
+
+Wielojęzyczny eksperyment embeddingowy `content-semantic-pilot.yml`
+został po pierwszym **udanym pełnym przebiegu** ustawiony jako
+**wyłącznie manualny** (`workflow_dispatch`). Nie uruchamia się
+automatycznie dla każdego commita PR, co ogranicza zużycie minut CI.
+Podczas eksperymentu model jest pobierany z przypiętego rewizją
+publicznego repozytorium, a teksty dokumentów są przetwarzane
+wyłącznie lokalnie. Workflow można uruchamiać manualnie po jego
+pojawieniu się na domyślnej gałęzi repozytorium. Lekki audyt tekstowy
+i dowodowy nadal działa automatycznie w PR.
