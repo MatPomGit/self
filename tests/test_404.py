@@ -44,7 +44,7 @@ class NotFoundPageTests(unittest.TestCase):
     def test_palettes_and_language_match_homepage(self):
         home = (ROOT / "index.html").read_text(encoding="utf-8")
         for token in ('--accent:#1d4f7a', '--accent:#93c2e6',
-                      '--surface:#202a35', 'localStorage.getItem(\\'self-theme\\')'):
+                      '--surface:#202a35', "localStorage.getItem('self-theme')"):
             self.assertIn(token, home)
             self.assertIn(token, PAGE)
         self.assertIn('data-lang-content="en"', PAGE)
