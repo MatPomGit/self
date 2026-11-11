@@ -179,3 +179,30 @@ top przykładów występuje także fragment narracji. Dla słów kluczowych
 przy bardzo małym pokryciu obydwu źródeł stosowana jest analogiczna
 ochrona. Wartości procentowe, jednostki i progi są oznaczane jako
 wymagające sprawdzenia, a nie automatycznie uznawane za zgodne.
+
+## Faza 3 — weryfikacja konkretnych twierdzeń naukowych
+
+Wyniki kontroli źródeł, status korekty interpretacji EAR i liczb 84%/86%
+dla ADHD/ASD oraz wymagane dane źródłowe opisuje
+[`docs/CONTENT_AUDIT_CLAIMS.md`](CONTENT_AUDIT_CLAIMS.md).
+
+`scripts/audit_repeated_claims.py` automatycznie odczytuje realne
+dokumenty i zapisuje świadectwa dla par EAR i RF ADHD/ASD (plik,
+SHA-256, lokalizacja, fragment). Wyszukuje również potencjalnie
+odrębne sekcje oraz wiersze tabel w parze dwóch raportów
+o analizie afektywnej. Wyniki `claim_evidence.json` i
+`claim_evidence.md` są artefaktami PR, a nie plikami publikowanymi
+na stronie.
+
+```bash
+python scripts/audit_repeated_claims.py \
+  --scope files/inne/analizy \
+  --output-dir reports/content-audit/claims
+```
+
+Dla korekty wniosku rozdzielono trzy rodzaje dowodów:
+(1) identyczność fragmentu w repozytorium, (2) zgodność liczb ze
+źródłem pierwotnym i jego kontekstem walidacji oraz (3) kliniczną
+zasadność interpretacji. Sam wynik embeddingów **nie zastępuje**
+punktów (2) i (3). Nie wykonano automatycznych zmian w oryginalnych
+DOCX/PDF.

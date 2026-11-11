@@ -47,6 +47,10 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           python scripts/audit_report_differences.py --scope files/inne/analizy --output-dir "$RUNNER_TEMP/content-audit" --ci-summary
+      - name: Extract source passages for scientific claim review
+        if: github.event_name == 'pull_request'
+        run: |
+          python scripts/audit_repeated_claims.py --scope files/inne/analizy --output-dir "$RUNNER_TEMP/content-audit"
       - name: Save content-overlap pilot report
         if: github.event_name == 'pull_request' && always()
         uses: actions/upload-artifact@v4
