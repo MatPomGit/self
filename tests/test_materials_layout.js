@@ -63,20 +63,22 @@ assert.ok(style.includes('@media(max-width:620px)'), 'Mobile viewport breakpoint
 const group = one('.materials-group');
 assert.equal(group.display, 'block', 'Block cards must be fragmentable across columns');
 assert.equal(group.width, '100%');
-assert.equal(group['break-inside'], 'auto', 'Card content must be able to continue in the next column');
-assert.equal(group['page-break-inside'], 'auto');
+assert.equal(group['break-inside'], 'avoid-column', 'Prevent a panel title from being left alone at a column boundary');
+assert.equal(group['page-break-inside'], 'avoid', 'Keep panels with their first file row when printing');
 assert.equal(group['box-decoration-break'], 'clone', 'Fragment borders and padding must be preserved');
 assert.ok(cssLength(group.padding, 'px', 'Card padding') <= 8);
 assert.ok((group.margin || '').startsWith('0 0 '), 'Cards must not have a top margin');
 const flow = one('.materials-group--flow');
 assert.equal(flow.display, 'block', 'Large cards cannot remain inline-block');
-assert.equal(flow['break-inside'], 'auto', 'Long cards must split between columns');
-assert.equal(one('.materials-group--flow .materials-subgroup')['break-inside'], 'auto');
+assert.equal(flow['break-inside'], 'avoid-column', 'Large panels also must not leave an orphan heading');
+assert.equal(one('.materials-group--flow .materials-subgroup')['break-inside'], 'avoid-column');
 const subgroup = one('.materials-subgroup');
-assert.equal(subgroup['break-inside'], 'auto', 'A single long module must be fragmentable');
+assert.equal(subgroup['break-inside'], 'avoid-column', 'Module title must stay with its first line of files');
 assert.equal(subgroup['box-decoration-break'], 'clone');
-assert.equal(one('.materials-group>h4,.materials-subgroup>h5')['break-after'], 'avoid',
+assert.equal(one('.materials-group>h4,.materials-subgroup>h5')['break-after'], 'avoid-column',
   'Headings should stay with the first row of their content');
+assert.equal(one('.materials-group>h4,.materials-subgroup>h5')['page-break-after'], 'avoid',
+  'Printed headings should not be orphaned');
 const columns = one('.materials-columns');
 assert.equal(columns.display, 'flex', 'Module groups must flow beside one another');
 assert.equal(columns['flex-wrap'], 'wrap', 'Module groups must wrap instead of overflowing');

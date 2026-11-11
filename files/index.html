@@ -69,17 +69,22 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 .theme-sun{display:none}
 :root[data-theme="dark"] .theme-sun{display:block}
 :root[data-theme="dark"] .theme-moon{display:none}
+/* Keep each panel heading with at least its first line of files.
+   Avoiding column breaks on the panel is stronger than break-after on h4:
+   in Chromium a following flex .materials-columns may otherwise start in
+   the next column, leaving only the title at the bottom of the previous one.
+   Oversized cards can still fragment when no column can contain them. */
 .materials-grid{columns:5 16rem;column-gap:7px;margin-top:6px}
-.materials-group{display:block;width:100%;min-width:0;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--surface);margin:0 0 7px;break-inside:auto;page-break-inside:auto;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.materials-group{display:block;width:100%;min-width:0;padding:6px;border:1px solid var(--line);border-radius:6px;background:var(--surface);margin:0 0 7px;break-inside:avoid-column;page-break-inside:avoid;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 .materials-group--wide{grid-column:auto}
-.materials-group--flow{display:block;break-inside:auto}
-.materials-group>h4,.materials-subgroup>h5{break-after:avoid}
-.materials-group--flow .materials-subgroup{break-inside:auto}
+.materials-group--flow{display:block;break-inside:avoid-column}
+.materials-group>h4,.materials-subgroup>h5{break-after:avoid-column;page-break-after:avoid}
+.materials-group--flow .materials-subgroup{break-inside:avoid-column}
 .materials-columns{display:flex;flex-wrap:wrap;align-items:flex-start;gap:3px}
 .materials-columns>.materials-subgroup{flex:1 1 8rem;max-width:100%}
 /* Długie moduły korzystają z całej szerokości karty; krótsze mogą sąsiadować. */
 .materials-columns>.materials-subgroup:has(.materials-list li:nth-child(n+9):not([hidden])){flex-basis:100%}
-.materials-subgroup{min-width:0;padding:2px 2px 2px;background:transparent;border:1px solid var(--subgroup-line);border-radius:4px;margin-top:2px;break-inside:auto;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.materials-subgroup{min-width:0;padding:2px 2px 2px;background:transparent;border:1px solid var(--subgroup-line);border-radius:4px;margin-top:2px;break-inside:avoid-column;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 .materials-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;column-gap:4px;row-gap:0;align-items:baseline}
 .materials-list--dense{line-height:1.05}
 .materials-list li{flex:0 1 auto;min-width:0;max-width:100%;break-inside:avoid}
