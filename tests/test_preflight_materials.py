@@ -12,7 +12,7 @@ from scripts.preflight_materials import problem, quarantine, scan
 class PreflightTests(unittest.TestCase):
     def test_valid_documents_and_invalid_stubs(self):
         with TemporaryDirectory() as tmp:
-            materials = Path(tmp) / "materials"
+            materials = Path(tmp) / "files"
             subject = materials / "course"
             subject.mkdir(parents=True)
             good_pdf = subject / "good.pdf"

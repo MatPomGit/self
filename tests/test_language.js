@@ -70,7 +70,7 @@ assert.match(html, /href="\?lang=pl" hreflang="pl" lang="pl" aria-current="page"
 assert.match(html, /href="\?lang=en" hreflang="en" lang="en"/);
 assert.match(html, /<script src="docs\/assets\/js\/site-i18n.js"><\/script>/);
 assert.match(html, /<img class="portrait" src="docs\/images\/self.png"/);
-assert.match(html, /href="materials\/"/);
+assert.match(html, /href="files\/"/);
 assert.match(html, /loadData\('docs\/data\/projects.json'/);
 assert.match(html, /loadData\('docs\/data\/publications.json'/);
 assert.match(html, /fetch\('docs\/data\/in-progress.json'\)/);

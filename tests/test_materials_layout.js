@@ -1,7 +1,7 @@
 // Validate layout semantics, not exact CSS formatting or a whole HTML snapshot.
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const html = fs.readFileSync('materials/index.html', 'utf8');
+const html = fs.readFileSync('files/index.html', 'utf8');
 const style = html.split('<style>')[1]?.split('</style>')[0];
 assert.ok(style, 'Materials page must include its stylesheet');
 

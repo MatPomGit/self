@@ -22,7 +22,7 @@ class References(HTMLParser):
 
 class SourceLinksTests(unittest.TestCase):
     def test_local_html_links_resolve_in_repository(self):
-        pages = [ROOT / "index.html", *sorted((ROOT / "materials").rglob("*.html"))]
+        pages = [ROOT / "index.html", *sorted((ROOT / "files").rglob("*.html"))]
         for page in pages:
             parser = References()
             parser.feed(page.read_text(encoding="utf-8"))

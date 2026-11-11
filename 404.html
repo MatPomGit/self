@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,follow">
+  <title>Nie znaleziono strony – matpom.pl</title>
+  <script>
+    // Preserve legacy deep links to materials after moving public files/.
+    (function () {
+      const legacy = '/materials/';
+      const path = window.location.pathname;
+      if (path.startsWith(legacy) && path !== legacy) {
+        window.location.replace('/files/' + path.slice(legacy.length) +
+          window.location.search + window.location.hash);
+      }
+    }());
+  </script>
+</head>
+<body>
+  <main>
+    <h1>Nie znaleziono strony</h1>
+    <p>Przejdź do <a href="/">strony głównej</a> lub <a href="/files/">materiałów dydaktycznych</a>.</p>
+  </main>
+</body>
+</html>

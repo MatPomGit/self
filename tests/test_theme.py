@@ -6,7 +6,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 HTML = (ROOT / "index.html").read_text(encoding="utf-8")
-MATERIALS_HTML = (ROOT / "materials" / "index.html").read_text(encoding="utf-8")
+MATERIALS_HTML = (ROOT / "files" / "index.html").read_text(encoding="utf-8")
 
 
 class Parser(HTMLParser):
