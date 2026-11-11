@@ -54,3 +54,9 @@ i Jaccard trójek znakowych (0.28); próg selekcji 0.64.
 Wszystkie progi **służą triage** i wymagają walidacji. Brak tekstowego
 dopasowania nie wyklucza parafrazy; raport może być przydatny z innego powodu.
 Decyzje MERGE/SUPERSEDE wymagają późniejszej weryfikacji merytorycznej.
+
+**Ochrona przed błędną klasyfikacją:** różne podziały PDF i DOCX na okna
+mogą obniżyć liczbę dopasowanych fragmentów. `FORMAT_VERSION_MISMATCH_CANDIDATE`
+wymaga dodatkowo niskiego pokrycia 5-gramów całego dokumentu (<25%).
+Dane tabelaryczne i łamanie wyrazów nadal wymagają oględzin; liczby są
+wskaźnikami do przeglądu, nie wynikiem walidacji semantycznej.

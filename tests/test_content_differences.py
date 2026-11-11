@@ -65,6 +65,30 @@ class DifferenceTests(unittest.TestCase):
                          label="format",same_stem=True)
         self.assertEqual(result["interpretation"],"FORMAT_VERSION_MISMATCH_CANDIDATE")
 
+    def test_formatting_variants_do_not_trigger_false_mismatch(self):
+        # Different segmentation may lower window alignment despite shared text.
+        paragraph = ("Kompleksowy raport dokumentuje wyniki badań nad "
+                     "interakcją robotów i człowieka oraz ich oceną. ")*14
+        first = doc("x.docx", [paragraph])
+        second = doc("x.pdf", [paragraph])
+        # Simulate a PDF extraction that groups words differently.
+        second.segments = [{"location": "str. 1",
+                            "text": paragraph.replace("robotów i człowieka",
+                                                    "robotów oraz człowieka")}]
+        result = compare(first, second, label="format", same_stem=True)
+        self.assertGreater(result["whole_doc_shorter_5gram_coverage"], .95)
+        self.assertNotEqual(result["interpretation"],
+                            "FORMAT_VERSION_MISMATCH_CANDIDATE")
+
+    def test_real_robot_report_is_not_automatically_marked_mismatched(self):
+        from scripts.audit_content_overlap import extract
+        folder = ROOT / "files/inne/analizy"
+        a = extract(folder / "Wpływ robotów na pracę człowieka.docx", ROOT)
+        b = extract(folder / "Wpływ robotów na pracę człowieka.pdf", ROOT)
+        result = compare(a, b, label="real", same_stem=True)
+        self.assertGreater(result["whole_doc_shorter_5gram_coverage"], .65)
+        self.assertEqual(result["interpretation"], "REVIEW_REQUIRED")
+
     def test_source_preservation_and_missing_inputs(self):
         with TemporaryDirectory() as folder:
             root=Path(folder)

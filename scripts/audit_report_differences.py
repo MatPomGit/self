@@ -19,7 +19,7 @@ import re
 import unicodedata
 
 if __package__:
-    from .audit_content_overlap import Extracted, extract, revision, tokens, STOP
+    from .audit_content_overlap import Extracted, extract, revision, tokens, grams, STOP
 else:
     from audit_content_overlap import Extracted, extract, revision, tokens, STOP
 
@@ -122,6 +122,10 @@ def compare(a: Extracted, b: Extracted, *, label: str,
         "interpretation": "REVIEW_REQUIRED",
         "aligned": [], "a_unmatched_candidates": [], "b_unmatched_candidates": [],
     }
+    gram_a, gram_b = grams(a.words), grams(b.words)
+    shorter = min(len(gram_a), len(gram_b))
+    candidate["whole_doc_shorter_5gram_coverage"] = round(
+        len(gram_a & gram_b) / shorter, 4) if shorter else None
     if not left or not right:
         candidate["interpretation"] = "EXTRACTION_INCOMPLETE"
         return candidate
@@ -185,8 +189,10 @@ def compare(a: Extracted, b: Extracted, *, label: str,
     # These are triage flags, explicitly not editorial consolidation decisions.
     if a.status != "EXTRACTED" or b.status != "EXTRACTED":
         candidate["interpretation"] = "EXTRACTION_INCOMPLETE"
-    elif same_stem and min(candidate["a_matched_fraction"],
-                           candidate["b_matched_fraction"]) < .35:
+    elif (same_stem and
+          candidate["whole_doc_shorter_5gram_coverage"] is not None and
+          candidate["whole_doc_shorter_5gram_coverage"] < .25 and
+          min(candidate["a_matched_fraction"], candidate["b_matched_fraction"]) < .35):
         candidate["interpretation"] = "FORMAT_VERSION_MISMATCH_CANDIDATE"
     elif not same_stem and min(candidate["a_matched_fraction"],
                                candidate["b_matched_fraction"]) >= .60:
@@ -240,6 +246,7 @@ def save(result: dict, dest: Path) -> None:
             f"- Matched passage fractions A/B: "
             f"{pair['a_matched_fraction']:.1%} / {pair['b_matched_fraction']:.1%} "
             f"(threshold: {pair['threshold']}).",
+            f"- Whole-text 5-gram coverage (shorter): {pair['whole_doc_shorter_5gram_coverage']}.",
             "- Matched excerpts (potential reuse):"
         ])
         for evidence in pair["aligned"]:
@@ -280,6 +287,7 @@ def main() -> int:
             "a": pair["a"], "b": pair["b"],
             "fraction_a": pair.get("a_matched_fraction"),
             "fraction_b": pair.get("b_matched_fraction"),
+            "whole_5gram": pair.get("whole_doc_shorter_5gram_coverage"),
             "matched_examples": [
                 {"a": x["a_locator"], "b": x["b_locator"],
                  "similarity": x["similarity"]}
