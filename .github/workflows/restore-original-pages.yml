@@ -43,6 +43,11 @@ jobs:
         continue-on-error: true
         run: |
           python scripts/audit_content_overlap.py --scope files/inne/analizy --output-dir "$RUNNER_TEMP/content-audit" --top 20 --ci-summary
+      - name: Compare passage differences in pilot report pairs
+        if: github.event_name == 'pull_request'
+        continue-on-error: true
+        run: |
+          python scripts/audit_report_differences.py --scope files/inne/analizy --output-dir "$RUNNER_TEMP/content-audit" --ci-summary
       - name: Save content-overlap pilot report
         if: github.event_name == 'pull_request' && always()
         uses: actions/upload-artifact@v4

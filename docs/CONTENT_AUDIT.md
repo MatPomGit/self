@@ -33,3 +33,24 @@ Wskazania to dowody leksykalne, nie ostateczna ocena merytoryczna.
 Pilotaż nie obejmuje OCR, analizy wykresów ani sprawdzania naukowej poprawności twierdzeń.
 Kolejne PR: ręcznie oznaczony benchmark, embeddingi lokalne, analiza twierdzeń, plan konsolidacji.
 Przed zmianą lub usunięciem jakichkolwiek oryginałów wymagane osobne zatwierdzenie.
+
+## Analiza fragmentów czterech par raportów
+
+Szczegółowe porównanie wyodrębnia fragmenty o wysokim podobieństwie tekstowym
+i **kandydatów** na fragmenty unikalne; każdy zapis zawiera stronę/akapit,
+pozycję w tekście i fragment z oryginału. Metoda nie udowadnia unikalności
+semantycznej ani nie ocenia prawdziwości twierdzeń.
+
+    python scripts/audit_report_differences.py --scope files/inne/analizy --output-dir /tmp/self-content-audit
+
+Raporty: `comparison.md` i `comparison.json`. Porównania obejmują:
+- `Synteza Modeli multimodalnych.docx` ↔ `Zautomatyzowana_analiza_afektywna.pdf`,
+- `Isaac Lab i bliźniaki cyfrowe.pdf` ↔ `Isaac_Lab.docx`,
+- `Przewijanie slajdow gestem.docx` ↔ `Przewijanie slajdow gestem.pdf`,
+- `Wpływ robotów na pracę człowieka.docx` ↔ `Wpływ robotów na pracę człowieka.pdf`.
+
+Okna do 75 wyrazów, krok 55; podobieństwo: kosinus tokenów (0.72)
+i Jaccard trójek znakowych (0.28); próg selekcji 0.64.
+Wszystkie progi **służą triage** i wymagają walidacji. Brak tekstowego
+dopasowania nie wyklucza parafrazy; raport może być przydatny z innego powodu.
+Decyzje MERGE/SUPERSEDE wymagają późniejszej weryfikacji merytorycznej.
