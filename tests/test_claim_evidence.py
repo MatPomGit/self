@@ -5,7 +5,7 @@ from tempfile import TemporaryDirectory
 import unittest
 from zipfile import ZipFile
 from xml.sax.saxutils import escape
-from scripts.audit_content_overlap import Extracted
+from scripts.audit_content_overlap import Extracted, tokens
 from scripts.audit_repeated_claims import (
     REPORTS, UNIQUE_PAIR, claim_candidates, distinct_passages,
     docx_tables, table_row_metrics, analyze, save
@@ -18,7 +18,7 @@ def fake_doc(path,sections):
     return Extracted(path,"a"*64,"EXTRACTED",
                      [{"location":f"akapit {i}", "text":s} for i,s
                       in enumerate(sections,1)],
-                     " ".join(sections).lower().split())
+                     tokens(" ".join(sections)))
 
 
 def make_docx(path,paragraph,rows=None):
