@@ -110,7 +110,7 @@ class DifferenceTests(unittest.TestCase):
         import sys
         code = ("import sys; sys.path.insert(0,'scripts'); "
                 "import audit_report_differences as m; "
-                "assert callable(m.grams)")
+                "assert callable(m.grams) and callable(m.validate_output_dir)")
         execution = subprocess.run(
             [sys.executable, "-c", code], cwd=ROOT,
             capture_output=True, text=True, timeout=10, check=False)
