@@ -51,6 +51,10 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           python scripts/audit_repeated_claims.py --scope files/inne/analizy --output-dir "$RUNNER_TEMP/content-audit"
+      - name: Prepare non-destructive draft consolidation of two P0 reports
+        if: github.event_name == 'pull_request'
+        run: |
+          python scripts/prepare_consolidation_drafts.py --scope files/inne/analizy --output-dir "$RUNNER_TEMP/content-audit/consolidation"
       - name: Save content-overlap pilot report
         if: github.event_name == 'pull_request' && always()
         uses: actions/upload-artifact@v4

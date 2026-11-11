@@ -8,6 +8,33 @@ Zmniejszyć powtarzanie treści **bez utraty informacji, danych, tabel ani bibli
 
 **Ważne:** pokrycie 5-gramów dotyczy tekstu, a odsetek dopasowanych okien semantycznych to wskaźnik wyszukiwania fragmentów. Żadna z tych metryk nie potwierdza automatycznie równości metod, wyników, poprawności naukowej, intencji autora ani kompletności danych.
 
+
+## Wykonanie PR-C1 i PR-C2 — wersje redakcyjne z zachowaniem źródeł
+
+Generator `scripts/prepare_consolidation_drafts.py` tworzy szkice dla **obu**
+par o priorytecie P0. Każdy szkic jest zbudowany na pełnym edytowalnym tekście
+DOCX, w oryginalnej kolejności akapitów i tabel. Treść PDF przechodzi
+odrębną analizę; fragmenty o słabszym pokryciu są **zachowane jako cytaty
+w aneksie weryfikacyjnym**, a nie usuwane ani automatycznie dopisywane do
+głównej narracji. Raport JSON utrwala SHA-256 obu źródeł i listę
+potencjalnie dodatkowych fragmentów z numerem strony.
+
+```bash
+python -m pip install "pypdf>=5,<7"
+python scripts/prepare_consolidation_drafts.py \
+  --scope files/inne/analizy \
+  --output-dir reports/content-audit/consolidation \
+  --pair all
+```
+
+Generowane: `afektywna-multimodalna.md/.json` oraz
+`isaac-lab-digital-twins.md/.json`, w artefakcie audytu
+`content-overlap-pilot`, a nie w publikowanym `files/`.
+To **szkice redakcyjne**, nie zaakceptowane raporty, nie końcowy
+DOCX/PDF i nie zgoda na usunięcie dokumentów pierwotnych. Dopiero
+następna redakcja semantyczna (weryfikacja przypisów, danych i rysunków)
+może wyeliminować rzeczywiste powtórzenia.
+
 ## A. Scalenia uzasadnione wynikami audytu
 
 ### A1. Analiza afektywna i multimodalna — **MERGE PROPOSED, P0**
