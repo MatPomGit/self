@@ -19,7 +19,7 @@ import re
 import unicodedata
 
 if __package__:
-    from .audit_content_overlap import Extracted, extract, revision, tokens, grams, STOP
+    from .audit_content_overlap import Extracted, extract, revision, tokens, grams, validate_output_dir, STOP
 else:
     from audit_content_overlap import Extracted, extract, revision, tokens, grams, STOP
 
@@ -279,6 +279,7 @@ def main() -> int:
     scope = (root / args.scope).resolve()
     if not scope.is_relative_to(root) or not scope.is_dir():
         parser.error("scope must be a directory within the repository")
+    validate_output_dir(root, args.output_dir)
     result = analyze(root, scope)
     save(result, args.output_dir)
     for pair in result["pairs"]:

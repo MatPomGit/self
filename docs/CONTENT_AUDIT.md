@@ -60,3 +60,17 @@ mogą obniżyć liczbę dopasowanych fragmentów. `FORMAT_VERSION_MISMATCH_CANDI
 wymaga dodatkowo niskiego pokrycia 5-gramów całego dokumentu (<25%).
 Dane tabelaryczne i łamanie wyrazów nadal wymagają oględzin; liczby są
 wskaźnikami do przeglądu, nie wynikiem walidacji semantycznej.
+
+## Warianty o różnych treściach i ochrona danych
+
+Dokumenty o tej samej nazwie są rozpatrywane jako jedno źródło **tylko
+warunkowo**: jeśli oba warianty dają się odczytać i pokrycie ich 5-gramów
+jest poniżej 25%, trafiają do **osobnych dokumentów logicznych**;
+nadal widnieją we wspólnej grupie formatowej z etykietą
+`FORMAT_VARIANTS_SPLIT_CANDIDATE`. Chroni to m.in. parę dotycząca
+sterowania prezentacją przed utratą jednego z raportów w rankingu porównań.
+
+Pliki publicznej strony nie są modyfikowane. Narzędzie odmówi zapisu
+wyników w `files/`, `docs/`, `materials/` i `_site/`.
+Duże, silnie skompresowane XML wewnątrz ODT/DOCX są odrzucane przed
+dekompresją. Wszystkie klasyfikacje wymagają sprawdzenia treści.

@@ -96,7 +96,13 @@ def office_segments(path: Path) -> tuple[list[dict], str]:
         p_tag = "{urn:oasis:names:tc:opendocument:xmlns:text:1.0}p"
         text_tag = None
     with ZipFile(path) as archive:
-        payload = archive.read(name)
+        info = archive.getinfo(name)
+        # Reject compressed XML bombs before expanding potentially huge content.
+        if info.file_size > 20 * 1024 * 1024:
+            raise ValueError("Office document XML exceeds 20 MiB limit")
+        if info.file_size > 1_000_000 and info.file_size > 200 * max(1, info.compress_size):
+            raise ValueError("Office document XML compression ratio exceeds limit")
+        payload = archive.read(info)
     root = ET.fromstring(payload)
     out = []
     total = 0
@@ -183,13 +189,33 @@ def compute(root: Path, scope: Path) -> dict:
     for item in extracted:
         by_key[doc_key(item.path)].append(item)
     documents = []
+    split_variants = set()
     for key, variants in sorted(by_key.items()):
-        # DOCX/ODT tend to contain editorial text unavailable in PDF extraction.
+        # Group format exports only if their full-text n-grams do not contradict
+        # that assumption. A same-named PDF may be an entirely different report.
         variants.sort(key=lambda x: (x.status != "EXTRACTED",
                                       {".docx": 0, ".odt": 1, ".pdf": 2}.get(
                                           Path(x.path).suffix.lower(), 3), x.path))
         canonical = variants[0]
-        documents.append((key, canonical, variants))
+        canonical_grams = grams(canonical.words)
+        grouped = [canonical]
+        for variant in variants[1:]:
+            g = grams(variant.words)
+            shorter = min(len(g), len(canonical_grams))
+            coverage = len(g & canonical_grams) / shorter if shorter else None
+            if (coverage is not None and coverage < .25
+                    and canonical.status == "EXTRACTED"
+                    and variant.status == "EXTRACTED"):
+                # Distinct logical document until editorial review confirms
+                # otherwise. Preserve the original filename-based format group.
+                split_variants.add(variant.path)
+                documents.append((key + "::" + variant.path.rsplit(".", 1)[-1],
+                                  variant, [variant]))
+            else:
+                grouped.append(variant)
+        documents.append((key, canonical, grouped))
+    documents.sort(key=lambda group: group[0])
+    doc_ids = {item.path: key for key, _, variants in documents for item in variants}
     gram_sets = [grams(doc.words) for _, doc, _ in documents]
     all_words = [Counter(w for w in doc.words if len(w) > 2 and w not in STOP)
                  for _, doc, _ in documents]
@@ -238,7 +264,9 @@ def compute(root: Path, scope: Path) -> dict:
     pairs.sort(key=lambda p: (-p["coverage_shorter_5gram"],
                               -p["tfidf_cosine"], p["a"], p["b"]))
     formats = []
-    for key, primary, variants in documents:
+    # Report format discrepancies even when low-text-equivalence siblings have
+    # been split into separate logical documents for pairwise discovery.
+    for key, variants in sorted(by_key.items()):
         if len(variants) < 2:
             continue
         gs = [grams(item.words) for item in variants]
@@ -252,10 +280,15 @@ def compute(root: Path, scope: Path) -> dict:
                                                           if similarity is not None else None),
                                "evidence": common_witness(variants[i], variants[j])
                                if similarity is not None and similarity >= .05 else []})
-        formats.append({"key": key, "files": [f.path for f in variants],
-                        "comparisons": scores, "status": "FORMAT_VARIANTS_UNVERIFIED"})
+        formats.append({
+            "key": key, "files": [f.path for f in variants],
+            "comparisons": scores,
+            "status": ("FORMAT_VARIANTS_SPLIT_CANDIDATE"
+                       if any(x.path in split_variants for x in variants)
+                       else "FORMAT_VARIANTS_UNVERIFIED")
+        })
     result = {
-        "schema_version": "0.1.0",
+        "schema_version": "0.2.0",
         "method": "deterministic lexical comparison, no semantic model; candidates require review",
         "source_revision": revision(root),
         "scope": scope.relative_to(root).as_posix(),
@@ -263,6 +296,7 @@ def compute(root: Path, scope: Path) -> dict:
         "counts": {
             "files": len(paths), "logical_documents": len(documents),
             "format_groups": len(formats),
+            "split_variants": len(split_variants),
             "extracted": sum(x.status == "EXTRACTED" for x in extracted),
             "extraction_incomplete": sum(x.status != "EXTRACTED" for x in extracted),
             "pairs_flagged": len(pairs),
@@ -271,7 +305,7 @@ def compute(root: Path, scope: Path) -> dict:
         "files": [{"path": x.path, "sha256": x.source_hash, "status": x.status,
                    "warning": x.warning, "word_count": len(x.words),
                    "sections": len(x.segments),
-                   "document_id": doc_key(x.path)} for x in extracted],
+                   "document_id": doc_ids[x.path]} for x in extracted],
         "formats": formats,
         "pairs": pairs
     }
@@ -287,6 +321,16 @@ def revision(root: Path) -> str:
         return "UNKNOWN"
 
 
+def validate_output_dir(root: Path, destination: Path) -> None:
+    """Never write audit results into directories deployed to GitHub Pages."""
+    root = root.resolve()
+    destination = destination.resolve()
+    for name in ("files", "docs", "materials", "_site"):
+        deployed = root / name
+        if destination == deployed or destination.is_relative_to(deployed):
+            raise ValueError(f"Audit output cannot be inside public directory {name}/")
+
+
 def write_reports(result: dict, dest: Path, top: int) -> None:
     dest.mkdir(parents=True, exist_ok=True)
     (dest / "overlap.json").write_text(
@@ -299,7 +343,7 @@ def write_reports(result: dict, dest: Path, top: int) -> None:
         "",
         "## Coverage",
         f"- Files: **{counts['files']}**; logical documents: **{counts['logical_documents']}**.",
-        f"- Format-variant groups: **{counts['format_groups']}**.",
+        f"- Format-variant groups: **{counts['format_groups']}**; suspicious split variants: **{counts['split_variants']}**.",
         f"- Extracted: **{counts['extracted']}**; incomplete: **{counts['extraction_incomplete']}**.",
         f"- Flagged lexical candidates: **{counts['pairs_flagged']}**.",
         "",
@@ -357,6 +401,7 @@ def main() -> int:
     scope = (root / args.scope).resolve()
     if not scope.is_relative_to(root) or not scope.is_dir():
         parser.error("--scope must be an existing directory inside repository")
+    validate_output_dir(root, args.output_dir)
     report = compute(root, scope)
     write_reports(report, args.output_dir, args.top)
     summary = report["counts"]
