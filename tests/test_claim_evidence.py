@@ -74,6 +74,19 @@ class ClaimEvidenceTests(unittest.TestCase):
         self.assertEqual(score["fraction_words_found_in_pdf"],1.)
         self.assertEqual(score["triage_flag"],"LAYOUT_REORDERING_POSSIBLE")
 
+    def test_split_docx_header_is_restored_only_with_pdf_vocabulary(self):
+        from scripts.audit_content_overlap import grams, tokens
+        pdf="Lokalizacja przetwarzania Docelowe opóźnienie Przykładowe zastosowanie Przykład sprzętu"
+        docx="Lokalizacja p rzetwarzania Docelowe o późnienie Przykładowe z astosowanie Przykład s przętu"
+        score=table_row_metrics(docx,grams(tokens(pdf)),set(tokens(pdf)))
+        self.assertEqual(score["fraction_words_found_in_pdf"],1.)
+        self.assertEqual(score["fraction_5gram_found_in_pdf"],1.)
+        # Generic single-letter Polish prepositions must not be recombined
+        # when the hypothetical joined word is absent from the source.
+        different=table_row_metrics("w laboratorium porównano pełne wyniki pomiaru",
+                                    grams(tokens(pdf)),set(tokens(pdf)))
+        self.assertLess(different["fraction_words_found_in_pdf"],.4)
+
     def test_strongly_shared_sections_not_mislabelled_distinct(self):
         repeated=("Porównanie metod klasyfikacji emocji w systemach "
                   "multimodalnych na wielu próbach danych. ")*11

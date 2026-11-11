@@ -228,3 +228,12 @@ publicznego repozytorium, a teksty dokumentów są przetwarzane
 wyłącznie lokalnie. Workflow można uruchamiać manualnie po jego
 pojawieniu się na domyślnej gałęzi repozytorium. Lekki audyt tekstowy
 i dowodowy nadal działa automatycznie w PR.
+
+### Scalanie sztucznie rozdzielonych wyrazów
+
+Przy porównywaniu tabel DOCX i PDF analizator koryguje ewidentne
+artefakty ekstrakcji typu „p rzetwarzania” → „przetwarzania”,
+ale **tylko wtedy, gdy poprawiona forma występuje niezależnie
+w docelowym PDF**. Zapobiega to błędnemu uznawaniu wspólnego
+nagłówka tabeli za unikalną treść. Operacja dotyczy wyłącznie
+normalizacji porównania, nie zmienia dokumentów.

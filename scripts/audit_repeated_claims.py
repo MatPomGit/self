@@ -121,7 +121,21 @@ def distinct_passages(a,b,limit=10):
 
 def table_row_metrics(rowtext, target_grams, target_words):
     """Compare word sets as a layout-tolerant complement to ordered 5-grams."""
-    words=tokens(rowtext)
+    raw=tokens(rowtext)
+    words=[]
+    idx=0
+    while idx<len(raw):
+        # DOCX extraction may insert spaces into a single label:
+        # "p rzetwarzania" vs PDF "przetwarzania". Rejoin only
+        # if the full word occurs in the independent PDF source.
+        if (idx+1<len(raw) and len(raw[idx])==1
+                and len(raw[idx+1])>=4
+                and raw[idx]+raw[idx+1] in target_words):
+            words.append(raw[idx]+raw[idx+1])
+            idx+=2
+        else:
+            words.append(raw[idx])
+            idx+=1
     g=grams(words)
     if len(g)<3:
         return None
