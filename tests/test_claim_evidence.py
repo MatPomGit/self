@@ -83,7 +83,7 @@ class ClaimEvidenceTests(unittest.TestCase):
         self.assertEqual(score["fraction_5gram_found_in_pdf"],1.)
         # Generic single-letter Polish prepositions must not be recombined
         # when the hypothetical joined word is absent from the source.
-        different=table_row_metrics("w laboratorium porównano pełne wyniki pomiaru",
+        different=table_row_metrics("w laboratorium porównano pełne wyniki pomiaru podczas konferencji naukowej",
                                     grams(tokens(pdf)),set(tokens(pdf)))
         self.assertLess(different["fraction_words_found_in_pdf"],.4)
 
