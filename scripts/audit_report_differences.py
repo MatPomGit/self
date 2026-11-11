@@ -21,7 +21,7 @@ import unicodedata
 if __package__:
     from .audit_content_overlap import Extracted, extract, revision, tokens, grams, STOP
 else:
-    from audit_content_overlap import Extracted, extract, revision, tokens, STOP
+    from audit_content_overlap import Extracted, extract, revision, tokens, grams, STOP
 
 # Explicit pilot pairs: independently named reports and suspicious format variants.
 PAIRS = (

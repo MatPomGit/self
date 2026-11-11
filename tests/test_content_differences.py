@@ -104,6 +104,18 @@ class DifferenceTests(unittest.TestCase):
             self.assertTrue((root/"out/comparison.md").exists())
             self.assertEqual((scope/"A.docx").read_bytes(),original)
 
+    def test_standalone_cli_imports_comparison_dependencies(self):
+        # unittest imports scripts.*; CLI imports audit_* directly from scripts/.
+        import subprocess
+        import sys
+        code = ("import sys; sys.path.insert(0,'scripts'); "
+                "import audit_report_differences as m; "
+                "assert callable(m.grams)")
+        execution = subprocess.run(
+            [sys.executable, "-c", code], cwd=ROOT,
+            capture_output=True, text=True, timeout=10, check=False)
+        self.assertEqual(execution.returncode, 0, execution.stderr)
+
     def test_pilot_sources_exist(self):
         scope=ROOT/"files/inne/analizy"
         self.assertEqual(len(PAIRS),4)
