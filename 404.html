@@ -4,9 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex,follow">
-  <title>Nie znaleziono strony – matpom.pl</title>
+  <meta name="color-scheme" content="light dark">
+  <title>404 · Strona poza polem widzenia | matpom.pl</title>
+  <meta name="description" content="Raport z nieudanego eksperymentu: strony nie znaleziono. Wróć do portalu naukowego Mateusza Pomianka.">
   <script>
     // Preserve legacy deep links to materials after moving public files/.
+    // This must execute before rendering the playful 404 page.
     (function () {
       const legacy = '/materials/';
       const path = window.location.pathname;
@@ -15,12 +18,241 @@
           window.location.search + window.location.hash);
       }
     }());
+    // Match the main site's saved theme and query-string language.
+    (() => {
+      const lang = new URLSearchParams(window.location.search).get('lang') === 'en' ? 'en' : 'pl';
+      document.documentElement.lang = lang;
+      document.documentElement.dataset.lang = lang;
+      let saved = null;
+      try { saved = localStorage.getItem('self-theme'); } catch (error) { /* Optional storage. */ }
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.dataset.theme =
+        saved === 'dark' || (saved !== 'light' && prefersDark) ? 'dark' : 'light';
+      if (lang === 'en') {
+        document.title = '404 · Beyond the field of view | matpom.pl';
+        document.querySelector('meta[name="description"]').content =
+          'The experiment failed to locate the page. Return to Mateusz Pomianek’s academic website.';
+      }
+    })();
   </script>
+  <style>
+    :root{
+      color-scheme:light;
+      --bg:#fff;--text:#1b2430;--muted:#5d6a78;--line:#e3e8ee;
+      --accent:#1d4f7a;--accent-soft:#eef3f8;--surface:#f6f9fc;
+      --on-accent:#fff;
+      --serif:Georgia,"Times New Roman",serif;
+      --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    }
+    :root[data-theme="dark"]{
+      color-scheme:dark;
+      --bg:#171c24;--text:#e5eaf0;--muted:#b2bdc8;--line:#3b4654;
+      --accent:#93c2e6;--accent-soft:#273443;--surface:#202a35;
+      --on-accent:#15202b;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 var(--sans)}
+    a{color:inherit}
+    button{font:inherit}
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+    :root:not([data-lang="en"]) [data-lang-content="en"],
+    :root[data-lang="en"] [data-lang-content="pl"]{display:none!important}
+    .page{width:min(1200px,calc(100% - 40px));margin:0 auto;min-height:100dvh;display:flex;flex-direction:column}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:28px 0;border-bottom:1px solid var(--line)}
+    .identity{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;min-width:0}
+    .home{font-family:var(--serif);font-size:1.2rem;font-weight:700;text-decoration:none;border-radius:4px}
+    .section{font-family:var(--serif);font-size:1.05rem;font-weight:700;color:var(--muted)}
+    .header-actions{display:flex;align-items:center;gap:12px;flex-shrink:0}
+    .affil{font-size:.92rem;color:var(--muted)}
+    .language-switch{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--line);border-radius:20px;padding:3px;font-size:.75rem;font-weight:650}
+    .language-switch a{display:inline-flex;align-items:center;justify-content:center;min-width:31px;min-height:30px;padding:0 5px;border-radius:15px;text-decoration:none;color:var(--muted)}
+    .language-switch a:hover,.language-switch a:focus-visible{color:var(--accent)}
+    .language-switch a[aria-current="page"]{background:var(--accent);color:var(--on-accent)}
+    .theme-toggle{width:40px;height:40px;border:1px solid var(--line);border-radius:50%;background:var(--bg);color:var(--text);display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+    .theme-toggle:hover{background:var(--accent-soft);border-color:var(--accent)}
+    .theme-toggle svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .theme-sun{display:none}
+    :root[data-theme="dark"] .theme-sun{display:block}
+    :root[data-theme="dark"] .theme-moon{display:none}
+    main{flex:1;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(250px,.8fr);gap:clamp(24px,5vw,92px);align-items:center;padding:clamp(48px,9vh,110px) 0}
+    .eyebrow{color:var(--accent);font-size:.78rem;font-weight:700;letter-spacing:.10em;text-transform:uppercase;margin:0 0 20px}
+    h1{font:700 clamp(2.1rem,4.7vw,4rem)/1.1 var(--serif);letter-spacing:-.025em;margin:0 0 24px;max-width:15ch}
+    .description{color:var(--muted);font-size:clamp(1rem,1.25vw,1.1rem);max-width:54ch;margin:0 0 26px}
+    .actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+    .action{display:inline-flex;align-items:center;justify-content:center;gap:9px;border:1px solid var(--line);border-radius:6px;padding:11px 17px;min-height:46px;font-size:.91rem;font-weight:650;text-decoration:none;transition:background-color .2s,border-color .2s}
+    .action:hover{background:var(--accent-soft);border-color:var(--accent);text-decoration:none}
+    .action.primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+    .action.primary:hover{filter:brightness(.91)}
+    .report{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:clamp(22px,3vw,34px);position:relative;overflow:hidden}
+    .report::before{content:"";position:absolute;inset:0 auto auto 0;width:4px;height:100%;background:var(--accent);opacity:.65}
+    .diagnostic{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px;color:var(--muted);font-size:.78rem}
+    .signal{display:flex;align-items:center;justify-content:center;position:relative;min-height:180px;margin-bottom:12px;color:var(--accent)}
+    .signal svg{position:absolute;inset:0;width:100%;height:100%;stroke:currentColor;fill:none;opacity:.55}
+    .signal-number{font:700 clamp(5rem,12vw,8rem)/1 var(--serif);letter-spacing:-.07em;position:relative;z-index:1;text-shadow:0 0 0 var(--surface)}
+    .observation{border-top:1px solid var(--line);padding-top:18px}
+    .observation strong{display:block;font-size:.88rem;margin-bottom:5px}
+    .hypothesis{font-size:.9rem;color:var(--muted);margin:0 0 14px;min-height:2.8em}
+    .retry{border:0;background:none;color:var(--accent);cursor:pointer;padding:4px 0;font-size:.86rem;font-weight:650;text-decoration:underline;text-underline-offset:3px}
+    .retry:hover{color:var(--text)}
+    footer{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;border-top:1px solid var(--line);color:var(--muted);font-size:.75rem;padding:22px 0 32px}
+    footer a{color:var(--accent);text-decoration:none}
+    footer a:hover{text-decoration:underline}
+    @media(max-width:800px){
+      .affil{display:none}
+      main{grid-template-columns:1fr;gap:30px;padding:40px 0 50px}
+      h1{max-width:24ch}
+      .report{max-width:520px}
+    }
+    @media(max-width:500px){
+      .page{width:min(100% - 28px,1200px)}
+      header{padding:18px 0;gap:12px;align-items:flex-start}
+      .identity{gap:2px 10px}
+      .home{font-size:1rem}
+      .section{font-size:.88rem}
+      .header-actions{gap:6px}
+      .theme-toggle{width:36px;height:36px}
+      .language-switch a{min-width:28px;min-height:28px}
+      .signal{min-height:140px}
+      .actions{align-items:stretch}
+    }
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{scroll-behavior:auto!important;transition:none!important}
+    }
+  </style>
 </head>
 <body>
-  <main>
-    <h1>Nie znaleziono strony</h1>
-    <p>Przejdź do <a href="/">strony głównej</a> lub <a href="/files/">materiałów dydaktycznych</a>.</p>
-  </main>
+  <div class="page">
+    <header>
+      <div class="identity">
+        <a class="home" href="/">dr inż. Mateusz Pomianek</a>
+        <span class="section" aria-hidden="true">/ 404</span>
+      </div>
+      <div class="header-actions">
+        <span class="affil" data-lang-content="pl">Politechnika Rzeszowska</span>
+        <span class="affil" data-lang-content="en">Rzeszów University of Technology</span>
+        <nav class="language-switch" aria-label="Language / Język">
+          <a href="?lang=pl" hreflang="pl" lang="pl" aria-current="page">PL</a>
+          <a href="?lang=en" hreflang="en" lang="en">EN</a>
+        </nav>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false" aria-label="Tryb ciemny" title="Włącz tryb ciemny">
+          <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 14.1A8.9 8.9 0 0 1 9.9 3.2a9 9 0 1 0 10.9 10.9Z"/></svg>
+          <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <section aria-labelledby="error-title">
+        <p class="eyebrow" data-lang-content="pl">Raport diagnostyczny · HTTP 404</p>
+        <p class="eyebrow" data-lang-content="en">Diagnostic report · HTTP 404</p>
+        <h1 id="error-title" data-lang-content="pl">Ta strona jest poza polem widzenia.</h1>
+        <h1 data-lang-content="en">This page is outside our field of view.</h1>
+        <p class="description" data-lang-content="pl">Sprawdziliśmy adres, uruchomiliśmy algorytm, a robot zajrzał nawet pod biurko. Wynik eksperymentu jest jednoznaczny: strony nie znaleziono.</p>
+        <p class="description" data-lang-content="en">We checked the address, ran the algorithm, and even sent a robot to look under the desk. The result is conclusive: no page found.</p>
+        <nav class="actions" aria-label="Nawigacja / Navigation">
+          <a class="action primary" href="/">
+            <span data-lang-content="pl">← Strona główna</span>
+            <span data-lang-content="en">← Home</span>
+          </a>
+          <a class="action" href="/files/">
+            <span data-lang-content="pl">Materiały dydaktyczne</span>
+            <span data-lang-content="en">Teaching materials</span>
+          </a>
+        </nav>
+      </section>
+
+      <aside class="report" aria-label="Raport błędu / Error report">
+        <div class="diagnostic">
+          <span data-lang-content="pl">EKSPERYMENT NR 404</span>
+          <span data-lang-content="en">EXPERIMENT NO. 404</span>
+          <span>NOT FOUND</span>
+        </div>
+        <div class="signal" aria-hidden="true">
+          <svg viewBox="0 0 320 190" focusable="false">
+            <circle cx="160" cy="95" r="74" stroke-width="1" stroke-dasharray="3 7"/>
+            <circle cx="160" cy="95" r="48" stroke-width="1.2"/>
+            <path d="M23 95h60m154 0h60M160 5v28m0 124v28" stroke-width="1" stroke-dasharray="4 6"/>
+            <path d="M79 50L65 36m176 14 14-14M79 140l-14 14m176-14 14 14" stroke-width="1"/>
+            <circle cx="223" cy="56" r="5" fill="currentColor" stroke="none"/>
+            <circle cx="104" cy="141" r="3" fill="currentColor" stroke="none"/>
+          </svg>
+          <span class="signal-number">404</span>
+        </div>
+        <div class="observation">
+          <strong data-lang-content="pl">Hipoteza robocza</strong>
+          <strong data-lang-content="en">Working hypothesis</strong>
+          <p class="hypothesis" id="hypothesis" aria-live="polite" data-lang-content="pl">Model zwrócił pusty zbiór. Przynajmniej bez halucynacji.</p>
+          <p class="hypothesis" id="hypothesis-en" aria-live="polite" data-lang-content="en">The model returned an empty set. At least it didn't hallucinate.</p>
+          <button class="retry" id="new-hypothesis" type="button">
+            <span data-lang-content="pl">Sprawdź inną hipotezę ↻</span>
+            <span data-lang-content="en">Try another hypothesis ↻</span>
+          </button>
+        </div>
+      </aside>
+    </main>
+
+    <footer>
+      <span data-lang-content="pl">matpom.pl · Informatyka, neuronauka i eksperymenty (zwykle udane).</span>
+      <span data-lang-content="en">matpom.pl · Computer science, neuroscience, and (usually successful) experiments.</span>
+      <a href="/" data-lang-content="pl">Powrót do portalu</a>
+      <a href="/" data-lang-content="en">Back to the website</a>
+    </footer>
+  </div>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const english = root.lang === 'en';
+      const switchLinks = document.querySelectorAll('.language-switch a');
+      switchLinks.forEach(link => {
+        if (link.hreflang === root.lang) link.setAttribute('aria-current', 'page');
+        else link.removeAttribute('aria-current');
+      });
+
+      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
+      const themeToggle = document.getElementById('theme-toggle');
+      function syncTheme() {
+        const dark = root.dataset.theme === 'dark';
+        themeToggle.setAttribute('aria-pressed', String(dark));
+        const label = dark
+          ? (english ? 'Switch to light mode' : 'Tryb jasny')
+          : (english ? 'Switch to dark mode' : 'Tryb ciemny');
+        themeToggle.setAttribute('aria-label', label);
+        themeToggle.title = label;
+      }
+      themeToggle.addEventListener('click', () => {
+        const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+        root.dataset.theme = next;
+        try { localStorage.setItem('self-theme', next); } catch (error) { /* Optional storage. */ }
+        syncTheme();
+      });
+      systemTheme.addEventListener('change', event => {
+        let stored = null;
+        try { stored = localStorage.getItem('self-theme'); } catch (error) { /* Optional storage. */ }
+        if (stored !== 'light' && stored !== 'dark') {
+          root.dataset.theme = event.matches ? 'dark' : 'light';
+          syncTheme();
+        }
+      });
+      syncTheme();
+
+      const hypotheses = [
+        ['Model zwrócił pusty zbiór. Przynajmniej bez halucynacji.',
+         "The model returned an empty set. At least it didn't hallucinate."],
+        ['Robot sprawdził pod biurkiem. Znalazł tylko kabel USB-C.',
+         'The robot checked under the desk. Only a USB-C cable was found.'],
+        ['Adres mógł wejść w superpozycję. Pomiar nadal wskazuje 404.',
+         'The address might be in superposition. The measurement still says 404.'],
+        ['Sygnał zaginął między neuronem a pakietem TCP.',
+         'The signal got lost somewhere between a neuron and a TCP packet.'],
+      ];
+      let hypothesisIndex = 0;
+      document.getElementById('new-hypothesis').addEventListener('click', () => {
+        hypothesisIndex = (hypothesisIndex + 1) % hypotheses.length;
+        document.getElementById('hypothesis').textContent = hypotheses[hypothesisIndex][0];
+        document.getElementById('hypothesis-en').textContent = hypotheses[hypothesisIndex][1];
+      });
+    })();
+  </script>
 </body>
 </html>

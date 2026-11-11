@@ -47,6 +47,7 @@ jobs:
           node tests/test_language.js
           node tests/test_about.js
           node tests/test_publication_utils.js
+          node tests/test_404.js
           node tests/test_materials_view.js
       - name: Validate responsive materials layout
         run: node tests/test_materials_layout.js
