@@ -24,7 +24,8 @@ KEYWORDS = re.compile(r"^\s*(?:słowa\s+kluczowe|keywords?|key\s+words)\s*:",re.
 REF_TITLE = re.compile(r"^\s*(?:bibliografia|references|piśmiennictwo|literatura\s+cytowana)\b",re.I)
 REF_MARKERS = re.compile(r"\[\d{1,3}\]|\bet\s+al\.\s*\(?20\d\d\)?",re.I)
 NUMBERED = re.compile(r"(?:[<>≥≤]\s*\d+(?:[,.]\d+)?)|"
-                      r"\b\d+(?:[,.]\d+)?\s*(?:%|ms|s|Hz|/min)\b",re.I)
+                      r"\b\d+(?:[,.]\d+)?\s*(?:%|ms|Hz|/min|s)"
+                      r"(?=\s|[.,;:)\]]|$)",re.I)
 
 
 def is_reference(text: str) -> bool:
@@ -34,7 +35,7 @@ def is_reference(text: str) -> bool:
     markers = len(REF_MARKERS.findall(normalized))
     if REF_TITLE.match(normalized):
         return True
-    if doi_count >= 1 and ("doi" in normalized.lower() or markers >= 1):
+    if doi_count >= 1 or re.match(r"^\s*\[\d{1,3}\]\s+\S+", normalized):
         return True
     return markers >= 3 and re.search(r"\b(?:20[01]\d|19\d\d)\b",normalized) is not None
 
@@ -62,9 +63,11 @@ def classify(pair: dict) -> dict:
                     "b_locator": e["b_locator"],
                     "status": "NUMERIC_CLAIM_REVIEW_REQUIRED"
                 })
-    if reference and not content and not keywords:
+    if reference >= 2 and reference >= content:
+        category = "BIBLIOGRAPHY_DOMINANT_CANDIDATE"
+    elif reference and not content and not keywords:
         category = "SHARED_BIBLIOGRAPHY_CANDIDATE"
-    elif keywords and not content and not reference:
+    elif keywords and (not content or min(a,b) < .05):
         category = "SHARED_KEYWORDS_CANDIDATE"
     elif min(a,b) >= .35 and content >= 2:
         category = "BROAD_CONTENT_REUSE_CANDIDATE"
@@ -78,6 +81,7 @@ def classify(pair: dict) -> dict:
         "LOCAL_CONTENT_OVERLAP_CANDIDATE":1,
         "TOPIC_SIMILARITY_LOW_COVERAGE":2,
         "SHARED_BIBLIOGRAPHY_CANDIDATE":3,
+        "BIBLIOGRAPHY_DOMINANT_CANDIDATE":3,
         "SHARED_KEYWORDS_CANDIDATE":4
     }[category]
     return {

@@ -4,6 +4,7 @@ on:
     paths:
       - 'scripts/audit_semantic_overlap.py'
       - 'scripts/evaluate_semantic_benchmark.py'
+      - 'scripts/triage_semantic_results.py'
       - 'tests/fixtures/semantic_pairs.json'
       - '.github/workflows/content-semantic-pilot.yml'
   workflow_dispatch:

@@ -54,6 +54,24 @@ class SemanticTriageTests(unittest.TestCase):
                          "SHARED_BIBLIOGRAPHY_CANDIDATE")
         self.assertEqual(result["ranking_tier"],3)
 
+    def test_bibliography_dominates_mixed_source_evidence(self):
+        reference=sample(
+            "[4] Arakawa, RGBDGaze. DOI:10.1145/3536221.3556568.",
+            "[4] Arakawa, RGBDGaze. doi:10.1145/3536221.3556568.")
+        narrative=sample("Wyniki badań okulograficznych zależą od próbki.",
+                         "W eksperymencie zmieniono protokół oceny spojrzenia.")
+        result=classify(make_pair(.16,.12,[reference,reference,narrative]))
+        self.assertEqual(result["triage_class"],
+                         "BIBLIOGRAPHY_DOMINANT_CANDIDATE")
+        self.assertEqual(result["evidence_composition"]["shared_references"],2)
+
+    def test_percentages_are_marked_for_verification(self):
+        evidence=sample(
+            "Dokładność modelu 84% w warunkach testowych.",
+            "Trafność wyniosła 86% dla ASD w tym badaniu.")
+        result=classify(make_pair(.2,.2,[evidence]))
+        self.assertEqual(len(result["numeric_claims_to_verify"]),1)
+
     def test_keywords_are_not_report_overlap(self):
         a="Słowa kluczowe: robot humanoidalny, model, ROS2, fuzja."
         b="Słowa kluczowe: robot humanoidalny, ROS2, lokalne modele."

@@ -171,3 +171,11 @@ jeżeli wykaz par został obcięty do top N, sumy klas odnoszą się
 wyłącznie do zapisanych pozycji. Żaden wynik nie jest oceną
 merytorycznej tożsamości wniosków. Przed usuwaniem lub łączeniem
 raportów wymagana jest weryfikacja źródeł i twierdzeń.
+
+**Doprecyzowanie po analizie wyników:** jeżeli większość najlepszych
+świadectw dopasowania stanowią cytowania DOI i pozycje bibliografii,
+para otrzymuje `BIBLIOGRAPHY_DOMINANT_CANDIDATE`, nawet gdy wśród
+top przykładów występuje także fragment narracji. Dla słów kluczowych
+przy bardzo małym pokryciu obydwu źródeł stosowana jest analogiczna
+ochrona. Wartości procentowe, jednostki i progi są oznaczane jako
+wymagające sprawdzenia, a nie automatycznie uznawane za zgodne.
