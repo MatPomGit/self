@@ -368,6 +368,25 @@ def main() -> int:
             "cosine": p["tfidf_cosine"], "class": p["classification"],
             "evidence": p["evidence"][:1]
         },ensure_ascii=False))
+    # Compare parallel formats separately; log low-confidence equivalence.
+    index = {item["path"]: item for item in report["files"]}
+    for group in report["formats"]:
+        for item in group["comparisons"]:
+            score = item["coverage_shorter_5gram"]
+            print("FORMAT_PAIR "+json.dumps({
+                "a": item["a"], "b": item["b"],
+                "coverage": score,
+                "a_words": index[item["a"]]["word_count"],
+                "b_words": index[item["b"]]["word_count"],
+                "needs_review": score is None or score < .75
+            }, ensure_ascii=False))
+    for p in report["pairs"][:min(10,args.top)]:
+        print("CANDIDATE_SIZE "+json.dumps({
+            "a": p["a_path"], "b": p["b_path"],
+            "a_words": index[p["a_path"]]["word_count"],
+            "b_words": index[p["b_path"]]["word_count"],
+            "witnesses": len(p["evidence"])
+        }, ensure_ascii=False))
     if args.ci_summary:
         summary_file = __import__("os").environ.get("GITHUB_STEP_SUMMARY")
         if summary_file:
