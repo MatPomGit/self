@@ -8,7 +8,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-MATERIALS = ROOT / "materials"
+MATERIALS = ROOT / "files"
 SUBJECTS = (
     "psychoinformatyka",
     "robotyka-afektywna",
@@ -292,7 +292,7 @@ class MaterialsTests(unittest.TestCase):
 
     def test_legacy_scaffolding_absent(self):
         for path in ("wirr", "lectures", "library", "f", "h", "p",
-                     "materials/wirr", "assets/wirr.js",
+                     "files/wirr", "assets/wirr.js",
                      "assets/library.json", "tools/build_library.py"):
             with self.subTest(path=path):
                 self.assertFalse((ROOT / path).exists())

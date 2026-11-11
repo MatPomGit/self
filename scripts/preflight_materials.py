@@ -17,7 +17,7 @@ from pypdf import PdfReader
 from pypdf.errors import PdfReadError
 
 ROOT = Path(__file__).resolve().parents[1]
-MATERIALS = ROOT / "materials"
+MATERIALS = ROOT / "files"
 DOCUMENT_PARTS = {
     ".docx": "word/document.xml",
     ".pptx": "ppt/presentation.xml",
@@ -70,7 +70,7 @@ def scan(materials: Path) -> list[tuple[Path, str]]:
 def quarantine(materials: Path, destination: Path, issues: list[tuple[Path, str]]) -> None:
     """Move invalid artifacts only in an ephemeral workspace, not from Git history."""
     if destination.resolve().is_relative_to(materials.resolve()):
-        raise ValueError("Quarantine must be outside materials/")
+        raise ValueError("Quarantine must be outside files/")
     for relative, _ in issues:
         source = materials / relative
         target = destination / relative
@@ -92,7 +92,7 @@ def main() -> int:
         parser.error("--quarantine is restricted to GitHub Actions ephemeral runners")
     issues = scan(MATERIALS)
     for relative, reason in issues:
-        message = f"materials/{relative.as_posix()}: {reason}"
+        message = f"files/{relative.as_posix()}: {reason}"
         print("[INVALID] " + message)
         if args.quarantine:
             safe_message = message.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")

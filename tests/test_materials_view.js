@@ -2,7 +2,7 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
-const html = fs.readFileSync('materials/index.html', 'utf8');
+const html = fs.readFileSync('files/index.html', 'utf8');
 assert.equal(html.split('<script>').length - 1, 2);
 const script = html.split('<script>')[2].split('</script>')[0];
 

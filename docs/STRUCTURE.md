@@ -1,7 +1,7 @@
 # Struktura repozytorium self
 
 Repozytorium publikuje statyczną witrynę GitHub Pages. Jedynym katalogiem
-aktualnych plików dla studentów jest `materials/`.
+aktualnych plików dla studentów jest `files/`.
 
 | Ścieżka | Funkcja |
 | --- | --- |
@@ -9,23 +9,22 @@ aktualnych plików dla studentów jest `materials/`.
 | `docs/data/about.json` | Pełny opis osoby i pracy badawczej, po polsku (`pl`) i angielsku (`en`) |
 | `docs/assets/`, `docs/data/`, `docs/images/` | Zasoby techniczne, dane i obrazy |
 | `docs/archive/` | Archiwalne warianty witryny |
-| `materials/index.html` | Automatycznie uzupełniany przy budowaniu katalog; domyślnie aktualne PDF |
-| `materials/psychoinformatyka/index.html` | Strona psychoinformatyki |
-| `materials/informatyka-poznawcza/index.html` | Strona informatyki poznawczej |
-| `materials/robotyka-afektywna/index.html` | Strona robotyki afektywnej |
-| `materials/narzędzia-dla-programistów/` | Instrukcje NDP, strony HTML i narzędzia terminalowe |
-| `materials/wirtualna-i-rozszerzona-rzeczywistosc/` | Wykłady, laboratoria, bloki i konfiguracja WiRR |
-| `materials/programowanie-aplikacji-mobilnych/` | Wykłady, laboratoria i źródła PAM |
-| `materials/programowanie-gier-komputerowych/` | Laboratoria PGK |
-| `materials/informatyka-afektywna/` | Laboratoria IA |
-| `materials/seminaria-dyplomowe/` | Prezentacja i szablony pracy |
-| `materials/templates/` | Szablon CSV |
+| `files/index.html` | Automatycznie uzupełniany przy budowaniu katalog; domyślnie aktualne PDF |
+| `files/psychoinformatyka/index.html` | Strona psychoinformatyki |
+| `files/informatyka-poznawcza/index.html` | Strona informatyki poznawczej |
+| `files/robotyka-afektywna/index.html` | Strona robotyki afektywnej |
+| `files/narzędzia-dla-programistów/` | Instrukcje NDP, strony HTML i narzędzia terminalowe |
+| `files/wirtualna-i-rozszerzona-rzeczywistosc/` | Wykłady, laboratoria, bloki i konfiguracja WiRR |
+| `files/programowanie-aplikacji-mobilnych/` | Wykłady, laboratoria i źródła PAM |
+| `files/programowanie-gier-komputerowych/` | Laboratoria PGK |
+| `files/informatyka-afektywna/` | Laboratoria IA |
+| `files/seminaria-dyplomowe/` | Prezentacja i szablony pracy |
 | `tests/` | Testy regresyjne i kontrola linków |
 
 ## Utrzymanie indeksu
 
-- Odnośniki w `materials/index.html` muszą wskazywać istniejące pliki w `materials/`.
-- Nowe pliki dodawaj tylko do właściwego katalogu w `materials/`.
+- Odnośniki w `files/index.html` muszą wskazywać istniejące pliki w `files/`.
+- Nowe pliki dodawaj tylko do właściwego katalogu w `files/`.
   `scripts/sync_materials.py --write` odkrywa je rekurencyjnie, naprawia
   jednoznaczne przeniesienia i uzupełnia istniejącą kartę przedmiotu lub
   tworzy nową. Pliki w `inne/` grupuje według podkatalogu.

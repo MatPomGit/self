@@ -13,7 +13,7 @@ from xml.etree import ElementTree as ET
 from zipfile import ZipFile, BadZipFile
 
 ROOT = Path(__file__).resolve().parents[1]
-INDEX = ROOT / "materials" / "index.html"
+INDEX = ROOT / "files" / "index.html"
 ANCHOR = re.compile(r'(<li>\s*<a)(?: class="([^"]*)")?(\s+href="([^"]+)"[^>]*>)')
 W_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
 P_NS = "http://schemas.openxmlformats.org/presentationml/2006/main"
