@@ -5,6 +5,7 @@ from tempfile import TemporaryDirectory
 import unittest
 from zipfile import ZipFile
 from xml.sax.saxutils import escape
+from xml.sax.saxutils import escape
 
 from scripts.audit_content_overlap import compute, doc_key, grams, write_reports
 
