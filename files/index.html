@@ -515,6 +515,9 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
   // W widoku podstawowym pokazuj tylko najnowszą wersję każdego PDF.
   const viewToggle = document.getElementById('materials-view-toggle');
   const materialsLinks = Array.from(document.querySelectorAll('.materials-list a[href]'));
+  // Short public URLs are added during Pages packaging; file metadata and
+  // download controls must continue to use the unchanged source PDF path.
+  const sourcePath = link => link.getAttribute('data-original-url') || link.getAttribute('href');
   const EDITABLE_EXTENSIONS = new Set(['docx', 'pptx', 'tex', 'typ', 'qmd']);
   const BROWSER_EXTENSIONS = new Set(['html', 'htm']);
 
@@ -525,7 +528,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
     const pdfByStem = new Map();
     const detached = new Set();
     function pathInfo(link) {
-      const path = link.getAttribute('href').split(/[?#]/, 1)[0];
+      const path = sourcePath(link).split(/[?#]/, 1)[0];
       const match = /\.([^.\/]+)$/.exec(path);
       return {
         extension: match ? match[1].toLowerCase() : '',
@@ -539,7 +542,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
       const explicit = link.getAttribute('data-material-title');
       if (explicit) return explicit;
       const label = labelWithoutExtension(link.textContent);
-      const filename = decodeURIComponent(link.getAttribute('href').split(/[?#]/, 1)[0].split('/').pop());
+      const filename = decodeURIComponent(sourcePath(link).split(/[?#]/, 1)[0].split('/').pop());
       const existing = link.getAttribute('title');
       // Zachowaj tytuły redakcyjne; tytuł równy nazwie pliku jest mało przydatny.
       if (existing && existing !== filename && existing !== label &&
@@ -590,7 +593,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
         formats.className = 'material-formats';
         const format = document.createElement('a');
         format.className = 'material-format--pdf';
-        format.setAttribute('href', link.getAttribute('href'));
+        format.setAttribute('href', sourcePath(link));
         format.setAttribute('download', '');
         format.title = 'Pobierz PDF: ' + (link.getAttribute('title') || link.textContent);
         format.setAttribute('aria-label', format.title);
@@ -675,7 +678,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
     };
   }
   for (const link of materialsLinks) {
-    const info = pdfVersionInfo(link.getAttribute('href'));
+    const info = pdfVersionInfo(sourcePath(link));
     if (!info) continue;
     const current = latestVersions.get(info.family);
     if (!current || comparePdfVersions(info.version, current) > 0) {
@@ -683,7 +686,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
     }
   }
   const currentPdfs = new Set(materialsLinks.filter(link => {
-    const info = pdfVersionInfo(link.getAttribute('href'));
+    const info = pdfVersionInfo(sourcePath(link));
     return info && comparePdfVersions(info.version, latestVersions.get(info.family)) === 0;
   }));
   function setMaterialsView(view) {

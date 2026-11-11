@@ -7,7 +7,7 @@ aktualnych plików dla studentów jest `files/`.
 | --- | --- |
 | `index.html` | Strona główna z kołem kategorii i przełącznikiem języka |
 | `docs/data/about.json` | Pełny opis osoby i pracy badawczej, po polsku (`pl`) i angielsku (`en`) |
-| `docs/assets/`, `docs/data/`, `docs/images/` | Zasoby techniczne, dane i obrazy |
+| `docs/assets/`, `docs/data/`, `docs/images/` | Zasoby techniczne, dane i obrazy (w tym `docs/data/papers.md`) |
 | `docs/archive/` | Archiwalne warianty witryny |
 | `files/index.html` | Automatycznie uzupełniany przy budowaniu katalog; domyślnie aktualne PDF |
 | `files/psychoinformatyka/index.html` | Strona psychoinformatyki |
@@ -36,6 +36,11 @@ aktualnych plików dla studentów jest `files/`.
 - `tests/test_materials.py` weryfikuje wszystkie lokalne odnośniki i kompletność
   indeksu po aktualizacji. `tests/test_sync_materials.py` obejmuje brakujący,
   przeniesiony, nowy i niejednoznaczny plik oraz idempotencję generatora.
+- Podczas pakowania strony `scripts/build_short_links.py` generuje krótkie strony
+  podglądu dla PDF, np. `/files/ndp/lab04/` i `/files/wirr/w07/`.
+  Główny odnośnik PDF w opublikowanym katalogu prowadzi do podglądu, a
+  przycisk `PDF` zachowuje bezpośredni adres pliku do pobrania.
+  Oryginalnych plików nie przenosi się, nie kopiuje ani nie modyfikuje.
 - Indeks zachowuje zwykły HTML, oba motywy i istniejące ścieżki pobierania.
   Responsywne kolumny CSS (zwykle cztery na szerokim ekranie, dwie na średnim,
   jedna na telefonie) równoważą wysokość i pozwalają kartom zajmować tylko

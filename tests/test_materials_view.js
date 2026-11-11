@@ -203,6 +203,9 @@ function subgroup() {
 }
 const labs = subgroup(); // Laboratoria przed wykładami w kodzie źródłowym.
 const pdfLab = row(labs.list, 'course/lab_02.pdf', 'lab_02 · PDF', 'lab');
+// Simulate the shortened Pages URL while preserving the original PDF for downloads.
+pdfLab.a.setAttribute('data-original-url', 'course/lab_02.pdf');
+pdfLab.a.setAttribute('href', 'ndp/lab02/');
 const sources = subgroup();
 const editor = row(sources.list, 'course/lab_02.docx', 'lab_02 · DOCX', 'lab');
 const orphan = row(sources.list, 'course/standalone.tex', 'standalone · TEX');
@@ -239,6 +242,7 @@ vm.runInNewContext(script, {
 const labFormats = pdfLab.li.querySelector('.material-formats');
 const lectureFormats = pdfLecture.li.querySelector('.material-formats');
 assert.equal(pdfLab.a.textContent, 'lab_02', 'tryb podstawowy bez rozszerzenia');
+assert.equal(pdfLab.a.getAttribute('href'), 'ndp/lab02/', 'główny URL pozostaje krótki');
 assert.equal(pdfLab.a.getAttribute('download'), null, 'nazwa pliku otwiera PDF zamiast pobierać');
 assert.match(pdfLab.a.getAttribute('aria-label'), /^Otwórz PDF:/);
 assert.equal(orphanHtml.a.getAttribute('download'), null);
