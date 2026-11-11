@@ -387,6 +387,25 @@ def main() -> int:
             "b_words": index[p["b_path"]]["word_count"],
             "witnesses": len(p["evidence"])
         }, ensure_ascii=False))
+    # Diagnostic excerpts are included only for exceptional format variants
+    # and the leading candidate pairs, not for the entire corpus.
+    exceptional = {item["a"] for group in report["formats"]
+                   for item in group["comparisons"]
+                   if item["coverage_shorter_5gram"] is None or
+                   item["coverage_shorter_5gram"] < .75}
+    exceptional |= {item["b"] for group in report["formats"]
+                    for item in group["comparisons"]
+                    if item["coverage_shorter_5gram"] is None or
+                    item["coverage_shorter_5gram"] < .75}
+    for pair in report["pairs"][:2]:
+        exceptional.add(pair["a_path"])
+        exceptional.add(pair["b_path"])
+    for name in sorted(exceptional):
+        sample = extract(root / name, root)
+        first = " ".join(s["text"] for s in sample.segments[:3])
+        print("DOCUMENT_PREVIEW " + json.dumps({
+            "path": name, "beginning": first[:260], "status": sample.status
+        }, ensure_ascii=False))
     if args.ci_summary:
         summary_file = __import__("os").environ.get("GITHUB_STEP_SUMMARY")
         if summary_file:
