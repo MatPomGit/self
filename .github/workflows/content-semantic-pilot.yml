@@ -1,0 +1,121 @@
+name: Content semantic overlap pilot (local inference)
+on:
+  pull_request:
+    paths:
+      - 'scripts/audit_semantic_overlap.py'
+      - 'scripts/evaluate_semantic_benchmark.py'
+      - 'tests/fixtures/semantic_pairs.json'
+      - '.github/workflows/content-semantic-pilot.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: content-semantic-pilot-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  semantic:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.number == 139
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install local inference dependencies
+        run: python -m pip install "pypdf>=5,<7" "numpy>=1.26,<3" "sentence-transformers>=5,<7" "huggingface-hub>=0.28,<2"
+      - name: Retrieve pinned public model weights only (never uploads report text)
+        env:
+          HF_HUB_DISABLE_TELEMETRY: '1'
+          HF_HUB_DISABLE_PROGRESS_BARS: '1'
+        run: |
+          python - <<'PY'
+          from huggingface_hub import snapshot_download
+          from pathlib import Path
+          import os
+          root = Path(os.environ['RUNNER_TEMP']) / 'models' / 'multilingual'
+          snapshot_download(
+              repo_id='sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2',
+              revision='e8f8c211226b894fcb81acc59f3b34ba3efd5f42',
+              local_dir=str(root),
+              allow_patterns=[
+                  'config.json', 'config_sentence_transformers.json',
+                  'sentence_bert_config.json', 'modules.json',
+                  '1_Pooling/config.json', 'model.safetensors',
+                  'tokenizer.json', 'tokenizer_config.json',
+                  'special_tokens_map.json', 'sentencepiece.bpe.model',
+                  'unigram.json'
+              ])
+          print('MODEL_SNAPSHOT_READY: ' + str(root))
+          PY
+      - name: Run actual offline semantic retrieval over public reports
+        env:
+          HF_HUB_OFFLINE: '1'
+          TRANSFORMERS_OFFLINE: '1'
+          HF_HUB_DISABLE_TELEMETRY: '1'
+        run: |
+          python scripts/audit_semantic_overlap.py \
+            --scope files/inne/analizy \
+            --model-dir "$RUNNER_TEMP/models/multilingual" \
+            --output-dir "$RUNNER_TEMP/content-semantic" \
+            --threshold 0.76 \
+            --top 35
+      - name: Evaluate real encoder on synthetic PL/EN smoke benchmark
+        env:
+          HF_HUB_OFFLINE: '1'
+          TRANSFORMERS_OFFLINE: '1'
+          HF_HUB_DISABLE_TELEMETRY: '1'
+        run: |
+          python scripts/evaluate_semantic_benchmark.py \
+            --model-dir "$RUNNER_TEMP/models/multilingual" \
+            --output-dir "$RUNNER_TEMP/content-semantic" \
+            --threshold 0.76
+      - name: Summarize semantic candidate rankings without report excerpts
+        if: success()
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          import os
+          root = Path(os.environ['RUNNER_TEMP']) / 'content-semantic'
+          doc = json.loads((root / 'semantic.json').read_text(encoding='utf-8'))
+          bench = json.loads((root / 'semantic_benchmark.json').read_text(encoding='utf-8'))
+          print('SEMANTIC_RESULTS ' + json.dumps({
+              'documents': doc['documents'],
+              'passages': doc['passages'],
+              'candidates_total': doc['candidate_pairs_total'],
+              'threshold': doc['threshold'],
+              'verified': doc['verified']
+          }, ensure_ascii=False))
+          for row in doc['pairs'][:20]:
+              print('SEMANTIC_PAIR ' + json.dumps({
+                  'a': row['a_path'], 'b': row['b_path'],
+                  'score': row['max_cosine'],
+                  'fraction_a': row['matched_fraction_a'],
+                  'fraction_b': row['matched_fraction_b']
+              }, ensure_ascii=False))
+          print('SEMANTIC_BENCH ' + json.dumps({
+              'confusion': bench['confusion'],
+              'precision': bench['precision'],
+              'recall': bench['recall'],
+              'f1': bench['f1'],
+              'real_corpus_validated': bench['verified_on_real_documents']
+          }, ensure_ascii=False))
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as out:
+              out.write((root / 'semantic.md').read_text(encoding='utf-8'))
+              out.write('\n\n### Synthetic benchmark (not real-corpus validation)\n')
+              out.write('Precision: ' + str(bench['precision']) +
+                        '; recall: ' + str(bench['recall']) +
+                        '; F1: ' + str(bench['f1']) + '\n')
+          PY
+      - name: Preserve semantic report and calibration evidence (not published)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: content-semantic-pilot
+          path: ${{ runner.temp }}/content-semantic/
+          retention-days: 7
+          if-no-files-found: warn
