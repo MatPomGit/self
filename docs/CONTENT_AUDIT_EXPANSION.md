@@ -104,3 +104,16 @@ python -m pytest tests/test_slide_variant_audit.py -q
 ```
 
 Porównanie tekstu slajdów nie wystarcza do stwierdzenia zgodności prezentacji: konieczna jest inspekcja grafiki, tabel, wzorów, animacji, notatek i liczby slajdów. Niska zgodność tekstu może wynikać z prezentacji silnie graficznej i nie jest podstawą do usuwania.
+
+## Etap 4 – porównanie sześciu par PDF–TEX z laboratorium EEG
+
+Dodano `scripts/audit_tex_variants.py` jako **read-only** analizator ciała dokumentu LaTeX. Skrypt ignoruje preambułę i komentarze, nie wykonuje kodu TeX, nie uruchamia kompilatora i nie pobiera zależności. Porównuje wyodrębnione przybliżone słowa z odpowiadającym plikiem PDF. Wynik obejmuje SHA-256, liczbę słów, pokrycie 5-gramów, status oraz fragmenty dowodowe.
+
+```bash
+python scripts/audit_tex_variants.py --root files --output-dir reports/content-audit/tex
+python -m pytest tests/test_tex_variant_audit.py -q
+```
+
+Raport `tex_comparison.json` oraz `tex_comparison.md` jest zapisywany w artefakcie CI. **Ekstrakcja jest stratna**: makra, rozbudowane tabele, wzory matematyczne, pliki `\\input`, grafiki i inne struktury wymagają kontroli po renderowaniu. Różnice w tej metryce nie dowodzą niezgodności źródła i PDF.
+
+**Stan:** na etapie wprowadzania zmiany workflow dla PDF–PPTX był w toku; nowe wyniki PDF–TEX wymagają ukończonego przebiegu CI i sprawdzenia raportów. Bez automatycznej archiwizacji.
