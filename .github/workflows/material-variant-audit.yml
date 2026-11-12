@@ -1,0 +1,63 @@
+name: Materials variant audit
+
+on:
+  pull_request:
+    paths:
+      - "scripts/audit_material_variants.py"
+      - "tests/test_material_variant_audit.py"
+      - ".github/workflows/material-variant-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install test dependency
+        run: python -m pip install "pytest>=8,<10"
+      - name: Run focused tests
+        run: python -m pytest tests/test_material_variant_audit.py -q
+      - name: Build cross-folder inventory
+        run: |
+          python scripts/audit_material_variants.py \
+            --root files \
+            --output "$RUNNER_TEMP/material-variants.json"
+      - name: Verify output and summarize counts
+        env:
+          REPORT: ${{ runner.temp }}/material-variants.json
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          data = json.loads(Path(os.environ["REPORT"]).read_text(encoding="utf-8"))
+          assert data["scope"] == "files/"
+          assert all(row["decision"] == "UNVERIFIED" for row in data["format_variants"])
+          assert all("ignored/" not in path for row in data["format_variants"] for path in row["files"])
+          assert all("ignored/" not in path for row in data["cross_series_pairs"] for path in row["files"])
+          lines = [
+              "## Materials variant inventory (unverified)",
+              f"- Supported files: {data['scanned_supported_files']}",
+              f"- Format variant pairs: {len(data['format_variants'])}",
+              f"- XR cross-series pairs: {len(data['cross_series_pairs'])}",
+              "- This is a filename-based triage; not evidence of duplication.",
+          ]
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
+              f.write("\n".join(lines) + "\n")
+          PY
+      - name: Upload inventory outside Pages
+        uses: actions/upload-artifact@v4
+        with:
+          name: material-variant-inventory
+          path: ${{ runner.temp }}/material-variants.json
+          retention-days: 7
+          if-no-files-found: error
