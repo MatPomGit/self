@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import hashlib
 from collections import defaultdict
 from pathlib import Path
 
@@ -15,14 +16,27 @@ FORMAT_FAMILIES = [
 ]
 
 
+def fingerprint(path: Path, root: Path) -> dict:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for block in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(block)
+    return {
+        "path": path.relative_to(root).as_posix(),
+        "bytes": path.stat().st_size,
+        "sha256": digest.hexdigest(),
+    }
+
+
 def inventory(root: Path) -> dict:
     if not root.is_dir():
         raise ValueError(f"Not a directory: {root}")
     files = sorted(
         p for p in root.rglob("*")
-        if p.is_file() and p.suffix.lower() in EXTENSIONS
+        if p.is_file() and not p.is_symlink() and p.suffix.lower() in EXTENSIONS
         and "ignored" not in p.relative_to(root).parts
     )
+    hashes = {p: fingerprint(p, root) for p in files}
     by_stem = defaultdict(list)
     for path in files:
         key = (path.parent.relative_to(root).as_posix(), path.stem.casefold())
@@ -37,6 +51,7 @@ def inventory(root: Path) -> dict:
                     "type": "FORMAT_VARIANT_CANDIDATE",
                     "family": family,
                     "files": sorted(p.relative_to(root).as_posix() for p in paths if p.suffix.lower() in extensions),
+                    "evidence": [hashes[p] for p in paths if p.suffix.lower() in extensions],
                     "decision": "UNVERIFIED",
                 })
 
@@ -47,21 +62,22 @@ def inventory(root: Path) -> dict:
     for number in range(1, 8):
         a = xr / f"wirr_lab_{number:02d}.pdf"
         b = xr / f"Lab_{number}_XR.pdf"
-        if a.is_file() and b.is_file():
+        if a in hashes and b in hashes:
             xr_pairs.append({
                 "type": "CROSS_SERIES_CANDIDATE",
                 "files": [a.relative_to(root).as_posix(), b.relative_to(root).as_posix()],
+                "evidence": [hashes[a], hashes[b]],
                 "decision": "REVIEW_REQUIRED",
                 "note": "Primary laboratory vs additional XR exercise; compare learning objectives first.",
             })
     return {
-        "schema_version": "1.0.0",
+        "schema_version": "1.1.0",
         "scope": "files/",
         "scanned_supported_files": len(files),
         "format_variants": variants,
         "cross_series_pairs": xr_pairs,
         "limitations": [
-            "Filename and directory inventory only; no PDF/DOCX/PPTX semantic extraction.",
+            "Filename, file-size and SHA-256 inventory only; no PDF/DOCX/PPTX semantic extraction.",
             "Do not infer MERGE or SUPERSEDE from a shared stem or number.",
             "files/ignored/ excluded recursively; never publish archive in Pages.",
         ],
