@@ -6,6 +6,8 @@ on:
       - "scripts/audit_material_variants.py"
       - "tests/test_material_variant_audit.py"
       - "scripts/audit_xr_pairs.py"
+      - "scripts/audit_format_variants.py"
+      - "tests/test_format_variant_audit.py"
       - "tests/test_xr_pair_audit.py"
       - "scripts/audit_content_overlap.py"
       - ".github/workflows/material-variant-audit.yml"
@@ -28,7 +30,7 @@ jobs:
       - name: Install test dependency
         run: python -m pip install "pytest>=8,<10" "pypdf>=5,<7"
       - name: Run focused tests
-        run: python -m pytest tests/test_material_variant_audit.py tests/test_xr_pair_audit.py -q
+        run: python -m pytest tests/test_material_variant_audit.py tests/test_xr_pair_audit.py tests/test_format_variant_audit.py -q
       - name: Build cross-folder inventory
         run: |
           python scripts/audit_material_variants.py \
@@ -40,6 +42,12 @@ jobs:
             --root files \
             --output-dir "$RUNNER_TEMP/xr-pairs"
           cat "$RUNNER_TEMP/xr-pairs/xr_pairs.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Compare PDF-DOCX variant contents
+        run: |
+          python scripts/audit_format_variants.py \
+            --root files \
+            --output-dir "$RUNNER_TEMP/format-comparison"
+          cat "$RUNNER_TEMP/format-comparison/format_comparison.md" >> "$GITHUB_STEP_SUMMARY"
       - name: Verify output and summarize counts
         env:
           REPORT: ${{ runner.temp }}/material-variants.json
@@ -70,5 +78,6 @@ jobs:
           path: |
             ${{ runner.temp }}/material-variants.json
             ${{ runner.temp }}/xr-pairs/
+            ${{ runner.temp }}/format-comparison/
           retention-days: 7
           if-no-files-found: error
