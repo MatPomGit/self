@@ -93,3 +93,14 @@ Wyniki `format_comparison.json` i `format_comparison.md` są zachowywane w artef
 Wśród 45 wysoce podobnych par najniższe pokrycie występuje dla `robotyka_afektywna` (**85,17%**), `MPC` (**85,32%**), `Mediapipe` (**85,39%**), `Mapowanie emocji` (**85,65%**) i `Silniki_XR` (**85,65%**). Warto zacząć od kontroli dodatkowych akapitów i rysunków w tych pięciu parach; **nie są to potwierdzone błędy eksportu**.
 
 **Kolejność decyzji redakcyjnych:** najpierw rozdzielenie dwóch różnych opracowań „Przewijanie slajdow gestem” (odrębne tytuły/linki bez utraty adresów), następnie sprawdzenie „Wpływ robotów na pracę człowieka”, w dalszej kolejności inspekcja pięciu najniżej dopasowanych par z kategorii ≥75%. Każde przeniesienie do `files/ignored/` wymaga zachowania kompletnych treści oraz sprawdzenia odnośników.
+
+## Etap 3 – porównanie 21 par PDF–PPTX
+
+Dodano `scripts/audit_slide_variants.py`: bezpieczna ekstrakcja widocznego tekstu slajdów z archiwum PPTX (limity wielkości/kompresji XML, brak wykonywania kodu) oraz porównanie z tekstem PDF. Wynik zawiera liczby słów, pokrycie 5-gramów w obu kierunkach, dopasowane strony i slajdy, SHA-256, status ekstrakcji i klasyfikację wymagającą dalszej oceny. Workflow przechowuje raport `slides_comparison.json` i `slides_comparison.md` w artefakcie, nie na stronie publicznej.
+
+```bash
+python scripts/audit_slide_variants.py --root files --output-dir reports/content-audit/slides
+python -m pytest tests/test_slide_variant_audit.py -q
+```
+
+Porównanie tekstu slajdów nie wystarcza do stwierdzenia zgodności prezentacji: konieczna jest inspekcja grafiki, tabel, wzorów, animacji, notatek i liczby slajdów. Niska zgodność tekstu może wynikać z prezentacji silnie graficznej i nie jest podstawą do usuwania.
