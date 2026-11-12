@@ -1,0 +1,128 @@
+name: Materials variant audit
+
+on:
+  pull_request:
+    paths:
+      - "scripts/audit_material_variants.py"
+      - "tests/test_material_variant_audit.py"
+      - "scripts/audit_xr_pairs.py"
+      - "scripts/audit_format_variants.py"
+      - "scripts/audit_slide_variants.py"
+      - "scripts/audit_tex_variants.py"
+      - "scripts/triage_material_variants.py"
+      - "tests/test_material_triage.py"
+      - "tests/test_tex_variant_audit.py"
+      - "tests/test_slide_variant_audit.py"
+      - "tests/test_format_variant_audit.py"
+      - "tests/test_xr_pair_audit.py"
+      - "scripts/audit_content_overlap.py"
+      - ".github/workflows/material-variant-audit.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install test dependency
+        run: python -m pip install "pytest>=8,<10" "pypdf>=5,<7"
+      - name: Run focused tests
+        run: python -m pytest tests/test_material_variant_audit.py tests/test_xr_pair_audit.py tests/test_format_variant_audit.py tests/test_slide_variant_audit.py tests/test_tex_variant_audit.py tests/test_material_triage.py -q
+      - name: Build cross-folder inventory
+        run: |
+          python scripts/audit_material_variants.py \
+            --root files \
+            --output "$RUNNER_TEMP/material-variants.json"
+      - name: Compare XR laboratory PDF contents
+        run: |
+          python scripts/audit_xr_pairs.py \
+            --root files \
+            --output-dir "$RUNNER_TEMP/xr-pairs"
+          cat "$RUNNER_TEMP/xr-pairs/xr_pairs.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Compare PDF-DOCX variant contents
+        run: |
+          python scripts/audit_format_variants.py \
+            --root files \
+            --output-dir "$RUNNER_TEMP/format-comparison"
+          cat "$RUNNER_TEMP/format-comparison/format_comparison.md" >> "$GITHUB_STEP_SUMMARY"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          data = json.loads((Path(os.environ["RUNNER_TEMP"]) /
+                             "format-comparison/format_comparison.json").read_text(encoding="utf-8"))
+          for row in data["pairs"]:
+              if row["status"] != "TEXT_VARIANTS_SIMILAR":
+                  print("FORMAT_REVIEW " + json.dumps({
+                      "files": row["files"],
+                      "status": row["status"],
+                      "coverage_shorter_5gram": row.get("coverage_shorter_5gram"),
+                      "coverage_a": row.get("coverage_a"),
+                      "coverage_b": row.get("coverage_b"),
+                      "a_words": row.get("a_words"),
+                      "b_words": row.get("b_words"),
+                  }, ensure_ascii=False))
+          PY
+      - name: Compare PDF-PPTX slide text
+        run: |
+          python scripts/audit_slide_variants.py \
+            --root files \
+            --output-dir "$RUNNER_TEMP/slide-comparison"
+          cat "$RUNNER_TEMP/slide-comparison/slides_comparison.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Compare PDF-TEX lab content
+        run: |
+          python scripts/audit_tex_variants.py \
+            --root files \
+            --output-dir "$RUNNER_TEMP/tex-comparison"
+          cat "$RUNNER_TEMP/tex-comparison/tex_comparison.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Prioritize verified text mismatches for editorial review
+        run: |
+          python scripts/triage_material_variants.py \
+            --reports-root "$RUNNER_TEMP" \
+            --output-dir "$RUNNER_TEMP/material-triage"
+          cat "$RUNNER_TEMP/material-triage/triage.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Verify output and summarize counts
+        env:
+          REPORT: ${{ runner.temp }}/material-variants.json
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          data = json.loads(Path(os.environ["REPORT"]).read_text(encoding="utf-8"))
+          assert data["scope"] == "files/"
+          assert all(row["decision"] == "UNVERIFIED" for row in data["format_variants"])
+          assert all("ignored/" not in path for row in data["format_variants"] for path in row["files"])
+          assert all("ignored/" not in path for row in data["cross_series_pairs"] for path in row["files"])
+          lines = [
+              "## Materials variant inventory (unverified)",
+              f"- Supported files: {data['scanned_supported_files']}",
+              f"- Format variant pairs: {len(data['format_variants'])}",
+              f"- XR cross-series pairs: {len(data['cross_series_pairs'])}",
+              "- This is a filename-based triage; not evidence of duplication.",
+          ]
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
+              f.write("\n".join(lines) + "\n")
+          PY
+      - name: Upload inventory outside Pages
+        uses: actions/upload-artifact@v4
+        with:
+          name: material-variant-inventory
+          path: |
+            ${{ runner.temp }}/material-variants.json
+            ${{ runner.temp }}/xr-pairs/
+            ${{ runner.temp }}/format-comparison/
+            ${{ runner.temp }}/slide-comparison/
+            ${{ runner.temp }}/tex-comparison/
+            ${{ runner.temp }}/material-triage/
+          retention-days: 7
+          if-no-files-found: error
