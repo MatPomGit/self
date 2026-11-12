@@ -36,6 +36,34 @@ bez wycinków raportów.
 Brak kandydatów oznacza tylko brak zgodności ponad progami leksykalnymi.
 Dokumenty archiwalne nie są przywracane do publicznej strony materiałów.
 
+## Analiza przyrostowa i cache ekstrakcji (Issue #138)
+
+Audyt na żądanie wykorzystuje **SHA-256 zawartości dokumentu + ścieżkę + wersję
+ekstraktora**, aby nie dekodować ponownie niezmienionych plików.
+Analiza między dokumentami (5-gramy, TF-IDF, klasyfikacje, dowody) jest
+**zawsze przeliczana od nowa** dla kompletnego korpusu. Cache przyspiesza
+wyłącznie ekstrakcję PDF/DOCX/ODT, nie zmienia definicji raportu.
+
+Przykład użycia lokalnego (cache nie może być w katalogu publikowanej strony):
+
+```bash
+python scripts/audit_content_overlap.py \
+  --scope files/inne/analizy \
+  --output-dir reports/content-audit/current \
+  --cache-dir reports/content-audit/extraction-cache --changed-only
+```
+
+Pierwszy przebieg buduje cache, kolejne odczytują wyłącznie rekordy o zgodnym
+SHA-256 i wersji ekstraktora. Zmiana pliku wymusza jego ponowną ekstrakcję.
+Niekompletna ekstrakcja nie jest utrwalana w cache; uszkodzone wpisy są
+odrzucane i odbudowywane z plików źródłowych. Liczby trafień i pominięć
+są drukowane jako `CONTENT_AUDIT_CACHE`, ale nie wpływają na manifest wynikowy.
+
+Workflow Issue #138 zapisuje cache między przebiegami przez `actions/cache@v4`
+(7-dniowe artefakty dowodowe pozostają osobno). Cache nie trafia do
+`files/`, `docs/`, `_site/` ani na GitHub Pages. Po zmianie formatu
+ekstrakcji należy zwiększyć `EXTRACTION_CACHE_VERSION` w skrypcie.
+
 ## Metoda
 - Każdy plik PDF/DOCX/ODT ma SHA-256 i jawny status ekstrakcji.
 - Odpowiedniki o wspólnym rdzeniu nazwy grupowane jako dokument logiczny.
