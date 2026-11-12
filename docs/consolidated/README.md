@@ -17,6 +17,16 @@ W tym katalogu znajdują się **dwa raporty zaktualizowane po konsolidacji i now
 - Oryginały wykorzystywane w tym etapie (`isaac_sim.docx`, `isaac_sim_pojecia.pdf`, `tele_ndd.docx`, `teled_ndd.docx`) pozostają nienaruszone. Oryginały dwóch starszych scaleń, wymienione w `docs/FILES_ARCHIVE_POLICY.md`, przeniesiono wcześniej do `files/ignored/`.
 - Pliki Markdown są kanoniczną wersją redakcyjną tej zmiany. Wygenerowane DOCX i PDF mają odpowiadać aktualnym źródłom Markdown. Synteza NDD jest dodatkowym materiałem, bez usuwania istniejących plików źródłowych.
 
+## Budowanie wersji DOCX/PDF
+
+Dla wybranych raportów można odbudować oba formaty z jednego źródła Markdown:
+
+```bash
+python scripts/build_consolidated_downloads.py --only isaac_lab --only telediagnostyka_ndd
+```
+
+Generator wymaga Pandoc, LibreOffice oraz pypdf. Dokonuje walidacji formatu i podstawowej kompletności treści. Ostatni przegląd obejmował raport Isaac Lab (10 stron PDF) i syntezę ADHD/ASD (8 stron PDF), wygenerowane i zweryfikowane w CI.
+
 ## Kontrola odbioru
 
 - [x] Spójny układ, definicje, wnioski i bibliografia raportów.
@@ -24,6 +34,7 @@ W tym katalogu znajdują się **dwa raporty zaktualizowane po konsolidacji i now
 - [x] Generacja edytowalnych DOCX i PDF; odpowiednio 5 i 4 strony, wizualna kontrola układu.
 - [x] Testy redakcyjne w CI.
 - [ ] Niezależna inspekcja ilustracji z oryginalnych PDF; obecny tekst nie odtwarza nieopisanych obrazów.
-- [ ] Ocena wizualna aktualnych eksportów, kontrola tabel i odnośników. Odrębna decyzja o ewentualnej przyszłej archiwizacji raportów NDD.
+- [x] Wizualna kontrola aktualnych eksportów Isaac Lab i NDD (10 oraz 8 stron), bez obciętych fragmentów.
+- [ ] Dalsza redakcyjna kontrola podziałów tabel na stronach i odrębna decyzja o ewentualnej przyszłej archiwizacji raportów NDD.
 
 Raporty mają charakter przeglądowy; nie zawierają wyników badań własnych i nie są rekomendacją do diagnozowania emocji.
