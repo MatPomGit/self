@@ -38,6 +38,7 @@ def inventory(materials: Path) -> dict[str, Path]:
         for path in sorted(materials.rglob("*"))
         if path.is_file() and not path.is_symlink()
         and path != materials / "index.html"
+        and path.relative_to(materials).parts[0] != "ignored"
         and not any(part.startswith(".") for part in path.relative_to(materials).parts)
     }
 
