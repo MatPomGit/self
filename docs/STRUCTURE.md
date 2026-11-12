@@ -6,6 +6,9 @@ aktualnych plików dla studentów jest `files/`.
 | Ścieżka | Funkcja |
 | --- | --- |
 | `index.html` | Strona główna z kołem kategorii i przełącznikiem języka |
+| `docs/data/project-details.json` | Rozszerzone opisy, logotypy i opcjonalne linki projektów (PL/EN) |
+| `docs/assets/images/projects/` | Grafiki projektów SVG/PNG/WebP |
+| `docs/PROJECTS.md` | Instrukcja edycji kart i podglądów projektów |
 | `docs/data/about.json` | Pełny opis osoby i pracy badawczej, po polsku (`pl`) i angielsku (`en`) |
 | `docs/assets/`, `docs/data/`, `docs/images/` | Zasoby techniczne, dane i obrazy (w tym `docs/data/papers.md`) |
 | `docs/archive/` | Archiwalne warianty witryny |

@@ -21,6 +21,17 @@ Osobista strona naukowa i dydaktyczna publikowana przez GitHub Pages.
 
 Opis katalogów i mechanizmu indeksowania: [docs/STRUCTURE.md](docs/STRUCTURE.md).
 
+
+## Logotypy i szczegóły projektów
+
+- Logotypy umieszczaj w `docs/assets/images/projects/` (SVG, PNG lub WebP, zalecany wariant 1:1, najlepiej przezroczyste tło).
+- Szczegóły i logo edytuj w `docs/data/project-details.json`, pod kluczem identycznym z polskim `title` w `docs/data/projects.json`.
+- Główne tytuły, daty i opisy: `docs/data/projects.json`; tłumaczenia tych pól: `docs/data/projects.en.json`.
+- Bez istniejącego lub poprawnego pliku logo interfejs wyświetli znak typograficzny. CI zgłosi błąd przy nieistniejącej ścieżce zapisanej w JSON.
+- Metadane nie są instrukcjami wewnętrznych agentów. Wszystkie wpisy trafią na **publiczną** stronę.
+
+[Instrukcja redakcyjna projektów](docs/PROJECTS.md).
+
 ## Krótkie adresy PDF
 
 Materiały PDF mają czytelne adresy do udostępniania. Przykłady:

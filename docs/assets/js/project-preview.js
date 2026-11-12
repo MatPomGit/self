@@ -17,8 +17,8 @@
   let selected=null;
   let locale='pl';
   const labels={
-    pl:{more:'Więcej szczegółów',close:'Zamknij',scope:'Cel i zakres',focus:'Kierunek badań',methods:'Metody i technologie',outcomes:'Rezultaty i produkty',status:'Status',ongoing:'Projekt w realizacji',past:'Projekt zakończony lub archiwalny',preview:'Podgląd projektu',detail:'Szczegóły projektu'},
-    en:{more:'More details',close:'Close',scope:'Objectives and scope',focus:'Research focus',methods:'Methods and technologies',outcomes:'Outputs and deliverables',status:'Status',ongoing:'Ongoing project',past:'Completed or archived project',preview:'Project preview',detail:'Project details'}
+    pl:{more:'Więcej szczegółów',close:'Zamknij',scope:'Cel i zakres',links:'Odnośniki',focus:'Kierunek badań',methods:'Metody i technologie',outcomes:'Rezultaty i produkty',status:'Status',ongoing:'Projekt w realizacji',past:'Projekt zakończony lub archiwalny',preview:'Podgląd projektu',detail:'Szczegóły projektu'},
+    en:{more:'More details',close:'Close',scope:'Objectives and scope',links:'Links',focus:'Research focus',methods:'Methods and technologies',outcomes:'Outputs and deliverables',status:'Status',ongoing:'Ongoing project',past:'Completed or archived project',preview:'Project preview',detail:'Project details'}
   };
   const el=(tag,cls,txt)=>{
     const node=document.createElement(tag);
@@ -31,10 +31,30 @@
     const d=project.details && project.details[locale] || {};
     return {methods:Array.isArray(d.methods)?d.methods:[],outcomes:Array.isArray(d.outcomes)?d.outcomes:[],focus:typeof d.focus==='string'?d.focus:''};
   }
+  // The logo path is repository-local and validated again by Python in CI.
+  // Never allow external, data:, or traversal URLs from editable JSON content.
+  function projectLogoPath(value){
+    if(typeof value!=='string' || !/^docs\/assets\/images\/projects\/[a-z0-9][a-z0-9_-]*\.(?:svg|png|webp)$/u.test(value))return null;
+    return value;
+  }
   function mark(project){
     const title=project.sourceTitle||project.title;
     const letters=title.split(/[\s·–/\-]+/u).filter(Boolean).slice(0,2).map(word=>word[0]).join('').toUpperCase();
-    return el('span','project-mark',letters||'◇');
+    const wrapper=el('span','project-mark');
+    const fallback=el('span','project-mark-fallback',letters||'◇');
+    wrapper.append(fallback);
+    const logo=projectLogoPath(project.details&&project.details.logo);
+    if(logo){
+      const image=el('img','project-logo');
+      image.alt='';
+      image.decoding='async';
+      image.loading='lazy';
+      image.addEventListener('load',()=>{fallback.hidden=true;});
+      image.addEventListener('error',()=>{image.remove();fallback.hidden=false;});
+      image.src=logo;
+      wrapper.append(image);
+    }
+    return wrapper;
   }
   function head(project,headingTag){
     const wrap=el('div','project-preview-head');
@@ -47,6 +67,13 @@
     const container=el('div','project-chip-list');
     methods.slice(0,5).forEach(method=>container.append(el('span','project-chip',method)));
     return container;
+  }
+  function safeProjectLink(value){
+    if(typeof value!=='string')return null;
+    try{
+      const url=new URL(value);
+      return url.protocol==='https:'&&url.username===''&&url.password==='' ? url.href : null;
+    }catch(error){return null;}
   }
   function cancelPending(){
     window.clearTimeout(pending);
@@ -126,6 +153,24 @@
     section(body,t.methods,extra.methods);
     section(body,t.outcomes,extra.outcomes);
     if(extra.focus)section(body,t.focus,extra.focus);
+    const links=project.details&&project.details.links;
+    if(Array.isArray(links)&&links.length){
+      const sectionLinks=el('section','project-detail-section');
+      sectionLinks.append(el('h3','',t.links));
+      const list=el('ul','project-detail-links');
+      links.forEach(link=>{
+        const href=safeProjectLink(link&&link.url);
+        if(!href || !link.label || typeof link.label!=='string')return;
+        const item=el('li','');
+        const a=el('a','',link.label);
+        a.href=href;
+        a.target='_blank';
+        a.rel='noopener noreferrer';
+        item.append(a);
+        list.append(item);
+      });
+      if(list.children.length){sectionLinks.append(list);body.append(sectionLinks);}
+    }
     dialog.replaceChildren(body);
     if(!dialog.open)dialog.showModal();
     close.focus();
