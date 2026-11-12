@@ -51,11 +51,11 @@ jobs:
         run: |
           python scripts/issue_audit_issue138.py select \
             --event "$EVENT_NAME" --requested "$INPUT_SCOPE" --comment "$ISSUE_COMMAND"
-      - name: Restore SHA-256 keyed extraction cache
-        uses: actions/cache@v4
+      - name: Restore trusted cache (read-only for issue comments)
+        uses: actions/cache/restore@v4
         with:
           path: ${{ runner.temp }}/issue-138-extraction-cache
-          key: issue138-extraction-v1-${{ runner.os }}-${{ github.sha }}-${{ steps.selection.outputs.scope }}
+          key: issue138-extraction-v1-${{ runner.os }}-${{ github.sha }}-both
           restore-keys: |
             issue138-extraction-v1-${{ runner.os }}-
       - name: Extract and compare selected report corpora (read-only)

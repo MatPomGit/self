@@ -73,6 +73,28 @@ class Issue138AuditTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "mismatch"):
                 summary(root, "active", "MatPomGit/self", "123")
 
+    def test_untrusted_comments_only_restore_trusted_push_cache(self):
+        issue = (ROOT / '.github/workflows/issue-138-audit.yml').read_text(
+            encoding='utf-8')
+        warm = (ROOT / '.github/workflows/issue-138-cache-warm.yml').read_text(
+            encoding='utf-8')
+        self.assertIn('uses: actions/cache/restore@v4', issue)
+        self.assertNotIn('uses: actions/cache@v4', issue)
+        self.assertIn('issue_comment:', issue)
+        self.assertIn('uses: actions/cache@v4', warm)
+        self.assertNotIn('issue_comment:', warm)
+        self.assertIn('push:', warm)
+        self.assertIn('branches: [main]', warm)
+        self.assertIn('workflow_dispatch:', warm)
+        self.assertIn("github.ref == 'refs/heads/main'", warm)
+        self.assertIn('persist-credentials: false', warm)
+        self.assertNotIn('issues: write', warm)
+        self.assertNotIn('deploy-pages', warm)
+        self.assertNotIn('github.event.pull_request.head', warm)
+        key = 'issue138-extraction-v1-${{ runner.os }}-${{ github.sha }}-both'
+        self.assertIn(key, issue)
+        self.assertIn(key, warm)
+
     def test_workflow_prevents_untrusted_comment_execution(self):
         workflow = (ROOT / ".github/workflows/issue-138-audit.yml").read_text(
             encoding="utf-8")
