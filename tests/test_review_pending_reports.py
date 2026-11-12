@@ -22,7 +22,7 @@ def test_passage_review_finds_unmatched_segment():
         "Jednostkowe zadanie bazuje na symulacji środowiska i obserwacji robota humanoidalnego z wykorzystaniem rzeczywistych modeli czujników oraz testów bezpieczeństwa eksploatacyjnego",
         "To osobny protokół opisujący zbiór badanych i walidację modelu klinicznego oraz różne miary dokładności i analizę wrażliwości na zmiany rozkładu danych",
     ])
-    b = record("b.md", ["Jednostkowe zadanie bazuje na symulacji środowiska i obserwacji robota humanoidalnego"])
+    b = record("b.md", ["Jednostkowe zadanie bazuje na symulacji środowiska i obserwacji robota humanoidalnego z wykorzystaniem rzeczywistych modeli czujników oraz testów bezpieczeństwa eksploatacyjnego"])
     ranked = paragraph_review(a, b)
     assert ranked[0]["location"] == "akapit 2"
     assert ranked[0]["coverage_in_reference"] == 0
