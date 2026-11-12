@@ -1,6 +1,6 @@
 {
   "ARC-RGBT": {
-    "logo": "docs/assets/images/projects/arc-rgbt.svg",
+    "logo": "docs/assets/images/projects/arc-rgbt.png",
     "pl": {
       "methods": ["Fuzja RGB–termowizja", "Detekcja obiektów", "Ocena odporności modeli"],
       "focus": "Analiza skuteczności detekcji w ograniczonej widoczności i przy zmianach warunków obserwacji.",
