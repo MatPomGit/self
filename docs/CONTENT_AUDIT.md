@@ -13,6 +13,29 @@ Zależność: Python 3.12+, pypdf >= 5, < 7.
     python -m pip install 'pypdf>=5,<7'
     python scripts/audit_content_overlap.py --scope files/inne/analizy --output-dir /tmp/self-content-audit --top 20
 
+## Obsługa operacyjna Issue #138
+
+Audyt jest uruchamiany na żądanie bez publikowania danych w GitHub Pages.
+W [Issue #138](https://github.com/MatPomGit/self/issues/138) właściciel repozytorium
+może dodać komentarz `/audit`, `/audit active`, `/audit archive` albo `/audit both`.
+Workflow akceptuje te komendy wyłącznie od `MatPomGit` w Issue #138.
+Komentarze są obsługiwane przez workflow z domyślnej gałęzi `main`;
+komentarze innych użytkowników ani komentarze bota raportującego są ignorowane.
+
+Nie wykonuje kodu osadzonego w komentarzu; wybiera tylko dopuszczony zakres.
+
+Alternatywnie: GitHub → Actions → **Issue 138 – report audit on demand** →
+**Run workflow** → wybór `active`, `archive` lub `both`.
+Obie ścieżki generują `overlap.json`, `manifest.json`, `matrix.csv`,
+`summary.md` w artefakcie `issue-138-content-audit` (7 dni).
+Workflow zapisuje w Issue #138 tylko liczbowe podsumowanie i link do przebiegu,
+bez wycinków raportów.
+
+`active`: `files/inne/analizy/`; `archive`: `files/ignored/inne/analizy/`;
+`both`: niezależne raporty dla obu zbiorów, bez automatycznego ich łączenia.
+Brak kandydatów oznacza tylko brak zgodności ponad progami leksykalnymi.
+Dokumenty archiwalne nie są przywracane do publicznej strony materiałów.
+
 ## Metoda
 - Każdy plik PDF/DOCX/ODT ma SHA-256 i jawny status ekstrakcji.
 - Odpowiedniki o wspólnym rdzeniu nazwy grupowane jako dokument logiczny.
