@@ -23,3 +23,10 @@ Nowe DOCX/PDF są generowane z kanonicznych źródeł `docs/consolidated/analiza
 - Wsteczne audyty nadal mogą czytać oryginały z `files/ignored/inne/analizy/`, lecz nie mogą publikować ich w indeksie.
 
 Zmiana starych adresów źródłowych będzie oznaczała brak bezpośredniego pobierania archiwalnych PDF/DOCX z Pages; nowe publiczne adresy są oparte na ścieżkach wyżej. Archiwalne bloby pozostają dostępne poprzez historię Git.
+
+
+## Opracowania uzupełniające bez zastępowania źródeł
+
+`files/inne/analizy/telediagnostyka_ndd.docx` oraz `.pdf` są generowane z `docs/consolidated/telediagnostyka_ndd.md`. Jest to nowa synteza tematyczna dwóch raportów NDD, a nie usunięcie treści o odrębnych celach. Oryginały `tele_ndd.docx`, `tele_ndd.pdf`, `teled_ndd.docx` i `teled_ndd.pdf` pozostają dostępne do osobnej decyzji redakcyjnej. Nie przenosić ich automatycznie do `files/ignored/`.
+
+Rozszerzenie `docs/consolidated/isaac_lab.md` do wersji 1.1.0 uzupełnia już istniejące pobieralne `isaac_lab.docx` i `isaac_lab.pdf`. Pliki `isaac_sim.docx` i `isaac_sim_pojecia.pdf` pozostają osobnymi źródłami, ponieważ zawierają dodatkowy kontekst techniczny i słownik zależny od wersji API. Ich archiwizacja nie została zatwierdzona.
