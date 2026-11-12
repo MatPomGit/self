@@ -1,0 +1,41 @@
+# Rozszerzenie audytu podobieństwa materiałów dydaktycznych
+
+**Wersja:** 1.0.0 · **Data:** 2026-11-12 · **Powiązanie:** [Issue #138](https://github.com/MatPomGit/self/issues/138)
+
+## Zakres i zasada bezpieczeństwa
+
+Wstępna inwentaryzacja rozszerza dotychczasowy zakres `files/inne/analizy/` o katalogi dydaktyczne. Wynik **nie stanowi analizy semantycznej** ani zgody na usunięcie dokumentów. `files/ignored/` jest pomijany i nie trafia na Pages.
+
+Uruchomienie lokalne, bez zależności od zewnętrznych usług:
+
+```bash
+python scripts/audit_material_variants.py --root files --output reports/content-audit/material-variants.json
+python -m pytest tests/test_material_variant_audit.py -q
+```
+
+Raport powstaje poza `files/`; zawiera pary odpowiadające wspólnemu rdzeniowi nazwy (PDF–DOCX, PDF–TEX, PDF–PPTX) oraz siedem możliwych par dwóch serii XR.
+
+## Priorytety merytorycznego porównania
+
+| Priorytet | Zakres | Hipoteza do sprawdzenia | Warunek dopuszczenia scalenia |
+| --- | --- | --- | --- |
+| P1 | `wirr_lab_01..07.pdf` ↔ `Lab_1..7_XR.pdf` | Dwie serie ćwiczeń o zbliżonej numeracji | Potwierdzona zgodność celów, poleceń i rezultatów; dodatkowe ćwiczenia mogą być celowo niezależne |
+| P1 | `isaac_sim.docx`, `isaac_sim_pojecia.pdf`, raport `isaac_lab` | Komplementarne opracowania ekosystemu Isaac | Macierz unikalnych pojęć, metod i tabel przed rozszerzeniem dokumentu kanonicznego |
+| P1 | `tele_ndd.docx` ↔ `teled_ndd.docx` | Wspólne badania diagnostyki ADHD/ASD | Rozdzielenie próby 70/30 i wyników 5-fold CV, bez utożsamiania modeli |
+| P2 | `analiza-eeg/lab1..6_*.tex` ↔ odpowiadające PDF | Eksporty tego samego materiału | Weryfikacja kompletności i wersji PDF, nie scalanie ćwiczeń między sobą |
+| P2 | `psychologia-poznawcza/psych_pozn_lab1..6` PDF/DOCX | Warianty formatowe | Zgodność treści i tabel |
+| P2 | `diagnoza-psychologiczna/diagnoza_lab1..5` PDF/DOCX | Warianty formatowe | Zgodność poleceń i kryteriów oceniania |
+| P2 | `nawigacja-robotow-humanoidalnych/robo_w01..10` PDF/PPTX | Źródło prezentacji i eksport | Zgodność slajdów, rysunków i treści |
+| P3 | `EEG_BIDS_Psychofizjologia_2026.pdf` ↔ `Galea_EEG_neuroXR.pdf` | Wspólne zagadnienia EEG, lecz różne cele | Domyślnie odnośniki krzyżowe, nie scalanie wykładów |
+
+## Następny poziom audytu
+
+1. Dla wszystkich par sprawdzić **hash, liczbę stron/slajdów, liczbę słów, strukturę nagłówków i zakres tematów**; dla PDF/TEX/PPTX rozwinąć ekstraktor po odrębnym teście bezpieczeństwa.
+2. Obliczać podobieństwo leksykalne i semantyczne **po wyłączeniu bibliografii**, wykazując osobno wspólne fragmenty i informacje unikalne.
+3. Twierdzenia naukowe, parametry i wyniki weryfikować na poziomie źródeł pierwotnych.
+4. Decyzje `MERGE`, `KEEP_SEPARATE`, `SUPERSEDE` przydzielać tylko po przeglądzie materiału dowodowego. Nazwa lub numer ćwiczenia nigdy nie wystarczają.
+5. Dopiero zaakceptowany dokument kanoniczny publikować jako DOCX/PDF, przenosząc zastąpione oryginały do `files/ignored/` i kontrolując wszystkie stare URL oraz filtr publikacji.
+
+### Kryterium zakończenia
+
+Każdy kandydat ma jawne źródła, wersje, metryki i mapę zachowanych treści. Brak odpowiedniej ekstrakcji oznacza `EXTRACTION_INCOMPLETE`, nie brak podobieństwa.
