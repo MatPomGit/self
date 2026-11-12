@@ -5,6 +5,9 @@ on:
     paths:
       - "scripts/audit_material_variants.py"
       - "tests/test_material_variant_audit.py"
+      - "scripts/audit_xr_pairs.py"
+      - "tests/test_xr_pair_audit.py"
+      - "scripts/audit_content_overlap.py"
       - ".github/workflows/material-variant-audit.yml"
   workflow_dispatch:
 
@@ -23,14 +26,20 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install test dependency
-        run: python -m pip install "pytest>=8,<10"
+        run: python -m pip install "pytest>=8,<10" "pypdf>=5,<7"
       - name: Run focused tests
-        run: python -m pytest tests/test_material_variant_audit.py -q
+        run: python -m pytest tests/test_material_variant_audit.py tests/test_xr_pair_audit.py -q
       - name: Build cross-folder inventory
         run: |
           python scripts/audit_material_variants.py \
             --root files \
             --output "$RUNNER_TEMP/material-variants.json"
+      - name: Compare XR laboratory PDF contents
+        run: |
+          python scripts/audit_xr_pairs.py \
+            --root files \
+            --output-dir "$RUNNER_TEMP/xr-pairs"
+          cat "$RUNNER_TEMP/xr-pairs/xr_pairs.md" >> "$GITHUB_STEP_SUMMARY"
       - name: Verify output and summarize counts
         env:
           REPORT: ${{ runner.temp }}/material-variants.json
@@ -58,6 +67,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: material-variant-inventory
-          path: ${{ runner.temp }}/material-variants.json
+          path: |
+            ${{ runner.temp }}/material-variants.json
+            ${{ runner.temp }}/xr-pairs/
           retention-days: 7
           if-no-files-found: error
