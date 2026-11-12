@@ -8,6 +8,8 @@ on:
       - "scripts/audit_xr_pairs.py"
       - "scripts/audit_format_variants.py"
       - "scripts/audit_slide_variants.py"
+      - "scripts/audit_tex_variants.py"
+      - "tests/test_tex_variant_audit.py"
       - "tests/test_slide_variant_audit.py"
       - "tests/test_format_variant_audit.py"
       - "tests/test_xr_pair_audit.py"
@@ -32,7 +34,7 @@ jobs:
       - name: Install test dependency
         run: python -m pip install "pytest>=8,<10" "pypdf>=5,<7"
       - name: Run focused tests
-        run: python -m pytest tests/test_material_variant_audit.py tests/test_xr_pair_audit.py tests/test_format_variant_audit.py tests/test_slide_variant_audit.py -q
+        run: python -m pytest tests/test_material_variant_audit.py tests/test_xr_pair_audit.py tests/test_format_variant_audit.py tests/test_slide_variant_audit.py tests/test_tex_variant_audit.py -q
       - name: Build cross-folder inventory
         run: |
           python scripts/audit_material_variants.py \
@@ -74,6 +76,12 @@ jobs:
             --root files \
             --output-dir "$RUNNER_TEMP/slide-comparison"
           cat "$RUNNER_TEMP/slide-comparison/slides_comparison.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Compare PDF-TEX lab content
+        run: |
+          python scripts/audit_tex_variants.py \
+            --root files \
+            --output-dir "$RUNNER_TEMP/tex-comparison"
+          cat "$RUNNER_TEMP/tex-comparison/tex_comparison.md" >> "$GITHUB_STEP_SUMMARY"
       - name: Verify output and summarize counts
         env:
           REPORT: ${{ runner.temp }}/material-variants.json
@@ -106,5 +114,6 @@ jobs:
             ${{ runner.temp }}/xr-pairs/
             ${{ runner.temp }}/format-comparison/
             ${{ runner.temp }}/slide-comparison/
+            ${{ runner.temp }}/tex-comparison/
           retention-days: 7
           if-no-files-found: error
