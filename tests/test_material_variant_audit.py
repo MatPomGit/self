@@ -24,6 +24,9 @@ def test_formats_and_xr(tmp_path: Path) -> None:
     assert result["scanned_supported_files"] == 6
     assert {v["family"] for v in result["format_variants"]} == {"pdf_tex", "pdf_pptx"}
     assert len(result["cross_series_pairs"]) == 1
+    assert result["schema_version"] == "1.1.0"
+    assert all(len(record["sha256"]) == 64 and record["bytes"] == 7 for group in result["format_variants"] for record in group["evidence"])
+    assert all(len(record["sha256"]) == 64 for group in result["cross_series_pairs"] for record in group["evidence"])
     assert all(v["decision"] == "UNVERIFIED" for v in result["format_variants"])
     assert not any("ignored/" in str(v) for v in result["format_variants"])
 
@@ -36,3 +39,13 @@ def test_distinct_stems_not_merged(tmp_path: Path) -> None:
     result = inventory(root)
     assert not result["format_variants"]
     assert not result["cross_series_pairs"]
+
+
+def test_symlinks_are_not_hashed(tmp_path: Path) -> None:
+    root = tmp_path / "files"
+    touch(root, "source/report.pdf")
+    touch(root, "source/report.docx")
+    (root / "source" / "external.pdf").symlink_to(tmp_path / "missing.pdf")
+    result = inventory(root)
+    assert result["scanned_supported_files"] == 2
+    assert len(result["format_variants"]) == 1
