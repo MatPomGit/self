@@ -1,7 +1,9 @@
 /* Project previews: isolated from the existing site cards. */
 .project-cards .data-card{position:relative;cursor:pointer}
 .project-cards .data-card:focus-within{border-color:var(--accent)}
-.project-card-action{align-self:flex-start;margin:3px 0 1px;padding:2px 0;border:0;background:none;color:var(--accent);font-size:.69rem;font-weight:600;line-height:1.2;cursor:pointer}
+.project-card-action{position:absolute;right:7px;bottom:4px;margin:0;padding:2px 5px;border:1px solid var(--line);border-radius:5px;background:var(--bg);color:var(--accent);font-size:.69rem;font-weight:600;line-height:1.2;cursor:pointer;opacity:0;transition:opacity .15s ease}
+.project-cards .data-card:hover .project-card-action,.project-cards .data-card:focus-within .project-card-action{opacity:1}
+@media(hover:none){.project-card-action{position:static;opacity:1;align-self:flex-end;margin-top:3px}}
 .project-card-action:hover{text-decoration:underline}
 .project-preview{position:fixed;z-index:50;width:min(410px,calc(100vw - 24px));max-height:min(70vh,600px);overflow:auto;padding:18px;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:12px;box-shadow:0 16px 44px rgba(20,43,64,.17);opacity:0;transform:translateY(5px);transition:opacity .18s ease,transform .18s ease;pointer-events:none}
 .project-preview.is-visible{opacity:1;transform:none;pointer-events:auto}
