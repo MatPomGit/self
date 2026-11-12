@@ -48,6 +48,24 @@ jobs:
             --root files \
             --output-dir "$RUNNER_TEMP/format-comparison"
           cat "$RUNNER_TEMP/format-comparison/format_comparison.md" >> "$GITHUB_STEP_SUMMARY"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          data = json.loads((Path(os.environ["RUNNER_TEMP"]) /
+                             "format-comparison/format_comparison.json").read_text(encoding="utf-8"))
+          for row in data["pairs"]:
+              if row["status"] != "TEXT_VARIANTS_SIMILAR":
+                  print("FORMAT_REVIEW " + json.dumps({
+                      "files": row["files"],
+                      "status": row["status"],
+                      "coverage_shorter_5gram": row.get("coverage_shorter_5gram"),
+                      "coverage_a": row.get("coverage_a"),
+                      "coverage_b": row.get("coverage_b"),
+                      "a_words": row.get("a_words"),
+                      "b_words": row.get("b_words"),
+                  }, ensure_ascii=False))
+          PY
       - name: Verify output and summarize counts
         env:
           REPORT: ${{ runner.temp }}/material-variants.json
