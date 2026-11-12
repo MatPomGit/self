@@ -10,6 +10,9 @@ ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "docs/data/projects.json"
 TRANSLATIONS = ROOT / "docs/data/projects.en.json"
 HTML = ROOT / "index.html"
+DETAILS = ROOT / "docs/data/project-details.json"
+PREVIEW_JS = ROOT / "docs/assets/js/project-preview.js"
+PREVIEW_CSS = ROOT / "docs/assets/css/project-preview.css"
 
 
 class ProjectsTests(unittest.TestCase):
@@ -47,6 +50,29 @@ class ProjectsTests(unittest.TestCase):
                 for key in ("title", "period", "description"):
                     self.assertIsInstance(translation.get(key), str)
                     self.assertTrue(translation[key].strip())
+
+    def test_preview_metadata_covers_projects_and_languages(self):
+        metadata = json.loads(DETAILS.read_text(encoding="utf-8"))
+        self.assertEqual(set(metadata), {item["title"] for item in self.projects})
+        for name, entry in metadata.items():
+            with self.subTest(name=name):
+                for language in ("pl", "en"):
+                    self.assertIn(language, entry)
+                    self.assertTrue(entry[language]["methods"])
+                    self.assertTrue(all(isinstance(x, str) and x.strip() for x in entry[language]["methods"]))
+
+    def test_project_preview_is_wired(self):
+        html = HTML.read_text(encoding="utf-8")
+        self.assertIn("project-preview.js", html)
+        self.assertIn("project-preview.css", html)
+        self.assertIn("ProjectPreview.attach", html)
+        self.assertIn("project-details.json", html)
+        js = PREVIEW_JS.read_text(encoding="utf-8")
+        self.assertIn("showModal()", js)
+        self.assertIn("pointerenter", js)
+        self.assertIn("focusin", js)
+        self.assertIn("Escape", js)
+        self.assertIn("setTimeout(()=>show(card,project,language),250)", js)
 
     def test_page_contains_project_data_hook(self):
         """Strona ma kontener projektów i odwołanie do danych."""

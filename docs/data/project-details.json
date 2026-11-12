@@ -1,0 +1,424 @@
+{
+  "ARC-RGBT": {
+    "pl": {
+      "methods": [
+        "Fuzja RGB–termowizja",
+        "Detekcja obiektów",
+        "Ocena odporności modeli"
+      ],
+      "focus": "Analiza skuteczności detekcji w ograniczonej widoczności i przy zmianach warunków obserwacji."
+    },
+    "en": {
+      "methods": [
+        "RGB–thermal fusion",
+        "Object detection",
+        "Robustness evaluation"
+      ],
+      "focus": "Evaluating detection under limited visibility and changing observation conditions."
+    }
+  },
+  "ARC-RVI · Autonomiczna inspekcja wizualna": {
+    "pl": {
+      "methods": [
+        "Lokalizacja obiektu",
+        "Planowanie punktów obserwacji",
+        "Ocena kompletności inspekcji"
+      ]
+    },
+    "en": {
+      "methods": [
+        "Target localisation",
+        "Viewpoint planning",
+        "Inspection completeness"
+      ]
+    }
+  },
+  "ARC-HRI-SAFETY": {
+    "pl": {
+      "methods": [
+        "Percepcja sceny",
+        "Analiza ruchu",
+        "Ocena ryzyka HRI"
+      ]
+    },
+    "en": {
+      "methods": [
+        "Scene perception",
+        "Motion analysis",
+        "HRI risk assessment"
+      ]
+    }
+  },
+  "ARC-AFFECTIVE": {
+    "pl": {
+      "methods": [
+        "EEG",
+        "Analiza zachowania",
+        "Estymacja obciążenia poznawczego"
+      ]
+    },
+    "en": {
+      "methods": [
+        "EEG",
+        "Behavioural analysis",
+        "Cognitive workload estimation"
+      ]
+    }
+  },
+  "XR-Cognition · Adaptacyjne środowiska poznawcze": {
+    "pl": {
+      "methods": [
+        "XR",
+        "Adaptacja zadań",
+        "Analiza procesów poznawczych"
+      ]
+    },
+    "en": {
+      "methods": [
+        "XR",
+        "Task adaptation",
+        "Cognitive process analysis"
+      ]
+    }
+  },
+  "ContextNDD": {
+    "pl": {
+      "methods": [
+        "Modelowanie kontekstu",
+        "Analiza zachowania",
+        "Różnice indywidualne"
+      ]
+    },
+    "en": {
+      "methods": [
+        "Context modelling",
+        "Behavioural analysis",
+        "Individual differences"
+      ]
+    }
+  },
+  "SAPIENS · Człowiek i robot humanoidalny": {
+    "pl": {
+      "methods": [
+        "HRI",
+        "Zaufanie do robotów",
+        "Obecność społeczna"
+      ]
+    },
+    "en": {
+      "methods": [
+        "HRI",
+        "Trust in robots",
+        "Social presence"
+      ]
+    }
+  },
+  "ARC Mobile Eye Tracking": {
+    "pl": {
+      "methods": [
+        "Kalibracja okulograficzna",
+        "Analiza obrazu",
+        "Estymacja spojrzenia"
+      ]
+    },
+    "en": {
+      "methods": [
+        "Gaze calibration",
+        "Image analysis",
+        "Gaze estimation"
+      ]
+    }
+  },
+  "EEG Neurolyze": {
+    "pl": {
+      "methods": [
+        "Muse S Athena",
+        "Kontrola jakości EEG",
+        "Synchronizacja zdarzeń (planowana)"
+      ]
+    },
+    "en": {
+      "methods": [
+        "Muse S Athena",
+        "EEG quality control",
+        "Event synchronisation (planned)"
+      ]
+    }
+  },
+  "S4D-TAM · Nawigacja autonomiczna": {
+    "pl": {
+      "methods": [
+        "Nawigacja bez GNSS",
+        "Semantyka sceny",
+        "Dane przestrzenne 3D/4D"
+      ]
+    },
+    "en": {
+      "methods": [
+        "GNSS-denied navigation",
+        "Scene semantics",
+        "3D/4D spatial data"
+      ]
+    }
+  },
+  "ARC Attachment Dynamics": {
+    "pl": {
+      "methods": [
+        "Psychologia przywiązania",
+        "Modelowanie dynamiczne"
+      ]
+    },
+    "en": {
+      "methods": [
+        "Attachment theory",
+        "Dynamic modelling"
+      ]
+    }
+  },
+  "ARC-ADHD · Adaptacyjna gra badawcza": {
+    "pl": {
+      "methods": [
+        "Gra adaptacyjna",
+        "Ocena transferu umiejętności"
+      ]
+    },
+    "en": {
+      "methods": [
+        "Adaptive game",
+        "Skill-transfer evaluation"
+      ]
+    }
+  },
+  "AI Cognitive Resilience": {
+    "pl": {
+      "methods": [
+        "Perswazja AI",
+        "Jakość dowodów",
+        "Zmiana przekonań"
+      ]
+    },
+    "en": {
+      "methods": [
+        "AI persuasion",
+        "Evidence quality",
+        "Belief change"
+      ]
+    }
+  },
+  "DERA-HRI · Emocje w interakcji z robotem": {
+    "pl": {
+      "methods": [
+        "Pomiar emocji",
+        "HRI",
+        "Poczucie kontroli"
+      ]
+    },
+    "en": {
+      "methods": [
+        "Emotion assessment",
+        "HRI",
+        "Perceived control"
+      ]
+    }
+  },
+  "MindDx · Symulator diagnozy psychologicznej": {
+    "pl": {
+      "methods": [
+        "Symulacja przypadków",
+        "Formułowanie hipotez",
+        "Uczenie diagnostyki"
+      ]
+    },
+    "en": {
+      "methods": [
+        "Case simulation",
+        "Hypothesis formulation",
+        "Diagnostic learning"
+      ]
+    }
+  },
+  "ARIANA": {
+    "pl": {
+      "methods": [
+        "Okulografia",
+        "Obrazowanie VIS/IR",
+        "Psychometria"
+      ]
+    },
+    "en": {
+      "methods": [
+        "Eye tracking",
+        "VIS/IR imaging",
+        "Psychometrics"
+      ]
+    }
+  },
+  "PIAST · Satelitarne obrazowanie Ziemi": {
+    "pl": {
+      "methods": [
+        "Nanosatelity",
+        "Obrazowanie Ziemi",
+        "Optoelektronika"
+      ]
+    },
+    "en": {
+      "methods": [
+        "Nanosatellites",
+        "Earth observation",
+        "Optoelectronics"
+      ]
+    }
+  },
+  "SEEKER · Głowice optoelektroniczne": {
+    "pl": {
+      "methods": [
+        "Obrazowanie wielospektralne",
+        "Prototypowanie",
+        "Weryfikacja rozwiązań"
+      ]
+    },
+    "en": {
+      "methods": [
+        "Multispectral imaging",
+        "Prototyping",
+        "Verification"
+      ]
+    }
+  },
+  "PolFEL · Laser na swobodnych elektronach": {
+    "pl": {
+      "methods": [
+        "Laser na swobodnych elektronach",
+        "Infrastruktura badawcza"
+      ]
+    },
+    "en": {
+      "methods": [
+        "Free-electron laser",
+        "Research infrastructure"
+      ]
+    }
+  },
+  "OPTOKRYPT · Kryptografia kwantowa": {
+    "pl": {
+      "methods": [
+        "Losowość kwantowa",
+        "Dystrybucja kluczy",
+        "Optyka"
+      ]
+    },
+    "en": {
+      "methods": [
+        "Quantum randomness",
+        "Key distribution",
+        "Optics"
+      ]
+    }
+  },
+  "Mikroruchy oka · Potencjalne biomarkery neurodegeneracji": {
+    "pl": {
+      "methods": [
+        "Okulografia",
+        "Cechy okulomotoryczne",
+        "Analiza biomarkerów"
+      ]
+    },
+    "en": {
+      "methods": [
+        "Eye tracking",
+        "Oculomotor features",
+        "Biomarker analysis"
+      ]
+    }
+  },
+  "Eye Tracking w rzeczywistości mieszanej": {
+    "pl": {
+      "methods": [
+        "XR",
+        "Eye tracking",
+        "Interakcja spojrzeniem"
+      ]
+    },
+    "en": {
+      "methods": [
+        "XR",
+        "Eye tracking",
+        "Gaze interaction"
+      ]
+    }
+  },
+  "Systemy wizyjne XR w nauce i obronności": {
+    "pl": {
+      "methods": [
+        "Mixed reality",
+        "Systemy wizyjne",
+        "Analiza zastosowań"
+      ]
+    },
+    "en": {
+      "methods": [
+        "Mixed reality",
+        "Vision systems",
+        "Application analysis"
+      ]
+    }
+  },
+  "RiverGUARD · Ochrona granic rzecznych": {
+    "pl": {
+      "methods": [
+        "Monitoring optoelektroniczny",
+        "Obserwacja terenowa"
+      ]
+    },
+    "en": {
+      "methods": [
+        "Optoelectronic monitoring",
+        "Field surveillance"
+      ]
+    }
+  },
+  "Skaner 3D sub-THz": {
+    "pl": {
+      "methods": [
+        "Fale subterahercowe",
+        "Skanowanie 3D"
+      ]
+    },
+    "en": {
+      "methods": [
+        "Sub-terahertz waves",
+        "3D scanning"
+      ]
+    }
+  },
+  "Sensor trenażera GROM / PIORUN": {
+    "pl": {
+      "methods": [
+        "Sensor optoelektroniczny",
+        "Symulacja szkoleniowa"
+      ]
+    },
+    "en": {
+      "methods": [
+        "Optoelectronic sensor",
+        "Training simulation"
+      ]
+    }
+  },
+  "PROTECT · Biometria kontroli granicznej": {
+    "pl": {
+      "methods": [
+        "Biometria multimodalna",
+        "Prywatność",
+        "Kontrola graniczna"
+      ]
+    },
+    "en": {
+      "methods": [
+        "Multimodal biometrics",
+        "Privacy",
+        "Border control"
+      ]
+    }
+  }
+}
