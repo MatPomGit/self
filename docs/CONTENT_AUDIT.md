@@ -19,6 +19,9 @@ Audyt jest uruchamiany na żądanie bez publikowania danych w GitHub Pages.
 W [Issue #138](https://github.com/MatPomGit/self/issues/138) właściciel repozytorium
 może dodać komentarz `/audit`, `/audit active`, `/audit archive` albo `/audit both`.
 Workflow akceptuje te komendy wyłącznie od `MatPomGit` w Issue #138.
+Komentarze są obsługiwane przez workflow z domyślnej gałęzi `main`;
+komentarze innych użytkowników ani komentarze bota raportującego są ignorowane.
+
 Nie wykonuje kodu osadzonego w komentarzu; wybiera tylko dopuszczony zakres.
 
 Alternatywnie: GitHub → Actions → **Issue 138 – report audit on demand** →
