@@ -175,10 +175,13 @@
     .project-section-title{font:650 1.12rem/1.4 var(--sans);margin:22px 0 4px}
     .project-cards{margin-top:12px;grid-auto-rows:1fr}
     .project-cards .data-card{
-      display:flex;flex-direction:column;min-height:220px;height:100%;
+      display:flex;flex-direction:column;min-height:196px;height:100%;padding:13px 14px;
       background:var(--bg);
       transition:background-color .18s ease,border-color .18s ease,box-shadow .18s ease;
     }
+    .project-cards .data-card h3{font-size:.93rem;line-height:1.3;margin:3px 0 5px}
+    .project-cards .data-card p{font-size:.82rem;line-height:1.38;margin:3px 0}
+    .project-cards .data-card .project-period{font-size:.74rem;line-height:1.3;margin:0 0 5px}
     @media(hover:hover){
       .project-cards .data-card:hover{
         background:var(--accent-soft);
