@@ -44,6 +44,18 @@ class PreflightTests(unittest.TestCase):
             self.assertTrue((destination / "course/empty.pdf").exists())
             self.assertEqual(scan(materials), [])
 
+    def test_ignored_documents_are_not_preflight_scanned(self):
+        with TemporaryDirectory() as temp:
+            files = Path(temp) / "files"
+            ignored = files / "ignored" / "sub"
+            active = files / "sub"
+            ignored.mkdir(parents=True)
+            active.mkdir()
+            (ignored / "obsolete.pdf").write_bytes(b"invalid-pdf")
+            (active / "broken.pdf").write_bytes(b"invalid-pdf")
+            issues = scan(files)
+            self.assertEqual([str(p) for p, _ in issues], ["sub/broken.pdf"])
+
     def test_reject_quarantine_inside_public_materials(self):
         with TemporaryDirectory() as tmp:
             root = Path(tmp)

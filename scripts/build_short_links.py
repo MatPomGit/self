@@ -82,6 +82,7 @@ def pdf_routes(files: Path) -> dict[str, str]:
     pdfs = [
         path.relative_to(files) for path in files.rglob("*")
         if path.is_file() and not path.is_symlink() and path.suffix.casefold() == ".pdf"
+        and path.relative_to(files).parts[0] != "ignored"
         and not any(part.startswith(".") for part in path.relative_to(files).parts)
     ]
     used: set[str] = set()

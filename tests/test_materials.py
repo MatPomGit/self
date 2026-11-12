@@ -103,6 +103,7 @@ class MaterialsTests(unittest.TestCase):
         public_files = {
             path.resolve() for path in MATERIALS.rglob("*")
             if path.is_file() and path != MATERIALS / "index.html"
+            and path.relative_to(MATERIALS).parts[0] != "ignored"
         }
         self.assertFalse(
             public_files - linked_files,
