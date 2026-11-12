@@ -3,25 +3,25 @@
     "sourceTitle": "ARC-RGBT",
     "title": "ARC-RGBT",
     "period": "2026–present",
-    "description": "Research on visible–thermal image fusion for object detection in challenging conditions, with emphasis on the reliability limits of multisensor approaches."
+    "description": "Research software for RGB–thermal fusion, image degradation analysis and object detection evaluation with sensor geometry."
   },
   {
     "sourceTitle": "ARC-RVI · Autonomiczna inspekcja wizualna",
     "title": "ARC-RVI · Autonomous Visual Inspection",
     "period": "2026–present",
-    "description": "Development of autonomous visual inspection methods for target localisation, viewpoint planning and assessment of the completeness and quality of robot-generated imagery."
+    "description": "Offline research software for robotic visual inspection: viewpoint planning, coverage and photographic quality assessment."
   },
   {
     "sourceTitle": "ARC-HRI-SAFETY",
     "title": "ARC-HRI-SAFETY",
     "period": "2026–present",
-    "description": "Development of risk-prediction methods for human–humanoid collaboration based on scene perception, motion analysis and safety constraints."
+    "description": "Predictive risk assessment for physical human–humanoid interaction using scene perception, motion and uncertainty."
   },
   {
     "sourceTitle": "ARC-AFFECTIVE",
     "title": "ARC-AFFECTIVE",
     "period": "2026–present",
-    "description": "Research on task-related fluctuations in attention and cognitive workload, including XR settings. Development of personalised user-state estimation from Muse S Athena EEG and behavioural data."
+    "description": "Research on attention and cognitive workload estimation from EEG, behaviour and other modalities with uncertainty-aware analysis."
   },
   {
     "sourceTitle": "XR-Cognition · Adaptacyjne środowiska poznawcze",
@@ -33,55 +33,55 @@
     "sourceTitle": "ContextNDD",
     "title": "ContextNDD",
     "period": "2026–present",
-    "description": "Development of context-sensitive behavioural analysis methods that account for individual differences without reducing user profiles to diagnostic labels."
+    "description": "Context-sensitive behavioural modelling with data-quality awareness and individual differences rather than automated diagnostic classification."
   },
   {
     "sourceTitle": "SAPIENS · Człowiek i robot humanoidalny",
     "title": "SAPIENS · Human–Humanoid Interaction",
     "period": "2026–present",
-    "description": "Research on the effects of direct human–humanoid interaction on trust, agency, social presence and the interpretation of emotional cues."
+    "description": "Psychological effects of direct interaction with humanoid robots: affect, trust, social presence and perceived agency."
   },
   {
     "sourceTitle": "ARC Mobile Eye Tracking",
     "title": "ARC Mobile Eye Tracking",
     "period": "2026–present",
-    "description": "Research on smartphone-based gaze estimation and the effects of calibration, lighting and head movement on measurement accuracy."
+    "description": "Android screen-space gaze estimation research, including calibration and effects of lighting and head movement."
   },
   {
     "sourceTitle": "EEG Neurolyze",
     "title": "EEG Neurolyze",
     "period": "2026–present",
-    "description": "Development of Muse S Athena EEG acquisition and analysis tools with data-quality checks. Planned support for cognitive experiments, event synchronisation and XR integration; physical recordings require validation."
+    "description": "Python toolkit for EEG acquisition, preprocessing and analysis with reproducible synthetic demonstrations and reports."
   },
   {
     "sourceTitle": "S4D-TAM · Nawigacja autonomiczna",
     "title": "S4D-TAM · Autonomous Navigation",
     "period": "2026–present",
-    "description": "Development of autonomous navigation evaluation methods for GNSS-degraded conditions using scene semantics and 3D/4D spatial data."
+    "description": "Benchmark for unmanned aerial navigation under degraded GNSS using semantic 4D spatial representations."
   },
   {
     "sourceTitle": "ARC Attachment Dynamics",
     "title": "ARC Attachment Dynamics",
     "period": "2026–present",
-    "description": "Research on dynamic changes in closeness, autonomy and perceived security in relationships through attachment theory and dynamic modelling."
+    "description": "Dynamic modelling of closeness, autonomy and perceived security in adult relationships from an attachment-theory perspective."
   },
   {
     "sourceTitle": "ARC-ADHD · Adaptacyjna gra badawcza",
     "title": "ARC-ADHD · Adaptive Research Game",
     "period": "2026–present",
-    "description": "Development of an adaptive research game investigating recovery of goal-directed behaviour after challenging stimuli, distinguishing task gains from transfer beyond the game."
+    "description": "Adaptive research game for measuring recovery of goal-directed behaviour after a controlled challenge in children with ADHD."
   },
   {
     "sourceTitle": "AI Cognitive Resilience",
     "title": "AI Cognitive Resilience",
     "period": "2026–present",
-    "description": "Research on how evidence quality and the strength and framing of AI-generated persuasion influence belief change."
+    "description": "Belief updating in human–LLM interaction, separating evidence quality from persuasive response style."
   },
   {
     "sourceTitle": "DERA-HRI · Emocje w interakcji z robotem",
     "title": "DERA-HRI · Emotions in Robot Interaction",
     "period": "2026–present",
-    "description": "Development of an instrument for studying emotional responses and experiences during robot interaction, including responsiveness, trust and perceived control."
+    "description": "Development of a self-report instrument for affective experiences following human–robot interaction; psychometric validation is pending."
   },
   {
     "sourceTitle": "MindDx · Symulator diagnozy psychologicznej",
