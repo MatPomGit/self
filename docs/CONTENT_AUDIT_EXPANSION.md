@@ -51,3 +51,21 @@ python -m pytest tests/test_material_variant_audit.py tests/test_xr_pair_audit.p
 
 Zapisuje `xr_pairs.json` i `xr_pairs.md`, zawsze poza publikowanym drzewem. GitHub Actions `material-variant-audit.yml` generuje tabelę podsumowania oraz zachowuje pełny wynik jako artefakt przez 7 dni. **Metryki tekstowe nie rozstrzygają zgodności celów dydaktycznych, ilustracji ani kryteriów oceny.** Przed archiwizacją konieczna jest kontrola oryginalnych PDF i wszystkich unikalnych poleceń.
 
+
+## Wynik pierwszego wykonania (2026-11-12)
+
+**Potwierdzony przebieg CI:** [Materials variant audit #8](https://github.com/MatPomGit/self/actions/runs/43262646284), wynik `success`, commit `ef2731c9b884027408f85ae8f9882575f917a6a8`. Testy: **7 passed**. Inwentarz: **285 obsługiwanych plików, 74 pary wariantów formatowych, 7 par serii WiRR/XR**. Artefakt `material-variant-inventory` (retencja 7 dni) zawiera pełny JSON i raport stron.
+
+| Nr | WiRR: liczba słów | Dodatkowe XR: liczba słów | Pokrycie 5-gramów krótszego |
+| --- | ---: | ---: | ---: |
+| 01 | 1613 | 3442 | 0.0% |
+| 02 | 1498 | 2958 | 0.0% |
+| 03 | 1612 | 2430 | 0.0% |
+| 04 | 1590 | 2250 | 0.0% |
+| 05 | 1573 | 2143 | 0.0% |
+| 06 | 1539 | 2300 | 0.0% |
+| 07 | 1250 | 2341 | 0.1% |
+
+**Werdykt do planu:** `KEEP_SEPARATE_PENDING_SEMANTIC_REVIEW`. Brak dowodu tekstowego na duplikaty między obiema seriami; niskie pokrycie nie wykazuje jednak różnicy celów dydaktycznych. Nie przenosić do `files/ignored/`. W kolejnej iteracji priorytet mają 74 pary wariantów formatowych i raporty Isaac/NDD, gdzie istnieje większe prawdopodobieństwo redundancji rzeczywistych wersji.
+
+Uwaga o testach: CI zaliczył siedem testów, ale podczas importu istniejącego analizatora emitowane były `SyntaxWarning` o nieprawidłowej sekwencji `\\`` w literale Python. Ostrzeżenia nie unieważniają wyników, lecz powinny zostać poprawione oddzielnie w źródłowym analizatorze.
