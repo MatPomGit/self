@@ -16,6 +16,7 @@
         stored === 'dark' || (stored !== 'light' && prefersDark) ? 'dark' : 'light';
     })();
   </script>
+  <link rel="stylesheet" href="docs/assets/css/project-preview.css">
   <style>
     :root{
       --bg:#fff;--text:#1b2430;--muted:#5d6a78;--line:#e3e8ee;--accent:#1d4f7a;--accent-soft:#eef3f8;
@@ -513,6 +514,7 @@
 
   <script src="docs/assets/js/site-i18n.js"></script>
 <script src="docs/assets/js/publication-utils.js"></script>
+<script src="docs/assets/js/project-preview.js"></script>
   <script>
     const i18n=window.SiteI18n;
     i18n.apply();
@@ -681,6 +683,13 @@
         if(!response.ok)throw new Error('HTTP '+response.status);
         let records=await response.json();
         if(!Array.isArray(records))throw new Error(tr('Nieprawidłowy format danych'));
+        if(path==='docs/data/projects.json'){
+          const metadataResponse=await fetch('docs/data/project-details.json');
+          if(metadataResponse.ok){
+            const metadata=await metadataResponse.json();
+            records=records.map(item=>({...item,details:metadata[item.title]||{}}));
+          }
+        }
         if(i18n.language==='en' && path==='docs/data/projects.json'){
           const translatedResponse=await fetch('docs/data/projects.en.json');
           if(!translatedResponse.ok)throw new Error('HTTP '+translatedResponse.status);
@@ -717,6 +726,7 @@
             makeElement('div','project-period',preventSingleLetterOrphans(entry.period)),
             makeElement('p','',preventSingleLetterOrphans(entry.description))
           );
+          window.ProjectPreview.attach(card,entry,i18n.language);
           grid.append(card);
         });
         section.append(heading,grid);
