@@ -39,3 +39,15 @@ Raport powstaje poza `files/`; zawiera pary odpowiadające wspólnemu rdzeniowi 
 ### Kryterium zakończenia
 
 Każdy kandydat ma jawne źródła, wersje, metryki i mapę zachowanych treści. Brak odpowiedniej ekstrakcji oznacza `EXTRACTION_INCOMPLETE`, nie brak podobieństwa.
+
+## Weryfikacja pełnej treści par XR (etap 2)
+
+`scripts/audit_xr_pairs.py` wykorzystuje istniejący ekstraktor `audit_content_overlap.py` i porównuje siedem numerowanych par dokumentów PDF. Dla każdej pary raportuje SHA-256, liczbę słów, strony, pokrycie 5-gramów w obu kierunkach, Jaccard, dopasowane strony i przykładowe wspólne fragmenty z lokalizacjami. Gdy ekstrakcja jest niekompletna, wynik ma status `EXTRACTION_INCOMPLETE`, a nie `LOW_LEXICAL_OVERLAP`.
+
+```bash
+python scripts/audit_xr_pairs.py --root files --output-dir reports/content-audit/xr
+python -m pytest tests/test_material_variant_audit.py tests/test_xr_pair_audit.py -q
+```
+
+Zapisuje `xr_pairs.json` i `xr_pairs.md`, zawsze poza publikowanym drzewem. GitHub Actions `material-variant-audit.yml` generuje tabelę podsumowania oraz zachowuje pełny wynik jako artefakt przez 7 dni. **Metryki tekstowe nie rozstrzygają zgodności celów dydaktycznych, ilustracji ani kryteriów oceny.** Przed archiwizacją konieczna jest kontrola oryginalnych PDF i wszystkich unikalnych poleceń.
+
