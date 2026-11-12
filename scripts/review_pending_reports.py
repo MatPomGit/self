@@ -124,7 +124,7 @@ def analyze(root: Path) -> dict:
 def summary(report: dict) -> str:
     lines = [
         "# Editorial evidence: Isaac Sim and ADHD/ASD", "",
-        f"Source revision: \`{report['revision']}\`", "",
+        f"Source revision: `{report['revision']}`", "",
         "| Comparison | Words A/B | 5-gram shorter coverage | Review |",
         "| --- | ---: | ---: | --- |",
     ]
@@ -135,7 +135,7 @@ def summary(report: dict) -> str:
         lines.append(f"| {key} | {a['word_count']}/{b['word_count']} | {display} | REVIEW_REQUIRED |")
     lines.extend(["", "## Source hashes and segment counts"])
     for key, item in report["sources"].items():
-        lines.append(f"- {key}: \`{item['path']}\`; SHA-256 \`{item['sha256']}\`; "
+        lines.append(f"- {key}: `{item['path']}`; SHA-256 `{item['sha256']}`; "
                      f"{item['word_count']} words, {len(item['segments'])} segments")
     lines.extend(["", "### Interpretation",
                   "The passages requiring review are in evidence.json. Validate each "
