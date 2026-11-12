@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import unittest
 from pathlib import Path
 
@@ -61,6 +62,36 @@ class ProjectsTests(unittest.TestCase):
                     self.assertTrue(entry[language]["methods"])
                     self.assertTrue(all(isinstance(x, str) and x.strip() for x in entry[language]["methods"]))
 
+    def test_logos_and_optional_project_links(self):
+        """Każdy wpis logo jest bezpieczną, istniejącą grafiką lokalną."""
+        metadata = json.loads(DETAILS.read_text(encoding="utf-8"))
+        logo_pattern = re.compile(r"docs/assets/images/projects/[a-z0-9][a-z0-9_-]*[.](svg|png|webp)$")
+        for name, entry in metadata.items():
+            with self.subTest(project=name):
+                logo = entry.get("logo")
+                if logo is not None:
+                    self.assertIsInstance(logo, str)
+                    self.assertRegex(logo, logo_pattern)
+                    target = ROOT / logo
+                    self.assertTrue(target.is_file(), logo)
+                    if target.suffix == ".svg":
+                        self.assertIn("<svg", target.read_text(encoding="utf-8"))
+                    elif target.suffix == ".png":
+                        self.assertEqual(target.read_bytes()[:8], bytes.fromhex("89504e470d0a1a0a"))
+                    elif target.suffix == ".webp":
+                        data = target.read_bytes()[:12]
+                        self.assertEqual(data[:4], b"RIFF")
+                        self.assertEqual(data[8:12], b"WEBP")
+                links = entry.get("links", [])
+                self.assertIsInstance(links, list)
+                for link in links:
+                    self.assertIsInstance(link, dict)
+                    self.assertIsInstance(link.get("label"), str)
+                    self.assertTrue(link["label"].strip())
+                    url = link.get("url")
+                    self.assertIsInstance(url, str)
+                    self.assertTrue(url.startswith("https://") and " " not in url and "@" not in url.split("/", 3)[2])
+
     def test_project_preview_is_wired(self):
         html = HTML.read_text(encoding="utf-8")
         self.assertIn("project-preview.js", html)
@@ -69,6 +100,9 @@ class ProjectsTests(unittest.TestCase):
         self.assertIn("project-details.json", html)
         js = PREVIEW_JS.read_text(encoding="utf-8")
         self.assertIn("showModal()", js)
+        self.assertIn("projectLogoPath", js)
+        self.assertIn("safeProjectLink", js)
+        self.assertIn("project-logo", PREVIEW_CSS.read_text(encoding="utf-8"))
         self.assertIn("pointerenter", js)
         self.assertIn("focusin", js)
         self.assertIn("Escape", js)

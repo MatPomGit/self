@@ -56,6 +56,7 @@ jobs:
         run: |
           node --check docs/assets/js/site-i18n.js
           node --check docs/assets/js/publication-utils.js
+          node --check docs/assets/js/project-preview.js
           node --check tests/test_materials_layout.js
           node --check tests/test_about.js
           node tests/test_language.js
