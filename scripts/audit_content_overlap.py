@@ -379,7 +379,7 @@ def pair_matrix_csv(result: dict) -> str:
     """Stable, UTF-8 CSV with complete candidate evidence and fixed field order."""
     output = io.StringIO(newline="")
     writer = csv.DictWriter(output, fieldnames=PAIR_CSV_FIELDS,
-                            lineterminator="\\n", extrasaction="ignore")
+                            lineterminator="\n", extrasaction="ignore")
     writer.writeheader()
     for pair in sorted(result["pairs"], key=lambda x: (x["a"], x["b"])):
         writer.writerow({
