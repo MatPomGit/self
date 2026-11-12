@@ -26,6 +26,10 @@ Zależność: Python 3.12+, pypdf >= 5, < 7.
 ## Artefakty
 - summary.md: raport z wykrytymi parami i lokalizacjami fragmentów.
 - overlap.json: metryki, źródłowe SHA-256, statusy, identyfikatory i świadectwa tekstowe.
+- manifest.json: deterministyczny rejestr źródeł, ich SHA-256 i logicznych identyfikatorów,
+  parametry ekstrakcji i progów, podsumowanie; celowo bez daty uruchomienia.
+- matrix.csv: uporządkowana macierz par leksykalnych z metrykami i lokalizowanymi
+  dowodami w polu JSON. Pusta macierz nadal posiada nagłówki.
 - Przechowywanie w artefakcie PR przez 7 dni, poza publikowanym katalogiem files/.
 
 ## Ograniczenia i następny etap

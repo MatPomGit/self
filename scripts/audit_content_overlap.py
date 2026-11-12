@@ -8,6 +8,8 @@ No network requests, embeddings, LLMs or remote API calls.
 from __future__ import annotations
 
 import argparse
+import csv
+import io
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -331,10 +333,80 @@ def validate_output_dir(root: Path, destination: Path) -> None:
             raise ValueError(f"Audit output cannot be inside public directory {name}/")
 
 
+def audit_manifest(result: dict) -> dict:
+    """Deterministic source ledger, independent of wall-clock run time.
+
+    This is not a semantic verification report. All hashes are derived from the
+    analyzed bytes and stable source paths; no raw document text is copied here.
+    """
+    files = sorted(result["files"], key=lambda item: item["path"])
+    return {
+        "schema_version": "1.0.0",
+        "source_revision": result["source_revision"],
+        "scope": result["scope"],
+        "parameters": {
+            "ngram": NGRAM,
+            "witness_ngram": WITNESS_N,
+            "maximum_file_bytes": MAX_BYTES,
+            "maximum_pdf_pages": MAX_PAGES,
+            "maximum_characters": MAX_CHARACTERS,
+            "allowed_extensions": sorted(ALLOWED),
+            "candidate_min_coverage": 0.11,
+            "candidate_min_tfidf_cosine": 0.40,
+        },
+        "counts": result["counts"],
+        "sources": [
+            {"path": item["path"], "sha256": item["sha256"],
+             "logical_document_id": item["document_id"],
+             "format": Path(item["path"]).suffix.lower(),
+             "extraction_status": item["status"],
+             "warning": item["warning"]}
+            for item in files
+        ],
+        "pair_decisions": "UNVERIFIED: candidate discovery only",
+    }
+
+
+PAIR_CSV_FIELDS = (
+    "a_document_id", "b_document_id", "a_path", "b_path",
+    "classification", "verified", "coverage_shorter_5gram",
+    "jaccard_5gram", "tfidf_cosine", "common_5grams",
+    "evidence_json",
+)
+
+
+def pair_matrix_csv(result: dict) -> str:
+    """Stable, UTF-8 CSV with complete candidate evidence and fixed field order."""
+    output = io.StringIO(newline="")
+    writer = csv.DictWriter(output, fieldnames=PAIR_CSV_FIELDS,
+                            lineterminator="\\n", extrasaction="ignore")
+    writer.writeheader()
+    for pair in sorted(result["pairs"], key=lambda x: (x["a"], x["b"])):
+        writer.writerow({
+            "a_document_id": pair["a"],
+            "b_document_id": pair["b"],
+            "a_path": pair["a_path"],
+            "b_path": pair["b_path"],
+            "classification": pair["classification"],
+            "verified": str(pair["verified"]).lower(),
+            "coverage_shorter_5gram": pair["coverage_shorter_5gram"],
+            "jaccard_5gram": pair["jaccard_5gram"],
+            "tfidf_cosine": pair["tfidf_cosine"],
+            "common_5grams": pair["common_5grams"],
+            "evidence_json": json.dumps(pair["evidence"], ensure_ascii=False,
+                                         sort_keys=True, separators=(",", ":")),
+        })
+    return output.getvalue()
+
+
 def write_reports(result: dict, dest: Path, top: int) -> None:
     dest.mkdir(parents=True, exist_ok=True)
     (dest / "overlap.json").write_text(
         json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (dest / "manifest.json").write_text(
+        json.dumps(audit_manifest(result), ensure_ascii=False, sort_keys=True,
+                   indent=2) + "\n", encoding="utf-8")
+    (dest / "matrix.csv").write_text(pair_matrix_csv(result), encoding="utf-8")
     counts = result["counts"]
     lines = [
         "# Content overlap audit — pilot", "",
