@@ -24,13 +24,7 @@
       "outcomes": [
         "Python research toolkit with CLI and a synthetic demonstration."
       ]
-    },
-    "links": [
-      {
-        "label": "GitHub – arc-rgbt",
-        "url": "https://github.com/MatPomGit/arc-rgbt"
-      }
-    ]
+    }
   },
   "ARC-RVI · Autonomiczna inspekcja wizualna": {
     "pl": {
@@ -54,13 +48,7 @@
       "outcomes": [
         "CLI tools and reproducible synthetic-fixture tests."
       ]
-    },
-    "links": [
-      {
-        "label": "GitHub – arc-rvi",
-        "url": "https://github.com/MatPomGit/arc-rvi"
-      }
-    ]
+    }
   },
   "ARC-HRI-SAFETY": {
     "pl": {
@@ -100,28 +88,26 @@
         "N-of-1"
       ],
       "focus": "Fusion robust to missing modalities, personalisation and measurement drift, targeting adaptive tasks and HCI. This is not a clinical diagnostic system."
-    },
-    "links": [
-      {
-        "label": "GitHub – arc-affective",
-        "url": "https://github.com/MatPomGit/arc-affective"
-      }
-    ]
+    }
   },
   "XR-Cognition · Adaptacyjne środowiska poznawcze": {
     "pl": {
       "methods": [
-        "XR",
-        "Adaptacja zadań",
-        "Analiza procesów poznawczych"
-      ]
+        "Projektowanie eksperymentów XR",
+        "Adaptacja poziomu trudności",
+        "Metryki uwagi i zachowania",
+        "Ocena użyteczności"
+      ],
+      "focus": "Zakres koncepcyjny obejmuje dobór bodźców, zmianę poziomu trudności, pomiar zachowania oraz ocenę użyteczności i obciążenia poznawczego. Integracja danych fizjologicznych pozostaje kierunkiem rozwoju, a nie potwierdzoną funkcją."
     },
     "en": {
       "methods": [
-        "XR",
-        "Task adaptation",
-        "Cognitive process analysis"
-      ]
+        "XR experiment design",
+        "Difficulty adaptation",
+        "Attention and behavioural metrics",
+        "Usability evaluation"
+      ],
+      "focus": "The proposed scope covers stimulus selection, difficulty adjustment, behavioural measurement and usability/workload evaluation. Physiological-data integration is a development direction, not a validated feature."
     }
   },
   "ContextNDD": {
@@ -192,13 +178,7 @@
       "outcomes": [
         "Android application UI scaffold."
       ]
-    },
-    "links": [
-      {
-        "label": "GitHub – arc-mobile-eyetracking",
-        "url": "https://github.com/MatPomGit/arc-mobile-eyetracking"
-      }
-    ]
+    }
   },
   "EEG Neurolyze": {
     "pl": {
@@ -224,13 +204,7 @@
       "outcomes": [
         "HTML reporting and synthetic-data archiving."
       ]
-    },
-    "links": [
-      {
-        "label": "GitHub – eeg-neurolyze",
-        "url": "https://github.com/MatPomGit/eeg-neurolyze"
-      }
-    ]
+    }
   },
   "S4D-TAM · Nawigacja autonomiczna": {
     "pl": {
@@ -254,13 +228,7 @@
       "outcomes": [
         "Python reference code and experimental contracts."
       ]
-    },
-    "links": [
-      {
-        "label": "GitHub – arc-s4d-tam",
-        "url": "https://github.com/MatPomGit/arc-s4d-tam"
-      }
-    ]
+    }
   },
   "ARC Attachment Dynamics": {
     "pl": {
@@ -346,212 +314,260 @@
       "outcomes": [
         "Draft questionnaires and validation protocol."
       ]
-    },
-    "links": [
-      {
-        "label": "GitHub – arc-dera-hri",
-        "url": "https://github.com/MatPomGit/arc-dera-hri"
-      }
-    ]
+    }
   },
   "MindDx · Symulator diagnozy psychologicznej": {
     "pl": {
       "methods": [
-        "Symulacja przypadków",
-        "Formułowanie hipotez",
-        "Uczenie diagnostyki"
-      ]
+        "Symulacje przypadków",
+        "Diagnostyka różnicowa",
+        "Drzewa decyzyjne",
+        "Informacja zwrotna"
+      ],
+      "focus": "Planowany tok ćwiczeń obejmuje analizę wywiadu i objawów, tworzenie diagnozy różnicowej, ocenę niepewności oraz informację zwrotną. Narzędzie edukacyjne nie zastępuje rzeczywistej diagnozy psychologicznej."
     },
     "en": {
       "methods": [
-        "Case simulation",
-        "Hypothesis formulation",
-        "Diagnostic learning"
-      ]
+        "Case simulations",
+        "Differential diagnosis",
+        "Decision trees",
+        "Formative feedback"
+      ],
+      "focus": "The planned exercise flow includes symptom and history review, differential hypotheses, uncertainty assessment and feedback. The educational tool does not replace actual psychological assessment."
     }
   },
   "ARIANA": {
     "pl": {
       "methods": [
+        "Synchronizacja multimodalna",
         "Okulografia",
         "Obrazowanie VIS/IR",
         "Psychometria"
-      ]
+      ],
+      "focus": "Zakres obejmował synchronizację różnych modalności, projektowanie eksperymentów i poszukiwanie zgodności między wskaźnikami behawioralnymi i samoopisowymi. Dostępne informacje nie pozwalają potwierdzić wyników walidacji."
     },
     "en": {
       "methods": [
+        "Multimodal synchronisation",
         "Eye tracking",
         "VIS/IR imaging",
         "Psychometrics"
-      ]
+      ],
+      "focus": "The scope included cross-modal synchronisation, experiment design and correspondence between behavioural and self-report indicators. Available information does not establish validation results."
     }
   },
   "PIAST · Satelitarne obrazowanie Ziemi": {
     "pl": {
       "methods": [
-        "Nanosatelity",
-        "Obrazowanie Ziemi",
-        "Optoelektronika"
-      ]
+        "Optyka i optoelektronika",
+        "Obrazowanie satelitarne",
+        "Integracja systemów",
+        "Weryfikacja inżynierska"
+      ],
+      "focus": "Tematyka programu obejmowała miniaturyzację ładunków obserwacyjnych, obrazowanie Ziemi oraz przygotowanie systemów optoelektronicznych do pracy na platformach satelitarnych. Opis nie przypisuje indywidualnych wyników całego programu."
     },
     "en": {
       "methods": [
-        "Nanosatellites",
-        "Earth observation",
-        "Optoelectronics"
-      ]
+        "Optics and optoelectronics",
+        "Satellite imaging",
+        "Systems integration",
+        "Engineering verification"
+      ],
+      "focus": "Programme scope included miniaturised observation payloads, Earth imaging and adaptation of optoelectronic systems to satellite platforms. Programme-wide achievements are not attributed to an individual contribution."
     }
   },
   "SEEKER · Głowice optoelektroniczne": {
     "pl": {
       "methods": [
         "Obrazowanie wielospektralne",
-        "Prototypowanie",
-        "Weryfikacja rozwiązań"
-      ]
+        "Integracja sensorów",
+        "Testy prototypów",
+        "Przetwarzanie obrazu"
+      ],
+      "focus": "Zakres techniczny dotyczył przetwarzania danych obrazowych, doboru torów pomiarowych oraz testów funkcjonalnych układów optoelektronicznych w zastosowaniach obronnych. Szczegóły niejawne i nieudokumentowane parametry są pominięte."
     },
     "en": {
       "methods": [
         "Multispectral imaging",
-        "Prototyping",
-        "Verification"
-      ]
+        "Sensor integration",
+        "Prototype testing",
+        "Image processing"
+      ],
+      "focus": "Technical scope concerned image processing, measurement-chain design and functional testing of optoelectronic systems for defence applications. Restricted details and unverified performance figures are omitted."
     }
   },
   "PolFEL · Laser na swobodnych elektronach": {
     "pl": {
       "methods": [
-        "Laser na swobodnych elektronach",
-        "Infrastruktura badawcza"
-      ]
+        "Aparatura badawcza",
+        "Optyka i diagnostyka",
+        "Integracja infrastruktury"
+      ],
+      "focus": "Tematyka obejmowała infrastrukturę pomiarową i eksperymentalną dla badań procesów zachodzących w krótkich skalach czasowych. Bez dodatkowych źródeł nie przypisano konkretnych parametrów wiązki ani wyników eksperymentów."
     },
     "en": {
       "methods": [
-        "Free-electron laser",
-        "Research infrastructure"
-      ]
+        "Research instrumentation",
+        "Optics and diagnostics",
+        "Infrastructure integration"
+      ],
+      "focus": "The topic involved experimental and measurement infrastructure for studying fast physical processes. No specific beam characteristics or experimental results are attributed without further sources."
     }
   },
   "OPTOKRYPT · Kryptografia kwantowa": {
     "pl": {
       "methods": [
-        "Losowość kwantowa",
+        "Generatory losowości kwantowej",
         "Dystrybucja kluczy",
-        "Optyka"
-      ]
+        "Fotonika",
+        "Analiza jakości sygnału"
+      ],
+      "focus": "Prace koncentrowały się na właściwościach optycznych źródeł i detektorów, torach transmisyjnych oraz ocenie bezpieczeństwa i jakości danych. Nie deklaruje się zweryfikowanego poziomu bezpieczeństwa konkretnego systemu."
     },
     "en": {
       "methods": [
-        "Quantum randomness",
+        "Quantum random-number generation",
         "Key distribution",
-        "Optics"
-      ]
+        "Photonics",
+        "Signal-quality analysis"
+      ],
+      "focus": "The work focused on optical sources and detectors, transmission paths, and assessment of security and data quality. No certified security level is claimed for a specific system."
     }
   },
   "Mikroruchy oka · Potencjalne biomarkery neurodegeneracji": {
     "pl": {
       "methods": [
-        "Okulografia",
-        "Cechy okulomotoryczne",
-        "Analiza biomarkerów"
-      ]
+        "Okulografia wysokiej rozdzielczości",
+        "Analiza mikroruchów",
+        "Ekstrakcja cech",
+        "Ocena powtarzalności"
+      ],
+      "focus": "Zakres dotyczył rejestracji subtelnych ruchów oka, ekstrakcji cech i oceny ich powtarzalności. Wskaźniki mają charakter badawczy i nie stanowią zatwierdzonego narzędzia diagnostycznego."
     },
     "en": {
       "methods": [
-        "Eye tracking",
-        "Oculomotor features",
-        "Biomarker analysis"
-      ]
+        "High-resolution eye tracking",
+        "Micromovement analysis",
+        "Feature extraction",
+        "Repeatability assessment"
+      ],
+      "focus": "The scope concerned fine eye-movement acquisition, feature extraction and repeatability. Such indicators remain research candidates rather than validated diagnostic tools."
     }
   },
   "Eye Tracking w rzeczywistości mieszanej": {
     "pl": {
       "methods": [
-        "XR",
         "Eye tracking",
-        "Interakcja spojrzeniem"
-      ]
+        "Interakcja gaze-based",
+        "XR",
+        "Projektowanie interfejsów"
+      ],
+      "focus": "Badano koncepcje mapowania punktu fiksacji na obiekty w przestrzeni, mechanizmy aktywacji i obciążenie użytkownika podczas interakcji. Szczegółowe wyniki ilościowe wymagają źródłowej dokumentacji."
     },
     "en": {
       "methods": [
-        "XR",
         "Eye tracking",
-        "Gaze interaction"
-      ]
+        "Gaze-based interaction",
+        "XR",
+        "Interface design"
+      ],
+      "focus": "The work explored gaze-to-object mapping, activation mechanisms and user workload during interaction. Quantitative results require supporting project records."
     }
   },
   "Systemy wizyjne XR w nauce i obronności": {
     "pl": {
       "methods": [
+        "Wizja komputerowa",
         "Mixed reality",
-        "Systemy wizyjne",
-        "Analiza zastosowań"
-      ]
+        "Analiza ergonomii",
+        "Scenariusze treningowe"
+      ],
+      "focus": "Zakres obejmował projektowanie scenariuszy wykorzystania XR, analizę rejestracji i prezentacji informacji przestrzennej oraz ocenę ograniczeń sprzętowych i interakcyjnych."
     },
     "en": {
       "methods": [
+        "Computer vision",
         "Mixed reality",
-        "Vision systems",
-        "Application analysis"
-      ]
+        "Ergonomic analysis",
+        "Training scenarios"
+      ],
+      "focus": "The scope included XR use-case design, spatial-information capture and presentation, and assessment of hardware and interaction constraints."
     }
   },
   "RiverGUARD · Ochrona granic rzecznych": {
     "pl": {
       "methods": [
         "Monitoring optoelektroniczny",
-        "Obserwacja terenowa"
-      ]
+        "Detekcja obiektów",
+        "Analiza warunków obserwacji"
+      ],
+      "focus": "Obszary techniczne obejmowały obserwację scen, dobór sensorów i analizę ograniczeń wykrywania obiektów w dynamicznym środowisku rzecznym. Nie przedstawiono niezweryfikowanych parametrów zasięgu ani skuteczności."
     },
     "en": {
       "methods": [
         "Optoelectronic monitoring",
-        "Field surveillance"
-      ]
+        "Object detection",
+        "Observation-condition analysis"
+      ],
+      "focus": "Technical themes included scene observation, sensor selection and detection constraints in dynamic river environments. Unverified range and detection-performance figures are not stated."
     }
   },
   "Skaner 3D sub-THz": {
     "pl": {
       "methods": [
-        "Fale subterahercowe",
-        "Skanowanie 3D"
-      ]
+        "Obrazowanie sub-THz",
+        "Skanowanie 3D",
+        "Przetwarzanie sygnałów",
+        "Rekonstrukcja przestrzenna"
+      ],
+      "focus": "Zakres prac dotyczył układów nadawczo-odbiorczych, rejestracji odpowiedzi materiałowych i rekonstrukcji geometrii na podstawie pomiarów. Nie podano niepotwierdzonych parametrów rozdzielczości ani skuteczności."
     },
     "en": {
       "methods": [
-        "Sub-terahertz waves",
-        "3D scanning"
-      ]
+        "Sub-THz imaging",
+        "3D scanning",
+        "Signal processing",
+        "Spatial reconstruction"
+      ],
+      "focus": "Work concerned transmit/receive measurement chains, material responses and geometric reconstruction from measurements. Unverified resolution and effectiveness figures are omitted."
     }
   },
   "Sensor trenażera GROM / PIORUN": {
     "pl": {
       "methods": [
-        "Sensor optoelektroniczny",
-        "Symulacja szkoleniowa"
-      ]
+        "Sensoryka",
+        "Interfejs człowiek–symulator",
+        "Integracja z trenażerem"
+      ],
+      "focus": "Zakres obejmował pomiar działań użytkownika, przekazywanie sygnałów do środowiska symulacyjnego i zgodność interfejsu z zadaniami szkoleniowymi. Szczegóły konstrukcyjne i skuteczność szkolenia wymagają osobnej dokumentacji."
     },
     "en": {
       "methods": [
-        "Optoelectronic sensor",
-        "Training simulation"
-      ]
+        "Sensors",
+        "Human–simulator interface",
+        "Trainer integration"
+      ],
+      "focus": "Scope included operator-action measurement, signal delivery to the simulation environment and alignment of the interface with training tasks. Design details and training effectiveness require separate evidence."
     }
   },
   "PROTECT · Biometria kontroli granicznej": {
     "pl": {
       "methods": [
         "Biometria multimodalna",
-        "Prywatność",
-        "Kontrola graniczna"
-      ]
+        "Fuzja cech",
+        "Ocena prywatności",
+        "Metody ewaluacji"
+      ],
+      "focus": "Tematyka obejmowała łączenie cech biometrycznych, odporność na zmienne warunki rejestracji oraz ograniczanie inwazyjności procedur. Nie przypisano pojedynczemu uczestnikowi wyników całego konsorcjum."
     },
     "en": {
       "methods": [
         "Multimodal biometrics",
-        "Privacy",
-        "Border control"
-      ]
+        "Feature fusion",
+        "Privacy assessment",
+        "Evaluation methods"
+      ],
+      "focus": "The topic covered biometric feature fusion, robustness to acquisition variation and less intrusive control procedures. Consortium-wide outcomes are not attributed to an individual participant."
     }
   }
 }

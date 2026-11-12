@@ -57,3 +57,9 @@ node --check docs/assets/js/project-preview.js
 ```
 
 Pełne testy uruchamia workflow `restore-original-pages.yml` przed opublikowaniem do GitHub Pages. Testy Pythona sprawdzają kompletność danych PL/EN, format ścieżek logo, obecność plików i ich podstawowe sygnatury oraz składnię odnośników HTTPS.
+
+## Zasady publicznej prezentacji portfolio
+
+- W panelach szczegółów **nie publikujemy odnośników do repozytoriów kodu** (ani publicznych, ani prywatnych). Dopuszczalne są odrębne, potwierdzone strony informacyjne projektów, jeżeli zostaną świadomie dodane.
+- Gdy materiałów źródłowych brakuje, opisuj obszar, techniki i możliwy zakres badawczy, ale nie przedstawiaj projektu jako zwalidowanego ani nie przypisuj mu niepotwierdzonych osiągnięć.
+- Pola `outcomes` służą wyłącznie do rezultatów udokumentowanych. W pozostałych projektach pozostają puste lub pominięte.
