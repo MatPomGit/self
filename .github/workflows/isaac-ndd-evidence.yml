@@ -1,0 +1,41 @@
+name: Isaac and NDD editorial evidence
+
+on:
+  pull_request:
+    paths:
+      - "scripts/review_pending_reports.py"
+      - "tests/test_review_pending_reports.py"
+      - ".github/workflows/isaac-ndd-evidence.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install extraction and test dependencies
+        run: python -m pip install "pypdf>=5,<7" "pytest>=8,<10"
+      - name: Verify evidence comparison
+        run: python -m pytest tests/test_review_pending_reports.py -q
+      - name: Extract selected public reports (read only)
+        run: |
+          python scripts/review_pending_reports.py \
+            --root . \
+            --output-dir "$RUNNER_TEMP/isaac-ndd-evidence"
+          cat "$RUNNER_TEMP/isaac-ndd-evidence/summary.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Retain bounded evidence outside public Pages
+        uses: actions/upload-artifact@v4
+        with:
+          name: isaac-ndd-evidence
+          path: ${{ runner.temp }}/isaac-ndd-evidence/
+          retention-days: 3
+          if-no-files-found: error
