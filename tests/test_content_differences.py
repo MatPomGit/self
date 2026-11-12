@@ -121,8 +121,9 @@ class DifferenceTests(unittest.TestCase):
         self.assertEqual(len(PAIRS),4)
         for label,a,b in PAIRS:
             with self.subTest(label=label):
-                self.assertTrue((scope/a).is_file())
-                self.assertTrue((scope/b).is_file())
+                archive=ROOT/"files/ignored/inne/analizy"
+                self.assertTrue((scope/a).is_file() or (archive/a).is_file())
+                self.assertTrue((scope/b).is_file() or (archive/b).is_file())
         self.assertGreater(MATCH_THRESHOLD,.5)
 
 

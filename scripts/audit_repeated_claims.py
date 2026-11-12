@@ -161,6 +161,10 @@ def analyze(root,scope):
     def load(filename):
         if filename not in cache:
             path=scope/filename
+            if not path.is_file():
+                archived=root/"files/ignored/inne/analizy"/filename
+                if archived.is_file() and not archived.is_symlink():
+                    path=archived
             if not path.is_file() or path.is_symlink():
                 raise FileNotFoundError(f"Missing report: {path}")
             cache[filename]=extract(path,root)
@@ -184,7 +188,7 @@ def analyze(root,scope):
         })
 
     a=load(UNIQUE_PAIR[0]);b=load(UNIQUE_PAIR[1])
-    tables=docx_tables(scope/UNIQUE_PAIR[0])
+    tables=docx_tables(root/a.path)
     comparative=grams(b.words)
     comparative_words=set(b.words)
     table_rows=[]

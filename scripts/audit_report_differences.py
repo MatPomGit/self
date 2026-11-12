@@ -204,6 +204,11 @@ def analyze(root: Path, scope: Path, pair_definitions=PAIRS) -> dict:
     results = []
     for label, a_name, b_name in pair_definitions:
         pa, pb = scope / a_name, scope / b_name
+        archive = root / "files/ignored/inne/analizy"
+        if not pa.is_file() and (archive / a_name).is_file():
+            pa = archive / a_name
+        if not pb.is_file() and (archive / b_name).is_file():
+            pb = archive / b_name
         if not pa.is_file() or not pb.is_file():
             results.append({"id": label, "a": a_name, "b": b_name,
                             "interpretation": "MISSING_INPUT", "verified": False})

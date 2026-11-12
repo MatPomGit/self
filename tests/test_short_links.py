@@ -59,6 +59,19 @@ class ShortLinkTests(unittest.TestCase):
             self.assertIn('href="/files/narz%C4%99dzia-dla-programist%C3%B3w/ndp__lab__04.pdf" download', page)
             self.assertEqual((ndp / "ndp__lab__04.pdf").read_bytes(), b"%PDF-mock-ndp")
 
+    def test_ignored_pdf_never_gets_short_link(self):
+        with TemporaryDirectory() as temp:
+            files = Path(temp) / "files"
+            active = files / "inne" / "analizy"
+            ignored = files / "ignored" / "inne" / "analizy"
+            active.mkdir(parents=True)
+            ignored.mkdir(parents=True)
+            (active / "analiza_afektywna.pdf").write_bytes(b"%PDF-real")
+            (ignored / "obsolete.pdf").write_bytes(b"%PDF-archive")
+            routes = pdf_routes(files)
+            self.assertIn("inne/analizy/analiza_afektywna.pdf", routes)
+            self.assertNotIn("ignored/inne/analizy/obsolete.pdf", routes)
+
     def test_no_stale_or_duplicate_aliases(self):
         with TemporaryDirectory() as temp:
             files = Path(temp) / "files"

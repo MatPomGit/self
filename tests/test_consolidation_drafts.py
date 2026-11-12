@@ -62,7 +62,7 @@ class ConsolidationDraftTests(unittest.TestCase):
         self.assertTrue(all("page" in x and "word_start" in x for x in candidate))
 
     def test_real_report_sources_preserved_and_draft_contains_content(self):
-        scope=ROOT/"files/inne/analizy"
+        scope=ROOT/"files/ignored/inne/analizy"
         self.assertEqual(len(PAIRS),2)
         for slug,title,base,other in PAIRS:
             with self.subTest(slug=slug):

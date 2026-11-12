@@ -62,6 +62,7 @@ def scan(materials: Path) -> list[tuple[Path, str]]:
         (path.relative_to(materials), issue)
         for path in sorted(materials.rglob("*"))
         if path.is_file() and not path.is_symlink()
+        and path.relative_to(materials).parts[0] != "ignored"
         and not any(part.startswith(".") for part in path.relative_to(materials).parts)
         if (issue := problem(path)) is not None
     ]

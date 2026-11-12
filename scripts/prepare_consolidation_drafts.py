@@ -239,7 +239,7 @@ PAIRS=(
 def main()->int:
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument("--root",type=Path,default=Path(__file__).resolve().parents[1])
-    p.add_argument("--scope",default="files/inne/analizy")
+    p.add_argument("--scope",default="files/ignored/inne/analizy")
     p.add_argument("--output-dir",type=Path,required=True)
     p.add_argument("--pair",choices=("all",*[x[0] for x in PAIRS]),default="all")
     a=p.parse_args()

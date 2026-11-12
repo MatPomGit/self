@@ -110,7 +110,7 @@ class ClaimEvidenceTests(unittest.TestCase):
                 with self.subTest(name=name):
                     self.assertTrue((scope/name).exists())
         for name in UNIQUE_PAIR:
-            self.assertTrue((scope/name).exists())
+            self.assertTrue((ROOT/"files/ignored/inne/analizy"/name).exists())
         report=analyze(ROOT,scope)
         self.assertEqual(len(report["claims"]),2)
         for claim in report["claims"]:
