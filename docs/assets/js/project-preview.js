@@ -17,8 +17,8 @@
   let selected=null;
   let locale='pl';
   const labels={
-    pl:{more:'Więcej szczegółów',close:'Zamknij',scope:'Cel i zakres',methods:'Metody i technologie',outcomes:'Rezultaty i produkty',status:'Status',ongoing:'Projekt w realizacji',past:'Projekt zakończony lub archiwalny',preview:'Podgląd projektu',detail:'Szczegóły projektu'},
-    en:{more:'More details',close:'Close',scope:'Objectives and scope',methods:'Methods and technologies',outcomes:'Outputs and deliverables',status:'Status',ongoing:'Ongoing project',past:'Completed or archived project',preview:'Project preview',detail:'Project details'}
+    pl:{more:'Więcej szczegółów',close:'Zamknij',scope:'Cel i zakres',focus:'Kierunek badań',methods:'Metody i technologie',outcomes:'Rezultaty i produkty',status:'Status',ongoing:'Projekt w realizacji',past:'Projekt zakończony lub archiwalny',preview:'Podgląd projektu',detail:'Szczegóły projektu'},
+    en:{more:'More details',close:'Close',scope:'Objectives and scope',focus:'Research focus',methods:'Methods and technologies',outcomes:'Outputs and deliverables',status:'Status',ongoing:'Ongoing project',past:'Completed or archived project',preview:'Project preview',detail:'Project details'}
   };
   const el=(tag,cls,txt)=>{
     const node=document.createElement(tag);
@@ -125,7 +125,7 @@
     const extra=detailsFor(project);
     section(body,t.methods,extra.methods);
     section(body,t.outcomes,extra.outcomes);
-    if(extra.focus)section(body,t.scope,extra.focus);
+    if(extra.focus)section(body,t.focus,extra.focus);
     dialog.replaceChildren(body);
     if(!dialog.open)dialog.showModal();
     close.focus();
