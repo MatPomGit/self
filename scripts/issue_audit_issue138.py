@@ -42,7 +42,7 @@ def scopes_for(selection: str) -> tuple[str, ...]:
 
 
 def summary(reports: Path, selection: str, repository: str, run_id: str) -> tuple[str, str]:
-    if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repository):
+    if not re.fullmatch(r"[A-Za-z0-9_-][A-Za-z0-9_.-]*/[A-Za-z0-9_-][A-Za-z0-9_.-]*", repository):
         raise ValueError("Invalid repository")
     if not re.fullmatch(r"[0-9]+", run_id):
         raise ValueError("Invalid workflow run ID")
