@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DOWNLOADS = (
     ("analiza_afektywna", ROOT / "docs/consolidated/analiza_afektywna.md"),
     ("isaac_lab", ROOT / "docs/consolidated/isaac_lab.md"),
+    ("telediagnostyka_ndd", ROOT / "docs/consolidated/telediagnostyka_ndd.md"),
 )
 DEST = ROOT / "files/inne/analizy"
 MIN_PDF_BYTES = 12_000
@@ -60,21 +61,23 @@ def validate(name: str, path: Path) -> None:
             raise ValueError(f"PDF text extraction failed: {path}")
 
 
-def build(root: Path = ROOT, *, output_dir: Path | None = None) -> list[Path]:
+def build(root: Path = ROOT, *, output_dir: Path | None = None,
+          only: tuple[str, ...] | None = None) -> list[Path]:
     destination = output_dir or root / "files/inne/analizy"
     destination = destination.resolve()
     if destination == root / "files/ignored" or destination.is_relative_to(root / "files/ignored"):
         raise ValueError("Canonical downloads cannot be written under files/ignored")
     if shutil.which("pandoc") is None or shutil.which("libreoffice") is None:
         raise RuntimeError("pandoc and LibreOffice Writer must be available")
+    selected = tuple(name for name, _ in DOWNLOADS if only is None or name in only)
+    if only is not None and set(only) - set(selected):
+        raise ValueError("Unknown report name(s): " + ", ".join(sorted(set(only) - set(selected))))
     files: list[Path] = []
     with tempfile.TemporaryDirectory(prefix="self-consolidated-") as temporary:
         temp = Path(temporary)
         profile = (temp / "lo-profile").as_uri()
-        for name, relative in (
-            ("analiza_afektywna", Path("docs/consolidated/analiza_afektywna.md")),
-            ("isaac_lab", Path("docs/consolidated/isaac_lab.md")),
-        ):
+        for name in selected:
+            relative = Path(f"docs/consolidated/{name}.md")
             source = root / relative
             if not source.is_file():
                 raise FileNotFoundError(source)
@@ -88,7 +91,7 @@ def build(root: Path = ROOT, *, output_dir: Path | None = None) -> list[Path]:
             validate(name, docx)
             validate(name, pdf)
         destination.mkdir(parents=True, exist_ok=True)
-        for name in ("analiza_afektywna", "isaac_lab"):
+        for name in selected:
             for ext in (".docx", ".pdf"):
                 source = temp / f"{name}{ext}"
                 target = destination / source.name
@@ -100,8 +103,11 @@ def build(root: Path = ROOT, *, output_dir: Path | None = None) -> list[Path]:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path, default=None)
+    parser.add_argument("--only", action="append", choices=[name for name, _ in DOWNLOADS],
+                        help="Build only selected report (may be repeated)")
     args = parser.parse_args()
-    files = build(ROOT, output_dir=args.output_dir)
+    files = build(ROOT, output_dir=args.output_dir,
+                  only=tuple(args.only) if args.only else None)
     for f in files:
         print(f"[CONSOLIDATED] {f.relative_to(ROOT) if f.is_relative_to(ROOT) else f} "
               f"{f.stat().st_size} bytes")

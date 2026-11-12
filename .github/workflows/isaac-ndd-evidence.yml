@@ -1,0 +1,75 @@
+name: Isaac and NDD editorial evidence
+
+on:
+  pull_request:
+    paths:
+      - "scripts/review_pending_reports.py"
+      - "tests/test_review_pending_reports.py"
+      - ".github/workflows/isaac-ndd-evidence.yml"
+      - "docs/consolidated/isaac_lab.md"
+      - "docs/consolidated/telediagnostyka_ndd.md"
+      - "scripts/build_consolidated_downloads.py"
+      - "tests/test_consolidated_reports.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  evidence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install extraction and test dependencies
+        run: python -m pip install "pypdf>=5,<7" "pytest>=8,<10"
+      - name: Verify evidence comparison
+        run: python -m pytest tests/test_review_pending_reports.py -q
+      - name: Extract selected public reports (read only)
+        run: |
+          python scripts/review_pending_reports.py \
+            --root . \
+            --output-dir "$RUNNER_TEMP/isaac-ndd-evidence"
+          cat "$RUNNER_TEMP/isaac-ndd-evidence/summary.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Retain bounded evidence outside public Pages
+        uses: actions/upload-artifact@v4
+        with:
+          name: isaac-ndd-evidence
+          path: ${{ runner.temp }}/isaac-ndd-evidence/
+          retention-days: 3
+          if-no-files-found: error
+
+  render:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install rendering dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq pandoc libreoffice-writer
+          python -m pip install "pypdf>=5,<7" "pytest>=8,<10"
+      - name: Validate consolidated editorial reports
+        run: python -m pytest tests/test_consolidated_reports.py -q
+      - name: Rebuild isolated DOCX/PDF for independent visual review
+        run: |
+          python scripts/build_consolidated_downloads.py \
+            --only isaac_lab --only telediagnostyka_ndd \
+            --output-dir "$RUNNER_TEMP/canonical"
+      - name: Upload render artifacts outside Pages
+        uses: actions/upload-artifact@v4
+        with:
+          name: canonical-report-review
+          path: ${{ runner.temp }}/canonical/
+          retention-days: 3
+          if-no-files-found: error

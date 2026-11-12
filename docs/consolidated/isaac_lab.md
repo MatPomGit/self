@@ -1,6 +1,6 @@
 # NVIDIA Isaac Sim i Isaac Lab: uczenie robotów, AGILE, Arena i cyfrowe bliźniaki
 
-**Raport syntetyczny · wersja 1.0.0 · 12 listopada 2026 r.**  
+**Raport syntetyczny · wersja 1.1.0 · 12 listopada 2026 r.**  
 **Zakres:** ekosystem symulacji, uczenia i ewaluacji polityk robotycznych, w tym humanoidów, modele świata i wdrożenia przemysłowe.
 
 ## Streszczenie
@@ -23,6 +23,73 @@ Ekosystem NVIDIA Isaac łączy symulację fizyczną i sensoryczną, wielkoskalow
 | NVIDIA Cosmos | Modele świata i narzędzia generowania/transformacji danych | Wzbogacanie danych i ocena scenariuszy |
 
 Równoległe środowiska umożliwiają próbkowanie wielu epizodów na GPU. Dane obserwacji, akcji i nagród przechowuje się zwykle w strukturach tensorowych, ograniczając koszt przesyłania między procesorem i kartą graficzną. Korzyści zależą jednak od złożoności sceny, modeli czujników, liczby kontaktów i ograniczeń pamięci. Integracja z ROS 2 jest realizowana przez odpowiednie mosty i pakiety; nie jest to odpowiednik jednego uniwersalnego protokołu komunikacyjnego.
+
+
+### 1.1. Tryby tworzenia aplikacji Isaac Sim
+
+Starszy raport `isaac_sim.docx` opisuje dwa przepływy pracy: rozszerzenia i autonomiczne skrypty Python. Dokumentacja Isaac Sim 6.2 wyróżnia **trzy** sposoby pracy:
+
+| Tryb | Charakterystyka | Zastosowania i uwagi |
+|---|---|---|
+| GUI | Interaktywna edycja scen USD, robotów, sensorów i grafów OmniGraph | Projektowanie i inspekcja scen, konfiguracja narzędzi |
+| Extension | Rozszerzenia Omniverse Kit; interakcja asynchroniczna, obsługa interfejsu, opcjonalny hot reload | Narzędzia programisty, wizualizacja, prototypy |
+| Standalone Python | Kontrola kroków symulacji i renderowania, również bez GUI | Automatyzowane eksperymenty, trening RL, reprodukowalna generacja danych |
+
+W trybie Extension logika aplikacyjna współistnieje z pętlą Kit; operacje blokujące i sterowanie czasem wymagają odpowiedniego planowania callbacków oraz funkcji asynchronicznych. W Standalone Python krok fizyki można wykonywać jawnie, po wykonaniu operacji aktualizujących scenę. Samo używanie plików USD nie rozstrzyga o trybie uruchomienia. Por. [Isaac Sim 6.2: Development Methods](https://docs.isaacsim.omniverse.nvidia.com/6.2.0/introduction/workflows.html).
+
+### 1.2. Core API i migracja do nowszych wersji
+
+W źródłach `isaac_sim.docx` oraz `isaac_sim_pojecia.pdf` wymieniono m.in. `World`, `Scene`, `SimulationContext`, `Articulation` i `DynamicCuboid`. Są to **pojęcia historycznego interfejsu programistycznego**, a nie uniwersalne, niezależne od wersji gwarancje dostępności klas. Począwszy od Isaac Sim 6.0 rozszerzenia `isaacsim.core.api`, `isaacsim.core.prims` i `isaacsim.core.utils` oznaczono jako przestarzałe.
+
+| Starszy element lub pojęcie | Odpowiednik i znaczenie przy migracji |
+|---|---|
+| `World`, `SimulationContext` | Zarządzanie cyklem symulacji przez `SimulationManager` i narzędzia `isaacsim.core.experimental.utils.stage`; nie migrować wywołań mechanicznie 1:1 |
+| `Scene` i historyczne pomocnicze obiekty Core API | Reprezentacja sceny USD i nowsze interfejsy zarządzania prymitywami |
+| `Articulation` z `isaacsim.core.prims` | Nowsze `isaacsim.core.experimental.prims`, z weryfikacją ścieżek importu i kontraktu |
+| Obiekty geometrii, np. `DynamicCuboid` | `isaacsim.core.experimental.objects` lub bezpośrednie API OpenUSD; zgodność parametrów wymaga testu |
+| Callbacki kroków fizyki | Interfejsy cyklu życia `SimulationManager`; konfiguracja w odniesieniu do wersji runtime |
+
+W repozytorium eksperymentu należy zapisać wersję Isaac Sim oraz testować używane symbole/API. Starsze przykłady oparte na `World.step()` mogą zachować wartość dydaktyczną, ale dla nowego kodu nie powinny być proponowane bez ostrzeżenia migracyjnego. Źródło: [NVIDIA, Core API to Core Experimental API](https://docs.isaacsim.omniverse.nvidia.com/6.2.0/migration_guides/isaac_sim_6_0/core_api_to_core_experimental.html).
+
+### 1.3. Reprezentacja robota, fizyka i import modeli
+
+Dodatkowy materiał `isaac_sim.docx` opisuje import modeli **URDF**, **MJCF** oraz złożeń CAD, konfigurację przegubów i inspekcję ich ograniczeń. Należy wyraźnie oddzielić trzy warstwy: (i) geometrię i strukturę kinematyczną, (ii) parametry dynamiki oraz kontaktu, (iii) sterownik i jego założenia dotyczące częstotliwości oraz opóźnień. Import modelu nie potwierdza poprawności mas, bezwładności, charakterystyk napędów i kontaktu. Należy zweryfikować mapowanie połączeń i limitów stawów, konwencje współrzędnych, jednostki oraz zachowanie modelu przy znanych trajektoriach testowych.
+
+Opisany w oryginale Onshape Importer jest przykładem **specjalizowanej integracji CAD**, której dostępność i zakres funkcji należy sprawdzać dla wybranej wersji oraz konfiguracji. Podobnie `cuOpt` dotyczy optymalizacji tras i harmonogramowania (np. VRP), a nie domyślnej funkcji dynamiki robota. Przy projektowaniu magazynu sensowne jest oddzielenie grafu tras, planowania floty i sterowania lokalnego pojedynczej platformy.
+
+### 1.4. Dane sensorów, metadata i układy odniesienia
+
+Starsze materiały szczegółowo opisują `GenericModelOutput` (GMO) jako nośnik danych i metadanych sensorów RTX. Współczesna dokumentacja Isaac Sim wskazuje, że m.in. wynik sensora RTX Lidar może trafiać do `GenericModelOutput` AOV, z którego dalsze komponenty pozyskują próbki i pola pomocnicze. W zależności od konfiguracji mogą występować identyfikatory obiektów, intensywność, normalne, dane o punktach oraz informacje wymagane do publikowania wiadomości ROS 2. **Nie należy zakładać, że wszystkie modalności mają identyczny układ pamięci i komplet tych samych pól.**
+
+Dla powtarzalności eksperymentu trzeba zapisać orientację i układ osi sensora, ramę odniesienia `frame_id`, przekształcenia do układu robota, znaczniki czasu, okres próbkowania, parametry szumów i kompensację ruchu, jeśli jest używana. Przykładowe osie sensora (+x w przód, +y w lewo, +z w górę) z dokumentu źródłowego należy sprawdzać **w odniesieniu do konkretnej dokumentacji sensora**, a nie przenosić jako regułę dla każdego źródła danych.
+
+Przykład wersjozależności: w dokumentacji RTX Sensors odnotowano problem pola `echoId` w RTX Lidar dla wersji Isaac Sim 6.0 i 6.1; pole może mieć wartość zero nawet przy wielokrotnym odbiciu. Dlatego walidacja strumienia powinna obejmować nie tylko liczbę punktów i rozkład odległości, lecz także sensowność metadanych. Zob. [RTX Sensors](https://docs.isaacsim.omniverse.nvidia.com/latest/sensors/isaacsim_sensors_rtx.html) oraz [RTX Lidar](https://docs.isaacsim.omniverse.nvidia.com/latest/sensors/isaacsim_sensors_rtx_lidar.html).
+
+### 1.5. ROS 2, DDS i synchronizacja
+
+Integracja z ROS 2 obejmuje publikowanie obserwacji (np. obrazy, chmury punktów, odometrię i transformacje), odbieranie poleceń oraz sterowanie czasem symulacji. Oryginalny dokument wymienia `On Physics Step` w OmniGraph jako mechanizm wiązania obliczeń sterownika z krokami fizyki. Należy jawnie sprawdzić semantykę czasu symulowanego, opóźnienia i częstotliwości publikacji, szczególnie gdy policy inference działa wolniej niż pętla dynamiki.
+
+**DDS (Data Distribution Service)** jest mechanizmem komunikacji, na którym opierają się typowe implementacje ROS 2. Podstawowe terminy z oryginalnego słownika:
+
+| Pojęcie | Znaczenie |
+|---|---|
+| `DomainParticipant` | Uczestnik określonej domeny DDS, działający w granicach przypisanej konfiguracji |
+| `Topic` | Nazwany i typowany kanał danych |
+| `DataWriter` | Publikacja próbek o zdefiniowanym typie |
+| `DataReader` | Odbiór próbek z tematu |
+| IDL | Definicja typów i kontraktów danych, a nie transport wiadomości |
+
+Powyższe nazwy odnoszą się do modelu DDS, a nie są specyficznym interfejsem Isaac Sim. Wywołania `read()`, `take()`, `write()` i `dispose()` należy wiązać z konkretną implementacją biblioteki, np. Eclipse Cyclone DDS, oraz jej wersją. W Isaac Sim 6.2 dokumentowane i testowane są konfiguracje ROS 2 Humble oraz Jazzy; uruchomienie innych dystrybucji i wersji Pythona wymaga osobnej kontroli kompatybilności ([ROS 2 installation](https://docs.isaacsim.omniverse.nvidia.com/6.2.0/installation/install_ros.html)).
+
+### 1.6. Replicator i syntetyczne dane uczące
+
+Wcześniejszy raport opisuje narzędzia **Semantics Schema Editor**, **Synthetic Data Recorder** i **Replicator**. Warstwa adnotacji semantycznych umożliwia przypisanie znaczenia obiektom, a adnotatory mogą generować np. RGB, maski segmentacji lub prostokąty detekcji. Randomizacja oświetlenia, tekstur, położenia obiektów i kamer dostarcza zmienności scen, ale nie dowodzi automatycznie zgodności z rozkładem danych rzeczywistych.
+
+`BasicWriter` jest podstawowym przykładem zapisu danych syntetycznych, a `CustomWriter` umożliwia wyspecjalizowany eksport. Należy rozróżnić interfejs **Synthetic Data Recorder** od konfiguracji innych rozszerzeń. Przykładowo od wersji 1.6.1 `isaacsim.replicator.agent.core` nie akceptuje `BasicWriter` jako klucza najwyższego poziomu w swojej konfiguracji i wymaga odpowiedniej deklaracji `CustomWriter`; nie znaczy to, że `BasicWriter` całkowicie usunięto z Replicatora. Źródła: [Synthetic Data Recorder](https://docs.isaacsim.omniverse.nvidia.com/latest/replicator_tutorials/tutorial_replicator_recorder.html), [Configuration File Guide](https://docs.isaacsim.omniverse.nvidia.com/6.2.0/action_and_event_data_generation/ext_replicator-agent/ext_isaacsim_replicator_agent_configuration.html).
+
+**Zalecane metadane eksportu:** wersja Isaac Sim i odpowiednich rozszerzeń, hash sceny USD i modeli robota, seed randomizacji, parametry sensorów i renderera, konfiguracja generatora, schemat etykiet, liczba próbek oraz osobny protokół oceny danych rzeczywistych.
+
+**Pochodzenie uzupełnienia:** dodatkowe fragmenty pochodzą z `files/inne/analizy/isaac_sim.docx` (SHA-256: `1044199a58993861648083af45c6fff759e4781f6281dd353aff4c4ec42be5a3`) oraz `isaac_sim_pojecia.pdf` (SHA-256: `883d25e545ea3b92c5ba0a8c401bdbd63902828a04da858cfc812598d9da4909`). Uaktualnienie pojęć i kompatybilności zweryfikowano z dokumentacją Isaac Sim 6.2; zawartość źródeł nie była automatycznie uznawana za aktualną.
 
 ## 2. Uczenie polityk i projekt AGILE
 
@@ -84,4 +151,4 @@ Isaac Sim służy przede wszystkim jako środowisko symulacji i generowania dany
 
 ## Pochodzenie i zakres weryfikacji
 
-Raport syntetyzuje `Isaac_Lab.docx` i `Isaac Lab i bliźniaki cyfrowe.pdf` z `files/inne/analizy/`, z aktualizacją terminologii na podstawie oficjalnych źródeł. Zawartość tabeli porównawczej pochodzi z materiałów pierwotnych, lecz została skorygowana o rozwój architektury Isaac Lab. Pominięto niesprawdzone ogólne twierdzenia o dokładności AOI i arbitralnej precyzji sterowania; nie są prezentowane jako wynik badań własnych. Historyczne pliki nie są nadpisywane.
+Raport syntetyzuje `Isaac_Lab.docx`, `Isaac Lab i bliźniaki cyfrowe.pdf`, `isaac_sim.docx` i `isaac_sim_pojecia.pdf` z `files/inne/analizy/`, z aktualizacją terminologii na podstawie oficjalnych źródeł. Zawartość tabeli porównawczej pochodzi z materiałów pierwotnych, lecz została skorygowana o rozwój architektury Isaac Lab. Pominięto niesprawdzone ogólne twierdzenia o dokładności AOI i arbitralnej precyzji sterowania; nie są prezentowane jako wynik badań własnych. Historyczne pliki nie są nadpisywane.
