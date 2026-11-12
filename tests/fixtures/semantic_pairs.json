@@ -1,0 +1,100 @@
+{
+  "schema_version": "0.1.0",
+  "note": "Synthetic, author-labeled smoke benchmark; not calibrated on the real report corpus. Negative pairs include topical relatedness and explicit contradiction.",
+  "positive_labels": [
+    "same_claim",
+    "paraphrase"
+  ],
+  "pairs": [
+    {
+      "id": "pl-reword-1",
+      "label": "paraphrase",
+      "a": "Kalibrację kamery przeprowadzono przy użyciu obrazów szachownicy, a parametry obiektywu wyznaczono metodą optymalizacji reprojekcji.",
+      "b": "Parametry kamery oszacowano z fotografii wzorca szachownicowego przez minimalizację błędu odwzorowania punktów."
+    },
+    {
+      "id": "pl-reword-2",
+      "label": "paraphrase",
+      "a": "W badaniu wykorzystano śledzenie wzroku do wyznaczenia częstotliwości i czasu trwania fiksacji podczas zadania poznawczego.",
+      "b": "Podczas wykonywania zadania poznawczego analizowano okulograficznie liczbę fiksacji oraz ich długość."
+    },
+    {
+      "id": "pl-reword-3",
+      "label": "paraphrase",
+      "a": "Dane EEG przefiltrowano pasmowo przed estymacją widmowej gęstości mocy dla poszczególnych elektrod.",
+      "b": "Zanim obliczono moc sygnału w dziedzinie częstotliwości dla kanałów EEG, wykonano filtrację pasmowoprzepustową."
+    },
+    {
+      "id": "pl-reword-4",
+      "label": "paraphrase",
+      "a": "Do wdrożenia agenta robotycznego zastosowano model językowy działający lokalnie, aby zmniejszyć opóźnienie komunikacji.",
+      "b": "Opóźnienie odpowiedzi robota ograniczono dzięki lokalnemu uruchomieniu modelu LLM sterującego agentem."
+    },
+    {
+      "id": "cross-lingual-1",
+      "label": "paraphrase",
+      "a": "Czas reakcji uczestników był dłuższy w warunku wysokiego obciążenia poznawczego niż w warunku kontrolnym.",
+      "b": "Participants responded more slowly under high cognitive load than in the control condition."
+    },
+    {
+      "id": "cross-lingual-2",
+      "label": "paraphrase",
+      "a": "The algorithm estimates the camera pose from matched visual landmarks in consecutive frames.",
+      "b": "Algorytm wyznacza pozycję i orientację kamery na podstawie dopasowanych punktów charakterystycznych w kolejnych klatkach."
+    },
+    {
+      "id": "same-claim-1",
+      "label": "same_claim",
+      "a": "W analizie zastosowano model typu transformer z mechanizmem uwagi do klasyfikacji obrazów.",
+      "b": "W analizie zastosowano model typu transformer z mechanizmem uwagi do klasyfikacji obrazów."
+    },
+    {
+      "id": "same-claim-2",
+      "label": "same_claim",
+      "a": "Zbiór danych podzielono na część treningową i testową z uwzględnieniem grup pacjentów.",
+      "b": "Zbiór danych podzielono na część treningową i testową z uwzględnieniem grup pacjentów."
+    },
+    {
+      "id": "related-not-duplicate-1",
+      "label": "related",
+      "a": "Wykorzystano Isaac Sim do symulowania kontaktu chwytaka z obiektem i wyliczania sił kontaktu.",
+      "b": "Przygotowano przegląd zastosowań Isaac Lab do uczenia ze wzmocnieniem humanoidów."
+    },
+    {
+      "id": "related-not-duplicate-2",
+      "label": "related",
+      "a": "Oceniono trafność modelu detekcji emocji na obrazach twarzy oznaczonych przez ekspertów.",
+      "b": "Porównano moc obliczeniową procesorów Edge AI używanych do przetwarzania obrazów twarzy."
+    },
+    {
+      "id": "related-not-duplicate-3",
+      "label": "related",
+      "a": "W artykule przedstawiono błędy kalibracji mobilnej kamery szerokokątnej.",
+      "b": "W artykule zaproponowano architekturę aplikacji AR na urządzenie mobilne."
+    },
+    {
+      "id": "contradiction-1",
+      "label": "contradiction",
+      "a": "W grupie eksperymentalnej stwierdzono istotne statystycznie skrócenie czasu reakcji względem kontroli.",
+      "b": "W grupie eksperymentalnej nie stwierdzono istotnego statystycznie skrócenia czasu reakcji względem kontroli."
+    },
+    {
+      "id": "contradiction-2",
+      "label": "contradiction",
+      "a": "Zastosowana metoda wymaga danych biometrycznych i identyfikacji uczestnika.",
+      "b": "Zastosowana metoda nie wymaga danych biometrycznych ani identyfikacji uczestnika."
+    },
+    {
+      "id": "unrelated-1",
+      "label": "unrelated",
+      "a": "W prezentacji wykorzystano rzutowanie czterowymiarowego hipersześcianu na przestrzeń trójwymiarową.",
+      "b": "Śledzono trendy epidemiologiczne sezonowych infekcji górnych dróg oddechowych."
+    },
+    {
+      "id": "unrelated-2",
+      "label": "unrelated",
+      "a": "Badacze zidentyfikowali pasmo aktywności neuronalnej w sygnale EEG.",
+      "b": "Liczba satelitów na orbicie geostacjonarnej wzrosła w analizowanym okresie."
+    }
+  ]
+}
