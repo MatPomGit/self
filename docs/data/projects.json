@@ -27,7 +27,7 @@
     "phase": "current",
     "title": "XR-Cognition · Adaptacyjne środowiska poznawcze",
     "period": "2026–obecnie",
-    "description": "Rozwój adaptacyjnych środowisk XR dostosowujących trudność zadań i prezentację bodźców do możliwości poznawczych użytkownika"
+    "description": "Projektowanie adaptacyjnych środowisk XR do badań uwagi, pamięci roboczej i obciążenia poznawczego, z dostosowaniem zadań do zachowania użytkownika."
   },
   {
     "phase": "current",
@@ -87,78 +87,78 @@
     "phase": "current",
     "title": "MindDx · Symulator diagnozy psychologicznej",
     "period": "2026–obecnie",
-    "description": "Rozwój interaktywnego środowiska do analizy przypadków, formułowania hipotez i doskonalenia diagnozy bez ryzyka dla rzeczywistych pacjentów"
+    "description": "Koncepcja interaktywnego symulatora uczenia rozumowania diagnostycznego na fikcyjnych przypadkach, z analizą hipotez i decyzji klinicznych."
   },
   {
     "phase": "previous",
     "title": "ARIANA",
     "period": "2024",
-    "description": "Koncepcja wielomodalnej platformy badania reakcji emocjonalnych, łączącej okulografię, obraz VIS/IR, pomiary ruchu i narzędzia psychometryczne"
+    "description": "Koncepcja platformy do wielomodalnej analizy reakcji afektywnych, łączącej okulografię, obrazowanie VIS/IR, ruch i dane psychometryczne."
   },
   {
     "phase": "previous",
     "title": "PIAST · Satelitarne obrazowanie Ziemi",
     "period": "2021–2025",
-    "description": "Prace w programie trzech nanosatelitów obserwacyjnych, rozwijającym polskie technologie optoelektroniczne i zdolności obrazowania Ziemi"
+    "description": "Prace w programie nanosatelitów obserwacji Ziemi, obejmującym rozwój polskich zdolności optoelektronicznych i obrazowania satelitarnego."
   },
   {
     "phase": "previous",
     "title": "SEEKER · Głowice optoelektroniczne",
     "period": "2021–2025",
-    "description": "Rozwój wielospektralnych i obrazujących układów optoelektronicznych do zastosowań obronnych, obejmujący prototypowanie i weryfikację rozwiązań"
+    "description": "Rozwój wielospektralnych układów optoelektronicznych, z naciskiem na integrację sensorów, obrazowanie i weryfikację prototypów."
   },
   {
     "phase": "previous",
     "title": "PolFEL · Laser na swobodnych elektronach",
     "period": "2019–2023",
-    "description": "Udział w rozwoju infrastruktury pierwszego polskiego lasera na swobodnych elektronach, otwierającej możliwości badań ultraszybkich procesów w materii"
+    "description": "Udział w rozwoju infrastruktury PolFEL przeznaczonej do badań z wykorzystaniem promieniowania generowanego przez laser na swobodnych elektronach."
   },
   {
     "phase": "previous",
     "title": "OPTOKRYPT · Kryptografia kwantowa",
     "period": "2021–2024",
-    "description": "Prace nad optycznymi technologiami ochrony informacji: generowaniem losowości kwantowej i bezpieczną dystrybucją kluczy szyfrujących"
+    "description": "Badania optycznych technik ochrony informacji, w tym generowania losowości kwantowej i dystrybucji kluczy kryptograficznych."
   },
   {
     "phase": "previous",
     "title": "Mikroruchy oka · Potencjalne biomarkery neurodegeneracji",
     "period": "2019–2024",
-    "description": "Badania nad monitorowaniem mikroruchów oka i analizą cech okulomotorycznych jako potencjalnych biomarkerów zaburzeń neurodegeneracyjnych"
+    "description": "Analiza mikroruchów oka i cech okulomotorycznych jako potencjalnych wskaźników zmian neurologicznych, z uwzględnieniem ograniczeń pomiarowych."
   },
   {
     "phase": "previous",
     "title": "Eye Tracking w rzeczywistości mieszanej",
     "period": "2020–2022",
-    "description": "Kierowanie badaniami nad wykorzystaniem śledzenia wzroku do sterowania i interakcji z obiektami w środowiskach XR"
+    "description": "Badania interakcji ze środowiskami rzeczywistości mieszanej za pomocą spojrzenia, obejmujące dobór obiektów i sterowanie interfejsem XR."
   },
   {
     "phase": "previous",
     "title": "Systemy wizyjne XR w nauce i obronności",
     "period": "2018–2020",
-    "description": "Kierowanie analizą możliwości wykorzystania technologii rzeczywistości mieszanej w eksperymentach naukowych i zastosowaniach wojskowych."
+    "description": "Analiza zastosowań technologii rzeczywistości mieszanej i systemów wizyjnych w eksperymentach naukowych, szkoleniu i środowiskach obronnych."
   },
   {
     "phase": "previous",
     "title": "RiverGUARD · Ochrona granic rzecznych",
     "period": "2019",
-    "description": "Prace nad optoelektronicznym systemem obserwacji i ochrony granic rzecznych w wymagających warunkach terenowych."
+    "description": "Prace nad koncepcją optoelektronicznego monitorowania obszarów nadrzecznych w zmiennych warunkach terenowych i oświetleniowych."
   },
   {
     "phase": "previous",
     "title": "Skaner 3D sub-THz",
     "period": "2015–2019",
-    "description": "Opracowanie aktywnego skanera trójwymiarowego wykorzystującego fale subterahercowe do bezkontaktowej kontroli bezpieczeństwa"
+    "description": "Opracowanie aktywnego skanera trójwymiarowego wykorzystującego fale subterahercowe do bezkontaktowej kontroli i rekonstrukcji przestrzennej."
   },
   {
     "phase": "previous",
     "title": "Sensor trenażera GROM / PIORUN",
     "period": "Data do potwierdzenia",
-    "description": "Opracowanie sensora do wirtualnego trenażera przeciwlotniczych zestawów GROM i PIORUN, wspierającego realistyczne szkolenie operatorów."
+    "description": "Opracowanie sensora wspierającego realistyczne odwzorowanie działania operatora w wirtualnym trenażerze przeciwlotniczych zestawów GROM i PIORUN."
   },
   {
     "phase": "previous",
     "title": "PROTECT · Biometria kontroli granicznej",
     "period": "2016–2019",
-    "description": "Europejski projekt nad mniej inwazyjną i bardziej odporną kontrolą granic z użyciem biometrii wielomodalnej i ochrony prywatności."
+    "description": "Badania rozwiązań wielomodalnej biometrii dla kontroli granicznej, łączących skuteczność identyfikacji z prywatnością i wygodą użytkowników."
   }
 ]
