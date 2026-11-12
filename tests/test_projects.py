@@ -65,7 +65,7 @@ class ProjectsTests(unittest.TestCase):
     def test_logos_and_optional_project_links(self):
         """Każdy wpis logo jest bezpieczną, istniejącą grafiką lokalną."""
         metadata = json.loads(DETAILS.read_text(encoding="utf-8"))
-        logo_pattern = re.compile(r"docs/assets/images/projects/[a-z0-9][a-z0-9_-]*\\.(svg|png|webp)\\Z")
+        logo_pattern = re.compile(r"docs/assets/images/projects/[a-z0-9][a-z0-9_-]*[.](svg|png|webp)$")
         for name, entry in metadata.items():
             with self.subTest(project=name):
                 logo = entry.get("logo")
@@ -77,7 +77,7 @@ class ProjectsTests(unittest.TestCase):
                     if target.suffix == ".svg":
                         self.assertIn("<svg", target.read_text(encoding="utf-8"))
                     elif target.suffix == ".png":
-                        self.assertEqual(target.read_bytes()[:8], b"\\x89PNG\\r\\n\\x1a\\n")
+                        self.assertEqual(target.read_bytes()[:8], bytes.fromhex("89504e470d0a1a0a"))
                     elif target.suffix == ".webp":
                         data = target.read_bytes()[:12]
                         self.assertEqual(data[:4], b"RIFF")
@@ -90,7 +90,7 @@ class ProjectsTests(unittest.TestCase):
                     self.assertTrue(link["label"].strip())
                     url = link.get("url")
                     self.assertIsInstance(url, str)
-                    self.assertRegex(url, r"\\Ahttps://[^\\s/@]+(?:/[^\\s]*)?\\Z")
+                    self.assertTrue(url.startswith("https://") and " " not in url and "@" not in url.split("/", 3)[2])
 
     def test_project_preview_is_wired(self):
         html = HTML.read_text(encoding="utf-8")
