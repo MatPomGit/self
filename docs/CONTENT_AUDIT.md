@@ -59,8 +59,19 @@ Niekompletna ekstrakcja nie jest utrwalana w cache; uszkodzone wpisy są
 odrzucane i odbudowywane z plików źródłowych. Liczby trafień i pominięć
 są drukowane jako `CONTENT_AUDIT_CACHE`, ale nie wpływają na manifest wynikowy.
 
-Workflow Issue #138 zapisuje cache między przebiegami przez `actions/cache@v4`
-(7-dniowe artefakty dowodowe pozostają osobno). Cache nie trafia do
+Zapis współdzielonego cache jest wykonywany **wyłącznie przez zaufany**
+workflow `Issue 138 – warm trusted extraction cache`, uruchamiany po zmianach
+na gałęzi `main` (lub ręcznie przez `workflow_dispatch`). Komentarz
+`/audit` jest zdarzeniem o niższym poziomie zaufania i **tylko odczytuje**
+cache przez `actions/cache/restore@v4`. To zachowuje ograniczenia
+bezpieczeństwa GitHub dotyczące zapisywania cache przez `issue_comment`.
+
+Gdy brak cache, audyt działa poprawnie i ekstraktuje wszystkie źródła
+bez optymalizacji. Po zakończeniu zadania warm-up ponowne wywołanie
+`/audit both` wykorzystuje wcześniejsze ekstrakcje.
+Statystyki `CONTENT_AUDIT_CACHE` służą do weryfikacji trafień.
+
+7-dniowe artefakty dowodowe pozostają osobno. Cache nie trafia do
 `files/`, `docs/`, `_site/` ani na GitHub Pages. Po zmianie formatu
 ekstrakcji należy zwiększyć `EXTRACTION_CACHE_VERSION` w skrypcie.
 
