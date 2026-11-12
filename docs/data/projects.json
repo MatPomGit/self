@@ -3,25 +3,25 @@
     "phase": "current",
     "title": "ARC-RGBT",
     "period": "2026–obecnie",
-    "description": "Fuzja obrazu widzialnego i termowizyjnego w detekcji obiektów w trudnych warunkach"
+    "description": "Rozwój narzędzi do fuzji obrazów RGB i termowizyjnych, analizy degradacji i oceny detekcji obiektów z uwzględnieniem geometrii sensorów."
   },
   {
     "phase": "current",
     "title": "ARC-RVI · Autonomiczna inspekcja wizualna",
     "period": "2026–obecnie",
-    "description": "Rozwój metod autonomicznej inspekcji wizualnej: lokalizacji obiektu, planowania ujęć, oceny kompletności i jakości dokumentacji tworzonej przez robota"
+    "description": "Oprogramowanie do planowania ujęć i oceny pokrycia oraz jakości dokumentacji wizualnej w inspekcji robotycznej, obecnie testowane offline."
   },
   {
     "phase": "current",
     "title": "ARC-HRI-SAFETY",
     "period": "2026–obecnie",
-    "description": "Przewidywanie ryzyka we współpracy człowieka z robotem humanoidalnym, z wykorzystaniem percepcji sceny, analizy ruchu i wymagań bezpieczeństwa"
+    "description": "Rozwój predykcyjnej oceny ryzyka w interakcji człowieka z robotem humanoidalnym na podstawie percepcji sceny, ruchu i niepewności."
   },
   {
     "phase": "current",
     "title": "ARC-AFFECTIVE",
     "period": "2026–obecnie",
-    "description": "Personalizowana estymacja uwagi i obciążenia poznawczego podczas zadań na podstawie EEG z Muse S Athena i danych behawioralnych"
+    "description": "Program badań nad estymacją uwagi i obciążenia poznawczego z sygnałów EEG, zachowania i innych modalności, z analizą niepewności pomiarów."
   },
   {
     "phase": "current",
@@ -33,55 +33,55 @@
     "phase": "current",
     "title": "ContextNDD",
     "period": "2026–obecnie",
-    "description": "Rozwój ram analizy zachowania uwzględniających kontekst sytuacyjny i różnice indywidualne, bez sprowadzania charakterystyki użytkownika wyłącznie do etykiet diagnostycznych"
+    "description": "Modelowanie zachowań z uwzględnieniem kontekstu sytuacyjnego, jakości danych i indywidualnych różnic zamiast automatycznej klasyfikacji diagnostycznej."
   },
   {
     "phase": "current",
     "title": "SAPIENS · Człowiek i robot humanoidalny",
     "period": "2026–obecnie",
-    "description": "Badania nad wpływem bezpośredniej interakcji z robotem humanoidalnym na zaufanie, poczucie sprawczości, obecność społeczną oraz interpretację sygnałów emocjonalnych"
+    "description": "Badania psychologicznych skutków bezpośredniej interakcji z humanoidem: emocji, zaufania, obecności społecznej i poczucia sprawczości."
   },
   {
     "phase": "current",
     "title": "ARC Mobile Eye Tracking",
     "period": "2026–obecnie",
-    "description": "Badania nad estymacją kierunku spojrzenia za pomocą smartfonu oraz wpływem kalibracji, oświetlenia i ruchu głowy na dokładność pomiaru"
+    "description": "Projekt pomiaru kierunku spojrzenia ekranowego na smartfonie Android oraz walidacji wpływu kalibracji, oświetlenia i ruchu głowy."
   },
   {
     "phase": "current",
     "title": "EEG Neurolyze",
     "period": "2026–obecnie",
-    "description": "Rozwój narzędzi do rejestracji i analizy EEG z Muse S Athena, kontroli jakości danych oraz planowanej synchronizacji zdarzeń i integracji z XR; pomiary sprzętowe wymagają walidacji."
+    "description": "Narzędzia Python do akwizycji, przetwarzania i analizy EEG oraz odtwarzalnych demonstracji i raportów z danych syntetycznych."
   },
   {
     "phase": "current",
     "title": "S4D-TAM · Nawigacja autonomiczna",
     "period": "2026–obecnie",
-    "description": "Rozwój metod oceny nawigacji bezzałogowej przy ograniczonej dostępności GNSS, z wykorzystaniem semantyki sceny i danych przestrzennych 3D/4D."
+    "description": "Benchmark nawigacji bezzałogowych statków powietrznych przy ograniczonym GNSS z semantyczną reprezentacją danych przestrzennych 4D."
   },
   {
     "phase": "current",
     "title": "ARC Attachment Dynamics",
     "period": "2026–obecnie",
-    "description": "Badania nad dynamicznymi zmianami bliskości, autonomii i poczucia bezpieczeństwa w relacjach, z wykorzystaniem psychologii przywiązania i modelowania dynamicznego"
+    "description": "Modelowanie dynamicznej regulacji bliskości, autonomii i poczucia bezpieczeństwa w relacjach dorosłych z perspektywy teorii przywiązania."
   },
   {
     "phase": "current",
     "title": "ARC-ADHD · Adaptacyjna gra badawcza",
     "period": "2026–obecnie",
-    "description": "Adaptacyjna gra do badania powrotu do działania po trudnym bodźcu, z rozróżnieniem poprawy wyników w zadaniu i transferu umiejętności poza grę"
+    "description": "Rozwój adaptacyjnej gry badawczej do pomiaru powrotu do działania ukierunkowanego na cel po kontrolowanym wyzwaniu u dzieci z ADHD."
   },
   {
     "phase": "current",
     "title": "AI Cognitive Resilience",
     "period": "2026–obecnie",
-    "description": "Badania nad wpływem jakości dowodów oraz siły i formy perswazji w odpowiedziach AI na zmianę przekonań odbiorców"
+    "description": "Badania aktualizacji przekonań podczas interakcji z LLM, rozdzielające jakość argumentów od perswazyjnej formy odpowiedzi AI."
   },
   {
     "phase": "current",
     "title": "DERA-HRI · Emocje w interakcji z robotem",
     "period": "2026–obecnie",
-    "description": "Narzędzie do badania emocji i doświadczeń związanych z interakcją z robotem, z uwzględnieniem responsywności, zaufania i poczucia kontroli"
+    "description": "Rozwój kwestionariusza doświadczeń afektywnych po interakcji człowieka z robotem; obecna wersja ma charakter rozwojowy i wymaga walidacji."
   },
   {
     "phase": "current",
