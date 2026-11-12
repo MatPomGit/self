@@ -69,3 +69,14 @@ Zapisuje `xr_pairs.json` i `xr_pairs.md`, zawsze poza publikowanym drzewem. GitH
 **Werdykt do planu:** `KEEP_SEPARATE_PENDING_SEMANTIC_REVIEW`. Brak dowodu tekstowego na duplikaty między obiema seriami; niskie pokrycie nie wykazuje jednak różnicy celów dydaktycznych. Nie przenosić do `files/ignored/`. W kolejnej iteracji priorytet mają 74 pary wariantów formatowych i raporty Isaac/NDD, gdzie istnieje większe prawdopodobieństwo redundancji rzeczywistych wersji.
 
 Uwaga o testach: CI zaliczył siedem testów, ale podczas importu istniejącego analizatora emitowane były `SyntaxWarning` o nieprawidłowej sekwencji `\\`` w literale Python. Ostrzeżenia nie unieważniają wyników, lecz powinny zostać poprawione oddzielnie w źródłowym analizatorze.
+
+## Drugi przebieg: zgodność PDF–DOCX
+
+`scripts/audit_format_variants.py` wykonuje tekstową ekstrakcję każdej wykrytej pary PDF–DOCX i porównuje pokrycie 5-gramów. Stosuje statusy `TEXT_VARIANTS_SIMILAR` (co najmniej 75%), `FORMAT_DIFFERENCE_REVIEW` (25–75%), `FORMAT_MISMATCH_CANDIDATE` (poniżej 25%), `INSUFFICIENT_TEXT`, `EXTRACTION_INCOMPLETE` i `MISSING_INPUT`. Są to **kategorie przesiewowe**, nie wynik recenzji merytorycznej.
+
+```bash
+python scripts/audit_format_variants.py --root files --output-dir reports/content-audit/formats
+python -m pytest tests/test_format_variant_audit.py -q
+```
+
+Wyniki `format_comparison.json` i `format_comparison.md` są zachowywane w artefakcie CI. Nie obejmują jeszcze porównania PDF–PPTX ani PDF–TEX; te formaty są rejestrowane w inwentarzu, ale nie należy na tej podstawie stwierdzać zgodności ich zawartości. Ponadto brak wyniku tekstowego nie świadczy o braku treści na stronach z obrazami.
