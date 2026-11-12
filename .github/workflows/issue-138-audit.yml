@@ -51,6 +51,13 @@ jobs:
         run: |
           python scripts/issue_audit_issue138.py select \
             --event "$EVENT_NAME" --requested "$INPUT_SCOPE" --comment "$ISSUE_COMMAND"
+      - name: Restore SHA-256 keyed extraction cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ runner.temp }}/issue-138-extraction-cache
+          key: issue138-extraction-v1-${{ runner.os }}-${{ github.sha }}-${{ steps.selection.outputs.scope }}
+          restore-keys: |
+            issue138-extraction-v1-${{ runner.os }}-
       - name: Extract and compare selected report corpora (read-only)
         env:
           SELECTED_SCOPE: ${{ steps.selection.outputs.scope }}
@@ -61,7 +68,8 @@ jobs:
               python scripts/audit_content_overlap.py \
                 --scope files/inne/analizy \
                 --output-dir "$RUNNER_TEMP/issue-138/active" \
-                --top 20 --ci-summary
+                --top 20 --ci-summary \
+                --cache-dir "$RUNNER_TEMP/issue-138-extraction-cache" --changed-only
               ;;
           esac
           case "$SELECTED_SCOPE" in
@@ -69,7 +77,8 @@ jobs:
               python scripts/audit_content_overlap.py \
                 --scope files/ignored/inne/analizy \
                 --output-dir "$RUNNER_TEMP/issue-138/archive" \
-                --top 20 --ci-summary
+                --top 20 --ci-summary \
+                --cache-dir "$RUNNER_TEMP/issue-138-extraction-cache" --changed-only
               ;;
           esac
       - name: Prepare bounded summary for Issue and GitHub Actions

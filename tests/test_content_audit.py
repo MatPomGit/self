@@ -8,7 +8,8 @@ from zipfile import ZipFile
 from xml.sax.saxutils import escape
 from xml.sax.saxutils import escape
 
-from scripts.audit_content_overlap import compute, doc_key, grams, write_reports, audit_manifest, pair_matrix_csv
+from scripts.audit_content_overlap import (compute, doc_key, grams, write_reports,
+    audit_manifest, pair_matrix_csv, ExtractionCache)
 
 
 def sample_docx(path, content):
@@ -95,6 +96,62 @@ class ContentAuditTests(unittest.TestCase):
         data = pair_matrix_csv(result)
         self.assertEqual(len(data.splitlines()), 1)
         self.assertIn("evidence_json", data)
+
+    def test_cache_incremental_equivalence_invalidation_and_repair(self):
+        with TemporaryDirectory() as temp:
+            root = Path(temp)
+            scope = root / "files/inne/analizy"
+            cache_dir = root / "reports/extraction-cache"
+            sample = ("Analiza rozpoznawania sygnałów multimodalnych "
+                      "opiera się na takich samych danych wejściowych. ") * 12
+            sample_docx(scope / "A.docx", sample + "Pierwsza konkluzja.")
+            sample_docx(scope / "B.docx", sample + "Druga konkluzja.")
+            before = {p.name: p.read_bytes() for p in scope.iterdir()}
+
+            initial_cache = ExtractionCache(root, cache_dir)
+            initial = compute(root, scope, cache=initial_cache)
+            self.assertEqual(initial_cache.stats(),
+                             {"hits": 0, "misses": 2, "invalid": 0, "writes": 2})
+            self.assertEqual({p.name: p.read_bytes() for p in scope.iterdir()}, before)
+
+            warm_cache = ExtractionCache(root, cache_dir)
+            warm = compute(root, scope, cache=warm_cache)
+            self.assertEqual(warm_cache.stats(),
+                             {"hits": 2, "misses": 0, "invalid": 0, "writes": 0})
+            self.assertEqual(audit_manifest(initial), audit_manifest(warm))
+            self.assertEqual(pair_matrix_csv(initial), pair_matrix_csv(warm))
+            self.assertEqual(initial["formats"], warm["formats"])
+            self.assertEqual(initial["pairs"], warm["pairs"])
+
+            sample_docx(scope / "A.docx", sample + "Zmodyfikowany wynik.")
+            incremental_cache = ExtractionCache(root, cache_dir)
+            changed = compute(root, scope, cache=incremental_cache)
+            self.assertEqual(incremental_cache.stats(),
+                             {"hits": 1, "misses": 1, "invalid": 0, "writes": 1})
+            full = compute(root, scope)
+            self.assertEqual(audit_manifest(changed), audit_manifest(full))
+            self.assertEqual(pair_matrix_csv(changed), pair_matrix_csv(full))
+
+            # A malformed cache file must be ignored and the original re-read.
+            target = incremental_cache._entry("files/inne/analizy/B.docx",
+                                              full["files"][1]["sha256"])
+            target.write_text("{corrupted JSON", encoding="utf-8")
+            repair_cache = ExtractionCache(root, cache_dir)
+            repaired = compute(root, scope, cache=repair_cache)
+            self.assertEqual(repair_cache.stats(),
+                             {"hits": 1, "misses": 1, "invalid": 1, "writes": 1})
+            self.assertEqual(audit_manifest(repaired), audit_manifest(full))
+
+    def test_cache_cannot_be_placed_in_published_materials(self):
+        with TemporaryDirectory() as temp:
+            root = Path(temp)
+            for public_dir in ("files/cache", "docs/cache",
+                               "materials/cache", "_site/cache"):
+                with self.subTest(public_dir=public_dir):
+                    with self.assertRaises(ValueError):
+                        ExtractionCache(root, root / public_dir)
+            cache = ExtractionCache(root, root / "reports/cache")
+            self.assertTrue(cache.directory.is_dir())
 
     def test_same_named_but_divergent_formats_are_independent(self):
         with TemporaryDirectory() as directory:

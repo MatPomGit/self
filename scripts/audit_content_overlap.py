@@ -15,6 +15,8 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 import hashlib
 import json
+import os
+import tempfile
 import math
 from pathlib import Path
 import re
@@ -148,6 +150,86 @@ def extract(path: Path, root: Path) -> Extracted:
                          f"{type(exc).__name__}: {str(exc)[:80]}")
 
 
+# Bump when extraction, tokenization or limits change.
+EXTRACTION_CACHE_VERSION = "1.0.0"
+
+
+class ExtractionCache:
+    """SHA-256 keyed extraction-only cache; all comparison scores are recomputed."""
+
+    def __init__(self, root: Path, directory: Path):
+        validate_output_dir(root, directory)
+        self.directory = directory.resolve()
+        self.directory.mkdir(parents=True, exist_ok=True)
+        self.hits = self.misses = self.invalid = self.writes = 0
+
+    def _entry(self, path: str, digest: str) -> Path:
+        identity = json.dumps([EXTRACTION_CACHE_VERSION, path, digest],
+                              ensure_ascii=False, separators=(",", ":"))
+        return self.directory / (hashlib.sha256(identity.encode()).hexdigest() + ".json")
+
+    def read(self, path: Path, root: Path) -> Extracted | None:
+        relative, digest = path.relative_to(root).as_posix(), sha(path)
+        candidate = self._entry(relative, digest)
+        if not candidate.is_file():
+            self.misses += 1
+            return None
+        try:
+            if candidate.is_symlink() or candidate.stat().st_size > MAX_CHARACTERS * 8 + 1_000_000:
+                raise ValueError("Unsafe or oversized cache entry")
+            record = json.loads(candidate.read_text(encoding="utf-8"))
+            if (not isinstance(record, dict)
+                    or record.get("version") != EXTRACTION_CACHE_VERSION
+                    or record.get("path") != relative
+                    or record.get("sha256") != digest
+                    or record.get("status") != "EXTRACTED"
+                    or record.get("warning") != ""):
+                raise ValueError("Stale cache entry")
+            segments = record.get("segments")
+            if (not isinstance(segments, list) or len(segments) > MAX_CHARACTERS
+                    or any(not isinstance(p, dict)
+                           or not isinstance(p.get("location"), str)
+                           or not isinstance(p.get("text"), str)
+                           or len(p["location"]) > 256 for p in segments)
+                    or sum(len(p["text"]) for p in segments) > MAX_CHARACTERS):
+                raise ValueError("Malformed cache segments")
+            words = tokens(" ".join(p["text"] for p in segments))
+            if not words:
+                raise ValueError("Empty cached text")
+            self.hits += 1
+            return Extracted(relative, digest, "EXTRACTED", segments, words)
+        except (OSError, ValueError, UnicodeError, TypeError):
+            self.invalid += 1
+            self.misses += 1
+            return None
+
+    def write(self, record: Extracted) -> None:
+        # Incomplete documents must be re-extracted, not frozen as cached failures.
+        if record.status != "EXTRACTED":
+            return
+        data = {"version": EXTRACTION_CACHE_VERSION, "path": record.path,
+                "sha256": record.source_hash, "status": record.status,
+                "warning": record.warning, "segments": record.segments}
+        name = None
+        try:
+            with tempfile.NamedTemporaryFile(
+                mode="w", dir=self.directory, prefix=".extraction-",
+                suffix=".tmp", encoding="utf-8", delete=False
+            ) as stream:
+                name = stream.name
+                json.dump(data, stream, sort_keys=True, ensure_ascii=False,
+                          separators=(",", ":"))
+            os.replace(name, self._entry(record.path, record.source_hash))
+            self.writes += 1
+        finally:
+            if name is not None:
+                Path(name).unlink(missing_ok=True)
+
+    def stats(self) -> dict[str, int]:
+        return {"hits": self.hits, "misses": self.misses,
+                "invalid": self.invalid, "writes": self.writes}
+
+
 def doc_key(path: str) -> str:
     filename = Path(path)
     stem = unicodedata.normalize("NFC", filename.stem).casefold()
@@ -181,12 +263,19 @@ def common_witness(a: Extracted, b: Extracted) -> list[dict]:
     return found
 
 
-def compute(root: Path, scope: Path) -> dict:
+def compute(root: Path, scope: Path, cache: ExtractionCache | None = None) -> dict:
     paths = sorted(
         (p for p in scope.rglob("*") if p.is_file() and not p.is_symlink()
          and p.suffix.lower() in ALLOWED), key=lambda p: p.as_posix().casefold()
     )
-    extracted = [extract(p, root) for p in paths]
+    extracted = []
+    for path in paths:
+        record = cache.read(path, root) if cache is not None else None
+        if record is None:
+            record = extract(path, root)
+            if cache is not None:
+                cache.write(record)
+        extracted.append(record)
     by_key = defaultdict(list)
     for item in extracted:
         by_key[doc_key(item.path)].append(item)
@@ -468,14 +557,30 @@ def main() -> int:
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--top", type=int, default=15)
     parser.add_argument("--ci-summary", action="store_true")
+    parser.add_argument("--cache-dir", type=Path, default=None,
+                        help="Private, content-addressed extraction cache")
+    parser.add_argument("--changed-only", action="store_true",
+                        help="Reuse unchanged SHA-256 extractions; compare entire corpus")
     args = parser.parse_args()
     root = args.root.resolve()
     scope = (root / args.scope).resolve()
     if not scope.is_relative_to(root) or not scope.is_dir():
         parser.error("--scope must be an existing directory inside repository")
     validate_output_dir(root, args.output_dir)
-    report = compute(root, scope)
+    if args.changed_only and args.cache_dir is None:
+        parser.error("--changed-only requires --cache-dir")
+    if args.cache_dir is not None:
+        validate_output_dir(root, args.cache_dir)
+        cache_path, output_path = args.cache_dir.resolve(), args.output_dir.resolve()
+        if cache_path == output_path or cache_path.is_relative_to(output_path):
+            parser.error("Cache directory must be outside audit artifact output")
+        cache = ExtractionCache(root, cache_path)
+    else:
+        cache = None
+    report = compute(root, scope, cache=cache)
     write_reports(report, args.output_dir, args.top)
+    if cache is not None:
+        print("CONTENT_AUDIT_CACHE " + json.dumps(cache.stats(), sort_keys=True))
     summary = report["counts"]
     print("CONTENT_AUDIT "+json.dumps(summary, ensure_ascii=False, sort_keys=True))
     for p in report["pairs"][:min(10,args.top)]:
