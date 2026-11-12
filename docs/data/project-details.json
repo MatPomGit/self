@@ -1,13 +1,11 @@
 {
   "ARC-RGBT": {
+    "logo": "docs/assets/images/projects/arc-rgbt.svg",
     "pl": {
-      "methods": [
-        "Fuzja RGB–termowizja",
-        "Detekcja obiektów",
-        "Ocena odporności modeli"
-      ],
-      "focus": "Analiza skuteczności detekcji w ograniczonej widoczności i przy zmianach warunków obserwacji."
-    },
+      "methods": ["Fuzja RGB–termowizja", "Detekcja obiektów", "Ocena odporności modeli"],
+      "focus": "Analiza skuteczności detekcji w ograniczonej widoczności i przy zmianach warunków obserwacji.",
+      "outcomes": ["Publikacje naukowe", "Oprogramowanie badawcze"]
+        },
     "en": {
       "methods": [
         "RGB–thermal fusion",
