@@ -1,0 +1,99 @@
+name: Issue 138 – report audit on demand
+
+on:
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: "Active public reports, archived originals, or both"
+        type: choice
+        required: true
+        default: active
+        options: [active, archive, both]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: issue-138-content-audit-${{ github.event.issue.number || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issue_comment' &&
+       github.event.issue.number == 138 &&
+       github.event.comment.user.login == 'MatPomGit' &&
+       (github.event.comment.body == '/audit' ||
+        github.event.comment.body == '/audit active' ||
+        github.event.comment.body == '/audit archive' ||
+        github.event.comment.body == '/audit both'))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install offline extraction dependencies
+        run: python -m pip install "pypdf>=5,<7"
+      - name: Choose authorized audit scope
+        id: selection
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_SCOPE: ${{ inputs.scope }}
+          ISSUE_COMMAND: ${{ github.event.comment.body }}
+        run: |
+          python scripts/issue_audit_issue138.py select \
+            --event "$EVENT_NAME" --requested "$INPUT_SCOPE" --comment "$ISSUE_COMMAND"
+      - name: Extract and compare selected report corpora (read-only)
+        env:
+          SELECTED_SCOPE: ${{ steps.selection.outputs.scope }}
+        run: |
+          set -euo pipefail
+          case "$SELECTED_SCOPE" in
+            active|both)
+              python scripts/audit_content_overlap.py \
+                --scope files/inne/analizy \
+                --output-dir "$RUNNER_TEMP/issue-138/active" \
+                --top 20 --ci-summary
+              ;;
+          esac
+          case "$SELECTED_SCOPE" in
+            archive|both)
+              python scripts/audit_content_overlap.py \
+                --scope files/ignored/inne/analizy \
+                --output-dir "$RUNNER_TEMP/issue-138/archive" \
+                --top 20 --ci-summary
+              ;;
+          esac
+      - name: Prepare bounded summary for Issue and GitHub Actions
+        env:
+          SELECTED_SCOPE: ${{ steps.selection.outputs.scope }}
+        run: |
+          python scripts/issue_audit_issue138.py summarize \
+            --reports "$RUNNER_TEMP/issue-138" \
+            --scope "$SELECTED_SCOPE" \
+            --repository "$GITHUB_REPOSITORY" \
+            --run-id "$GITHUB_RUN_ID" \
+            --issue-comment "$RUNNER_TEMP/issue-138/issue-comment.md"
+      - name: Upload audit evidence without publishing it on GitHub Pages
+        uses: actions/upload-artifact@v4
+        with:
+          name: issue-138-content-audit
+          path: |
+            ${{ runner.temp }}/issue-138/active/
+            ${{ runner.temp }}/issue-138/archive/
+          retention-days: 7
+          if-no-files-found: error
+      - name: Attach validated aggregate result to Issue 138
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue comment 138 --repo "$GITHUB_REPOSITORY" \
+            --body-file "$RUNNER_TEMP/issue-138/issue-comment.md"
