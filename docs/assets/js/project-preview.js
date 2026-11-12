@@ -33,7 +33,7 @@
   }
   function mark(project){
     const title=project.sourceTitle||project.title;
-    const letters=title.split(/[\s·–/-]+/u).filter(Boolean).slice(0,2).map(word=>word[0]).join('').toUpperCase();
+    const letters=title.split(/[\s·–/\-]+/u).filter(Boolean).slice(0,2).map(word=>word[0]).join('').toUpperCase();
     return el('span','project-mark',letters||'◇');
   }
   function head(project,headingTag){
