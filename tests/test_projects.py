@@ -103,10 +103,14 @@ class ProjectsTests(unittest.TestCase):
         self.assertIn("projectLogoPath", js)
         self.assertIn("safeProjectLink", js)
         self.assertIn("project-logo", PREVIEW_CSS.read_text(encoding="utf-8"))
-        self.assertIn("pointerenter", js)
-        self.assertIn("focusin", js)
-        self.assertIn("Escape", js)
-        self.assertIn("setTimeout(()=>show(card,project,language),250)", js)
+        self.assertIn("card.tabIndex=0", js)
+        self.assertIn("aria-haspopup", js)
+        self.assertIn("event.key==='Enter'||event.key===' '", js)
+        self.assertIn("dialog.addEventListener('close'", js)
+        self.assertNotIn("pointerenter", js)
+        self.assertNotIn("project-card-action", js)
+        self.assertNotIn("project-preview-more", js)
+        self.assertIn("background:rgba(6,15,27,.76)", PREVIEW_CSS.read_text(encoding="utf-8"))
 
     def test_page_contains_project_data_hook(self):
         """Strona ma kontener projektów i odwołanie do danych."""

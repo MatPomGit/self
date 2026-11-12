@@ -1,24 +1,15 @@
-/* Hover and keyboard-accessible project previews, with native modal detail panel. */
+/* Click and keyboard-activated project detail panel. */
 (function(){
   'use strict';
-  const preview=document.createElement('div');
-  preview.className='project-preview';
-  preview.id='project-preview';
-  preview.setAttribute('aria-label','Project preview');
-  preview.hidden=true;
-  document.body.append(preview);
   const dialog=document.createElement('dialog');
   dialog.className='project-detail-dialog';
   dialog.setAttribute('aria-label','Project details');
   document.body.append(dialog);
-  let activeCard=null;
-  let pending=null;
-  let closePending=null;
-  let selected=null;
+  let returnFocus=null;
   let locale='pl';
   const labels={
-    pl:{more:'Więcej szczegółów',close:'Zamknij',scope:'Cel i zakres',links:'Odnośniki',focus:'Kierunek badań',methods:'Metody i technologie',outcomes:'Rezultaty i produkty',status:'Status',ongoing:'Projekt w realizacji',past:'Projekt zakończony lub archiwalny',preview:'Podgląd projektu',detail:'Szczegóły projektu'},
-    en:{more:'More details',close:'Close',scope:'Objectives and scope',links:'Links',focus:'Research focus',methods:'Methods and technologies',outcomes:'Outputs and deliverables',status:'Status',ongoing:'Ongoing project',past:'Completed or archived project',preview:'Project preview',detail:'Project details'}
+    pl:{close:'Zamknij',scope:'Cel i zakres',links:'Odnośniki',focus:'Kierunek badań',methods:'Metody i technologie',outcomes:'Rezultaty i produkty',status:'Status',ongoing:'Projekt w realizacji',past:'Projekt zakończony lub archiwalny',detail:'Szczegóły projektu'},
+    en:{close:'Close',scope:'Objectives and scope',links:'Links',focus:'Research focus',methods:'Methods and technologies',outcomes:'Outputs and deliverables',status:'Status',ongoing:'Ongoing project',past:'Completed or archived project',detail:'Project details'}
   };
   const el=(tag,cls,txt)=>{
     const node=document.createElement(tag);
@@ -63,65 +54,12 @@
     wrap.append(mark(project),info);
     return wrap;
   }
-  function chips(methods){
-    const container=el('div','project-chip-list');
-    methods.slice(0,5).forEach(method=>container.append(el('span','project-chip',method)));
-    return container;
-  }
   function safeProjectLink(value){
     if(typeof value!=='string')return null;
     try{
       const url=new URL(value);
       return url.protocol==='https:'&&url.username===''&&url.password==='' ? url.href : null;
     }catch(error){return null;}
-  }
-  function cancelPending(){
-    window.clearTimeout(pending);
-    window.clearTimeout(closePending);
-    pending=null;
-    closePending=null;
-  }
-  function hide(){
-    cancelPending();
-    preview.classList.remove('is-visible');
-    preview.hidden=true;
-    activeCard=null;
-    selected=null;
-  }
-  function position(card){
-    const rect=card.getBoundingClientRect();
-    const width=preview.offsetWidth;
-    const height=preview.offsetHeight;
-    const right=window.innerWidth-rect.right;
-    const left=right>=width+12?rect.right+10:rect.left-width-10;
-    const x=Math.max(12,Math.min(left,window.innerWidth-width-12));
-    const y=Math.max(12,Math.min(rect.top,window.innerHeight-height-12));
-    preview.style.left=x+'px';
-    preview.style.top=y+'px';
-  }
-  function show(card,project,language){
-    if(dialog.open)return;
-    cancelPending();
-    locale=language;
-    const t=labels[locale];
-    activeCard=card;
-    selected=project;
-    preview.setAttribute('aria-label',t.preview);
-    preview.replaceChildren(head(project,'h3'));
-    preview.append(el('p','project-preview-summary',clean(project.description)));
-    const extra=detailsFor(project);
-    if(extra.methods.length)preview.append(chips(extra.methods));
-    const button=el('button','project-preview-more',t.more+' ↗');
-    button.type='button';
-    button.addEventListener('click',()=>openDialog(project,language));
-    preview.append(button);
-    preview.hidden=false;
-    position(card);
-    preview.classList.add('is-visible');
-  }
-  function postponeClose(){
-    window.clearTimeout(closePending);
-    closePending=window.setTimeout(hide,180);
   }
   function section(content,title,values){
     if(!values || (Array.isArray(values)&&!values.length))return;
@@ -135,7 +73,6 @@
     content.append(wrap);
   }
   function openDialog(project,language){
-    hide();
     locale=language;
     const t=labels[locale];
     dialog.setAttribute('aria-label',t.detail+': '+project.title);
@@ -175,35 +112,31 @@
     if(!dialog.open)dialog.showModal();
     close.focus();
   }
-  preview.addEventListener('pointerenter',()=>window.clearTimeout(closePending));
-  preview.addEventListener('pointerleave',postponeClose);
   dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();});
-  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!dialog.open)hide();});
-  document.addEventListener('pointerdown',event=>{
-    if(!dialog.open&&!preview.contains(event.target)&&!(activeCard&&activeCard.contains(event.target)))hide();
+  dialog.addEventListener('close',()=>{
+    if(returnFocus&&returnFocus.isConnected)returnFocus.focus({preventScroll:true});
+    returnFocus=null;
   });
-  window.addEventListener('scroll',()=>{if(activeCard)position(activeCard);},{passive:true});
-  window.addEventListener('resize',hide);
   function attach(card,project,language){
-    const t=labels[language];
-    const button=el('button','project-card-action',t.more);
-    button.type='button';
-    button.setAttribute('aria-label',t.detail+': '+project.title);
-    button.addEventListener('click',event=>{event.stopPropagation();openDialog(project,language);});
-    card.append(button);
-    card.addEventListener('click',event=>{if(event.target.closest('button,a'))return;openDialog(project,language);});
-    card.addEventListener('pointerenter',event=>{
-      if(event.pointerType!=='mouse'&&event.pointerType!=='pen')return;
-      cancelPending();
-      pending=window.setTimeout(()=>show(card,project,language),250);
+    card.tabIndex=0;
+    card.setAttribute('role','button');
+    card.setAttribute('aria-haspopup','dialog');
+    card.setAttribute('aria-label',(language==='en'?'Project details: ':'Szczegóły projektu: ')+project.title);
+    const open=()=>{
+      if(dialog.open)return;
+      returnFocus=card;
+      openDialog(project,language);
+    };
+    card.addEventListener('click',event=>{
+      if(event.target.closest('a,button'))return;
+      open();
     });
-    card.addEventListener('pointerleave',()=>{
-      window.clearTimeout(pending);
-      if(activeCard===card)postponeClose();
-    });
-    card.addEventListener('focusin',()=>{if(!dialog.open)show(card,project,language);});
-    card.addEventListener('focusout',event=>{
-      if(!card.contains(event.relatedTarget)&&!preview.contains(event.relatedTarget))postponeClose();
+    card.addEventListener('keydown',event=>{
+      if(event.target!==card)return;
+      if(event.key==='Enter'||event.key===' '){
+        event.preventDefault();
+        open();
+      }
     });
   }
   window.ProjectPreview=Object.freeze({attach});
