@@ -117,3 +117,31 @@ python -m pytest tests/test_tex_variant_audit.py -q
 Raport `tex_comparison.json` oraz `tex_comparison.md` jest zapisywany w artefakcie CI. **Ekstrakcja jest stratna**: makra, rozbudowane tabele, wzory matematyczne, pliki `\\input`, grafiki i inne struktury wymagają kontroli po renderowaniu. Różnice w tej metryce nie dowodzą niezgodności źródła i PDF.
 
 **Stan:** na etapie wprowadzania zmiany workflow dla PDF–PPTX był w toku; nowe wyniki PDF–TEX wymagają ukończonego przebiegu CI i sprawdzenia raportów. Bez automatycznej archiwizacji.
+
+## Zweryfikowane wyniki pełnego audytu formatów — 12.11.2026
+
+Źródło: [Materials variant audit #23](https://github.com/MatPomGit/self/actions/runs/43265165831), `success`; artefakt `material-variant-inventory` zawiera raporty JSON/Markdown z hashami i dopasowaniami stron. Weryfikacja obejmuje **47 PDF–DOCX, 21 PDF–PPTX, 6 PDF–TEX**.
+
+- **PDF–DOCX:** 45 par z pokryciem co najmniej 75%, 1 z pokryciem 73,30% (`Wpływ robotów na pracę człowieka`), 1 z pokryciem 2,73% (`Przewijanie slajdow gestem`). Ostatnia para nie jest zgodnym eksportem mimo identycznej nazwy.
+- **PDF–PPTX:** 20 z 21 par z pokryciem co najmniej 75%; wyjątek `robo_w01` (68,73%). Liczby stron/slajdów `robo_w01`: 33/33, więc nie widać brakującego slajdu, ale lokalne różnice mogą być merytoryczne.
+- **PDF–TEX:** 6/6 par wymaga dalszej oceny. Pokrycie wynosi 40,29–65,69%; ekstrakcja TeX usuwa makra i nie jest miarodajnym testem identyczności wyrenderowanego PDF.
+
+### Lokalizacja odstępstw w prezentacjach
+
+| Para | Pokrycie ogólne | Strony PDF/slajdy PPTX do obejrzenia w pierwszej kolejności |
+| --- | ---: | --- |
+| `robo_w01` | 68,73% | 6 (28,80%), 19 (46,67%), 23 (47,48%), 4 (47,69%), 31 (47,79%) |
+| `robo_w07` | 76,42% | 18 (19,77%), 12 (37,18%), 27 (47,01%), 9 (52,21%) |
+| `robo_w08` | 81,75% | 18 (42,17%), 20 (48,18%) |
+| `EEG_BIDS_Psychofizjologia_2026` | 79,32% | 10 (42,31%); pokrycie tekstu PDF przez PPTX 61,57% |
+
+Procenty w ostatniej kolumnie dotyczą pokrycia 5-gramów **krótszej strony/slajdu** po ekstrakcji, a nie procentu treści straconej lub liczby błędów. Kontrola wizualna wymaga renderowania oryginalnych PDF/PPTX.
+
+### Konkretna kolejność kontroli
+
+1. Zachować osobno dwa odmienne opracowania `Przewijanie slajdow gestem`; poprawić ich tytuły lub opisy, aby wspólny rdzeń nazwy nie sugerował wariantu formatu.
+2. Porównać unikalne akapity/tabele w `Wpływ robotów na pracę człowieka` przed ewentualnym wskazaniem pliku kanonicznego.
+3. Skontrolować wyżej wymienione strony PDF–PPTX i ustalić, czy różnice wynikają z kolejności ekstrakcji, czy faktycznie innego tekstu.
+4. Dla EEG/TeX zweryfikować najpierw `lab4` (40,29%), `lab5` (42,86%), `lab6` (45,19%) i `lab2` (49,15%). Porównać źródło z kompilacją bez `shell-escape` i zachować wzory oraz tabele.
+
+Osobny skrypt `scripts/triage_material_variants.py` generuje priorytetową listę na podstawie artefaktów CI. Wszystkie decyzje mają status `REVIEW_REQUIRED`, bez automatycznej archiwizacji.
