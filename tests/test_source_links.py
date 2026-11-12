@@ -22,7 +22,8 @@ class References(HTMLParser):
 
 class SourceLinksTests(unittest.TestCase):
     def test_local_html_links_resolve_in_repository(self):
-        pages = [ROOT / "index.html", *sorted((ROOT / "files").rglob("*.html"))]
+        pages = [ROOT / "index.html", *sorted(p for p in (ROOT / "files").rglob("*.html")
+                 if p.relative_to(ROOT / "files").parts[0] != "ignored")]
         for page in pages:
             parser = References()
             parser.feed(page.read_text(encoding="utf-8"))

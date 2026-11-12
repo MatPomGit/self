@@ -47,6 +47,20 @@ class MaterialsSyncTests(unittest.TestCase):
             self.assertNotIn("new_v1.0.pdf", restored)
             self.assertEqual(render(restored, root), (restored, []))
 
+    def test_ignored_archive_never_appears_in_materials_index(self):
+        with TemporaryDirectory() as temp:
+            materials = self.make_root(temp)
+            archived = materials / "ignored" / "example"
+            archived.mkdir(parents=True)
+            (archived / "legacy.pdf").write_bytes(b"%PDF-test-archive")
+            (materials / "example" / "current.pdf").write_bytes(b"%PDF-test")
+            result, issues = render(BASE, materials)
+            self.assertFalse(issues)
+            self.assertIn("example/current.pdf", result)
+            self.assertNotIn("legacy.pdf", result)
+            self.assertNotIn('data-materials-subject="ignored"', result)
+            self.assertEqual(render(result, materials), (result, []))
+
     def test_unknown_subject_gets_new_card_and_html_is_escaped(self):
         with TemporaryDirectory() as temp:
             root = self.make_root(temp)
