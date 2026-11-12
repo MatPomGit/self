@@ -83,7 +83,8 @@ def audit(root: Path) -> dict:
         base = root / ROOT_DIR
         first = base / f"wirr_lab_{n:02d}.pdf"
         second = base / f"Lab_{n}_XR.pdf"
-        if not first.is_file() or not second.is_file():
+        if (not first.is_file() or not second.is_file()
+                or first.is_symlink() or second.is_symlink()):
             pairs.append({"lab": n, "classification": "MISSING_INPUT",
                           "decision": "REVIEW_REQUIRED",
                           "files": [str(first.relative_to(root)), str(second.relative_to(root))]})
