@@ -27,7 +27,7 @@
     "sourceTitle": "XR-Cognition · Adaptacyjne środowiska poznawcze",
     "title": "XR-Cognition · Adaptive Cognitive Environments",
     "period": "2026–present",
-    "description": "Development of adaptive XR environments that adjust task difficulty and stimulus presentation to current cognitive capacity. Research on feedback using EEG, eye tracking and behavioural data."
+    "description": "Design of adaptive XR environments for studying attention, working memory and cognitive workload, with task adaptation informed by user behaviour."
   },
   {
     "sourceTitle": "ContextNDD",
@@ -87,78 +87,78 @@
     "sourceTitle": "MindDx · Symulator diagnozy psychologicznej",
     "title": "MindDx · Psychological Assessment Simulator",
     "period": "2026–present",
-    "description": "Development of an interactive learning environment for case analysis, hypothesis formulation and diagnostic decision-making without risk to real patients."
+    "description": "Concept of an interactive simulator for learning diagnostic reasoning with fictional cases, hypothesis evaluation and clinical decision-making."
   },
   {
     "sourceTitle": "ARIANA",
     "title": "ARIANA",
     "period": "2024",
-    "description": "A multimodal affect-research platform concept combining eye tracking, visible/infrared imaging, movement sensing and psychometrics."
+    "description": "Concept of a platform for multimodal affective-response analysis combining eye tracking, VIS/IR imaging, motion and psychometric data."
   },
   {
     "sourceTitle": "PIAST · Satelitarne obrazowanie Ziemi",
     "title": "PIAST · Satellite Earth Observation",
     "period": "2021–2025",
-    "description": "Work within a three-nanosatellite Earth-observation programme advancing Polish optoelectronics and imaging capabilities."
+    "description": "Work within an Earth-observation nanosatellite programme developing Polish optoelectronic capabilities and satellite imagery."
   },
   {
     "sourceTitle": "SEEKER · Głowice optoelektroniczne",
     "title": "SEEKER · Optoelectronic Seekers",
     "period": "2021–2025",
-    "description": "Development of multispectral and imaging optoelectronic systems for defence applications, including prototyping and verification."
+    "description": "Development of multispectral optoelectronic systems focusing on sensor integration, imaging and prototype verification."
   },
   {
     "sourceTitle": "PolFEL · Laser na swobodnych elektronach",
     "title": "PolFEL · Free-Electron Laser",
     "period": "2019–2023",
-    "description": "Participation in the development of Poland's first free-electron laser infrastructure for studying ultrafast processes in matter."
+    "description": "Contribution to the development of PolFEL research infrastructure for experiments using free-electron-laser radiation."
   },
   {
     "sourceTitle": "OPTOKRYPT · Kryptografia kwantowa",
     "title": "OPTOKRYPT · Quantum Cryptography",
     "period": "2021–2024",
-    "description": "Research into optical information-security technologies, including quantum random-number generation and secure key distribution."
+    "description": "Research on optical information-security techniques including quantum randomness generation and cryptographic key distribution."
   },
   {
     "sourceTitle": "Mikroruchy oka · Potencjalne biomarkery neurodegeneracji",
     "title": "Ocular Micromovements · Potential Neurodegeneration Biomarkers",
     "period": "2019–2024",
-    "description": "Research on monitoring small eye movements and analysing oculomotor features as potential biomarkers of neurodegenerative disorders, accounting for measurement and interpretation limitations."
+    "description": "Analysis of ocular micromovements and oculomotor features as potential markers of neurological change, with attention to measurement limitations."
   },
   {
     "sourceTitle": "Eye Tracking w rzeczywistości mieszanej",
     "title": "Eye Tracking in Mixed Reality",
     "period": "2020–2022",
-    "description": "Leading research into gaze-based control and interaction with objects in mixed-reality environments."
+    "description": "Research on gaze-based interaction in mixed reality, including object selection and XR interface control."
   },
   {
     "sourceTitle": "Systemy wizyjne XR w nauce i obronności",
     "title": "XR Vision Systems for Research and Defence",
     "period": "2018–2020",
-    "description": "Leading research on mixed-reality vision systems for scientific experiments and military applications."
+    "description": "Analysis of mixed-reality and vision-system applications in scientific experiments, training and defence environments."
   },
   {
     "sourceTitle": "RiverGUARD · Ochrona granic rzecznych",
     "title": "RiverGUARD · River-Border Monitoring",
     "period": "2019",
-    "description": "Work on an optoelectronic monitoring and protection system for river borders in challenging field conditions."
+    "description": "Work on optoelectronic monitoring of river-border areas under varying terrain and illumination conditions."
   },
   {
     "sourceTitle": "Skaner 3D sub-THz",
     "title": "3D Sub-THz Scanner",
     "period": "2015–2019",
-    "description": "Participation in an active 3D sub-terahertz scanner project for non-contact security screening."
+    "description": "Development of an active three-dimensional scanner using sub-terahertz radiation for contactless screening and spatial reconstruction."
   },
   {
     "sourceTitle": "Sensor trenażera GROM / PIORUN",
     "title": "GROM / PIORUN Trainer Sensor",
     "period": "Dates to be confirmed",
-    "description": "Development of a sensor for a virtual GROM/PIORUN anti-aircraft system trainer supporting realistic operator training."
+    "description": "Development of a sensor supporting realistic operator interaction in a virtual trainer for GROM and PIORUN air-defence systems."
   },
   {
     "sourceTitle": "PROTECT · Biometria kontroli granicznej",
     "title": "PROTECT · Border-Control Biometrics",
     "period": "2016–2019",
-    "description": "A European project exploring less intrusive and more robust border controls through multimodal biometrics and privacy safeguards."
+    "description": "Research on multimodal biometrics for border control balancing identification performance, privacy and user convenience."
   }
 ]
