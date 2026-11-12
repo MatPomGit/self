@@ -173,12 +173,15 @@
     .data-card a{font-size:.85rem;color:var(--accent);overflow-wrap:anywhere}
     .project-section + .project-section{margin-top:32px}
     .project-section-title{font:650 1.12rem/1.4 var(--sans);margin:22px 0 4px}
-    .project-cards{margin-top:12px;grid-auto-rows:1fr}
+    .project-cards{margin-top:12px;grid-auto-rows:auto}
     .project-cards .data-card{
-      display:flex;flex-direction:column;min-height:220px;height:100%;
+      display:flex;flex-direction:column;min-height:0;height:100%;padding:6px 12px;
       background:var(--bg);
       transition:background-color .18s ease,border-color .18s ease,box-shadow .18s ease;
     }
+    .project-cards .data-card h3{font-size:.93rem;line-height:1.3;margin:3px 0 5px}
+    .project-cards .data-card p{font-size:.82rem;line-height:1.2;margin:3px 0}
+    .project-cards .data-card .project-period{font-size:.6rem;line-height:1;margin:0 0 3px}
     @media(hover:hover){
       .project-cards .data-card:hover{
         background:var(--accent-soft);
@@ -690,6 +693,10 @@
         console.error('Błąd wczytywania '+path,error);
       }
     }
+    // Keep single-letter Polish words with the following word when wrapping card text.
+    function preventSingleLetterOrphans(value){
+      return value.replace(/(?<!\p{L})([aiouwzAIUOWZ])[ \t]+(?=\S)/gu, '$1\u00a0');
+    }
     function renderProjects(records){
       const list=document.getElementById('projects-list');
       const fragment=document.createDocumentFragment();
@@ -706,9 +713,9 @@
         projects.forEach(entry=>{
           const card=makeElement('article','data-card');
           card.append(
-            makeElement('h3','',entry.title),
-            makeElement('div','project-period',entry.period),
-            makeElement('p','',entry.description)
+            makeElement('h3','',preventSingleLetterOrphans(entry.title)),
+            makeElement('div','project-period',preventSingleLetterOrphans(entry.period)),
+            makeElement('p','',preventSingleLetterOrphans(entry.description))
           );
           grid.append(card);
         });

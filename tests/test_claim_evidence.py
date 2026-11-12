@@ -108,9 +108,9 @@ class ClaimEvidenceTests(unittest.TestCase):
         for spec in REPORTS.values():
             for name in spec["files"]:
                 with self.subTest(name=name):
-                    self.assertTrue((scope/name).exists())
+                    self.assertTrue((scope/name).exists() or (ROOT/"files/ignored/inne/analizy"/name).exists())
         for name in UNIQUE_PAIR:
-            self.assertTrue((ROOT/"files/ignored/inne/analizy"/name).exists())
+            self.assertTrue((scope/name).exists() or (ROOT/"files/ignored/inne/analizy"/name).exists())
         report=analyze(ROOT,scope)
         self.assertEqual(len(report["claims"]),2)
         for claim in report["claims"]:

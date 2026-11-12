@@ -8,33 +8,6 @@ Zmniejszyć powtarzanie treści **bez utraty informacji, danych, tabel ani bibli
 
 **Ważne:** pokrycie 5-gramów dotyczy tekstu, a odsetek dopasowanych okien semantycznych to wskaźnik wyszukiwania fragmentów. Żadna z tych metryk nie potwierdza automatycznie równości metod, wyników, poprawności naukowej, intencji autora ani kompletności danych.
 
-
-## Wykonanie PR-C1 i PR-C2 — wersje redakcyjne z zachowaniem źródeł
-
-Generator `scripts/prepare_consolidation_drafts.py` tworzy szkice dla **obu**
-par o priorytecie P0. Każdy szkic jest zbudowany na pełnym edytowalnym tekście
-DOCX, w oryginalnej kolejności akapitów i tabel. Treść PDF przechodzi
-odrębną analizę; fragmenty o słabszym pokryciu są **zachowane jako cytaty
-w aneksie weryfikacyjnym**, a nie usuwane ani automatycznie dopisywane do
-głównej narracji. Raport JSON utrwala SHA-256 obu źródeł i listę
-potencjalnie dodatkowych fragmentów z numerem strony.
-
-```bash
-python -m pip install "pypdf>=5,<7"
-python scripts/prepare_consolidation_drafts.py \
-  --scope files/inne/analizy \
-  --output-dir reports/content-audit/consolidation \
-  --pair all
-```
-
-Generowane: `afektywna-multimodalna.md/.json` oraz
-`isaac-lab-digital-twins.md/.json`, w artefakcie audytu
-`content-overlap-pilot`, a nie w publikowanym `files/`.
-To **szkice redakcyjne**, nie zaakceptowane raporty, nie końcowy
-DOCX/PDF i nie zgoda na usunięcie dokumentów pierwotnych. Dopiero
-następna redakcja semantyczna (weryfikacja przypisów, danych i rysunków)
-może wyeliminować rzeczywiste powtórzenia.
-
 ## A. Scalenia uzasadnione wynikami audytu
 
 ### A1. Analiza afektywna i multimodalna — **MERGE PROPOSED, P0**
@@ -122,3 +95,12 @@ Tych trzech grup **nie rekomenduje się łączyć z powodu samej redundancji**. 
 ## Decyzja operacyjna
 
 **Na teraz dwa scalenia główne: A1 i A2.** Pozostałe raporty należy zachować osobno do czasu nowego, merytorycznego porównania. Docelowo wynik A1+A2 zmniejszyłby 40 dokumentów logicznych do **38**, bez liczenia późniejszych zmian wariantów formatowych. Liczba 38 jest **celem hipotetycznym po zatwierdzeniu**, nie wynikiem już wykonanej konsolidacji.
+## Generator dowodowych szkiców dla raportów archiwalnych
+
+Narzędzie `scripts/prepare_consolidation_drafts.py` jest **tylko analizatorem kontrolnym**, nie nadpisuje opublikowanych dokumentów. Korzysta z oryginałów przeniesionych do `files/ignored/inne/analizy/`, zapisuje sekcje DOCX i potencjalnie dodatkowe fragmenty PDF w artefakcie poza `files/`. Opublikowane pliki kanoniczne pozostają w `files/inne/analizy/`, a ich źródła w `docs/consolidated/`. Uruchomienie:
+
+```bash
+python scripts/prepare_consolidation_drafts.py --scope files/ignored/inne/analizy --output-dir reports/content-audit/consolidation
+```
+
+Wynik nie stanowi decyzji o unikalności tekstu, a archiwum **nie może** trafić do publikacji GitHub Pages.
