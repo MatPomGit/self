@@ -2,66 +2,111 @@
   "ARC-RGBT": {
     "logo": "docs/assets/images/projects/arc-rgbt.png",
     "pl": {
-      "methods": ["Fuzja RGB–termowizja", "Detekcja obiektów", "Ocena odporności modeli"],
-      "focus": "Analiza skuteczności detekcji w ograniczonej widoczności i przy zmianach warunków obserwacji.",
-      "outcomes": ["Publikacje naukowe", "Oprogramowanie badawcze"]
-        },
+      "methods": [
+        "Fuzja RGB/LWIR",
+        "Parowanie klatek",
+        "Geometria sensorów",
+        "Ewaluacja etykietowana"
+      ],
+      "focus": "Badanie odporności fuzji i detekcji na degradację obrazu, błędy parowania klatek i różnice między sensorami. Weryfikacja obecnie obejmuje przede wszystkim testy offline i dane syntetyczne.",
+      "outcomes": [
+        "Pakiet badawczy Python z CLI i demonstracją syntetyczną."
+      ]
+    },
     "en": {
       "methods": [
-        "RGB–thermal fusion",
-        "Object detection",
-        "Robustness evaluation"
+        "RGB/LWIR fusion",
+        "Frame pairing",
+        "Sensor geometry",
+        "Labelled evaluation"
       ],
-      "focus": "Evaluating detection under limited visibility and changing observation conditions."
-    }
+      "focus": "Evaluating robustness of fusion and detection to image degradation, frame-pairing errors and sensor differences. Current checks primarily use offline and synthetic data.",
+      "outcomes": [
+        "Python research toolkit with CLI and a synthetic demonstration."
+      ]
+    },
+    "links": [
+      {
+        "label": "GitHub – arc-rgbt",
+        "url": "https://github.com/MatPomGit/arc-rgbt"
+      }
+    ]
   },
   "ARC-RVI · Autonomiczna inspekcja wizualna": {
     "pl": {
       "methods": [
-        "Lokalizacja obiektu",
-        "Planowanie punktów obserwacji",
-        "Ocena kompletności inspekcji"
+        "Planowanie ujęć",
+        "Pokrycie i jakość zdjęć",
+        "Symulacja geometryczna"
+      ],
+      "focus": "Opracowywanie lokalizacji celu, doboru punktów obserwacji i pomiaru kompletności dokumentacji. Obecne scenariusze są syntetyczne; autonomiczna inspekcja fizycznym robotem nie została wdrożona.",
+      "outcomes": [
+        "Narzędzia CLI i powtarzalne testy na danych syntetycznych."
       ]
     },
     "en": {
       "methods": [
-        "Target localisation",
         "Viewpoint planning",
-        "Inspection completeness"
+        "Coverage and image quality",
+        "Geometric simulation"
+      ],
+      "focus": "Target localisation, viewpoint selection and inspection completeness. Current scenarios are synthetic; autonomous inspection with a physical robot has not been implemented.",
+      "outcomes": [
+        "CLI tools and reproducible synthetic-fixture tests."
       ]
-    }
+    },
+    "links": [
+      {
+        "label": "GitHub – arc-rvi",
+        "url": "https://github.com/MatPomGit/arc-rvi"
+      }
+    ]
   },
   "ARC-HRI-SAFETY": {
     "pl": {
       "methods": [
-        "Percepcja sceny",
-        "Analiza ruchu",
-        "Ocena ryzyka HRI"
-      ]
+        "Predykcja ruchu",
+        "Wielomodalna percepcja",
+        "ROS 2 / HRI",
+        "Modelowanie ryzyka"
+      ],
+      "focus": "Modelowanie możliwych ruchów człowieka, kontekstu społecznego oraz opóźnień pomiaru; architektura badawcza nie stanowi certyfikowanego sterownika bezpieczeństwa."
     },
     "en": {
       "methods": [
-        "Scene perception",
-        "Motion analysis",
-        "HRI risk assessment"
-      ]
+        "Motion prediction",
+        "Multimodal perception",
+        "ROS 2 / HRI",
+        "Risk modelling"
+      ],
+      "focus": "Modelling possible human motion, social context and sensing latency; this research architecture is not a certified safety controller."
     }
   },
   "ARC-AFFECTIVE": {
     "pl": {
       "methods": [
         "EEG",
-        "Analiza zachowania",
-        "Estymacja obciążenia poznawczego"
-      ]
+        "Fuzja multimodalna",
+        "Uczenie maszynowe",
+        "N-of-1"
+      ],
+      "focus": "Metody fuzji odporne na brakujące modalności, personalizację i dryf pomiarowy; zastosowania obejmują adaptacyjne zadania i interakcję człowiek–komputer. Projekt nie służy diagnozie klinicznej."
     },
     "en": {
       "methods": [
         "EEG",
-        "Behavioural analysis",
-        "Cognitive workload estimation"
-      ]
-    }
+        "Multimodal fusion",
+        "Machine learning",
+        "N-of-1"
+      ],
+      "focus": "Fusion robust to missing modalities, personalisation and measurement drift, targeting adaptive tasks and HCI. This is not a clinical diagnostic system."
+    },
+    "links": [
+      {
+        "label": "GitHub – arc-affective",
+        "url": "https://github.com/MatPomGit/arc-affective"
+      }
+    ]
   },
   "XR-Cognition · Adaptacyjne środowiska poznawcze": {
     "pl": {
@@ -82,142 +127,232 @@
   "ContextNDD": {
     "pl": {
       "methods": [
-        "Modelowanie kontekstu",
-        "Analiza zachowania",
-        "Różnice indywidualne"
+        "Modelowanie kontekstowe",
+        "Dane podłużne",
+        "Fuzja z oceną jakości"
+      ],
+      "focus": "Ujęcie epizodów zachowania w kontekście aktywności, bodźców i zmian w czasie; równolegle rozwijana jest koncepcja fuzji multimodalnej wspierającej interpretację, nie samodzielną diagnozę.",
+      "outcomes": [
+        "Publiczny preprint koncepcyjny arXiv:2610.04705v1."
       ]
     },
     "en": {
       "methods": [
         "Context modelling",
-        "Behavioural analysis",
-        "Individual differences"
+        "Longitudinal data",
+        "Quality-aware fusion"
+      ],
+      "focus": "Behavioural episodes are analysed in relation to activities, sensory context and temporal variation; multimodal fusion is intended to support interpretation, not standalone diagnosis.",
+      "outcomes": [
+        "Public conceptual preprint arXiv:2610.04705v1."
       ]
     }
   },
   "SAPIENS · Człowiek i robot humanoidalny": {
     "pl": {
       "methods": [
+        "Psychologia eksperymentalna",
         "HRI",
-        "Zaufanie do robotów",
-        "Obecność społeczna"
-      ]
+        "Pomiar afektu",
+        "Psychometria"
+      ],
+      "focus": "Projekt rozróżnia emocje uczestnika, przypisywaną robotowi responsywność oraz odczytywaną ekspresję jego mechanicznego ciała; struktura psychometryczna wymaga badań."
     },
     "en": {
       "methods": [
+        "Experimental psychology",
         "HRI",
-        "Trust in robots",
-        "Social presence"
-      ]
+        "Affect measurement",
+        "Psychometrics"
+      ],
+      "focus": "The programme distinguishes participant affect, attributed robot responsiveness and perceived embodied expression. The psychometric structure remains to be evaluated."
     }
   },
   "ARC Mobile Eye Tracking": {
     "pl": {
       "methods": [
-        "Kalibracja okulograficzna",
+        "Android",
+        "Kalibracja",
         "Analiza obrazu",
-        "Estymacja spojrzenia"
+        "Metrologia pomiaru"
+      ],
+      "focus": "Celem jest ocena dokładności, powtarzalności i częstości niepowodzeń pomiaru po kalibracji indywidualnej. Aplikacja jest obecnie szkieletem interfejsu, bez działającego toru estymacji spojrzenia.",
+      "outcomes": [
+        "Szkielet aplikacji Android."
       ]
     },
     "en": {
       "methods": [
-        "Gaze calibration",
+        "Android",
+        "Calibration",
         "Image analysis",
-        "Gaze estimation"
+        "Measurement evaluation"
+      ],
+      "focus": "The aim is to quantify post-calibration accuracy, repeatability and failure rate. The current Android app is a UI scaffold without an operational gaze-estimation pipeline.",
+      "outcomes": [
+        "Android application UI scaffold."
       ]
-    }
+    },
+    "links": [
+      {
+        "label": "GitHub – arc-mobile-eyetracking",
+        "url": "https://github.com/MatPomGit/arc-mobile-eyetracking"
+      }
+    ]
   },
   "EEG Neurolyze": {
     "pl": {
       "methods": [
-        "Muse S Athena",
-        "Kontrola jakości EEG",
-        "Synchronizacja zdarzeń (planowana)"
+        "Python",
+        "EEG-BIDS",
+        "Analiza EO/EC",
+        "Kontrola integralności"
+      ],
+      "focus": "Zaimplementowano generowanie syntetycznego EEG, archiwizację z kontrolą SHA-256, analizę EO/EC i eksport EEG-BIDS. Adapter sprzętowy Muse S Athena wymaga walidacji pomiarów.",
+      "outcomes": [
+        "Raport HTML i archiwizacja danych syntetycznych."
       ]
     },
     "en": {
       "methods": [
-        "Muse S Athena",
-        "EEG quality control",
-        "Event synchronisation (planned)"
+        "Python",
+        "EEG-BIDS",
+        "EO/EC analysis",
+        "Integrity checks"
+      ],
+      "focus": "Implemented synthetic EEG generation, SHA-256-verified archives, eyes-open/eyes-closed analysis and EEG-BIDS export. Muse S Athena acquisition still requires on-device validation.",
+      "outcomes": [
+        "HTML reporting and synthetic-data archiving."
       ]
-    }
+    },
+    "links": [
+      {
+        "label": "GitHub – eeg-neurolyze",
+        "url": "https://github.com/MatPomGit/eeg-neurolyze"
+      }
+    ]
   },
   "S4D-TAM · Nawigacja autonomiczna": {
     "pl": {
       "methods": [
-        "Nawigacja bez GNSS",
-        "Semantyka sceny",
-        "Dane przestrzenne 3D/4D"
+        "Benchmarki nawigacji",
+        "Semantyka 4D",
+        "Metryki i statystyka"
+      ],
+      "focus": "Rozwijana jest referencyjna implementacja Python oraz wspólny protokół porównawczy dla metod wizyjnych, wizyjno-inercyjnych i LiDAR-inercyjnych; nie jest to system certyfikowany do lotów.",
+      "outcomes": [
+        "Referencyjny kod Python i kontrakty eksperymentalne."
       ]
     },
     "en": {
       "methods": [
-        "GNSS-denied navigation",
-        "Scene semantics",
-        "3D/4D spatial data"
+        "Navigation benchmarks",
+        "4D semantics",
+        "Metrics and statistics"
+      ],
+      "focus": "A Python reference implementation and unified comparison protocol target visual, visual–inertial and LiDAR–inertial methods; this is not flight-certified navigation.",
+      "outcomes": [
+        "Python reference code and experimental contracts."
       ]
-    }
+    },
+    "links": [
+      {
+        "label": "GitHub – arc-s4d-tam",
+        "url": "https://github.com/MatPomGit/arc-s4d-tam"
+      }
+    ]
   },
   "ARC Attachment Dynamics": {
     "pl": {
       "methods": [
-        "Psychologia przywiązania",
-        "Modelowanie dynamiczne"
-      ]
+        "Modele dynamiczne",
+        "Teoria przywiązania",
+        "Projektowanie pomiaru"
+      ],
+      "focus": "Badania dotyczą sekwencji sygnałów interpersonalnych, oceny zagrożenia, reakcji i powrotu do równowagi. Obecne symulacje nie potwierdzają trafności modelu dla populacji."
     },
     "en": {
       "methods": [
+        "Dynamic models",
         "Attachment theory",
-        "Dynamic modelling"
-      ]
+        "Measurement design"
+      ],
+      "focus": "Studies interpersonal signals, threat appraisal, response and recovery. Current simulations do not establish population validity."
     }
   },
   "ARC-ADHD · Adaptacyjna gra badawcza": {
     "pl": {
       "methods": [
+        "Android / Kotlin",
         "Gra adaptacyjna",
-        "Ocena transferu umiejętności"
+        "Pomiar latencji powrotu"
+      ],
+      "focus": "Projekt rozdziela poprawę wyniku w grze od transferu umiejętności do codziennego funkcjonowania. Istnieją demonstracje techniczne Android; skuteczność kliniczna nie została wykazana.",
+      "outcomes": [
+        "Demonstracyjne warianty aplikacji Android."
       ]
     },
     "en": {
       "methods": [
+        "Android / Kotlin",
         "Adaptive game",
-        "Skill-transfer evaluation"
+        "Recovery-latency measurement"
+      ],
+      "focus": "The project separates in-game learning from everyday-life transfer. Android technical demonstrations exist; clinical effectiveness has not been established.",
+      "outcomes": [
+        "Demonstration variants of the Android application."
       ]
     }
   },
   "AI Cognitive Resilience": {
     "pl": {
       "methods": [
-        "Perswazja AI",
-        "Jakość dowodów",
-        "Zmiana przekonań"
-      ]
+        "Eksperymenty z LLM",
+        "Manipulacja EQ × RPP",
+        "Pomiar zmiany przekonań"
+      ],
+      "focus": "Projekt analizuje kalibrację epistemiczną: reakcję na jakość dowodów niezależnie od płynności i autorytatywności komunikatu. Konstrukty badawcze nie są jeszcze zwalidowanymi miarami psychometrycznymi."
     },
     "en": {
       "methods": [
-        "AI persuasion",
-        "Evidence quality",
-        "Belief change"
-      ]
+        "LLM experiments",
+        "EQ × RPP manipulation",
+        "Belief-change measurement"
+      ],
+      "focus": "Studies epistemic calibration: responses to evidence quality independently of fluency or apparent authority. Research constructs are not yet psychometrically validated."
     }
   },
   "DERA-HRI · Emocje w interakcji z robotem": {
     "pl": {
       "methods": [
-        "Pomiar emocji",
+        "Psychometria",
         "HRI",
-        "Poczucie kontroli"
+        "Trafność treściowa",
+        "Wywiady poznawcze"
+      ],
+      "focus": "Model rozdziela domeny doświadczeń afektywnych, interakcyjnych i relacyjnych. Wersja rozwojowa v3.0 obejmuje pięć domen i 45 pozycji głównych; struktura czynnikowa i rzetelność pozostają niepotwierdzone.",
+      "outcomes": [
+        "Robocze kwestionariusze i protokół walidacji."
       ]
     },
     "en": {
       "methods": [
-        "Emotion assessment",
+        "Psychometrics",
         "HRI",
-        "Perceived control"
+        "Content validity",
+        "Cognitive interviews"
+      ],
+      "focus": "Five-domain, 45-core-item development instrument (v3.0) covering affective, interactional and relational experiences; factor structure and reliability remain unverified.",
+      "outcomes": [
+        "Draft questionnaires and validation protocol."
       ]
-    }
+    },
+    "links": [
+      {
+        "label": "GitHub – arc-dera-hri",
+        "url": "https://github.com/MatPomGit/arc-dera-hri"
+      }
+    ]
   },
   "MindDx · Symulator diagnozy psychologicznej": {
     "pl": {
