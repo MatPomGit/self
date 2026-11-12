@@ -80,3 +80,16 @@ python -m pytest tests/test_format_variant_audit.py -q
 ```
 
 Wyniki `format_comparison.json` i `format_comparison.md` są zachowywane w artefakcie CI. Nie obejmują jeszcze porównania PDF–PPTX ani PDF–TEX; te formaty są rejestrowane w inwentarzu, ale nie należy na tej podstawie stwierdzać zgodności ich zawartości. Ponadto brak wyniku tekstowego nie świadczy o braku treści na stronach z obrazami.
+
+## Wynik porównania rzeczywistego tekstu 47 par PDF–DOCX
+
+**Źródło:** [CI Materials variant audit #13](https://github.com/MatPomGit/self/actions/runs/43263585191), `success`, 10 testów PASS, artefakt `material-variant-inventory`, z weryfikowalnymi SHA-256 źródeł (retencja 7 dni).
+
+- `TEXT_VARIANTS_SIMILAR`: **45/47** par z pokryciem co najmniej 75%. Wskaźnik dotyczy 5-gramów krótszego dokumentu; nie uprawnia automatycznie do usunięcia wariantu źródłowego.
+- `FORMAT_DIFFERENCE_REVIEW`: **1/47**, `inne/analizy/Wpływ robotów na pracę człowieka.docx` vs `.pdf`: pokrycie krótszego **73,30%**, odpowiednio **2694 i 2943 słowa**; konieczna kontrola różnic, tabel i rysunków przed ustaleniem jednej wersji kanonicznej.
+- `FORMAT_MISMATCH_CANDIDATE`: **1/47**, `inne/analizy/Przewijanie slajdow gestem.docx` vs `.pdf`: **2,73%**, odpowiednio **5167 i 2993 słowa**. Wspólne fragmenty świadectw dotyczą przede wszystkim adresów MediaPipe w bibliografii. **Dwa niezależne opracowania; nie nadpisywać ani nie archiwizować jednego jako eksportu drugiego.**
+- Pozostałe **27 z 74** par inwentaryzowanych formatów nie należy do PDF–DOCX; wymagają porównania PDF–TEX lub PDF–PPTX innym ekstraktorem.
+
+Wśród 45 wysoce podobnych par najniższe pokrycie występuje dla `robotyka_afektywna` (**85,17%**), `MPC` (**85,32%**), `Mediapipe` (**85,39%**), `Mapowanie emocji` (**85,65%**) i `Silniki_XR` (**85,65%**). Warto zacząć od kontroli dodatkowych akapitów i rysunków w tych pięciu parach; **nie są to potwierdzone błędy eksportu**.
+
+**Kolejność decyzji redakcyjnych:** najpierw rozdzielenie dwóch różnych opracowań „Przewijanie slajdow gestem” (odrębne tytuły/linki bez utraty adresów), następnie sprawdzenie „Wpływ robotów na pracę człowieka”, w dalszej kolejności inspekcja pięciu najniżej dopasowanych par z kategorii ≥75%. Każde przeniesienie do `files/ignored/` wymaga zachowania kompletnych treści oraz sprawdzenia odnośników.
