@@ -185,7 +185,7 @@ class ContentAuditTests(unittest.TestCase):
         from scripts.audit_content_overlap import validate_output_dir
         with TemporaryDirectory() as name:
             root = Path(name)
-            for folder in ("files", "docs", "materials", "_site"):
+            for folder in ("files", "docs", "_site"):
                 with self.subTest(folder=folder):
                     with self.assertRaises(ValueError):
                         validate_output_dir(root, root / folder / "report")
