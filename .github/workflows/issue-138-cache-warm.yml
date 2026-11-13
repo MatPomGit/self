@@ -34,7 +34,7 @@ jobs:
       - name: Install offline extraction dependencies
         run: python -m pip install "pypdf>=5,<7"
       - name: Restore or reserve trusted cache for current main
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ${{ runner.temp }}/issue-138-extraction-cache
           key: issue138-extraction-v1-${{ runner.os }}-${{ github.sha }}-both

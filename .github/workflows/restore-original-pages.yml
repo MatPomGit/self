@@ -46,7 +46,7 @@ jobs:
           python scripts/audit_repeated_claims.py --scope files/inne/analizy --output-dir "$RUNNER_TEMP/content-audit"
       - name: Upload audit evidence
         if: github.event_name == 'pull_request' && always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: content-overlap-pilot
           path: ${{ runner.temp }}/content-audit/
@@ -59,6 +59,8 @@ jobs:
           node --check docs/assets/js/project-preview.js
           node --check tests/test_materials_layout.js
           node --check tests/test_about.js
+          node --check tests/test_create_issues.js
+          node tests/test_create_issues.js
           node tests/test_language.js
           node tests/test_about.js
           node tests/test_publication_utils.js
