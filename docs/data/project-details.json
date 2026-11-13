@@ -73,21 +73,27 @@
   "ARC-AFFECTIVE": {
     "pl": {
       "methods": [
-        "EEG",
-        "Fuzja multimodalna",
-        "Uczenie maszynowe",
-        "N-of-1"
+        "EEG: filtracja, ICA, analiza czasowo-częstotliwościowa, pasma theta/alpha/beta i ERP",
+        "Eye-tracking i pupillometria: fiksacje, sakkady, mrugnięcia i dynamika źrenicy",
+        "Analiza behawioralna: czas reakcji, poprawność, błędy i zmienność odpowiedzi",
+        "Fuzja multimodalna: synchronizacja, łączenie cech, late fusion i brakujące modalności",
+        "Uczenie maszynowe: klasyfikacja, regresja, modele sekwencyjne i kalibracja niepewności",
+        "Eksperymenty N-of-1: wielokrotne pomiary, personalizacja i porównania między sesjami",
+        "Walidacja statystyczna: podziały uwzględniające osoby i sesje, stabilność i dryf pomiarowy"
       ],
-      "focus": "Metody fuzji odporne na brakujące modalności, personalizację i dryf pomiarowy; zastosowania obejmują adaptacyjne zadania i interakcję człowiek–komputer. Projekt nie służy diagnozie klinicznej."
+      "focus": "Plan badań obejmuje modele fuzji odporne na utratę wybranych modalności, wykrywanie dryfu sygnałów oraz kalibrację niepewności predykcji. Porównywane mają być modele populacyjne i personalizowane N-of-1, z walidacją między osobami i sesjami. Rozważane zastosowania HCI/XR obejmują adaptację tempa prezentacji informacji, poziomu trudności zadań i intensywności bodźców; przy niskiej wiarygodności predykcji adaptacja powinna zostać wstrzymana. Są to kierunki prac wymagające weryfikacji eksperymentalnej, a nie potwierdzone funkcje systemu online. Projekt nie jest narzędziem diagnostyki klinicznej."
     },
     "en": {
       "methods": [
-        "EEG",
-        "Multimodal fusion",
-        "Machine learning",
-        "N-of-1"
+        "EEG: filtering, ICA, time-frequency analysis, theta/alpha/beta bands and ERPs",
+        "Eye-tracking and pupillometry: fixations, saccades, blinks and pupil dynamics",
+        "Behavioural analysis: reaction time, accuracy, errors and response variability",
+        "Multimodal fusion: synchronisation, feature-level fusion, late fusion and missing modalities",
+        "Machine learning: classification, regression, sequential models and uncertainty calibration",
+        "N-of-1 studies: repeated measurements, personalisation and between-session comparisons",
+        "Statistical validation: subject- and session-aware splits, stability and measurement drift"
       ],
-      "focus": "Fusion robust to missing modalities, personalisation and measurement drift, targeting adaptive tasks and HCI. This is not a clinical diagnostic system."
+      "focus": "The research plan covers fusion models robust to missing modalities, signal-drift detection and calibrated predictive uncertainty. Population-level approaches will be compared with personalised N-of-1 models using subject- and session-aware validation. Potential HCI/XR applications include adapting information pacing, task difficulty and stimulus intensity; adaptation should be withheld when predictions are unreliable. These are research directions requiring experimental verification, not confirmed features of a deployed online system. The project is not a clinical diagnostic tool."
     }
   },
   "XR-Cognition · Adaptacyjne środowiska poznawcze": {
