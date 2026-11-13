@@ -78,10 +78,10 @@ class Issue138AuditTests(unittest.TestCase):
             encoding='utf-8')
         warm = (ROOT / '.github/workflows/issue-138-cache-warm.yml').read_text(
             encoding='utf-8')
-        self.assertIn('uses: actions/cache/restore@v4', issue)
-        self.assertNotIn('uses: actions/cache@v4', issue)
+        self.assertIn('uses: actions/cache/restore@v5', issue)
+        self.assertNotIn('uses: actions/cache@v5', issue)
         self.assertIn('issue_comment:', issue)
-        self.assertIn('uses: actions/cache@v4', warm)
+        self.assertIn('uses: actions/cache@v5', warm)
         self.assertNotIn('issue_comment:', warm)
         self.assertIn('push:', warm)
         self.assertIn('branches: [main]', warm)
