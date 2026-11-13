@@ -1,0 +1,318 @@
+ \documentclass[11pt,a4paper]{article}
+
+\usepackage[top=2cm,bottom=2.5cm,left=2cm,right=2cm]{geometry}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{amsmath,amssymb}
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{hyperref}
+
+\hypersetup{
+    pdftitle={Neuropsychologia - Ćwiczenie nr 2},
+    pdfauthor={dr inż. Mateusz Pomianek},
+    hidelinks
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+% Custom Colors
+\definecolor{navyheader}{RGB}{19, 44, 89}
+\definecolor{titleblue}{RGB}{23, 62, 115}
+\definecolor{lightbgblue}{RGB}{243, 247, 253}
+\definecolor{labelbgblue}{RGB}{218, 230, 246}
+\definecolor{borderblue}{RGB}{160, 190, 225}
+
+\begin{document}
+
+% Top Meta / Running Header Context
+\begin{center}
+    {\footnotesize\textcolor{darkgray}{Neuropsychologia \textbar{} Ćwiczenie nr 2 \textbar{} TMT, FAS, WCST i Test Stroopa w praktyce klinicznej}}
+    \vspace{0.2cm}
+    \color{navyheader}\hrule height 1.5pt
+\end{center}
+
+\vspace{0.3cm}
+
+% Header Block
+\begin{tcolorbox}[
+    enhanced,
+    colback=lightbgblue,
+    colframe=borderblue,
+    arc=0mm,
+    boxrule=1pt,
+    left=15pt,
+    right=15pt,
+    top=0pt,
+    bottom=15pt
+]
+    % Top solid banner
+    \begin{tcolorbox}[
+        enhanced,
+        colback=navyheader,
+        colframe=navyheader,
+        arc=0mm,
+        left=0pt,
+        right=0pt,
+        top=10pt,
+        bottom=10pt,
+        enlarge left by=-15pt,
+        enlarge right by=-15pt,
+        enlarge top by=0pt,
+        width=\dimexpr\textwidth+30pt\relax
+    ]
+        \centering
+        {\large\bfseries\textcolor{white}{UNIWERSYTET VIZJA}}\\[3pt]
+        {\small\textcolor{white}{Wydział Psychologii i Nauk Społecznych}}
+    \end{tcolorbox}
+
+    \vspace{0.6cm}
+    \centering
+    {\LARGE\bfseries\textcolor{titleblue}{NEUROPSYCHOLOGIA}}\\[6pt]
+    {\large\bfseries\textcolor{titleblue}{Ćwiczenie nr 2}}\\[8pt]
+    {\normalsize Ocena neuropsychologiczna funkcji wykonawczych}\\[4pt]
+    {\large\bfseries\textcolor{titleblue}{TMT, FAS, WCST i Test Stroopa}}
+    \vspace{0.2cm}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+% Metadata Table
+\renewcommand{\arraystretch}{1.4}
+\noindent
+\begin{tabularx}{\textwidth}{|>{\columncolor{labelbgblue}}p{3.5cm}|X<{\columncolor{lightbgblue}}|c@{}}
+\hline
+\textbf{Przedmiot:} & Neuropsychologia & \tabularnewline
+\hline
+\textbf{Rok akademicki:} & 2025/2026 & \tabularnewline
+\hline
+\textbf{Forma zajęć:} & Ćwiczenia & \tabularnewline
+\hline
+\textbf{Metody:} & ołówek: TMT A/B, FAS, WCST (wersja skrócona), Test Stroopa & \tabularnewline
+\hline
+\end{tabularx}
+
+\vspace{0.6cm}
+
+% Section 1
+\section{1. Informacje ogólne o zajęciach}
+
+Drugie ćwiczenia laboratoryjne stanowią bezpośrednie rozwinięcie zagadnień wprowadzonych na ćwiczeniu nr 1. Opierając się na analizie przypadku Phineasa Gage'a oraz koncepcji podwójnej dysocjacji, przechodzimy od poziomu teoretycznego do praktyki diagnostycznej. Studenci po raz pierwszy pracują z rzeczywistymi narzędziami neuropsychologicznymi w układzie parami: jeden student pełni rolę badającego (eksaminatora), drugi – osoby badanej, a następnie zamieniają się rolami.
+
+\vspace{0.2cm}
+
+% Learning Objectives Box
+\begin{tcolorbox}[
+    enhanced,
+    colback=lightbgblue,
+    colframe=navyheader,
+    arc=0mm,
+    boxrule=1pt,
+    title={\small\textbf{Cele kształcenia (zgodne z KRK -- poziom 6. EQF)}},
+    coltitle=white,
+    colbacktitle=navyheader,
+    left=12pt,
+    right=12pt,
+    top=10pt,
+    bottom=10pt
+]
+\normalsize
+\textbf{Wiedza:} 
+Student charakteryzuje wielowymiarowy konstrukt funkcji wykonawczych (FW), opisuje neurobiologiczne podstawy FW ze szczególnym uwzględnieniem sieci czołowo-ciemieniowej i czołowo-prążkowiowej, omawia psychometryczne właściwości TMT, FAS i WCST.
+\vspace{0.6em}
+
+\textbf{Umiejętności:} 
+Student samodzielnie administruje testami TMT A/B, FAS i WCST według standardowej procedury, oblicza i wstępnie interpretuje wyniki surowe, identyfikuje wskaźniki patologiczne typowe dla syndromu dysegzekutywnego.
+\vspace{0.6em}
+
+\textbf{Kompetencje społeczne:} 
+Student stosuje etyczne zasady badania neuropsychologicznego (poinformowana zgoda, feedback, poufność), wykazuje wrażliwość na zmęczenie i frustrację osoby badanej.
+
+\end{tcolorbox}
+
+\subsection{Nawiązanie do ćwiczenia 1}
+Na poprzednich zajęciach analizowaliśmy przypadek Phineasa Gage'a, u którego uszkodzenie brzuszno-przyśrodkowej i oczodołowej kory przedczołowej spowodowało dramatyczne zmiany w planowaniu, kontroli impulsów i regulacji emocjonalnej. Dzisiejsze ćwiczenia pozwolą Wam empirycznie zbadać te same domeny funkcjonalne za pomocą standaryzowanych narzędzi diagnostycznych. Wyniki uzyskane przez parę badający-badany posłużą jako materiał do analizy jakościowej i interpretacji klinicznej.
+
+\subsection{Harmonogram zajęć}
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{p{1.8cm} p{3.2cm} X}
+\toprule
+\rowcolor{headerblue}
+\textcolor{white}{\textbf{Czas}} & \textcolor{white}{\textbf{Blok}} & \textcolor{white}{\textbf{Aktywność}} \\
+\midrule
+0--10 min & Wprowadzenie & Zasady bezpiecznej administracji testów, etyczne aspekty badania, przydział ról i losowanie kolejności \\
+\rowcolor{rowblue}
+10--25 min & TMT -- część A i B & Demonstracja przez prowadzącego; administracja w parach; natychmiastowy zapis czasu i błędów; obliczenie wskaźnika B--A \\
+25--45 min & FAS -- Fluencja fonemiczna & Instrukcja i administracja (F, A, S $\times$ 60 s); transkrypcja odpowiedzi na arkuszu zapisu; obliczenie wyniku surowego i wskaźnika perseweracji \\
+\rowcolor{rowblue}
+45--65 min & WCST -- wersja skrócona (64 karty) & Omówienie zasad przez prowadzącego; administracja; protokołowanie każdej odpowiedzi; identyfikacja błędów perseweratywnych i liczby kategorii \\
+65--85 min & Test Stroopa (wersja papier-ołówek) & Wprowadzenie teoretyczne (hamowanie, efekt Stroopa); demonstracja; administracja części Słowo, Kolor i Słowo-Kolor; obliczenie wskaźnika interferencji \\
+\rowcolor{rowblue}
+85--105 min & Obliczenia i interpretacja profilu & Przeliczanie wyników surowych wszystkich czterech testów; wypełnianie arkusza zapisu; dyskusja porównawcza w parach; identyfikacja profilu dysegzekutywnego \\
+105--115 min & Dyskusja plenarna & Prezentacja wybranych profili; synteza grupowa: jakie komponenty FW zostały objęte pomiarem, jakie pozostają poza zasięgiem zestawu? \\
+\rowcolor{rowblue}
+115--120 min & Podsumowanie i zadanie domowe & Omówienie zadania domowego, wyjaśnienie wątpliwości, zalecenia do protokołu \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{tcolorbox}[ethicsbox, title={\quad Ważne zasady etyczne obowiązujące podczas badania}]
+\textbf{Przed badaniem:} Wyjaśnij osobie badanej cel i przebieg zadania w języku zrozumiałym dla laika. Uzyskaj ustną zgodę na uczestnictwo.
+
+\textbf{W trakcie badania:} Nie komentuj wyników na bieżąco. Zachowuj neutralny wyraz twarzy. Stosuj wyłącznie zatwierdzone instrukcje werbalne -- żadnych podpowiedzi merytorycznych.
+
+\textbf{Po badaniu:} Udziel krótkiego, ogólnego informacji zwrotnej (debriefing). Nigdy nie używaj wyników z ćwiczeń do rzeczywistej diagnozy klinicznej.
+
+\textbf{Poufność:} Dane zbierane w parach pozostają w obrębie grupy laboratoryjnej -- nie są przekazywane prowadzącemu ani innym studentom bez zgody osoby badanej.
+\end{tcolorbox}
+
+\section{Podstawy teoretyczne}
+
+\subsection{Definicja i wielowymiarowy charakter funkcji wykonawczych}
+
+Funkcje wykonawcze (FW; ang. \textit{executive functions}) to niejednorodny zbiór procesów poznawczych wyższego rzędu, umożliwiających celowe, elastyczne i zorientowane na przyszłość zachowanie. Nie są one pojedynczą zdolnością, lecz złożonym, hierarchicznie zorganizowanym zestawem komponentów, które współpracują, by regulować inne procesy psychiczne.
+
+Najbardziej wpływowy model struktury FW zaproponowali Miyake i współpracownicy (2000) w badaniu z zastosowaniem analizy czynnikowej potwierdzającej (CFA). Wyróżnili trzy względnie niezależne, choć skorelowane komponenty:
+
+\begin{itemize}
+    \item \textbf{Hamowanie (inhibicja)} -- zdolność do celowego tłumienia dominujących, automatycznych reakcji lub nieistotnych informacji z pola uwagi. Mierzona m.in. testem Stroopa i Stop Signal Task.
+    \item \textbf{Przełączanie (shifting)} -- zdolność do elastycznego przełączania między zadaniami, schematami myślowymi lub zestawami reguł. Kluczowy wskaźnik to koszt przełączenia (\textit{switch cost}). Mierzony m.in. Trailmaking Test cz.~B.
+    \item \textbf{Aktualizacja (updating)} -- zdolność do bieżącego monitorowania i modyfikowania zawartości pamięci roboczej stosownie do napływających informacji. Mierzona m.in. N-back, WCST.
+\end{itemize}
+
+Model Miyake i in. (2000) jest punktem wyjścia, jednak liczne badania wskazują, że struktura FW jest bardziej złożona. Diamond (2013) postuluje hierarchię, w której hamowanie i pamięć robocza stanowią komponenty pierwotne, a elastyczność poznawcza i płynność myślenia to zdolności pochodne. Fuster (2015) z kolei podkreśla rolę kory przedczołowej jako integratora czasowego, umożliwiającego planowanie sekwencji działań rozciągniętych w czasie.
+
+\subsection{Neurobiologia funkcji wykonawczych}
+
+\subsubsection{Kora przedczołowa i jej subregiony}
+
+Kora przedczołowa (PFC; pola Brodmanna 9, 10, 11, 12, 44, 45, 46, 47) jest centralnym substratem neurobiologicznym FW. Wyróżniamy kilka funkcjonalnie odrębnych subregionów:
+
+\begin{table}[htbp]
+\centering
+\small
+\begin{tabularx}{\textwidth}{p{3.3cm} p{2.2cm} X X}
+\toprule
+\rowcolor{headerblue}
+\textcolor{white}{\textbf{Subregion PFC}} & \textcolor{white}{\textbf{Pola Brodmanna}} & \textcolor{white}{\textbf{Funkcje kluczowe}} & \textcolor{white}{\textbf{Skutki uszkodzenia}} \\
+\midrule
+Grzbietowo-boczna (dlPFC) & 9, 46 & Pamięć robocza, planowanie, monitoring & Deficyty w WCST, trudności z organizacją sekwencji \\
+\rowcolor{rowblue}
+Brzuszno-przyśrodkowa (vmPFC) & 11, 12, 25 & Decyzje oparte na wartości emocjonalnej, regulacja impulsów & Ryzykowne decyzje (Iowa Gambling Task), brak hamowania -- por. Gage \\
+Oczodołowa (OFC) & 11, 47 & Uczenie nagrody/kary, adaptacja do zmiany reguł & Persewieracje, zachowania uzależnieniowe \\
+\rowcolor{rowblue}
+Przednia część zakrętu obręczy (ACC) & 24, 32 & Detekcja konfliktu, monitorowanie błędów & Apatia, abulia, trudności z inicjacją \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsubsection{Sieci czołowe}
+
+Współczesne rozumienie neurobiologii FW wykracza poza lokalizacjonistyczne ujęcie PFC. Kluczowe znaczenie mają dwie sieci czołowe:
+
+\begin{itemize}
+    \item \textbf{Sieć czołowo-ciemieniowa (FPN)} -- obejmuje dlPFC oraz płat ciemieniowy (TPJ, SPL). Odpowiada za kontrolę uwagi odgórnej (\textit{top-down}) i manipulację informacją w pamięci roboczej.
+    \item \textbf{Sieć czołowo-prążkowiowa} -- pętle korowo-prążkowiowo-wzgórzowo-korowe (CSTC) łączące PFC z prążkowiem (\textit{caudate}, \textit{putamen}) i wzgórzem. Fundamentalne znaczenie dla uczenia reguł, inicjacji i hamowania ruchów (pętla ruchowa) oraz FW (pętla poznawcza i limbiczna).
+\end{itemize}
+
+\subsection{Obraz kliniczny syndromu dysegzekutywnego}
+
+Syndrom dysegzekutywny (\textit{dysexecutive syndrome}) to termin opisowy obejmujący konstelację deficytów FW, obserwowanych po uszkodzeniach PFC i połączonych struktur podkorowych. Charakterystyczne objawy kliniczne to:
+
+\begin{itemize}
+    \item \textbf{Persewieracje} -- nieadaptacyjne powtarzanie tej samej reakcji pomimo zmiany reguł (szczególnie widoczne w WCST).
+    \item \textbf{Utilization behaviour} -- kompulsywne sięganie po i używanie przedmiotów obecnych w polu widzenia, bez intencji.
+    \item \textbf{Deficyt hamowania} -- trudność w powstrzymaniu automatycznych, dominujących reakcji (test Stroopa, Go/No-Go).
+    \item \textbf{Zaburzenia planowania} -- niezdolność do opracowania strategii wieloetapowej (Tower of London/Hanoi).
+    \item \textbf{Anosognozja wykonawcza} -- brak wglądu w własne deficyty FW, paradoksalnie utrudniający rehabilitację.
+    \item \textbf{Dysregulacja emocjonalna i impulsywność} -- charakterystyczna dla uszkodzeń vmPFC i OFC.
+\end{itemize}
+
+\section{Charakterystyka narzędzi diagnostycznych}
+
+\subsection{Trail Making Test (TMT)}
+
+\subsubsection{Opis i historia}
+
+Trail Making Test (TMT) po raz pierwszy opisali Partington i Leiter (1949) jako narzędzie do oceny skutków urazów głowy u żołnierzy. W 1958 roku Reitan wprowadził go do neuropsychologicznej baterii Halstead-Reitan. TMT należy do najczęściej stosowanych testów neuropsychologicznych na świecie -- jego prostota administracyjna i czułość na uszkodzenia PFC sprawiają, że jest standardowym elementem oceny przesiewowej.
+
+\subsubsection{Procedura administracji}
+
+\begin{tcolorbox}[instructionbox, title={Instrukcja werbalna -- TMT część A}]
+''Na tej kartce są rozrzucone kółka z cyframi od 1 do 25. Połącz je linią ciągłą, zaczynając od 1, potem 2, potem 3 i tak dalej -- w kolejności rosnącej, tak szybko jak możesz, nie odrywając ołówka od kartki. Czy rozumiesz? Zacznij.''
+
+Mierz czas stoperem od 'Zacznij' do ukończenia lub upływu limitu (300 s).
+
+Przy każdym błędzie wskaż go natychmiast: 'To nie jest właściwe. Wróć do ostatniego poprawnego połączenia i kontynuuj.' Nie zatrzymuj stopera.
+\end{tcolorbox}
+
+\begin{tcolorbox}[instructionbox, title={Instrukcja werbalna -- TMT część B}]
+''Na tej kartce są kółka z cyframi i literami. Połącz je linią ciągłą, zaczynając od cyfry 1, potem litery A, potem cyfry 2, potem litery B i tak dalej -- na przemian cyfra--litera w kolejności rosnącej, tak szybko jak możesz. Czy rozumiesz? Zacznij.''
+
+Ta sama procedura błędów jak w części A. Limit czasu: 300 s.
+\end{tcolorbox}
+
+\subsubsection{Wyniki i interpretacja}
+
+Wyniki surowe TMT to czas wykonania (w sekundach) dla części A i B oraz liczba błędów. Kluczowym wskaźnikiem neuropsychologicznym jest wskaźnik różnicowy B--A (lub B/A), który izoluje wkład przełączania i pamięci roboczej, kontrolując ogólną szybkość psychomotoryczną i uwagę:
+
+\textbf{Wskaźnik przełączania:} B -- A (sekundy) lub B / A (iloraz)
+
+Wyższy wskaźnik B--A sugeruje specyficzny deficyt funkcji wykonawczych niezależny od ogólnego spowolnienia. Wartości referencyjne zależą od wieku, wykształcenia i normy populacyjnej (por. Tombaugh,
+2004). Jako orientacyjną granicę patologiczną dla osób z wykształceniem wyższym w wieku 20–29 lat przyjmuje się: TMT-A > 40~s, TMT-B > 91~s.
+
+\subsection{Test Fluencji Słownej Fonemicznej (FAS)}
+
+\subsubsection{Opis}
+
+Test Fluencji Słownej Fonemicznej (FAS lub COWAT -- Controlled Oral Word Association Test; Benton i Hamsher, 1976) mierzy zdolność do generowania słów należących do określonej kategorii fonemicznej w ograniczonym czasie. Jest czuły na uszkodzenia lewobocznej kory czołowej i aktywację sieci czołowo skroniowej. Odróżniamy fluencję fonemiczną (FAS -- litery F, A, S) od fluencji semantycznej (kategorie: zwierzęta, warzywa), która angażuje bardziej obszary skroniowe.
+
+\subsubsection{Procedura administracji}
+
+\begin{tcolorbox}[
+  colback=white,
+  colframe=NavyBlue,
+  colbacktitle=NavyBlue,
+  coltitle=white,
+  fonttitle=\bfseries,
+  title={Instrukcja werbalna -- FAS},
+  arc=1mm,
+  boxrule=0.8pt,
+  left=6pt, right=6pt, top=6pt, bottom=6pt
+]
+``Powiem Ci literę alfabetu. Chcę, żebyś powiedział(-a) mi jak najwięcej słów zaczynających się na tę literę -- tak szybko i tyle, ile możesz w ciągu 60 sekund. Możesz używać jakichkolwiek słów poza imionami własnymi (imionami i nazwiskami osób, nazwami miast, krajów), liczbami i tym samym słowem z różnymi końcówkami. Na przykład, gdybym powiedział(-a) 'R', mógłbyś/mogłabyś powiedzieć 'rak', 'rower', 'ryba'... Czy rozumiesz? Litera to F. Zacznij.
+
+\smallskip
+Powtórz procedurę dla liter A i S (60~s każda).
+
+\smallskip
+Zapisuj każde słowo (łącznie z błędnymi -- powtórzeniami i słowami niedozwolonymi) na arkuszu zapisu.
+\end{tcolorbox}
+
+\subsubsection{Obliczanie wyniku i interpretacja}
+
+Wynik surowy FAS = suma poprawnych słów dla F + A + S (po 60~s każda), z wyłączeniem powtórzeń i słów niedozwolonych. Osobno oblicz wskaźniki jakościowe:
+
+\begin{itemize}
+  \item \textbf{Wskaźnik perseweracji} = (liczba powtórzeń / wynik surowy FAS) $\times$ 100\%
+  \item \textbf{Wskaźnik naruszeń reguł} = liczba słów niedozwolonych (nazwy własne, cyfry)
+\end{itemize}
+
+Wyniki poniżej 37 słów (sumarycznie F+A+S) dla dorosłych z wyższym wykształceniem sygnalizują możliwy deficyt fluencji fonemicznej. Niski wynik przy zachowanej fluencji semantycznej sugeruje uszkodzenia czołowe lewoboczne.
+
+\subsection{Wisconsin Card Sorting Test (WCST)}
+
+\subsubsection{Opis i znaczenie kliniczne}
+
+Wisconsin Card Sorting Test (Grant i Berg, 1948; Heaton i in., 1993) jest jednym z najbardziej rozpoznawalnych testów neuropsychologicznych do oceny elastyczności poznawczej, formowania pojęć i hamowania perseweratywnych odpowiedzi. Test wymaga od osoby badanej odkrycia ukrytych zasad klasyfikacji kart, i co kluczowe, elastycznego dostosowania do zmieniających się reguł bez wyraźnej informacji o tym, jaka reguła obowiązuje.
+
+\subsubsection{Materiały i procedura (wersja skrócona, 64 karty)}
+
+Na zajęciach stosujemy wersję skróconą (64 karty odpowiedzi, 4 karty-klucze). Karty-klucze przedstawiają: (1) jeden czerwony trójkąt, (2) dwa zielone gwiazdki, (3) trzy żółte krzyże, (4) cztery niebieskie koła. Osoba badana klasyfikuje każdą kartę odpowiedzi pod jeden z czterech kluczy, a badający informuje tylko o poprawności odpowiedzi (``Dobrze'' / ``Nie''), nie ujawniając reguły.
+
+\end{document}
