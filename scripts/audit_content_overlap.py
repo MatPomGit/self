@@ -499,8 +499,8 @@ def write_reports(result: dict, dest: Path, top: int) -> None:
     counts = result["counts"]
     lines = [
         "# Content overlap audit — pilot", "",
-        f"Source SHA: \`{result['source_revision']}\`  ",
-        f"Scope: \`{result['scope']}\`",
+        f"Source SHA: `{result['source_revision']}`  ",
+        f"Scope: `{result['scope']}`",
         "",
         "## Coverage",
         f"- Files: **{counts['files']}**; logical documents: **{counts['logical_documents']}**.",
@@ -517,8 +517,8 @@ def write_reports(result: dict, dest: Path, top: int) -> None:
     for n, p in enumerate(result["pairs"][:top], 1):
         a, b = p["a_path"], p["b_path"]
         lines.extend([
-            f"### {n}. \`{a}\` vs \`{b}\`",
-            f"Classification: \`{p['classification']}\` | coverage (shorter): "
+            f"### {n}. `{a}` vs `{b}`",
+            f"Classification: `{p['classification']}` | coverage (shorter): "
             f"**{p['coverage_shorter_5gram']:.1%}** | TF-IDF cosine: "
             f"**{p['tfidf_cosine']:.3f}** | status: **UNVERIFIED**.",
         ])
@@ -536,12 +536,12 @@ def write_reports(result: dict, dest: Path, top: int) -> None:
         scores = [x["coverage_shorter_5gram"] for x in comparisons
                   if x["coverage_shorter_5gram"] is not None]
         marker = (f"{min(scores):.1%}" if scores else "unavailable")
-        lines.append(f"- \`{group['key']}\` — overlap of shortest text: {marker}. "
+        lines.append(f"- `{group['key']}` — overlap of shortest text: {marker}. "
                      "Requires editorial equivalence check.")
     lines.extend(["", "## Extraction problems", ""])
     for x in result["files"]:
         if x["status"] != "EXTRACTED":
-            lines.append(f"- \`{x['path']}\`: {x['warning'] or 'INCOMPLETE'}")
+            lines.append(f"- `{x['path']}`: {x['warning'] or 'INCOMPLETE'}")
     lines.extend(["", "## Next steps",
                   "1. Verify leading pairs at indicated sections, retaining unique findings.",
                   "2. Add multilingual embedding retrieval and claim-level evidence before MERGE decisions.",
