@@ -13,8 +13,8 @@
     (function () {
       const legacy = '/materials/';
       const path = window.location.pathname;
-      if (path.startsWith(legacy) && path !== legacy) {
-        window.location.replace('/files/' + path.slice(legacy.length) +
+      if (path === '/materials' || path.startsWith(legacy)) {
+        window.location.replace('/files/' + (path === '/materials' ? '' : path.slice(legacy.length)) +
           window.location.search + window.location.hash);
       }
     }());

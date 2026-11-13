@@ -416,7 +416,7 @@ def validate_output_dir(root: Path, destination: Path) -> None:
     """Never write audit results into directories deployed to GitHub Pages."""
     root = root.resolve()
     destination = destination.resolve()
-    for name in ("files", "docs", "materials", "_site"):
+    for name in ("files", "docs", "_site"):
         deployed = root / name
         if destination == deployed or destination.is_relative_to(deployed):
             raise ValueError(f"Audit output cannot be inside public directory {name}/")

@@ -137,7 +137,7 @@ nadal widnieją we wspólnej grupie formatowej z etykietą
 sterowania prezentacją przed utratą jednego z raportów w rankingu porównań.
 
 Pliki publicznej strony nie są modyfikowane. Narzędzie odmówi zapisu
-wyników w `files/`, `docs/`, `materials/` i `_site/`.
+wyników w `files/`, `docs/` i `_site/`.
 Duże, silnie skompresowane XML wewnątrz ODT/DOCX są odrzucane przed
 dekompresją. Wszystkie klasyfikacje wymagają sprawdzenia treści.
 

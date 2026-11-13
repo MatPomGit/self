@@ -88,7 +88,7 @@ def main():
     repo = Path.cwd().resolve()
     output = args.output_dir.resolve()
     if any(output == repo / folder or (repo / folder) in output.parents
-           for folder in ("files", "docs", "materials", "_site")):
+           for folder in ("files", "docs", "_site")):
         parser.error("Cannot store audit reports inside public directories")
     reports = {}
     for kind, name in REPORTS.items():

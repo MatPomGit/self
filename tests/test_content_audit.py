@@ -149,7 +149,7 @@ class ContentAuditTests(unittest.TestCase):
         with TemporaryDirectory() as temp:
             root = Path(temp)
             for public_dir in ("files/cache", "docs/cache",
-                               "materials/cache", "_site/cache"):
+                               "_site/cache"):
                 with self.subTest(public_dir=public_dir):
                     with self.assertRaises(ValueError):
                         ExtractionCache(root, root / public_dir)
