@@ -117,8 +117,9 @@ assert.equal(english.storage(), 'light');
 const legacy = visit('/materials/course/lecture.pdf', '?lang=en', '#page=5');
 assert.equal(legacy.redirect, '/files/course/lecture.pdf?lang=en#page=5',
   'Legacy PDFs must still redirect without losing the query or fragment');
-assert.equal(visit('/materials/', '', '').redirect, null,
-  'The existing /materials/ index handles the directory');
+assert.equal(visit('/materials/', '', '').redirect, '/files/',
+  'Legacy directory must use the 404 fallback without a physical materials/ folder');
+assert.equal(visit('/materials', '?lang=en', '#course').redirect, '/files/?lang=en#course');
 assert.equal(visit('/files/course/unknown.pdf').redirect, null);
 assert.equal(visit('/something-materials/page').redirect, null);
 

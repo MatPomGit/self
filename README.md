@@ -89,6 +89,6 @@ python scripts/classify_materials.py --write
 
 ## Migracja adresów
 
-Katalog `materials/` zastąpiono `files/`. Dla starego adresu `/materials/` pozostawiono stronę przekierowującą. Starsze bezpośrednie adresy dokumentów `/materials/...` mają przekierowanie przeglądarkowe z `404.html`, nie odpowiedź HTTP 301; zewnętrzne linki warto zaktualizować na `https://matpom.pl/files/...`.
+Katalog `materials/` zastąpiono `files/`. Katalog `materials/` nie istnieje ani w repozytorium, ani w artefakcie publikacji. Zarówno dawny adres `/materials/`, jak i starsze bezpośrednie adresy dokumentów `/materials/...` obsługuje przekierowanie przeglądarkowe z `404.html`, nie odpowiedź HTTP 301; zewnętrzne linki warto zaktualizować na `https://matpom.pl/files/...`.
 
 Domena i HTTPS są skonfigurowane w **Settings → Pages** repozytorium, a rekordy DNS u rejestratora. Do wdrożenia nie jest potrzebny hosting WWW.

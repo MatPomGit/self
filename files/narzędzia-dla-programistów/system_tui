@@ -234,9 +234,9 @@ format_uptime() {
     UPTIME_STR="up $UPTIME_STR"
 }
 
-# Przeszukuje katalog materials/ (bez find/sort/awk).
+# Przeszukuje katalog przedmiotu w files/ (bez find/sort/awk).
 scan_materials() {
-    local d="$SCRIPT_DIR/materials" n f
+    local d="$SCRIPT_DIR" n f
     MATERIAL_FILES=()
     [[ -d $d ]] || return 0
     for n in "${LAB_MODULES[@]}"; do
@@ -339,7 +339,7 @@ build_materials_section() {
     local selected_index=${1:-0} focus_zone=${2:-actions} idx name
     MAT_OUT=$'\n'"${COLOR_INFO}Materiały (↓ aby przejść, Enter aby otworzyć):${COLOR_RESET}"$'\n'
     if (( ${#MATERIAL_FILES[@]} == 0 )); then
-        MAT_OUT+="  ${COLOR_WARN}Brak plików w katalogu materials/.${COLOR_RESET}"$'\n'
+        MAT_OUT+="  ${COLOR_WARN}Brak plików w katalogu files/.${COLOR_RESET}"$'\n'
         return 0
     fi
     for idx in "${!MATERIAL_FILES[@]}"; do
@@ -447,7 +447,7 @@ wait_for_q() {
 
 # Buduje ścieżkę do pliku instrukcji laboratoryjnej dla wskazanego modułu.
 get_lab_module_file() {
-    printf "%s/materials/lab_%02d.md\n" "$SCRIPT_DIR" "$1"
+    printf "%s/lab_%02d.md\n" "$SCRIPT_DIR" "$1"
 }
 
 # Otwiera wybrany plik materiału przez less lub prosty podgląd tekstowy.
