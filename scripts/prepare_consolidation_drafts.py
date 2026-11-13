@@ -179,8 +179,8 @@ def draft(source_docx:Path,source_pdf:Path,root:Path,*,slug:str,title:str) -> tu
         "> pozostają w aneksie do porównania. Nie usuwać oryginałów.",
         "",
         "## Rejestr źródeł", "",
-        f"- DOCX (baza): \`{source.path}\`, SHA-256 \`{source.source_hash}\`.",
-        f"- PDF (porównanie): \`{alternative.path}\`, SHA-256 \`{alternative.source_hash}\`.",
+        f"- DOCX (baza): `{source.path}`, SHA-256 `{source.source_hash}`.",
+        f"- PDF (porównanie): `{alternative.path}`, SHA-256 `{alternative.source_hash}`.",
         "",
         "## Tekst bazowy z DOCX", ""
     ]
