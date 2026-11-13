@@ -59,6 +59,8 @@ jobs:
           node --check docs/assets/js/project-preview.js
           node --check tests/test_materials_layout.js
           node --check tests/test_about.js
+          node --check tests/test_create_issues.js
+          node tests/test_create_issues.js
           node tests/test_language.js
           node tests/test_about.js
           node tests/test_publication_utils.js
