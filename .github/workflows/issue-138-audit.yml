@@ -52,7 +52,7 @@ jobs:
           python scripts/issue_audit_issue138.py select \
             --event "$EVENT_NAME" --requested "$INPUT_SCOPE" --comment "$ISSUE_COMMAND"
       - name: Restore trusted cache (read-only for issue comments)
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: ${{ runner.temp }}/issue-138-extraction-cache
           key: issue138-extraction-v1-${{ runner.os }}-${{ github.sha }}-both
@@ -92,7 +92,7 @@ jobs:
             --run-id "$GITHUB_RUN_ID" \
             --issue-comment "$RUNNER_TEMP/issue-138/issue-comment.md"
       - name: Upload audit evidence without publishing it on GitHub Pages
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: issue-138-content-audit
           path: |
