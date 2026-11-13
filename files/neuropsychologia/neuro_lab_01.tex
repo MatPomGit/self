@@ -1,0 +1,131 @@
+ \documentclass[11pt,a4paper]{article}
+
+\usepackage[top=2cm,bottom=2.5cm,left=2cm,right=2cm]{geometry}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\usepackage{amsmath,amssymb}
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{hyperref}
+
+\hypersetup{
+    pdfauthor={Uniwersytet Vizja},
+    pdftitle={Neuropsychologia - Ćwiczenie nr 1},
+    hidelinks
+}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+
+% Custom Colors
+\definecolor{navyheader}{RGB}{19, 44, 89}
+\definecolor{titleblue}{RGB}{23, 62, 115}
+\definecolor{lightbgblue}{RGB}{243, 247, 253}
+\definecolor{labelbgblue}{RGB}{218, 230, 246}
+\definecolor{borderblue}{RGB}{160, 190, 225}
+
+\begin{document}
+
+% Top Meta / Running Header Context
+\begin{center}
+    {\footnotesize\textcolor{darkgray}{Neuropsychologia \textbar{} Ćwiczenie nr 1 \textbar{} Mapowanie mózg–zachowanie i analiza sieci neuronowych}}
+    \vspace{0.2cm}
+    \color{navyheader}\hrule height 1.5pt
+\end{center}
+
+\vspace{0.3cm}
+
+% Header Block
+\begin{tcolorbox}[
+    enhanced,
+    colback=lightbgblue,
+    colframe=borderblue,
+    arc=0mm,
+    boxrule=1pt,
+    left=15pt,
+    right=15pt,
+    top=0pt,
+    bottom=15pt
+]
+    % Top solid banner
+    \begin{tcolorbox}[
+        enhanced,
+        colback=navyheader,
+        colframe=navyheader,
+        arc=0mm,
+        left=0pt,
+        right=0pt,
+        top=10pt,
+        bottom=10pt,
+        enlarge left by=-15pt,
+        enlarge right by=-15pt,
+        enlarge top by=0pt,
+        width=\dimexpr\textwidth+30pt\relax
+    ]
+        \centering
+        {\large\bfseries\textcolor{white}{UNIWERSYTET VIZJA}}\\[3pt]
+        {\small\textcolor{white}{Wydział Psychologii i Nauk Społecznych}}
+    \end{tcolorbox}
+
+    \vspace{0.6cm}
+    \centering
+    {\LARGE\bfseries\textcolor{titleblue}{NEUROPSYCHOLOGIA}}\\[6pt]
+    {\large\bfseries\textcolor{titleblue}{Ćwiczenie nr 1}}\\[8pt]
+    {\normalsize Wprowadzenie do neuropsychologii klinicznej:}\\[4pt]
+    {\large\bfseries\textcolor{titleblue}{Mapowanie relacji mózg–zachowanie i analiza sieci neuronowych}}
+    \vspace{0.2cm}
+\end{tcolorbox}
+
+\vspace{0.5cm}
+
+% Metadata Table
+\renewcommand{\arraystretch}{1.4}
+\noindent
+\begin{tabularx}{\textwidth}{|>{\columncolor{labelbgblue}}p{3.5cm}|X<{\columncolor{lightbgblue}}|c@{}}
+\hline
+\textbf{Przedmiot:} & Neuropsychologia & \tabularnewline
+\hline
+\textbf{Rok akademicki:} & 2025/2026 & \tabularnewline
+\hline
+\textbf{Forma zajęć:} & Ćwiczenia & \tabularnewline
+\hline
+\textbf{Metody:} & Analiza przypadków klinicznych, praca grupowa, mapowanie neuroanatomiczne & \tabularnewline
+\hline
+\end{tabularx}
+
+\vspace{0.6cm}
+
+% Section 1
+\section*{1. Informacje ogólne o zajęciach}
+
+Pierwsze ćwiczenia laboratoryjne z neuropsychologii mają charakter wprowadzający, lecz zakładają zaawansowany poziom przygotowania teoretycznego właściwy dla roku IV studiów psychologicznych. Zamiast podejścia deskryptywnego, od studentów oczekuje się aktywnej krytycznej analizy: oceny siły dowodowej klasycznych przypadków klinicznych, konfrontacji modeli lokalizacyjnych z podejściem sieciowym (connectome-based models) oraz konstruowania hipotez neuropsychologicznych z uzasadnieniem metodologicznym. Praca opiera się na analizie czterech przypadków, mapowaniu neuroanatomicznym i strukturalnej dyskusji grupowej.
+
+\vspace{0.2cm}
+
+% Learning Objectives Box
+\begin{tcolorbox}[
+    enhanced,
+    colback=lightbgblue,
+    colframe=navyheader,
+    arc=0mm,
+    boxrule=1pt,
+    title={\small\textbf{Cele kształcenia (zgodne z KRK -- poziom 6. EQF)}},
+    coltitle=white,
+    colbacktitle=navyheader,
+    left=12pt,
+    right=12pt,
+    top=10pt,
+    bottom=10pt
+]
+\normalsize
+\textbf{Wiedza:} Student krytycznie porównuje paradygmaty lokalizacjonizmu, ekwipotencjalizmu i modeli sieci neuronowych; charakteryzuje teorie emocji i pamięci w kontekście neuropsychologicznym (Damasio, Squire, LeDoux); omawia metodologiczne ograniczenia badań opartych na jednostkowych przypadkach klinicznych.
+
+\vspace{0.6em}
+
+\textbf{Umiejętności:} Student konstruuje strukturalnie poprawne hipotezy neuropsychologiczne oparte na zasadzie podwójnej dysocjacji; mapuje uszkodzenia mózgu na schematy neuroanatomiczne z uzasadnieniem cytoarchitektonicznym (pola Brodmanna); ocenia, które komponenty funkcji poznawczych podlegają i nie podlegają modularnemu rozgraniczeniu.
+
+\vspace{0.6em}
+
+\textbf{Kompetencje społeczne:} Student identyfikuje etyczne dylematy towarzyszące wieloletniemu badaniu pacjentów z uszkodzeniami mózgu; prezentuje stanowisko analityczne w dyskusji plenarnej; wykazuje wrażliwość na podmiotowość pacjentów neurologicznych w narracji klinicznej.
+\end{tcolorbox}
