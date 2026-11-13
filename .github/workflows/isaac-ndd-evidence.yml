@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - "scripts/review_pending_reports.py"
+      - "scripts/audit_content_overlap.py"
+      - "tests/test_content_audit.py"
       - "tests/test_review_pending_reports.py"
       - ".github/workflows/isaac-ndd-evidence.yml"
       - "docs/consolidated/isaac_lab.md"
@@ -29,7 +31,7 @@ jobs:
       - name: Install extraction and test dependencies
         run: python -m pip install "pypdf>=5,<7" "pytest>=8,<10"
       - name: Verify evidence comparison
-        run: python -m pytest tests/test_review_pending_reports.py -q
+        run: python -m pytest tests/test_review_pending_reports.py tests/test_content_audit.py -q
       - name: Extract selected public reports (read only)
         run: |
           python scripts/review_pending_reports.py \

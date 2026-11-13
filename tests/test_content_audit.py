@@ -55,7 +55,10 @@ class ContentAuditTests(unittest.TestCase):
             self.assertTrue(all(len(x['sha256']) == 64 for x in result['files']))
             output = root / 'report'
             write_reports(result, output, 8)
-            self.assertIn('UNVERIFIED', (output / 'summary.md').read_text(encoding='utf-8'))
+            rendered_summary = (output / 'summary.md').read_text(encoding='utf-8')
+            self.assertIn('UNVERIFIED', rendered_summary)
+            self.assertIn(f"Source SHA: `{result['source_revision']}`", rendered_summary)
+            self.assertNotIn("\\`", rendered_summary)
             saved = json.loads((output / 'overlap.json').read_text(encoding='utf-8'))
             self.assertEqual(saved['counts'], result['counts'])
             self.assertEqual((scope / 'Pierwsza.docx').read_bytes(), prior)
