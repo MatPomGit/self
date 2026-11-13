@@ -2,21 +2,20 @@ name: Utwórz nowe issues dla dalszego rozwoju
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - copilot/fix-existing-bugs
-    paths:
-      - '.github/workflows/create-issues.yml'
 
 permissions:
   issues: write
+
+concurrency:
+  group: create-issues-${{ github.repository }}
+  cancel-in-progress: false
 
 jobs:
   create-issues:
     runs-on: ubuntu-latest
     steps:
       - name: Utwórz issues dla dalszego rozwoju strony
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
           script: |
             const issues = [
@@ -62,18 +61,23 @@ jobs:
               }
             ];
 
-            // Fetch existing open issues to avoid duplicates
+            // Include closed issues; completed tasks must not be recreated.
+            // GitHub's issues endpoint also returns PRs, which are not issues.
             const existing = await github.paginate(github.rest.issues.listForRepo, {
               owner: context.repo.owner,
               repo: context.repo.repo,
-              state: 'open',
+              state: 'all',
               per_page: 100
             });
-            const existingTitles = new Set(existing.map(i => i.title));
+            const normalizedTitle = title => title.normalize('NFKC').trim().toLocaleLowerCase('pl');
+            const existingTitles = new Set(existing
+              .filter(item => !item.pull_request)
+              .map(item => normalizedTitle(item.title)));
 
             for (const issue of issues) {
-              if (existingTitles.has(issue.title)) {
-                console.log(`Skipping (already exists): ${issue.title}`);
+              const titleKey = normalizedTitle(issue.title);
+              if (existingTitles.has(titleKey)) {
+                console.log(`Skipping (already exists, open or closed): ${issue.title}`);
                 continue;
               }
               const created = await github.rest.issues.create({
@@ -83,5 +87,6 @@ jobs:
                 body: issue.body,
                 labels: issue.labels
               });
+              existingTitles.add(titleKey);
               console.log(`Created: ${created.data.html_url}`);
             }
