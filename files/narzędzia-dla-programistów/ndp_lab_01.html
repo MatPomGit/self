@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>NDP | Laboratorium 01 | Środowisko pracy programisty</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#172c40;background:#f2f5f8;line-height:1.42}
+*{box-sizing:border-box}html{scroll-behavior:auto}body{margin:0}button,input{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}
+:focus-visible{outline:3px solid #087e8b;outline-offset:2px}
+header{background:#003c82;color:#fff;padding:13px max(14px,calc((100vw - 1220px)/2));border-bottom:3px solid #087e8b}
+header h1{margin:0;font-size:1.13rem;letter-spacing:.005em}header p{margin:2px 0 0;color:#e0f2fc;font-size:.85rem}
+.layout{max-width:1220px;margin:14px auto 28px;display:grid;grid-template-columns:188px minmax(0,1fr);gap:12px;padding:0 12px}
+aside{align-self:start;position:sticky;top:12px;border:1px solid #d8e2eb;border-radius:10px;background:white;padding:12px}
+aside h2{font-size:.91rem;margin:0 0 9px}.nav{display:grid;gap:3px}.nav button{text-align:left;border:0;background:transparent;color:#304b61;border-radius:6px;padding:7px 8px;display:flex;align-items:center;gap:8px;font-size:.89rem;min-height:36px}
+.nav span{font-size:.76rem;border:1px solid #b9cad9;border-radius:50%;width:22px;height:22px;display:inline-grid;place-items:center;flex-shrink:0}
+.nav .active{background:#e8f1f8;color:#003c82;font-weight:700}
+main{min-width:0}.paper{background:white;border:1px solid #d8e2eb;border-radius:10px;padding:17px 22px 20px;min-height:375px}
+.section-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}.step-count{color:#087e8b;font-size:.76rem;font-weight:750;text-transform:uppercase;letter-spacing:.06em}
+h2{font-size:1.32rem;line-height:1.2;margin:5px 0 9px}p{margin:8px 0}.muted{color:#475c70;font-size:.89rem}
+code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace}p code,li code{background:#eaf0f5;color:#142638;border-radius:3px;padding:1px 4px}
+.task-list{margin:9px 0 0;padding:0;list-style:none;counter-reset:task;display:grid;gap:5px}.task{counter-increment:task;display:grid;grid-template-columns:minmax(170px,.87fr) minmax(0,1.5fr);align-items:start;gap:12px;padding:8px 10px;border:1px solid #e0e8ef;border-radius:7px;background:#fcfdff}
+.task-label{display:flex;align-items:flex-start;gap:8px;font-size:.9rem;font-weight:590;line-height:1.35;padding-top:5px}.task-label::before{content:counter(task) ".";color:#087e8b;font-weight:800;flex-shrink:0;min-width:21px}
+.task pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;background:#eaf1f7;color:#0d283e!important;padding:8px 11px;border:1px solid #cbdce9;border-radius:5px;font-size:.9rem;line-height:1.37;tab-size:2;user-select:text}
+.task pre code{color:#0d283e!important;background:transparent!important;font-size:inherit!important;white-space:inherit}
+.task .detail{grid-column:2;font-size:.79rem;color:#42596c;margin-top:-5px}.task.text-only .detail{grid-column:2;margin-top:2px}
+.hint{font-size:.86rem;color:#425568;border-left:3px solid #087e8b;background:#f2f8fa;padding:8px 11px;margin-top:12px}
+.progress{height:4px;display:flex;gap:4px;margin-bottom:13px}.progress i{border-radius:5px;background:#e0e8ef;flex:1}.progress .current{background:#087e8b}
+.actions{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid #e6edf2;margin-top:16px;padding-top:14px}
+.btn{font-size:.88rem;font-weight:700;padding:8px 15px;border-radius:6px;border:1px solid #c2d2df;color:#003c82;background:white}.btn.primary{background:#003c82;border-color:#003c82;color:white}.btn.teal{background:#087e8b;border-color:#087e8b;color:white}
+.starter-files{display:flex;gap:7px;flex-wrap:wrap;margin-top:5px}.starter-files button{border:1px solid #abc1d2;background:#eaf4f8;color:#003c82;border-radius:6px;font-size:.8rem;padding:5px 9px}
+.question{margin:7px 0;padding:10px 12px 11px;border:1px solid #dde7ef;border-radius:7px;min-width:0}.question legend{font-weight:680;font-size:.93rem;padding:0 4px}
+.answer{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}.answer label{display:flex;align-items:flex-start;gap:8px;padding:7px 9px;border:1px solid #dce5ec;border-radius:5px;font-size:.85rem;cursor:pointer;line-height:1.3}
+.answer label:has(input:checked){border-color:#087e8b;background:#ecf8f7}.answer input{flex-shrink:0;accent-color:#087e8b;margin-top:3px}
+.details{font-size:.84rem;color:#495c6a}.album{margin:12px 0}.album input{max-width:160px;border:1px solid #c1d0db;border-radius:5px;padding:6px}
+.kpis{display:flex;gap:9px;margin:11px 0}.kpi{border:1px solid #cddde6;border-radius:7px;padding:10px 15px;background:#f4f9fb}.kpi strong{display:block;font-size:1.35rem;color:#003c82}
+.result-item{margin:7px 0;padding:10px 12px;border:1px solid #dde6ed;border-left:4px solid #b45539;border-radius:5px;font-size:.87rem}.result-item.good{border-left-color:#178055}.result-item p{margin:3px 0}
+footer{max-width:1220px;margin:0 auto 24px;padding:0 15px;color:#687a88;font-size:.77rem;text-align:right}
+@media(max-width:880px){.layout{grid-template-columns:1fr}.nav{display:flex;flex-wrap:wrap}.nav button{flex:1;min-width:95px;justify-content:center}.nav span{display:none}aside{position:static}}
+@media(max-width:650px){header{padding:12px}.paper{padding:13px}.task{grid-template-columns:1fr;gap:5px;padding:9px}.task .detail{grid-column:1;margin-top:0}.task-label{padding-top:0}.answer{grid-template-columns:1fr}}
+@media print{body{background:white}header{background:white;color:black;border-bottom:1px solid #ccc}.layout{display:block;margin:0}aside,.actions,.progress{display:none!important}.paper{border:0;padding:0}.task{break-inside:avoid}}
+
+/* Shared NDP Basic dark palette: also applies when embedded in ndp_laboratoria.html. */
+html[data-theme="dark"]{color-scheme:dark;--bg:#0d151b;--paper:#131f27;--ink:#e8f0f4;--muted:#b2c5d0;--line:#344d5d;--accent:#63d5de;--accent-2:#4dd2bd;background:#0d151b!important;color:#e8f0f4!important}
+html[data-theme="dark"] body{background:#0d151b!important;color:#e8f0f4!important}
+html[data-theme="dark"] header{background:#11354d!important;border-bottom-color:#43bac5!important;color:#fff!important}
+html[data-theme="dark"] header h1{color:#fff!important}
+html[data-theme="dark"] header p{color:#d5eaf5!important}
+html[data-theme="dark"] aside,html[data-theme="dark"] .paper{background:#131f27!important;border-color:#344d5d!important;color:#e8f0f4!important}
+html[data-theme="dark"] h2,html[data-theme="dark"] aside h2,html[data-theme="dark"] .question legend{color:#e8f0f4!important}
+html[data-theme="dark"] .nav button{color:#d1e4ee!important;background:transparent!important}
+html[data-theme="dark"] .nav button:hover{background:#213b4b!important}
+html[data-theme="dark"] .nav button.active,html[data-theme="dark"] .nav .active{background:#244b5e!important;color:#e5fbff!important}
+html[data-theme="dark"] .nav span{border-color:#4a7587!important;color:#d6edf5!important}
+html[data-theme="dark"] .muted,html[data-theme="dark"] .details,html[data-theme="dark"] .task .detail{color:#b6c8d5!important}
+html[data-theme="dark"] .step-count,html[data-theme="dark"] .task-label::before{color:#70d6de!important}
+html[data-theme="dark"] .task,html[data-theme="dark"] .question,html[data-theme="dark"] .result-item{background:#172630!important;border-color:#344d5d!important;color:#e8f0f4!important}
+html[data-theme="dark"] .task pre,html[data-theme="dark"] .task pre code{background:#0c2535!important;color:#edf8ff!important;border-color:#36566a!important}
+html[data-theme="dark"] p code,html[data-theme="dark"] li code{background:#223c4d!important;color:#e0f4ff!important}
+html[data-theme="dark"] .hint{background:#173541!important;border-left-color:#48c5d0!important;color:#d3e6ee!important}
+html[data-theme="dark"] .progress i{background:#304758!important}
+html[data-theme="dark"] .progress .current{background:#56cbd6!important}
+html[data-theme="dark"] .actions{border-top-color:#344d5d!important}
+html[data-theme="dark"] .btn{background:#203848!important;border-color:#507083!important;color:#e5f4fa!important}
+html[data-theme="dark"] .btn:hover{background:#2d5063!important}
+html[data-theme="dark"] .btn.primary,html[data-theme="dark"] .btn.teal,html[data-theme="dark"] .btn.primary:hover,html[data-theme="dark"] .btn.teal:hover{background:#176d83!important;border-color:#4bc9d8!important;color:#fff!important}
+html[data-theme="dark"] .primary:not(.btn){background:#176d83!important;border-color:#4bc9d8!important;color:#fff!important}
+html[data-theme="dark"] .starter-files button{background:#203b4c!important;border-color:#507083!important;color:#d7f4ff!important}
+html[data-theme="dark"] .answer label{background:#192d3b!important;color:#e6f2f8!important;border-color:#3b586c!important}
+html[data-theme="dark"] .answer label:has(input:checked){background:#174c50!important;border-color:#65d7d0!important}
+html[data-theme="dark"] .answer input{accent-color:#65d7d0!important}
+html[data-theme="dark"] .album input{background:#152938!important;color:#e8f0f4!important;border:1px solid #577386!important}
+html[data-theme="dark"] .kpi{background:#1a3040!important;border-color:#3b586c!important;color:#e8f0f4!important}
+html[data-theme="dark"] .kpi strong{color:#85dcec!important}
+html[data-theme="dark"] .result-item.good{border-left-color:#63d7a0!important}
+html[data-theme="dark"] footer{color:#b4c6d1!important}
+html[data-theme="dark"] :focus-visible{outline-color:#74e1dd!important}
+@media print{html[data-theme="dark"]{color-scheme:light!important;background:white!important;color:black!important}html[data-theme="dark"] body{background:white!important;color:black!important}}
+
+/* NDP 01: eksperyment dydaktyczny i układ bez pustych kolumn. */
+.lesson-insight{margin:10px 0 0;padding:8px 11px;border-left:3px solid #237e95;background:#f3f8fa;border-radius:0 6px 6px 0;font-size:.86rem;line-height:1.5}
+.lesson-insight strong{display:block;margin-bottom:3px}
+.experiment-heading{font-size:1.02rem;margin:16px 0 6px;color:inherit}
+.task-list{gap:8px}
+.task{display:block;padding:10px 13px}
+.task-label{padding:0;line-height:1.4;font-size:.92rem}
+.task pre{margin:8px 0 0;padding:8px 11px}
+.task .detail,.task.text-only .detail{display:block;grid-column:auto;margin:6px 0 0;font-size:.83rem;line-height:1.4}
+.task.text-only .details{display:none}
+.lesson-evidence{margin:14px 0 0;padding:10px 13px;border-left:3px solid #0a8190;background:#eaf6f7;border-radius:0 7px 7px 0;font-size:.9rem}
+html[data-theme="dark"] .lesson-evidence{background:#183c45;color:#e4f6f8;border-left-color:#65d9e1}
+html[data-theme="dark"] .lesson-insight{background:#17303e;color:#dbeaf1;border-left-color:#55bfd3}
+
+</style>
+</head>
+<body>
+<header><h1>Narzędzia dla programistów · Laboratorium 01</h1><p>Środowisko pracy programisty</p></header>
+<div class="layout"><aside aria-label="Nawigacja"><h2>Przebieg ćwiczenia</h2><nav id="nav" class="nav"></nav></aside>
+<main><div class="paper"><div id="progress" class="progress" aria-hidden="true"></div><section id="content" aria-live="polite"></section><div id="actions" class="actions"></div></div></main></div>
+<footer>KIiA · Politechnika Rzeszowska</footer>
+<script>
+"use strict";
+const CONFIG={"id":"NDP-01","number":"01","title":"Środowisko pracy programisty","steps":[{"name":"Kopia pliku","heading":"Utwórz i sprawdź niezależną kopię pliku","minutes":15,"intro":"Porównaj zawartość oryginału i kopii przed edycją oraz po niej, wykorzystując skróty SHA-256.","items":[{"label":"W edytorze tekstu utwórz dokument z dwoma zdaniami i zapisz go jako lorem.rtf w katalogu domowym.","detail":"macOS: w TextEdit wybierz Format → Utwórz tekst sformatowany, a następnie Plik → Zachowaj. Windows/Linux: w LibreOffice Writer wybierz Zapisz jako → Rich Text Format (.rtf).","kind":"text","code":null},{"label":"W menedżerze plików utwórz folder cw1 w katalogu domowym. Skopiuj do niego lorem.rtf i zmień nazwę kopii na epopeja.rtf.","detail":"macOS: ⌘+C oraz ⌘+V. Windows/Linux: Ctrl+C oraz Ctrl+V. Użyj kopiowania, nie wycinania.","kind":"text","code":null},{"label":"Porównaj skróty SHA-256 dokumentów bezpośrednio po skopiowaniu.","code":"shasum -a 256 \"$HOME/lorem.rtf\" \"$HOME/cw1/epopeja.rtf\"","detail":"macOS: shasum -a 256. Linux: sha256sum. Zgodność skrótów dla dwóch plików wskazuje jednakową zawartość bajtową.","kind":"code"},{"label":"Otwórz epopeja.rtf, dopisz trzecie zdanie i zapisz dokument. Następnie otwórz lorem.rtf i porównaj treść obu plików.","detail":"W kopii powinny znajdować się trzy zdania, natomiast w oryginale nadal dwa.","kind":"text","code":null},{"label":"Po edycji kopii ponownie oblicz skróty obu plików.","code":"shasum -a 256 \"$HOME/lorem.rtf\" \"$HOME/cw1/epopeja.rtf\"","detail":"Skrót kopii powinien różnić się od skrótu oryginału. To sprawdza zmianę zawartości bajtowej, a nie fizyczny sposób przechowywania kopii na dysku.","kind":"code"},{"label":"Wyświetl lokalizację obu plików w menedżerze plików.","detail":"macOS: Finder → Widok → Pokaż pasek ścieżki. Windows: użyj paska adresu Eksploratora. Linux: sprawdź ścieżkę w menedżerze plików.","kind":"text","code":null}],"evidence":"Skróty obu plików powinny być zgodne bezpośrednio po kopiowaniu i różne po edycji epopeja.rtf.","insight":"SHA-256 porównuje zawartość bajtową, a nie wygląd dokumentu. Dwa pliki RTF mogą wyświetlać ten sam tekst i mieć różne skróty, np. z powodu metadanych lub formatowania. Skrót nie ujawnia też fizycznego sposobu przechowywania pliku."},{"name":"Dwie ścieżki","heading":"Odnajdź plik za pomocą ścieżek","minutes":12,"intro":"Sprawdź, jak zmiana katalogu roboczego wpływa na interpretację ścieżek względnych.","items":[{"label":"Sprawdź bieżący katalog w terminalu Bash lub zsh.","code":"pwd","detail":"W Windows możesz skorzystać z Git Bash. W PowerShell podobną informację uzyskasz poleceniem Get-Location.","kind":"code"},{"label":"Przejdź do swojego katalogu domowego.","code":"cd \"$HOME\"","detail":"Ponownie wykonaj pwd, aby potwierdzić zmianę katalogu.","kind":"code"},{"label":"Wyświetl katalog cw1 w menedżerze plików.","code":"open \"$HOME/cw1\"","detail":"Polecenie open dotyczy macOS. Linux: xdg-open \"$HOME/cw1\". Windows PowerShell: explorer.exe \"$HOME/cw1\".","kind":"code"},{"label":"Przejdź do cw1 i wyświetl jego zawartość.","code":"cd \"$HOME/cw1\"\nls -lh","detail":"Porównaj nazwę i rozmiar epopeja.rtf z informacjami w Finderze.","kind":"code"},{"label":"Sprawdź typ pliku, a nie samo rozszerzenie.","code":"file epopeja.rtf","detail":"file jest dostępne w macOS i wielu środowiskach Linux/Git Bash. Format rzeczywisty może różnić się od końcówki nazwy.","kind":"code"},{"label":"Wróć do katalogu domowego i porównaj wynik poleceń wskazujących dwie ścieżki do pliku epopeja.rtf.","code":"cd \"$HOME\"\nls -l epopeja.rtf\nls -l cw1/epopeja.rtf","detail":"Pierwsza próba powinna zgłosić brak pliku w katalogu domowym, druga powinna wskazać plik w cw1.","kind":"code"}],"evidence":"Po zmianie katalogu wykonaj ls -l epopeja.rtf i ls -l cw1/epopeja.rtf. Porównaj, które polecenie znajdzie dokument.","insight":"Bieżący katalog jest właściwością procesu. Względna ścieżka w skrypcie jest interpretowana względem katalogu procesu uruchamiającego, a nie automatycznie względem położenia samego skryptu."},{"name":"System","heading":"Sprawdź konfigurację stanowiska","minutes":9,"intro":"Zidentyfikuj system, architekturę oraz powłokę, w której wykonujesz polecenia.","items":[{"label":"Ustal nazwę konta użytkownika.","code":"whoami","detail":"Nie kopiuj nazwy konta do publicznych raportów, jeśli może identyfikować konkretną osobę.","kind":"code"},{"label":"Odczytaj wersję systemu.","code":"sw_vers","detail":"macOS: zapisz wartość ProductVersion. Linux: cat /etc/os-release. Windows PowerShell: Get-ComputerInfo | Select-Object WindowsProductName,WindowsVersion.","kind":"code"},{"label":"Sprawdź architekturę komputera.","code":"uname -m","detail":"macOS/Linux: przykładowe wyniki to arm64, aarch64 lub x86_64. Windows PowerShell: $env:PROCESSOR_ARCHITECTURE.","kind":"code"},{"label":"Sprawdź domyślną oraz aktualnie uruchomioną powłokę.","code":"printf '%s\\n' \"$SHELL\"\nprintf '%s\\n' \"$0\"","detail":"W interaktywnej sesji Bash lub zsh pierwsze polecenie pokazuje zwykle domyślną powłokę, a $0 nazwę uruchomionej powłoki. W PowerShell pomiń tę parę poleceń.","kind":"code"}],"evidence":null,"insight":"Zmienna SHELL zazwyczaj opisuje powłokę skonfigurowaną dla konta. Po uruchomieniu Bash wewnątrz zsh wartość SHELL może pozostać bez zmian, mimo że polecenia wykonuje już Bash. W sesji interaktywnej można porównać ją z $0."},{"name":"Narzędzia","heading":"Sprawdź działanie narzędzi programisty","minutes":11,"intro":"Sprawdź rozpoznawanie programów w PATH i ich rzeczywistą możliwość uruchomienia.","items":[{"label":"Sprawdź, gdzie powłoka odnajduje Git.","code":"command -v git","detail":"W PowerShell użyj Get-Command git. Zapisz ścieżkę lub brak wyniku.","kind":"code"},{"label":"Sprawdź, czy Git się uruchamia.","code":"git --version","detail":"Zapisz wersję albo dokładny komunikat błędu.","kind":"code"},{"label":"Sprawdź obecność i działanie kompilatora LaTeX.","code":"command -v pdflatex\npdflatex --version","detail":"Jeżeli kompilator jest niedostępny, zanotuj wynik. Nie przepisuj całego komunikatu o wersji.","kind":"code"},{"label":"Sprawdź działanie Vima.","code":"vim --version","detail":"Wystarczy pierwszy wiersz zawierający informację o wersji.","kind":"code"},{"label":"Na macOS sprawdź katalog aktywnych narzędzi deweloperskich Apple.","code":"xcode-select -p","detail":"Na Linux/Windows pomiń to polecenie. Nie instaluj samodzielnie programów wymagających uprawnień administratora.","kind":"code"}],"evidence":null,"insight":"W Bash status 127 zwykle oznacza, że nie odnaleziono polecenia, a 126 — że znaleziono je, lecz nie można go wykonać. To dwa różne problemy diagnostyczne; żaden nie uzasadnia automatycznie ponownej instalacji."},{"name":"Kontrolowany błąd","heading":"Zdiagnozuj błąd nazwy pliku","minutes":10,"intro":"Porównaj kod zakończenia udanej i nieudanej operacji. Następnie sprawdź status potoku.","items":[{"label":"Przejdź do katalogu cw1, który zawiera epopeja.rtf.","code":"cd \"$HOME/cw1\"","detail":"Upewnij się, że wykonujesz dalsze polecenia w Bash lub zsh.","kind":"code"},{"label":"Wywołaj polecenie odczytu nieistniejącego pliku.","code":"cat nie_ma_takiego_pliku.rtf","detail":"Odczytaj dokładny komunikat. Nie instaluj niczego ani nie zmieniaj ustawień systemu.","kind":"code"},{"label":"Natychmiast odczytaj kod zakończenia.","code":"echo $?","detail":"Zapisz wynik, zanim wykonasz kolejne polecenie. W PowerShell zachowanie $? jest inne; ten eksperyment wykonaj w Bash lub zsh.","kind":"code"},{"label":"Zweryfikuj nazwę rzeczywiście istniejącego pliku.","code":"ls -la","detail":"Sprawdź, czy widzisz epopeja.rtf.","kind":"code"},{"label":"Wykonaj poprawne polecenie i odczytaj jego status.","code":"file epopeja.rtf\necho $?","detail":"Porównaj status błędu i poprawnego wykonania. Polecenie file jest tu bezpieczniejsze od cat dla zawartości RTF.","kind":"code"},{"label":"Sprawdź, czy niepowodzenie pierwszego programu zmienia kod zakończenia potoku.","code":"false | true\necho $?","detail":"W domyślnych ustawieniach Bash/zsh wynik potoku powinien wynosić 0, bo ostatnie polecenie zakończyło się powodzeniem.","kind":"code"}],"evidence":"Po cat nie_ma_takiego_pliku.rtf i po file epopeja.rtf sprawdź echo $? bez poleceń pośrednich. Następnie wykonaj false | true; echo $? i porównaj wyniki.","insight":"Domyślnie status potoku w Bash pochodzi od jego ostatniego polecenia. Dlatego false | true kończy się statusem 0, mimo błędu false. Ustawienie pipefail zmienia tę regułę."},{"name":"AI i dowody","heading":"Zweryfikuj diagnozę AI na podstawie wyników","minutes":11,"intro":"Zweryfikuj dwie konkurencyjne przyczyny błędu na podstawie wyników poleceń.","items":[{"label":"Przygotuj anonimowy opis błędu obejmujący polecenie, komunikat i katalog roboczy.","code":null,"detail":"Nie podawaj danych osobowych, haseł ani całych ścieżek ujawniających nazwę konta. Możesz zastąpić nazwę użytkownika słowem student.","kind":"text"},{"label":"Uzyskaj dwie możliwe przyczyny błędu z narzędzia AI albo porównaj dwie hipotezy samodzielnie: brak pliku i brak programu.","code":null,"detail":"Jeśli używasz AI, wklej tylko zanonimizowany opis. Potem sprawdź obie hipotezy poleceniami z następnego kroku.","kind":"text"},{"label":"Sprawdź dostępność programu oraz istnienie pliku.","code":"command -v cat\nls -la epopeja.rtf\nls -la nie_ma_takiego_pliku.rtf","detail":"Wyniki pozwalają odróżnić problem z programem od problemu ze ścieżką.","kind":"code"},{"label":"Sprawdź opis działania polecenia w dokumentacji.","code":"man cat","detail":"W macOS/Linux wyjdź z dokumentacji klawiszem q. W Windows Git Bash dostępność man może być ograniczona.","kind":"code"},{"label":"Odrzuć hipotezę sprzeczną z wynikami i wskaż przyczynę błędu.","code":null,"detail":"Porównaj status programu cat z wynikiem sprawdzenia pliku. W raporcie podaj polecenie, które rozstrzygnęło między hipotezami.","kind":"text"}],"evidence":null,"insight":null},{"name":"Wynik pracy","heading":"Przygotuj i zabezpiecz raport techniczny","minutes":10,"intro":"Zbierz wyniki eksperymentów w krótkim, możliwym do odtworzenia raporcie.","items":[{"label":"W raporcie zestaw treść i ścieżki dokumentów lorem.rtf oraz epopeja.rtf.","code":null,"detail":"Dołącz informację, które zdanie występuje tylko w kopii.","kind":"text"},{"label":"Dodaj do raportu tabelę: system, architektura, powłoka i dostępność Git, LaTeX oraz Vima.","code":null,"detail":"Wystarczą istotne wersje i komunikaty; nie wklejaj całych logów.","kind":"text"},{"label":"Dodaj wynik diagnozy nieistniejącego pliku: komunikat, polecenie kontrolne i przyczynę.","code":null,"detail":"Jeśli korzystałeś z AI, wskaż zakres wykorzystania i sposób sprawdzenia jego hipotez.","kind":"text"},{"label":"Sprawdź zawartość własnego katalogu przed sprzątaniem.","code":"ls -la \"$HOME/cw1\"","detail":"Nie usuwaj plików, dopóki raport i wymagane dokumenty nie zostały zapisane.","kind":"code"},{"label":"Zabezpiecz raport, a następnie wyloguj się z usług uczelnianych.","code":null,"detail":"Usuń własne pliki robocze tylko wtedy, gdy wymaga tego prowadzący, po sprawdzeniu ich lokalizacji.","kind":"text"}],"evidence":null,"insight":null}],"questions":[{"q":"Po skopiowaniu lorem.rtf do cw1/epopeja.rtf dopisano zdanie tylko w kopii. Która obserwacja potwierdza, że pliki są niezależne?","a":["Dopisane zdanie pojawia się w obu dokumentach.","Oryginał znika, a jego zawartość pozostaje w kopii.","Dopisane zdanie występuje wyłącznie w epopeja.rtf.","Dopisane zdanie występuje wyłącznie w lorem.rtf."],"ok":2,"why":"Kopiowanie tworzy niezależny plik: edycja epopeja.rtf nie modyfikuje lorem.rtf."},{"q":"Załóż, że HOME=/Users/student. Co wyświetli pwd po wykonaniu cd \"$HOME/cw1\"?","a":["/Users/student/cw1","/Users/student","~/cw1","/cw1"],"ok":0,"why":"cd ustawia katalog roboczy na /Users/student/cw1; pwd wyświetla pełną ścieżkę."},{"q":"W Terminalu wykonano open \"$HOME/cw1\". Co powinno się wydarzyć na macOS?","a":["W Finderze zostaje otwarty katalog domowy.","Terminal przechodzi do katalogu cw1.","W TextEdit zostaje otwarty plik epopeja.rtf.","W Finderze zostaje otwarty katalog cw1."],"ok":3,"why":"open z argumentem będącym katalogiem otwiera go w Finderze; nie zmienia katalogu bieżącej powłoki."},{"q":"Plik nazwano epopeja.rtf, ale file epopeja.rtf zwraca „UTF-8 Unicode text”. Jak interpretować ten wynik?","a":["Plik musi zawierać prawidłowo zakodowany dokument RTF.","Rozpoznana zawartość jest tekstowa; samo rozszerzenie nie potwierdza formatu RTF.","Polecenie file zwróciło nazwę systemu plików, a nie format dokumentu.","Wynik oznacza, że plik został skopiowany zamiast przeniesiony."],"ok":1,"why":"Polecenie file ocenia zawartość, a nie samą końcówkę nazwy; tekst UTF-8 nie jest automatycznie dokumentem RTF."},{"q":"Wynik echo \"$SHELL\" to /bin/zsh, a ps -p $ -o comm= wskazuje bash. Co z tego wynika?","a":["Aktualnie działa zsh, a w koncie ustawiono bash.","Obydwa polecenia podają aktualnie wykonywaną powłokę zsh.","W koncie ustawiono zsh, ale bieżący proces powłoki to bash.","W koncie ustawiono bash, ale bieżący proces powłoki to zsh."],"ok":2,"why":"Zmienna SHELL opisuje zazwyczaj domyślną powłokę logowania; ps wskazuje proces bieżącej powłoki."},{"q":"command -v git zwraca /usr/bin/git, a git --version zwraca numer wersji. Co zostało rzeczywiście potwierdzone?","a":["Możliwość wysyłania commitów do dowolnego repozytorium zdalnego.","Dostępność polecenia w PATH i uruchamianie programu Git.","Poprawna konfiguracja nazwy i adresu e-mail autora commitów.","Możliwość instalacji programów bez uprawnień administratora."],"ok":1,"why":"Polecenia sprawdzają rozpoznawanie wykonywalnego Git i jego wersję, nie uprawnienia ani konfigurację repozytoriów."},{"q":"cat nie_ma_takiego_pliku.rtf kończy się błędem. Potem wykonano poprawne ls -la i dopiero echo $?. Co opisuje wyświetlona wartość?","a":["Kod zakończenia ls -la, najczęściej 0.","Kod zakończenia cat, nadal różny od 0.","Sumę kodów zakończenia cat i ls.","Kod zakończenia pierwszego polecenia w sesji."],"ok":0,"why":"$? oznacza status bezpośrednio poprzedniego polecenia, czyli ls, a nie wcześniejszego cat."},{"q":"Wynik uname -m to arm64. Który wariant instalatora jest zgodny z tą architekturą?","a":["Pakiet wyłącznie dla i386.","Pakiet przeznaczony tylko dla x86_64.","Pakiet przeznaczony wyłącznie dla architektury ppc64.","Pakiet natywny dla arm64."],"ok":3,"why":"arm64 oznacza architekturę ARM 64-bit; właściwy pakiet musi ją obsługiwać."},{"q":"git --version działa, ale xcode-select -p zwraca błąd. Jaki wniosek wynika wyłącznie z tych wyników?","a":["Git nie jest dostępny w aktualnej powłoce.","Git działa, natomiast ścieżka aktywnych narzędzi deweloperskich wymaga wyjaśnienia.","Cały zestaw narzędzi deweloperskich Apple działa poprawnie.","Powłoka nie rozpoznaje żadnych poleceń z PATH."],"ok":1,"why":"Dostępność Git i prawidłowa konfiguracja xcode-select to różne aspekty środowiska."},{"q":"Student chce sprawdzić hipotezę „Git nie działa, bo nie ma go w PATH”. Które polecenie bezpośrednio sprawdza tę hipotezę?","a":["git config user.name","sw_vers","command -v git","xcode-select -p"],"ok":2,"why":"command -v git sprawdza, czy powłoka może odnaleźć polecenie Git w aktualnym środowisku."}]};
+const STEPS=CONFIG.steps;
+const QUESTIONS=CONFIG.questions;
+const STARTER=CONFIG.starter||{};
+let current=0,completed=false,report=null;
+const quizAnswers=Array(QUESTIONS.length).fill(null);
+let quizAlbum='';
+const $=id=>document.getElementById(id);
+function esc(value){return String(value).replace(/[&<>"']/g,s=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));}
+function commandSteps(items){
+ return '<ol class="task-list">'+items.map(({label,code,detail,kind})=>
+  '<li class="task '+(code?'':'text-only')+'"><div class="task-label">'+esc(label)+'</div>'+
+  (code?'<pre><code>'+esc(code)+'</code></pre>':(kind==='starter'?'<div class="starter-files" id="starterFiles"></div>':''))+
+  (detail?'<div class="detail">'+esc(detail)+'</div>':'')+'</li>').join('')+'</ol>';
+}
+function btn(label,variant,fn){const x=document.createElement('button');x.type='button';x.className='btn '+variant;x.textContent=label;x.addEventListener('click',fn);return x;}
+function downloadFile(filename,contents,mime){const blob=new Blob([contents],{type:mime});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.download=filename;a.href=url;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);}
+function show(n){
+ if(completed && n!==STEPS.length+1)return;
+ if(n<0||n>STEPS.length+1 || (n===STEPS.length+1&&!completed))return;
+ current=n;
+ const all=STEPS.map(s=>s.name).concat(['Test','Wyniki']);
+ $('nav').replaceChildren();all.forEach((name,i)=>{const b=document.createElement('button');b.type='button';b.className=i===n?'active':'';b.disabled=(completed&&i!==n)||(!completed&&i===STEPS.length+1);b.innerHTML='<span>'+String(i+1)+'</span>'+esc(name);b.setAttribute('aria-current',i===n?'step':'false');b.addEventListener('click',()=>show(i));$('nav').append(b);});
+ $('progress').innerHTML=all.map((_,i)=>'<i class="'+(i<=n?'current':'')+'"></i>').join('');
+ const c=$('content');
+ if(n<STEPS.length){
+  const s=STEPS[n];
+  c.innerHTML='<div class="step-count">Etap '+(n+1)+' z '+STEPS.length+' · około '+s.minutes+' min</div>'+
+    '<h2>'+esc(s.heading)+'</h2><p>'+esc(s.intro)+'</p>'+
+    '<h3 class="experiment-heading">Wykonaj</h3>'+commandSteps(s.items)+
+    (s.evidence?'<div class="lesson-evidence"><strong>Kontrola wyniku</strong>'+esc(s.evidence)+'</div>':'')+
+    (s.insight?'<div class="lesson-insight"><strong>Uwaga techniczna</strong>'+esc(s.insight)+'</div>':'');  const holder=$('starterFiles');if(holder){Object.entries(STARTER).forEach(([filename,contents])=>{const b=document.createElement('button');b.type='button';b.textContent=filename;b.addEventListener('click',()=>downloadFile(filename,contents,'text/plain;charset=utf-8'));holder.append(b);});}
+ }else if(n===STEPS.length){c.innerHTML='<div class="step-count">Test końcowy · 10 pytań</div><h2>Sprawdź wiedzę</h2><p>10 pytań, po cztery odpowiedzi. Wybierz po jednej. Wyniki zostaną pokazane po zakończeniu.</p><p class="album"><label for="album">Numer albumu (opcjonalnie): </label><input id="album" type="text" inputmode="numeric" maxlength="12" autocomplete="off"></p><form id="quiz" novalidate></form>';drawQuiz();$('album').value=quizAlbum;$('album').addEventListener('input',e=>quizAlbum=e.target.value);
+ }else{c.innerHTML='<div class="step-count">Podsumowanie testu</div><h2>Wynik podejścia</h2><div id="results"></div>';drawResults();}
+ const a=$('actions');a.replaceChildren();if(n>0&&!completed)a.append(btn('Poprzedni','',()=>show(n-1)));
+ if(n<STEPS.length)a.append(btn('Następny','primary',()=>show(n+1)));
+ else if(n===STEPS.length&&!completed)a.append(btn('Zakończ i oceń','teal',grade));
+ else if(n===STEPS.length+1)a.append(btn('Zapisz wynik JSON','primary',saveReport));
+ window.scrollTo(0,0);
+}
+function drawQuiz(){const form=$('quiz');QUESTIONS.forEach((q,i)=>{
+ const field=document.createElement('fieldset');field.className='question';const legend=document.createElement('legend');legend.innerHTML=String(i+1)+'. '+q.q;field.append(legend);
+ const choices=document.createElement('div');choices.className='answer';q.a.forEach((answer,k)=>{const label=document.createElement('label');const radio=document.createElement('input');radio.type='radio';radio.name='q'+i;radio.value=String(k);radio.autocomplete='off';radio.checked=quizAnswers[i]===k;radio.addEventListener('change',()=>quizAnswers[i]=k);label.append(radio,document.createTextNode(answer));choices.append(label);});field.append(choices);form.append(field);});}
+function grade(){if(completed)return;
+ const vals=quizAnswers.slice();
+ const missing=vals.filter(x=>x===null).length;if(missing){alert('Odpowiedz na wszystkie pytania. Brak: '+missing+'.');return;}
+ const album=$('album').value.trim();if(album&&!/^\d{1,12}$/.test(album)){alert('Numer albumu musi zawierać od 1 do 12 cyfr.');return;}
+ const score=vals.reduce((n,a,i)=>n+Number(a===QUESTIONS[i].ok),0);
+ report={schema:'ndp-lab-assessment/1.0',exercise:CONFIG.id,finished_at:new Date().toISOString(),album:album||null,score,max_score:10,percent:score*10,answers:vals.map((answer,i)=>({number:i+1,answer_index:answer,correct:answer===QUESTIONS[i].ok}))};
+ completed=true;show(STEPS.length+1);
+}
+function drawResults(){if(!report)return;const r=$('results');r.innerHTML='<div class="kpis"><div class="kpi">Punkty<strong>'+report.score+' / 10</strong></div><div class="kpi">Wynik<strong>'+report.percent+'%</strong></div></div><p class="details">Poniżej podano ocenę odpowiedzi i poprawne rozwiązania.</p>';
+ QUESTIONS.forEach((q,i)=>{const isCorrect=report.answers[i].correct;const b=document.createElement('div');b.className='result-item '+(isCorrect?'good':'');
+ const h=document.createElement('strong');h.textContent=(i+1)+'. '+(isCorrect?'Poprawnie':'Błąd')+' · '+q.q.replace(/<[^>]*>/g,'');b.append(h);
+ const v=document.createElement('p');v.textContent='Twoja odpowiedź: '+q.a[report.answers[i].answer_index];b.append(v);
+ if(!isCorrect){const c=document.createElement('p');c.textContent='Poprawna odpowiedź: '+q.a[q.ok];b.append(c);}
+ const why=document.createElement('p');why.className='details';why.textContent=q.why;b.append(why);r.append(b);});
+ const p=document.createElement('p');p.className='details';p.textContent='Raport możesz zapisać na komputerze. Nie jest wysyłany automatycznie.';r.append(p);
+}
+function saveReport(){if(!report)return;downloadFile('ndp_lab_'+CONFIG.number+'_wynik_'+(report.album||'anonim')+'.json',JSON.stringify(report,null,2)+'\n','application/json;charset=utf-8');}
+show(0);
+</script>
+</body>
+</html>
