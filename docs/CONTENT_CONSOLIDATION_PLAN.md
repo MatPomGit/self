@@ -1,4 +1,4 @@
-# Plan konsolidacji raportów w `files/inne/analizy/`
+# Plan konsolidacji raportów w `files/robocze/analizy/`
 
 **Wersja:** 1.0.0 · **Data:** 2026-11-12 · **Zadanie:** [#138](https://github.com/MatPomGit/self/issues/138) · **Audyt:** [PR #139](https://github.com/MatPomGit/self/pull/139)
 
@@ -97,7 +97,7 @@ Tych trzech grup **nie rekomenduje się łączyć z powodu samej redundancji**. 
 **Na teraz dwa scalenia główne: A1 i A2.** Pozostałe raporty należy zachować osobno do czasu nowego, merytorycznego porównania. Docelowo wynik A1+A2 zmniejszyłby 40 dokumentów logicznych do **38**, bez liczenia późniejszych zmian wariantów formatowych. Liczba 38 jest **celem hipotetycznym po zatwierdzeniu**, nie wynikiem już wykonanej konsolidacji.
 ## Generator dowodowych szkiców dla raportów archiwalnych
 
-Narzędzie `scripts/prepare_consolidation_drafts.py` jest **tylko analizatorem kontrolnym**, nie nadpisuje opublikowanych dokumentów. Korzysta z oryginałów przeniesionych do `files/ignored/inne/analizy/`, zapisuje sekcje DOCX i potencjalnie dodatkowe fragmenty PDF w artefakcie poza `files/`. Opublikowane pliki kanoniczne pozostają w `files/inne/analizy/`, a ich źródła w `docs/consolidated/`. Uruchomienie:
+Narzędzie `scripts/prepare_consolidation_drafts.py` jest **tylko analizatorem kontrolnym**, nie nadpisuje opublikowanych dokumentów. Korzysta z oryginałów przeniesionych do `files/ignored/inne/analizy/`, zapisuje sekcje DOCX i potencjalnie dodatkowe fragmenty PDF w artefakcie poza `files/`. Opublikowane pliki kanoniczne pozostają w `files/robocze/analizy/`, a ich źródła w `docs/consolidated/`. Uruchomienie:
 
 ```bash
 python scripts/prepare_consolidation_drafts.py --scope files/ignored/inne/analizy --output-dir reports/content-audit/consolidation

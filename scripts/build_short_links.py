@@ -37,7 +37,7 @@ COURSES = {
     "robotyka-afektywna": "ra",
     "seminaria-dyplomowe": "sd",
     "wirtualna-i-rozszerzona-rzeczywistosc": "wirr",
-    "inne": "inne",
+    "robocze": "robocze",
 }
 NUMBERED = re.compile(
     r"(?:^|[_ .-])(?P<kind>lab|w|wyklad|wykład)[_ .-]*(?P<number>\d{1,3})(?=$|[_ .-])",
@@ -60,7 +60,7 @@ def alias_base(relative: Path) -> tuple[str, str, str]:
     """Return (course prefix, short document slug, alternative suffix)."""
     subject = relative.parts[0]
     prefix = COURSES.get(subject, slug(subject))
-    if subject == "inne" and len(relative.parts) > 2:
+    if subject == "robocze" and len(relative.parts) > 2:
         prefix += "/" + slug(relative.parts[1])
     stem = relative.stem
     number = NUMBERED.search(stem)

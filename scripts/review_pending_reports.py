@@ -20,10 +20,10 @@ except ModuleNotFoundError:
     )
 
 INPUTS = {
-    "isaac_architecture": "files/inne/analizy/isaac_sim.docx",
-    "isaac_glossary": "files/inne/analizy/isaac_sim_pojecia.pdf",
-    "ndd_review": "files/inne/analizy/tele_ndd.docx",
-    "ndd_telehealth": "files/inne/analizy/teled_ndd.docx",
+    "isaac_architecture": "files/robocze/analizy/isaac_sim.docx",
+    "isaac_glossary": "files/robocze/analizy/isaac_sim_pojecia.pdf",
+    "ndd_review": "files/robocze/analizy/tele_ndd.docx",
+    "ndd_telehealth": "files/robocze/analizy/teled_ndd.docx",
 }
 CANONICAL = "docs/consolidated/isaac_lab.md"
 

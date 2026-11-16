@@ -553,7 +553,7 @@ def write_reports(result: dict, dest: Path, top: int) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
-    parser.add_argument("--scope", default="files/inne/analizy")
+    parser.add_argument("--scope", default="files/robocze/analizy")
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--top", type=int, default=15)
     parser.add_argument("--ci-summary", action="store_true")

@@ -103,8 +103,8 @@ Teleporada, zdalne wykonanie kwestionariusza i automatyczna predykcja są różn
 
 Wersje materiałów poddanych analizie, według sum SHA-256:
 
-- `files/inne/analizy/tele_ndd.docx`: `30e17d8a293d08483a1f3de853761390327c7451f33ac9f9b475f6463a513e49`
-- `files/inne/analizy/teled_ndd.docx`: `1ee2c772c9aec3ecf4c0bc55bc9adc1d79c6116dacceafcb00cc4ebb8c5560b0`
+- `files/robocze/analizy/tele_ndd.docx`: `30e17d8a293d08483a1f3de853761390327c7451f33ac9f9b475f6463a513e49`
+- `files/robocze/analizy/teled_ndd.docx`: `1ee2c772c9aec3ecf4c0bc55bc9adc1d79c6116dacceafcb00cc4ebb8c5560b0`
 
 Teksty źródłowe pozostają dostępne w pierwotnych plikach. Nowa synteza jest **opracowaniem uzupełniającym**; nie stanowi dowodu, że całą zawartość dwóch dokumentów można zastąpić krótszym tekstem bez utraty szczegółów.
 

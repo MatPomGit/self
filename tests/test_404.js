@@ -120,6 +120,13 @@ assert.equal(legacy.redirect, '/files/course/lecture.pdf?lang=en#page=5',
 assert.equal(visit('/materials/', '', '').redirect, '/files/',
   'Legacy directory must use the 404 fallback without a physical materials/ folder');
 assert.equal(visit('/materials', '?lang=en', '#course').redirect, '/files/?lang=en#course');
+assert.equal(visit('/files/inne/analizy/report.pdf', '?lang=en', '#page=2').redirect,
+  '/files/robocze/analizy/report.pdf?lang=en#page=2',
+  'Renamed public directory should retain deep links and fragments');
+assert.equal(visit('/materials/inne/analizy/report.pdf').redirect,
+  '/files/robocze/analizy/report.pdf',
+  'Combined migrations should avoid a second redirect');
+assert.equal(visit('/files/inne', '', '').redirect, '/files/robocze');
 assert.equal(visit('/files/course/unknown.pdf').redirect, null);
 assert.equal(visit('/something-materials/page').redirect, null);
 

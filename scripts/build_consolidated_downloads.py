@@ -20,7 +20,7 @@ DOWNLOADS = (
     ("isaac_lab", ROOT / "docs/consolidated/isaac_lab.md"),
     ("telediagnostyka_ndd", ROOT / "docs/consolidated/telediagnostyka_ndd.md"),
 )
-DEST = ROOT / "files/inne/analizy"
+DEST = ROOT / "files/robocze/analizy"
 MIN_PDF_BYTES = 12_000
 MIN_DOCX_BYTES = 8_000
 
@@ -63,7 +63,7 @@ def validate(name: str, path: Path) -> None:
 
 def build(root: Path = ROOT, *, output_dir: Path | None = None,
           only: tuple[str, ...] | None = None) -> list[Path]:
-    destination = output_dir or root / "files/inne/analizy"
+    destination = output_dir or root / "files/robocze/analizy"
     destination = destination.resolve()
     if destination == root / "files/ignored" or destination.is_relative_to(root / "files/ignored"):
         raise ValueError("Canonical downloads cannot be written under files/ignored")

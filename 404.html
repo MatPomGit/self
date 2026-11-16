@@ -13,8 +13,14 @@
     (function () {
       const legacy = '/materials/';
       const path = window.location.pathname;
-      if (path === '/materials' || path.startsWith(legacy)) {
-        window.location.replace('/files/' + (path === '/materials' ? '' : path.slice(legacy.length)) +
+      if (path === '/files/inne' || path.startsWith('/files/inne/')) {
+        window.location.replace('/files/robocze' + path.slice('/files/inne'.length) +
+          window.location.search + window.location.hash);
+      } else if (path === '/materials' || path.startsWith(legacy)) {
+        const suffix = path === '/materials' ? '' : path.slice(legacy.length);
+        const canonical = suffix === 'inne' || suffix.startsWith('inne/')
+          ? 'robocze' + suffix.slice('inne'.length) : suffix;
+        window.location.replace('/files/' + canonical +
           window.location.search + window.location.hash);
       }
     }());

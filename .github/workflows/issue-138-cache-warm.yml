@@ -7,7 +7,7 @@ on:
       - .github/workflows/issue-138-audit.yml
       - .github/workflows/issue-138-cache-warm.yml
       - scripts/audit_content_overlap.py
-      - files/inne/analizy/**
+      - files/robocze/analizy/**
       - files/ignored/inne/analizy/**
   workflow_dispatch:
 
@@ -52,7 +52,7 @@ jobs:
           root = Path.cwd()
           cache = ExtractionCache(root, Path(os.environ["CACHE_DIR"]))
           for label, directory in (
-              ("active", "files/inne/analizy"),
+              ("active", "files/robocze/analizy"),
               ("archive", "files/ignored/inne/analizy"),
           ):
               result = compute(root, root / directory, cache=cache)

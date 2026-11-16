@@ -11,7 +11,7 @@ Pliki źródłowe pozostają nienaruszone; wyniki trafiają wyłącznie do artef
 Zależność: Python 3.12+, pypdf >= 5, < 7.
 
     python -m pip install 'pypdf>=5,<7'
-    python scripts/audit_content_overlap.py --scope files/inne/analizy --output-dir /tmp/self-content-audit --top 20
+    python scripts/audit_content_overlap.py --scope files/robocze/analizy --output-dir /tmp/self-content-audit --top 20
 
 ## Obsługa operacyjna Issue #138
 
@@ -31,7 +31,7 @@ Obie ścieżki generują `overlap.json`, `manifest.json`, `matrix.csv`,
 Workflow zapisuje w Issue #138 tylko liczbowe podsumowanie i link do przebiegu,
 bez wycinków raportów.
 
-`active`: `files/inne/analizy/`; `archive`: `files/ignored/inne/analizy/`;
+`active`: `files/robocze/analizy/`; `archive`: `files/ignored/inne/analizy/`;
 `both`: niezależne raporty dla obu zbiorów, bez automatycznego ich łączenia.
 Brak kandydatów oznacza tylko brak zgodności ponad progami leksykalnymi.
 Dokumenty archiwalne nie są przywracane do publicznej strony materiałów.
@@ -48,7 +48,7 @@ Przykład użycia lokalnego (cache nie może być w katalogu publikowanej strony
 
 ```bash
 python scripts/audit_content_overlap.py \
-  --scope files/inne/analizy \
+  --scope files/robocze/analizy \
   --output-dir reports/content-audit/current \
   --cache-dir reports/content-audit/extraction-cache --changed-only
 ```
@@ -107,7 +107,7 @@ i **kandydatów** na fragmenty unikalne; każdy zapis zawiera stronę/akapit,
 pozycję w tekście i fragment z oryginału. Metoda nie udowadnia unikalności
 semantycznej ani nie ocenia prawdziwości twierdzeń.
 
-    python scripts/audit_report_differences.py --scope files/inne/analizy --output-dir /tmp/self-content-audit
+    python scripts/audit_report_differences.py --scope files/robocze/analizy --output-dir /tmp/self-content-audit
 
 Raporty: `comparison.md` i `comparison.json`. Porównania obejmują:
 - `Synteza Modeli multimodalnych.docx` ↔ `Zautomatyzowana_analiza_afektywna.pdf`,
@@ -160,7 +160,7 @@ Przykładowo na komputerze mającym już zainstalowany model wielojęzyczny:
 
 ```bash
 python scripts/audit_semantic_overlap.py \
-  --scope files/inne/analizy \
+  --scope files/robocze/analizy \
   --model-dir /opt/models/paraphrase-multilingual-MiniLM-L12-v2 \
   --output-dir reports/content-audit/semantic \
   --threshold 0.76
@@ -262,7 +262,7 @@ na stronie.
 
 ```bash
 python scripts/audit_repeated_claims.py \
-  --scope files/inne/analizy \
+  --scope files/robocze/analizy \
   --output-dir reports/content-audit/claims
 ```
 

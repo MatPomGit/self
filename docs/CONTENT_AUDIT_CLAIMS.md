@@ -1,6 +1,6 @@
 # Audyt zgodności twierdzeń naukowych — Issue #138
 
-**Wersja robocza 0.1.0 · 11.11.2026 · źródła: publiczne raporty \`files/inne/analizy/\`.**
+**Wersja robocza 0.1.0 · 11.11.2026 · źródła: publiczne raporty \`files/robocze/analizy/\`.**
 
 Celem jest **poprawność naukowa i zachowanie informacji unikalnych**,
 a nie mechaniczne ograniczanie liczby raportów. Ustalenia oparto na

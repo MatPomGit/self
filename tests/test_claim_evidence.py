@@ -104,7 +104,7 @@ class ClaimEvidenceTests(unittest.TestCase):
             self.assertEqual(rows[1]["locator"],"tabela 1, wiersz 2")
 
     def test_real_reports_and_read_only_audit(self):
-        scope=ROOT/"files/inne/analizy"
+        scope=ROOT/"files/robocze/analizy"
         for spec in REPORTS.values():
             for name in spec["files"]:
                 with self.subTest(name=name):
