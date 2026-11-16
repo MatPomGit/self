@@ -82,7 +82,7 @@ class DifferenceTests(unittest.TestCase):
 
     def test_real_robot_report_is_not_automatically_marked_mismatched(self):
         from scripts.audit_content_overlap import extract
-        folder = ROOT / "files/inne/analizy"
+        folder = ROOT / "files/robocze/analizy"
         _, docx_name, pdf_name = next(
             pair for pair in PAIRS if pair[0] == "robots-and-work"
         )
@@ -95,7 +95,7 @@ class DifferenceTests(unittest.TestCase):
     def test_source_preservation_and_missing_inputs(self):
         with TemporaryDirectory() as folder:
             root=Path(folder)
-            scope=root/"files/inne/analizy"
+            scope=root/"files/robocze/analizy"
             write_docx(scope/"A.docx","Zapis podstawowego badania z pomiarami.")
             write_docx(scope/"B.docx","Zapis drugiego badania z pomiarami.")
             original=(scope/"A.docx").read_bytes()
@@ -120,7 +120,7 @@ class DifferenceTests(unittest.TestCase):
         self.assertEqual(execution.returncode, 0, execution.stderr)
 
     def test_pilot_sources_exist(self):
-        scope=ROOT/"files/inne/analizy"
+        scope=ROOT/"files/robocze/analizy"
         self.assertEqual(len(PAIRS),4)
         for label,a,b in PAIRS:
             with self.subTest(label=label):

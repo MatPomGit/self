@@ -250,7 +250,7 @@ def save(result, dest):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
-    parser.add_argument("--scope", default="files/inne/analizy")
+    parser.add_argument("--scope", default="files/robocze/analizy")
     parser.add_argument("--model-dir", type=Path, required=True,
                         help="Local directory containing an already-installed model")
     parser.add_argument("--output-dir", type=Path, required=True)

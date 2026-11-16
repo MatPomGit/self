@@ -62,14 +62,14 @@ class ShortLinkTests(unittest.TestCase):
     def test_ignored_pdf_never_gets_short_link(self):
         with TemporaryDirectory() as temp:
             files = Path(temp) / "files"
-            active = files / "inne" / "analizy"
+            active = files / "robocze" / "analizy"
             ignored = files / "ignored" / "inne" / "analizy"
             active.mkdir(parents=True)
             ignored.mkdir(parents=True)
             (active / "analiza_afektywna.pdf").write_bytes(b"%PDF-real")
             (ignored / "obsolete.pdf").write_bytes(b"%PDF-archive")
             routes = pdf_routes(files)
-            self.assertIn("inne/analizy/analiza_afektywna.pdf", routes)
+            self.assertIn("robocze/analizy/analiza_afektywna.pdf", routes)
             self.assertNotIn("ignored/inne/analizy/obsolete.pdf", routes)
 
     def test_no_stale_or_duplicate_aliases(self):

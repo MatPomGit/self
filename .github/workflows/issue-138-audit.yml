@@ -66,7 +66,7 @@ jobs:
           case "$SELECTED_SCOPE" in
             active|both)
               python scripts/audit_content_overlap.py \
-                --scope files/inne/analizy \
+                --scope files/robocze/analizy \
                 --output-dir "$RUNNER_TEMP/issue-138/active" \
                 --top 20 --ci-summary \
                 --cache-dir "$RUNNER_TEMP/issue-138-extraction-cache" --changed-only

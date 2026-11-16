@@ -22,6 +22,7 @@ aktualnych plików dla studentów jest `files/`.
 | `files/programowanie-gier-komputerowych/` | Laboratoria PGK |
 | `files/informatyka-afektywna/` | Laboratoria IA |
 | `files/seminaria-dyplomowe/` | Prezentacja i szablony pracy |
+| `files/robocze/` | Materiały robocze: analizy, instrukcje i prezentacje |
 | `tests/` | Testy regresyjne i kontrola linków |
 
 ## Utrzymanie indeksu
@@ -35,7 +36,7 @@ aktualnych plików dla studentów jest `files/`.
   `tests/test_public_materials.py` oraz `tests/test_ignored_materials.py`.
   `scripts/sync_materials.py --write` odkrywa je rekurencyjnie, naprawia
   jednoznaczne przeniesienia i uzupełnia istniejącą kartę przedmiotu lub
-  tworzy nową. Pliki w `inne/` grupuje według podkatalogu.
+  tworzy nową. Pliki w `robocze/` grupuje według podkatalogu.
 - Oba workflowy uruchamiają generator **przed testami i publikacją**.
   Wynik trafia bezpośrednio do artefaktu Pages; CI nie tworzy automatycznych
   commitów. Pojawienie się nowego pliku nie powoduje błędu testu.

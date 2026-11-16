@@ -89,7 +89,7 @@ Wcześniejszy raport opisuje narzędzia **Semantics Schema Editor**, **Synthetic
 
 **Zalecane metadane eksportu:** wersja Isaac Sim i odpowiednich rozszerzeń, hash sceny USD i modeli robota, seed randomizacji, parametry sensorów i renderera, konfiguracja generatora, schemat etykiet, liczba próbek oraz osobny protokół oceny danych rzeczywistych.
 
-**Pochodzenie uzupełnienia:** dodatkowe fragmenty pochodzą z `files/inne/analizy/isaac_sim.docx` (SHA-256: `1044199a58993861648083af45c6fff759e4781f6281dd353aff4c4ec42be5a3`) oraz `isaac_sim_pojecia.pdf` (SHA-256: `883d25e545ea3b92c5ba0a8c401bdbd63902828a04da858cfc812598d9da4909`). Uaktualnienie pojęć i kompatybilności zweryfikowano z dokumentacją Isaac Sim 6.2; zawartość źródeł nie była automatycznie uznawana za aktualną.
+**Pochodzenie uzupełnienia:** dodatkowe fragmenty pochodzą z `files/robocze/analizy/isaac_sim.docx` (SHA-256: `1044199a58993861648083af45c6fff759e4781f6281dd353aff4c4ec42be5a3`) oraz `isaac_sim_pojecia.pdf` (SHA-256: `883d25e545ea3b92c5ba0a8c401bdbd63902828a04da858cfc812598d9da4909`). Uaktualnienie pojęć i kompatybilności zweryfikowano z dokumentacją Isaac Sim 6.2; zawartość źródeł nie była automatycznie uznawana za aktualną.
 
 ## 2. Uczenie polityk i projekt AGILE
 
@@ -151,4 +151,4 @@ Isaac Sim służy przede wszystkim jako środowisko symulacji i generowania dany
 
 ## Pochodzenie i zakres weryfikacji
 
-Raport syntetyzuje `Isaac_Lab.docx`, `Isaac Lab i bliźniaki cyfrowe.pdf`, `isaac_sim.docx` i `isaac_sim_pojecia.pdf` z `files/inne/analizy/`, z aktualizacją terminologii na podstawie oficjalnych źródeł. Zawartość tabeli porównawczej pochodzi z materiałów pierwotnych, lecz została skorygowana o rozwój architektury Isaac Lab. Pominięto niesprawdzone ogólne twierdzenia o dokładności AOI i arbitralnej precyzji sterowania; nie są prezentowane jako wynik badań własnych. Historyczne pliki nie są nadpisywane.
+Raport syntetyzuje `Isaac_Lab.docx`, `Isaac Lab i bliźniaki cyfrowe.pdf`, `isaac_sim.docx` i `isaac_sim_pojecia.pdf` z `files/robocze/analizy/`, z aktualizacją terminologii na podstawie oficjalnych źródeł. Zawartość tabeli porównawczej pochodzi z materiałów pierwotnych, lecz została skorygowana o rozwój architektury Isaac Lab. Pominięto niesprawdzone ogólne twierdzenia o dokładności AOI i arbitralnej precyzji sterowania; nie są prezentowane jako wynik badań własnych. Historyczne pliki nie są nadpisywane.

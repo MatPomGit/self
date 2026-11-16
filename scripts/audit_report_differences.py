@@ -30,8 +30,8 @@ PAIRS = (
     ("isaac-lab", "Isaac Lab i bliźniaki cyfrowe.pdf", "Isaac_Lab.docx"),
     ("gesture-slides", "Przewijanie_slajdow_gestem.docx",
      "Przewijanie_slajdow_gestem.pdf"),
-    ("robots-and-work", "Wpływ_robotów_na_pracę_człowieka.docx",
-     "Wpływ_robotów_na_pracę_człowieka.pdf"),
+    ("robots-and-work", "Wplyw_robotow_na_prace_czlowieka.docx",
+     "Wplyw_robotow_na_prace_czlowieka.pdf"),
 )
 WORD = re.compile(r"\S+")
 WINDOW_WORDS = 75
@@ -276,7 +276,7 @@ def save(result: dict, dest: Path) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
-    parser.add_argument("--scope", default="files/inne/analizy")
+    parser.add_argument("--scope", default="files/robocze/analizy")
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--ci-summary", action="store_true")
     args = parser.parse_args()

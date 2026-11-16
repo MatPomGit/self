@@ -8,8 +8,8 @@ Archiwum istnieje **wyłącznie w repozytorium i jego historii**. Ponieważ GitH
 
 | Źródła archiwalne | Nowe pliki do pobrania |
 | --- | --- |
-| `files/ignored/inne/analizy/Synteza Modeli multimodalnych.docx`; `Zautomatyzowana_analiza_afektywna.pdf` | `files/inne/analizy/analiza_afektywna.docx` oraz `.pdf` |
-| `files/ignored/inne/analizy/Isaac_Lab.docx`, `Isaac_Lab.pdf`, `Isaac Lab i bliźniaki cyfrowe.pdf` | `files/inne/analizy/isaac_lab.docx` oraz `.pdf` |
+| `files/ignored/inne/analizy/Synteza Modeli multimodalnych.docx`; `Zautomatyzowana_analiza_afektywna.pdf` | `files/robocze/analizy/analiza_afektywna.docx` oraz `.pdf` |
+| `files/ignored/inne/analizy/Isaac_Lab.docx`, `Isaac_Lab.pdf`, `Isaac Lab i bliźniaki cyfrowe.pdf` | `files/robocze/analizy/isaac_lab.docx` oraz `.pdf` |
 
 Nowe DOCX/PDF są generowane z kanonicznych źródeł `docs/consolidated/analiza_afektywna.md` i `docs/consolidated/isaac_lab.md` przez `scripts/build_consolidated_downloads.py`. W ten sposób oba formaty opisują tę samą, zredagowaną wersję.
 
@@ -27,6 +27,6 @@ Zmiana starych adresów źródłowych będzie oznaczała brak bezpośredniego po
 
 ## Opracowania uzupełniające bez zastępowania źródeł
 
-`files/inne/analizy/telediagnostyka_ndd.docx` oraz `.pdf` są generowane z `docs/consolidated/telediagnostyka_ndd.md`. Jest to nowa synteza tematyczna dwóch raportów NDD, a nie usunięcie treści o odrębnych celach. Oryginały `tele_ndd.docx`, `tele_ndd.pdf`, `teled_ndd.docx` i `teled_ndd.pdf` pozostają dostępne do osobnej decyzji redakcyjnej. Nie przenosić ich automatycznie do `files/ignored/`.
+`files/robocze/analizy/telediagnostyka_ndd.docx` oraz `.pdf` są generowane z `docs/consolidated/telediagnostyka_ndd.md`. Jest to nowa synteza tematyczna dwóch raportów NDD, a nie usunięcie treści o odrębnych celach. Oryginały `tele_ndd.docx`, `tele_ndd.pdf`, `teled_ndd.docx` i `teled_ndd.pdf` pozostają dostępne do osobnej decyzji redakcyjnej. Nie przenosić ich automatycznie do `files/ignored/`.
 
 Rozszerzenie `docs/consolidated/isaac_lab.md` do wersji 1.1.0 uzupełnia już istniejące pobieralne `isaac_lab.docx` i `isaac_lab.pdf`. Pliki `isaac_sim.docx` i `isaac_sim_pojecia.pdf` pozostają osobnymi źródłami, ponieważ zawierają dodatkowy kontekst techniczny i słownik zależny od wersji API. Ich archiwizacja nie została zatwierdzona.

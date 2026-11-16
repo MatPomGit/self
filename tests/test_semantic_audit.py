@@ -92,7 +92,7 @@ class SemanticAuditTests(unittest.TestCase):
     def test_real_pipeline_uses_fake_encoder_without_network(self):
         with TemporaryDirectory() as temp:
             root=Path(temp)
-            scope=root/"files/inne/analizy"
+            scope=root/"files/robocze/analizy"
             phrase=("W badaniu analizowano zależności pomiędzy parametrami "
                     "pomiarowymi a modelowaniem zachowania uczestnika. ")*8
             docx(scope/"Pierwszy.docx",phrase)

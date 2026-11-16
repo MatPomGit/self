@@ -33,6 +33,9 @@ class MaterialsTests(unittest.TestCase):
         folded = [name.casefold() for name in names]
         self.assertEqual(len(folded), len(set(folded)),
                          "Katalogi materiałów różnią się tylko wielkością liter")
+        self.assertTrue((MATERIALS / "robocze").is_dir())
+        self.assertFalse((MATERIALS / "inne").exists())
+        self.assertTrue((MATERIALS / "ignored/inne/analizy").is_dir())
         self.assertTrue((MATERIALS / "nowoczesne-technologie-w-psychologii").is_dir())
         self.assertFalse((MATERIALS / "Nowoczesne-technologie-w-psychologii").exists())
         for name in ("E-terapia.pdf", "E-terapia.pptx",
@@ -73,7 +76,7 @@ class MaterialsTests(unittest.TestCase):
             "nawigacja-robotow-humanoidalnych",
             "neuropsychologia",
             "psychologia-poznawcza",
-            "inne",
+            "robocze",
         ):
             subject_cards = [c for c in cards if f'href="{directory}/' in c]
             self.assertEqual(len(subject_cards), 1, directory)

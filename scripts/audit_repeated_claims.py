@@ -269,7 +269,7 @@ def save(report,dest):
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root",type=Path,default=Path(__file__).resolve().parents[1])
-    parser.add_argument("--scope",default="files/inne/analizy")
+    parser.add_argument("--scope",default="files/robocze/analizy")
     parser.add_argument("--output-dir",type=Path,required=True)
     args=parser.parse_args()
     root=args.root.resolve();scope=(root/args.scope).resolve()

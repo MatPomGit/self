@@ -41,9 +41,9 @@ jobs:
       - name: Audit report overlap and scientific claims (read-only)
         if: github.event_name == 'pull_request'
         run: |
-          python scripts/audit_content_overlap.py --scope files/inne/analizy --output-dir "$RUNNER_TEMP/content-audit" --top 20 --ci-summary
-          python scripts/audit_report_differences.py --scope files/inne/analizy --output-dir "$RUNNER_TEMP/content-audit" --ci-summary
-          python scripts/audit_repeated_claims.py --scope files/inne/analizy --output-dir "$RUNNER_TEMP/content-audit"
+          python scripts/audit_content_overlap.py --scope files/robocze/analizy --output-dir "$RUNNER_TEMP/content-audit" --top 20 --ci-summary
+          python scripts/audit_report_differences.py --scope files/robocze/analizy --output-dir "$RUNNER_TEMP/content-audit" --ci-summary
+          python scripts/audit_repeated_claims.py --scope files/robocze/analizy --output-dir "$RUNNER_TEMP/content-audit"
       - name: Upload audit evidence
         if: github.event_name == 'pull_request' && always()
         uses: actions/upload-artifact@v6

@@ -24,8 +24,8 @@ def sample_docx(path, content):
 class ContentAuditTests(unittest.TestCase):
     def test_ngram_and_logical_document(self):
         self.assertIn(tuple('a b c d e'.split()), grams('a b c d e'.split()))
-        self.assertEqual(doc_key('files/inne/analizy/Test.pdf'),
-                         doc_key('files/inne/analizy/Test.docx'))
+        self.assertEqual(doc_key('files/robocze/analizy/Test.pdf'),
+                         doc_key('files/robocze/analizy/Test.docx'))
 
     def test_overlap_evidence_and_unmodified_sources(self):
         text = ('W tym eksperymencie zastosowano model multimodalny oraz identyczną '
@@ -33,7 +33,7 @@ class ContentAuditTests(unittest.TestCase):
                 'algorytmów na tym samym zbiorze obserwacji i metodzie analizy. ') * 4
         with TemporaryDirectory() as directory:
             root = Path(directory)
-            scope = root / 'files/inne/analizy'
+            scope = root / 'files/robocze/analizy'
             sample_docx(scope / 'Pierwsza.docx', text + 'Własny wynik eksperymentalny.')
             sample_docx(scope / 'Druga.docx', text + 'Różny dodatkowy wynik.')
             sample_docx(scope / 'Trzecia.docx', 'Dane o przemysłowych sieciach robota.')
@@ -66,7 +66,7 @@ class ContentAuditTests(unittest.TestCase):
     def test_manifest_and_matrix_are_reproducible_and_traceable(self):
         with TemporaryDirectory() as directory:
             root = Path(directory)
-            scope = root / "files/inne/analizy"
+            scope = root / "files/robocze/analizy"
             sample = ("Wspólne metody przetwarzania sygnałów multimodalnych "
                       "oraz analiza porównawcza wyników badania. ") * 14
             sample_docx(scope / "A.docx", sample + "Dodatkowe szczegóły.")
@@ -103,7 +103,7 @@ class ContentAuditTests(unittest.TestCase):
     def test_cache_incremental_equivalence_invalidation_and_repair(self):
         with TemporaryDirectory() as temp:
             root = Path(temp)
-            scope = root / "files/inne/analizy"
+            scope = root / "files/robocze/analizy"
             cache_dir = root / "reports/extraction-cache"
             sample = ("Analiza rozpoznawania sygnałów multimodalnych "
                       "opiera się na takich samych danych wejściowych. ") * 12
@@ -136,7 +136,7 @@ class ContentAuditTests(unittest.TestCase):
             self.assertEqual(pair_matrix_csv(changed), pair_matrix_csv(full))
 
             # A malformed cache file must be ignored and the original re-read.
-            target = incremental_cache._entry("files/inne/analizy/B.docx",
+            target = incremental_cache._entry("files/robocze/analizy/B.docx",
                                               full["files"][1]["sha256"])
             target.write_text("{corrupted JSON", encoding="utf-8")
             repair_cache = ExtractionCache(root, cache_dir)
@@ -159,7 +159,7 @@ class ContentAuditTests(unittest.TestCase):
     def test_same_named_but_divergent_formats_are_independent(self):
         with TemporaryDirectory() as directory:
             root = Path(directory)
-            scope = root / "files/inne/analizy"
+            scope = root / "files/robocze/analizy"
             left = ("System rozpoznaje gest dłoni i wyznacza punkty "
                     "śledzenia w obrazie z kamery. ")*12
             right = ("W laboratorium analizowano klimatyczne szeregi "
@@ -194,7 +194,7 @@ class ContentAuditTests(unittest.TestCase):
     def test_no_false_duplicate_for_unrelated_reports(self):
         with TemporaryDirectory() as directory:
             root = Path(directory)
-            scope = root / 'files/inne/analizy'
+            scope = root / 'files/robocze/analizy'
             sample_docx(scope / 'A.docx', 'Wyniki doświadczenia są niejednoznaczne.')
             sample_docx(scope / 'B.docx', 'Przeprowadzono testy odrębnych narzędzi.')
             result = compute(root, scope)

@@ -51,7 +51,7 @@ jobs:
           HF_HUB_DISABLE_TELEMETRY: '1'
         run: |
           python scripts/audit_semantic_overlap.py \
-            --scope files/inne/analizy \
+            --scope files/robocze/analizy \
             --model-dir "$RUNNER_TEMP/models/multilingual" \
             --output-dir "$RUNNER_TEMP/content-semantic" \
             --threshold 0.76 \

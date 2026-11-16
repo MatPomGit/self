@@ -4,7 +4,7 @@
 
 ## Zakres i zasada bezpieczeństwa
 
-Wstępna inwentaryzacja rozszerza dotychczasowy zakres `files/inne/analizy/` o katalogi dydaktyczne. Wynik **nie stanowi analizy semantycznej** ani zgody na usunięcie dokumentów. `files/ignored/` jest pomijany i nie trafia na Pages.
+Wstępna inwentaryzacja rozszerza dotychczasowy zakres `files/robocze/analizy/` o katalogi dydaktyczne. Wynik **nie stanowi analizy semantycznej** ani zgody na usunięcie dokumentów. `files/ignored/` jest pomijany i nie trafia na Pages.
 
 Uruchomienie lokalne, bez zależności od zewnętrznych usług:
 
