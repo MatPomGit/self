@@ -54,12 +54,9 @@
     wrap.append(mark(project),info);
     return wrap;
   }
+  // Share the HTTPS-only policy with publication and manuscript links.
   function safeProjectLink(value){
-    if(typeof value!=='string')return null;
-    try{
-      const url=new URL(value);
-      return url.protocol==='https:'&&url.username===''&&url.password==='' ? url.href : null;
-    }catch(error){return null;}
+    return window.SelfPublications.safeHttpsUrl(value);
   }
   function section(content,title,values){
     if(!values || (Array.isArray(values)&&!values.length))return;
@@ -72,8 +69,29 @@
     }else wrap.append(el('p','',clean(values)));
     content.append(wrap);
   }
+  function appendProjectLinks(body,links,title){
+    if(!Array.isArray(links))return;
+    const valid=links.map(link=>({
+      label:link&&link.label,
+      href:safeProjectLink(link&&link.url)
+    })).filter(link=>typeof link.label==='string'&&link.label.trim()&&link.href);
+    if(!valid.length)return;
+    const group=el('section','project-detail-section');
+    const list=el('ul','project-detail-links');
+    valid.forEach(({label,href})=>{
+      const item=el('li','');
+      const anchor=el('a','',label);
+      anchor.href=href;
+      anchor.target='_blank';
+      anchor.rel='noopener noreferrer';
+      item.append(anchor);
+      list.append(item);
+    });
+    group.append(el('h3','',title),list);
+    body.append(group);
+  }
   function openDialog(project,language){
-    locale=language;
+    locale=language==='en'?'en':'pl';
     const t=labels[locale];
     dialog.setAttribute('aria-label',t.detail+': '+project.title);
     const body=el('div','project-detail-body');
@@ -90,24 +108,7 @@
     section(body,t.methods,extra.methods);
     section(body,t.outcomes,extra.outcomes);
     if(extra.focus)section(body,t.focus,extra.focus);
-    const links=project.details&&project.details.links;
-    if(Array.isArray(links)&&links.length){
-      const sectionLinks=el('section','project-detail-section');
-      sectionLinks.append(el('h3','',t.links));
-      const list=el('ul','project-detail-links');
-      links.forEach(link=>{
-        const href=safeProjectLink(link&&link.url);
-        if(!href || !link.label || typeof link.label!=='string')return;
-        const item=el('li','');
-        const a=el('a','',link.label);
-        a.href=href;
-        a.target='_blank';
-        a.rel='noopener noreferrer';
-        item.append(a);
-        list.append(item);
-      });
-      if(list.children.length){sectionLinks.append(list);body.append(sectionLinks);}
-    }
+    appendProjectLinks(body,project.details&&project.details.links,t.links);
     dialog.replaceChildren(body);
     if(!dialog.open)dialog.showModal();
     close.focus();

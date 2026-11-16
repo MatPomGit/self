@@ -72,6 +72,7 @@ python scripts/build_short_links.py --site . --check
 python -m unittest discover -s tests -v
 node tests/test_language.js
 node tests/test_materials_view.js
+node tests/test_project_preview.js
 node tests/test_materials_layout.js
 bash tests/theme_switcher_static_check.sh
 ```
