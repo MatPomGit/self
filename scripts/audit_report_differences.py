@@ -30,8 +30,8 @@ PAIRS = (
     ("isaac-lab", "Isaac Lab i bliźniaki cyfrowe.pdf", "Isaac_Lab.docx"),
     ("gesture-slides", "Przewijanie_slajdow_gestem.docx",
      "Przewijanie_slajdow_gestem.pdf"),
-    ("robots-and-work", "Wpływ_robotów_na_pracę_człowieka.docx",
-     "Wpływ_robotów_na_pracę_człowieka.pdf"),
+    ("robots-and-work", "Wplyw_robotow_na_prace_czlowieka.docx",
+     "Wplyw_robotow_na_prace_czlowieka.pdf"),
 )
 WORD = re.compile(r"\S+")
 WINDOW_WORDS = 75
