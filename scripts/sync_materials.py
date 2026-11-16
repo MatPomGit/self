@@ -14,6 +14,11 @@ from pathlib import Path
 import re
 from urllib.parse import quote, unquote, urlsplit
 
+if __package__:
+    from .public_materials import public_material_files
+else:  # Direct CLI invocation: python scripts/sync_materials.py
+    from public_materials import public_material_files
+
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "files" / "index.html"
 CARD = re.compile(
@@ -35,11 +40,8 @@ def inventory(materials: Path) -> dict[str, Path]:
     """Inventory regular public files, not the generated root index."""
     return {
         path.relative_to(materials).as_posix(): path
-        for path in sorted(materials.rglob("*"))
-        if path.is_file() and not path.is_symlink()
-        and path != materials / "index.html"
-        and path.relative_to(materials).parts[0] != "ignored"
-        and not any(part.startswith(".") for part in path.relative_to(materials).parts)
+        for path in public_material_files(materials)
+        if path != materials / "index.html"
     }
 
 
