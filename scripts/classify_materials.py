@@ -12,6 +12,11 @@ from urllib.parse import unquote, urlsplit
 from xml.etree import ElementTree as ET
 from zipfile import ZipFile, BadZipFile
 
+if __package__:
+    from .public_materials import is_public_material
+else:  # Direct CLI invocation: python scripts/classify_materials.py
+    from public_materials import is_public_material
+
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "files" / "index.html"
 ANCHOR = re.compile(r'(<li>\s*<a)(?: class="([^"]*)")?(\s+href="([^"]+)"[^>]*>)')
@@ -73,13 +78,17 @@ def classify(html: str, materials: Path) -> tuple[str, list[str]]:
 
     def process(match: re.Match[str]) -> str:
         start, old, rest, href = match.groups()
-        path = (root / unquote(urlsplit(href).path)).resolve()
-        if not path.is_relative_to(root) or not path.is_file():
+        parsed = urlsplit(href)
+        if parsed.scheme or parsed.netloc:
             return match[0]
+        candidate = root / unquote(parsed.path)
+        if not is_public_material(root, candidate):
+            return match[0]
+        path = candidate.resolve()
         detected = get_type(path)
         if detected is None and path.suffix.lower() in (".html", ".tex"):
             pdf = path.with_suffix(".pdf")
-            if pdf.is_file():
+            if is_public_material(root, pdf):
                 detected = get_type(pdf)
         if detected is None:
             return match[0]
