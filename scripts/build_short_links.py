@@ -15,6 +15,11 @@ import re
 import unicodedata
 from urllib.parse import quote, unquote, urlsplit
 
+if __package__:
+    from .public_materials import public_material_files
+else:  # Direct CLI invocation: python scripts/build_short_links.py
+    from public_materials import public_material_files
+
 COURSES = {
     "Kto-Co-Jak": "kcj",
     "analiza-eeg": "eeg",
@@ -80,10 +85,8 @@ def ranked(relative: Path) -> tuple[int, int, str]:
 def pdf_routes(files: Path) -> dict[str, str]:
     """Map original PDF paths relative to files/ to short relative URLs."""
     pdfs = [
-        path.relative_to(files) for path in files.rglob("*")
-        if path.is_file() and not path.is_symlink() and path.suffix.casefold() == ".pdf"
-        and path.relative_to(files).parts[0] != "ignored"
-        and not any(part.startswith(".") for part in path.relative_to(files).parts)
+        path.relative_to(files) for path in public_material_files(files)
+        if path.suffix.casefold() == ".pdf"
     ]
     used: set[str] = set()
     routes: dict[str, str] = {}

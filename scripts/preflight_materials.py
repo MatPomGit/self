@@ -16,6 +16,11 @@ from zipfile import BadZipFile, ZipFile
 from pypdf import PdfReader
 from pypdf.errors import PdfReadError
 
+if __package__:
+    from .public_materials import public_material_files
+else:  # Direct CLI invocation: python scripts/preflight_materials.py
+    from public_materials import public_material_files
+
 ROOT = Path(__file__).resolve().parents[1]
 MATERIALS = ROOT / "files"
 DOCUMENT_PARTS = {
@@ -60,10 +65,7 @@ def scan(materials: Path) -> list[tuple[Path, str]]:
     """Return bad files in stable path order, ignoring symlinks and hidden files."""
     return [
         (path.relative_to(materials), issue)
-        for path in sorted(materials.rglob("*"))
-        if path.is_file() and not path.is_symlink()
-        and path.relative_to(materials).parts[0] != "ignored"
-        and not any(part.startswith(".") for part in path.relative_to(materials).parts)
+        for path in public_material_files(materials)
         if (issue := problem(path)) is not None
     ]
 

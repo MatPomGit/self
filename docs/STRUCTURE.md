@@ -28,6 +28,11 @@ aktualnych plików dla studentów jest `files/`.
 
 - Odnośniki w `files/index.html` muszą wskazywać istniejące pliki w `files/`.
 - Nowe pliki dodawaj tylko do właściwego katalogu w `files/`.
+- Inwentaryzacja plików publicznych jest współdzielona przez `scripts/public_materials.py`.
+  Generator indeksu, preflight, klasyfikator i generator krótkich adresów
+  pomijają `files/ignored/`, katalogi ukryte i dowiązania symboliczne.
+  Wykluczone katalogi nie są przeglądane rekurencyjnie; politykę zabezpieczają
+  `tests/test_public_materials.py` oraz `tests/test_ignored_materials.py`.
   `scripts/sync_materials.py --write` odkrywa je rekurencyjnie, naprawia
   jednoznaczne przeniesienia i uzupełnia istniejącą kartę przedmiotu lub
   tworzy nową. Pliki w `inne/` grupuje według podkatalogu.
