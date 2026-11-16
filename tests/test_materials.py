@@ -81,7 +81,7 @@ class MaterialsTests(unittest.TestCase):
         self.assertIn('text-decoration:none', html)
         self.assertNotRegex(html, r'<a\b[^>]*>Laboratorium\s')
         self.assertIn("wirr_lab_08.pdf", html)
-        self.assertIn("ndp__lab__10.pdf", html)
+        self.assertIn("ndp__lab__09.pdf", html)
         self.assertIn("ra_w7.pdf", html)
         self.assertNotIn('href="library/', html)
 
