@@ -83,8 +83,11 @@ class DifferenceTests(unittest.TestCase):
     def test_real_robot_report_is_not_automatically_marked_mismatched(self):
         from scripts.audit_content_overlap import extract
         folder = ROOT / "files/inne/analizy"
-        a = extract(folder / "Wpływ robotów na pracę człowieka.docx", ROOT)
-        b = extract(folder / "Wpływ robotów na pracę człowieka.pdf", ROOT)
+        _, docx_name, pdf_name = next(
+            pair for pair in PAIRS if pair[0] == "robots-and-work"
+        )
+        a = extract(folder / docx_name, ROOT)
+        b = extract(folder / pdf_name, ROOT)
         result = compare(a, b, label="real", same_stem=True)
         self.assertGreater(result["whole_doc_shorter_5gram_coverage"], .65)
         self.assertEqual(result["interpretation"], "REVIEW_REQUIRED")

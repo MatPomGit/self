@@ -28,10 +28,10 @@ PAIRS = (
     ("affective-synthesis", "Synteza Modeli multimodalnych.docx",
      "Zautomatyzowana_analiza_afektywna.pdf"),
     ("isaac-lab", "Isaac Lab i bliźniaki cyfrowe.pdf", "Isaac_Lab.docx"),
-    ("gesture-slides", "Przewijanie slajdow gestem.docx",
-     "Przewijanie slajdow gestem.pdf"),
-    ("robots-and-work", "Wpływ robotów na pracę człowieka.docx",
-     "Wpływ robotów na pracę człowieka.pdf"),
+    ("gesture-slides", "Przewijanie_slajdow_gestem.docx",
+     "Przewijanie_slajdow_gestem.pdf"),
+    ("robots-and-work", "Wpływ_robotów_na_pracę_człowieka.docx",
+     "Wpływ_robotów_na_pracę_człowieka.pdf"),
 )
 WORD = re.compile(r"\S+")
 WINDOW_WORDS = 75
