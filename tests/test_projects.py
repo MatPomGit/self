@@ -96,6 +96,8 @@ class ProjectsTests(unittest.TestCase):
         html = HTML.read_text(encoding="utf-8")
         self.assertIn("project-preview.js", html)
         self.assertIn("project-preview.css", html)
+        self.assertLess(html.index('src="docs/assets/js/publication-utils.js"'),
+                        html.index('src="docs/assets/js/project-preview.js"'))
         self.assertIn("ProjectPreview.attach", html)
         self.assertIn("project-details.json", html)
         js = PREVIEW_JS.read_text(encoding="utf-8")
