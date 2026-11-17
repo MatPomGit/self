@@ -31,7 +31,9 @@ REPORTS = {
         "source": "https://fel.cvut.cz/en/faculty/people/444-jan-cech/publications",
     },
     "adhd_asd_rf_performance": {
-        "files": ("tele_ndd.docx", "teled_ndd.docx"),
+        # Preserve historical provenance even after the originals were retired.
+        # Audit the current replacement without calling it a second original.
+        "files": ("tele_ndd.docx", "teled_ndd.docx", "Telediagnostyka_NDD.docx"),
         "terms": (r"\b84\s*%", r"\b86\s*%", r"Random\s*Forest|las\s+losow\w*"),
         "review": "VALID_RESULT_REQUIRES_VALIDATION_CONTEXT",
         "source": "https://doi.org/10.2196/54577",
@@ -173,7 +175,17 @@ def analyze(root,scope):
     for claim_id, spec in REPORTS.items():
         documents=[]
         for filename in spec["files"]:
-            doc=load(filename)
+            try:
+                doc=load(filename)
+            except FileNotFoundError:
+                # A retired source is unavailable, not a document with zero
+                # matching claims. Preserve its identity in the evidence ledger.
+                documents.append({
+                    "path":(scope/filename).relative_to(root).as_posix(),
+                    "sha256":None,"status":"MISSING_INPUT",
+                    "match_count":None,"examples":[],
+                })
+                continue
             examples=claim_candidates(doc,spec["terms"])
             documents.append({
                 "path":doc.path,"sha256":doc.source_hash,
@@ -181,7 +193,11 @@ def analyze(root,scope):
                 "examples":examples,
             })
         findings.append({
-            "id":claim_id,"review_status":spec["review"],
+            "id":claim_id,
+            "source_coverage":("PARTIAL" if any(
+                d["status"] == "MISSING_INPUT" for d in documents
+            ) else "COMPLETE"),
+            "review_status":spec["review"],
             "reference_url":spec["source"],
             "reviewed_externally":False,
             "documents":documents,
@@ -236,6 +252,10 @@ def save(report,dest):
                       f"- Review flag: \x60{item['review_status']}\x60",
                       f"- Primary external source: {item['reference_url']}"])
         for doc in item["documents"]:
+            if doc["status"] == "MISSING_INPUT":
+                lines.append(f"- \x60{doc['path']}\x60 — MISSING_INPUT; "
+                             "historical source not present in this revision")
+                continue
             lines.append(f"- \x60{doc['path']}\x60 — "
                          f"{doc['match_count']} candidate source section(s), "
                          f"SHA-256 \x60{doc['sha256']}\x60")
@@ -281,7 +301,8 @@ def main():
     for claim in report["claims"]:
         print("CLAIM_SIGNAL "+json.dumps({
             "id":claim["id"],"flag":claim["review_status"],
-            "files":[{"path":x["path"],"matches":x["match_count"],
+            "source_coverage":claim["source_coverage"],
+            "files":[{"path":x["path"],"status":x["status"],"matches":x["match_count"],
                       "top_locator":x["examples"][0]["locator"] if x["examples"] else None}
                      for x in claim["documents"]]
         },ensure_ascii=False))
