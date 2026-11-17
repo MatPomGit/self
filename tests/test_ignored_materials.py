@@ -18,7 +18,7 @@ OLD = [
     "Zautomatyzowana_analiza_afektywna.pdf",
 ]
 NEW = [
-    "analiza_afektywna.docx", "analiza_afektywna.pdf",
+    "Analiza_afektu.docx", "Analiza_afektu.pdf",
     "isaac_lab.docx", "isaac_lab.pdf",
 ]
 
@@ -52,7 +52,7 @@ class IgnoredArchivePolicyTests(unittest.TestCase):
         routes = pdf_routes(FILES)
         self.assertFalse(any(name.startswith("ignored/") for name in routes))
         self.assertIn("robocze/analizy/isaac_lab.pdf", routes)
-        self.assertIn("robocze/analizy/analiza_afektywna.pdf", routes)
+        self.assertIn("robocze/analizy/Analiza_afektu.pdf", routes)
 
     def test_archive_is_not_linked_in_source_index(self):
         html = (FILES / "index.html").read_text(encoding="utf-8")
