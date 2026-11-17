@@ -105,25 +105,49 @@ class ClaimEvidenceTests(unittest.TestCase):
 
     def test_real_reports_and_read_only_audit(self):
         scope=ROOT/"files/robocze/analizy"
-        for spec in REPORTS.values():
-            for name in spec["files"]:
-                with self.subTest(name=name):
-                    self.assertTrue((scope/name).exists() or (ROOT/"files/ignored/inne/analizy"/name).exists())
+        archive=ROOT/"files/ignored/inne/analizy"
+        # These are the current public sources; retired source names can still
+        # appear in the provenance ledger, explicitly marked MISSING_INPUT.
+        for name in ("Mediapipe.docx", "VGG-Transformer.docx",
+                     "Telediagnostyka_NDD.docx"):
+            self.assertTrue((scope/name).is_file())
         for name in UNIQUE_PAIR:
-            self.assertTrue((scope/name).exists() or (ROOT/"files/ignored/inne/analizy"/name).exists())
+            self.assertTrue((scope/name).is_file() or (archive/name).is_file())
+
         report=analyze(ROOT,scope)
-        self.assertEqual(len(report["claims"]),2)
+        self.assertEqual(len(report["claims"]),len(REPORTS))
         for claim in report["claims"]:
-            self.assertEqual(len(claim["documents"]),2)
-            self.assertTrue(all(s["match_count"]>=1 for s in claim["documents"]))
-            self.assertTrue(all(len(s["sha256"])==64 for s in claim["documents"]))
+            self.assertEqual(len(claim["documents"]),
+                             len(REPORTS[claim["id"]]["files"]))
+            for name, doc in zip(REPORTS[claim["id"]]["files"],
+                                 claim["documents"]):
+                present=(scope/name).is_file() or (archive/name).is_file()
+                with self.subTest(name=name):
+                    self.assertEqual(doc["status"]=="MISSING_INPUT",not present)
+                    if present:
+                        self.assertEqual(len(doc["sha256"]),64)
+                        self.assertGreaterEqual(doc["match_count"],1)
+                    else:
+                        self.assertIsNone(doc["sha256"])
+                        self.assertIsNone(doc["match_count"])
+                        self.assertEqual(doc["examples"],[])
+            expected_coverage=("PARTIAL" if any(
+                d["status"]=="MISSING_INPUT" for d in claim["documents"]
+            ) else "COMPLETE")
+            self.assertEqual(claim["source_coverage"],expected_coverage)
         self.assertFalse(report["source_files_modified"])
         with TemporaryDirectory() as tmp:
             save(report,Path(tmp))
             self.assertTrue((Path(tmp)/"claim_evidence.json").is_file())
             saved=json.loads((Path(tmp)/"claim_evidence.json").read_text(encoding="utf-8"))
             self.assertEqual(saved["schema_version"],"0.1.0")
-            self.assertTrue((Path(tmp)/"claim_evidence.md").is_file())
+            output=(Path(tmp)/"claim_evidence.md")
+            self.assertTrue(output.is_file())
+            for claim in report["claims"]:
+                for doc in claim["documents"]:
+                    if doc["status"]=="MISSING_INPUT":
+                        self.assertIn("MISSING_INPUT",output.read_text(encoding="utf-8"))
+                        self.assertIn(doc["path"],output.read_text(encoding="utf-8"))
 
 
 if __name__=="__main__":
