@@ -3,7 +3,10 @@
 [CitNetExplorer](https://www.citnetexplorer.nl/),
 [eegLab](https://kvonholzen.github.io/files/eeglab%20steps_speech.pdf), 
 [OpenSesame](https://github.com/open-cogsci/OpenSesame) - graphical, open-source experiment builder for the social sciences
-[Eye tracking and OpenSesame](https://www.hse.ru/data/2018/12/04/1144130740/Eye%20tracking%20and%20Open%20Sesame.pdf), 
+[Eye tracking and OpenSesame](https://www.hse.ru/data/2018/12/04/1144130740/Eye%20tracking%20and%20Open%20Sesame.pdf),
+[Lexical Decision Experiment in Open Sesame]()
+[MindProbe](https://mindprobe.eu/) - server to host online experiments, sponsored by the European Society for Cognitive Psychology (ESCoP)
+[JATOS](https://www.jatos.org/Whats-JATOS.html) - online studies directly on own server
 [pavlovia.org](https://pavlovia.org/) - run, share, and explore experiments in the behavioural sciences online
 [Praat](https://www.fon.hum.uva.nl/praat/) - analiza mowy i zjawisk fonetycznych, 
 [Praat tutorial](https://www.gouskova.com/2016/09/03/praat-tutorial/),
