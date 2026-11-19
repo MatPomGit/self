@@ -1,0 +1,5 @@
+[OpenAlex](https://openalex.org/),
+[VOSviewer](https://www.vosviewer.com/)
+[eegLab](https://kvonholzen.github.io/files/eeglab%20steps_speech.pdf), 
+[OpenSesame](https://github.com/open-cogsci/OpenSesame), 
+[Eye tracking and OpenSesame](https://www.hse.ru/data/2018/12/04/1144130740/Eye%20tracking%20and%20Open%20Sesame.pdf), 
