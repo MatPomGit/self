@@ -8,8 +8,8 @@
 [WebGazer.js](WebGazer.js)
 
 **Python**
-[WinPython](https://winpython.github.io/) - portable Python distribution for Windows
-[PsychoPy](https://psychopy.org/)
+[WinPython](https://winpython.github.io/) - portable Python distribution for Windows \\
+[PsychoPy](https://psychopy.org/) //
 [PyGaze](https://www.pygaze.org/) - Open source eye-tracking software 
 [NeuroKit2](https://pypi.org/project/neurokit2/) - Toolbox for Neurophysiological Signal Processing
 [Brian2](https://briansimulator.org/) - symulator impulsowych sieci neuronowyc (następca pyBrain)
