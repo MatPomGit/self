@@ -1,27 +1,67 @@
-[OpenAlex](https://openalex.org/),
-[VOSviewer](https://www.vosviewer.com/),
-[CitNetExplorer](https://www.citnetexplorer.nl/),
-[eegLab](https://kvonholzen.github.io/files/eeglab%20steps_speech.pdf), 
-[OpenSesame](https://github.com/open-cogsci/OpenSesame) - graphical, open-source experiment builder for the social sciences
-[Eye tracking and OpenSesame](https://www.hse.ru/data/2018/12/04/1144130740/Eye%20tracking%20and%20Open%20Sesame.pdf),
-[Lexical Decision Experiment in Open Sesame]()
-[MindProbe](https://mindprobe.eu/) - server to host online experiments, sponsored by the European Society for Cognitive Psychology (ESCoP)
-[JATOS](https://www.jatos.org/Whats-JATOS.html) - online studies directly on own server
-[pavlovia.org](https://pavlovia.org/) - run, share, and explore experiments in the behavioural sciences online
-[Praat](https://www.fon.hum.uva.nl/praat/) - analiza mowy i zjawisk fonetycznych, 
-[Praat tutorial](https://www.gouskova.com/2016/09/03/praat-tutorial/),
-[mousetrap-os](https://github.com/PascalKieslich/mousetrap-os) - OpenSesame plugin for Mouse-tracking
+**Bibliometria i analiza publikacji**
 
-**Python**
-[WinPython](https://winpython.github.io/) - portable Python distribution for Windows
-[PsychoPy](https://psychopy.org/)
-[PyGaze](https://www.pygaze.org/pep/) - Open source eye-tracking software 
-[NeuroKit2](https://pypi.org/project/neurokit2/) - Toolbox for Neurophysiological Signal Processing
-[Brian2](https://briansimulator.org/) - symulator impulsowych sieci neuronowyc (następca pyBrain)
+[OpenAlex](https://openalex.org/) - baza publikacji, autorów i cytowań naukowych.
 
-**Js**
-[lab.js](https://lab.js.org/)
-[lab.js online](https://labjs.felixhenninger.com/)
-[PsychoJS](https://github.com/psychopy/psychojs) - PsychoJS is a JavaScript library that makes it possible to run neuroscience, psychology, and psychophysics experiments in a browser.
-[WebGazer.js](https://webgazer.cs.brown.edu/) - Webcam library for Eye Tracking in Browser
-[OSWeb]() - online runtime for OpenSesame experiments.
+[VOSviewer](https://www.vosviewer.com/) - wizualizacja sieci bibliometrycznych i współautorstwa
+
+[CitNetExplorer](https://www.citnetexplorer.nl/) -  analiza powiązań między cytowanymi publikacjami
+
+**Środowiska programistyczne**
+
+[WinPython](https://winpython.github.io/) - przenośna dystrybucja Pythona dla Windows
+
+**Projektowanie eksperymentów**
+
+[lab.js](https://lab.js.org/) - projektowanie eksperymentów przeglądarkowych.
+
+[lab.js online](https://labjs.felixhenninger.com/) - internetowy edytor eksperymentów lab.js.
+
+[PsychoPy](https://psychopy.org/) - tworzenie eksperymentów psychologicznych i psychofizycznych.
+
+[OpenSesame](https://github.com/open-cogsci/OpenSesame) - graficzne projektowanie eksperymentów psychologicznych
+
+OpenSesame turorials:
+- [Gaze cuing](https://osdoc.cogsci.nl/4.1/tutorials/beginner/#about-opensesame),
+- [Lexical decision](https://kvonholzen.github.io/Tutorials_Open_Sesame_Lexical_decision.html),
+- [other](https://kvonholzen.github.io/Tutorials.html),
+
+**Platformy eksperymentalne online**
+
+[JATOS](https://www.jatos.org/Whats-JATOS.html) - serwer do prowadzenia eksperymentów online.
+
+[MindProbe](https://mindprobe.eu/) - hosting eksperymentów psychologicznych oparty na JATOS. ufundowany przez by the European Society for Cognitive Psychology (ESCoP)
+
+[pavlovia.org](https://pavlovia.org/) - publikowanie i prowadzenie eksperymentów online.
+
+[PsychoJS](https://github.com/psychopy/psychojs) - uruchamianie eksperymentów PsychoPy w przeglądarce
+
+[OSWeb](https://osdoc.cogsci.nl/3.3/manual/osweb/osweb/) - uruchamianie eksperymentów OpenSesame w przeglądarce.
+
+analiza mowy i zjawisk fonetycznych, 
+,
+OpenSesame plugin for Mouse-tracking
+
+**Eye-tracking i mouse-tracking**
+
+[PyGaze](https://www.pygaze.org/pep/) - obsługa eye-trackerów w eksperymentach Python
+
+[WebGazer.js](https://webgazer.cs.brown.edu/) - śledzenie spojrzenia za pomocą kamery internetowej
+
+[mousetrap-os](https://github.com/PascalKieslich/mousetrap-os) - rejestrowanie trajektorii myszy w OpenSesame
+
+- [Eye tracking](https://www.hse.ru/data/2018/12/04/1144130740/Eye%20tracking%20and%20Open%20Sesame.pdf) - instrukcja integracji eye-trackingu z OpenSesame
+
+**Analiza sygnałów i neuroinformatyka**
+
+- [eegLab](https://kvonholzen.github.io/files/eeglab%20steps_speech.pdf) - analiza sygnałów EEG związanych z mową
+
+[NeuroKit2](https://pypi.org/project/neurokit2/) - analiza sygnałów psychofizjologicznych
+
+[Brian2](https://briansimulator.org/) - symulacja impulsowych sieci neuronowych
+
+[Praat](https://www.fon.hum.uva.nl/praat/) - analiza mowy i zjawisk fonetycznych
+
+[Praat tutorial](https://www.gouskova.com/2016/09/03/praat-tutorial/)samouczek analizy fonetycznej w Praat
+
+
+
