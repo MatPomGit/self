@@ -10,6 +10,8 @@
 
 [WinPython](https://winpython.github.io/) - przenośna dystrybucja Pythona dla Windows
 
+
+
 **Projektowanie eksperymentów**
 
 [lab.js](https://lab.js.org/) - projektowanie eksperymentów przeglądarkowych.
@@ -25,6 +27,8 @@ OpenSesame turorials:
 - [Lexical decision](https://kvonholzen.github.io/Tutorials_Open_Sesame_Lexical_decision.html),
 - [other](https://kvonholzen.github.io/Tutorials.html),
 
+
+
 **Platformy eksperymentalne online**
 
 [JATOS](https://www.jatos.org/Whats-JATOS.html) - serwer do prowadzenia eksperymentów online.
@@ -35,11 +39,9 @@ OpenSesame turorials:
 
 [PsychoJS](https://github.com/psychopy/psychojs) - uruchamianie eksperymentów PsychoPy w przeglądarce
 
-[OSWeb](https://osdoc.cogsci.nl/3.3/manual/osweb/osweb/) - uruchamianie eksperymentów OpenSesame w przeglądarce.
+[OSWeb](https://osdoc.cogsci.nl/3.3/manual/osweb/osweb/) - uruchamianie eksperymentów OpenSesame w przeglądarce
 
-analiza mowy i zjawisk fonetycznych, 
-,
-OpenSesame plugin for Mouse-tracking
+
 
 **Eye-tracking i mouse-tracking**
 
@@ -49,7 +51,9 @@ OpenSesame plugin for Mouse-tracking
 
 [mousetrap-os](https://github.com/PascalKieslich/mousetrap-os) - rejestrowanie trajektorii myszy w OpenSesame
 
-- [Eye tracking](https://www.hse.ru/data/2018/12/04/1144130740/Eye%20tracking%20and%20Open%20Sesame.pdf) - instrukcja integracji eye-trackingu z OpenSesame
+[Eye tracking](https://www.hse.ru/data/2018/12/04/1144130740/Eye%20tracking%20and%20Open%20Sesame.pdf) - instrukcja integracji eye-trackingu z OpenSesame
+
+
 
 **Analiza sygnałów i neuroinformatyka**
 
