@@ -64,7 +64,7 @@ OpenSesame turorials: [Gaze cuing](https://osdoc.cogsci.nl/4.1/tutorials/beginne
 
 - [Praat](https://www.fon.hum.uva.nl/praat/) - analiza mowy i zjawisk fonetycznych
 
-- [Praat tutorial](https://www.gouskova.com/2016/09/03/praat-tutorial/)samouczek analizy fonetycznej w Praat
+- [Praat tutorial](https://www.gouskova.com/2016/09/03/praat-tutorial/) - samouczek analizy fonetycznej w Praat
 
 
 
