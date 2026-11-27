@@ -20,8 +20,8 @@
   {
     "sourceTitle": "ARC-AFFECTIVE",
     "title": "ARC-AFFECTIVE",
-    "period": "2026–present",
-    "description": "ARC-AFFECTIVE investigates attention and cognitive workload estimation using synchronised EEG, eye-tracking, pupillometry and behavioural data. Candidate measures include theta, alpha and beta activity, event-related potentials (ERPs), fixations, saccades, pupil diameter, reaction times and response accuracy. Planned n-back, Stroop and Continuous Performance Test (CPT) protocols will examine session-to-session variability, artefacts and uncertainty in measurements and predictions."
+    "period": "2026",
+    "description": "Historical research programme on attention and cognitive workload estimation using EEG, eye-tracking, pupillometry and behaviour. Its eight research tracks continue in ARC AI (six), ARC Neuro (one) and ARC Robo (one). The original repository has been archived; this does not imply completed studies or verified results."
   },
   {
     "sourceTitle": "XR-Cognition · Adaptacyjne środowiska poznawcze",

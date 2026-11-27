@@ -18,10 +18,10 @@
     "description": "Rozwój predykcyjnej oceny ryzyka w interakcji człowieka z robotem humanoidalnym na podstawie percepcji sceny, ruchu i niepewności."
   },
   {
-    "phase": "current",
+    "phase": "previous",
     "title": "ARC-AFFECTIVE",
-    "period": "2026–obecnie",
-    "description": "Program badawczy ARC-AFFECTIVE dotyczy estymacji uwagi i obciążenia poznawczego na podstawie zsynchronizowanych danych EEG, okulografii, pupillometrii i zachowania. Analizowane wskaźniki obejmują rytmy theta, alpha i beta, potencjały ERP, fiksacje, sakkady, średnicę źrenicy, czasy reakcji i poprawność odpowiedzi. Planowane zadania n-back, Stroopa i CPT mają umożliwić badanie zmienności między sesjami, artefaktów oraz niepewności pomiarów i predykcji."
+    "period": "2026",
+    "description": "Historyczny program badawczy dotyczący estymacji uwagi i obciążenia poznawczego na podstawie EEG, okulografii, pupillometrii i zachowania. Osiem ścieżek badawczych jest kontynuowanych w ARC AI (sześć), ARC Neuro (jedna) i ARC Robo (jedna). Repozytorium źródłowe zarchiwizowano; nie oznacza to ukończenia badań ani potwierdzenia wyników."
   },
   {
     "phase": "current",
