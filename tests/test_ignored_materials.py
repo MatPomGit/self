@@ -19,7 +19,7 @@ OLD = [
 ]
 NEW = [
     "Analiza_afektu.docx", "Analiza_afektu.pdf",
-    "isaac_lab.docx", "isaac_lab.pdf",
+    "Isaac_lab.docx", "Isaac_lab.pdf",
 ]
 
 
@@ -28,7 +28,8 @@ class IgnoredArchivePolicyTests(unittest.TestCase):
         for filename in OLD:
             with self.subTest(filename=filename):
                 self.assertTrue((FILES / "ignored/inne/analizy" / filename).is_file())
-                self.assertFalse((FILES / "robocze/analizy" / filename).exists())
+                # Compare exact names even on case-insensitive filesystems.
+                self.assertNotIn(filename, {p.name for p in (FILES / "robocze/analizy").iterdir()})
 
     def test_new_public_downloads_are_valid(self):
         from pypdf import PdfReader
@@ -51,7 +52,7 @@ class IgnoredArchivePolicyTests(unittest.TestCase):
         self.assertTrue(all("robocze/analizy/" + n in names for n in NEW))
         routes = pdf_routes(FILES)
         self.assertFalse(any(name.startswith("ignored/") for name in routes))
-        self.assertIn("robocze/analizy/isaac_lab.pdf", routes)
+        self.assertIn("robocze/analizy/Isaac_lab.pdf", routes)
         self.assertIn("robocze/analizy/Analiza_afektu.pdf", routes)
 
     def test_archive_is_not_linked_in_source_index(self):
