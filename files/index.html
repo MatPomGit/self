@@ -35,6 +35,10 @@ a,a:visited{color:var(--text);text-decoration:none}
 a:hover{text-decoration:underline}
 .materials-list a.material-link--lecture,.materials-list a.material-link--lecture:visited{color:var(--lecture)}
 .materials-list a.material-link--lab,.materials-list a.material-link--lab:visited{color:var(--lab)}
+/* Raporty robocze mają jednolity kolor PDF niezależnie od geometrii strony.
+   Po publikacji href wskazuje krótki adres, a data-original-url zachowuje źródło. */
+.materials-list a[href^="robocze/analizy/"][href$=".pdf" i],
+.materials-list a[data-original-url^="robocze/analizy/"][data-original-url$=".pdf" i]{color:var(--lab)}
 /* Format pliku ma pierwszeństwo przed typem materiału. */
 .materials-list a[href$=".pptx" i],.materials-list a[href$=".pptx" i]:visited{color:var(--pptx)}
 .materials-list a[href$=".tex" i],.materials-list a[href$=".tex" i]:visited{color:var(--tex)}
@@ -496,7 +500,7 @@ button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
 
 
 <section class="materials-group materials-group--flow">
-<h4>Pozostałe</h4>
+<h4>Robocze</h4>
 <div class="materials-columns">
 <div class="materials-subgroup">
 <h5>Materiały</h5>
