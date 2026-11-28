@@ -135,7 +135,7 @@ class MaterialsTests(unittest.TestCase):
             "Diagnoza psychologiczna",
             "Nowoczesne technologie w psychologii",
             "Seminaria dyplomowe",
-            "Pozostałe",
+            "Robocze",
         ])
         for selector in (
             ".materials-list a.material-link--lecture",
@@ -148,6 +148,29 @@ class MaterialsTests(unittest.TestCase):
         # Klasyfikacja wynika z geometrii. Test osobny sprawdza jej poprawność.
         self.assertIn('class="material-link--lecture"', html)
         self.assertIn('class="material-link--lab"', html)
+
+    def test_working_analysis_pdfs_have_uniform_color_before_and_after_packaging(self):
+        from scripts.build_short_links import rewrite_index
+
+        html = (MATERIALS / "index.html").read_text(encoding="utf-8")
+        style = html.split("<style>", 1)[1].split("</style>", 1)[0]
+        direct = '.materials-list a[href^="robocze/analizy/"][href$=".pdf" i]'
+        alias = ('.materials-list a[data-original-url^="robocze/analizy/"]'
+                 '[data-original-url$=".pdf" i]')
+        rule = direct + ",\n" + alias + "{color:var(--lab)}"
+        self.assertIn(rule, style)
+        self.assertGreater(style.index(rule),
+                           style.index(".materials-list a.material-link--lab"))
+        # Geometry-free PDF links must keep their color after short-link rewriting.
+        source = '<li><a href="robocze/analizy/report.PDF" download>Report</a></li>'
+        rendered, count = rewrite_index(source, {
+            "robocze/analizy/report.PDF": "robocze/analizy/report/",
+        })
+        self.assertEqual(count, 1)
+        self.assertIn('data-original-url="robocze/analizy/report.PDF"', rendered)
+        self.assertIn('href="robocze/analizy/report/"', rendered)
+        self.assertIn("<h4>Robocze</h4>", html)
+        self.assertNotIn("<h4>Pozostałe</h4>", html)
 
     def test_pam_lecture_codes_and_hover_titles(self):
         """Wykłady PAM mają krótkie nazwy nawet przed uruchomieniem JavaScriptu."""
